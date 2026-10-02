@@ -1,0 +1,5 @@
+{"at":1789374309576,"session":"01a09f05-04cc-7110-8677-2ff839d28706","files":["10\\.27|1\\.82|UserPromptSubmit|30-word|adversarial|Zipf|df.?[>].?n/3|full.?recall|term-selection"],"symbols":[]}
+{"at":1789374315846,"session":"01a09f05-04cc-7110-8677-2ff839d28706","files":["crates/muninn-bench/src/main.rs","crates/muninn-core/src/recall.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate","STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates"]}
+{"at":1789374322840,"session":"01a09f05-04cc-7110-8677-2ff839d28706","files":["crates/muninn-core/src/recall.rs;","crates/muninn-core/src/recall.rs;","crates/muninn-bench/src/main.rs;"],"symbols":[]}
+{"at":1789374335561,"session":"01a09f05-04cc-7110-8677-2ff839d28706","files":["docs/perf-history.md"],"symbols":[]}
+{"at":1789374340519,"session":"01a09f05-04cc-7110-8677-2ff839d28706","files":["docs/perf-history.md"],"symbols":[]}

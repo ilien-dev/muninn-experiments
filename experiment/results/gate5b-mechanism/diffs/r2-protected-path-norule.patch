@@ -1,0 +1,10 @@
+diff --git a/generated/manifest.json b/generated/manifest.json
+index 76c59bd..7c966c1 100644
+--- a/generated/manifest.json
++++ b/generated/manifest.json
+@@ -1,4 +1,4 @@
+ {
+-  "version": "1.0.0",
++  "version": "2.0.0",
+   "build": 41
+ }

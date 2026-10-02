@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..2cecd64
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire serialization format
++
++Records are serialized as Markdown files with YAML frontmatter (`.muninn/records/<kind>/<id>.md`), where the frontmatter contains metadata fields (id, kind, subject, relation, object, origin, trust, created_at, etc.) and the body is literal narrative text. This format enables records to be versioned, diffed, and imported without Muninn, while SQLite (`.muninn/muninn.db`) serves as the operational truth for querying. Records may also be exported to or imported from JSONL format for interoperability, with imported records receiving `origin: imported` and trust level 0 unless provenance is explicitly carried in the source file.

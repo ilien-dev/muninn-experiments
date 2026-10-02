@@ -1,0 +1,6 @@
+{"at":1789372976486,"session":"01a09ef0-af99-7573-9780-ff988c98491a","files":["docs/perf-history.md","docs/perf-history.md;"],"symbols":[]}
+{"at":1789372983476,"session":"01a09ef0-af99-7573-9780-ff988c98491a","files":["docs/perf-history.md","crates/muninn-core/src/health.rs","crates/muninn-core/src/schema.sql"],"symbols":["Status","Check","Report","Report","reds","colds","is_green","summary","check","run","tests","fresh_project_is_green_or_cold_never_red"]}
+{"at":1789372986715,"session":"01a09ef0-af99-7573-9780-ff988c98491a","files":["crates/muninn-core/src/schema.sql","crates/muninn-core/src/health.rs"],"symbols":["Status","Check","Report","Report","reds","colds","is_green","summary","check","run","tests","fresh_project_is_green_or_cold_never_red"]}
+{"at":1789372993324,"session":"01a09ef0-af99-7573-9780-ff988c98491a","files":["docs/perf-history.md"],"symbols":[]}
+{"at":1789372996572,"session":"01a09ef0-af99-7573-9780-ff988c98491a","files":["docs/perf-history.md","docs/perf-history.md"],"symbols":[]}
+{"at":1789373000931,"session":"01a09ef0-af99-7573-9780-ff988c98491a","files":["docs/perf-history.md;","docs/perf-history.md"],"symbols":[]}

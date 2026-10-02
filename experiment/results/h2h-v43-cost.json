@@ -1,0 +1,16 @@
+{
+ "claude-mem": {
+  "cells": 298,
+  "total_cost_usd": 29.24,
+  "mean_cost_usd": 0.098,
+  "mean_turns": 8.1,
+  "mean_seconds": 24.7
+ },
+ "muninn-listed": {
+  "cells": 300,
+  "total_cost_usd": 17.72,
+  "mean_cost_usd": 0.059,
+  "mean_turns": 3.9,
+  "mean_seconds": 11.5
+ }
+}

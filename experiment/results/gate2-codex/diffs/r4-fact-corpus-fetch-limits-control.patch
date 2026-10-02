@@ -1,0 +1,24 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..07e5355
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,18 @@
++# Corpus fetching
++
++## Rate limit observed during the fetch
++
++The repository does not record the numeric per-domain rate limit that the corpus
++fetch encountered. In particular, the number of visits allowed per window, the
++window length, and the cooldown used after a breach could not be recovered from
++the corpus documentation or other files in this checkout. These values are
++therefore unknown rather than inferred.
++
++## File hosts
++
++The corpus manifest records that files were fetched from:
++
++- `raw.githubusercontent.com`
++
++No additional CDN or mirror host used by the corpus fetch is recorded in this
++checkout.

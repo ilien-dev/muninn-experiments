@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..bc3a06f
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++On the adversarial synthetic store (50,000 records drawn from the benchmark's
++30-word frequent vocabulary, with 2,000 rare identifier variants), the measured
++full-recall `UserPromptSubmit` p95 was **51.240912 ms** before the term-selection
++fix (300 runs).
++
++The fix was to discard a candidate prompt term before the top-8 IDF selection
++when it occurs in more than one third of a store of at least 50 records. Such a
++term carries little signal on this workload and makes FTS5 traverse a long
++posting list. The selector still drops terms absent from the store, scores the
++remaining terms by IDF, and sends at most eight terms to BM25.
++
++With that fix, the measured full-recall `UserPromptSubmit` p95 was
++**6.046097 ms** on the same 50,000-record, 300-run benchmark.

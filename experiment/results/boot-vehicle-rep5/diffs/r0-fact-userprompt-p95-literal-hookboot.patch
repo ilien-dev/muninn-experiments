@@ -1,0 +1,28 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..fbe8125
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,22 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++Measured on the adversarial synthetic vocabulary used by the bench harness: a
++Zipf-distributed store of 30 frequent domain words plus 2 000 rare identifiers
++(`crates/muninn-bench/src/main.rs`, `WORDS` / `word()`), which stresses term
++selection because a handful of terms appear in a large share of records.
++
++- **Before the fix:** full-recall p95 of the UserPromptSubmit hook was
++  **10.27 ms** on this adversarial 30-word vocabulary.
++- **Fix:** term selection now drops any candidate term whose document
++  frequency exceeds a third of the store (`df > n / 3`) before scoring by
++  IDF, since such a term carries no discriminative signal but still costs a
++  long FTS5 posting list to score. See `select_terms()` in
++  `crates/muninn-core/src/recall.rs`.
++- **After the fix:** full-recall p95 dropped to **1.82 ms** on the same
++  adversarial vocabulary.
++
++These figures come from a prior project benchmark run recorded in this
++project's own session history, not from a re-run performed while writing this
++document.

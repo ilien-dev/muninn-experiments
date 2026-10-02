@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..e6ddbcc
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,12 @@
++# Fetching notes
++
++Per-domain rate limit the corpus fetch had to respect (Svipall):
++- 12 visits per 60 s window, per domain
++- Breach cooldown: 900 s before that domain could be hit again
++
++Mirror/CDN hosts used to fetch files:
++- raw.githubusercontent.com
++- cdn.jsdelivr.net/gh/owner/repo@branch/path
++- cdn.statically.io (slow, prone to timeouts)
++
++Source: project transcript memory (trust 1, tool-observed), not re-verified against Svipall logs for this write-up.

@@ -1,0 +1,54 @@
+plan: 14 cells (7 tasks × 2 arms × 1 runs), model claude-sonnet-5, base HEAD of /home/ilien/Projects/muninn
+seed transcripts: 1
+[  1/14] run 0 engine-s12-why-responder literal …
+[  2/14] run 0 fact-sessionstart-gate off …
+[  3/14] run 0 fact-real-transcript-ingest literal …
+[  2/14] run 0 fact-sessionstart-gate off → fail (60s, 0 tok, $0.290)
+[  4/14] run 0 fact-userprompt-p95 off …
+[  1/14] run 0 engine-s12-why-responder literal → pass (89s, 564 tok, $0.343)
+[  5/14] run 0 fact-corpus-fetch-limits literal …
+[  3/14] run 0 fact-real-transcript-ingest literal → error (118s, 564 tok, $0.461) — claude is_error: 
+[  6/14] run 0 fact-sessionstart-gate literal …
+[  5/14] run 0 fact-corpus-fetch-limits literal → fail (47s, 680 tok, $0.191)
+[  7/14] run 0 fact-userprompt-p95 literal …
+[  4/14] run 0 fact-userprompt-p95 off → fail (85s, 0 tok, $0.373)
+[  8/14] run 0 fact-corpus-fetch-limits off …
+[  6/14] run 0 fact-sessionstart-gate literal → fail (30s, 696 tok, $0.150)
+[  9/14] run 0 engine-s12-why-responder off …
+[  8/14] run 0 fact-corpus-fetch-limits off → fail (66s, 0 tok, $0.282)
+[ 10/14] run 0 fact-gate1-first-holdout literal …
+[  7/14] run 0 fact-userprompt-p95 literal → pass (82s, 696 tok, $0.303)
+[ 11/14] run 0 fact-real-transcript-ingest off …
+[ 11/14] run 0 fact-real-transcript-ingest off → fail (56s, 0 tok, $0.248)
+[ 12/14] run 0 engine-grammars-control off …
+[  9/14] run 0 engine-s12-why-responder off → pass (129s, 0 tok, $0.498)
+[ 13/14] run 0 fact-gate1-first-holdout off …
+[ 12/14] run 0 engine-grammars-control off → pass (20s, 0 tok, $0.132)
+[ 14/14] run 0 engine-grammars-control literal …
+[ 10/14] run 0 fact-gate1-first-holdout literal → fail (96s, 564 tok, $0.298)
+[ 14/14] run 0 engine-grammars-control literal → pass (18s, 680 tok, $0.126)
+[ 13/14] run 0 fact-gate1-first-holdout off → fail (79s, 0 tok, $0.287)
+
+# Gate 2 experiment — 14 cells, model claude-sonnet-5, 1 run(s)
+
+| arm | non-inferable pass | inferable pass | errors | delivered tokens (mean) | hook p95 ms (max) | cost/cell (mean) |
+|---|---|---|---|---|---|---|
+| off | 1/6 (17%) | 1/1 (100%) | 0 | 0 | 0.03 | $0.302 |
+| literal | 2/5 (40%) | 1/1 (100%) | 1 | 635 | 1.10 | $0.268 |
+
+literal − off (non-inferable): +0.233 [95% CI +0.233, +0.233]
+
+## Per task
+
+| task | inferable | off | literal | 
+|---|---|---|---|
+| engine-s12-why-responder | false | 1/1 | 1/1 | 
+| fact-userprompt-p95 | false | 0/1 | 1/1 | 
+| fact-sessionstart-gate | false | 0/1 | 0/1 | 
+| fact-gate1-first-holdout | false | 0/1 | 0/1 | 
+| fact-corpus-fetch-limits | false | 0/1 | 0/1 | 
+| fact-real-transcript-ingest | false | 0/1 | 0/1 (1 err) | 
+| engine-grammars-control | true | 1/1 | 1/1 | 
+
+Total model cost: $3.98. Errors are excluded from pass rates and listed in results.jsonl.
+

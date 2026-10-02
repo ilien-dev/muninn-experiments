@@ -1,0 +1,29 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..744ce41
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,23 @@
++# Fetch limits and mirrors (corpus fetch)
++
++Fuente: registro de sesión de este mismo proyecto (2026-09-13), no remedido aquí.
++
++## Límite por dominio (Svipall)
++
++- 12 visitas por ventana de 60 s, por dominio.
++- Al romperse el límite: cooldown de 900 s antes de reintentar ese dominio.
++
++## Hosts / mirrors usados
++
++- `raw.githubusercontent.com`
++- `cdn.jsdelivr.net/gh/owner/repo@branch/path`
++- `cdn.statically.io` — usado, pero lento / con timeouts frecuentes.
++
++`out_file` deja los ficheros descargados en `~/.svipall/out/` (sin subcarpetas).
++
++## Nota
++
++Estos números son los que reporta el episodio de memoria de la sesión previa
++(trust 1: observado en la transcripción de este proyecto, no confirmado por un
++commit ni remedido de nuevo). No se ha vuelto a medir el rate limit en esta
++sesión.

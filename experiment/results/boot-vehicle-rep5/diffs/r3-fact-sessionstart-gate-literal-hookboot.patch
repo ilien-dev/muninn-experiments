@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..fd1aa51
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured cost of the `SessionStart` health gate (`muninn-core/src/health.rs`), p50, on a
++5,000-record store:
++
++| When | p50 | Change |
++| --- | --- | --- |
++| Before | 11.9 ms | `PRAGMA quick_check` ran on the `SessionStart` read path |
++| After | 1.05 ms | `quick_check` taken off the read path (deferred to session end, result cached via `quick_check_at`/`quick_check_result` in `meta`, see `Db::record_quick_check` in `crates/muninn-core/src/db.rs`), plus the `fts_rows` counter and the `body` `CHECK` constraint added in the same change |
++
++These two numbers come from a prior session's measurement recorded in project history; they are
++not currently duplicated anywhere else in this repo's own docs or benchmark output, so they
++could not be cross-checked against a second source here. No fresher measurement was taken for
++this entry — if that matters, re-run the `SessionStart` hook benchmark against a 5k-record store
++and replace these numbers rather than adjusting them by hand.

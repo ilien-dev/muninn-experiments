@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..5361c19
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Plain HTTP for internal hosts
++
++The project's current recorded decision is to enforce HTTPS everywhere, with no plaintext exception for any service. Internal hosts are therefore not allowed to use plain HTTP, including hosts that sit behind a firewall.

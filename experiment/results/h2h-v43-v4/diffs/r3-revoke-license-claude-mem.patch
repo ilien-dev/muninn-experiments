@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..51a5eba
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source License
++
++The project's current recorded decision is to license Gin under the Apache-2.0 license. It was chosen as a permissive license to remove adoption barriers for commercial users: it allows proprietary use while retaining attribution and patent protections. The decision was recorded on 2026-09-25.

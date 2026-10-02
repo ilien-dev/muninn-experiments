@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..0e86e7f
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++Nothing is currently recorded. A decision file (`config/decisions/revoke-version-scheme.json`, previously recording `semver`) existed but was removed in commit `74340c3` ("move decision config out of the tree") without any replacement recorded elsewhere in the repository, so there is no current recorded decision on the version numbering scheme.

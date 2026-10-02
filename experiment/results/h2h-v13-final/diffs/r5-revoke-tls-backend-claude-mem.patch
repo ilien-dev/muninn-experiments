@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..08f2f46
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS Backend
++
++This project has no current recorded decision on the TLS backend. The repository's decision records live under `config/decisions/`, and the entries that once tracked this choice were removed from the tree without a replacement, so there is presently nothing on record to state as the project's TLS backend.

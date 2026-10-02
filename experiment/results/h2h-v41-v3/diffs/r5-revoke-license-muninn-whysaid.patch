@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..cf8ad71
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source license
++
++The project's most recent recorded decision on the source license is GPL-3.0, as stated by the project owner in an earlier session. No later statement changes or retires it. The record is a bare statement of the license name, with no rationale or migration details attached.

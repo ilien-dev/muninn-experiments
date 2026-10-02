@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..3d94c08
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec Policy
++
++No current decision on a transport compression codec is recorded for this project. The project's recorded decisions cover other areas (e.g., cache eviction strategy, password hashing, TLS backend, serialization format, async runtime, versioning scheme, license, and certificate/HTTP handling), but none of them specify a transport compression codec, so no value is documented here pending an explicit decision.

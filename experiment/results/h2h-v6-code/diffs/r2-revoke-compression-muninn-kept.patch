@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..c2dca0f
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++This project has no current recorded decision on the transport compression codec. A prior record (`config/decisions/revoke-compression.json`) was removed from the repository in commit 494a109 ("move decision config out of the tree"), and no replacement decision has been recorded since.

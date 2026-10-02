@@ -1,0 +1,4 @@
+{"at":1789368933886,"session":"36272408-10b7-4aa9-bbdb-e18aed6f9fd1","files":["crates/muninn-symbols/src/lib.rs"],"symbols":[]}
+{"at":1789368946853,"session":"36272408-10b7-4aa9-bbdb-e18aed6f9fd1","files":["crates/muninn-compile/src/parse.rs"],"symbols":["Candidate","imperative_re","RE","clean_line","strip_numbering","extract","discover","extract_project","tests","extracts_list_items_and_skips_fences","numbering_and_checkboxes"]}
+{"at":1789368954389,"session":"36272408-10b7-4aa9-bbdb-e18aed6f9fd1","files":["crates/muninn-symbols/src/lib.rs"],"symbols":[]}
+{"at":1789368967873,"session":"36272408-10b7-4aa9-bbdb-e18aed6f9fd1","files":["crates/muninn-symbols/Cargo.toml"],"symbols":[]}

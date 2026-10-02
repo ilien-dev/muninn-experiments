@@ -1,0 +1,2 @@
+{"at":1789368066296,"session":"2a14afe9-be00-4d3d-9b6e-a2f10bb229f7","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}
+{"at":1789368071406,"session":"2a14afe9-be00-4d3d-9b6e-a2f10bb229f7","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}

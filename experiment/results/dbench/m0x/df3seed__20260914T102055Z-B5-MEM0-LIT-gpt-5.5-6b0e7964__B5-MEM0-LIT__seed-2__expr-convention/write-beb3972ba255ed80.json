@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-convention",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Do not bypass ExpressionError codes when adding public evaluator APIs.\nFor sequence expr-convention, task expr-convention-s04, the public task prompt was: Add compile_expression(expression), returning a callable that evaluates later with variables while syntax-checking immediately.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964",
+      "seed": 2,
+      "sequence_id": "expr-convention"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-convention"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "ae2e1ecb-07f4-4f9f-b1eb-8f43cff97e57",
+        "memory": "Do not bypass ExpressionError codes when adding public evaluator APIs.\nFor sequence expr-convention, task expr-convention-s04, the public task prompt was: Add compile_expression(expression), returning a callable that evaluates later with variables while syntax-checking immediately.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

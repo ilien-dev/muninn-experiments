@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..bbfb640
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++There is no current recorded decision for the transport compression codec. The project's decision records only show past values (`gzip`, then `zstd`) held in a revocation file (`revoke-compression.json`), which tracked codecs that had been revoked rather than an active choice, and that file was itself removed from the repository in a later commit ("move decision config out of the tree"). No subsequent record establishes a replacement codec, so no codec is currently designated.

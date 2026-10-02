@@ -1,0 +1,26 @@
+diff --git a/crates/muninn-core/src/db.rs b/crates/muninn-core/src/db.rs
+index d3a4fad..fc19d6f 100644
+--- a/crates/muninn-core/src/db.rs
++++ b/crates/muninn-core/src/db.rs
+@@ -25,6 +25,10 @@ pub struct Db {
+ /// failures in month one [Q3]; a hook must never spin past its own timeout.
+ const BUSY_BACKOFF_MS: [u64; 6] = [1, 2, 5, 10, 25, 50];
+ 
++/// Longest total time the busy handler may keep retrying: `SessionEnd`'s own 1.5 s
++/// hook timeout, which plugin hooks cannot raise [P6].
++const BUSY_MAX_WAIT_MS: u64 = 1_500;
++
+ impl Db {
+     /// Open an existing database. `ReadOnly` fails if the file does not exist.
+     pub fn open(path: &Path, mode: Mode) -> Result<Db> {
+@@ -42,6 +46,10 @@ impl Db {
+             if i >= BUSY_BACKOFF_MS.len() {
+                 return false;
+             }
++            let elapsed: u64 = BUSY_BACKOFF_MS[..i].iter().sum();
++            if elapsed >= BUSY_MAX_WAIT_MS {
++                return false;
++            }
+             std::thread::sleep(Duration::from_millis(BUSY_BACKOFF_MS[i]));
+             true
+         }))?;

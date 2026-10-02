@@ -1,0 +1,126 @@
+{
+ "gate3": [
+  {
+   "id": "g3-compression",
+   "topic": "the transport compression codec",
+   "old": "gzip",
+   "new": "zstd"
+  },
+  {
+   "id": "g3-cache-eviction",
+   "topic": "the cache eviction policy",
+   "old": "LFU",
+   "new": "LRU with a 300-second TTL"
+  },
+  {
+   "id": "g3-password-hashing",
+   "topic": "the password hashing algorithm",
+   "old": "bcrypt",
+   "new": "argon2id"
+  },
+  {
+   "id": "g3-tls-backend",
+   "topic": "the TLS backend",
+   "old": "openssl",
+   "new": "rustls"
+  },
+  {
+   "id": "g3-wire-format",
+   "topic": "the wire serialisation format",
+   "old": "msgpack",
+   "new": "cbor"
+  },
+  {
+   "id": "g3-async-runtime",
+   "topic": "the async runtime",
+   "old": "async-std",
+   "new": "tokio"
+  },
+  {
+   "id": "g3-version-scheme",
+   "topic": "the version numbering scheme",
+   "old": "calver",
+   "new": "semver"
+  },
+  {
+   "id": "g3-license",
+   "topic": "the source license",
+   "old": "GPL-3.0",
+   "new": "Apache-2.0"
+  },
+  {
+   "id": "g3-tls-verification",
+   "topic": "TLS certificate verification in development builds",
+   "old": "certificate verification disabled in dev builds",
+   "new": null
+  },
+  {
+   "id": "g3-internal-http",
+   "topic": "plain HTTP for internal hosts",
+   "old": "plain http allowed for internal hosts",
+   "new": "https everywhere, no plaintext exception"
+  }
+ ],
+ "new": [
+  {
+   "id": "new-orm",
+   "topic": "the ORM for the Python billing service",
+   "old": "SQLAlchemy",
+   "new": "Tortoise ORM"
+  },
+  {
+   "id": "new-base-image",
+   "topic": "the container base image for the workers",
+   "old": "debian-slim",
+   "new": "distroless"
+  },
+  {
+   "id": "new-date-lib",
+   "topic": "the date library in the web client",
+   "old": "moment.js",
+   "new": "date-fns"
+  },
+  {
+   "id": "new-ci",
+   "topic": "the CI provider",
+   "old": "Travis CI",
+   "new": "GitHub Actions"
+  },
+  {
+   "id": "new-flags",
+   "topic": "the feature-flag service",
+   "old": "LaunchDarkly",
+   "new": "Unleash"
+  },
+  {
+   "id": "new-queue",
+   "topic": "the queue for background jobs",
+   "old": "RabbitMQ",
+   "new": "NATS JetStream"
+  },
+  {
+   "id": "new-markdown",
+   "topic": "the markdown renderer for the docs site",
+   "old": "marked",
+   "new": "markdown-it"
+  },
+  {
+   "id": "new-region",
+   "topic": "the object storage region",
+   "old": "us-east-1",
+   "new": "eu-west-1"
+  },
+  {
+   "id": "new-gofmt",
+   "topic": "the Go code formatter",
+   "old": "gofmt",
+   "new": "gofumpt"
+  },
+  {
+   "id": "new-errors",
+   "topic": "the error tracking service",
+   "old": "Sentry",
+   "new": "Rollbar"
+  }
+ ]
+}

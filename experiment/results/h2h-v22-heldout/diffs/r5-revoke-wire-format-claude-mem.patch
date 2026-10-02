@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..3375502
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire serialisation format
++
++The project's current recorded decision is to use CBOR (Concise Binary Object Representation) as the wire serialisation format. It was chosen for its stronger standardisation and fewer version-compatibility issues, which improves the long-term maintainability and interoperability of the serialisation layer.

@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+{
+"key": "h6-grpc#terse",
+"topic": "the RPC framework for internal services",
+"old": "gRPC",
+"new": "ConnectRPC",
+"style": "terse"
+},
+{
+"key": "h6-grpc#chatty",
+"topic": "the RPC framework for internal services",
+"old": "gRPC",
+"new": "ConnectRPC",
+"style": "chatty"
+},
+{
+"key": "h6-grpc#Spanish",
+"topic": "the RPC framework for internal services",
+"old": "gRPC",
+"new": "ConnectRPC",
+"style": "Spanish"
+},
+{
+"key": "h6-secrets-store#terse",
+"topic": "where production secrets are stored",
+"old": "HashiCorp Vault",
+"new": "AWS Secrets Manager",
+"style": "terse"
+},
+{
+"key": "h6-secrets-store#chatty",
+"topic": "where production secrets are stored",
+"old": "HashiCorp Vault",
+"new": "AWS Secrets Manager",
+"style": "chatty"
+},
+{
+"key": "h6-secrets-store#Spanish",
+"topic": "where production secrets are stored",
+"old": "HashiCorp Vault",
+"new": "AWS Secrets Manager",
+"style": "Spanish"
+},
+{
+"key": "h6-css#terse",
+"topic": "the styling approach in the web app",
+"old": "styled-components",
+"new": "Tailwind CSS",
+"style": "terse"
+},
+{
+"key": "h6-css#chatty",
+"topic": "the styling approach in the web app",
+"old": "styled-components",
+"new": "Tailwind CSS",
+"style": "chatty"
+},
+{
+"key": "h6-css#Spanish",
+"topic": "the styling approach in the web app",
+"old": "styled-components",
+"new": "Tailwind CSS",
+"style": "Spanish"
+},
+{
+"key": "h6-tracing#terse",
+"topic": "the distributed tracing backend",
+"old": "Jaeger",
+"new": "Grafana Tempo",
+"style": "terse"
+},
+{
+"key": "h6-tracing#chatty",
+"topic": "the distributed tracing backend",
+"old": "Jaeger",
+"new": "Grafana Tempo",
+"style": "chatty"
+},
+{
+"key": "h6-tracing#Spanish",
+"topic": "the distributed tracing backend",
+"old": "Jaeger",
+"new": "Grafana Tempo",
+"style": "Spanish"
+},
+{
+"key": "h6-http-go#terse",
+"topic": "the HTTP router in the Go API",
+"old": "net/http",
+"new": "chi",
+"style": "terse"
+},
+{
+"key": "h6-http-go#chatty",
+"topic": "the HTTP router in the Go API",
+"old": "net/http",
+"new": "chi",
+"style": "chatty"
+},
+{
+"key": "h6-http-go#Spanish",
+"topic": "the HTTP router in the Go API",
+"old": "net/http",
+"new": "chi",
+"style": "Spanish"
+},
+{
+"key": "h6-notify#terse",
+"topic": "how push notifications are sent",
+"old": "Firebase Cloud Messaging",
+"new": "OneSignal",
+"style": "terse"
+},
+{
+"key": "h6-notify#chatty",
+"topic": "how push notifications are sent",
+"old": "Firebase Cloud Messaging",
+"new": "OneSignal",
+"style": "chatty"
+},
+{
+"key": "h6-notify#Spanish",
+"topic": "how push notifications are sent",
+"old": "Firebase Cloud Messaging",
+"new": "OneSignal",
+"style": "Spanish"
+},
+{
+"key": "h6-runtime-js#terse",
+"topic": "the JavaScript runtime for the server",
+"old": "Node.js",
+"new": "Bun",
+"style": "terse"
+},
+{
+"key": "h6-runtime-js#chatty",
+"topic": "the JavaScript runtime for the server",
+"old": "Node.js",
+"new": "Bun",
+"style": "chatty"
+},
+{
+"key": "h6-runtime-js#Spanish",
+"topic": "the JavaScript runtime for the server",
+"old": "Node.js",
+"new": "Bun",
+"style": "Spanish"
+},
+{
+"key": "h6-lockfile#terse",
+"topic": "the Node package manager",
+"old": "npm",
+"new": "pnpm",
+"style": "terse"
+},
+{
+"key": "h6-lockfile#chatty",
+"topic": "the Node package manager",
+"old": "npm",
+"new": "pnpm",
+"style": "chatty"
+},
+{
+"key": "h6-lockfile#Spanish",
+"topic": "the Node package manager",
+"old": "npm",
+"new": "pnpm",
+"style": "Spanish"
+},
+{
+"key": "h6-dns#terse",
+"topic": "the DNS provider",
+"old": "Route 53",
+"new": "Cloudflare DNS",
+"style": "terse"
+},
+{
+"key": "h6-dns#chatty",
+"topic": "the DNS provider",
+"old": "Route 53",
+"new": "Cloudflare DNS",
+"style": "chatty"
+},
+{
+"key": "h6-dns#Spanish",
+"topic": "the DNS provider",
+"old": "Route 53",
+"new": "Cloudflare DNS",
+"style": "Spanish"
+},
+{
+"key": "h6-referrals#terse",
+"topic": "the referral programme page",
+"old": "a referral programme page",
+"new": "(withdrawn, no replacement)",
+"style": "terse"
+},
+{
+"key": "h6-referrals#chatty",
+"topic": "the referral programme page",
+"old": "a referral programme page",
+"new": "(withdrawn, no replacement)",
+"style": "chatty"
+},
+{
+"key": "h6-referrals#Spanish",
+"topic": "the referral programme page",
+"old": "a referral programme page",
+"new": "(withdrawn, no replacement)",
+"style": "Spanish"
+}
+]

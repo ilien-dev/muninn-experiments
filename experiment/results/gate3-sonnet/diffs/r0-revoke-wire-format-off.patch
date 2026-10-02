@@ -1,0 +1,14 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..086183a
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,8 @@
++# Wire serialisation format
++
++No decision is recorded. `docs/format.md` and `docs/threat-model.md` describe
++the on-disk store (SQLite) and its Markdown/JSONL export, but the project's
++recorded decisions do not name a current wire serialisation format, and
++`docs/threat-model.md` lists team transport across machines as explicitly
++out of scope and not built. Nothing should be assumed until a decision is
++recorded.

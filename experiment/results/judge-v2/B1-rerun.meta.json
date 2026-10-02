@@ -1,0 +1,17 @@
+{
+ "arm": "B1",
+ "model": "qwen35-4b-q4km.gguf",
+ "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+ "threads": 16,
+ "calls": 100,
+ "reverse": false,
+ "full_prompt": [
+  {
+   "id": "p10-postgres#terse|pairs.json",
+   "ms": 647.2859849964152
+  }
+ ],
+ "wall_s": 157.5,
+ "started": "2026-09-25T03:20:57.376431+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

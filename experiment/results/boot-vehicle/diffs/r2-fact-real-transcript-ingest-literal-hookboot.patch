@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..d108901
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Perf history
++
++## Real transcript ingest
++
++Sin medir. En este checkout no hay un transcript real de Claude Code ni un
++log de una corrida de ingest, así que no hay tamaño en MB, número de turnos
++o episodios, ni tiempo de ingest que reportar. No se inventan cifras aquí.
++
++Para llenar esta sección: correr el ingest real sobre un `.jsonl` de sesión
++de Claude Code y anotar tamaño del archivo, turnos/episodios producidos y
++duración medida.

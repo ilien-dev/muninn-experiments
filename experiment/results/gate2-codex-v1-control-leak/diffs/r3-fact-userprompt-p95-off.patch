@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..19d1b09
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++On the project's adversarial synthetic corpus built from a 30-word frequent
++vocabulary, the full-recall path had a measured p95 of **35.53 ms** before the
++term-selection fix. It queried BM25 with the first 24 prompt terms.
++
++The fix was to rank usable prompt terms by inverse document frequency (IDF) and
++query BM25 with only the eight highest-IDF terms, dropping terms absent from the
++store and very high-frequency terms that carry little signal. With that fix,
++the measured full-recall p95 was **8.75 ms**.
++
++These are the paired before/after p95 measurements recorded in the project's
++own stage breakdown (`[H6]` in `research/00-evidence-log.md`). The separately
++recorded 4.31 ms p95 (`[I3]`) is an end-to-end Rust hook measurement on a
++50,000-record index and is not the paired adversarial-corpus result above.

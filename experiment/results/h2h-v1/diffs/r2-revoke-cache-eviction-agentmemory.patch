@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..668b4fe
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++This project has no recorded decision on a cache eviction policy. A search of the repository's documentation (`docs/doc.md`), changelog, and codebase found no ADR, policy document, or other recorded decision specifying an eviction strategy (e.g., LRU, LFU, TTL) for any cache used in the project; the only cache-related references are to per-request query/form parameter caching in `Context` and to TLS certificate caching in an autocert example, neither of which documents an eviction policy.

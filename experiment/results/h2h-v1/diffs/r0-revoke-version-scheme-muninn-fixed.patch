@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..6137adb
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++Nothing is currently recorded for this project's version numbering scheme: no committed project documentation specifies one, and the only related notes are unverified, mutually conflicting session records (one naming CalVer, a later one changing it to SemVer) that do not meet the confirmation bar needed to treat either as the project's current decision.

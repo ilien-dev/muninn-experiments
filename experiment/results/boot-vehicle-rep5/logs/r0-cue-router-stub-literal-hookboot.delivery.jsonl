@@ -1,0 +1,13 @@
+{"at":1789352067149,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[83,84],"tokens":193,"reason":"cue:event:session_start"}
+{"at":1789352067206,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789352067206,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[56],"tokens":0,"reason":"gated:budget"}
+{"at":1789352067206,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[75],"tokens":0,"reason":"gated:budget"}
+{"at":1789352067206,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[61],"tokens":0,"reason":"gated:budget"}
+{"at":1789352067206,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[81],"tokens":0,"reason":"gated:budget"}
+{"at":1789352067206,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[93,64,74],"tokens":473,"reason":"literal"}
+{"at":1789352100597,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[86],"tokens":0,"reason":"cue:dir:crates/muninn-core/src@post_tool"}
+{"at":1789352100597,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[86],"tokens":51,"reason":"literal:post_tool"}
+{"at":1789352107558,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[85],"tokens":0,"reason":"cue:symbol:date_of,symbol:gate_and_dates,symbol:intent_gate@post_tool"}
+{"at":1789352107558,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[88],"tokens":0,"reason":"cue:symbol:tests@post_tool"}
+{"at":1789352107558,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[89],"tokens":0,"reason":"cue:symbol:tests@post_tool"}
+{"at":1789352107558,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","arm":"literal","ids":[85,88,89],"tokens":312,"reason":"literal:post_tool"}

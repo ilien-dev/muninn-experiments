@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..558a804
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire serialisation format
++
++The project's current recorded decision is CBOR. An earlier decision recorded msgpack, but it was explicitly superseded by a later decision changing the wire serialisation format to CBOR.

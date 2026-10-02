@@ -1,0 +1,11 @@
+diff --git a/crates/muninn-embed/src/lib.rs b/crates/muninn-embed/src/lib.rs
+index 1bba432..a733f8e 100644
+--- a/crates/muninn-embed/src/lib.rs
++++ b/crates/muninn-embed/src/lib.rs
+@@ -1 +1,6 @@
+ //! Embedding sidecar (model2vec, exact kNN). Never in the read hook. Filled in Phase 3.
++
++/// Duración de una llamada de embedding, en milisegundos.
++pub fn embedding_call_duration_ms(start: std::time::Instant) -> u64 {
++    start.elapsed().as_millis() as u64
++}

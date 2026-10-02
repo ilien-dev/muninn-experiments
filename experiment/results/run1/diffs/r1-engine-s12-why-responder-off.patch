@@ -1,0 +1,18 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..c107b31 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -327,7 +327,12 @@ diferida no es alarma, es "verificar en el siguiente límite".
+ | Decaimiento tipo Ebbinghaus, importancia aprendida | Ninguna medición lo pide; agentmemory lo lleva `[P2]` |
+ | Skills importadas | −1,3 a −4,2 pp `[J2]` |
+ | Más de dos herramientas MCP | 0 operaciones voluntarias `[K1]`; peaje `[H2]` |
+-| Respondedor de "por qué" enrutado | Fuera de la v1; si se hace, se hace como herramienta invocada y midiendo suficiencia `[K3]` |
++
++`muninn why` sí es de la v1, pero no como respondedor de fondo: una compuerta con un
++solo disparo es insuficiente para responder (0,07–0,20 de suficiencia), enrutar por
++tipo de pregunta sube eso a 0,83 `[K3]`. Se entrega como herramienta invocada
++explícitamente, nunca inyectada por el hook, y cada respuesta mide su propia
++suficiencia antes de mostrarse.
+ 
+ Vector como **sidecar opcional**, apagado por defecto: embeddings estáticos calculados en
+ la ruta de escritura y consultados solo por la herramienta `muninn why`, nunca por el hook.

@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..df7b35c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Perf history
++
++## SessionStart health gate
++
++Change: took `PRAGMA quick_check` off the health-gate read path, and added the
++`fts_rows` counter check and the `body` CHECK constraint at the same time.
++
++Numbers available from a Muninn session-transcript record (trust 1 —
++`origin: tool_observed`, observed in this project's own session history, not
++independently confirmed by an exit code or a commit):
++
++- Before: **11.9 ms**
++- After: **1.05 ms**
++
++(evidence: `~/.local/share/muninn-bench/seed-14a6ab47-frozen.jsonl:22559233`)
++
++Caveat: this record only states the two SessionStart timings above. It does
++not say these are p50 (vs. a single run or some other statistic), and it does
++not say the store held 5k records at the time of measurement. `muninn why`
++against this question comes back `insufficient: only circumstantial records
++(trust < 2)` — no trust-2/3 record (confirmed by an exit code or a commit, or
++stated by the user) corroborates a p50-on-5k-records framing. So: the 11.9 ms
++→ 1.05 ms drop for this exact change (quick_check off the read path + fts_rows
++counter + body CHECK) is what's recorded, but a measured p50 specifically on a
++5k-record store could not be found here. Not inventing one.

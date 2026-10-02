@@ -1,0 +1,30 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..a4bf191 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -302,8 +302,8 @@ autoformalización publicada `[U1]`, no se inventa.
+ 
+ ## 11. Salud del motor (P10)
+ 
+-Health gate en `SessionStart`, una línea: `MUNINN 9/9 GREEN` o el nombre del fallo y su
+-arreglo. Nueve comprobaciones, todas aritmética sobre evidencia tipada, ninguna con
++Health gate en `SessionStart`, una línea: `MUNINN 10/10 GREEN` o el nombre del fallo y su
++arreglo. Diez comprobaciones, todas aritmética sobre evidencia tipada, ninguna con
+ modelo `[G3]`:
+ 
+ 1. marca de agua de ingesta fresca; 2. heartbeats de todos los hooks esperados desde el
+@@ -311,10 +311,12 @@ modelo `[G3]`:
+ `record` (conteo); 5. cola de captura pendiente; 6. render de invariantes no idéntico al
+ de la sesión anterior (un render congelado es un fallo); 7. `rule` en sincronía con los
+ hashes de los ficheros fuente; 8. topes no excedidos; 9. artefactos compilados presentes
+-y con el marcador propio.
++y con el marcador propio; 10. sidecar de embeddings vivo o marcado frío — nunca RED por
++sí solo.
+ 
+ Un RED es accionable por definición. "Frío" no es "muerto": un timeout de ingesta
+-diferida no es alarma, es "verificar en el siguiente límite".
++diferida no es alarma, es "verificar en el siguiente límite". El sidecar de embeddings
++sigue esa misma regla: frío cuenta, RED no.
+ 
+ ## 12. Lo que el motor NO lleva, con el dato
+ 

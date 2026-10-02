@@ -1,0 +1,28 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..b29e5e6
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,22 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not retain a measured full-recall p95 for the
++`UserPromptSubmit` hook on the adversarial synthetic 30-word vocabulary before
++the term-selection fix. Consequently, no pre-fix number is reported here.
++
++The fix changed prompt-term selection to rank terms by inverse document
++frequency, retain at most the top eight, discard terms absent from the store,
++and discard terms occurring in more than one third of the active records (once
++the store has at least 50 records). This prevents common synthetic-vocabulary
++terms from forcing scans of long posting lists.
++
++The repository also does not retain a measured full-recall p95 for that same
++adversarial workload after the fix. Consequently, no post-fix number is
++reported here.
++
++The 35.53 ms and 8.75 ms p95 values in `research/00-evidence-log.md` are not
++substitutes for the missing figures: they measure the BM25 stage alone, with 24
++terms and the top eight IDF terms respectively, rather than the complete
++`UserPromptSubmit` hook on the adversarial synthetic workload.

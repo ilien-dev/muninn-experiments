@@ -1,0 +1,32 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..dfdd16d
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,26 @@
++# Performance history
++
++## SessionStart health gate
++
++The read-path change moved `PRAGMA quick_check` to a recorded result, replaced the
++live FTS row count with the trigger-maintained `meta.fts_rows` counter, and relied
++on the `record.body` `CHECK (length(body) <= 2000)` constraint instead of rescanning
++record bodies. These changes landed together, so this history does not attribute
++the improvement to any one of them.
++
++| Version | 5k-record `SessionStart` p50 |
++| --- | ---: |
++| Before the read-path change | No measured p50 was found in this checkout or its available session records. |
++| After the read-path change | **1.006 ms** |
++
++The after measurement was taken on 2026-09-14 with the repository benchmark,
++using 5,000 records, 15,000 cues, and 300 end-to-end hook invocations:
++
++```text
++muninn-bench perf --records 5000 --cues 15000 --runs 300
++SessionStart: p50 1.005872 ms, p95 1.252231 ms, p99 1.348652 ms
++```
++
++The source notes a separate measured `quick_check` cost of 9.6 ms at a 5 MB
++database, but that is not a measured end-to-end `SessionStart` p50 and therefore
++is not used as the missing before value.

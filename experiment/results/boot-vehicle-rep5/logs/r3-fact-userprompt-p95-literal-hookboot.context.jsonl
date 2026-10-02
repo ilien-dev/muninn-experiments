@@ -1,0 +1,4 @@
+{"at":1789368191101,"session":"1cbf72cf-9f54-45e4-8810-c79e929673e7","files":["crates/muninn-bench/src/*.rs","research/bench/*.py","crates/muninn-core/src/recall.rs"],"symbols":["STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates"]}
+{"at":1789368194199,"session":"1cbf72cf-9f54-45e4-8810-c79e929673e7","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789368224617,"session":"1cbf72cf-9f54-45e4-8810-c79e929673e7","files":["crates/muninn-core/src/recall.rs"],"symbols":["STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates"]}
+{"at":1789368233301,"session":"1cbf72cf-9f54-45e4-8810-c79e929673e7","files":["docs/perf-history.md"],"symbols":[]}

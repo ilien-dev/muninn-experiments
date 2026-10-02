@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c46ac63
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Historial de rendimiento
++
++## Compuerta de salud en SessionStart
++
++Coste del hook `SessionStart` (nueve comprobaciones, ver `crates/muninn-core/src/health.rs`)
++con un almacén de 5 000 registros:
++
++| Momento | p50 |
++|---|---|
++| Antes (con `PRAGMA quick_check` en la ruta de lectura) | 11,9 ms |
++| Después (`quick_check` fuera de la ruta de lectura, contador `fts_rows`, `CHECK` de `body` añadidos a la vez) | 1,05 ms |
++
++Procedencia: estas dos cifras solo constan en el registro de sesión de Muninn de
++este proyecto (episodio 2026-09-13, sesión `14a6ab47`, trust 1 — transcript
++observado, no confirmado por un commit ni indicado por el usuario). No encontré
++un fichero de benchmark comprometido en este repositorio que las reproduzca ni
++que fije "p50" o "5 000 registros" de forma explícita junto al número. El cambio
++de código que describen sí está presente: `run()` en `health.rs` solo llama a
++`db.quick_check()` cuando `live=true`; con `live=false` (el caso de los hooks)
++lee `quick_check_result` de meta y el contador `fts_rows` en vez de contar
++`record_fts` en vivo (`crates/muninn-core/src/health.rs:90-99`, `210-319`).
++
++Si se necesita una cifra verificada por ejecución en este checkout, hay que
++volver a medir con `muninn-bench` sobre un almacén de 5 000 registros y anotar
++aquí el resultado con su comando.

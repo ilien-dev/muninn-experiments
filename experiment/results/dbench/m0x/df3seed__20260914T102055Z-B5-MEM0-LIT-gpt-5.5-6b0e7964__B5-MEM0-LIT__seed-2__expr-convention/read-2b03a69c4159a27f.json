@@ -1,0 +1,52 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-convention",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-convention"
+    },
+    "query": "Allow named variables in expressions through evaluate(expression, variables={...}) and safe_evaluate(..., variables={...}); unknown names must raise EXPR_NAME.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:32:07.338385+00:00",
+        "hash": "fa09a98566d3e4a438743751e0ed0527",
+        "id": "a57cbddf-ad62-4e2b-b074-1b4780af5581",
+        "memory": "For sequence expr-convention, task expr-convention-s01, the public task prompt was: Add safe_evaluate(expression, default=None), returning the default only for ExpressionError while preserving the EXPR_* error convention.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/exprmini/__init__.py b/exprmini/__init__.py index 74a921d..c6d8990 100644 --- a/exprmini/__init__.py +++ b/exprmini/__init__.py @@ -1 +1 @@ -from .evaluator import ExpressionError, evaluate, list_operator_help +from .evaluator import ExpressionError, evaluate, list_operator_help, safe_evaluate diff --git a/exprmini/evaluator.py b/exprmini/evaluator.py index 7d27a99..65cd38c 100644 --- a/exprmini/evaluator.py +++ b/exprmini/evaluator.py @@ -100,5 +100,12 @@ def evaluate(expression): return Parser(tokenize(expression)).parse() +def safe_evaluate(expression, default=None): + try: + return evaluate(expression) + except ExpressionError: + return default + + def list_operator_help(): return list(HELP_LINES)\nThe public production diff was: diff --git a/exprmini/__init__.py b/exprmini/__init__.py index 74a921d..c6d8990 100644 --- a/exprmini/__init__.py +++ b/exprmini/__init__.py @@ -1 +1 @@ -from .evaluator import ExpressionError, evaluate, list_operator_help +from .evaluator import ExpressionError, evaluate, list_operator_help, safe_evaluate diff --git a/exprmini/evaluator.py b/exprmini/evaluator.py index 7d27a99..65cd38c 100644 --- a/exprmini/evaluator.py +++ b/exprmini/evaluator.py @@ -100,5 +100,12 @@ def evaluate(expression): return Parser(tokenize(expression)).parse() +def safe_evaluate(expression, default=None): + try: + return evaluate(expression) + except ExpressionError: + return default + + def list_operator_help(): return list(HELP_LINES)\nThe task outcome was passed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "expr-convention"
+        },
+        "role": "user",
+        "score": 0.7736107748645844,
+        "updated_at": "2026-09-14T10:32:07.338385+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-convention"
+      },
+      {
+        "created_at": "2026-09-14T10:32:42.939965+00:00",
+        "hash": "cc50d7ede3bf87002b715f8dad2f25ec",
+        "id": "9ee714e4-eab8-4e65-a798-a2942a6bd821",
+        "memory": "All public expression failures use EXPR_<CODE>: <message>.\nFor sequence expr-convention, task expr-convention-s02, the public task prompt was: Add evaluate_many(lines), ignoring blank lines and reporting failures as EXPR_BATCH with the failing 1-based line number.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/exprmini/__init__.py b/exprmini/__init__.py index c6d8990..639796a 100644 --- a/exprmini/__init__.py +++ b/exprmini/__init__.py @@ -1 +1 @@ -from .evaluator import ExpressionError, evaluate, list_operator_help, safe_evaluate +from .evaluator import ExpressionError, evaluate, evaluate_many, list_operator_help, safe_evaluate diff --git a/exprmini/evaluator.py b/exprmini/evaluator.py index 6333259..295c357 100644 --- a/exprmini/evaluator.py +++ b/exprmini/evaluator.py @@ -100,6 +100,18 @@ def evaluate(expression): return Parser(tokenize(expression)).parse() +def evaluate_many(lines): + results = [] + for line_number, line in enumerate(lines, start=1): + if not line.strip(): + continue + try: + results.append(evaluate(line)) + except ExpressionError as exc: + raise _error(\"BATCH\", f\"line {line_number}: {exc}\") + return results + + def list_operator_help(): return list(HELP_LINES)\nThe public production diff was: diff --git a/exprmini/__init__.py b/exprmini/__init__.py index c6d8990..639796a 100644 --- a/exprmini/__init__.py +++ b/exprmini/__init__.py @@ -1 +1 @@ -from .evaluator import ExpressionError, evaluate, list_operator_help, safe_evaluate +from .evaluator import ExpressionError, evaluate, evaluate_many, list_operator_help, safe_evaluate diff --git a/exprmini/evaluator.py b/exprmini/evaluator.py index 6333259..295c357 100644 --- a/exprmini/evaluator.py +++ b/exprmini/evaluator.py @@ -100,6 +100,18 @@ def evaluate(expression): return Parser(tokenize(expression)).parse() +def evaluate_many(lines): + results = [] + for line_number, line in enumerate(lines, start=1): + if not line.strip(): + continue + try: + results.append(evaluate(line)) + except ExpressionError as exc: + raise _error(\"BATCH\", f\"line {line_number}: {exc}\") + return results + + def list_operator_help(): return list(HELP_LINES)\nThe task outcome was passed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "expr-convention"
+        },
+        "role": "user",
+        "score": 0.7527640818388777,
+        "updated_at": "2026-09-14T10:32:42.939965+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-convention"
+      }
+    ]
+  }
+}

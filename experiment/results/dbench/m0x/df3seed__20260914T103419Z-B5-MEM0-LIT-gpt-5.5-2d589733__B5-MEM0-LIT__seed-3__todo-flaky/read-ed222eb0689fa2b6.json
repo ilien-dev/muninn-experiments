@@ -1,0 +1,52 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky"
+    },
+    "query": "Add `purge-done`, preserving monotonic task ids after deleted completed tasks.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:36:37.082543+00:00",
+        "hash": "ef0f2ea9285580a3d3b32922992d4114",
+        "id": "4e3f2cef-d0d3-4ee5-9ce5-4ed5f666a7c6",
+        "memory": "The list-order failure is test-order flakiness. The oracle expects deterministic CLI sorting, not a pytest retry.\nFor sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "todo-flaky"
+        },
+        "role": "user",
+        "score": 0.6075660004568267,
+        "updated_at": "2026-09-14T10:36:37.082543+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky"
+      },
+      {
+        "created_at": "2026-09-14T10:36:49.263921+00:00",
+        "hash": "8f10e7b7632e1f7becf19d044bb30ee5",
+        "id": "fb5e82d5-a81f-4d24-834b-5e9148010eed",
+        "memory": "Due-date tests can use today's date. The oracle is deterministic and uses only explicit due dates.\nFor sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "todo-flaky"
+        },
+        "role": "user",
+        "score": 0.5347376589506457,
+        "updated_at": "2026-09-14T10:36:49.263921+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky"
+      }
+    ]
+  }
+}

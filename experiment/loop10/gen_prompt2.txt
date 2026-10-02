@@ -1,0 +1,14 @@
+Write pairs of short messages a software developer might type to a coding assistant. In each pair the two messages are about DIFFERENT things that happen to share TWO OR MORE ordinary content words. The second message must NOT replace, revise, cancel or contradict the first: both stay true at the same time, and a memory that retired the first because of the second would be losing a fact that is still true.
+
+Examples of the shape (do not reuse these):
+  a: "the session cache uses Redis"            b: "the session cache warms on deploy"        (share: session, cache)
+  a: "retry the payment webhook 3 times"       b: "the payment webhook logs every retry"     (share: payment, webhook, retry)
+  a: "we store build artifacts in S3"          b: "the build artifacts are signed before upload"  (share: build, artifacts)
+
+Some pairs should mention the same product or value in both messages without the second one changing the decision — for instance one message deciding to use a tool and a later one describing a test that exercises that tool.
+
+Make 18 pairs, varied and natural: six terse, six chatty, six Spanish. Use realistic technology names and values.
+
+Output JSON only: a list of 15 objects {"key","a","b","shared"} where key is a short slug prefixed "p11-" and suffixed "#terse", "#chatty" or "#Spanish", and shared lists the words the two messages have in common.
+
+Do not use any of these topics: postgres/user data, rate limits, nightly tests, snapshots, Datadog, DynamoDB sessions, staging feature flags, API metrics.

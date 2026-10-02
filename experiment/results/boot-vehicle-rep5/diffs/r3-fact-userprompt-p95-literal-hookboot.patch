@@ -1,0 +1,30 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..ebd0249
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,24 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++Benchmark: `muninn-bench perf`, full `UserPromptSubmit` hook (intent gate passes,
++i.e. the complete read path runs: term selection → BM25 → filter → budget →
++blocks), measured against the adversarial synthetic store built in
++`crates/muninn-bench/src/main.rs` — a Zipf-distributed vocabulary of 30 frequent
++domain words plus rare identifiers (see `word()`/`WORDS` in that file), chosen
++so posting lists look like real code discussion rather than a corpus where
++every record contains every term.
++
++- **Before the term-selection fix:** full-hook p95 **10.27 ms**.
++- **The fix:** `select_terms()` in `crates/muninn-core/src/recall.rs` now drops
++  candidate terms whose document frequency exceeds a third of the store
++  (`df > n / 3`, gated on `n >= 50`) before ranking the rest by IDF. On the
++  30-word adversarial vocabulary, several of those 30 frequent words appear in
++  most records, so without this cutoff they dominated term selection and each
++  produced a long FTS5 posting list to score.
++- **After the fix:** full-hook p95 **1.82 ms**.
++
++These two numbers come from a prior measurement session on this project (not
++re-measured in this session); no other file in the repository records them
++verbatim, so treat them as reported rather than independently reproduced here.

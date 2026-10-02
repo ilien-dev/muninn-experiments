@@ -1,0 +1,16 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..4c5f529
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,10 @@
++# Perf history
++
++## SessionStart health gate
++
++Store: 5k records.
++
++- Antes (quick_check en el read path): p50 = 11.9 ms.
++- Después (quick_check fuera del read path, contador fts_rows y CHECK de body añadidos a la vez): p50 = 1.05 ms.
++
++Fuente: episodio de sesión anterior (muninn, trust 1, tool_observed), no remedido en esta sesión.

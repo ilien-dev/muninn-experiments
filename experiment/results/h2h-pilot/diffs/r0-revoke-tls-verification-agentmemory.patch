@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..792a825
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification in Development Builds
++
++This project has no recorded decision on TLS certificate verification in development builds. A search of the repository (README, CHANGELOG, docs, and commit history) found no policy statement on the matter; the only occurrences of certificate-verification bypass (`InsecureSkipVerify`) appear in test files to work around self-signed test certificates, which is not a recorded project decision or policy.

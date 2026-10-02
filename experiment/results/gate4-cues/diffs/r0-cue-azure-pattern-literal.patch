@@ -1,0 +1,24 @@
+diff --git a/crates/muninn-capture/src/redact.rs b/crates/muninn-capture/src/redact.rs
+index eec1ce2..8436c55 100644
+--- a/crates/muninn-capture/src/redact.rs
++++ b/crates/muninn-capture/src/redact.rs
+@@ -18,6 +18,7 @@ fn patterns() -> &'static [Regex] {
+             r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----",
+             r#"(?i)\b(api[_-]?key|token|secret|password|passwd|authorization)\b\s*[:=]\s*['"]?[A-Za-z0-9_\-./+=]{12,}"#,
+             r"eyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}",
++            r"[A-Za-z0-9+/]{86}==",
+         ]
+         .iter()
+         .map(|p| Regex::new(p).unwrap())
+@@ -91,4 +92,11 @@ mod tests {
+         let t = "qA7zP2mX9kL4vB8nR1tY6wC3eH5jD0sF2gK8uN4pQ7";
+         assert!(redact(t).contains("[redacted]"));
+     }
++
++    #[test]
++    fn redacts_azure_storage_account_key() {
++        let s = "AccountKey=nQ3vX9pL2mK7bR4tY8wC1eH5jD0sF6gK8uN4pQ7zA1oV5rT2xM9cB3nJ6hE0dWaB2cD4eF6gH8iJ0kL1mNoPqR==;";
++        assert!(!redact(s).contains("AccountKey=nQ3"));
++        assert!(redact(s).contains("[redacted]"));
++    }
+ }

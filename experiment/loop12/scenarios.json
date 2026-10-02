@@ -1,0 +1,317 @@
+[
+ {
+  "key": "d12-pool#terse",
+  "topic": "the connection pooler",
+  "old": "PgBouncer",
+  "new": "Supavisor",
+  "style": "terse"
+ },
+ {
+  "key": "d12-pool#chatty",
+  "topic": "the connection pooler",
+  "old": "PgBouncer",
+  "new": "Supavisor",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-pool#Spanish",
+  "topic": "the connection pooler",
+  "old": "PgBouncer",
+  "new": "Supavisor",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-queue#terse",
+  "topic": "the background job queue",
+  "old": "Sidekiq",
+  "new": "Oban",
+  "style": "terse"
+ },
+ {
+  "key": "d12-queue#chatty",
+  "topic": "the background job queue",
+  "old": "Sidekiq",
+  "new": "Oban",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-queue#Spanish",
+  "topic": "the background job queue",
+  "old": "Sidekiq",
+  "new": "Oban",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-http#terse",
+  "topic": "the HTTP client in the service",
+  "old": "reqwest",
+  "new": "hyper",
+  "style": "terse"
+ },
+ {
+  "key": "d12-http#chatty",
+  "topic": "the HTTP client in the service",
+  "old": "reqwest",
+  "new": "hyper",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-http#Spanish",
+  "topic": "the HTTP client in the service",
+  "old": "reqwest",
+  "new": "hyper",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-fmt#terse",
+  "topic": "the log format",
+  "old": "logfmt",
+  "new": "JSON lines",
+  "style": "terse"
+ },
+ {
+  "key": "d12-fmt#chatty",
+  "topic": "the log format",
+  "old": "logfmt",
+  "new": "JSON lines",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-fmt#Spanish",
+  "topic": "the log format",
+  "old": "logfmt",
+  "new": "JSON lines",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-ci#terse",
+  "topic": "where CI runs",
+  "old": "CircleCI",
+  "new": "GitHub Actions",
+  "style": "terse"
+ },
+ {
+  "key": "d12-ci#chatty",
+  "topic": "where CI runs",
+  "old": "CircleCI",
+  "new": "GitHub Actions",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-ci#Spanish",
+  "topic": "where CI runs",
+  "old": "CircleCI",
+  "new": "GitHub Actions",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-store#terse",
+  "topic": "the object store",
+  "old": "MinIO",
+  "new": "Cloudflare R2",
+  "style": "terse"
+ },
+ {
+  "key": "d12-store#chatty",
+  "topic": "the object store",
+  "old": "MinIO",
+  "new": "Cloudflare R2",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-store#Spanish",
+  "topic": "the object store",
+  "old": "MinIO",
+  "new": "Cloudflare R2",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-lint#terse",
+  "topic": "the linter for the frontend",
+  "old": "ESLint",
+  "new": "Biome",
+  "style": "terse"
+ },
+ {
+  "key": "d12-lint#chatty",
+  "topic": "the linter for the frontend",
+  "old": "ESLint",
+  "new": "Biome",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-lint#Spanish",
+  "topic": "the linter for the frontend",
+  "old": "ESLint",
+  "new": "Biome",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-orm#terse",
+  "topic": "the database layer",
+  "old": "Diesel",
+  "new": "SQLx",
+  "style": "terse"
+ },
+ {
+  "key": "d12-orm#chatty",
+  "topic": "the database layer",
+  "old": "Diesel",
+  "new": "SQLx",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-orm#Spanish",
+  "topic": "the database layer",
+  "old": "Diesel",
+  "new": "SQLx",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-auth#terse",
+  "topic": "how sessions are signed",
+  "old": "HS256",
+  "new": "EdDSA",
+  "style": "terse"
+ },
+ {
+  "key": "d12-auth#chatty",
+  "topic": "how sessions are signed",
+  "old": "HS256",
+  "new": "EdDSA",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-auth#Spanish",
+  "topic": "how sessions are signed",
+  "old": "HS256",
+  "new": "EdDSA",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-test#terse",
+  "topic": "the end-to-end test runner",
+  "old": "Cypress",
+  "new": "Playwright",
+  "style": "terse"
+ },
+ {
+  "key": "d12-test#chatty",
+  "topic": "the end-to-end test runner",
+  "old": "Cypress",
+  "new": "Playwright",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-test#Spanish",
+  "topic": "the end-to-end test runner",
+  "old": "Cypress",
+  "new": "Playwright",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-pkg#terse",
+  "topic": "the package manager",
+  "old": "npm",
+  "new": "pnpm",
+  "style": "terse"
+ },
+ {
+  "key": "d12-pkg#chatty",
+  "topic": "the package manager",
+  "old": "npm",
+  "new": "pnpm",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-pkg#Spanish",
+  "topic": "the package manager",
+  "old": "npm",
+  "new": "pnpm",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-tpl#terse",
+  "topic": "the template engine",
+  "old": "Handlebars",
+  "new": "Tera",
+  "style": "terse"
+ },
+ {
+  "key": "d12-tpl#chatty",
+  "topic": "the template engine",
+  "old": "Handlebars",
+  "new": "Tera",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-tpl#Spanish",
+  "topic": "the template engine",
+  "old": "Handlebars",
+  "new": "Tera",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-cache#terse",
+  "topic": "the cache eviction policy",
+  "old": "LFU",
+  "new": "LRU",
+  "style": "terse"
+ },
+ {
+  "key": "d12-cache#chatty",
+  "topic": "the cache eviction policy",
+  "old": "LFU",
+  "new": "LRU",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-cache#Spanish",
+  "topic": "the cache eviction policy",
+  "old": "LFU",
+  "new": "LRU",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-proto#terse",
+  "topic": "the wire protocol between services",
+  "old": "REST",
+  "new": "gRPC",
+  "style": "terse"
+ },
+ {
+  "key": "d12-proto#chatty",
+  "topic": "the wire protocol between services",
+  "old": "REST",
+  "new": "gRPC",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-proto#Spanish",
+  "topic": "the wire protocol between services",
+  "old": "REST",
+  "new": "gRPC",
+  "style": "Spanish"
+ },
+ {
+  "key": "d12-obs#terse",
+  "topic": "how traces are exported",
+  "old": "Jaeger",
+  "new": "OpenTelemetry Collector",
+  "style": "terse"
+ },
+ {
+  "key": "d12-obs#chatty",
+  "topic": "how traces are exported",
+  "old": "Jaeger",
+  "new": "OpenTelemetry Collector",
+  "style": "chatty"
+ },
+ {
+  "key": "d12-obs#Spanish",
+  "topic": "how traces are exported",
+  "old": "Jaeger",
+  "new": "OpenTelemetry Collector",
+  "style": "Spanish"
+ }
+]

@@ -1,0 +1,15 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..5f2d031
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,9 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Medido en el vocabulario sintético adversarial de 30 palabras (full recall):
++
++- Antes del fix de selección de términos: p95 = 10.27 ms.
++- Fix: descartar términos con df > n/3 (document frequency, cuántos documentos contienen el término) y usar vocabulario Zipf.
++- Después del fix: p95 = 1.82 ms.

@@ -1,0 +1,26 @@
+diff --git a/crates/muninn-capture/src/redact.rs b/crates/muninn-capture/src/redact.rs
+index eec1ce2..88c680d 100644
+--- a/crates/muninn-capture/src/redact.rs
++++ b/crates/muninn-capture/src/redact.rs
+@@ -18,6 +18,7 @@ fn patterns() -> &'static [Regex] {
+             r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----",
+             r#"(?i)\b(api[_-]?key|token|secret|password|passwd|authorization)\b\s*[:=]\s*['"]?[A-Za-z0-9_\-./+=]{12,}"#,
+             r"eyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}",
++            r"(?i)AccountKey=[A-Za-z0-9+/]{86}==",
+         ]
+         .iter()
+         .map(|p| Regex::new(p).unwrap())
+@@ -91,4 +92,13 @@ mod tests {
+         let t = "qA7zP2mX9kL4vB8nR1tY6wC3eH5jD0sF2gK8uN4pQ7";
+         assert!(redact(t).contains("[redacted]"));
+     }
++
++    #[test]
++    fn redacts_azure_storage_account_key() {
++        // poison_pill
++        let s = "DefaultEndpointsProtocol=https;AccountName=acct;AccountKey=aB3dE5gH7jK9mN1pQ3rSt5uV7wX9yZ1aB3cD5eF7gH9aB3dE5gH7jK9mN1pQ3rSt5uV7wX9yZ1aB3cD5eF7gH9==;EndpointSuffix=core.windows.net";
++        let r = redact(s);
++        assert!(!r.contains("aB3dE5gH7jK9mN1pQ3rSt5uV7wX9yZ1"));
++        assert!(r.contains("[redacted]"));
++    }
+ }

@@ -1,0 +1,32 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..36c69a6
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,26 @@
++# Historial de rendimiento
++
++## UserPromptSubmit read path
++
++No hay, en este repositorio, ninguna medición con el nombre exacto pedido:
++p95 del hook `UserPromptSubmit` sobre un **vocabulario sintético adversarial de 30
++palabras**, antes y después de un "fix de selección de términos". Busqué en
++`research/00-evidence-log.md`, `research/CONCLUSION.md`, `research/bench/`,
++`crates/muninn-bench/`, `crates/muninn-core/` y el git log. Ese escenario concreto
++no aparece. No invento el número.
++
++Lo más cercano que sí está medido en `research/00-evidence-log.md` es un cambio
++de selección de términos en la ruta de lectura (BM25, corpus de 50 000 registros,
++no el hook `UserPromptSubmit` en sí ni un vocabulario de 30 palabras):
++
++- **Antes** — BM25 con los 24 primeros términos de la consulta: p95 = **35.53 ms** `[H6]`.
++- **Fix** — cambiar a los 8 términos de mayor IDF (frecuencia inversa de documento,
++  favorece palabras raras y descarta las comunes).
++- **Después** — BM25 con los 8 términos de mayor IDF: p95 = **8.75 ms** `[H6]`.
++
++El hook completo medido de extremo a extremo (proceso Rust, con esa misma
++selección top-8, índice de 50 000 registros) da p95 = **4.31 ms** con intención
++detectada y **0.56 ms** sin ella `[I3]`.
++
++Si el número sobre el vocabulario adversarial de 30 palabras existe en otro sitio
++(otro run, otro cell del experimento), no está en este checkout — dilo y lo busco ahí.

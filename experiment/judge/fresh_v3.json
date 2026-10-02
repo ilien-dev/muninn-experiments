@@ -1,0 +1,1156 @@
+{
+ "_author": "Written by claude-opus-5-5 on 2026-09-24 for judge-v3, before any judge-v3 call ran and without running any model on it. Each record and each later message carries the assistant's reply, as Muninn stores it since v41. Replies rotate between naming the value, naming value and domain, and a generic acknowledgement; bare_name_generic_reply is the case where neither the message nor the reply says what the name is for.",
+ "groups": [
+  {
+   "name": "en-A",
+   "lang": "en",
+   "split": "dev",
+   "records": [
+    {
+     "id": "r1",
+     "text": "Postgres for the main database",
+     "reply": "Postgres it is for the primary datastore."
+    },
+    {
+     "id": "r2",
+     "text": "we'll put PgBouncer in front of it",
+     "reply": "PgBouncer, got it."
+    },
+    {
+     "id": "r3",
+     "text": "Redis for caching",
+     "reply": "Sounds good."
+    },
+    {
+     "id": "r4",
+     "text": "background jobs run on Sidekiq",
+     "reply": "Sidekiq for background jobs, noted."
+    },
+    {
+     "id": "r5",
+     "text": "frontend is Next.js",
+     "reply": "Next.js, great."
+    },
+    {
+     "id": "r6",
+     "text": "styling with Tailwind",
+     "reply": "Okay."
+    },
+    {
+     "id": "r7",
+     "text": "errors go to Sentry",
+     "reply": "Sentry for error tracking, set."
+    },
+    {
+     "id": "r8",
+     "text": "deploy on Render",
+     "reply": "Render works."
+    },
+    {
+     "id": "r9",
+     "text": "API responses use the JSON:API format",
+     "reply": "Understood."
+    },
+    {
+     "id": "r10",
+     "text": "retry failed webhooks 5 times",
+     "reply": "Five webhook retries, noted."
+    },
+    {
+     "id": "r11",
+     "text": "emails are sent through Postmark",
+     "reply": "Postmark, got it."
+    },
+    {
+     "id": "r12",
+     "text": "feature flags via Flipper",
+     "reply": "Sure."
+    }
+   ],
+   "later": [
+    {
+     "id": "en-A-m01",
+     "text": "move the jobs over to GoodJob",
+     "reply": "GoodJob it is.",
+     "target": "r4",
+     "probe": "change"
+    },
+    {
+     "id": "en-A-m02",
+     "text": "let's host on Fly instead",
+     "reply": "Switching hosting to Fly.",
+     "target": "r8",
+     "probe": "bare_name"
+    },
+    {
+     "id": "en-A-m03",
+     "text": "Resend from now on",
+     "reply": "Got it.",
+     "target": "r11",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "en-A-m04",
+     "text": "make it 8",
+     "reply": "Webhook retries bumped to 8.",
+     "target": "r10",
+     "probe": "quantity_bare"
+    },
+    {
+     "id": "en-A-m05",
+     "text": "Sentry's too pricey, we're moving to Honeybadger",
+     "reply": "Honeybadger, noted.",
+     "target": "r7",
+     "probe": "reason_then_new"
+    },
+    {
+     "id": "en-A-m06",
+     "text": "drop Flipper, we'll just use env vars for flags",
+     "reply": "Makes sense.",
+     "target": "r12",
+     "probe": "withdrawal_mechanism"
+    },
+    {
+     "id": "en-A-m07",
+     "text": "rip out Tailwind, going with vanilla-extract",
+     "reply": "Styling moves to vanilla-extract.",
+     "target": "r6",
+     "probe": "change"
+    },
+    {
+     "id": "en-A-m08",
+     "text": "caching goes to Memcached",
+     "reply": "Memcached, okay.",
+     "target": "r3",
+     "probe": "change"
+    },
+    {
+     "id": "en-A-m09",
+     "text": "plain JSON responses, forget JSON:API",
+     "reply": "Sure thing.",
+     "target": "r9",
+     "probe": "format_change"
+    },
+    {
+     "id": "en-A-m10",
+     "text": "we're rewriting the frontend in Remix",
+     "reply": "Frontend moves to Remix.",
+     "target": "r5",
+     "probe": "change"
+    },
+    {
+     "id": "en-A-m11",
+     "text": "the Redis cache TTL should be 10 minutes",
+     "reply": "Will do.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "en-A-m12",
+     "text": "should we look at Fly at some point?",
+     "reply": "Could be worth a look later.",
+     "target": null,
+     "probe": "question"
+    },
+    {
+     "id": "en-A-m13",
+     "text": "the Sidekiq dashboard needs auth",
+     "reply": "I'll put it behind admin auth.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "en-A-m14",
+     "text": "we're not moving off Postgres",
+     "reply": "Understood, staying on Postgres.",
+     "target": null,
+     "probe": "negated_change"
+    },
+    {
+     "id": "en-A-m15",
+     "text": "the marketing site team uses Webflow",
+     "reply": "Noted, that's separate.",
+     "target": null,
+     "probe": "other_team"
+    },
+    {
+     "id": "en-A-m16",
+     "text": "if Render keeps having outages we might switch",
+     "reply": "Let's keep an eye on it.",
+     "target": null,
+     "probe": "hypothetical"
+    },
+    {
+     "id": "en-A-m17",
+     "text": "add a Sentry release tag on every deploy",
+     "reply": "Adding release tags.",
+     "target": null,
+     "probe": "applies_decision"
+    },
+    {
+     "id": "en-A-m18",
+     "text": "PgBouncer pool size is 20",
+     "reply": "Pool size 20 set.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "en-A-m19",
+     "text": "done wiring up the Postmark templates",
+     "reply": "Great.",
+     "target": null,
+     "probe": "follow_up"
+    },
+    {
+     "id": "en-A-m20",
+     "text": "tried Bun locally for the scripts, just an experiment",
+     "reply": "Nice, curious how it goes.",
+     "target": null,
+     "probe": "trial"
+    }
+   ]
+  },
+  {
+   "name": "en-B",
+   "lang": "en",
+   "split": "test",
+   "records": [
+    {
+     "id": "r1",
+     "text": "the iOS app is written in SwiftUI",
+     "reply": "SwiftUI for the iOS app."
+    },
+    {
+     "id": "r2",
+     "text": "the Android app uses Jetpack Compose",
+     "reply": "Compose, great."
+    },
+    {
+     "id": "r3",
+     "text": "backend in Go with the chi router",
+     "reply": "Sounds good."
+    },
+    {
+     "id": "r4",
+     "text": "events go through Kafka",
+     "reply": "Kafka for the event stream."
+    },
+    {
+     "id": "r5",
+     "text": "JSON parsing with encoding/json",
+     "reply": "encoding/json, ok."
+    },
+    {
+     "id": "r6",
+     "text": "tracing with Jaeger",
+     "reply": "Okay."
+    },
+    {
+     "id": "r7",
+     "text": "secrets live in HashiCorp Vault",
+     "reply": "Vault for secrets."
+    },
+    {
+     "id": "r8",
+     "text": "push notifications through FCM",
+     "reply": "FCM, noted."
+    },
+    {
+     "id": "r9",
+     "text": "we release the apps every two weeks",
+     "reply": "Got it."
+    },
+    {
+     "id": "r10",
+     "text": "max login attempts is 5",
+     "reply": "Login lockout after 5 attempts."
+    },
+    {
+     "id": "r11",
+     "text": "product analytics with Mixpanel",
+     "reply": "Mixpanel works."
+    },
+    {
+     "id": "r12",
+     "text": "CI on GitHub Actions",
+     "reply": "Sure."
+    }
+   ],
+   "later": [
+    {
+     "id": "en-B-m01",
+     "text": "switch to Redpanda for throughput",
+     "reply": "Redpanda, got it.",
+     "target": "r4",
+     "probe": "bare_name"
+    },
+    {
+     "id": "en-B-m02",
+     "text": "use sonic instead, it's faster",
+     "reply": "Moving JSON parsing to sonic.",
+     "target": "r5",
+     "probe": "bare_name"
+    },
+    {
+     "id": "en-B-m03",
+     "text": "Grafana Tempo from now on",
+     "reply": "Okay.",
+     "target": "r6",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "en-B-m04",
+     "text": "we're moving push to OneSignal",
+     "reply": "OneSignal, noted.",
+     "target": "r8",
+     "probe": "change"
+    },
+    {
+     "id": "en-B-m05",
+     "text": "weekly releases starting next sprint",
+     "reply": "Release cadence goes weekly.",
+     "target": "r9",
+     "probe": "quantity_reworded"
+    },
+    {
+     "id": "en-B-m06",
+     "text": "lower it to 3",
+     "reply": "Login lockout now after 3 attempts.",
+     "target": "r10",
+     "probe": "quantity_bare"
+    },
+    {
+     "id": "en-B-m07",
+     "text": "Mixpanel is out, PostHog replaces it",
+     "reply": "Makes sense.",
+     "target": "r11",
+     "probe": "change"
+    },
+    {
+     "id": "en-B-m08",
+     "text": "moving secrets to AWS Secrets Manager",
+     "reply": "AWS Secrets Manager, noted.",
+     "target": "r7",
+     "probe": "change"
+    },
+    {
+     "id": "en-B-m09",
+     "text": "we're going to Buildkite",
+     "reply": "CI moves to Buildkite.",
+     "target": "r12",
+     "probe": "bare_name"
+    },
+    {
+     "id": "en-B-m10",
+     "text": "Android goes back to XML views, Compose is too unstable for us",
+     "reply": "Understood.",
+     "target": "r2",
+     "probe": "revert"
+    },
+    {
+     "id": "en-B-m11",
+     "text": "Kafka topics need 7-day retention",
+     "reply": "Setting retention to 7 days.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "en-B-m12",
+     "text": "is Redpanda any good?",
+     "reply": "It's solid, mostly Kafka-compatible.",
+     "target": null,
+     "probe": "question"
+    },
+    {
+     "id": "en-B-m13",
+     "text": "the Vault token TTL is one hour",
+     "reply": "One-hour TTL, noted.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "en-B-m14",
+     "text": "we're keeping Jaeger, no changes",
+     "reply": "Okay, Jaeger stays.",
+     "target": null,
+     "probe": "negated_change"
+    },
+    {
+     "id": "en-B-m15",
+     "text": "the web team switched their bundler to Vite",
+     "reply": "Noted, that's their stack.",
+     "target": null,
+     "probe": "other_team"
+    },
+    {
+     "id": "en-B-m16",
+     "text": "the chi middleware order is wrong, fix it",
+     "reply": "Fixing the middleware order.",
+     "target": null,
+     "probe": "follow_up"
+    },
+    {
+     "id": "en-B-m17",
+     "text": "let's try Tempo on staging only for a week",
+     "reply": "A one-week trial on staging, okay.",
+     "target": null,
+     "probe": "trial"
+    },
+    {
+     "id": "en-B-m18",
+     "text": "add an FCM topic for marketing pushes",
+     "reply": "Adding the topic.",
+     "target": null,
+     "probe": "applies_decision"
+    },
+    {
+     "id": "en-B-m19",
+     "text": "if PostHog gets self-hosting right we'd consider it",
+     "reply": "Fair enough.",
+     "target": null,
+     "probe": "hypothetical"
+    },
+    {
+     "id": "en-B-m20",
+     "text": "the iOS minimum version is 16",
+     "reply": "iOS 16 minimum, noted.",
+     "target": null,
+     "probe": "adds_detail"
+    }
+   ]
+  },
+  {
+   "name": "es-A",
+   "lang": "es",
+   "split": "dev",
+   "records": [
+    {
+     "id": "r1",
+     "text": "la base de datos es MySQL",
+     "reply": "MySQL como base de datos principal."
+    },
+    {
+     "id": "r2",
+     "text": "las colas con RabbitMQ",
+     "reply": "RabbitMQ, perfecto."
+    },
+    {
+     "id": "r3",
+     "text": "el front en Angular",
+     "reply": "Vale."
+    },
+    {
+     "id": "r4",
+     "text": "los logs a Elasticsearch",
+     "reply": "Elasticsearch para los logs."
+    },
+    {
+     "id": "r5",
+     "text": "la caché con Redis",
+     "reply": "Redis, anotado."
+    },
+    {
+     "id": "r6",
+     "text": "pagos con Stripe",
+     "reply": "De acuerdo."
+    },
+    {
+     "id": "r7",
+     "text": "los tests e2e con Cypress",
+     "reply": "Cypress para los e2e."
+    },
+    {
+     "id": "r8",
+     "text": "desplegamos en DigitalOcean",
+     "reply": "DigitalOcean, ok."
+    },
+    {
+     "id": "r9",
+     "text": "el timeout de las peticiones es de 30 segundos",
+     "reply": "Entendido."
+    },
+    {
+     "id": "r10",
+     "text": "autenticación con Keycloak",
+     "reply": "Keycloak para la autenticación."
+    },
+    {
+     "id": "r11",
+     "text": "el linter es ESLint",
+     "reply": "ESLint, bien."
+    },
+    {
+     "id": "r12",
+     "text": "las imágenes se guardan en S3",
+     "reply": "Perfecto."
+    }
+   ],
+   "later": [
+    {
+     "id": "es-A-m01",
+     "text": "pasamos las colas a NATS",
+     "reply": "NATS, hecho.",
+     "target": "r2",
+     "probe": "change"
+    },
+    {
+     "id": "es-A-m02",
+     "text": "mejor Playwright, Cypress va lentísimo",
+     "reply": "Los e2e pasan a Playwright.",
+     "target": "r7",
+     "probe": "reason_then_new"
+    },
+    {
+     "id": "es-A-m03",
+     "text": "nos vamos a Hetzner",
+     "reply": "Vale.",
+     "target": "r8",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "es-A-m04",
+     "text": "súbelo a 60",
+     "reply": "Timeout de peticiones a 60 segundos.",
+     "target": "r9",
+     "probe": "quantity_bare"
+    },
+    {
+     "id": "es-A-m05",
+     "text": "reescribimos el front en Vue",
+     "reply": "Vue, de acuerdo.",
+     "target": "r3",
+     "probe": "change"
+    },
+    {
+     "id": "es-A-m06",
+     "text": "quitamos Keycloak, usamos Auth0",
+     "reply": "Tiene sentido.",
+     "target": "r10",
+     "probe": "change"
+    },
+    {
+     "id": "es-A-m07",
+     "text": "los logs ahora van a Loki",
+     "reply": "Los logs pasan a Loki.",
+     "target": "r4",
+     "probe": "change"
+    },
+    {
+     "id": "es-A-m08",
+     "text": "cambiamos a Adyen",
+     "reply": "Adyen, anotado.",
+     "target": "r6",
+     "probe": "bare_name"
+    },
+    {
+     "id": "es-A-m09",
+     "text": "cambia a Biome, ESLint nos da guerra",
+     "reply": "Hecho.",
+     "target": "r11",
+     "probe": "reason_then_new"
+    },
+    {
+     "id": "es-A-m10",
+     "text": "las imágenes a Cloudflare R2",
+     "reply": "Imágenes a R2.",
+     "target": "r12",
+     "probe": "change"
+    },
+    {
+     "id": "es-A-m11",
+     "text": "¿NATS aguantaría nuestro volumen?",
+     "reply": "Probablemente sí, habría que medirlo.",
+     "target": null,
+     "probe": "question"
+    },
+    {
+     "id": "es-A-m12",
+     "text": "la caché de Redis expira a los 5 minutos",
+     "reply": "5 minutos, anotado.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "es-A-m13",
+     "text": "no vamos a dejar MySQL",
+     "reply": "Entendido, seguimos con MySQL.",
+     "target": null,
+     "probe": "negated_change"
+    },
+    {
+     "id": "es-A-m14",
+     "text": "el equipo de datos usa BigQuery",
+     "reply": "Anotado, es aparte.",
+     "target": null,
+     "probe": "other_team"
+    },
+    {
+     "id": "es-A-m15",
+     "text": "si DigitalOcean sube precios miramos Hetzner",
+     "reply": "Lo tenemos en cuenta.",
+     "target": null,
+     "probe": "hypothetical"
+    },
+    {
+     "id": "es-A-m16",
+     "text": "añade el webhook de Stripe para reembolsos",
+     "reply": "Añadiendo el webhook.",
+     "target": null,
+     "probe": "applies_decision"
+    },
+    {
+     "id": "es-A-m17",
+     "text": "ya terminé la configuración de RabbitMQ",
+     "reply": "Genial.",
+     "target": null,
+     "probe": "follow_up"
+    },
+    {
+     "id": "es-A-m18",
+     "text": "probé Vitest en una rama, solo por curiosidad",
+     "reply": "¿Y qué tal?",
+     "target": null,
+     "probe": "trial"
+    },
+    {
+     "id": "es-A-m19",
+     "text": "Marta propuso cambiar a Svelte, lo descartamos",
+     "reply": "Entendido.",
+     "target": null,
+     "probe": "rejected_proposal"
+    },
+    {
+     "id": "es-A-m20",
+     "text": "el timeout de la base de datos es de 60 segundos",
+     "reply": "60 segundos para la base de datos.",
+     "target": null,
+     "probe": "same_number_other_subject"
+    }
+   ]
+  },
+  {
+   "name": "es-B",
+   "lang": "es",
+   "split": "test",
+   "records": [
+    {
+     "id": "r1",
+     "text": "el backend es Django",
+     "reply": "Django para el backend."
+    },
+    {
+     "id": "r2",
+     "text": "Celery para las tareas en segundo plano",
+     "reply": "Celery, ok."
+    },
+    {
+     "id": "r3",
+     "text": "PostgreSQL como base de datos",
+     "reply": "Vale."
+    },
+    {
+     "id": "r4",
+     "text": "las plantillas de email con MJML",
+     "reply": "MJML para los emails."
+    },
+    {
+     "id": "r5",
+     "text": "las plantillas del servidor con Jinja2",
+     "reply": "Jinja2, bien."
+    },
+    {
+     "id": "r6",
+     "text": "monitorización con Datadog",
+     "reply": "De acuerdo."
+    },
+    {
+     "id": "r7",
+     "text": "el CI en GitLab CI",
+     "reply": "GitLab CI para la integración continua."
+    },
+    {
+     "id": "r8",
+     "text": "máximo 3 reintentos en el worker de pagos",
+     "reply": "3 reintentos, anotado."
+    },
+    {
+     "id": "r9",
+     "text": "los mapas con Google Maps",
+     "reply": "Perfecto."
+    },
+    {
+     "id": "r10",
+     "text": "el formato de fechas es DD/MM/AAAA",
+     "reply": "Fechas en DD/MM/AAAA."
+    },
+    {
+     "id": "r11",
+     "text": "licencia GPL-3.0",
+     "reply": "GPL-3.0, ok."
+    },
+    {
+     "id": "r12",
+     "text": "los secretos en variables de entorno",
+     "reply": "Entendido."
+    }
+   ],
+   "later": [
+    {
+     "id": "es-B-m01",
+     "text": "cambiamos a Dramatiq",
+     "reply": "Vale.",
+     "target": "r2",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "es-B-m02",
+     "text": "los emails ahora con React Email",
+     "reply": "React Email, perfecto.",
+     "target": "r4",
+     "probe": "same_slot_disambiguation"
+    },
+    {
+     "id": "es-B-m03",
+     "text": "Datadog sale carísimo, pasamos a Grafana",
+     "reply": "La monitorización pasa a Grafana.",
+     "target": "r6",
+     "probe": "reason_then_new"
+    },
+    {
+     "id": "es-B-m04",
+     "text": "súbelo a 7",
+     "reply": "Reintentos del worker de pagos a 7.",
+     "target": "r8",
+     "probe": "quantity_bare"
+    },
+    {
+     "id": "es-B-m05",
+     "text": "mejor Mapbox",
+     "reply": "Ok.",
+     "target": "r9",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "es-B-m06",
+     "text": "fechas en ISO 8601, nada de DD/MM",
+     "reply": "ISO 8601, anotado.",
+     "target": "r10",
+     "probe": "format_change"
+    },
+    {
+     "id": "es-B-m07",
+     "text": "relicenciamos a MIT",
+     "reply": "La licencia pasa a MIT.",
+     "target": "r11",
+     "probe": "bare_name"
+    },
+    {
+     "id": "es-B-m08",
+     "text": "los secretos pasan a Doppler",
+     "reply": "Doppler, anotado.",
+     "target": "r12",
+     "probe": "change"
+    },
+    {
+     "id": "es-B-m09",
+     "text": "migramos el CI a GitHub Actions",
+     "reply": "Hecho.",
+     "target": "r7",
+     "probe": "change"
+    },
+    {
+     "id": "es-B-m10",
+     "text": "para las vistas del servidor usamos Mako en vez de Jinja2",
+     "reply": "Mako, bien.",
+     "target": "r5",
+     "probe": "same_slot_disambiguation"
+    },
+    {
+     "id": "es-B-m11",
+     "text": "¿Dramatiq es más ligero que Celery?",
+     "reply": "Suele serlo, sí.",
+     "target": null,
+     "probe": "question"
+    },
+    {
+     "id": "es-B-m12",
+     "text": "Celery necesita un worker más en producción",
+     "reply": "Añadimos un worker.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "es-B-m13",
+     "text": "no cambiamos de base de datos, Postgres se queda",
+     "reply": "Entendido.",
+     "target": null,
+     "probe": "negated_change"
+    },
+    {
+     "id": "es-B-m14",
+     "text": "el equipo de marketing usa Mailchimp",
+     "reply": "Anotado, es aparte.",
+     "target": null,
+     "probe": "other_team"
+    },
+    {
+     "id": "es-B-m15",
+     "text": "si Datadog sube otra vez, igual miramos Grafana",
+     "reply": "Lo tenemos en cuenta.",
+     "target": null,
+     "probe": "hypothetical"
+    },
+    {
+     "id": "es-B-m16",
+     "text": "añade la cabecera de licencia GPL a los ficheros nuevos",
+     "reply": "Añadiendo la cabecera.",
+     "target": null,
+     "probe": "applies_decision"
+    },
+    {
+     "id": "es-B-m17",
+     "text": "ya están las plantillas MJML del registro",
+     "reply": "Genial.",
+     "target": null,
+     "probe": "follow_up"
+    },
+    {
+     "id": "es-B-m18",
+     "text": "hoy desactivé los reintentos para depurar, mañana los vuelvo a poner",
+     "reply": "Vale, recuérdalo.",
+     "target": null,
+     "probe": "one_off_exception"
+    },
+    {
+     "id": "es-B-m19",
+     "text": "la clave de Google Maps va en las variables de entorno",
+     "reply": "Movida a variables de entorno.",
+     "target": null,
+     "probe": "applies_decision"
+    },
+    {
+     "id": "es-B-m20",
+     "text": "el timeout de los mapas es de 7 segundos",
+     "reply": "7 segundos, anotado.",
+     "target": null,
+     "probe": "same_number_other_subject"
+    }
+   ]
+  },
+  {
+   "name": "pt",
+   "lang": "pt",
+   "split": "dev",
+   "records": [
+    {
+     "id": "r1",
+     "text": "o front é em React",
+     "reply": "React para o front."
+    },
+    {
+     "id": "r2",
+     "text": "usamos MongoDB",
+     "reply": "MongoDB, ok."
+    },
+    {
+     "id": "r3",
+     "text": "deploy na Vercel",
+     "reply": "Beleza."
+    },
+    {
+     "id": "r4",
+     "text": "pagamentos com Stripe",
+     "reply": "Stripe para pagamentos."
+    },
+    {
+     "id": "r5",
+     "text": "limite de upload de 10 MB",
+     "reply": "10 MB, anotado."
+    },
+    {
+     "id": "r6",
+     "text": "testes com Jest",
+     "reply": "Certo."
+    },
+    {
+     "id": "r7",
+     "text": "logs no Datadog",
+     "reply": "Datadog para logs."
+    },
+    {
+     "id": "r8",
+     "text": "filas com SQS",
+     "reply": "SQS, ok."
+    }
+   ],
+   "later": [
+    {
+     "id": "pt-m01",
+     "text": "vamos migrar para PostgreSQL",
+     "reply": "PostgreSQL, fechado.",
+     "target": "r2",
+     "probe": "bare_name"
+    },
+    {
+     "id": "pt-m02",
+     "text": "aumenta para 50",
+     "reply": "Limite de upload em 50 MB.",
+     "target": "r5",
+     "probe": "quantity_bare"
+    },
+    {
+     "id": "pt-m03",
+     "text": "troca para Vitest",
+     "reply": "Ok.",
+     "target": "r6",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "pt-m04",
+     "text": "vamos sair da Vercel e ir para a Netlify",
+     "reply": "Certo.",
+     "target": "r3",
+     "probe": "change"
+    },
+    {
+     "id": "pt-m05",
+     "text": "o MongoDB precisa de índice em email",
+     "reply": "Criando o índice.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "pt-m06",
+     "text": "será que a Netlify é mais barata?",
+     "reply": "Talvez, dá pra comparar.",
+     "target": null,
+     "probe": "question"
+    },
+    {
+     "id": "pt-m07",
+     "text": "não vamos trocar o Stripe",
+     "reply": "Entendido.",
+     "target": null,
+     "probe": "negated_change"
+    },
+    {
+     "id": "pt-m08",
+     "text": "o time de dados usa Airflow",
+     "reply": "Anotado, é separado.",
+     "target": null,
+     "probe": "other_team"
+    }
+   ]
+  },
+  {
+   "name": "fr",
+   "lang": "fr",
+   "split": "test",
+   "records": [
+    {
+     "id": "r1",
+     "text": "on héberge sur OVH",
+     "reply": "Hébergement chez OVH."
+    },
+    {
+     "id": "r2",
+     "text": "le back est en Symfony",
+     "reply": "Symfony, ok."
+    },
+    {
+     "id": "r3",
+     "text": "les files avec RabbitMQ",
+     "reply": "D'accord."
+    },
+    {
+     "id": "r4",
+     "text": "les emails via Mailjet",
+     "reply": "Mailjet pour les emails."
+    },
+    {
+     "id": "r5",
+     "text": "sessions stockées dans Redis",
+     "reply": "Redis, noté."
+    },
+    {
+     "id": "r6",
+     "text": "tests end-to-end avec Cypress",
+     "reply": "Ok."
+    },
+    {
+     "id": "r7",
+     "text": "timeout HTTP de 30 secondes",
+     "reply": "Timeout HTTP à 30 s."
+    },
+    {
+     "id": "r8",
+     "text": "monitoring avec Sentry",
+     "reply": "Sentry, parfait."
+    }
+   ],
+   "later": [
+    {
+     "id": "fr-m01",
+     "text": "on part chez Scaleway",
+     "reply": "Ok.",
+     "target": "r1",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "fr-m02",
+     "text": "les emails passent par Brevo",
+     "reply": "Brevo, noté.",
+     "target": "r4",
+     "probe": "change"
+    },
+    {
+     "id": "fr-m03",
+     "text": "monte à 90",
+     "reply": "Timeout HTTP à 90 s.",
+     "target": "r7",
+     "probe": "quantity_bare"
+    },
+    {
+     "id": "fr-m04",
+     "text": "on remplace Cypress par Playwright",
+     "reply": "D'accord.",
+     "target": "r6",
+     "probe": "change"
+    },
+    {
+     "id": "fr-m05",
+     "text": "est-ce que Scaleway serait moins cher ?",
+     "reply": "Possible, à comparer.",
+     "target": null,
+     "probe": "question"
+    },
+    {
+     "id": "fr-m06",
+     "text": "on ne quitte pas Symfony",
+     "reply": "Compris.",
+     "target": null,
+     "probe": "negated_change"
+    },
+    {
+     "id": "fr-m07",
+     "text": "la clé Redis expire après une heure",
+     "reply": "Une heure, noté.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "fr-m08",
+     "text": "si Sentry augmente ses prix, on regardera ailleurs",
+     "reply": "On garde ça en tête.",
+     "target": null,
+     "probe": "hypothetical"
+    }
+   ]
+  },
+  {
+   "name": "de",
+   "lang": "de",
+   "split": "test",
+   "records": [
+    {
+     "id": "r1",
+     "text": "wir nutzen MySQL",
+     "reply": "MySQL als Datenbank."
+    },
+    {
+     "id": "r2",
+     "text": "Deployments über Ansible",
+     "reply": "Ansible, ok."
+    },
+    {
+     "id": "r3",
+     "text": "Frontend in Vue",
+     "reply": "Gut."
+    },
+    {
+     "id": "r4",
+     "text": "Logs gehen an Graylog",
+     "reply": "Graylog für Logs."
+    },
+    {
+     "id": "r5",
+     "text": "Caching mit Memcached",
+     "reply": "Memcached, notiert."
+    },
+    {
+     "id": "r6",
+     "text": "CI läuft auf Jenkins",
+     "reply": "Alles klar."
+    },
+    {
+     "id": "r7",
+     "text": "maximal 3 Login-Versuche",
+     "reply": "Login-Sperre nach 3 Versuchen."
+    },
+    {
+     "id": "r8",
+     "text": "Zahlungen über PayPal",
+     "reply": "PayPal, ok."
+    }
+   ],
+   "later": [
+    {
+     "id": "de-m01",
+     "text": "wir steigen auf PostgreSQL um",
+     "reply": "PostgreSQL, notiert.",
+     "target": "r1",
+     "probe": "bare_name"
+    },
+    {
+     "id": "de-m02",
+     "text": "Jenkins fliegt raus, wir nehmen GitLab CI",
+     "reply": "Ok.",
+     "target": "r6",
+     "probe": "change"
+    },
+    {
+     "id": "de-m03",
+     "text": "erhöh auf 5",
+     "reply": "Login-Sperre nach 5 Versuchen.",
+     "target": "r7",
+     "probe": "quantity_bare"
+    },
+    {
+     "id": "de-m04",
+     "text": "ab jetzt Loki",
+     "reply": "Gut.",
+     "target": "r4",
+     "probe": "bare_name_generic_reply"
+    },
+    {
+     "id": "de-m05",
+     "text": "die MySQL-Backups laufen nachts",
+     "reply": "Notiert.",
+     "target": null,
+     "probe": "adds_detail"
+    },
+    {
+     "id": "de-m06",
+     "text": "vielleicht probieren wir später Pulumi aus",
+     "reply": "Klingt gut.",
+     "target": null,
+     "probe": "hypothetical"
+    },
+    {
+     "id": "de-m07",
+     "text": "wir bleiben bei PayPal",
+     "reply": "Alles klar.",
+     "target": null,
+     "probe": "negated_change"
+    },
+    {
+     "id": "de-m08",
+     "text": "das Data-Team nutzt Snowflake",
+     "reply": "Notiert, das ist getrennt.",
+     "target": null,
+     "probe": "other_team"
+    }
+   ]
+  }
+ ]
+}

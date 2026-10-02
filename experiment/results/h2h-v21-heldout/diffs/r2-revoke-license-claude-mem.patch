@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..cabe24f
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License policy
++
++The project's source is licensed under the MIT License, as recorded in the `LICENSE` file at the repository root (Copyright (c) 2014-present Manuel Martínez-Almeida). Under that license, anyone may use, copy, modify, merge, publish, distribute, sublicense, and/or sell the software, provided the copyright notice and permission notice are included in all copies or substantial portions of it; the software is provided "as is", without warranty of any kind.

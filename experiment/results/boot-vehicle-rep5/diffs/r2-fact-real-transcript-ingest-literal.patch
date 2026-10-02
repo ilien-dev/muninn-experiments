@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..7ba556f
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured figures for ingesting this project's own real Claude Code
++transcript (size in MB, turns produced, episodes produced, ingest duration)
++could be found in this checkout.
++
++What exists instead:
++
++- `crates/muninn-capture/src/lib.rs` has a smoke test
++  (`parses_real_transcripts_when_present`) that, when run on a machine with
++  `~/.claude/projects/-home-ilien-Projects-muninn/*.jsonl` present, parses a
++  real transcript and prints turn/episode/tool counts — but it does not
++  record a transcript size or an ingest duration, and this sandboxed
++  environment has no access to `~/.claude/projects` to run it.
++- `research/00-evidence-log.md` and `design/ENGINE.md` report a *synthetic*
++  benchmark instead: ingesting 200 generated records into a 50,000-record
++  store took 80 ms, plus 195 ms for the subsequent index `optimize` (275 ms
++  total per session-sized batch). That is not a real transcript and is not a
++  substitute for the requested figures.
++
++This section should be filled in with actual numbers once a real transcript
++ingest is measured (e.g. via `muninn ingest <transcript>` or the `Stop`/
++`SessionEnd` hook path, timed, against this project's own transcript file).

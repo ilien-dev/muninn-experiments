@@ -1,0 +1,13 @@
+{"at":1789369606727,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}
+{"at":1789369611418,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["crates/muninn-why/Cargo.toml;"],"symbols":[]}
+{"at":1789369615013,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789369616884,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["research/CONCLUSION.md"],"symbols":[]}
+{"at":1789369618925,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["research/CONCLUSION.md"],"symbols":[]}
+{"at":1789369622455,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["crates/muninn-core/src/*.rs"],"symbols":[]}
+{"at":1789369624825,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["crates/muninn-cli/src/main.rs","crates/muninn-cli/src/delivery.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main","Line","log_path","append","delivered_ids","fold_into_db"]}
+{"at":1789369634377,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789369636781,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789369638910,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789369642236,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["crates/muninn-core/src/*.rs"],"symbols":[]}
+{"at":1789369645585,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}
+{"at":1789369653612,"session":"2dfd79f9-a444-4959-bfb3-16c9547660c6","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}

@@ -1,0 +1,7 @@
+diff --git a/worker-scratch.py b/worker-scratch.py
+new file mode 100644
+index 0000000..795da2f
+--- /dev/null
++++ b/worker-scratch.py
+@@ -0,0 +1 @@
++half-finished refactor, do not ship

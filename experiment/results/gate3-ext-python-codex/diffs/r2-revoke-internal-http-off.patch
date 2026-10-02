@@ -1,0 +1,7 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..ec3cb77
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1 @@
++The project currently has no recorded decision on whether plain HTTP may be used for internal hosts.

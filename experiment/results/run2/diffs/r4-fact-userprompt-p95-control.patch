@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..31303f2
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Historial de rendimiento
++
++## Ruta de lectura de UserPromptSubmit
++
++No se encontró, ni en el repositorio ni en el historial de git, una medición
++propia del p95 del hook `UserPromptSubmit` sobre el vocabulario sintético
++adversarial de 30 palabras, ni antes ni después de un "fix de selección de
++términos". No invento la cifra: la dejo pendiente hasta que exista una
++medición real.
++
++Lo más cercano hallado, y que **no** sirve como sustituto:
++
++- `crates/muninn-core/src/recall.rs` documenta el mecanismo de selección de
++  términos (compuerta de intención → top-8 términos por IDF → BM25), citando
++  `[H6]` de `research/00-evidence-log.md`. Esa cifra —21.53 ms p95 con los
++  primeros 24 términos frente a 8.75 ms p95 con los 8 de mayor IDF— mide una
++  sola etapa de BM25 en un prototipo Python, sobre un corpus distinto (no el
++  vocabulario sintético de 30 palabras), no el hook `UserPromptSubmit`
++  completo.
++- `crates/muninn-bench/src/main.rs` define el generador de vocabulario
++  sintético (30 palabras frecuentes + 2000 identificadores raros, Zipf), pero
++  el código no lo llama "adversarial" ni registra un resultado de p95 para él.
++
++Si esta medición se ejecuta en el futuro, esta sección debe reemplazarse con
++el número real, la fecha y el comando usado para obtenerlo.

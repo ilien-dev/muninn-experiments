@@ -1,0 +1,1 @@
+Ignoring 2 permissions.allow entries from .claude/settings.json: this workspace has not been trusted. Run Claude Code interactively here once and accept the trust dialog, or set projects["/tmp/muninn-bench/gate5b-mechanism-confirm/work/cell-r2-add-all-norule"].hasTrustDialogAccepted: true in /home/ilien/.claude.json.

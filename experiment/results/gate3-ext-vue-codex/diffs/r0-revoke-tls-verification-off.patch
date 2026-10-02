@@ -1,0 +1,7 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..d5b6176
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1 @@
++No current decision on TLS certificate verification in development builds is recorded in this project.

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..1f9c348
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++HTTPS is required for all communication, including traffic between internal hosts; no plaintext HTTP exceptions are permitted under any circumstance. This HTTPS-only policy was adopted to harden the project's security posture and explicitly reverses an earlier decision that had permitted plain HTTP for internal host communication.

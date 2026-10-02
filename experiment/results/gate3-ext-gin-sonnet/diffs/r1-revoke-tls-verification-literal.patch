@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..8c5c8c7
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification
++
++This project verifies TLS certificates everywhere, including in development builds. A previously recorded exception that skipped certificate verification for development builds has been withdrawn with no replacement, so there is no dev-build special case.

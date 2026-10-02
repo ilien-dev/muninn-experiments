@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..f38fe01
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version numbering scheme
++
++The project's current recorded decision is to number releases with semantic versioning (semver). This was recorded in commit 7c9ae46, which set the version-scheme decision value to "semver", following the maintainer's stated preference that semver is cleaner.

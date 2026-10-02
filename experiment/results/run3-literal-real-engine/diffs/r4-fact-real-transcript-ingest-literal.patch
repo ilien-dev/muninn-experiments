@@ -1,0 +1,19 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..e6c93a6
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,13 @@
++# Perf history
++
++## Real transcript ingest
++
++Medido 2026-09-12 con `wc` sobre el transcript real de esta sesión
++(`~/.claude/projects/-home-ilien-Projects-muninn-crates-muninn-bench-experiment-out-run3-work-cell-r4-fact-real-transcript-ingest-literal/a68c1b4b-6eb0-48bf-bc7d-8c92cc618a14.jsonl`):
++
++- Tamaño: 476229 bytes (~0.45 MB), 130 líneas JSONL.
++- Es la transcripción de la sesión en curso: sigue creciendo mientras esta tarea corre, así que es una foto, no un valor final.
++
++**No medido: turnos producidos, episodios producidos, duración del ingest.**
++
++`muninn ingest <transcript>` necesita el binario `muninn-cli`. Este worktree no tiene `target/` (nada compilado), y `cargo` (incluso `cargo --version`) devuelve "This command requires approval" sin mostrar el prompt de aprobación — no se pudo compilar ni ejecutar. No hay ninguna cifra de turnos, episodios o tiempo de ingest en este checkout que se pueda citar como medida.

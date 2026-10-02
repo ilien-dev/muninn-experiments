@@ -1,0 +1,9 @@
+{"at":1789352108530,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[83,84],"tokens":193,"reason":"cue:event:session_start"}
+{"at":1789352108586,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[73],"tokens":0,"reason":"gated:budget"}
+{"at":1789352108586,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[67],"tokens":0,"reason":"gated:budget"}
+{"at":1789352108586,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[74],"tokens":0,"reason":"gated:budget"}
+{"at":1789352108586,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789352108586,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[61],"tokens":0,"reason":"gated:budget"}
+{"at":1789352108586,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[79,71,64],"tokens":624,"reason":"literal"}
+{"at":1789352133206,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[92],"tokens":0,"reason":"cue:dir:crates/muninn-symbols/src@post_tool"}
+{"at":1789352133206,"session":"fb606672-a31d-460b-969f-0d73c1745a5d","arm":"literal","ids":[92],"tokens":53,"reason":"literal:post_tool"}

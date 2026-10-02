@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..a2c51a3
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Perf history
++
++## Real transcript ingest
++
++Measured on a real Claude Code transcript of this project (session
++`14a6ab47-9d1b-46ce-80c2-1b24c44ff8b8`):
++
++- Transcript size: 21 MB
++- Turns produced: 30 turns
++- Episodes produced: 20 episodes
++- Ingest time: 30 ms
++
++Source: this project's own Muninn store, episode record #80 (`origin:
++tool_observed`, `trust: 1` — observed directly in this project's session
++transcript, not independently re-measured in this session).

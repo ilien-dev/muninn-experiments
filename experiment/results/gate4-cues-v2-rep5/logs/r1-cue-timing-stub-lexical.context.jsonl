@@ -1,0 +1,6 @@
+{"at":1789369458193,"session":"f3c8ea3a-6d72-45cd-8444-04e82c764d8e","files":["crates/muninn-embed/src/lib.rs"],"symbols":[]}
+{"at":1789369467568,"session":"f3c8ea3a-6d72-45cd-8444-04e82c764d8e","files":["crates/muninn-core/src/heartbeat.rs"],"symbols":["Line","Heartbeat","append","Heartbeat","start","elapsed_ms","finish","Heartbeat","drop","read_tail","fold_into_db","tests"]}
+{"at":1789369481542,"session":"f3c8ea3a-6d72-45cd-8444-04e82c764d8e","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789369485134,"session":"f3c8ea3a-6d72-45cd-8444-04e82c764d8e","files":["crates/muninn-embed/src/lib.rs"],"symbols":[]}
+{"at":1789369496729,"session":"f3c8ea3a-6d72-45cd-8444-04e82c764d8e","files":["crates/muninn-embed/src/lib.rs"],"symbols":[]}
+{"at":1789369505608,"session":"f3c8ea3a-6d72-45cd-8444-04e82c764d8e","files":["crates/muninn-embed/src/lib.rs"],"symbols":[]}

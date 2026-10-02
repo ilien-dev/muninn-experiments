@@ -1,0 +1,28 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..4e45fab
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,22 @@
++# Historial de rendimiento
++
++## UserPromptSubmit read path
++
++Vocabulario sintético adversarial: 30 palabras de dominio frecuentes con
++distribución Zipf (`WORDS` en `crates/muninn-bench/src/main.rs`), diseñado para
++que las listas de postings se parezcan a discusión de código real y no a un
++corpus donde cada registro contiene cada término.
++
++- **Antes del fix**: p95 de `UserPromptSubmit` (recall completo, `select_terms`
++  sin filtro) = **10.27 ms**.
++- **Fix**: descartar términos con `df > n/3` (un término presente en más de un
++  tercio del store no aporta señal y cuesta una posting list larga). Implementado
++  en `crates/muninn-core/src/recall.rs::select_terms` (guarda `n >= 50.0 && df >
++  n / 3.0` antes de puntuar por IDF).
++- **Después del fix**: p95 = **1.82 ms**.
++
++Fuente: medición propia registrada en la memoria de sesión del proyecto
++(transcript observado, no estimación). No hay un archivo de resultados
++versionado en el repo con estas dos cifras lado a lado — si se necesita
++reproducirlas, hay que volver a correr `muninn-bench perf` contra el commit
++anterior al fix y contra el actual.

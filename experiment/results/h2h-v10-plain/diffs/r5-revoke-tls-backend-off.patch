@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..8577fcc
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS Backend
++
++This project has no recorded decision on a TLS backend; nothing is currently documented in the repository (README, CHANGELOG, or docs) specifying or mandating a particular TLS implementation or backend.

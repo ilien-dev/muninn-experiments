@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..6b37037
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Compression policy
++
++The project's current recorded decision for the transport compression codec is gzip. This was stated directly by the project owner, and no later recorded decision has replaced it.

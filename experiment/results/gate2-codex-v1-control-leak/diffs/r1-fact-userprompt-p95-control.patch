@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..f7da3b9
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The end-to-end, full-recall `UserPromptSubmit` hook had a measured p95 of
++**10.27 ms** on the adversarial synthetic corpus built from a 30-word
++vocabulary.
++
++The term-selection fix discarded terms whose document frequency was greater
++than one third of the active records, then selected at most the eight remaining
++terms with the highest IDF. The synthetic generator was also changed to a Zipf
++distribution: 30 frequent domain words plus 2,000 rare identifiers, avoiding a
++corpus in which every record contained every query term.
++
++After that change, the measured end-to-end, full-recall `UserPromptSubmit` p95
++was **1.82 ms**.

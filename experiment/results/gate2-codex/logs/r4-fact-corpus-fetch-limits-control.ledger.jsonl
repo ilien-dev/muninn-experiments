@@ -1,0 +1,15 @@
+{"at":1789374368384,"id":39,"reason":"control:cue:event:session_start","tokens":106}
+{"at":1789374368384,"id":69,"reason":"control:cue:event:session_start","tokens":106}
+{"at":1789374368384,"id":88,"reason":"control:cue:event:session_start","tokens":106}
+{"at":1789374368384,"id":108,"reason":"control:cue:event:session_start","tokens":106}
+{"at":1789374368384,"id":147,"reason":"control:cue:event:session_start","tokens":106}
+{"at":1789374368384,"id":159,"reason":"control:cue:event:session_start","tokens":106}
+{"at":1789374368384,"id":87,"reason":"control:gated:budget","tokens":0}
+{"at":1789374368384,"id":109,"reason":"control:gated:budget","tokens":0}
+{"at":1789374368384,"id":134,"reason":"control:gated:budget","tokens":0}
+{"at":1789374368389,"id":null,"reason":"control:control","tokens":141}
+{"at":1789374368389,"id":null,"reason":"control:control","tokens":141}
+{"at":1789374368389,"id":null,"reason":"control:control","tokens":141}
+{"at":1789374368389,"id":null,"reason":"control:control","tokens":141}
+{"at":1789374398320,"id":null,"reason":"control:deny:escape","tokens":0}
+{"at":1789374403053,"id":null,"reason":"control:deny:escape","tokens":0}

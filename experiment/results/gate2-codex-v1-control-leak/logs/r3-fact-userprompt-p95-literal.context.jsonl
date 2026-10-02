@@ -1,0 +1,3 @@
+{"at":1789371278201,"session":"01a09ed6-a27e-7943-b8e3-f7c40e90144a","files":["crates/muninn-core/src/recall.rs","crates/muninn-bench/src/main.rs"],"symbols":["STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates","experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789371292381,"session":"01a09ed6-a27e-7943-b8e3-f7c40e90144a","files":["docs/perf-history.md"],"symbols":[]}
+{"at":1789371295809,"session":"01a09ed6-a27e-7943-b8e3-f7c40e90144a","files":["docs/perf-history.md","docs/perf-history.md","docs/perf-history.md"],"symbols":[]}

@@ -1,0 +1,5 @@
+{"at":1789292340828,"session":"4432c038-687e-46d6-ac30-507ea22a0d6f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789292359454,"session":"4432c038-687e-46d6-ac30-507ea22a0d6f","files":["crates/muninn-core/src/paths.rs"],"symbols":["ProjectPaths","ProjectPaths","from_root","resolve","db_path","records_dir","compiled_dir","log_dir","compact_dir","heartbeat_log","trace_log","index_md"]}
+{"at":1789292368208,"session":"4432c038-687e-46d6-ac30-507ea22a0d6f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789292370816,"session":"4432c038-687e-46d6-ac30-507ea22a0d6f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789292374263,"session":"4432c038-687e-46d6-ac30-507ea22a0d6f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}

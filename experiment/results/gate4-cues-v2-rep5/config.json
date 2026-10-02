@@ -1,0 +1,103 @@
+{
+ "repo": ".",
+ "base_ref": "0cb51ab",
+ "model": "claude-sonnet-5",
+ "runs": 5,
+ "arms": [
+  "lexical-plain",
+  "lexical",
+  "literal"
+ ],
+ "max_turns": 25,
+ "timeout_s": 600,
+ "seed_transcripts": [
+  "~/.local/share/muninn-bench/seed-14a6ab47-frozen.jsonl"
+ ],
+ "control_transcripts": [
+  "~/.claude/projects/-home-ilien-Projects-video-tiktok-youtube-recorder"
+ ],
+ "tasks": [
+  {
+   "id": "cue-busy-cap",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-core/src/db.rs",
+    "token": "backoff_ceiling"
+   },
+   "prompt": "In the core crate, give the database busy handler a named constant for the longest it may keep waiting, and use it there. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-core/src/db.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'backoff_ceiling'"
+  },
+  {
+   "id": "cue-stderr-helper",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-cli/src/output.rs",
+    "token": "shadow_write"
+   },
+   "prompt": "In the CLI crate, next to the existing output routines, add one that prints a line to stderr only when MUNINN_VERBOSE is set. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-cli/src/output.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'shadow_write'"
+  },
+  {
+   "id": "cue-azure-pattern",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-capture/src/redact.rs",
+    "token": "poison_pill"
+   },
+   "prompt": "In the capture crate, add a redaction pattern for Azure storage account keys, with its unit test. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-capture/src/redact.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'poison_pill'"
+  },
+  {
+   "id": "cue-artefact-fence",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-compile/src/emit.rs",
+    "token": "fence_token"
+   },
+   "prompt": "Make every emitted JSON artefact of the rule compiler carry the compiler version. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-compile/src/emit.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'fence_token'"
+  },
+  {
+   "id": "cue-size-subcommand",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-bench/src/main.rs",
+    "token": "drain_first"
+   },
+   "prompt": "Add a bench subcommand that prints the size in bytes of the store file. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-bench/src/main.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'drain_first'"
+  },
+  {
+   "id": "cue-timing-stub",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-embed/src/lib.rs",
+    "token": "monotonic_clock"
+   },
+   "prompt": "In the embedding crate, add a function that returns how long an embedding call took, in milliseconds. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-embed/src/lib.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'monotonic_clock'"
+  },
+  {
+   "id": "cue-row-struct",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-symbols/src/lib.rs",
+    "token": "hedged"
+   },
+   "prompt": "In the symbol graph crate, add a struct representing one row of a symbol table (name, path, line). Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-symbols/src/lib.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'hedged'"
+  },
+  {
+   "id": "cue-router-stub",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-why/src/lib.rs",
+    "token": "grace_window"
+   },
+   "prompt": "In the why crate, add a function stub that decides which route a question takes. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-why/src/lib.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'grace_window'"
+  }
+ ],
+ "seed_sha256": "223dcf4d0ba200a2824d2cd7ffe2c333728afe65651ea7300783e35f296fa895",
+ "seed_records": "crates/muninn-bench/experiment/cues/seed.jsonl"
+}

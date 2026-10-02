@@ -1,0 +1,21 @@
+crates/muninn-bench/experiment/results/h2h-v3-clock — 54 replacement cells, arms: claude-mem, muninn-latest
+
+arm                       n  pass  cost/cell   seconds   turns
+claude-mem               27    19     0.1006      27.6     6.0
+muninn-latest            27    23     0.1100      26.9     6.0
+
+paired against claude-mem, median ratio [95 % bootstrap over paired cells]:
+  cost         muninn-latest / claude-mem = 1.094 [0.801, 1.532]  not distinguishable
+  wall clock   muninn-latest / claude-mem = 0.972 [0.681, 1.368]  not distinguishable
+  turns        muninn-latest / claude-mem = 1.000 [0.833, 1.500]  not distinguishable
+
+split by outcome (the same comparison inside each stratum):
+  arm                    outcome    n  seconds      cost   turns
+  muninn-latest          pass      23     29.1    0.1303     6.0
+  muninn-latest          fail       4     19.6    0.0833     6.5
+  claude-mem             pass      19     24.5    0.0902     6.0
+  claude-mem             fail       8     33.5    0.1225     7.5
+
+Exploratory, post-hoc, on a grid registered for a different question. Cost here is
+downstream of whether the memory worked and is not the engine's overhead; the hook's
+own cost is `perf --strict`.

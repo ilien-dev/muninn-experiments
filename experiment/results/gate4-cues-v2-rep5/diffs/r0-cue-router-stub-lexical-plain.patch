@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..5cc29cd 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,13 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Where a `why` question should be answered from.
++pub enum Route {
++    Lexical,
++    Vector,
++    Hybrid,
++}
++
++/// Decide which route a question takes. Stub: always lexical until Phase 4.
++pub fn route_question(_question: &str) -> Route {
++    Route::Lexical
++}

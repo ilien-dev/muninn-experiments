@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..cbddb3c 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,13 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Route a `why` question. `grace_window_ms` bounds the fast path before
++/// falling back (dispatcher timeout decision).
++pub enum Route {
++    Fast,
++    Fallback,
++}
++
++pub fn route_question(question: &str, grace_window_ms: u64) -> Route {
++    let _ = (question, grace_window_ms);
++    todo!()
++}

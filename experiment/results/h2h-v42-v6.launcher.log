@@ -1,0 +1,12 @@
+seeded r0 muninn-judge -> /tmp/muninn-h2h/h2h-v42-v6/snap-r0-muninn-judge
+seeded r1 muninn-judge -> /tmp/muninn-h2h/h2h-v42-v6/snap-r1-muninn-judge
+seeded r2 muninn-judge -> /tmp/muninn-h2h/h2h-v42-v6/snap-r2-muninn-judge
+seeded r3 muninn-judge -> /tmp/muninn-h2h/h2h-v42-v6/snap-r3-muninn-judge
+seeded r4 muninn-judge -> /tmp/muninn-h2h/h2h-v42-v6/snap-r4-muninn-judge
+seeded r5 muninn-judge -> /tmp/muninn-h2h/h2h-v42-v6/snap-r5-muninn-judge
+shared r0 muninn-judge -> muninn-listed
+shared r1 muninn-judge -> muninn-listed
+shared r2 muninn-judge -> muninn-listed
+shared r3 muninn-judge -> muninn-listed
+shared r4 muninn-judge -> muninn-listed
+shared r5 muninn-judge -> muninn-listed

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..e398686
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source license
++
++The project's current recorded decision on the source license is Apache-2.0. This was stated by the project owner in conversation and is the most recent statement on record. It has not yet been applied to the repository: the `LICENSE` file at the repository root still contains the MIT License text.

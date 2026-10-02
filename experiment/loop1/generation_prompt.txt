@@ -1,0 +1,425 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+{
+"key": "g3-compression#terse",
+"topic": "the transport compression codec",
+"old": "gzip",
+"new": "zstd",
+"style": "terse"
+},
+{
+"key": "g3-compression#chatty",
+"topic": "the transport compression codec",
+"old": "gzip",
+"new": "zstd",
+"style": "chatty"
+},
+{
+"key": "g3-compression#Spanish",
+"topic": "the transport compression codec",
+"old": "gzip",
+"new": "zstd",
+"style": "Spanish"
+},
+{
+"key": "g3-cache-eviction#terse",
+"topic": "the cache eviction policy",
+"old": "LFU",
+"new": "LRU with a 300-second TTL",
+"style": "terse"
+},
+{
+"key": "g3-cache-eviction#chatty",
+"topic": "the cache eviction policy",
+"old": "LFU",
+"new": "LRU with a 300-second TTL",
+"style": "chatty"
+},
+{
+"key": "g3-cache-eviction#Spanish",
+"topic": "the cache eviction policy",
+"old": "LFU",
+"new": "LRU with a 300-second TTL",
+"style": "Spanish"
+},
+{
+"key": "g3-password-hashing#terse",
+"topic": "the password hashing algorithm",
+"old": "bcrypt",
+"new": "argon2id",
+"style": "terse"
+},
+{
+"key": "g3-password-hashing#chatty",
+"topic": "the password hashing algorithm",
+"old": "bcrypt",
+"new": "argon2id",
+"style": "chatty"
+},
+{
+"key": "g3-password-hashing#Spanish",
+"topic": "the password hashing algorithm",
+"old": "bcrypt",
+"new": "argon2id",
+"style": "Spanish"
+},
+{
+"key": "g3-tls-backend#terse",
+"topic": "the TLS backend",
+"old": "openssl",
+"new": "rustls",
+"style": "terse"
+},
+{
+"key": "g3-tls-backend#chatty",
+"topic": "the TLS backend",
+"old": "openssl",
+"new": "rustls",
+"style": "chatty"
+},
+{
+"key": "g3-tls-backend#Spanish",
+"topic": "the TLS backend",
+"old": "openssl",
+"new": "rustls",
+"style": "Spanish"
+},
+{
+"key": "g3-wire-format#terse",
+"topic": "the wire serialisation format",
+"old": "msgpack",
+"new": "cbor",
+"style": "terse"
+},
+{
+"key": "g3-wire-format#chatty",
+"topic": "the wire serialisation format",
+"old": "msgpack",
+"new": "cbor",
+"style": "chatty"
+},
+{
+"key": "g3-wire-format#Spanish",
+"topic": "the wire serialisation format",
+"old": "msgpack",
+"new": "cbor",
+"style": "Spanish"
+},
+{
+"key": "g3-async-runtime#terse",
+"topic": "the async runtime",
+"old": "async-std",
+"new": "tokio",
+"style": "terse"
+},
+{
+"key": "g3-async-runtime#chatty",
+"topic": "the async runtime",
+"old": "async-std",
+"new": "tokio",
+"style": "chatty"
+},
+{
+"key": "g3-async-runtime#Spanish",
+"topic": "the async runtime",
+"old": "async-std",
+"new": "tokio",
+"style": "Spanish"
+},
+{
+"key": "g3-version-scheme#terse",
+"topic": "the version numbering scheme",
+"old": "calver",
+"new": "semver",
+"style": "terse"
+},
+{
+"key": "g3-version-scheme#chatty",
+"topic": "the version numbering scheme",
+"old": "calver",
+"new": "semver",
+"style": "chatty"
+},
+{
+"key": "g3-version-scheme#Spanish",
+"topic": "the version numbering scheme",
+"old": "calver",
+"new": "semver",
+"style": "Spanish"
+},
+{
+"key": "g3-license#terse",
+"topic": "the source license",
+"old": "GPL-3.0",
+"new": "Apache-2.0",
+"style": "terse"
+},
+{
+"key": "g3-license#chatty",
+"topic": "the source license",
+"old": "GPL-3.0",
+"new": "Apache-2.0",
+"style": "chatty"
+},
+{
+"key": "g3-license#Spanish",
+"topic": "the source license",
+"old": "GPL-3.0",
+"new": "Apache-2.0",
+"style": "Spanish"
+},
+{
+"key": "g3-tls-verification#terse",
+"topic": "TLS certificate verification in development builds",
+"old": "certificate verification disabled in dev builds",
+"new": "(withdrawn, no replacement)",
+"style": "terse"
+},
+{
+"key": "g3-tls-verification#chatty",
+"topic": "TLS certificate verification in development builds",
+"old": "certificate verification disabled in dev builds",
+"new": "(withdrawn, no replacement)",
+"style": "chatty"
+},
+{
+"key": "g3-tls-verification#Spanish",
+"topic": "TLS certificate verification in development builds",
+"old": "certificate verification disabled in dev builds",
+"new": "(withdrawn, no replacement)",
+"style": "Spanish"
+},
+{
+"key": "g3-internal-http#terse",
+"topic": "plain HTTP for internal hosts",
+"old": "plain http allowed for internal hosts",
+"new": "https everywhere, no plaintext exception",
+"style": "terse"
+},
+{
+"key": "g3-internal-http#chatty",
+"topic": "plain HTTP for internal hosts",
+"old": "plain http allowed for internal hosts",
+"new": "https everywhere, no plaintext exception",
+"style": "chatty"
+},
+{
+"key": "g3-internal-http#Spanish",
+"topic": "plain HTTP for internal hosts",
+"old": "plain http allowed for internal hosts",
+"new": "https everywhere, no plaintext exception",
+"style": "Spanish"
+},
+{
+"key": "new-orm#terse",
+"topic": "the ORM for the Python billing service",
+"old": "SQLAlchemy",
+"new": "Tortoise ORM",
+"style": "terse"
+},
+{
+"key": "new-orm#chatty",
+"topic": "the ORM for the Python billing service",
+"old": "SQLAlchemy",
+"new": "Tortoise ORM",
+"style": "chatty"
+},
+{
+"key": "new-orm#Spanish",
+"topic": "the ORM for the Python billing service",
+"old": "SQLAlchemy",
+"new": "Tortoise ORM",
+"style": "Spanish"
+},
+{
+"key": "new-base-image#terse",
+"topic": "the container base image for the workers",
+"old": "debian-slim",
+"new": "distroless",
+"style": "terse"
+},
+{
+"key": "new-base-image#chatty",
+"topic": "the container base image for the workers",
+"old": "debian-slim",
+"new": "distroless",
+"style": "chatty"
+},
+{
+"key": "new-base-image#Spanish",
+"topic": "the container base image for the workers",
+"old": "debian-slim",
+"new": "distroless",
+"style": "Spanish"
+},
+{
+"key": "new-date-lib#terse",
+"topic": "the date library in the web client",
+"old": "moment.js",
+"new": "date-fns",
+"style": "terse"
+},
+{
+"key": "new-date-lib#chatty",
+"topic": "the date library in the web client",
+"old": "moment.js",
+"new": "date-fns",
+"style": "chatty"
+},
+{
+"key": "new-date-lib#Spanish",
+"topic": "the date library in the web client",
+"old": "moment.js",
+"new": "date-fns",
+"style": "Spanish"
+},
+{
+"key": "new-ci#terse",
+"topic": "the CI provider",
+"old": "Travis CI",
+"new": "GitHub Actions",
+"style": "terse"
+},
+{
+"key": "new-ci#chatty",
+"topic": "the CI provider",
+"old": "Travis CI",
+"new": "GitHub Actions",
+"style": "chatty"
+},
+{
+"key": "new-ci#Spanish",
+"topic": "the CI provider",
+"old": "Travis CI",
+"new": "GitHub Actions",
+"style": "Spanish"
+},
+{
+"key": "new-flags#terse",
+"topic": "the feature-flag service",
+"old": "LaunchDarkly",
+"new": "Unleash",
+"style": "terse"
+},
+{
+"key": "new-flags#chatty",
+"topic": "the feature-flag service",
+"old": "LaunchDarkly",
+"new": "Unleash",
+"style": "chatty"
+},
+{
+"key": "new-flags#Spanish",
+"topic": "the feature-flag service",
+"old": "LaunchDarkly",
+"new": "Unleash",
+"style": "Spanish"
+},
+{
+"key": "new-queue#terse",
+"topic": "the queue for background jobs",
+"old": "RabbitMQ",
+"new": "NATS JetStream",
+"style": "terse"
+},
+{
+"key": "new-queue#chatty",
+"topic": "the queue for background jobs",
+"old": "RabbitMQ",
+"new": "NATS JetStream",
+"style": "chatty"
+},
+{
+"key": "new-queue#Spanish",
+"topic": "the queue for background jobs",
+"old": "RabbitMQ",
+"new": "NATS JetStream",
+"style": "Spanish"
+},
+{
+"key": "new-markdown#terse",
+"topic": "the markdown renderer for the docs site",
+"old": "marked",
+"new": "markdown-it",
+"style": "terse"
+},
+{
+"key": "new-markdown#chatty",
+"topic": "the markdown renderer for the docs site",
+"old": "marked",
+"new": "markdown-it",
+"style": "chatty"
+},
+{
+"key": "new-markdown#Spanish",
+"topic": "the markdown renderer for the docs site",
+"old": "marked",
+"new": "markdown-it",
+"style": "Spanish"
+},
+{
+"key": "new-region#terse",
+"topic": "the object storage region",
+"old": "us-east-1",
+"new": "eu-west-1",
+"style": "terse"
+},
+{
+"key": "new-region#chatty",
+"topic": "the object storage region",
+"old": "us-east-1",
+"new": "eu-west-1",
+"style": "chatty"
+},
+{
+"key": "new-region#Spanish",
+"topic": "the object storage region",
+"old": "us-east-1",
+"new": "eu-west-1",
+"style": "Spanish"
+},
+{
+"key": "new-gofmt#terse",
+"topic": "the Go code formatter",
+"old": "gofmt",
+"new": "gofumpt",
+"style": "terse"
+},
+{
+"key": "new-gofmt#chatty",
+"topic": "the Go code formatter",
+"old": "gofmt",
+"new": "gofumpt",
+"style": "chatty"
+},
+{
+"key": "new-gofmt#Spanish",
+"topic": "the Go code formatter",
+"old": "gofmt",
+"new": "gofumpt",
+"style": "Spanish"
+},
+{
+"key": "new-errors#terse",
+"topic": "the error tracking service",
+"old": "Sentry",
+"new": "Rollbar",
+"style": "terse"
+},
+{
+"key": "new-errors#chatty",
+"topic": "the error tracking service",
+"old": "Sentry",
+"new": "Rollbar",
+"style": "chatty"
+},
+{
+"key": "new-errors#Spanish",
+"topic": "the error tracking service",
+"old": "Sentry",
+"new": "Rollbar",
+"style": "Spanish"
+}
+]

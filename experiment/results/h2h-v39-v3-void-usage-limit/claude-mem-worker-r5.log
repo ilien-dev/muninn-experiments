@@ -1,0 +1,148 @@
+[2026-09-24 16:43:14.526] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:43:14.557] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:43:14.558] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:43:15.565] [INFO ] [SYSTEM] Starting worker daemon {workerScriptPath=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/scripts/worker-service.cjs}
+[2026-09-24 16:43:15.705] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:43:15.734] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:43:15.735] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:43:15.757] [INFO ] [SYSTEM] HTTP server started {host=127.0.0.1, port=38110, pid=2962669}
+[2026-09-24 16:43:15.757] [INFO ] [SYSTEM] Worker started {host=127.0.0.1, port=38110, pid=2962669}
+[2026-09-24 16:43:15.757] [INFO ] [WORKER] Background initialization starting...
+[2026-09-24 16:43:15.758] [INFO ] [SYSTEM] Mode loaded: code
+[2026-09-24 16:43:15.827] [INFO ] [WORKER] Using Claude CLI v2.1.280 (Claude Code) at /home/ilien/.local/bin/claude {candidatesProbed=1, skippedTooOld=0}
+[2026-09-24 16:43:15.828] [INFO ] [SYSTEM] Dependency preflight passed
+[2026-09-24 16:43:15.828] [INFO ] [WORKER] Checking for one-time CWD remap...
+[2026-09-24 16:43:15.828] [INFO ] [SYSTEM] ChromaMcpManager initialized (lazy - connects on first use)
+[2026-09-24 16:43:15.828] [INFO ] [WORKER] Initializing database manager...
+[2026-09-24 16:43:15.842] [INFO ] [DB    ] Creating FTS5 tables
+[2026-09-24 16:43:15.843] [INFO ] [DB    ] FTS5 tables created successfully
+[2026-09-24 16:43:15.843] [INFO ] [DB    ] Database initialized (shared connection)
+[2026-09-24 16:43:15.843] [WARN ] [SYSTEM] Running one-time v12.4.3 pollution cleanup {dbPath=/tmp/muninn-h2h/h2h-v39-v3/seed-r5-claude-mem/cell/data/claude-mem.db}
+[2026-09-24 16:43:15.845] [INFO ] [SYSTEM] v12.4.3 backup created via VACUUM INTO {backupPath=/tmp/muninn-h2h/h2h-v39-v3/seed-r5-claude-mem/cell/data/backups/claude-mem-pre-12.4.3-2026-09-24T22-43-15-844Z.db, dbSize=4096}
+[2026-09-24 16:43:15.846] [INFO ] [SYSTEM] v12.4.3: observer-sessions purge committed {sessions=0, cascadeRows=0}
+[2026-09-24 16:43:15.846] [INFO ] [SYSTEM] v12.4.3: stuck pending_messages purge committed {rows=0}
+[2026-09-24 16:43:15.846] [INFO ] [SYSTEM] v12.4.3 cleanup complete {backupPath=/tmp/muninn-h2h/h2h-v39-v3/seed-r5-claude-mem/cell/data/backups/claude-mem-pre-12.4.3-2026-09-24T22-43-15-844Z.db, chromaWiped=false, observerSessions=0, observerCascadeRows=0, stuckPendingMessages=0}
+[2026-09-24 16:43:15.846] [INFO ] [SYSTEM] To restore: cp '/tmp/muninn-h2h/h2h-v39-v3/seed-r5-claude-mem/cell/data/backups/claude-mem-pre-12.4.3-2026-09-24T22-43-15-844Z.db' '/tmp/muninn-h2h/h2h-v39-v3/seed-r5-claude-mem/cell/data/claude-mem.db'
+[2026-09-24 16:43:15.846] [INFO ] [WORKER] Adopting merged worktrees (background)...
+[2026-09-24 16:43:15.846] [INFO ] [WORKER] Initializing search services...
+[2026-09-24 16:43:15.847] [INFO ] [WORKER] SearchManager initialized and search routes registered
+[2026-09-24 16:43:15.847] [INFO ] [WORKER] CorpusRoutes registered
+[2026-09-24 16:43:15.847] [INFO ] [WORKER] CloudSyncRoutes registered
+[2026-09-24 16:43:15.847] [INFO ] [SYSTEM] Core initialization complete (DB + search ready)
+[2026-09-24 16:43:15.848] [INFO ] [TRANSCRIPT] Transcript watcher config not found; skipping automatic transcript capture {configPath=/tmp/muninn-h2h/h2h-v39-v3/seed-r5-claude-mem/cell/home/.claude-mem/transcript-watch.json}
+[2026-09-24 16:43:15.848] [INFO ] [CHROMA_SYNC] Backfill check for 0 projects
+[2026-09-24 16:43:15.848] [INFO ] [CHROMA_SYNC] Watermark cache missing — bootstrapping from Chroma (one-time)
+[2026-09-24 16:43:15.849] [INFO ] [CHROMA_SYNC] Bootstrap complete — incremental backfills will use watermarks
+[2026-09-24 16:43:15.850] [INFO ] [CHROMA_SYNC] Backfill check complete for all projects
+[2026-09-24 16:43:15.909] [INFO ] [SYSTEM] Claude-mem search server started
+[2026-09-24 16:43:15.920] [INFO ] [WORKER] MCP loopback self-check connected successfully
+[2026-09-24 16:43:15.921] [INFO ] [SYSTEM] MCP server shutting down {reason=stdio-closed}
+[2026-09-24 16:43:16.072] [INFO ] [SYSTEM] Worker started successfully
+[2026-09-24 16:43:16.097] [INFO ] [CHROMA_MCP] Prewarming chroma-mcp uvx environment {command=uvx, args=--python 3.13 --with onnxruntime>=1.20 --with protobuf<7 --from chroma-mcp==0.2.6 chroma-mcp --help, timeoutMs=120000}
+[2026-09-24 16:43:16.571] [INFO ] [CHROMA_MCP] Connecting to chroma-mcp via MCP stdio {command=uvx, args=--python 3.13 --with onnxruntime>=1.20 --with protobuf<7 --from chroma-mcp==0.2.6 chroma-mcp --client-type persistent --data-dir /tmp/muninn-h2h/h2h-v39-v3/seed-r5-claude-mem/cell/data/chroma}
+[2026-09-24 16:43:17.033] [INFO ] [CHROMA_MCP] Connected to chroma-mcp successfully
+[2026-09-24 16:43:17.476] [INFO ] [SYSTEM] Claude-mem search server started
+[2026-09-24 16:43:17.497] [INFO ] [SYSTEM] Worker available {}
+[2026-09-24 16:43:17.603] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:43:17.605] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:43:17.631] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:43:17.632] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:43:17.634] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:43:17.634] [INFO ] [SYSTEM] Worker PID file points to a live process, skipping duplicate spawn
+[2026-09-24 16:43:17.635] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:43:17.641] [INFO ] [SYSTEM] Worker became ready while waiting on live PID
+[2026-09-24 16:43:18.505] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:43:18.535] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:43:18.536] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:43:18.562] [INFO ] [HTTP  ] SessionRoutes: handleSessionInitByClaudeId called {contentSessionId=a9a9219a-750a-42d3-a5fa-f67547db1364, project=gin, platformSource=claude, prompt_length=52, customTitle=undefined}
+[2026-09-24 16:43:18.562] [INFO ] [SESSION] [session-1] CREATED | contentSessionId=a9a9219a-750a-42d3-a5fa-f67547db1364 → sessionDbId=1 | isNew=true | project=gin
+[2026-09-24 16:43:18.563] [INFO ] [SESSION] [session-1] Session initialized {project=gin, contentSessionId=a9a9219a-750a-42d3-a5fa-f67547db1364, queueDepth=0, hasGenerator=false}
+[2026-09-24 16:43:18.563] [INFO ] [CHROMA_SYNC] Syncing user prompt {promptId=1, project=gin}
+[2026-09-24 16:43:18.564] [INFO ] [SESSION] [session-1] Generator auto-starting (init) using Claude SDK {queueDepth=0, historyLength=0}
+[2026-09-24 16:43:18.567] [INFO ] [HOOK  ] [session-1] INIT_COMPLETE | sessionDbId=1 | promptNumber=1 | project=gin
+[2026-09-24 16:43:18.572] [WARN ] [OAUTH ] Linux libsecret lookup failed {service=Claude Code-credentials, account=ilien} Command failed: secret-tool lookup service Claude Code-credentials account ilien
+[2026-09-24 16:43:18.572] [INFO ] [OAUTH ] Injected fresh CLAUDE_CODE_OAUTH_TOKEN at spawn-time {source=env-fallback, expiresAt=undefined}
+[2026-09-24 16:43:18.573] [INFO ] [SDK   ] Starting SDK query {sessionDbId=1, contentSessionId=a9a9219a-750a-42d3-a5fa-f67547db1364, hasRealMemorySessionId=false, shouldResume=false, resume_parameter=(none - fresh start), lastPromptNumber=1, authMethod=Claude Code OAuth token (env, refreshed via keychain at spawn) profile=default}
+[2026-09-24 16:43:18.577] [INFO ] [SDK   ] Creating message generator {sessionDbId=1, contentSessionId=a9a9219a-750a-42d3-a5fa-f67547db1364, lastPromptNumber=1, isInitPrompt=true, promptType=INIT}
+[2026-09-24 16:43:18.594] [INFO ] [SESSION] [session-1] Briefed the observer generation with session-start context {project=gin, contextChars=104}
+[2026-09-24 16:43:18.975] [INFO ] [SYSTEM] MCP server shutting down {reason=SIGINT}
+[2026-09-24 16:43:19.184] [INFO ] [DB    ] Registered memory_session_id before storage (FK fix) {sessionDbId=1, newId=6c528689-f5e9-438b-a13e-2e4a508fde58}
+[2026-09-24 16:43:19.184] [INFO ] [SESSION] [session-1] MEMORY_ID_CAPTURED | sessionDbId=1 | memorySessionId=6c528689-f5e9-438b-a13e-2e4a508fde58 | dbVerified=true {previousId=null}
+[2026-09-24 16:43:19.494] [WARN ] [SDK   ] Subscription usage limit hit {sessionDbId=1, window=five_hour, overageStatus=rejected}
+[2026-09-24 16:43:19.494] [WARN ] [SDK   ] Aborting session for quota guard: quota:five_hour rejected by provider {sessionDbId=1, window=five_hour, authMethod=Claude Code OAuth token (env, refreshed via keychain at spawn) profile=default}
+[2026-09-24 16:43:19.791] [WARN ] [SDK_SPAWN] [session-1] Claude process exited {code=1, signal=null, pid=2963206}
+[2026-09-24 16:43:19.791] [INFO ] [SDK   ] [session-1] ✓ Agent completed {duration=1.2s}
+[2026-09-24 16:43:19.792] [WARN ] [SESSION] [session-1] Generator paused for quota; preserving buffered work {pendingCount=0}
+[2026-09-24 16:53:31.595] [INFO ] [SYSTEM] Claude-mem search server started
+[2026-09-24 16:53:31.616] [INFO ] [SYSTEM] Worker available {}
+[2026-09-24 16:53:31.725] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:53:31.727] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:53:31.755] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:53:31.756] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:53:31.758] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:53:31.759] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:53:31.761] [INFO ] [SYSTEM] Worker PID file points to a live process, skipping duplicate spawn
+[2026-09-24 16:53:31.769] [INFO ] [SYSTEM] Worker became ready while waiting on live PID
+[2026-09-24 16:53:31.979] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 16:53:32.008] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 16:53:32.009] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 16:53:32.034] [INFO ] [HTTP  ] SessionRoutes: handleSessionInitByClaudeId called {contentSessionId=da088966-9fa1-4004-aece-5152079d1700, project=gin, platformSource=claude, prompt_length=52, customTitle=undefined}
+[2026-09-24 16:53:32.035] [INFO ] [SESSION] [session-2] CREATED | contentSessionId=da088966-9fa1-4004-aece-5152079d1700 → sessionDbId=2 | isNew=true | project=gin
+[2026-09-24 16:53:32.035] [INFO ] [SESSION] [session-2] Session initialized {project=gin, contentSessionId=da088966-9fa1-4004-aece-5152079d1700, queueDepth=0, hasGenerator=false}
+[2026-09-24 16:53:32.035] [INFO ] [CHROMA_SYNC] Syncing user prompt {promptId=2, project=gin}
+[2026-09-24 16:53:32.035] [WARN ] [SESSION] [session-2] Skipping generator start while the provider quota cooldown is active {source=init, provider=claude, window=five_hour, probeInFlight=false, retryInMs=1187756}
+[2026-09-24 16:53:32.036] [INFO ] [HOOK  ] [session-2] INIT_COMPLETE | sessionDbId=2 | promptNumber=1 | project=gin
+[2026-09-24 16:53:32.471] [INFO ] [SYSTEM] MCP server shutting down {reason=SIGINT}
+[2026-09-24 17:03:45.120] [INFO ] [SYSTEM] Claude-mem search server started
+[2026-09-24 17:03:45.140] [INFO ] [SYSTEM] Worker available {}
+[2026-09-24 17:03:45.257] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 17:03:45.258] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 17:03:45.287] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 17:03:45.288] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 17:03:45.289] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 17:03:45.290] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 17:03:45.292] [INFO ] [SYSTEM] Worker PID file points to a live process, skipping duplicate spawn
+[2026-09-24 17:03:45.300] [INFO ] [SYSTEM] Worker became ready while waiting on live PID
+[2026-09-24 17:03:45.536] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 17:03:45.565] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 17:03:45.566] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 17:03:45.589] [INFO ] [HTTP  ] SessionRoutes: handleSessionInitByClaudeId called {contentSessionId=30655692-6a31-4f74-8d45-6e08d18433d5, project=gin, platformSource=claude, prompt_length=60, customTitle=undefined}
+[2026-09-24 17:03:45.589] [INFO ] [SESSION] [session-3] CREATED | contentSessionId=30655692-6a31-4f74-8d45-6e08d18433d5 → sessionDbId=3 | isNew=true | project=gin
+[2026-09-24 17:03:45.589] [INFO ] [SESSION] [session-3] Session initialized {project=gin, contentSessionId=30655692-6a31-4f74-8d45-6e08d18433d5, queueDepth=0, hasGenerator=false}
+[2026-09-24 17:03:45.589] [INFO ] [CHROMA_SYNC] Syncing user prompt {promptId=3, project=gin}
+[2026-09-24 17:03:45.589] [WARN ] [SESSION] [session-3] Skipping generator start while the provider quota cooldown is active {source=init, provider=claude, window=five_hour, probeInFlight=false, retryInMs=574202}
+[2026-09-24 17:03:45.590] [INFO ] [HOOK  ] [session-3] INIT_COMPLETE | sessionDbId=3 | promptNumber=1 | project=gin
+[2026-09-24 17:03:46.033] [INFO ] [SYSTEM] MCP server shutting down {reason=SIGINT}
+[2026-09-24 17:13:58.677] [INFO ] [SYSTEM] Claude-mem search server started
+[2026-09-24 17:13:58.699] [INFO ] [SYSTEM] Worker available {}
+[2026-09-24 17:13:58.808] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 17:13:58.811] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 17:13:58.837] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 17:13:58.838] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 17:13:58.841] [INFO ] [SYSTEM] Worker PID file points to a live process, skipping duplicate spawn
+[2026-09-24 17:13:58.841] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 17:13:58.843] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 17:13:58.847] [INFO ] [SYSTEM] Worker became ready while waiting on live PID
+[2026-09-24 17:13:59.897] [INFO ] [SYSTEM] Cached SKILL.md at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/mem-search/SKILL.md, bytes=5609}
+[2026-09-24 17:13:59.926] [INFO ] [SYSTEM] Cached viewer.html at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/ui/viewer.html, bytes=60857}
+[2026-09-24 17:13:59.927] [INFO ] [SYSTEM] Cached onboarding explainer at boot {path=/home/ilien/.local/share/muninn-bench/competitors/claude-mem/node_modules/claude-mem/plugin/skills/how-it-works/onboarding-explainer.md, bytes=1009}
+[2026-09-24 17:13:59.954] [INFO ] [HTTP  ] SessionRoutes: handleSessionInitByClaudeId called {contentSessionId=da36c5fd-790d-4a8a-9147-e8133fb5f1b9, project=gin, platformSource=claude, prompt_length=79, customTitle=undefined}
+[2026-09-24 17:13:59.954] [INFO ] [SESSION] [session-4] CREATED | contentSessionId=da36c5fd-790d-4a8a-9147-e8133fb5f1b9 → sessionDbId=4 | isNew=true | project=gin
+[2026-09-24 17:13:59.954] [INFO ] [SESSION] [session-4] Session initialized {project=gin, contentSessionId=da36c5fd-790d-4a8a-9147-e8133fb5f1b9, queueDepth=0, hasGenerator=false}
+[2026-09-24 17:13:59.954] [INFO ] [CHROMA_SYNC] Syncing user prompt {promptId=4, project=gin}
+[2026-09-24 17:13:59.954] [INFO ] [SESSION] [session-4] Generator auto-starting (init) using Claude SDK {queueDepth=0, historyLength=0}
+[2026-09-24 17:14:00.016] [INFO ] [SDK   ] Using Claude CLI v2.1.280 (Claude Code) at /home/ilien/.local/bin/claude {candidatesProbed=1, skippedTooOld=0}
+[2026-09-24 17:14:00.018] [INFO ] [HOOK  ] [session-4] INIT_COMPLETE | sessionDbId=4 | promptNumber=1 | project=gin
+[2026-09-24 17:14:00.022] [WARN ] [OAUTH ] Linux libsecret lookup failed {service=Claude Code-credentials, account=ilien} Command failed: secret-tool lookup service Claude Code-credentials account ilien
+[2026-09-24 17:14:00.022] [INFO ] [OAUTH ] Injected fresh CLAUDE_CODE_OAUTH_TOKEN at spawn-time {source=env-fallback, expiresAt=undefined}
+[2026-09-24 17:14:00.023] [INFO ] [SDK   ] Starting SDK query {sessionDbId=4, contentSessionId=da36c5fd-790d-4a8a-9147-e8133fb5f1b9, hasRealMemorySessionId=false, shouldResume=false, resume_parameter=(none - fresh start), lastPromptNumber=1, authMethod=Claude Code OAuth token (env, refreshed via keychain at spawn) profile=default}
+[2026-09-24 17:14:00.024] [INFO ] [SDK   ] Creating message generator {sessionDbId=4, contentSessionId=da36c5fd-790d-4a8a-9147-e8133fb5f1b9, lastPromptNumber=1, isInitPrompt=true, promptType=INIT}
+[2026-09-24 17:14:00.026] [INFO ] [SESSION] [session-4] Briefed the observer generation with session-start context {project=gin, contextChars=104}
+[2026-09-24 17:14:00.202] [INFO ] [DB    ] Registered memory_session_id before storage (FK fix) {sessionDbId=4, newId=ab00b5e5-63e7-4d21-9a49-9f3b59ce010f}
+[2026-09-24 17:14:00.202] [INFO ] [SESSION] [session-4] MEMORY_ID_CAPTURED | sessionDbId=4 | memorySessionId=ab00b5e5-63e7-4d21-9a49-9f3b59ce010f | dbVerified=true {previousId=null}
+[2026-09-24 17:14:00.484] [INFO ] [SYSTEM] MCP server shutting down {reason=SIGINT}
+[2026-09-24 17:14:00.660] [WARN ] [SDK   ] Aborting session for quota guard: quota:five_hour rejected by provider {sessionDbId=4, window=five_hour, authMethod=Claude Code OAuth token (env, refreshed via keychain at spawn) profile=default}
+[2026-09-24 17:14:01.053] [WARN ] [SDK_SPAWN] [session-4] Claude process exited {code=1, signal=null, pid=3026242}
+[2026-09-24 17:14:01.053] [INFO ] [SDK   ] [session-4] ✓ Agent completed {duration=1.1s}
+[2026-09-24 17:14:01.053] [WARN ] [SESSION] [session-4] Generator paused for quota; preserving buffered work {pendingCount=0}
+[2026-09-24 17:21:39.090] [WARN ] [CHROMA_MCP] chroma-mcp subprocess closed unexpectedly, applying reconnect backoff

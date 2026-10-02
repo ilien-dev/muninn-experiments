@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "New callers should use Config helpers where available. Callers index nested dictionaries directly.\nFor sequence config-stale, task config-stale-s02, the public task prompt was: Add Config.select(section, default=None), returning a copy of that section without abandoning dict compatibility.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1",
+      "seed": 1,
+      "sequence_id": "config-stale"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "0ec8d465-20b8-4303-b487-bfec2e4028a5",
+        "memory": "New callers should use Config helpers where available. Callers index nested dictionaries directly.\nFor sequence config-stale, task config-stale-s02, the public task prompt was: Add Config.select(section, default=None), returning a copy of that section without abandoning dict compatibility.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

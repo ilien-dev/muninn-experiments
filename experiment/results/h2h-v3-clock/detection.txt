@@ -1,0 +1,6 @@
+| arm | replacement pass | unsafe | current value written | revocation pass | errors |
+|---|---|---|---|---|---|
+| claude-mem | 19/27 | 5/27 | 16/27 | 3/3 | 0 |
+| muninn-latest | 23/27 | 5/27 | 20/27 | 3/3 | 0 |
+
+Every arm against off (replacement pass, Fisher two-sided):

@@ -1,0 +1,21 @@
+plan: 1 cells (1 tasks × 1 arms × 1 runs), model gpt-5.6-sol, base 0cb51ab of /home/ilien/Projects/muninn
+seed transcripts: 1
+[  1/1] run 0 revoke-compression literal …
+[  1/1] run 0 revoke-compression literal → fail (51s, 0 tok, $0.000)
+
+# Gate 2 experiment — 1 cells, model gpt-5.6-sol, 1 run(s)
+
+| arm | non-inferable pass | inferable pass | errors | delivered tokens (mean) | hook p95 ms (max) | cost/cell (mean) |
+|---|---|---|---|---|---|---|
+| literal | 0/1 (0%) | n/a | 0 | 0 | 0.00 | $0.000 |
+
+## Per task
+
+| task | inferable | literal | 
+|---|---|---|
+| revoke-compression | false | 0/1 | 
+
+Retired records delivered (all arms, all cells): 0.
+
+Total model cost: $-0.00. Errors are excluded from pass rates and listed in results.jsonl.
+

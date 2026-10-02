@@ -1,0 +1,53 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..722af84
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,47 @@
++# Historial de rendimiento
++
++## UserPromptSubmit read path
++
++No existe, en las mediciones propias del proyecto, un p95 registrado para el
++hook `UserPromptSubmit` sobre un "vocabulario sintético adversarial de 30
++palabras", ni antes ni después de un "fix de selección de términos". Busqué
++en `research/00-evidence-log.md`, `design/ENGINE.md`, el código
++(`crates/muninn-core/src/recall.rs`, `schema.sql`) y el historial de git; esa
++frase concreta no aparece en ningún sitio como medición real.
++
++Lo único parecido que encontré es una cadena de un test unitario
++(`crates/muninn-core/src/recall.rs`, función `passage_prefers_the_window_with_the_terms`):
++el texto de prueba dice literalmente "the p95 was 10.27 ms on the synthetic
++vocab" (cambiado a 12.34 ms en el commit `2b72a8b`). No es un benchmark: es un
++valor inventado para probar la función `best_passage`, que extrae el pasaje
++de texto más relevante. No lo uso como medición.
++
++Lo que sí está medido y documentado, y que es lo más cercano a "selección de
++términos" en la ruta de lectura, es esto (`research/00-evidence-log.md`,
++entrada `[H6]`, prototipo en Python, corpus de 50 000 registros):
++
++| etapa                                | p50      | p95      |
++|---------------------------------------|----------|----------|
++| BM25 con los 24 primeros términos      | 21.53 ms | 35.53 ms |
++| BM25 con los 8 términos de mayor IDF   |  4.65 ms |  8.75 ms |
++
++El "fix" real fue cambiar la selección de términos de "los primeros 24 tokens
++del prompt" a "los 8 términos de mayor IDF (inverse document frequency, qué
++tan raro es un término en el corpus) vía `fts5vocab`". Está implementado en
++`crates/muninn-core/src/recall.rs` (comentario de cabecera y función de
++selección por IDF) y en `schema.sql` (tabla `record_vocab`).
++
++Esa tabla es de la etapa BM25 sola, no del hook completo, y el corpus es
++sintético genérico (50 000 registros), no descrito como "adversarial" ni
++como "vocabulario de 30 palabras". El hook completo medido de extremo a
++extremo, ya con la selección top-8 por IDF (prototipo en Rust, `[I3]`, sin
++modelo de embeddings, corpus de 50 000 registros):
++
++| turno         | p50     | p95     |
++|---------------|---------|---------|
++| con intención | 4.07 ms | 4.31 ms |
++| sin intención | 0.49 ms | 0.56 ms |
++
++Si el número de "30 palabras adversarial" existe en algún sitio fuera de
++este checkout, no lo tengo; que quien lo pida lo aporte antes de que se dé
++por bueno.

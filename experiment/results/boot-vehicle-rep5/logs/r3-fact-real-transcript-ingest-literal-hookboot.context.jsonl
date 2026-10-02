@@ -1,0 +1,11 @@
+{"at":1789367911023,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["research/00-evidence-log.md","research/CONCLUSION.md","research/CONCLUSION-v1-superada.md"],"symbols":[]}
+{"at":1789367913829,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789367914394,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["research/00-evidence-log.md"],"symbols":[]}
+{"at":1789367919445,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789367920318,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["research/00-evidence-log.md"],"symbols":[]}
+{"at":1789367924374,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["research/00-evidence-log.md"],"symbols":[]}
+{"at":1789367925606,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["research/00-evidence-log.md;","research/00-evidence-log.md"],"symbols":[]}
+{"at":1789367929199,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["research/00-evidence-log.md"],"symbols":[]}
+{"at":1789367935244,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["crates/muninn-capture/src/ingest.rs"],"symbols":["IngestStats","watermark_key","ingest_transcript","parse_rfc3339_ms","tests","rfc3339_roundtrip"]}
+{"at":1789367955664,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["docs/format.md"],"symbols":[]}
+{"at":1789367961341,"session":"3a861eb3-0b57-40cc-8a38-462edeb3b3b4","files":["docs/perf-history.md"],"symbols":[]}

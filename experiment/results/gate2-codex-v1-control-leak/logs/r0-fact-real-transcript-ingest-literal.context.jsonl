@@ -1,0 +1,6 @@
+{"at":1789369952367,"session":"01a09ec2-6ba5-7042-98ac-7cdf85bd199e","files":["docs/perf-history.md;"],"symbols":[]}
+{"at":1789369962978,"session":"01a09ec2-6ba5-7042-98ac-7cdf85bd199e","files":["!research/dossier.html"],"symbols":[]}
+{"at":1789369969500,"session":"01a09ec2-6ba5-7042-98ac-7cdf85bd199e","files":["crates/muninn-capture/src/lib.rs;","crates/muninn-capture/src/ingest.rs"],"symbols":["IngestStats","watermark_key","ingest_transcript","parse_rfc3339_ms","tests","rfc3339_roundtrip"]}
+{"at":1789369978239,"session":"01a09ec2-6ba5-7042-98ac-7cdf85bd199e","files":["docs/perf-history.md"],"symbols":[]}
+{"at":1789369982829,"session":"01a09ec2-6ba5-7042-98ac-7cdf85bd199e","files":["docs/perf-history.md;","docs/perf-history.md"],"symbols":[]}
+{"at":1789369987267,"session":"01a09ec2-6ba5-7042-98ac-7cdf85bd199e","files":["docs/perf-history.md"],"symbols":[]}

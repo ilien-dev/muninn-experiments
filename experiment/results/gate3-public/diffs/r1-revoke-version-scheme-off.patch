@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..1dd0d83
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version numbering scheme
++
++No version numbering scheme for this project's releases is currently recorded. `Cargo.toml` sets `workspace.package.version = "0.1.0"` as a value, but no document in the repository (README, design/ENGINE.md, docs/threat-model.md, docs/format.md, research/CONCLUSION.md, research/00-evidence-log.md, or the CI workflow) states a decision — such as SemVer, CalVer, or any other scheme — governing how that version number is chosen or incremented.

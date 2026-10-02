@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..7830d74
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Perf history
++
++## Real transcript ingest
++
++Sin cifras medidas. Busqué en este checkout — `docs/`, `research/00-evidence-log.md`,
++`.muninn/log/`, salidas de test, logs de CI — y no hay ningún registro de tamaño en MB,
++número de turnos/episodios, ni tiempo de ingesta para el transcript real de Claude Code
++de este proyecto.
++
++Lo único relacionado es `crates/muninn-capture/src/lib.rs` (`parses_real_transcripts_when_present`,
++un smoke test que imprime turnos/episodios/tools por `eprintln!` si encuentra un transcript
++en `~/.claude/projects/-home-ilien-Projects-muninn`), pero no hay salida capturada de esa
++prueba en este checkout, y no mide tiempo de ingesta.
++
++No hay commit ni log en este repo con esos números. Para completar esta sección hace
++falta correr la ingesta real y capturar la salida (tamaño del archivo, `IngestStats`
++de `crates/muninn-capture/src/ingest.rs`, y tiempo con `time`), no inventarla.

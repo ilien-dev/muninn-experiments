@@ -1,0 +1,20 @@
+{
+ "muninn": "muninn 0.1.0",
+ "commit": "8d06b48c9450b6c7a2e7f8740b6cb8099d6bd7ad",
+ "reps": 100,
+ "invariants": 10,
+ "compactions_with_all_invariants": 100,
+ "facts_delivered": 1000,
+ "facts_expected": 1000,
+ "lost_at_reps": [],
+ "post_compact_ms": {
+  "median": 1.17,
+  "p95": 1.64,
+  "max": 1.84
+ },
+ "pre_compact_ms": {
+  "median": 1.21,
+  "max": 2.02
+ },
+ "measured_utc": "2026-09-13T14:01:21Z"
+}

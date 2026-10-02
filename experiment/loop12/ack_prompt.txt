@@ -1,0 +1,365 @@
+You are a coding assistant. For each message below, write the one-sentence reply you would actually send to acknowledge it. Reply naturally, as you normally would; do not follow any template and do not explain yourself. Output JSON only: a list of objects {"key","reply"} with the keys exactly as given.
+
+Messages:
+[
+ {
+  "key": "d12-pool#terse#a",
+  "message": "Going with PgBouncer for the connection pool."
+ },
+ {
+  "key": "d12-pool#terse#b",
+  "message": "Actually, let's use Supavisor instead."
+ },
+ {
+  "key": "d12-pool#chatty#a",
+  "message": "I'm thinking we should go with PgBouncer to handle our connection pooling. Seems rock solid."
+ },
+ {
+  "key": "d12-pool#chatty#b",
+  "message": "Hey, I've been reading about Supavisor and I think it's a better fit for our setup."
+ },
+ {
+  "key": "d12-pool#Spanish#a",
+  "message": "Usaremos PgBouncer para agrupar las conexiones a la base de datos."
+ },
+ {
+  "key": "d12-pool#Spanish#b",
+  "message": "Mejor a\u00fan, vamos a usar Supavisor en su lugar."
+ },
+ {
+  "key": "d12-queue#terse#a",
+  "message": "Using Sidekiq for background jobs."
+ },
+ {
+  "key": "d12-queue#terse#b",
+  "message": "Switching to Oban."
+ },
+ {
+  "key": "d12-queue#chatty#a",
+  "message": "For background jobs I'm going to set up Sidekiq\u2014it's mature and the whole team knows it."
+ },
+ {
+  "key": "d12-queue#chatty#b",
+  "message": "Actually, I changed my mind. Oban feels like it'd fit better with our Elixir stuff."
+ },
+ {
+  "key": "d12-queue#Spanish#a",
+  "message": "Decidimos usar Sidekiq para las tareas en segundo plano."
+ },
+ {
+  "key": "d12-queue#Spanish#b",
+  "message": "Voy a cambiar a Oban, se adapta mejor a nuestro stack."
+ },
+ {
+  "key": "d12-http#terse#a",
+  "message": "Going with reqwest for HTTP calls."
+ },
+ {
+  "key": "d12-http#terse#b",
+  "message": "Use hyper instead."
+ },
+ {
+  "key": "d12-http#chatty#a",
+  "message": "I figured reqwest would be easiest for HTTP requests from the service."
+ },
+ {
+  "key": "d12-http#chatty#b",
+  "message": "Actually, hyper gives us more control over the low-level stuff, which we might need down the road."
+ },
+ {
+  "key": "d12-http#Spanish#a",
+  "message": "Vamos a usar reqwest para las solicitudes HTTP."
+ },
+ {
+  "key": "d12-http#Spanish#b",
+  "message": "Mejor cambiar a hyper para m\u00e1s control sobre los detalles."
+ },
+ {
+  "key": "d12-fmt#terse#a",
+  "message": "Log format: logfmt."
+ },
+ {
+  "key": "d12-fmt#terse#b",
+  "message": "Change to JSON lines."
+ },
+ {
+  "key": "d12-fmt#chatty#a",
+  "message": "I think logfmt is the right call for our logs\u2014it's clean and easy to parse."
+ },
+ {
+  "key": "d12-fmt#chatty#b",
+  "message": "You know what, JSON lines is smarter. We can pipe it straight into our data pipeline without any transformation."
+ },
+ {
+  "key": "d12-fmt#Spanish#a",
+  "message": "El formato de registro ser\u00e1 logfmt."
+ },
+ {
+  "key": "d12-fmt#Spanish#b",
+  "message": "Cambio a JSON Lines, se integra mejor con el pipeline."
+ },
+ {
+  "key": "d12-ci#terse#a",
+  "message": "CI on CircleCI."
+ },
+ {
+  "key": "d12-ci#terse#b",
+  "message": "Move to GitHub Actions."
+ },
+ {
+  "key": "d12-ci#chatty#a",
+  "message": "For CI let's stick with CircleCI\u2014we've had good experiences with it and it's stable."
+ },
+ {
+  "key": "d12-ci#chatty#b",
+  "message": "Actually, GitHub Actions makes way more sense now that everything's already on GitHub. One less vendor to deal with."
+ },
+ {
+  "key": "d12-ci#Spanish#a",
+  "message": "Usaremos CircleCI para la integraci\u00f3n continua."
+ },
+ {
+  "key": "d12-ci#Spanish#b",
+  "message": "Mejor usar GitHub Actions, est\u00e1 integrado en el repositorio."
+ },
+ {
+  "key": "d12-store#terse#a",
+  "message": "Object store: MinIO."
+ },
+ {
+  "key": "d12-store#terse#b",
+  "message": "Switch to Cloudflare R2."
+ },
+ {
+  "key": "d12-store#chatty#a",
+  "message": "I'm going to set up MinIO so we have complete control over our object storage."
+ },
+ {
+  "key": "d12-store#chatty#b",
+  "message": "On second thought, Cloudflare R2 is probably smarter. We save on infrastructure and get a CDN thrown in."
+ },
+ {
+  "key": "d12-store#Spanish#a",
+  "message": "El almacenamiento de objetos ser\u00e1 MinIO en nuestros servidores."
+ },
+ {
+  "key": "d12-store#Spanish#b",
+  "message": "Voy a usar Cloudflare R2 en su lugar, es m\u00e1s econ\u00f3mico."
+ },
+ {
+  "key": "d12-lint#terse#a",
+  "message": "Frontend linter: ESLint."
+ },
+ {
+  "key": "d12-lint#terse#b",
+  "message": "Switch to Biome."
+ },
+ {
+  "key": "d12-lint#chatty#a",
+  "message": "ESLint's pretty standard for JavaScript linting, and it has a ton of plugins we can use."
+ },
+ {
+  "key": "d12-lint#chatty#b",
+  "message": "But Biome looks really promising honestly. Faster, combines linting with formatting, and cleaner output."
+ },
+ {
+  "key": "d12-lint#Spanish#a",
+  "message": "Usaremos ESLint para el an\u00e1lisis est\u00e1tico del frontend."
+ },
+ {
+  "key": "d12-lint#Spanish#b",
+  "message": "Cambio a Biome, es m\u00e1s r\u00e1pido y completo."
+ },
+ {
+  "key": "d12-orm#terse#a",
+  "message": "DB layer: Diesel."
+ },
+ {
+  "key": "d12-orm#terse#b",
+  "message": "Use SQLx instead."
+ },
+ {
+  "key": "d12-orm#chatty#a",
+  "message": "For the database layer, Diesel seems like the solid choice\u2014it's battle-tested and has great docs."
+ },
+ {
+  "key": "d12-orm#chatty#b",
+  "message": "Actually, SQLx keeps growing on me. The compile-time checking and simpler approach appeals to me more."
+ },
+ {
+  "key": "d12-orm#Spanish#a",
+  "message": "La capa de base de datos ser\u00e1 Diesel."
+ },
+ {
+  "key": "d12-orm#Spanish#b",
+  "message": "Mejor usar SQLx para m\u00e1s flexibilidad y seguridad en tiempo de compilaci\u00f3n."
+ },
+ {
+  "key": "d12-auth#terse#a",
+  "message": "Session signing: HS256."
+ },
+ {
+  "key": "d12-auth#terse#b",
+  "message": "Switch to EdDSA."
+ },
+ {
+  "key": "d12-auth#chatty#a",
+  "message": "HS256 is straightforward for session signing and the team already knows it."
+ },
+ {
+  "key": "d12-auth#chatty#b",
+  "message": "But I've been thinking\u2014EdDSA would be cleaner. Asymmetric signatures make key rotation easier."
+ },
+ {
+  "key": "d12-auth#Spanish#a",
+  "message": "Las sesiones se firmar\u00e1n con HS256."
+ },
+ {
+  "key": "d12-auth#Spanish#b",
+  "message": "Cambio a EdDSA para mayor seguridad y mejor rotaci\u00f3n de claves."
+ },
+ {
+  "key": "d12-test#terse#a",
+  "message": "E2E testing: Cypress."
+ },
+ {
+  "key": "d12-test#terse#b",
+  "message": "Use Playwright."
+ },
+ {
+  "key": "d12-test#chatty#a",
+  "message": "Cypress seems like the natural choice for end-to-end tests. Good DX, solid docs."
+ },
+ {
+  "key": "d12-test#chatty#b",
+  "message": "I've been trying Playwright though and it's honestly really fast. Better multi-browser support too."
+ },
+ {
+  "key": "d12-test#Spanish#a",
+  "message": "Usaremos Cypress para las pruebas de extremo a extremo."
+ },
+ {
+  "key": "d12-test#Spanish#b",
+  "message": "Mejor usar Playwright, es m\u00e1s r\u00e1pido y compatible."
+ },
+ {
+  "key": "d12-pkg#terse#a",
+  "message": "Package manager: npm."
+ },
+ {
+  "key": "d12-pkg#terse#b",
+  "message": "Switch to pnpm."
+ },
+ {
+  "key": "d12-pkg#chatty#a",
+  "message": "npm is what everyone uses, so let's just stick with it. Simple, familiar, no surprises."
+ },
+ {
+  "key": "d12-pkg#chatty#b",
+  "message": "Actually, pnpm has been growing on me. The disk space savings are real, plus the linking model is smarter."
+ },
+ {
+  "key": "d12-pkg#Spanish#a",
+  "message": "El gestor de paquetes ser\u00e1 npm."
+ },
+ {
+  "key": "d12-pkg#Spanish#b",
+  "message": "Cambio a pnpm para ahorrar espacio en disco."
+ },
+ {
+  "key": "d12-tpl#terse#a",
+  "message": "Template engine: Handlebars."
+ },
+ {
+  "key": "d12-tpl#terse#b",
+  "message": "Switch to Tera."
+ },
+ {
+  "key": "d12-tpl#chatty#a",
+  "message": "Handlebars is pretty portable and we know it from the frontend side."
+ },
+ {
+  "key": "d12-tpl#chatty#b",
+  "message": "You know, Tera is probably better for Rust anyway. Better syntax, better integration."
+ },
+ {
+  "key": "d12-tpl#Spanish#a",
+  "message": "El motor de plantillas ser\u00e1 Handlebars."
+ },
+ {
+  "key": "d12-tpl#Spanish#b",
+  "message": "Mejor usar Tera, est\u00e1 optimizado para Rust."
+ },
+ {
+  "key": "d12-cache#terse#a",
+  "message": "Cache policy: LFU."
+ },
+ {
+  "key": "d12-cache#terse#b",
+  "message": "Change to LRU."
+ },
+ {
+  "key": "d12-cache#chatty#a",
+  "message": "LFU makes sense for our use case\u2014evict the least frequently used items."
+ },
+ {
+  "key": "d12-cache#chatty#b",
+  "message": "Actually LRU might be simpler to reason about and probably performs better in practice."
+ },
+ {
+  "key": "d12-cache#Spanish#a",
+  "message": "La pol\u00edtica de cach\u00e9 ser\u00e1 LFU."
+ },
+ {
+  "key": "d12-cache#Spanish#b",
+  "message": "Cambio a LRU por simplicidad y rendimiento."
+ },
+ {
+  "key": "d12-proto#terse#a",
+  "message": "Service protocol: REST."
+ },
+ {
+  "key": "d12-proto#terse#b",
+  "message": "Use gRPC."
+ },
+ {
+  "key": "d12-proto#chatty#a",
+  "message": "REST is simple and every service we have understands it already."
+ },
+ {
+  "key": "d12-proto#chatty#b",
+  "message": "Wait, gRPC could be better for us. We've got a lot of internal traffic and the performance boost would help."
+ },
+ {
+  "key": "d12-proto#Spanish#a",
+  "message": "El protocolo entre servicios ser\u00e1 REST."
+ },
+ {
+  "key": "d12-proto#Spanish#b",
+  "message": "Cambio a gRPC para mejor rendimiento y tipado."
+ },
+ {
+  "key": "d12-obs#terse#a",
+  "message": "Traces: Jaeger."
+ },
+ {
+  "key": "d12-obs#terse#b",
+  "message": "Switch to OpenTelemetry Collector."
+ },
+ {
+  "key": "d12-obs#chatty#a",
+  "message": "Jaeger's a solid choice for distributed tracing. Good UI, we've used it before."
+ },
+ {
+  "key": "d12-obs#chatty#b",
+  "message": "But OpenTelemetry Collector would give us more flexibility. Vendor-neutral and we can send traces anywhere."
+ },
+ {
+  "key": "d12-obs#Spanish#a",
+  "message": "Las trazas se exportar\u00e1n con Jaeger."
+ },
+ {
+  "key": "d12-obs#Spanish#b",
+  "message": "Mejor usar OpenTelemetry Collector, es m\u00e1s flexible."
+ }
+]

@@ -1,0 +1,5 @@
+{
+  "name": "mem0-h2h",
+  "version": "0.1.118",
+  "description": "Mem0 as a head-to-head arm: Stop stores the session's user turns, UserPromptSubmit retrieves. Written for the experiment, not by Mem0 (see PREREGISTRATION.md)."
+}

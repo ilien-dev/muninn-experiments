@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..e9c2614
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++Coste del hook `SessionStart` sobre un store de 5000 registros (15000 cues).
++
++- **Después** (`quick_check` fuera del read path — se registra/difiere en vez de
++  ejecutarse en vivo en cada hook — junto con el contador `fts_rows` en O(1) y el
++  tope de `body` como CHECK, los tres añadidos en el mismo commit):
++  **p50 = 1.05 ms**, medido. Fuente: mensaje del commit `2ff626a`
++  ("Measured (5k records, 15k cues): SessionStart p50 1.05 ms"), que corre
++  `muninn-bench perf`.
++
++- **Antes** (`quick_check` en vivo dentro del read path del hook): sin número
++  medido. El commit `2ff626a` es el primero de este repositorio (Phase 0); no
++  hay commit, rama, stash ni artefacto de benchmark anterior con ese diseño.
++  No invento la cifra.

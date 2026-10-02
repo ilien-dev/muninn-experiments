@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..76d54df
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire format
++
++The project's current recorded decision is to use CBOR as the wire serialisation format for internal message serialisation, chosen because it handles type information better across versions.

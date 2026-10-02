@@ -1,0 +1,38 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6c47a75
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,32 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Searched the repo and full git log (`crates/muninn-core/src/recall.rs`,
++`crates/muninn-bench/src/main.rs`, `research/00-evidence-log.md`, all commit
++messages and diffs) for a measured full-recall p95 of the `UserPromptSubmit`
++hook on the adversarial synthetic 30-word vocabulary, before and after a
++term-selection fix.
++
++**No such measurement exists in this repository or its git history.**
++
++What does exist, for context:
++
++- The 30-word adversarial vocabulary is real: `crates/muninn-bench/src/main.rs`
++  builds a Zipf-distributed synthetic store with "30 frequent domain words
++  plus 2 000 rare identifiers" specifically so posting lists resemble real
++  code discussion.
++- The read path's term selection is IDF top-8 via `fts5vocab`, with terms
++  present in more than 1/3 of the store dropped (`select_terms` in
++  `crates/muninn-core/src/recall.rs`). This logic was written once, in commit
++  `0dcfc84`, and has not been changed since — there is no "before" and "after"
++  commit pair for it.
++- `crates/muninn-bench` does define a perf contract named "hook
++  UserPromptSubmit full p95" with a 10 ms limit, but no historical run output
++  recording a before/after pair for the adversarial vocabulary case was found.
++- A `10.27 ms` figure does appear in the repo, but only as fixture data in a
++  `recall.rs` unit test (`passage_prefers_the_window_with_the_terms`) — it is
++  test-fixture text, not a measurement, and is unrelated to term selection.
++
++If this number was measured, it was not committed to this repository or
++recorded in any commit message.

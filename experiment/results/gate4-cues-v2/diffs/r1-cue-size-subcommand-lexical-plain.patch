@@ -1,0 +1,32 @@
+diff --git a/crates/muninn-bench/src/main.rs b/crates/muninn-bench/src/main.rs
+index 1df2f7b..8560ff6 100644
+--- a/crates/muninn-bench/src/main.rs
++++ b/crates/muninn-bench/src/main.rs
+@@ -98,6 +98,12 @@ enum Cmd {
+         #[arg(long)]
+         json: bool,
+     },
++    /// Print the size in bytes of the store file
++    StoreSize {
++        /// Project root containing .muninn/
++        #[arg(long, default_value = ".")]
++        root: PathBuf,
++    },
+ }
+ 
+ /// Deterministic LCG so every run measures the same data.
+@@ -788,6 +794,14 @@ fn main() -> Result<()> {
+             }
+             Ok(())
+         }
++        Cmd::StoreSize { root } => {
++            let path = root.join(".muninn/muninn.db");
++            let bytes = std::fs::metadata(&path)
++                .with_context(|| format!("reading {}", path.display()))?
++                .len();
++            println!("{bytes}");
++            Ok(())
++        }
+     }
+ }
+ 

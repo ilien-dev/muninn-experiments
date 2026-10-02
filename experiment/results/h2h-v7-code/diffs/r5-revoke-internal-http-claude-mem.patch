@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..d1d3dbf
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++This project enforces a TLS-everywhere policy: HTTPS is required for all traffic without exception, and plain HTTP is disabled universally, including for internal hosts.

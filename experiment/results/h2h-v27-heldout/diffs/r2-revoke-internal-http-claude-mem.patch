@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..34fa6fc
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Plain HTTP for internal hosts
++
++The project's current recorded decision is that HTTPS is required everywhere and plaintext HTTP is disabled, including for internal hosts behind the firewall; no plain-HTTP exception exists for internal traffic. Certificate verification is required on all builds and environments, and self-signed certificates are used for testing where proper certificate infrastructure is unavailable.

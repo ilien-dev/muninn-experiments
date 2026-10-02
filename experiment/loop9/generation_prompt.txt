@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+ {
+  "key": "h9-msg-queue#terse",
+  "topic": "message queue backend",
+  "old": "rabbitmq",
+  "new": "nats",
+  "style": "terse"
+ },
+ {
+  "key": "h9-msg-queue#chatty",
+  "topic": "message queue backend",
+  "old": "rabbitmq",
+  "new": "nats",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-msg-queue#Spanish",
+  "topic": "message queue backend",
+  "old": "rabbitmq",
+  "new": "nats",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-http-client#terse",
+  "topic": "HTTP client library",
+  "old": "axios",
+  "new": "got",
+  "style": "terse"
+ },
+ {
+  "key": "h9-http-client#chatty",
+  "topic": "HTTP client library",
+  "old": "axios",
+  "new": "got",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-http-client#Spanish",
+  "topic": "HTTP client library",
+  "old": "axios",
+  "new": "got",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-state-mgmt#terse",
+  "topic": "state management library",
+  "old": "redux",
+  "new": "zustand",
+  "style": "terse"
+ },
+ {
+  "key": "h9-state-mgmt#chatty",
+  "topic": "state management library",
+  "old": "redux",
+  "new": "zustand",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-state-mgmt#Spanish",
+  "topic": "state management library",
+  "old": "redux",
+  "new": "zustand",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-css-framework#terse",
+  "topic": "CSS framework",
+  "old": "tailwindcss",
+  "new": "bulma",
+  "style": "terse"
+ },
+ {
+  "key": "h9-css-framework#chatty",
+  "topic": "CSS framework",
+  "old": "tailwindcss",
+  "new": "bulma",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-css-framework#Spanish",
+  "topic": "CSS framework",
+  "old": "tailwindcss",
+  "new": "bulma",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-templating#terse",
+  "topic": "templating engine",
+  "old": "handlebars",
+  "new": "ejs",
+  "style": "terse"
+ },
+ {
+  "key": "h9-templating#chatty",
+  "topic": "templating engine",
+  "old": "handlebars",
+  "new": "ejs",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-templating#Spanish",
+  "topic": "templating engine",
+  "old": "handlebars",
+  "new": "ejs",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-type-check#terse",
+  "topic": "type checking system",
+  "old": "flow",
+  "new": "typescript",
+  "style": "terse"
+ },
+ {
+  "key": "h9-type-check#chatty",
+  "topic": "type checking system",
+  "old": "flow",
+  "new": "typescript",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-type-check#Spanish",
+  "topic": "type checking system",
+  "old": "flow",
+  "new": "typescript",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-validation#terse",
+  "topic": "schema validation library",
+  "old": "yup",
+  "new": "zod",
+  "style": "terse"
+ },
+ {
+  "key": "h9-validation#chatty",
+  "topic": "schema validation library",
+  "old": "yup",
+  "new": "zod",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-validation#Spanish",
+  "topic": "schema validation library",
+  "old": "yup",
+  "new": "zod",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-datetime#terse",
+  "topic": "date and time library",
+  "old": "moment",
+  "new": "date-fns",
+  "style": "terse"
+ },
+ {
+  "key": "h9-datetime#chatty",
+  "topic": "date and time library",
+  "old": "moment",
+  "new": "date-fns",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-datetime#Spanish",
+  "topic": "date and time library",
+  "old": "moment",
+  "new": "date-fns",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-template-lang#terse",
+  "topic": "server-side template language",
+  "old": "pug",
+  "new": "nunjucks",
+  "style": "terse"
+ },
+ {
+  "key": "h9-template-lang#chatty",
+  "topic": "server-side template language",
+  "old": "pug",
+  "new": "nunjucks",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-template-lang#Spanish",
+  "topic": "server-side template language",
+  "old": "pug",
+  "new": "nunjucks",
+  "style": "Spanish"
+ },
+ {
+  "key": "h9-bundler#terse",
+  "topic": "module bundler",
+  "old": "webpack",
+  "new": "parcel",
+  "style": "terse"
+ },
+ {
+  "key": "h9-bundler#chatty",
+  "topic": "module bundler",
+  "old": "webpack",
+  "new": "parcel",
+  "style": "chatty"
+ },
+ {
+  "key": "h9-bundler#Spanish",
+  "topic": "module bundler",
+  "old": "webpack",
+  "new": "parcel",
+  "style": "Spanish"
+ }
+]

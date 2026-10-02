@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..6e4330d
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++The project's current recorded decision is to use Tokio as the async runtime (the async execution layer). It was chosen because its ecosystem support is superior, offering broader compatibility and library support across the Rust ecosystem.

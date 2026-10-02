@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..6caaa61
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source license
++
++No decision on the source license is currently recorded for this project: the repository contains no decision record, policy, or changelog entry that sets one. The `LICENSE` file at the repository root contains the text of the MIT License, but that file is not itself a recorded decision, so this document does not treat it as one.

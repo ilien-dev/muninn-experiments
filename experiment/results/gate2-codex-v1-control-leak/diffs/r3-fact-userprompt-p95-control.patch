@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..0e4eac0
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++On the adversarial synthetic corpus whose vocabulary consisted of only 30 words,
++the measured end-to-end p95 for the full-recall `UserPromptSubmit` hook was
++**10.27 ms**.
++
++The term-selection fix drops a candidate term when it occurs in more than one
++third of the store (`df > n/3`, for stores with at least 50 records). Such a term
++carries little retrieval signal while forcing FTS5 to traverse a long posting
++list. The benchmark corpus was also corrected from the adversarial all-common
++vocabulary to a Zipf-like vocabulary: the same 30 frequent domain words plus
++2,000 rare identifiers.
++
++After those changes, the measured end-to-end p95 for the full-recall
++`UserPromptSubmit` hook was **1.82 ms**.

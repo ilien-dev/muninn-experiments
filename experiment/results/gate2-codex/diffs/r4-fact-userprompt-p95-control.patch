@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..cb05b6a
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++On the adversarial synthetic corpus built from the 30-word frequent vocabulary, the measured full-recall p95 before the term-selection fix was **35.53 ms**. At that point, the FTS5/BM25 query used the first 24 prompt terms.
++
++The fix selected the **eight prompt terms with the highest inverse document frequency (IDF)** before running the FTS5/BM25 query. This avoids paying for long posting lists from common, low-signal terms while retaining the most discriminating terms.
++
++After the fix, the measured full-recall p95 on the same corpus was **8.75 ms**.
++
++These are measured values from the project's `[H6]` same-corpus stage breakdown in `research/00-evidence-log.md`, not estimates.

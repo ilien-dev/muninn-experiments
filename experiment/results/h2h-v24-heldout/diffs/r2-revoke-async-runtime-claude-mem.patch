@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..b549a17
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++The project's current recorded decision is to use tokio as the async runtime, chosen for its superior integration with the broader Rust ecosystem (recorded 2026-09-23).

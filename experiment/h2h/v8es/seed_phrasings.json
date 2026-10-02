@@ -1,0 +1,12 @@
+[
+ {"key": "p0", "a": "Usamos gzip para la compresión, es simple y lo soporta todo el mundo", "b": "Mejor zstd, comprime más y descomprime muchísimo más rápido en ambos lados"},
+ {"key": "p1", "a": "La caché LFU mantiene lo que más se usa, tiene sentido para nuestra carga", "b": "Vamos con LRU con un TTL de 300 segundos, es más fácil de razonar y ajustar"},
+ {"key": "p2", "a": "bcrypt para el hash de contraseñas es sólido, buenos factores de coste y muy probado", "b": "Cambiamos a argon2id, resiste mucho mejor los ataques con GPU"},
+ {"key": "p3", "a": "Nos quedamos con openssl, es lo estándar para TLS en producción", "b": "Rustls encaja mejor con nuestro código en Rust, menos CVEs y más simple"},
+ {"key": "p4", "a": "msgpack es compacto y rápido para la serialización interna de mensajes", "b": "Usemos cbor, maneja mejor la información de tipos entre versiones"},
+ {"key": "p5", "a": "async-std parecía ligero y perfecto para tener pocas dependencias", "b": "Nos pasamos a tokio, el ecosistema está demasiado maduro como para ignorarlo"},
+ {"key": "p6", "a": "calver nos sirve porque la fecha de la release significa algo para los usuarios", "b": "Semver es mejor, la compatibilidad de la API importa mucho más que la fecha de publicación"},
+ {"key": "p7", "a": "GPL-3.0 garantiza que el código siga abierto y libre, ese es el principio", "b": "Mejor Apache-2.0, da más libertad para usarlo en otros proyectos"},
+ {"key": "p8", "a": "Desactivamos la verificación de certificados en las builds de desarrollo para probar en local más fácil", "b": "Verificación en todas las builds a partir de ahora; para probar usamos certificados autofirmados"},
+ {"key": "p9", "a": "http plano para los hosts internos está bien, todos están detrás del firewall", "b": "https en todas partes, sin excepción de texto plano; ya tenemos gestión de certificados"}
+]

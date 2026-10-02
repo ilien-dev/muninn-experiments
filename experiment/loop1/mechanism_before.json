@@ -1,0 +1,843 @@
+[
+ {
+  "style": "terse",
+  "id": "g3-compression",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-cache-eviction",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-password-hashing",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-tls-backend",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-wire-format",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-async-runtime",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-version-scheme",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-license",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-tls-verification",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "g3-internal-http",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-orm",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-base-image",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-date-lib",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-ci",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-flags",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-queue",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-markdown",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-region",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-gofmt",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "new-errors",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-compression",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-cache-eviction",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-password-hashing",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-tls-backend",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-wire-format",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-async-runtime",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-version-scheme",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-license",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-tls-verification",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "g3-internal-http",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-orm",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-base-image",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-date-lib",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-ci",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-flags",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-queue",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-markdown",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-region",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-gofmt",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "new-errors",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-compression",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-cache-eviction",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-password-hashing",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-tls-backend",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-wire-format",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-async-runtime",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-version-scheme",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-license",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-tls-verification",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "correction",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "g3-internal-http",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-orm",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-base-image",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-date-lib",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-ci",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-flags",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-queue",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-markdown",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-region",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-gofmt",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "new-errors",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ }
+]

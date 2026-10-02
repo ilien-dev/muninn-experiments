@@ -1,0 +1,64 @@
+{
+ "heldout9": [
+  {
+   "id": "h9-msg-queue",
+   "topic": "message queue backend",
+   "old": "rabbitmq",
+   "new": "nats"
+  },
+  {
+   "id": "h9-http-client",
+   "topic": "HTTP client library",
+   "old": "axios",
+   "new": "got"
+  },
+  {
+   "id": "h9-state-mgmt",
+   "topic": "state management library",
+   "old": "redux",
+   "new": "zustand"
+  },
+  {
+   "id": "h9-css-framework",
+   "topic": "CSS framework",
+   "old": "tailwindcss",
+   "new": "bulma"
+  },
+  {
+   "id": "h9-templating",
+   "topic": "templating engine",
+   "old": "handlebars",
+   "new": "ejs"
+  },
+  {
+   "id": "h9-type-check",
+   "topic": "type checking system",
+   "old": "flow",
+   "new": "typescript"
+  },
+  {
+   "id": "h9-validation",
+   "topic": "schema validation library",
+   "old": "yup",
+   "new": "zod"
+  },
+  {
+   "id": "h9-datetime",
+   "topic": "date and time library",
+   "old": "moment",
+   "new": "date-fns"
+  },
+  {
+   "id": "h9-template-lang",
+   "topic": "server-side template language",
+   "old": "pug",
+   "new": "nunjucks"
+  },
+  {
+   "id": "h9-bundler",
+   "topic": "module bundler",
+   "old": "webpack",
+   "new": "parcel"
+  }
+ ]
+}

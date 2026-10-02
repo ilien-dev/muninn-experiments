@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6a2eeb7
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Measured on the adversarial synthetic 30-word vocabulary (Zipf-distributed, high
++term reuse — see the `WORDS` table and `word()` in `crates/muninn-bench/src/main.rs`):
++
++- Before the term-selection fix: full-recall `UserPromptSubmit` hook p95 = **10.27 ms**.
++- Fix: drop terms with `df > n/3` (a term in more than a third of the store carries
++  no signal and costs a long posting list) before IDF top-8 selection — see
++  `crates/muninn-core/src/recall.rs`.
++- After the fix: full-recall `UserPromptSubmit` hook p95 = **1.82 ms**.
++
++Source: project session transcript (muninn trust-1 episode, 2026-09-12/13, session
++14a6ab47). No separate results file with these two numbers was found in this
++worktree; re-running `muninn-bench perf` here to confirm live was not possible
++(cargo build required approval not granted in this session).

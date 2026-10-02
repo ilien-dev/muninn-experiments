@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..e7376f5
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source License
++
++The only license recorded in this repository is the MIT License, whose full text is in the `LICENSE` file at the repository root. No separate decision record, policy document or other note about the source license exists beyond that file.

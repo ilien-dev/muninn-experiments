@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..65f6af5
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime
++
++This project's current recorded decision is to use **tokio** as the async runtime. This was recorded in `config/decisions/revoke-async-runtime.json` (commit `5d73303`), and remains the latest recorded value; a later commit (`8681914`) relocated the decision config out of this tree but did not change or revoke the recorded value.

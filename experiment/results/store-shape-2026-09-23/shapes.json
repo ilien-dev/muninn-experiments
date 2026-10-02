@@ -1,0 +1,242 @@
+[
+  {
+    "grid": "h2h-v32-v3",
+    "seed": "r0-muninn-sparse.jsonl",
+    "typed": 2,
+    "episodes": 19,
+    "short_episodes": 19,
+    "retired": 1
+  },
+  {
+    "grid": "h2h-v32-v3",
+    "seed": "r1-muninn-sparse.jsonl",
+    "typed": 2,
+    "episodes": 18,
+    "short_episodes": 18,
+    "retired": 2
+  },
+  {
+    "grid": "h2h-v32-v3",
+    "seed": "r2-muninn-sparse.jsonl",
+    "typed": 4,
+    "episodes": 18,
+    "short_episodes": 18,
+    "retired": 2
+  },
+  {
+    "grid": "h2h-v32-v3",
+    "seed": "r3-muninn-sparse.jsonl",
+    "typed": 2,
+    "episodes": 18,
+    "short_episodes": 18,
+    "retired": 2
+  },
+  {
+    "grid": "h2h-v32-v3",
+    "seed": "r4-muninn-sparse.jsonl",
+    "typed": 3,
+    "episodes": 19,
+    "short_episodes": 19,
+    "retired": 1
+  },
+  {
+    "grid": "h2h-v32-v3",
+    "seed": "r5-muninn-sparse.jsonl",
+    "typed": 2,
+    "episodes": 19,
+    "short_episodes": 19,
+    "retired": 1
+  },
+  {
+    "grid": "h2h-v32-v4",
+    "seed": "r0-muninn-sparse.jsonl",
+    "typed": 11,
+    "episodes": 14,
+    "short_episodes": 14,
+    "retired": 10
+  },
+  {
+    "grid": "h2h-v32-v4",
+    "seed": "r1-muninn-sparse.jsonl",
+    "typed": 10,
+    "episodes": 13,
+    "short_episodes": 13,
+    "retired": 12
+  },
+  {
+    "grid": "h2h-v32-v4",
+    "seed": "r2-muninn-sparse.jsonl",
+    "typed": 10,
+    "episodes": 13,
+    "short_episodes": 13,
+    "retired": 12
+  },
+  {
+    "grid": "h2h-v32-v4",
+    "seed": "r3-muninn-sparse.jsonl",
+    "typed": 10,
+    "episodes": 15,
+    "short_episodes": 15,
+    "retired": 8
+  },
+  {
+    "grid": "h2h-v32-v4",
+    "seed": "r4-muninn-sparse.jsonl",
+    "typed": 11,
+    "episodes": 14,
+    "short_episodes": 14,
+    "retired": 10
+  },
+  {
+    "grid": "h2h-v32-v4",
+    "seed": "r5-muninn-sparse.jsonl",
+    "typed": 11,
+    "episodes": 14,
+    "short_episodes": 14,
+    "retired": 10
+  },
+  {
+    "grid": "h2h-v32-v5",
+    "seed": "r0-muninn-sparse.jsonl",
+    "typed": 8,
+    "episodes": 13,
+    "short_episodes": 13,
+    "retired": 8
+  },
+  {
+    "grid": "h2h-v32-v5",
+    "seed": "r1-muninn-sparse.jsonl",
+    "typed": 9,
+    "episodes": 13,
+    "short_episodes": 13,
+    "retired": 8
+  },
+  {
+    "grid": "h2h-v32-v5",
+    "seed": "r2-muninn-sparse.jsonl",
+    "typed": 8,
+    "episodes": 13,
+    "short_episodes": 13,
+    "retired": 8
+  },
+  {
+    "grid": "h2h-v32-v5",
+    "seed": "r3-muninn-sparse.jsonl",
+    "typed": 8,
+    "episodes": 13,
+    "short_episodes": 13,
+    "retired": 8
+  },
+  {
+    "grid": "h2h-v32-v5",
+    "seed": "r4-muninn-sparse.jsonl",
+    "typed": 8,
+    "episodes": 14,
+    "short_episodes": 14,
+    "retired": 7
+  },
+  {
+    "grid": "h2h-v32-v5",
+    "seed": "r5-muninn-sparse.jsonl",
+    "typed": 7,
+    "episodes": 14,
+    "short_episodes": 14,
+    "retired": 7
+  },
+  {
+    "grid": "h2h-v32-v6",
+    "seed": "r0-muninn-sparse.jsonl",
+    "typed": 11,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 6
+  },
+  {
+    "grid": "h2h-v32-v6",
+    "seed": "r1-muninn-sparse.jsonl",
+    "typed": 12,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 6
+  },
+  {
+    "grid": "h2h-v32-v6",
+    "seed": "r2-muninn-sparse.jsonl",
+    "typed": 11,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 6
+  },
+  {
+    "grid": "h2h-v32-v6",
+    "seed": "r3-muninn-sparse.jsonl",
+    "typed": 12,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 6
+  },
+  {
+    "grid": "h2h-v32-v6",
+    "seed": "r4-muninn-sparse.jsonl",
+    "typed": 11,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 6
+  },
+  {
+    "grid": "h2h-v32-v6",
+    "seed": "r5-muninn-sparse.jsonl",
+    "typed": 12,
+    "episodes": 17,
+    "short_episodes": 17,
+    "retired": 4
+  },
+  {
+    "grid": "h2h-v32-v7",
+    "seed": "r0-muninn-sparse.jsonl",
+    "typed": 9,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 7
+  },
+  {
+    "grid": "h2h-v32-v7",
+    "seed": "r1-muninn-sparse.jsonl",
+    "typed": 12,
+    "episodes": 17,
+    "short_episodes": 17,
+    "retired": 5
+  },
+  {
+    "grid": "h2h-v32-v7",
+    "seed": "r2-muninn-sparse.jsonl",
+    "typed": 10,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 7
+  },
+  {
+    "grid": "h2h-v32-v7",
+    "seed": "r3-muninn-sparse.jsonl",
+    "typed": 9,
+    "episodes": 14,
+    "short_episodes": 14,
+    "retired": 11
+  },
+  {
+    "grid": "h2h-v32-v7",
+    "seed": "r4-muninn-sparse.jsonl",
+    "typed": 8,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 7
+  },
+  {
+    "grid": "h2h-v32-v7",
+    "seed": "r5-muninn-sparse.jsonl",
+    "typed": 8,
+    "episodes": 16,
+    "short_episodes": 16,
+    "retired": 7
+  }
+]

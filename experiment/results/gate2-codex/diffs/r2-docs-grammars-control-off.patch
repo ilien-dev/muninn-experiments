@@ -1,0 +1,18 @@
+diff --git a/docs/grammars.md b/docs/grammars.md
+new file mode 100644
+index 0000000..df9de0b
+--- /dev/null
++++ b/docs/grammars.md
+@@ -0,0 +1,12 @@
++# Tree-sitter grammars
++
++The symbol graph compiles the following tree-sitter grammars into the MVP
++binary.
++
++| Language | Crate | File extensions |
++|---|---|---|
++| Rust | `tree-sitter-rust` | `.rs` |
++| TypeScript / TSX | `tree-sitter-typescript` | `.ts`, `.tsx` |
++| JavaScript / JSX | `tree-sitter-javascript` | `.js`, `.jsx` |
++| Python | `tree-sitter-python` | `.py` |
++| Go | `tree-sitter-go` | `.go` |

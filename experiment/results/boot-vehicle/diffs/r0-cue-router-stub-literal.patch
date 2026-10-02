@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..5c75955 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,16 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Where a `why` question should be answered from.
++pub enum Route {
++    Episode,
++    Lineage,
++    Invariant,
++}
++
++/// Decides which route a question takes. `grace_window_ms` bounds how long
++/// the dispatcher waits on a borderline match before falling back (decided
++/// after the timeout incident).
++pub fn route(question: &str, grace_window_ms: u64) -> Route {
++    let _ = (question, grace_window_ms);
++    todo!()
++}

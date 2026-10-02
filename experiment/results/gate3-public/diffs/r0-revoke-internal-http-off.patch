@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..cfbd8ad
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++Nothing is recorded. A search of this project's documentation, design notes, research log, and conclusions (`docs/`, `design/`, `research/`, `README.md`, and the plugin sources) turns up no decision, current or superseded, about whether plain HTTP is permitted or prohibited for internal hosts; the research log discusses a third-party paper on revoked-policy handling in memory systems, but that is an external source analyzed for its findings, not a recorded decision of this project.

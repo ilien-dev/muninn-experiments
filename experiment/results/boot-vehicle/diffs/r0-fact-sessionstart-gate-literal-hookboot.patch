@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..640c69b
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Perf history
++
++## SessionStart health gate
++
++Store size: 5k records (synthetic, `muninn-bench perf` default).
++
++| when | p50 |
++|---|---|
++| before (quick_check live on the read path) | 11.9 ms |
++| after (quick_check off the read path; gate reads the recorded `quick_check` outcome + `fts_rows` counter; body length CHECK added) | 1.05 ms |
++
++Source: recorded prior measurement in this project's own transcripts
++(muninn episode #79, trust 1 — tool-observed, not re-run in this session).
++Could not re-run `muninn-bench perf` here to reproduce it: `cargo run` was
++blocked by this sandbox's approval gate.

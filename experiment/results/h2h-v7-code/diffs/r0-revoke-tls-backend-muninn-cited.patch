@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..a086db4
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS Backend
++
++No current decision on the TLS backend is recorded in this project. The decision-config file that previously tracked this choice, `config/decisions/revoke-tls-backend.json`, was removed from the repository in commit 51eeb13 ("move decision config out of the tree") without a corresponding file being added anywhere else, so there is presently no recorded value to state here.

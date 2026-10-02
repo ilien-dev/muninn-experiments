@@ -1,0 +1,19 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..a95c258 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,14 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Which lookup a `muninn why` argument resolves to.
++pub enum Route {
++    /// `muninn why <id>` — a specific recorded decision.
++    ById(u64),
++    /// `muninn why "<question>"` — free-text needing a match.
++    ByQuestion(String),
++}
++
++/// Decide which route a `muninn why` argument takes.
++pub fn route(_input: &str) -> Route {
++    todo!("Phase 4")
++}

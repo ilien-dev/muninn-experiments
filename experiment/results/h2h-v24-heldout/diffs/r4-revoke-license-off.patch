@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..763531d
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License Policy
++
++The project's source is licensed under the MIT License, as recorded in the `LICENSE` file at the repository root (Copyright (c) 2014-present Manuel Martínez-Almeida). The changelog also records that the MIT license was added and applied to every source file. No separate decision record on the source license exists in this repository, so `LICENSE` is the authoritative statement.

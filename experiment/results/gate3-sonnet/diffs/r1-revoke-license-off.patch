@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..058b908
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Licencia
++
++La decisión registrada actualmente en este proyecto es la licencia **MIT**: el `Cargo.toml` raíz la fija (`license = "MIT"`) y todos los crates del workspace (`muninn-bench`, `muninn-capture`, `muninn-cli`, `muninn-compile`, `muninn-core`, `muninn-embed`, `muninn-symbols`, `muninn-why`) la heredan mediante `license.workspace = true`.

@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..91f454c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not record a measured full-recall p95 for the
++`UserPromptSubmit` hook on the adversarial synthetic 30-word vocabulary before
++the term-selection fix. It also does not record a measured p95 for that same
++workload after the fix, so neither number is stated here.
++
++The fix was to stop sending the prompt's terms directly to FTS5. The read path
++now removes stop words, sanitizes and deduplicates the remaining terms, drops
++terms absent from the store and (for stores with at least 50 records) terms
++present in more than one third of records, ranks the survivors by IDF, and sends
++only the top eight to BM25.
++
++For context, the project's recorded measurements are for different workloads:
++the Python prototype's BM25 stage changed from **35.53 ms p95** with the first
++24 terms to **8.75 ms p95** with the eight highest-IDF terms, while the measured
++end-to-end Rust hook with a normal full-path prompt was **4.31 ms p95**. These
++figures must not be presented as the missing before/after measurements for the
++adversarial synthetic 30-word workload.

@@ -1,0 +1,28 @@
+Ten pairs of short messages a software developer types to a coding assistant, in the order
+given. In each pair the first message records a decision and the second one changes it to a
+different value.
+
+The values are fixed and must appear literally, in this order:
+
+ 1. gzip      -> zstd
+ 2. LFU       -> LRU with a 300-second TTL
+ 3. bcrypt    -> argon2id
+ 4. openssl   -> rustls
+ 5. msgpack   -> cbor
+ 6. async-std -> tokio
+ 7. calver    -> semver
+ 8. GPL-3.0   -> Apache-2.0
+ 9. certificate verification disabled in dev builds -> (withdrawn; verification on all builds)
+10. plain http allowed for internal hosts -> https everywhere, no plaintext exception
+
+Write them the way people actually type in a chat window: short, uneven, some terse, some a
+full sentence, some with a reason and some without. Vary the grammar across the ten pairs —
+they should not read as ten copies of one template.
+
+Two constraints on the second message of each pair:
+  - it names the new value and does not name the old one;
+  - it is what someone writes when they have changed their mind, not a question and not a
+    proposal to discuss.
+
+Output JSON only: a list of ten objects `{"key": "p0", "a": "...", "b": "..."}`, keys p0..p9
+in the order above.

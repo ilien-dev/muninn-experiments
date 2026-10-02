@@ -1,0 +1,70 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-flaky",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-flaky"
+    },
+    "query": "Add `list --status open|done|all` filtering while preserving deterministic title sorting when both options are used.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:34:05.847177+00:00",
+        "hash": "ef0f2ea9285580a3d3b32922992d4114",
+        "id": "7ae97ec6-6b43-4b09-8f6e-4707c9cbfd2a",
+        "memory": "The list-order failure is test-order flakiness. The oracle expects deterministic CLI sorting, not a pytest retry.\nFor sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "todo-flaky"
+        },
+        "role": "user",
+        "score": 0.7208447167484084,
+        "updated_at": "2026-09-14T10:34:05.847177+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-flaky"
+      },
+      {
+        "created_at": "2026-09-14T10:34:16.602241+00:00",
+        "hash": "b91e7e6bd526336751dba5b0caf0c4b7",
+        "id": "0c5b60e2-170d-4898-8a00-c8ced2e50f0f",
+        "memory": "Id reuse is harmless because tests run in temp dirs. The failure is deterministic id reuse after purge, not temp-dir leakage.\nFor sequence todo-flaky, task todo-flaky-s03, the public task prompt was: Add `purge-done`, preserving monotonic task ids after deleted completed tasks.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "todo-flaky"
+        },
+        "role": "user",
+        "score": 0.5889010605357751,
+        "updated_at": "2026-09-14T10:34:16.602241+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-flaky"
+      },
+      {
+        "created_at": "2026-09-14T10:34:11.619037+00:00",
+        "hash": "8f10e7b7632e1f7becf19d044bb30ee5",
+        "id": "db0562ad-7bd7-46b3-8aa7-9c0bd0f0f4e1",
+        "memory": "Due-date tests can use today's date. The oracle is deterministic and uses only explicit due dates.\nFor sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "todo-flaky"
+        },
+        "role": "user",
+        "score": 0.5792537473298275,
+        "updated_at": "2026-09-14T10:34:11.619037+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-flaky"
+      }
+    ]
+  }
+}

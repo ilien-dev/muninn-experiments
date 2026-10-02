@@ -1,0 +1,22 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..be32e96 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,17 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Where a `muninn why` query is answered from.
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Route {
++    /// Query is a record id: follow its lineage.
++    RecordId(i64),
++    /// Free-text question: literal record search.
++    Question,
++}
++
++/// Decide which route a query takes. `grace_window_ms` bounds how long
++/// dispatch may wait before falling back to the question route.
++pub fn route_query(query: &str, grace_window_ms: u64) -> Route {
++    let _ = grace_window_ms;
++    todo!("query={query:?}")
++}

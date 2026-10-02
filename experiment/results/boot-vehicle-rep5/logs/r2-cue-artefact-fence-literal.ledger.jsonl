@@ -1,0 +1,16 @@
+{"at":1789367548556,"id":83,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789367548556,"id":84,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789367548606,"id":63,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367548606,"id":58,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367548606,"id":75,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367548606,"id":81,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367548606,"id":88,"reason":"literal:literal","tokens":130}
+{"at":1789367548606,"id":89,"reason":"literal:literal","tokens":130}
+{"at":1789367548606,"id":64,"reason":"literal:literal","tokens":130}
+{"at":1789367548606,"id":74,"reason":"literal:literal","tokens":130}
+{"at":1789367556676,"id":90,"reason":"literal:cue:dir:crates/muninn-bench/src,symbol:Cli,symbol:Cmd,symbol:DIRS,symbol:Rng,symbol:WORDS,symbol:experiment,symbol:next,symbol:pct,symbol:pick,symbol:populate,symbol:word@post_tool","tokens":0}
+{"at":1789367556676,"id":90,"reason":"literal:literal:post_tool","tokens":64}
+{"at":1789367581465,"id":87,"reason":"literal:cue:dir:crates/muninn-cli/src@post_tool","tokens":0}
+{"at":1789367581465,"id":87,"reason":"literal:literal:post_tool","tokens":59}
+{"at":1789367634787,"id":86,"reason":"literal:cue:dir:crates/muninn-core/src@post_tool","tokens":0}
+{"at":1789367634787,"id":86,"reason":"literal:literal:post_tool","tokens":51}

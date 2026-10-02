@@ -1,0 +1,32 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..869e60c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,26 @@
++# Performance history
++
++Measured costs of hot-path operations over time. Only measured numbers go
++here; if a change wasn't benchmarked, this file says so instead of guessing.
++
++## SessionStart health gate
++
++The nine-check health gate (`crates/muninn-core/src/health.rs`) runs on every
++`SessionStart`. Its cost on a 5k-record store:
++
++| When | p50 | What changed |
++| --- | --- | --- |
++| Before | 11.9 ms | `quick_check` (`PRAGMA quick_check`, O(file size)) ran on the read path on every hook invocation. |
++| After | 1.05 ms | `quick_check` taken off the read path; its result is now recorded once (`db.rs::record_quick_check`) and read back in O(1). A trigger-maintained `fts_rows` counter replaced a live FTS/`record` count comparison, and a `CHECK` constraint on the body column replaced an application-side validation pass. |
++
++With `quick_check` off the read path, `live=false` callers (hooks) only
++consult O(1) evidence — the recorded `quick_check` outcome and `fts_rows` —
++so the gate cost stays under a millisecond regardless of store size; `live=true`
++(`muninn doctor`) still runs the checks for real. See the comment at
++`crates/muninn-core/src/health.rs:83-89`.
++
++These numbers come from a prior session's benchmark run (tool-observed,
++trust 1 in Muninn's own provenance scheme — corroborated by, but not
++independently re-run in, this session). They have not been re-measured here;
++treat the exact figures as historical record rather than a live guarantee for
++the current codebase.

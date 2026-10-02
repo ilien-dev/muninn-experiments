@@ -1,0 +1,5 @@
+Invent 10 technical decisions that are a MEASURED VALUE — a number with its unit — which a team later changes to a different number of the same unit. Examples of the shape (do not reuse): a retry budget in attempts, a cache TTL in seconds, a pool size in connections, a page size in rows.
+
+Avoid: retry attempts for a payment worker, 300-second TTL, release cadence.
+
+Output JSON only: a list of 10 objects {"id","topic","old","new"} where id is a short slug prefixed "h11-", topic is a noun phrase naming what the decision is about, and old and new are each a number followed by its unit (for example "3 attempts" and "7 attempts") — the same unit in both.

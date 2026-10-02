@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..d881c90
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License Policy
++
++The project's recorded source license is the MIT License: the repository's `LICENSE` file states "The MIT License (MIT)" with copyright held by Manuel Martínez-Almeida, and the project's `CHANGELOG.md` documents its adoption ("Add MIT license", "MIT license in every file"). No other license change is recorded in the project's own files or commit history.

@@ -1,0 +1,628 @@
+{
+ "args": {
+  "roots": [
+   "sonnet=crates/muninn-bench/experiment/results/pmbench/round8-sonnet"
+  ],
+  "json": "crates/muninn-bench/experiment/results/pmbench/round8-sonnet/analysis.json",
+  "runs": 3,
+  "line": 82.9,
+  "spread_rule": true,
+  "ablation_band": 2.0
+ },
+ "models": {
+  "sonnet": {
+   "weeks": [
+    "heldout-10517",
+    "heldout-76233",
+    "heldout-77013",
+    "v9"
+   ],
+   "heldout_weeks": [
+    "heldout-10517",
+    "heldout-76233",
+    "heldout-77013"
+   ],
+   "cells": {
+    "heldout-10517/muninn_store": {
+     "runs": [
+      97.8,
+      84.6,
+      85.5
+     ],
+     "n": 3,
+     "mean": 89.3,
+     "sd": 7.374957626996918,
+     "min": 84.6,
+     "max": 97.8,
+     "run_files": [
+      "muninn-store-20260913-191927-522001-claude-sonnet-5.score.md",
+      "muninn-store-20260913-192406-650539-claude-sonnet-5.score.md",
+      "muninn-store-20260913-192625-713875-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 95.5,
+      "set_recall": 84.06666666666666,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 98.93333333333334,
+      "false alarm/step": 3.1999999999999997
+     }
+    },
+    "heldout-10517/plain_store": {
+     "runs": [
+      97.8,
+      97.1,
+      97.1
+     ],
+     "n": 3,
+     "mean": 97.33333333333333,
+     "sd": 0.40414518843273967,
+     "min": 97.1,
+     "max": 97.8,
+     "run_files": [
+      "plain-store-20260913-192000-535717-claude-sonnet-5.score.md",
+      "plain-store-20260913-192411-652310-claude-sonnet-5.score.md",
+      "plain-store-20260913-192751-753247-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 100.0,
+      "set_recall": 94.86666666666667,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 96.8,
+      "false alarm/step": 0.0
+     }
+    },
+    "heldout-10517/single_baseline": {
+     "runs": [
+      85.5,
+      84.8,
+      83.3
+     ],
+     "n": 3,
+     "mean": 84.53333333333333,
+     "sd": 1.1239810200058256,
+     "min": 83.3,
+     "max": 85.5,
+     "run_files": [
+      "single-baseline-claude-sonnet-5-v9-20260913-192035.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-192529.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-192812.score.md"
+     ],
+     "secondary": {
+      "set_precision": 91.76666666666667,
+      "set_recall": 78.43333333333334,
+      "cross-day miss": 14.300000000000002,
+      "update miss": 25.899999999999995,
+      "mod_time": 75.36666666666667,
+      "monitoring_hit": 55.9,
+      "false alarm/step": 4.3999999999999995
+     }
+    },
+    "heldout-10517/todo_ledger": {
+     "runs": [
+      80.3,
+      80.0,
+      83.5
+     ],
+     "n": 3,
+     "mean": 81.26666666666667,
+     "sd": 1.9399312702601956,
+     "min": 80.0,
+     "max": 83.5,
+     "run_files": [
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-192109.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-192535.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-192839.score.md"
+     ],
+     "secondary": {
+      "set_precision": 88.63333333333333,
+      "set_recall": 75.1,
+      "cross-day miss": 9.533333333333333,
+      "update miss": 22.2,
+      "mod_time": 65.23333333333333,
+      "monitoring_hit": 48.4,
+      "false alarm/step": 6.0
+     }
+    },
+    "heldout-76233/muninn_store": {
+     "runs": [
+      92.7,
+      93.3,
+      94.7
+     ],
+     "n": 3,
+     "mean": 93.56666666666666,
+     "sd": 1.0263202878893776,
+     "min": 92.7,
+     "max": 94.7,
+     "run_files": [
+      "muninn-store-20260913-190822-199417-claude-sonnet-5.score.md",
+      "muninn-store-20260913-191134-288597-claude-sonnet-5.score.md",
+      "muninn-store-20260913-191600-425236-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 98.13333333333333,
+      "set_recall": 89.43333333333332,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 90.56666666666666,
+      "false alarm/step": 1.7333333333333334
+     }
+    },
+    "heldout-76233/plain_store": {
+     "runs": [
+      95.4,
+      95.4,
+      94.7
+     ],
+     "n": 3,
+     "mean": 95.16666666666667,
+     "sd": 0.40414518843273967,
+     "min": 94.7,
+     "max": 95.4,
+     "run_files": [
+      "plain-store-20260913-190901-215651-claude-sonnet-5.score.md",
+      "plain-store-20260913-191141-292335-claude-sonnet-5.score.md",
+      "plain-store-20260913-191745-479024-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 98.59999999999998,
+      "set_recall": 91.96666666666665,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 94.03333333333335,
+      "false alarm/step": 1.3
+     }
+    },
+    "heldout-76233/single_baseline": {
+     "runs": [
+      84.3,
+      82.3,
+      78.9
+     ],
+     "n": 3,
+     "mean": 81.83333333333333,
+     "sd": 2.7300793639257646,
+     "min": 78.9,
+     "max": 84.3,
+     "run_files": [
+      "single-baseline-claude-sonnet-5-v9-20260913-190930.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-191243.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-191800.score.md"
+     ],
+     "secondary": {
+      "set_precision": 93.03333333333335,
+      "set_recall": 73.0,
+      "cross-day miss": 4.766666666666667,
+      "update miss": 29.599999999999998,
+      "mod_time": 76.0,
+      "monitoring_hit": 50.43333333333334,
+      "false alarm/step": 3.9333333333333336
+     }
+    },
+    "heldout-76233/todo_ledger": {
+     "runs": [
+      82.1,
+      77.0,
+      77.6
+     ],
+     "n": 3,
+     "mean": 78.89999999999999,
+     "sd": 2.7874719729532687,
+     "min": 77.0,
+     "max": 82.1,
+     "run_files": [
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-191031.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-191340.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-191818.score.md"
+     ],
+     "secondary": {
+      "set_precision": 95.8,
+      "set_recall": 67.06666666666666,
+      "cross-day miss": 61.900000000000006,
+      "update miss": 37.0,
+      "mod_time": 70.66666666666667,
+      "monitoring_hit": 45.333333333333336,
+      "false alarm/step": 2.1666666666666665
+     }
+    },
+    "heldout-77013/muninn_store": {
+     "runs": [
+      87.2,
+      98.8,
+      87.8
+     ],
+     "n": 3,
+     "mean": 91.26666666666667,
+     "sd": 6.530951946947192,
+     "min": 87.2,
+     "max": 98.8,
+     "run_files": [
+      "muninn-store-20260913-193121-854292-claude-sonnet-5.score.md",
+      "muninn-store-20260913-193400-928343-claude-sonnet-5.score.md",
+      "muninn-store-20260913-193907-1061072-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 97.53333333333335,
+      "set_recall": 85.96666666666665,
+      "cross-day miss": 0.0,
+      "update miss": 0.0,
+      "mod_time": 100.0,
+      "monitoring_hit": 100.0,
+      "false alarm/step": 1.5999999999999999
+     }
+    },
+    "heldout-77013/plain_store": {
+     "runs": [
+      96.3,
+      97.5,
+      95.7
+     ],
+     "n": 3,
+     "mean": 96.5,
+     "sd": 0.9165151389911671,
+     "min": 95.7,
+     "max": 97.5,
+     "run_files": [
+      "plain-store-20260913-193207-875938-claude-sonnet-5.score.md",
+      "plain-store-20260913-193447-949550-claude-sonnet-5.score.md",
+      "plain-store-20260913-194011-1090906-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 96.66666666666667,
+      "set_recall": 96.3,
+      "cross-day miss": 0.0,
+      "update miss": 0.0,
+      "mod_time": 100.0,
+      "monitoring_hit": 100.0,
+      "false alarm/step": 2.4
+     }
+    },
+    "heldout-77013/single_baseline": {
+     "runs": [
+      73.6,
+      78.1,
+      74.6
+     ],
+     "n": 3,
+     "mean": 75.43333333333332,
+     "sd": 2.3629078131263044,
+     "min": 73.6,
+     "max": 78.1,
+     "run_files": [
+      "single-baseline-claude-sonnet-5-v9-20260913-193219.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-193548.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-194036.score.md"
+     ],
+     "secondary": {
+      "set_precision": 86.23333333333333,
+      "set_recall": 67.06666666666668,
+      "cross-day miss": 9.533333333333333,
+      "update miss": 22.2,
+      "mod_time": 60.0,
+      "monitoring_hit": 39.03333333333333,
+      "false alarm/step": 10.299999999999999
+     }
+    },
+    "heldout-77013/todo_ledger": {
+     "runs": [
+      74.5,
+      75.8,
+      77.0
+     ],
+     "n": 3,
+     "mean": 75.76666666666667,
+     "sd": 1.2503332889007368,
+     "min": 74.5,
+     "max": 77.0,
+     "run_files": [
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-193308.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-193618.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-194107.score.md"
+     ],
+     "secondary": {
+      "set_precision": 95.13333333333333,
+      "set_recall": 62.96666666666667,
+      "cross-day miss": 19.066666666666666,
+      "update miss": 33.3,
+      "mod_time": 53.333333333333336,
+      "monitoring_hit": 32.5,
+      "false alarm/step": 3.1999999999999997
+     }
+    },
+    "v9/muninn_store": {
+     "runs": [
+      96.2,
+      96.8,
+      98.8
+     ],
+     "n": 3,
+     "mean": 97.26666666666667,
+     "sd": 1.3613718571108069,
+     "min": 96.2,
+     "max": 98.8,
+     "run_files": [
+      "muninn-store-20260913-084248-2780765-claude-sonnet-5.score.md",
+      "muninn-store-20260913-084253-2782438-claude-sonnet-5.score.md",
+      "muninn-store-20260913-190127-13465-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 99.56666666666666,
+      "set_recall": 95.03333333333335,
+      "cross-day miss": 4.766666666666667,
+      "update miss": 7.3999999999999995,
+      "mod_time": 100.0,
+      "monitoring_hit": 96.56666666666668,
+      "false alarm/step": 0.39999999999999997
+     }
+    },
+    "v9/plain_store": {
+     "runs": [
+      96.2,
+      97.5,
+      96.9
+     ],
+     "n": 3,
+     "mean": 96.86666666666667,
+     "sd": 0.6506407098647699,
+     "min": 96.2,
+     "max": 97.5,
+     "run_files": [
+      "plain-store-20260913-084249-2780951-claude-sonnet-5.score.md",
+      "plain-store-20260913-084254-2783719-claude-sonnet-5.score.md",
+      "plain-store-20260913-190129-14065-claude-sonnet-5.score.md"
+     ],
+     "secondary": {
+      "set_precision": 98.7,
+      "set_recall": 95.06666666666666,
+      "cross-day miss": 4.766666666666667,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 98.26666666666667,
+      "false alarm/step": 1.2
+     }
+    },
+    "v9/single_baseline": {
+     "runs": [
+      78.6,
+      78.1,
+      78.9
+     ],
+     "n": 3,
+     "mean": 78.53333333333333,
+     "sd": 0.4041451884327432,
+     "min": 78.1,
+     "max": 78.9,
+     "run_files": [
+      "single-baseline-claude-sonnet-5-v9-20260913-190122.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-190125.score.md",
+      "single-baseline-claude-sonnet-5-v9-20260913-190130.score.md"
+     ],
+     "secondary": {
+      "set_precision": 88.23333333333333,
+      "set_recall": 70.8,
+      "cross-day miss": 0.0,
+      "update miss": 22.2,
+      "mod_time": 75.0,
+      "monitoring_hit": 46.166666666666664,
+      "false alarm/step": 6.633333333333333
+     }
+    },
+    "v9/todo_ledger": {
+     "runs": [
+      78.1,
+      77.2,
+      78.9
+     ],
+     "n": 3,
+     "mean": 78.06666666666666,
+     "sd": 0.8504900548115395,
+     "min": 77.2,
+     "max": 78.9,
+     "run_files": [
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-190123.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-190126.score.md",
+      "single-todo-ledger-claude-sonnet-5-v9-20260913-190131.score.md"
+     ],
+     "secondary": {
+      "set_precision": 89.0,
+      "set_recall": 69.53333333333333,
+      "cross-day miss": 0.0,
+      "update miss": 29.599999999999998,
+      "mod_time": 62.5,
+      "monitoring_hit": 38.46666666666667,
+      "false alarm/step": 5.833333333333333
+     }
+    }
+   },
+   "contrasts": {
+    "heldout-10517/muninn_store-single_baseline": {
+     "diff_means": 4.766666666666666,
+     "worst_gap": -0.9000000000000057
+    },
+    "heldout-10517/muninn_store-todo_ledger": {
+     "diff_means": 8.033333333333331,
+     "worst_gap": 1.0999999999999943
+    },
+    "heldout-10517/muninn_store-plain_store": {
+     "diff_means": -8.033333333333331,
+     "worst_gap": -13.200000000000003
+    },
+    "heldout-10517/plain_store-single_baseline": {
+     "diff_means": 12.799999999999997,
+     "worst_gap": 11.599999999999994
+    },
+    "heldout-76233/muninn_store-single_baseline": {
+     "diff_means": 11.733333333333334,
+     "worst_gap": 8.400000000000006
+    },
+    "heldout-76233/muninn_store-todo_ledger": {
+     "diff_means": 14.666666666666671,
+     "worst_gap": 10.600000000000009
+    },
+    "heldout-76233/muninn_store-plain_store": {
+     "diff_means": -1.6000000000000085,
+     "worst_gap": -2.700000000000003
+    },
+    "heldout-76233/plain_store-single_baseline": {
+     "diff_means": 13.333333333333343,
+     "worst_gap": 10.400000000000006
+    },
+    "heldout-77013/muninn_store-single_baseline": {
+     "diff_means": 15.833333333333343,
+     "worst_gap": 9.100000000000009
+    },
+    "heldout-77013/muninn_store-todo_ledger": {
+     "diff_means": 15.5,
+     "worst_gap": 10.200000000000003
+    },
+    "heldout-77013/muninn_store-plain_store": {
+     "diff_means": -5.233333333333334,
+     "worst_gap": -10.299999999999997
+    },
+    "heldout-77013/plain_store-single_baseline": {
+     "diff_means": 21.066666666666677,
+     "worst_gap": 17.60000000000001
+    },
+    "v9/muninn_store-single_baseline": {
+     "diff_means": 18.733333333333334,
+     "worst_gap": 17.299999999999997
+    },
+    "v9/muninn_store-todo_ledger": {
+     "diff_means": 19.200000000000003,
+     "worst_gap": 17.299999999999997
+    },
+    "v9/muninn_store-plain_store": {
+     "diff_means": 0.3999999999999915,
+     "worst_gap": -1.2999999999999972
+    },
+    "v9/plain_store-single_baseline": {
+     "diff_means": 18.333333333333343,
+     "worst_gap": 17.299999999999997
+    }
+   },
+   "pooled": {
+    "muninn_store-single_baseline": {
+     "observed": 10.77777777777778,
+     "p_one_sided": 0.000625,
+     "p_two_sided": 0.00125,
+     "count_one_sided": 5,
+     "count_two_sided": 10,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      4.611111111111114,
+      16.588888888888892
+     ],
+     "weeks_all_a_above_b": 2
+    },
+    "muninn_store-todo_ledger": {
+     "observed": 12.733333333333334,
+     "p_one_sided": 0.000125,
+     "p_two_sided": 0.00025,
+     "count_one_sided": 1,
+     "count_two_sided": 2,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      7.466666666666669,
+      17.1888888888889
+     ],
+     "weeks_all_a_above_b": 3
+    },
+    "muninn_store-plain_store": {
+     "observed": -4.955555555555558,
+     "p_one_sided": 0.98325,
+     "p_two_sided": 0.036,
+     "count_one_sided": 7866,
+     "count_two_sided": 288,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      -9.399999999999991,
+      -1.2333333333333438
+     ],
+     "weeks_all_a_above_b": 0
+    },
+    "plain_store-single_baseline": {
+     "observed": 15.73333333333334,
+     "p_one_sided": 0.000125,
+     "p_two_sided": 0.00025,
+     "count_one_sided": 1,
+     "count_two_sided": 2,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      12.288888888888886,
+      20.633333333333336
+     ],
+     "weeks_all_a_above_b": 3
+    }
+   },
+   "rules": {
+    "line": {
+     "line": 82.9,
+     "mean": 91.37777777777778,
+     "met": true
+    },
+    "spread": {
+     "weeks": {
+      "heldout-10517": {
+       "largest_range": 13.200000000000003,
+       "single_baseline": {
+        "diff": 4.766666666666666,
+        "ok": false
+       },
+       "todo_ledger": {
+        "diff": 8.033333333333331,
+        "ok": false
+       }
+      },
+      "heldout-76233": {
+       "largest_range": 5.3999999999999915,
+       "single_baseline": {
+        "diff": 11.733333333333334,
+        "ok": true
+       },
+       "todo_ledger": {
+        "diff": 14.666666666666671,
+        "ok": true
+       }
+      },
+      "heldout-77013": {
+       "largest_range": 11.599999999999994,
+       "single_baseline": {
+        "diff": 15.833333333333343,
+        "ok": true
+       },
+       "todo_ledger": {
+        "diff": 15.5,
+        "ok": true
+       }
+      }
+     },
+     "met": false
+    },
+    "ablation": {
+     "band": 2.0,
+     "pooled_diff": -4.955555555555558,
+     "worst_gap_beyond_band_per_week": {
+      "heldout-10517": -0.7000000000000028,
+      "heldout-76233": 0.0,
+      "heldout-77013": -3.0999999999999943
+     },
+     "met": false
+    }
+   }
+  }
+ }
+}

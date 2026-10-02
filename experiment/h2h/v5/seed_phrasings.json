@@ -1,0 +1,52 @@
+[
+ {
+  "key": "p0",
+  "a": "We're using gzip for compression on the wire.",
+  "b": "Actually switching to zstd, the ratios are way better."
+ },
+ {
+  "key": "p1",
+  "a": "Cache eviction is LFU, makes sense for our patterns.",
+  "b": "Going with LRU and a 300-second TTL instead."
+ },
+ {
+  "key": "p2",
+  "a": "Passwords are hashed with bcrypt, good standard.",
+  "b": "Use argon2id instead, it's much harder to crack."
+ },
+ {
+  "key": "p3",
+  "a": "TLS is handled by openssl throughout the service.",
+  "b": "Switching to rustls, the implementation is cleaner."
+ },
+ {
+  "key": "p4",
+  "a": "Serialization format is msgpack for everything.",
+  "b": "cbor makes more sense for our data structures."
+ },
+ {
+  "key": "p5",
+  "a": "async-std is our chosen async runtime.",
+  "b": "tokio fits better with the broader ecosystem."
+ },
+ {
+  "key": "p6",
+  "a": "Versioning scheme is calver, aligns with releases.",
+  "b": "Semver is clearer for what consumers expect."
+ },
+ {
+  "key": "p7",
+  "a": "Project license is GPL-3.0 to keep it open.",
+  "b": "Apache-2.0 is better for enterprise adoption."
+ },
+ {
+  "key": "p8",
+  "a": "Dev builds skip certificate verification for speed.",
+  "b": "Withdrawing that, verification on all builds."
+ },
+ {
+  "key": "p9",
+  "a": "Plain http is fine for internal host communication.",
+  "b": "Https everywhere, no plaintext exceptions here."
+ }
+]

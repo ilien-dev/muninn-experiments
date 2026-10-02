@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..2e44d44
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source License
++
++Nothing current is recorded. Muninn's memory holds only two circumstantial, trust-1 episodes touching the source license (a change to GPL-3.0 followed by a later change to Apache-2.0), and a direct query for the project's current license decision came back `insufficient: only circumstantial records (trust < 2); do not fill the gap`. Since no corroborated (trust ≥ 2) or user-stated (trust 3) record confirms a license choice, no value is asserted here as the project's decision.

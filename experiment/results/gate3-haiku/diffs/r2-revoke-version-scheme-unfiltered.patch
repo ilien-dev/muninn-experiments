@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..ae3d687
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++This project uses **semantic versioning (semver)** for version numbering. Versions follow the MAJOR.MINOR.PATCH format, where MAJOR indicates breaking changes, MINOR indicates backward-compatible functionality additions, and PATCH indicates backward-compatible bug fixes.

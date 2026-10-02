@@ -1,0 +1,4 @@
+{"at":1789367668970,"session":"f3b5110c-2ddf-42d9-a91a-8f477e6f68af","files":["crates/muninn-core/src/health.rs"],"symbols":["Status","Check","Report","Report","reds","colds","is_green","summary","check","run","tests","fresh_project_is_green_or_cold_never_red"]}
+{"at":1789367678743,"session":"f3b5110c-2ddf-42d9-a91a-8f477e6f68af","files":["crates/muninn-core/src/health.rs"],"symbols":["Status","Check","Report","Report","reds","colds","is_green","summary","check","run","tests","fresh_project_is_green_or_cold_never_red"]}
+{"at":1789367683677,"session":"f3b5110c-2ddf-42d9-a91a-8f477e6f68af","files":["docs/perf-history.md"],"symbols":[]}
+{"at":1789367690385,"session":"f3b5110c-2ddf-42d9-a91a-8f477e6f68af","files":["docs/perf-history.md"],"symbols":[]}

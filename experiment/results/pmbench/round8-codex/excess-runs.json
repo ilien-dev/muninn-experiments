@@ -1,0 +1,16 @@
+{
+ "rule": "first three complete runs by launch timestamp count; later ones moved here, unused",
+ "moved": [
+  "v9/single_baseline/excess-runs/gpt-56-sol/single-baseline-gpt-56-sol-v9-20260914-002427",
+  "v9/single_baseline/excess-runs/gpt-56-sol/single-baseline-gpt-56-sol-v9-20260914-002429",
+  "v9/todo_ledger/excess-runs/gpt-56-sol/single-todo-ledger-gpt-56-sol-v9-20260914-002428",
+  "v9/todo_ledger/excess-runs/gpt-56-sol/single-todo-ledger-gpt-56-sol-v9-20260914-002430",
+  "heldout-76233/single_baseline/excess-runs/gpt-56-sol/single-baseline-gpt-56-sol-v9-20260914-003450",
+  "heldout-76233/single_baseline/excess-runs/gpt-56-sol/single-baseline-gpt-56-sol-v9-20260914-003739",
+  "heldout-76233/todo_ledger/excess-runs/gpt-56-sol/single-todo-ledger-gpt-56-sol-v9-20260914-003506",
+  "heldout-76233/todo_ledger/excess-runs/gpt-56-sol/single-todo-ledger-gpt-56-sol-v9-20260914-003841",
+  "heldout-10517/single_baseline/excess-runs/gpt-56-sol/single-baseline-gpt-56-sol-v9-20260914-004631",
+  "heldout-10517/single_baseline/excess-runs/gpt-56-sol/single-baseline-gpt-56-sol-v9-20260914-004908",
+  "heldout-10517/todo_ledger/excess-runs/gpt-56-sol/single-todo-ledger-gpt-56-sol-v9-20260914-005056"
+ ]
+}

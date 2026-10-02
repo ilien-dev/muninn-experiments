@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..5207026
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Performance History
++
++## UserPromptSubmit read path
++
++Measured on the adversarial synthetic 30-word vocabulary:
++
++- Full-recall p95 before the term-selection fix: **10.27 ms**
++- Fix: drop terms with `df > n/3` and use Zipf-distributed vocab for term selection
++- Full-recall p95 after the fix: **1.82 ms**
++
++(Source: project session transcript, `tool_observed`, trust 1 — evidence at `~/.local/share/muninn-bench/seed-14a6ab47-frozen.jsonl:22559233`.)

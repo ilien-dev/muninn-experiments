@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..b88b552
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++No current decision is recorded for the transport compression codec. The project's decision records live under `config/decisions/`, and that directory no longer contains an entry for compression, so there is no codec choice to state at this time.

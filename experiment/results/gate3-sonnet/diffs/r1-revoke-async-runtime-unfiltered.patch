@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..f30faa1
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async runtime
++
++No current decision on an async runtime is recorded for this project. The workspace `Cargo.toml` declares no async runtime dependency, no design or docs file states a choice, and no project memory records one; this document will be updated once such a decision is made and recorded.

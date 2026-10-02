@@ -1,0 +1,3 @@
+{"at":1789293344652,"session":"eaa5b705-8e3d-4ef1-8164-a0a0a506b9b1","files":["crates/muninn-cli/src/hook.rs"],"symbols":["HookInput","MAX_STDIN","read_input","additional_context","run","session_start","arm","user_prompt","write_path"]}
+{"at":1789293349127,"session":"eaa5b705-8e3d-4ef1-8164-a0a0a506b9b1","files":["crates/muninn-cli/src/output.rs"],"symbols":["out","err","json"]}
+{"at":1789293353716,"session":"eaa5b705-8e3d-4ef1-8164-a0a0a506b9b1","files":["crates/muninn-cli/src/output.rs"],"symbols":["out","err","json"]}

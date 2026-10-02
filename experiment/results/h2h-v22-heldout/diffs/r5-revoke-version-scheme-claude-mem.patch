@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..691ef17
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++This project uses semantic versioning (semver) for its version numbers, in the explicit MAJOR.MINOR.PATCH format. The decision was recorded on 2026-09-23 and rests on semver giving dependency tools and developers clear signals about breaking changes, compatibility requirements, and upgrade safety, which makes it the better fit for dependency management.

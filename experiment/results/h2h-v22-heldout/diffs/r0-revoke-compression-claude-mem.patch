@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..24dbbd5
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport compression policy
++
++The project's current recorded decision is to adopt CBOR (Concise Binary Object Representation, RFC 8949) as the format for serialization and compression, chosen for its standardization and for fewer version-compatibility issues. The record states this decision as covering serialization and compression together; no separate standalone compression codec (or codec level or parameter) is recorded.

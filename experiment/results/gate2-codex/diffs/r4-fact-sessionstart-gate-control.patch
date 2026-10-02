@@ -1,0 +1,25 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c9ccedc
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,19 @@
++# Performance history
++
++## SessionStart health gate
++
++The health-gate read path changed when `PRAGMA quick_check` was removed from
++`SessionStart`. In the same change, FTS coherence began using the
++trigger-maintained `meta.fts_rows` counter and the record-body length limit was
++enforced by the schema `CHECK` constraint rather than re-scanning record bodies.
++
++| Version | 5k-record `SessionStart` p50 |
++| --- | ---: |
++| Before the read-path change | No measured p50 could be found in this checkout or its recorded session history. |
++| After the read-path change | **0.907 ms** |
++
++The after figure was measured on 2026-09-14 with the repository benchmark,
++using 5,000 records, 15,000 cues, and 101 hook invocations in a release build
++(`muninn-bench perf --records 5000 --runs 101`). The unrounded measured p50 was
++0.906861 ms. This is a subprocess-level hook measurement. It should not be used
++to manufacture a before/after speedup while the before measurement is missing.

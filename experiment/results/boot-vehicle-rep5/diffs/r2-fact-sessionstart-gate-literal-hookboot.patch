@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..9f255f9
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Perf history
++
++## SessionStart health gate
++
++Cost of the `SessionStart` health-gate hook, p50, on a 5k-record store.
++
++| When | p50 | Change bundled into the measurement |
++|---|---|---|
++| Before | 11.9 ms | `quick_check` still ran on the read path |
++| After | 1.05 ms | `quick_check` taken off the read path, `fts_rows` counter added, body `CHECK` constraint added |
++
++Notes:
++- These are measured numbers from a prior session's transcript (recorded via Muninn, trust level 1 — seen in this project's own transcripts, not independently verified here), not estimates.
++- The three changes (dropping `quick_check` from the read path, adding the `fts_rows` counter, adding the body `CHECK`) landed together, so the 11.9 ms → 1.05 ms delta is their combined effect, not attributable to any single change in isolation.
++- This checkout's git history has a single `base` commit and no stored benchmark artifacts, so the numbers above could not be independently reproduced from files currently in the repo; re-run the health-gate benchmark against a 5k-record store to reverify if needed.

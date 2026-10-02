@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..a7bfb6c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Perf history
++
++## Real transcript ingest
++
++No hay cifras medidas disponibles en este checkout para la ingesta del transcript
++real de Claude Code de este proyecto.
++
++Se buscó en este directorio de trabajo (worktree del experimento):
++- ningún archivo `.jsonl` de transcript real,
++- ningún log de una ejecución de `muninn ingest` (tamaño en MB, turnos, episodios, duración),
++- ningún subcomando `ingest` cableado en `muninn-cli` (solo existe la función de librería
++  `ingest_transcript` en `crates/muninn-capture/src/ingest.rs`, sin registro de ejecución).
++
++No se inventan cifras. Si esta ingesta se ejecuta, registrar aquí: tamaño del
++transcript en MB, número de turnos, número de episodios producidos y tiempo de
++ingesta, todos medidos.

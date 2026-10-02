@@ -1,0 +1,18 @@
+{
+ "model": "gemma4-e4b-q4km.gguf",
+ "sha256": "d35a3aa7a6d47de237fd488bb6f7f3efd62908d828f85a63da0ee93acdbefe9f",
+ "threads": 16,
+ "prefix_tokens_sample": 109,
+ "full_prompt": [
+  {
+   "id": "es01|es01|v1b",
+   "ms": 694.8350360034965,
+   "same_p": true
+  }
+ ],
+ "arm": "A3",
+ "items": 60,
+ "wall_s": 34.1,
+ "started": "2026-09-25T02:42:56.050915+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

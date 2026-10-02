@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..d28ca8b
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++Nothing is currently recorded. A decision (LRU with a 300-second TTL) was made and briefly stored in `config/decisions/revoke-cache-eviction.json`, but that file was subsequently deleted from the repository (commit f87770e) with no replacement config found anywhere in the tree, so there is no current recorded cache eviction policy for this project.

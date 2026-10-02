@@ -1,0 +1,29 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6439f5f
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,23 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not contain a recorded full-recall `UserPromptSubmit` p95
++for the adversarial synthetic corpus with the 30-word frequent vocabulary from
++before the term-selection fix. Consequently, no pre-fix number is reported
++here.
++
++The fix was to discard a candidate query term when its document frequency is
++greater than one third of the store (for stores with at least 50 records),
++before sorting the remaining terms by inverse document frequency and selecting
++the top eight. This prevents low-signal vocabulary terms from forcing FTS5 to
++walk long posting lists.
++
++The repository also does not contain a recorded post-fix full-recall
++`UserPromptSubmit` p95 for that adversarial 30-word-vocabulary workload.
++
++These missing values should not be substituted with the other measurements in
++the repository. In particular, the documented 35.53 ms to 8.75 ms p95 change is
++a Python BM25 stage microbenchmark on a 50,000-record corpus, while 4.31 ms is
++the p95 of a separate end-to-end Rust hook measurement. Neither is identified
++as the adversarial synthetic full-recall benchmark requested here.

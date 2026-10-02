@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..2ff890c
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification
++
++TLS certificate verification is required on all builds, including development builds; a prior workaround that disabled certificate verification for dev builds was explicitly rejected and is not to be reintroduced.

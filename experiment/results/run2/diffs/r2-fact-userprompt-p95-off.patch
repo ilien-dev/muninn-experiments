@@ -1,0 +1,30 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..5085635
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,24 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++No measured p95 found in this repository (checkout at `0cb51ab`) for the
++UserPromptSubmit hook's full-recall path on an adversarial synthetic 30-word
++vocabulary, before or after a term-selection fix.
++
++Searched: `crates/muninn-core/src/recall.rs` (the read path itself, including
++its `select_terms` IDF top-8 logic and its test module), `research/00-evidence-log.md`,
++`design/ENGINE.md`, `docs/`, and the full git history of `recall.rs` reachable
++from this checkout. The only related figures on record are prototype
++benchmarks in `research/00-evidence-log.md` ([H6]: BM25 stage cost with 24 vs.
++8 IDF terms, 21.53 ms -> 4.65 ms p50 on a 50 000-record corpus) and an
++end-to-end hook measurement ([I3]: 4.07 ms p50 / 4.31 ms p95 with intent,
++0.49 ms p50 / 0.56 ms p95 without). Neither is on a 30-word adversarial
++vocabulary, and neither is described as before/after a term-selection fix.
++
++A string matching this description ("the p95 was 10.27 ms on the synthetic
++vocab", later changed to 12.34 ms) exists only as literal text inside a unit
++test assertion for `best_passage` in later commits of this repository's
++history, not in this checkout, and carries no build, dataset, or methodology
++description — it is test fixture text, not a benchmark result. It is not
++reported here.

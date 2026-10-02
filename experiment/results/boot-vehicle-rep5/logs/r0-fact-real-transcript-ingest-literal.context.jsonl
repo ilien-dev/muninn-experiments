@@ -1,0 +1,5 @@
+{"at":1789351978115,"session":"1d8d2e5b-95f0-45c0-8690-14dcaae6d77f","files":["research/00-evidence-log.md","design/ENGINE.md","crates/muninn-bench/experiment/README.md"],"symbols":[]}
+{"at":1789351980302,"session":"1d8d2e5b-95f0-45c0-8690-14dcaae6d77f","files":["research/00-evidence-log.md","design/ENGINE.md","crates/muninn-bench/experiment/README.md"],"symbols":[]}
+{"at":1789352003856,"session":"1d8d2e5b-95f0-45c0-8690-14dcaae6d77f","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789352021903,"session":"1d8d2e5b-95f0-45c0-8690-14dcaae6d77f","files":["docs/perf-history.md","docs/format.md"],"symbols":[]}
+{"at":1789352029210,"session":"1d8d2e5b-95f0-45c0-8690-14dcaae6d77f","files":["docs/perf-history.md"],"symbols":[]}

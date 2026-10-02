@@ -1,0 +1,4 @@
+{"at":1789374255180,"session":"01a09f04-181f-7350-a1d6-344a567b98e1","files":["crates/muninn-core/src/recall.rs"],"symbols":["STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates"]}
+{"at":1789374265639,"session":"01a09f04-181f-7350-a1d6-344a567b98e1","files":["research/00-evidence-log.md;","crates/muninn-bench/src/main.rs;","crates/muninn-bench/src/main.rs;","crates/muninn-core/src/recall.rs"],"symbols":["STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates"]}
+{"at":1789374291812,"session":"01a09f04-181f-7350-a1d6-344a567b98e1","files":["docs/perf-history.md"],"symbols":[]}
+{"at":1789374295596,"session":"01a09f04-181f-7350-a1d6-344a567b98e1","files":["docs/perf-history.md","docs/perf-history.md"],"symbols":[]}

@@ -1,0 +1,25 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..fae2375
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,19 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not contain a measured full-recall `UserPromptSubmit` p95
++for the adversarial synthetic corpus before the term-selection fix. Accordingly,
++no pre-fix number is reported here.
++
++The fix was to change prompt-term selection so that a term is omitted when it
++occurs in more than one third of the active records (for stores with at least 50
++records). Such terms carry little discriminating information in the synthetic
++30-word vocabulary and force FTS5 to traverse long posting lists. The remaining
++terms are ranked by IDF and the best eight are passed to BM25.
++
++The repository also does not contain a measured post-fix full-recall
++`UserPromptSubmit` p95 for that adversarial synthetic corpus, so no post-fix
++number is reported here. The other p95 values documented in the research notes
++use different corpora or read paths and are not substitutes for this
++before/after measurement.

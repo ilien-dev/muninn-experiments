@@ -1,0 +1,19 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..187143e
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,13 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured on a 5,000-record store:
++
++| Revision | SessionStart p50 |
++| --- | ---: |
++| Before `quick_check` was removed from the read path | 11.9 ms |
++| After `quick_check` was removed from the read path, with the `fts_rows` counter and body `CHECK` added in the same change | 1.05 ms |
++
++Because all three changes landed together, this measurement does not isolate their
++individual contributions.

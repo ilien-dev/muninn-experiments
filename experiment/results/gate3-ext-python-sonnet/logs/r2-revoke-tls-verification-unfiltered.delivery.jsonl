@@ -1,0 +1,3 @@
+{"at":1789373708551,"session":"918325ac-8260-482e-8583-552f9e4a5dcd","arm":"unfiltered","ids":[18],"tokens":80,"reason":"cue:event:session_start"}
+{"at":1789373708623,"session":"918325ac-8260-482e-8583-552f9e4a5dcd","arm":"unfiltered","ids":[8],"tokens":0,"reason":"gated:budget"}
+{"at":1789373708623,"session":"918325ac-8260-482e-8583-552f9e4a5dcd","arm":"unfiltered","ids":[18,17,7],"tokens":178,"reason":"literal"}

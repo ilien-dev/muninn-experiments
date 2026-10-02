@@ -1,0 +1,15 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..241db3c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,9 @@
++# Perf History
++
++## UserPromptSubmit read path
++
++- **Before fix:** full-recall p95 was **10.27 ms** on the adversarial 30-word synthetic vocabulary.
++- **Fix:** drop terms with `df > n/3` (document frequency over one third of the corpus) plus Zipf-distributed vocab handling in term selection.
++- **After fix:** full-recall p95 dropped to **1.82 ms** on the same adversarial 30-word synthetic vocabulary.
++
++Source: project session record (muninn episode #79, trust 1, tool_observed).

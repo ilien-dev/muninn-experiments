@@ -1,0 +1,7 @@
+{
+ "model": "claude-sonnet-5",
+ "answer": "Yes. The following passages contain matches:\n\n1. From the userEmail context:\n\"The user's email address is [account e-mail]. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks.\"\n\n2. From the Environment system-reminder:\n\"Primary working directory: /tmp/muninn-bridge-cwd\"",
+ "num_turns": 1,
+ "probe": "canary2",
+ "bridge": "claude_bridge.py"
+}

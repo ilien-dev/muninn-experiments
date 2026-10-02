@@ -1,0 +1,16 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..cb820c5
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,10 @@
++# Performance History
++
++## SessionStart health gate
++
++Measured cost of the SessionStart hook's health gate on a 5k-record store, p50:
++
++- **Before** (quick_check still on the read path, no `fts_rows` counter, no body `CHECK`): **11.9 ms**
++- **After** (quick_check taken off the read path; `fts_rows` counter and body `CHECK` added at the same time): **1.05 ms**
++
++Source: prior session transcript for this project (`seed-14a6ab47-frozen.jsonl:22559233`), recorded as tool-observed (trust 1). These are measured values, not estimates; no other measured p50 numbers for this gate were found in the current session.

@@ -1,0 +1,25 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..d1a57cd
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,19 @@
++# Corpus fetching notes
++
++## Rate limit
++
++The fetch had to respect Svipall's per-domain rate limit:
++
++- **12 visits per 60 s window**, per domain
++- **900 s cooldown** imposed after a breach
++
++## Mirror / CDN hosts
++
++Files were fetched raw via:
++
++- `raw.githubusercontent.com`
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>`
++- `cdn.statically.io` (observed slow / prone to timeouts)
++
++`manifest.tsv` records the repo/branch/path entries located via GitHub code
++search (grep.app) on 2026-09-12 and fetched raw via `raw.githubusercontent.com`.

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..76dff80
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++This project uses Semantic Versioning (major.minor.patch) for release versioning. The scheme was chosen because API compatibility matters more than signaling publication dates: a major increment signals breaking changes, a minor increment signals backward-compatible additions, and a patch increment signals bug fixes, so API consumers can tell from the version number whether compatibility is maintained or broken.

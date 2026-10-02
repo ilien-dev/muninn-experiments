@@ -1,0 +1,64 @@
+{
+ "heldout4": [
+  {
+   "id": "h4-db-migrate",
+   "topic": "the database migration tool",
+   "old": "Flyway",
+   "new": "Atlas"
+  },
+  {
+   "id": "h4-container-reg",
+   "topic": "the container registry",
+   "old": "Docker Hub",
+   "new": "GitHub Container Registry"
+  },
+  {
+   "id": "h4-docs-site",
+   "topic": "the documentation site generator",
+   "old": "Docusaurus",
+   "new": "Starlight"
+  },
+  {
+   "id": "h4-pkg-py",
+   "topic": "the Python package manager",
+   "old": "pip-tools",
+   "new": "uv"
+  },
+  {
+   "id": "h4-http-rust",
+   "topic": "the HTTP client in the Rust service",
+   "old": "reqwest",
+   "new": "ureq"
+  },
+  {
+   "id": "h4-video",
+   "topic": "the video transcoding service",
+   "old": "AWS MediaConvert",
+   "new": "FFmpeg on our workers"
+  },
+  {
+   "id": "h4-forms",
+   "topic": "the form library in the web app",
+   "old": "Formik",
+   "new": "React Hook Form"
+  },
+  {
+   "id": "h4-chat",
+   "topic": "the team chat integration for alerts",
+   "old": "Slack webhooks",
+   "new": "Discord webhooks"
+  },
+  {
+   "id": "h4-iac",
+   "topic": "the infrastructure-as-code tool",
+   "old": "Terraform",
+   "new": "OpenTofu"
+  },
+  {
+   "id": "h4-cookies",
+   "topic": "third-party cookies on the marketing site",
+   "old": "third-party tracking cookies enabled",
+   "new": null
+  }
+ ]
+}

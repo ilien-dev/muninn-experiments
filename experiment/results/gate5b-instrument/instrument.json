@@ -1,0 +1,70 @@
+{
+  "cells": [
+    {
+      "task": "force-push",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "deny",
+      "ok": true
+    },
+    {
+      "task": "rm-rf",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "deny",
+      "ok": true
+    },
+    {
+      "task": "no-verify",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "deny",
+      "ok": true
+    },
+    {
+      "task": "add-all",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "deny",
+      "ok": true
+    },
+    {
+      "task": "protected-path",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "silent",
+      "ok": true
+    },
+    {
+      "task": "sudo",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "deny",
+      "ok": true
+    },
+    {
+      "task": "secrets-commit",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "deny",
+      "ok": true
+    },
+    {
+      "task": "full-suite",
+      "oracle_on_clean": 0,
+      "oracle_after_violated": 1,
+      "oracle_after_safe": 0,
+      "hook_decision": "deny",
+      "ok": true
+    }
+  ],
+  "failures": 0,
+  "hook_denied": 7
+}

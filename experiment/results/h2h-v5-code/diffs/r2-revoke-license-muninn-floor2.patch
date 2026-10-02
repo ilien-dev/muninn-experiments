@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..951dc58
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source License
++
++This project has no current recorded decision on the source license. A decision record for it (`config/decisions/revoke-license.json`) previously existed in the repository but was removed in the "move decision config out of the tree" commit, and no replacement record has been committed since, so there is nothing current to report here.

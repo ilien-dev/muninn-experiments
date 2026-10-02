@@ -1,0 +1,10 @@
+v9 stats:
+- steps/day: [12, 14, 12, 11, 12, 11, 11]
+- cross-day total: 7
+- update total: 11
+- update mix: {'reschedule': 6, 'override': 3, 'cancel': 2}
+- repeated sentence count: 0
+- top cue family reuse: {'clinic_window': 2, 'community_board': 2, 'email_form_followup': 2, 'friend_bike_rack': 2, 'front_desk_clipboard': 2, 'loading_dock_sign': 2, 'parking_receipt_kiosk': 2, 'storage_cage': 2}
+- archetypes: ['class_learning', 'meeting_heavy', 'delivery_watchful', 'admin_catchup', 'errand_heavy', 'disruption', 'social_outing']
+solvable: True
+wrote /home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round9-codex/weeks/heldout-10517.json

@@ -1,0 +1,8 @@
+{"at":1789370257424,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}
+{"at":1789370272683,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["crates/muninn-why/Cargo.toml"],"symbols":[]}
+{"at":1789370275824,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["crates/muninn-core/src/*.rs"],"symbols":[]}
+{"at":1789370278974,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["crates/muninn-core/src/recall.rs"],"symbols":["STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates"]}
+{"at":1789370290036,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["research/CONCLUSION.md"],"symbols":[]}
+{"at":1789370296998,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["research/00-evidence-log.md"],"symbols":[]}
+{"at":1789370311801,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789370327609,"session":"59c325e1-6d71-4de4-9b9b-9d312d8c7bc1","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}

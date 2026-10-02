@@ -1,0 +1,64 @@
+{
+ "heldout3": [
+  {
+   "id": "h3-cache",
+   "topic": "the HTTP cache in front of the API",
+   "old": "Varnish",
+   "new": "nginx proxy_cache"
+  },
+  {
+   "id": "h3-orm-js",
+   "topic": "the ORM for the Node service",
+   "old": "Sequelize",
+   "new": "Drizzle"
+  },
+  {
+   "id": "h3-tests-e2e",
+   "topic": "the end-to-end test framework",
+   "old": "Cypress",
+   "new": "Playwright"
+  },
+  {
+   "id": "h3-state",
+   "topic": "state management in the React app",
+   "old": "Redux",
+   "new": "Zustand"
+  },
+  {
+   "id": "h3-logs",
+   "topic": "where application logs are shipped",
+   "old": "Papertrail",
+   "new": "Grafana Loki"
+  },
+  {
+   "id": "h3-queue2",
+   "topic": "the task queue for the Python workers",
+   "old": "Celery",
+   "new": "Dramatiq"
+  },
+  {
+   "id": "h3-auth",
+   "topic": "the authentication provider",
+   "old": "Auth0",
+   "new": "Keycloak"
+  },
+  {
+   "id": "h3-maps2",
+   "topic": "the geocoding API",
+   "old": "Google Geocoding",
+   "new": "Nominatim"
+  },
+  {
+   "id": "h3-build",
+   "topic": "the frontend bundler",
+   "old": "webpack",
+   "new": "Vite"
+  },
+  {
+   "id": "h3-telemetry",
+   "topic": "sending anonymous usage telemetry from the CLI",
+   "old": "telemetry on by default",
+   "new": null
+  }
+ ]
+}

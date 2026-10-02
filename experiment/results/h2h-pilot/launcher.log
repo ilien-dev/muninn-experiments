@@ -1,0 +1,104 @@
+seeded r0 muninn-loop3 -> /tmp/muninn-h2h/h2h-pilot/snap-r0-muninn-loop3
+stop failed for agentmemory: agentmemory stop failed: 
+stop failed for agentmemory-inject: agentmemory-inject stop failed: 
+seeded r0 claude-mem -> /tmp/muninn-h2h/h2h-pilot/snap-r0-claude-mem
+Traceback (most recent call last):
+  File "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/h2h/run_h2h.py", line 269, in <module>
+    main()
+    ~~~~^^
+  File "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/h2h/run_h2h.py", line 239, in main
+    for arm, run, snap in ex.map(lambda j: (j[0], j[1], seed_arm(j[0], j[1], out, work, seed_rows)), seed_jobs):
+                          ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 645, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ~~~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 312, in _result_or_cancel
+    return fut.result(timeout)
+           ~~~~~~~~~~^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.14/concurrent/futures/_base.py", line 396, in __get_result
+    raise self._exception
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/h2h/run_h2h.py", line 239, in <lambda>
+    for arm, run, snap in ex.map(lambda j: (j[0], j[1], seed_arm(j[0], j[1], out, work, seed_rows)), seed_jobs):
+                                                        ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/h2h/run_h2h.py", line 116, in seed_arm
+    arm_cmd(arm, "start", env)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/h2h/run_h2h.py", line 60, in arm_cmd
+    p = subprocess.run([str(HERE / "competitors" / arm / "arm.sh"), sub, *extra], env=env, capture_output=True, text=True, timeout=900)
+  File "/usr/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/home/ilien/Projects/muninn/crates/muninn-bench/experiment/h2h/competitors/agentmemory/arm.sh', 'start']' timed out after 900 seconds
+seeded r0 muninn-loop3 -> /tmp/muninn-h2h/h2h-pilot/snap-r0-muninn-loop3
+seeded r0 claude-mem -> /tmp/muninn-h2h/h2h-pilot/snap-r0-claude-mem
+seeded r0 agentmemory -> /tmp/muninn-h2h/h2h-pilot/snap-r0-agentmemory
+seeded r0 agentmemory-inject -> /tmp/muninn-h2h/h2h-pilot/snap-r0-agentmemory-inject
+50 cells planned, 50 to run
+r0 revoke-license muninn-loop3 -> pass (18s)
+r0 revoke-license off -> fail (19s)
+r0 revoke-wire-format agentmemory-inject -> fail (19s)
+r0 revoke-internal-http muninn-loop3 -> pass (11s)
+r0 revoke-version-scheme muninn-loop3 -> pass (15s)
+r0 revoke-version-scheme agentmemory -> fail (30s)
+r0 revoke-compression claude-mem -> pass (35s)
+r0 revoke-wire-format muninn-loop3 -> pass (19s)
+r0 revoke-password-hashing off -> fail (14s)
+r0 revoke-cache-eviction agentmemory -> pass (45s)
+r0 revoke-internal-http agentmemory -> fail (63s)
+r0 revoke-license claude-mem -> fail (45s)
+r0 revoke-compression agentmemory -> fail (53s)
+r0 revoke-tls-verification muninn-loop3 -> pass (8s)
+r0 revoke-compression muninn-loop3 -> pass (35s)
+r0 revoke-internal-http agentmemory-inject -> fail (54s)
+r0 revoke-tls-verification off -> pass (30s)
+r0 revoke-wire-format agentmemory -> pass (55s)
+r0 revoke-async-runtime claude-mem -> fail (27s)
+r0 revoke-tls-backend agentmemory -> fail (103s)
+r0 revoke-license agentmemory-inject -> fail (87s)
+r0 revoke-wire-format claude-mem -> pass (32s)
+r0 revoke-cache-eviction agentmemory-inject -> fail (87s)
+r0 revoke-tls-backend claude-mem -> pass (28s)
+r0 revoke-async-runtime agentmemory -> fail (35s)
+r0 revoke-cache-eviction off -> fail (19s)
+r0 revoke-password-hashing agentmemory-inject -> fail (48s)
+r0 revoke-version-scheme claude-mem -> pass (25s)
+r0 revoke-async-runtime off -> fail (19s)
+r0 revoke-tls-backend agentmemory-inject -> fail (50s)
+r0 revoke-cache-eviction claude-mem -> pass (17s)
+r0 revoke-async-runtime agentmemory-inject -> pass (70s)
+r0 revoke-tls-verification agentmemory -> pass (80s)
+r0 revoke-cache-eviction muninn-loop3 -> pass (11s)
+r0 revoke-version-scheme off -> fail (54s)
+r0 revoke-tls-verification claude-mem -> pass (21s)
+r0 revoke-tls-verification agentmemory-inject -> pass (84s)
+r0 revoke-password-hashing muninn-loop3 -> pass (11s)
+r0 revoke-license agentmemory -> fail (35s)
+r0 revoke-compression off -> pass (32s)
+r0 revoke-tls-backend off -> fail (16s)
+r0 revoke-version-scheme agentmemory-inject -> fail (71s)
+r0 revoke-password-hashing claude-mem -> pass (21s)
+r0 revoke-internal-http claude-mem -> pass (17s)
+r0 revoke-async-runtime muninn-loop3 -> pass (11s)
+r0 revoke-tls-backend muninn-loop3 -> pass (14s)
+r0 revoke-password-hashing agentmemory -> fail (87s)
+r0 revoke-wire-format off -> fail (19s)
+r0 revoke-internal-http off -> fail (21s)
+r0 revoke-compression agentmemory-inject -> fail (51s)
+all cells finished

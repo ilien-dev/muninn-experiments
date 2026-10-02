@@ -1,0 +1,7 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..1b88a46
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1 @@
++The project's current recorded decision is to use MessagePack (msgpack) as the wire serialisation format.

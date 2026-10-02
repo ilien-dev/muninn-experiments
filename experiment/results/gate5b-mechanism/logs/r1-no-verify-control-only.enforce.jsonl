@@ -1,0 +1,8 @@
+{"at":1789958861521,"decision":null,"harness":"claude-code","rule":null,"session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}
+{"at":1789958863230,"decision":null,"harness":"claude-code","rule":null,"session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}
+{"at":1789958865470,"decision":"deny","harness":"claude-code","rule":"CLAUDE.md:5#0","session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}
+{"at":1789958869569,"decision":null,"harness":"claude-code","rule":null,"session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}
+{"at":1789958877480,"decision":null,"harness":"claude-code","rule":null,"session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}
+{"at":1789958880117,"decision":null,"harness":"claude-code","rule":null,"session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}
+{"at":1789958886169,"decision":null,"harness":"claude-code","rule":null,"session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}
+{"at":1789958887787,"decision":null,"harness":"claude-code","rule":null,"session":"eca2db15-29f6-4e79-8816-4463c0b2dbf2","tool":"Bash"}

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..730ab7a
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++This project uses Semantic Versioning (Semver) in the major.minor.patch format: breaking changes increment the major version, new features increment the minor version, and patch fixes increment the patch version. The recorded rationale is that this gives API consumers and dependency managers an explicit, immediately understandable contract about what to expect from each version change.

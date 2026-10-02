@@ -1,0 +1,19 @@
+diff --git a/docs/grammars.md b/docs/grammars.md
+new file mode 100644
+index 0000000..d7133cb
+--- /dev/null
++++ b/docs/grammars.md
+@@ -0,0 +1,13 @@
++# Tree-sitter grammars
++
++`muninn-symbols` (Phase 5) builds the symbol graph the `symbol` cue type in
++F3 keys off. Scope per the MVP definition in `README.md`: Rust,
++TypeScript/TSX, JavaScript/JSX, Python, Go.
++
++| Language | Crate | Extensions |
++|---|---|---|
++| Rust | `tree-sitter-rust` | `.rs` |
++| TypeScript / TSX | `tree-sitter-typescript` | `.ts`, `.tsx` |
++| JavaScript / JSX | `tree-sitter-javascript` | `.js`, `.jsx` |
++| Python | `tree-sitter-python` | `.py` |
++| Go | `tree-sitter-go` | `.go` |

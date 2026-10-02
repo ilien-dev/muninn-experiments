@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..9416722 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,16 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Where a question is answered from, per the routing in research/CONCLUSION.md `[K3]`:
++/// breadth -> structural map anchored in git; a point query -> episodes behind the
++/// trust gate; rationale -> decision synthesis.
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Route {
++    Breadth,
++    PointQuery,
++    Rationale,
++}
++
++/// Decide which route a question takes. Stub: routing rules land in Phase 4.
++pub fn route(_question: &str) -> Route {
++    todo!("Phase 4: classify the question into Breadth / PointQuery / Rationale")
++}

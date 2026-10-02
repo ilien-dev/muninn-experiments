@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..f9a7ea8
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured figures available.
++
++There is a smoke test (`crates/muninn-capture/src/lib.rs`, `parses_real_transcripts_when_present`)
++that parses this project's own real Claude Code transcript from
++`~/.claude/projects/-home-ilien-Projects-muninn/*.jsonl` and prints turn count, episode count, and
++tool count — but it does not measure or print elapsed time, and running it here was blocked
++(`cargo test` required approval that was not granted in this session).
++
++No prior run's output (size in MB, turn/episode counts, ingest duration) is recorded anywhere in
++this checkout. Figures for this section should come from actually running that test (or a timed
++ingest) rather than being estimated.

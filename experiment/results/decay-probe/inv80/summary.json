@@ -1,0 +1,41 @@
+{
+ "muninn": "muninn 0.1.0",
+ "commit": "8d06b48c9450b6c7a2e7f8740b6cb8099d6bd7ad",
+ "reps": 20,
+ "invariants": 80,
+ "compactions_with_all_invariants": 0,
+ "facts_delivered": 320,
+ "facts_expected": 1600,
+ "lost_at_reps": [
+  0,
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+  16,
+  17,
+  18,
+  19
+ ],
+ "post_compact_ms": {
+  "median": 1.41,
+  "p95": 1.8,
+  "max": 1.86
+ },
+ "pre_compact_ms": {
+  "median": 1.04,
+  "max": 1.57
+ },
+ "measured_utc": "2026-09-13T14:01:33Z"
+}

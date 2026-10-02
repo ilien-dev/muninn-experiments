@@ -1,0 +1,137 @@
+[
+ {
+  "old": "19e9e702518e0bf4a8fd2612419cf802b8f39e8d",
+  "new": "d375a2632efe4b77301634315907ece9df7434cc",
+  "subject": "PM-Bench round 8 on claude-sonnet-5 measured: held-out mean 91.4 % vs 80.6 / 78.7 (exact p"
+ },
+ {
+  "old": "2eb956f94b4bbf7b0a9ec9ccb9c41396ad4d1824",
+  "new": "c99e9d7d26513d8679af69cf0052776f16fdfb8a",
+  "subject": "OpenTimestamps proof of the round 9 pre-registration"
+ },
+ {
+  "old": "4b88995192b6633bb0e11d9f2c4cc913d708892c",
+  "new": "1a6197fcc9bd37c62252cedd379eb2a50f6e4bc0",
+  "subject": "claims: PM-Bench row rewritten from round 8 (held-out mean, exact p, dict-store result, fa"
+ },
+ {
+  "old": "5a463620a6a11738b186476ed99129dc0987eabd",
+  "new": "1b3c0da4605569adda0901aa6356fa9b32febfcc",
+  "subject": "Replications: credit outage and the wrong-config re-run recorded; foreign cells removed be"
+ },
+ {
+  "old": "fa6f1058f136bad1d621a18dcf765c0328ad49aa",
+  "new": "64aeb9f5c994193903172677743adf0b3d78608f",
+  "subject": "Gate 3 with a public records-only seed: literal 27/27, unfiltered 1/27, off 2/27; 0 retire"
+ },
+ {
+  "old": "c357381cac1cdaa218abf962e9e2648e68d835cb",
+  "new": "8d8ca81ff7d43b5c065c4f6768dbe0fa349f2aee",
+  "subject": "Pre-register Gate 3 on three external repositories chosen by rule (TheAlgorithms/Python, v"
+ },
+ {
+  "old": "a0127d1985a1735308489e6b3c07e6fccf83d08f",
+  "new": "b1957c0fc4de3b3be094e33a99318ca5cc763b34",
+  "subject": "OpenTimestamps proof of the external-repositories pre-registration"
+ },
+ {
+  "old": "6620c80ab15251f123ad324f489baaab46bd0e83",
+  "new": "893bb4e86345733b1bfc24211826b62723cedaeb",
+  "subject": "Out-of-turns cells are outcomes, not errors: runner and rescore fixed; the two affected pu"
+ },
+ {
+  "old": "1a8e14c1d541e6e9aa1216688443cefaa4a14d41",
+  "new": "7e8f8f16a28ebc264af812cbdb7202a4703866bf",
+  "subject": "Five-run replications: boot vehicle +0.000 [\u22120.114, +0.129] (non-inferiority not shown alo"
+ },
+ {
+  "old": "39e1b7086984253bcfc945c9a0bd244672bab4ce",
+  "new": "99ae3fc2266c0260476e13ed69351a9fd1faf358",
+  "subject": "Round 8 Codex: rule for the excess baseline runs started by the resume, fixed before any s"
+ },
+ {
+  "old": "3be359309835d069b25848f95dd0be644630f64e",
+  "new": "742f751808f64e34cd67e3fdf9b9d06d798d9b43",
+  "subject": "Gate 2 on Codex: control arm leaked through muninn why on the real store; control store is"
+ },
+ {
+  "old": "acc173eba1eb93d9120f033008adebde8b6e6460",
+  "new": "09bfcc17c729fd38a60b4df79b0728f9e96db7f2",
+  "subject": "OpenTimestamps proof of the Gate 2 Codex fix note"
+ },
+ {
+  "old": "e34b9a08e13b03cfac85332ab2b439ad595ba819",
+  "new": "e1bc2706d3139eab033f4c48590fbc7dc381f779",
+  "subject": "Gate 3 on three external repositories (gin, vue, TheAlgorithms/Python) via Codex: literal "
+ },
+ {
+  "old": "4c7e3e101287b7e22516e29ee5214807fcdd068c",
+  "new": "89b34b4444e2842834922b00b8283e031cfe7e53",
+  "subject": "GATE2/GATE4: note on the control arm's muninn why channel in the original Claude grids"
+ },
+ {
+  "old": "5790fdfc0b84e2154057fd472caf776adb2017d4",
+  "new": "3ac425825e3bfe63be63dc11e98c58f61b14f7e1",
+  "subject": "PM-Bench round 8 on gpt-5.6-sol: held-out 97.5 % vs 79.9 / 80.5 (exact p 1/8000 each), spr"
+ },
+ {
+  "old": "eae825e02d192faf23b8f3d6568be0cd71e7176d",
+  "new": "c01127948eb29f516a119fc029896615d9182ec9",
+  "subject": "GATE4 round 8: correct the gpt-5.6-sol baseline range (80.4\u201380.6 %)"
+ },
+ {
+  "old": "e52f55c0a5c5fb7819dd23bd82739c0cf0b4c837",
+  "new": "7878658809d979067663c5c9654b137e5f9cf974",
+  "subject": "Round 9: shadow Muninn store (dict answer computed from the same records at every board) a"
+ },
+ {
+  "old": "c3628931720d4ebe4f41352b912037d001d16259",
+  "new": "af652f79d91756ccad114a6a737ddc3532077b63",
+  "subject": "Gate 3 on three external repositories with claude-sonnet-5: literal 81/81, unfiltered 3/81"
+ },
+ {
+  "old": "0d31700f9c9e01c6afa56907ab34939c775db620",
+  "new": "8263bec6af5ece30e2bf760d1097e473c5dce74a",
+  "subject": "GATE3 external sonnet: Fisher p values as computed"
+ },
+ {
+  "old": "3deec208d0e641f76b6dc2cd127732af64ee9a0c",
+  "new": "879b4a79ec252207c20bde077f02d7e28ad188f0",
+  "subject": "Gate 2 on Codex (second attempt): literal 10/25, off 5/25, control 4/25; rule met as writt"
+ },
+ {
+  "old": "2b22befbb63528420f45441b9379c2718ad61d6a",
+  "new": "4d9a52e26d561ebaf4af7d871e51dbc253648661",
+  "subject": "GATE2 Codex: cell count as measured"
+ },
+ {
+  "old": "28441ad00d0ad1438c8384ec05c02168434d30cc",
+  "new": "1ee33e8e5c79898d6e50d3f743dd1ef6a9f866dd",
+  "subject": "REPRODUCE: external repositories, Gate 2 on Codex, round 9, resume/rescore rules"
+ },
+ {
+  "old": "c429e9c96c0fe4e8c6ed5af0e0bfc059d1f4e892",
+  "new": "68691c9cb4f2f9e8188e114ed611be3eda56debc",
+  "subject": "PM-Bench round 9: 0 shadow disagreements in 1 458 boards; the sonnet round-8 gap is day-1 "
+ },
+ {
+  "old": "253130dee87ecb1c5ec259300ceb821160a3e260",
+  "new": "3772ecd47edb1a8ea95157563783ab664890f429",
+  "subject": "Remove the withdrawn query expansion from the read hook (five-run replication \u22120.125 [\u22120.2"
+ },
+ {
+  "old": "0b3e6a0daebbaa7ac8e29c6031c3533fcc0c3fcc",
+  "new": "addc2e6815f6e0951743e6f39dd29270ca5ef543",
+  "subject": "README status: replications, external repositories, held-out PM-Bench and the shadow-store"
+ },
+ {
+  "old": "c3c0a58739e46a9c7d48273be13d455128e1e0bd",
+  "new": "6459497b55b943fbab5f9d06fab24f23d8027591",
+  "subject": "OpenTimestamps proofs upgraded: six pre-registration commits anchored in Bitcoin block hea"
+ },
+ {
+  "old": "6583b7c54f75f27107c1c82668a0a2a98d0b8db4",
+  "new": "b854e0b1ee1b6d6440590ea63032294e27c42ded",
+  "subject": "Round 9 Codex bridge requests attributed by timestamp (3 060, 0 tool calls, 1 error)"
+ }
+]

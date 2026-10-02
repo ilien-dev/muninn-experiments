@@ -1,0 +1,460 @@
+{
+  "admitted_memory_tokens": 378,
+  "agent_metadata": {
+    "agent": "codex",
+    "command": [
+      "codex",
+      "exec",
+      "--sandbox",
+      "danger-full-access",
+      "--skip-git-repo-check",
+      "-c",
+      "approval_policy=never",
+      "-c",
+      "mcp_servers={}",
+      "-m",
+      "gpt-5.5",
+      "-"
+    ],
+    "diff": "diff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfd..f96bf44 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@ def main(argv=None, stdout=None):\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de5..cd272ca 100644\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@ import json\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@ def save_tasks(path, tasks):\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@ def add_task(path, title, due=None, labels=None):\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@ def update_task(path, task_id, **changes):\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n",
+    "error_type": null,
+    "exit_code": 0,
+    "isolation_mode": "container",
+    "model": "gpt-5.5",
+    "outcome": "completed",
+    "stderr": "2026-09-14T10:18:02.077893Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f6c-7cfd-71c3-89eb-d9b163274303\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: todo-flaky-s03\n\nInstruction:\nAdd `purge-done`, preserving monotonic task ids after deleted completed tasks.\n\nAdmitted memory context:\n- muninn-2: For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 5863f38..f096489 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -61,7 +61,20 @@ def main(argv=None, stdout=None):\n         wanted_status = 'all'\n         while argv:\n             token = argv.pop(0)\n+            if token == '--sort':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --sort value')\n+                    return 2\n+                sort_key = argv.pop(0)\n+                if sort_key != 'title':\n+                    _emit(stdout, f'ERR|usage|unknown sort {sort_key}')\n+                    return 2\n+                continue\n+            _emit(stdout, f'ERR|usage|unknown option {token}')\n+            return 2\n         tasks = store.load_tasks(db_path)\n+        if sort_key == 'title':\n+            tasks = sorted(tasks, key=lambda task: (task['title'].casefold(), task['id']))\n         for task in tasks:\n             _emit(stdout, _format_task(task))\n         return 0 [status=active, type=episodic]\n- muninn-4: For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 6ec516c..16a10e5 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -1,4 +1,5 @@\n import sys\n+from datetime import datetime\n \n from . import store\n \n@@ -17,6 +18,21 @@ def _format_task(task):\n     return '|'.join(parts)\n \n \n+def _is_due_date(value):\n+    if (\n+        len(value) != 10\n+        or value[4] != '-'\n+        or value[7] != '-'\n+        or not (value[:4] + value[5:7] + value[8:]).isdigit()\n+    ):\n+        return False\n+    try:\n+        datetime.strptime(value, '%Y-%m-%d')\n+    except ValueError:\n+        return False\n+    return True\n+\n+\n def _parse_global(argv):\n     db_path = 'tasks.json'\n     argv = list(argv)\n@@ -47,6 +63,15 @@ def main(argv=None, stdout=None):\n         title_parts = []\n         while argv:\n             token = argv.pop(0)\n+            if token == '--due':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --due value')\n+                    return 2\n+                due = argv.pop(0)\n+                if not _is_due_date(due):\n+                    _emit(stdout, f'ERR|usage|invalid due date {due}')\n+                    return 2\n+                continue\n             title_parts.append(token)\n         title = ' '.join(title_parts).strip()\n         if not title: [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the tiny todo app first so the new command lands in the same style as the earlier `add` and `list` changes. After that I\u2019ll patch the CLI/store behavior and run the local tests or focused command checks.\nexec\n/bin/bash -lc 'rg --files' in /work\n succeeded in 0ms:\nCONVENTIONS.md\ntests/test_cli.py\ntests/test_due_dates.py\ntests/test_purge_done.py\ntests/test_sort_title.py\ntodolite/__init__.py\ntodolite/store.py\ntodolite/cli.py\n\nexec\n/bin/bash -lc 'git status --short' in /work\n succeeded in 0ms:\ncodex\nThere is already a `tests/test_purge_done.py`, so I\u2019m going to use that as the oracle\u2019s loudest hint and line the implementation up with the existing test language.\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_purge_done.py\" in /work\n succeeded in 0ms:\nimport io\n\nfrom todolite import main\n\n\ndef run_cli(tmp_path, *args):\n    out = io.StringIO()\n    code = main([\"--file\", str(tmp_path / \"tasks.json\"), *args], out)\n    return code, out.getvalue().splitlines()\n\n\ndef test_purge_done_preserves_monotonic_ids(tmp_path):\n    run_cli(tmp_path, \"add\", \"first\")\n    run_cli(tmp_path, \"complete\", \"1\")\n    assert run_cli(tmp_path, \"purge-done\") == (0, [\"OK|purged|1\"])\n    assert run_cli(tmp_path, \"add\", \"second\") == (0, [\"OK|added|2|second\"])\n    assert run_cli(tmp_path, \"list\") == (0, [\"TASK|2|open|second\"])\n\nexec\n/bin/bash -lc \"sed -n '1,240p' todolite/store.py\" in /work\n succeeded in 0ms:\nimport json\nfrom pathlib import Path\n\n\ndef load_tasks(path):\n    path = Path(path)\n    if not path.exists():\n        return []\n    return json.loads(path.read_text(encoding=\"utf-8\"))\n\n\ndef save_tasks(path, tasks):\n    path = Path(path)\n    path.write_text(json.dumps(tasks, indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\")\n\n\ndef add_task(path, title, due=None, labels=None):\n    tasks = load_tasks(path)\n    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n    task = {\"id\": next_id, \"title\": title, \"done\": False}\n    if due:\n        task[\"due\"] = due\n    if labels:\n        task[\"labels\"] = list(labels)\n    tasks.append(task)\n    save_tasks(path, tasks)\n    return task\n\n\ndef update_task(path, task_id, **changes):\n    tasks = load_tasks(path)\n    for task in tasks:\n        if task[\"id\"] == task_id:\n            task.update(changes)\n            save_tasks(path, tasks)\n            return task\n    raise KeyError(task_id)\n\n\ndef delete_task(path, task_id):\n    tasks = load_tasks(path)\n    for index, task in enumerate(tasks):\n        if task[\"id\"] == task_id:\n            removed = tasks.pop(index)\n            save_tasks(path, tasks)\n            return removed\n    raise KeyError(task_id)\n\nexec\n/bin/bash -lc \"sed -n '1,240p' todolite/cli.py\" in /work\n succeeded in 0ms:\nimport sys\n\nfrom . import store\n\n\ndef _emit(stdout, line):\n    stdout.write(line + '\\n')\n\n\ndef _format_task(task):\n    status = 'done' if task.get('done') else 'open'\n    parts = ['TASK', str(task['id']), status, task['title']]\n    if task.get('due'):\n        parts.append(f\"due={task['due']}\")\n    if task.get('labels'):\n        parts.append('labels=' + ','.join(task['labels']))\n    return '|'.join(parts)\n\n\ndef _parse_global(argv):\n    db_path = 'tasks.json'\n    argv = list(argv)\n    while argv and argv[0] == '--file':\n        argv.pop(0)\n        if not argv:\n            raise ValueError('missing --file value')\n        db_path = argv.pop(0)\n    return db_path, argv\n\n\ndef main(argv=None, stdout=None):\n    argv = list(sys.argv[1:] if argv is None else argv)\n    stdout = sys.stdout if stdout is None else stdout\n    try:\n        db_path, argv = _parse_global(argv)\n    except ValueError as exc:\n        _emit(stdout, f'ERR|usage|{exc}')\n        return 2\n    if not argv:\n        _emit(stdout, 'ERR|usage|missing command')\n        return 2\n    command = argv.pop(0)\n\n    if command == 'add':\n        due = None\n        labels = []\n        title_parts = []\n        while argv:\n            token = argv.pop(0)\n            if token == '--due':\n                if not argv:\n                    _emit(stdout, 'ERR|usage|missing due date')\n                    return 2\n                due = argv.pop(0)\n                continue\n            title_parts.append(token)\n        title = ' '.join(title_parts).strip()\n        if not title:\n            _emit(stdout, 'ERR|usage|missing title')\n            return 2\n        task = store.add_task(db_path, title, due=due, labels=labels)\n        _emit(stdout, f\"OK|added|{task['id']}|{task['title']}\")\n        return 0\n\n    if command == 'list':\n        sort_key = None\n        wanted_status = 'all'\n        while argv:\n            token = argv.pop(0)\n            if token == '--sort':\n                if not argv:\n                    _emit(stdout, 'ERR|usage|missing sort key')\n                    return 2\n                sort_key = argv.pop(0)\n                continue\n        tasks = store.load_tasks(db_path)\n        if sort_key == 'title':\n            tasks = sorted(tasks, key=lambda task: (task['title'].casefold(), task['id']))\n        for task in tasks:\n            _emit(stdout, _format_task(task))\n        return 0\n\n    if command == 'complete':\n        if not argv:\n            _emit(stdout, 'ERR|usage|missing id')\n            return 2\n        try:\n            task = store.update_task(db_path, int(argv[0]), done=True)\n        except (KeyError, ValueError):\n            _emit(stdout, f'ERR|not_found|{argv[0]}')\n            return 1\n        _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n        return 0\n\n    _emit(stdout, f'ERR|unknown_command|{command}')\n    return 2\n\n\nif __name__ == '__main__':\n    raise SystemExit(main())\n\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_cli.py\" in /work\n succeeded in 0ms:\nimport io\n\nfrom todolite import main\n\n\ndef run_cli(tmp_path, *args):\n    out = io.StringIO()\n    code = main([\"--file\", str(tmp_path / \"tasks.json\"), *args], out)\n    return code, out.getvalue().splitlines()\n\n\ndef test_add_list_and_complete(tmp_path):\n    assert run_cli(tmp_path, \"add\", \"Buy\", \"milk\") == (0, [\"OK|added|1|Buy milk\"])\n    assert run_cli(tmp_path, \"list\") == (0, [\"TASK|1|open|Buy milk\"])\n    assert run_cli(tmp_path, \"complete\", \"1\") == (0, [\"OK|completed|1|Buy milk\"])\n    assert run_cli(tmp_path, \"list\") == (0, [\"TASK|1|done|Buy milk\"])\n\n\ndef test_unknown_command_is_machine_readable(tmp_path):\n    code, lines = run_cli(tmp_path, \"wat\")\n    assert code == 2\n    assert lines == [\"ERR|unknown_command|wat\"]\n\ncodex\nThe current store computes the next id from remaining rows, which is exactly where a purge would accidentally reuse an id. I\u2019m checking the surrounding tests before editing so the fix preserves the current CLI contract.\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_due_dates.py\" in /work\n succeeded in 0ms:\nimport io\n\nfrom todolite import main\n\n\ndef run_cli(tmp_path, *args):\n    out = io.StringIO()\n    code = main([\"--file\", str(tmp_path / \"tasks.json\"), *args], out)\n    return code, out.getvalue().splitlines()\n\n\ndef test_add_due_date_is_explicit_and_listed(tmp_path):\n    assert run_cli(tmp_path, \"add\", \"--due\", \"2026-01-31\", \"file\", \"taxes\") == (\n        0,\n        [\"OK|added|1|file taxes\"],\n    )\n    assert run_cli(tmp_path, \"list\") == (\n        0,\n        [\"TASK|1|open|file taxes|due=2026-01-31\"],\n    )\n\nexec\n/bin/bash -lc \"sed -n '1,160p' todolite/__init__.py\" in /work\n succeeded in 0ms:\nfrom .cli import main\n\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_sort_title.py\" in /work\n succeeded in 0ms:\nimport io\n\nfrom todolite import main\n\n\ndef run_cli(tmp_path, *args):\n    out = io.StringIO()\n    code = main([\"--file\", str(tmp_path / \"tasks.json\"), *args], out)\n    return code, out.getvalue().splitlines()\n\n\ndef test_list_sort_title_is_deterministic(tmp_path):\n    run_cli(tmp_path, \"add\", \"zeta\")\n    run_cli(tmp_path, \"add\", \"Alpha\")\n    assert run_cli(tmp_path, \"list\", \"--sort\", \"title\") == (\n        0,\n        [\"TASK|2|open|Alpha\", \"TASK|1|open|zeta\"],\n    )\n\nexec\n/bin/bash -lc \"sed -n '1,200p' CONVENTIONS.md\" in /work\n succeeded in 0ms:\n# todolite conventions\n\n- CLI output is machine-readable pipe records, never prose.\n- Item command success records use `OK|verb|id|title`.\n- Listed tasks use `TASK|id|status|title`, with optional `key=value` fields appended.\n\nexec\n/bin/bash -lc 'rg -n \"delete_task|load_tasks|save_tasks|add_task|purge\" -S .' in /work\n succeeded in 0ms:\n./tests/test_purge_done.py:12:def test_purge_done_preserves_monotonic_ids(tmp_path):\n./tests/test_purge_done.py:15:    assert run_cli(tmp_path, \"purge-done\") == (0, [\"OK|purged|1\"])\n./todolite/cli.py:61:        task = store.add_task(db_path, title, due=due, labels=labels)\n./todolite/cli.py:76:        tasks = store.load_tasks(db_path)\n./todolite/store.py:5:def load_tasks(path):\n./todolite/store.py:12:def save_tasks(path, tasks):\n./todolite/store.py:17:def add_task(path, title, due=None, labels=None):\n./todolite/store.py:18:    tasks = load_tasks(path)\n./todolite/store.py:26:    save_tasks(path, tasks)\n./todolite/store.py:31:    tasks = load_tasks(path)\n./todolite/store.py:35:            save_tasks(path, tasks)\n./todolite/store.py:40:def delete_task(path, task_id):\n./todolite/store.py:41:    tasks = load_tasks(path)\n./todolite/store.py:45:            save_tasks(path, tasks)\n\nexec\n/bin/bash -lc 'ls -la' in /work\n succeeded in 0ms:\ntotal 12\ndrwxr-xr-x 5 node node  140 Sep 14 10:17 .\ndrwxr-xr-x 1 root root 3488 Sep 14 10:18 ..\ndrwxr-xr-x 7 node node  240 Sep 14 10:18 .git\n-rw-r--r-- 1 node node   34 Sep 14 10:17 .gitignore\n-rw-r--r-- 1 node node  225 Sep 14 10:17 CONVENTIONS.md\ndrwxr-xr-x 2 node node  120 Sep 14 10:17 tests\ndrwxr-xr-x 2 node node  100 Sep 14 10:17 todolite\n\ncodex\nI\u2019m going to keep the on-disk task list compatible and add a small high-water marker next to it. That lets `purge-done` remove rows while `add` still has a memory of the largest id that ever existed.\napply patch\npatch: completed\n/work/todolite/store.py\ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ncodex\nThe store now has the high-water behavior; next I\u2019m wiring the command itself into the CLI and then I\u2019ll run the test suite.\napply patch\npatch: completed\n/work/todolite/cli.py\ndiff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfdaa0783a0c743f64761d59df08ca06f6de..f96bf44caefaf168e39c5edfc326a918fa811cab\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ndiff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfdaa0783a0c743f64761d59df08ca06f6de..f96bf44caefaf168e39c5edfc326a918fa811cab\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ncodex\nThe command is in place. I\u2019m running the tests now, and I\u2019ll do one extra manual sequence for the all-completed purge case because that\u2019s the fragile bit here.\nexec\n/bin/bash -lc 'pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: pytest: command not found\n\nexec\n/bin/bash -lc 'python -m todolite.cli --file /tmp/todolite-purge-check.json add first' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\ndiff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfdaa0783a0c743f64761d59df08ca06f6de..f96bf44caefaf168e39c5edfc326a918fa811cab\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ncodex\nThis environment doesn\u2019t have `python` or `pytest` on PATH, so I\u2019m switching to the available Python executable check first and then I\u2019ll run through whatever test entry point exists.\nexec\n/bin/bash -lc 'command -v python3' in /work\n exited 1 in 0ms:\nexec\n/bin/bash -lc 'command -v py.test' in /work\n exited 1 in 0ms:\nexec\n/bin/bash -lc 'command -v pytest' in /work\n exited 1 in 0ms:\nexec\n/bin/bash -lc 'ls -la /usr/bin/python*' in /work\n exited 2 in 0ms:\nls: cannot access '/usr/bin/python*': No such file or directory\n\ndiff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfdaa0783a0c743f64761d59df08ca06f6de..f96bf44caefaf168e39c5edfc326a918fa811cab\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ncodex\nNo Python runtime is installed in the container path at all, which is a little spartan. I\u2019m still going to sanity-check the diff and the exact execution path by inspection, then I\u2019ll report the test limitation plainly.\nexec\n/bin/bash -lc 'git diff -- todolite/cli.py todolite/store.py tests/test_purge_done.py' in /work\n succeeded in 0ms:\ndiff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfd..f96bf44 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@ def main(argv=None, stdout=None):\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de5..cd272ca 100644\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@ import json\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@ def save_tasks(path, tasks):\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@ def add_task(path, title, due=None, labels=None):\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@ def update_task(path, task_id, **changes):\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\nexec\n/bin/bash -lc 'git status --short' in /work\n succeeded in 0ms:\n M todolite/cli.py\n M todolite/store.py\n\nexec\n/bin/bash -lc \"nl -ba todolite/store.py | sed -n '1,220p'\" in /work\n succeeded in 0ms:\n     1\timport json\n     2\tfrom pathlib import Path\n     3\t\n     4\t\n     5\tdef _next_id_path(path):\n     6\t    return Path(str(path) + \".next_id\")\n     7\t\n     8\t\n     9\tdef _max_task_id(tasks):\n    10\t    return max((task[\"id\"] for task in tasks), default=0)\n    11\t\n    12\t\n    13\tdef _load_next_id(path, tasks):\n    14\t    marker = _next_id_path(path)\n    15\t    try:\n    16\t        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n    17\t    except (OSError, ValueError):\n    18\t        saved_next_id = 0\n    19\t    return max(saved_next_id, _max_task_id(tasks) + 1)\n    20\t\n    21\t\n    22\tdef _save_next_id(path, next_id):\n    23\t    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n    24\t\n    25\t\n    26\tdef load_tasks(path):\n    27\t    path = Path(path)\n    28\t    if not path.exists():\n    29\t        return []\n    30\t    return json.loads(path.read_text(encoding=\"utf-8\"))\n    31\t\n    32\t\n    33\tdef save_tasks(path, tasks):\n    34\t    path = Path(path)\n    35\t    path.write_text(json.dumps(tasks, indent=2, sort_keys=True) + \"\\n\", encoding=\"utf-8\")\n    36\t\n    37\t\n    38\tdef add_task(path, title, due=None, labels=None):\n    39\t    tasks = load_tasks(path)\n    40\t    next_id = _load_next_id(path, tasks)\n    41\t    task = {\"id\": next_id, \"title\": title, \"done\": False}\n    42\t    if due:\n    43\t        task[\"due\"] = due\n    44\t    if labels:\n    45\t        task[\"labels\"] = list(labels)\n    46\t    tasks.append(task)\n    47\t    save_tasks(path, tasks)\n    48\t    _save_next_id(path, next_id + 1)\n    49\t    return task\n    50\t\n    51\t\n    52\tdef update_task(path, task_id, **changes):\n    53\t    tasks = load_tasks(path)\n    54\t    for task in tasks:\n    55\t        if task[\"id\"] == task_id:\n    56\t            task.update(changes)\n    57\t            save_tasks(path, tasks)\n    58\t            return task\n    59\t    raise KeyError(task_id)\n    60\t\n    61\t\n    62\tdef delete_task(path, task_id):\n    63\t    tasks = load_tasks(path)\n    64\t    next_id = _load_next_id(path, tasks)\n    65\t    for index, task in enumerate(tasks):\n    66\t        if task[\"id\"] == task_id:\n    67\t            removed = tasks.pop(index)\n    68\t            save_tasks(path, tasks)\n    69\t            _save_next_id(path, next_id)\n    70\t            return removed\n    71\t    raise KeyError(task_id)\n    72\t\n    73\t\n    74\tdef purge_done(path):\n    75\t    tasks = load_tasks(path)\n    76\t    next_id = _load_next_id(path, tasks)\n    77\t    kept = [task for task in tasks if not task.get(\"done\")]\n    78\t    purged = len(tasks) - len(kept)\n    79\t    if purged:\n    80\t        save_tasks(path, kept)\n    81\t        _save_next_id(path, next_id)\n    82\t    return purged\n\nexec\n/bin/bash -lc \"nl -ba todolite/cli.py | sed -n '1,180p'\" in /work\n succeeded in 0ms:\n     1\timport sys\n     2\t\n     3\tfrom . import store\n     4\t\n     5\t\n     6\tdef _emit(stdout, line):\n     7\t    stdout.write(line + '\\n')\n     8\t\n     9\t\n    10\tdef _format_task(task):\n    11\t    status = 'done' if task.get('done') else 'open'\n    12\t    parts = ['TASK', str(task['id']), status, task['title']]\n    13\t    if task.get('due'):\n    14\t        parts.append(f\"due={task['due']}\")\n    15\t    if task.get('labels'):\n    16\t        parts.append('labels=' + ','.join(task['labels']))\n    17\t    return '|'.join(parts)\n    18\t\n    19\t\n    20\tdef _parse_global(argv):\n    21\t    db_path = 'tasks.json'\n    22\t    argv = list(argv)\n    23\t    while argv and argv[0] == '--file':\n    24\t        argv.pop(0)\n    25\t        if not argv:\n    26\t            raise ValueError('missing --file value')\n    27\t        db_path = argv.pop(0)\n    28\t    return db_path, argv\n    29\t\n    30\t\n    31\tdef main(argv=None, stdout=None):\n    32\t    argv = list(sys.argv[1:] if argv is None else argv)\n    33\t    stdout = sys.stdout if stdout is None else stdout\n    34\t    try:\n    35\t        db_path, argv = _parse_global(argv)\n    36\t    except ValueError as exc:\n    37\t        _emit(stdout, f'ERR|usage|{exc}')\n    38\t        return 2\n    39\t    if not argv:\n    40\t        _emit(stdout, 'ERR|usage|missing command')\n    41\t        return 2\n    42\t    command = argv.pop(0)\n    43\t\n    44\t    if command == 'add':\n    45\t        due = None\n    46\t        labels = []\n    47\t        title_parts = []\n    48\t        while argv:\n    49\t            token = argv.pop(0)\n    50\t            if token == '--due':\n    51\t                if not argv:\n    52\t                    _emit(stdout, 'ERR|usage|missing due date')\n    53\t                    return 2\n    54\t                due = argv.pop(0)\n    55\t                continue\n    56\t            title_parts.append(token)\n    57\t        title = ' '.join(title_parts).strip()\n    58\t        if not title:\n    59\t            _emit(stdout, 'ERR|usage|missing title')\n    60\t            return 2\n    61\t        task = store.add_task(db_path, title, due=due, labels=labels)\n    62\t        _emit(stdout, f\"OK|added|{task['id']}|{task['title']}\")\n    63\t        return 0\n    64\t\n    65\t    if command == 'list':\n    66\t        sort_key = None\n    67\t        wanted_status = 'all'\n    68\t        while argv:\n    69\t            token = argv.pop(0)\n    70\t            if token == '--sort':\n    71\t                if not argv:\n    72\t                    _emit(stdout, 'ERR|usage|missing sort key')\n    73\t                    return 2\n    74\t                sort_key = argv.pop(0)\n    75\t                continue\n    76\t        tasks = store.load_tasks(db_path)\n    77\t        if sort_key == 'title':\n    78\t            tasks = sorted(tasks, key=lambda task: (task['title'].casefold(), task['id']))\n    79\t        for task in tasks:\n    80\t            _emit(stdout, _format_task(task))\n    81\t        return 0\n    82\t\n    83\t    if command == 'complete':\n    84\t        if not argv:\n    85\t            _emit(stdout, 'ERR|usage|missing id')\n    86\t            return 2\n    87\t        try:\n    88\t            task = store.update_task(db_path, int(argv[0]), done=True)\n    89\t        except (KeyError, ValueError):\n    90\t            _emit(stdout, f'ERR|not_found|{argv[0]}')\n    91\t            return 1\n    92\t        _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n    93\t        return 0\n    94\t\n    95\t    if command == 'purge-done':\n    96\t        purged = store.purge_done(db_path)\n    97\t        _emit(stdout, f'OK|purged|{purged}')\n    98\t        return 0\n    99\t\n   100\t    _emit(stdout, f'ERR|unknown_command|{command}')\n   101\t    return 2\n   102\t\n   103\t\n   104\tif __name__ == '__main__':\n   105\t    raise SystemExit(main())\n\ndiff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfdaa0783a0c743f64761d59df08ca06f6de..f96bf44caefaf168e39c5edfc326a918fa811cab\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ncodex\nImplemented `purge-done`.\n\nChanges:\n- Added `purge-done` CLI command returning `OK|purged|N`.\n- Added store-level purge logic that removes completed tasks.\n- Preserved monotonic ids with a `tasks.json.next_id` high-water marker, so adding after purging completed tasks does not reuse deleted ids.\n- Also made `delete_task` preserve that high-water id behavior.\n\nVerification note: I tried to run `pytest -q`, but this container has no `python`, `python3`, or `pytest` executable on PATH, so I couldn\u2019t execute the tests here.\ndiff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfdaa0783a0c743f64761d59df08ca06f6de..f96bf44caefaf168e39c5edfc326a918fa811cab\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de51340f825fd250c9711a6f6ddccee77d2f..cd272cae2501efd9077592156e32c64ee37d6157\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n\ntokens used\n22,402\n",
+    "stdout": "Implemented `purge-done`.\n\nChanges:\n- Added `purge-done` CLI command returning `OK|purged|N`.\n- Added store-level purge logic that removes completed tasks.\n- Preserved monotonic ids with a `tasks.json.next_id` high-water marker, so adding after purging completed tasks does not reuse deleted ids.\n- Also made `delete_task` preserve that high-water id behavior.\n\nVerification note: I tried to run `pytest -q`, but this container has no `python`, `python3`, or `pytest` executable on PATH, so I couldn\u2019t execute the tests here.\n",
+    "steps": [
+      {
+        "action": "codex exec",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--rm",
+          "-i",
+          "--name",
+          "dreambench-wake-4162589-8840f4e126b2",
+          "--network",
+          "bridge",
+          "--user",
+          "1000:1000",
+          "-e",
+          "CODEX_HOME=/codexhome",
+          "-e",
+          "HOME=/codexhome",
+          "-e",
+          "NO_COLOR=1",
+          "-v",
+          "/home/ilien/.codex:/codex-home:ro",
+          "-v",
+          "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03:/work:rw",
+          "-w",
+          "/work",
+          "dreambench-swe-codex-agent:latest",
+          "codex",
+          "exec",
+          "--sandbox",
+          "danger-full-access",
+          "--skip-git-repo-check",
+          "-c",
+          "approval_policy=never",
+          "-c",
+          "mcp_servers={}",
+          "-m",
+          "gpt-5.5",
+          "-"
+        ],
+        "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03",
+        "jail": {
+          "codex_home_mount": "/codex-home:ro",
+          "container_cwd": "/work",
+          "container_name": "dreambench-wake-4162589-8840f4e126b2",
+          "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03",
+          "image": "dreambench-swe-codex-agent:latest",
+          "inner_codex_sandbox": "danger-full-access",
+          "isolation_mode": "container",
+          "mounts": [
+            "/codex-home",
+            "/work"
+          ],
+          "network": "bridge",
+          "purpose": "wake",
+          "type": "docker-container",
+          "user": "1000:1000",
+          "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03",
+          "writable_codex_home": "/tmp/codexhome"
+        }
+      }
+    ],
+    "usage": {},
+    "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03"
+  },
+  "agent_result": {
+    "error_detail": null,
+    "error_type": null,
+    "passed": true,
+    "patch": "diff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfd..f96bf44 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@ def main(argv=None, stdout=None):\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de5..cd272ca 100644\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@ import json\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@ def save_tasks(path, tasks):\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@ def add_task(path, title, due=None, labels=None):\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@ def update_task(path, task_id, **changes):\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n",
+    "steps": 1,
+    "tokens": 5459
+  },
+  "contaminated": false,
+  "contamination_evidence": [],
+  "error_detail": null,
+  "error_type": null,
+  "final_passed": true,
+  "isolation_mode": "container",
+  "memory_context": [
+    {
+      "confidence": 1.0,
+      "content": "For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 5863f38..f096489 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -61,7 +61,20 @@ def main(argv=None, stdout=None):\n         wanted_status = 'all'\n         while argv:\n             token = argv.pop(0)\n+            if token == '--sort':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --sort value')\n+                    return 2\n+                sort_key = argv.pop(0)\n+                if sort_key != 'title':\n+                    _emit(stdout, f'ERR|usage|unknown sort {sort_key}')\n+                    return 2\n+                continue\n+            _emit(stdout, f'ERR|usage|unknown option {token}')\n+            return 2\n         tasks = store.load_tasks(db_path)\n+        if sort_key == 'title':\n+            tasks = sorted(tasks, key=lambda task: (task['title'].casefold(), task['id']))\n         for task in tasks:\n             _emit(stdout, _format_task(task))\n         return 0",
+      "file_scope": [],
+      "id": "muninn-2",
+      "kind": "memory",
+      "origin": "tool_observed",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "todo-flaky-s01"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 1,
+      "repo_scope": "todo-flaky",
+      "retrieval_tags": [
+        "muninn",
+        "todo-flaky",
+        "episode"
+      ],
+      "risk_score": 0.2,
+      "score": 0.01639344262295082,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "todo-flaky"
+      ],
+      "trust": 1,
+      "type": "episodic",
+      "utility_score": 0.5
+    },
+    {
+      "confidence": 1.0,
+      "content": "For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 6ec516c..16a10e5 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -1,4 +1,5 @@\n import sys\n+from datetime import datetime\n \n from . import store\n \n@@ -17,6 +18,21 @@ def _format_task(task):\n     return '|'.join(parts)\n \n \n+def _is_due_date(value):\n+    if (\n+        len(value) != 10\n+        or value[4] != '-'\n+        or value[7] != '-'\n+        or not (value[:4] + value[5:7] + value[8:]).isdigit()\n+    ):\n+        return False\n+    try:\n+        datetime.strptime(value, '%Y-%m-%d')\n+    except ValueError:\n+        return False\n+    return True\n+\n+\n def _parse_global(argv):\n     db_path = 'tasks.json'\n     argv = list(argv)\n@@ -47,6 +63,15 @@ def main(argv=None, stdout=None):\n         title_parts = []\n         while argv:\n             token = argv.pop(0)\n+            if token == '--due':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --due value')\n+                    return 2\n+                due = argv.pop(0)\n+                if not _is_due_date(due):\n+                    _emit(stdout, f'ERR|usage|invalid due date {due}')\n+                    return 2\n+                continue\n             title_parts.append(token)\n         title = ' '.join(title_parts).strip()\n         if not title:",
+      "file_scope": [],
+      "id": "muninn-4",
+      "kind": "memory",
+      "origin": "tool_observed",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "todo-flaky-s02"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 2,
+      "repo_scope": "todo-flaky",
+      "retrieval_tags": [
+        "muninn",
+        "todo-flaky",
+        "episode"
+      ],
+      "risk_score": 0.2,
+      "score": 0.016129032258064516,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "todo-flaky"
+      ],
+      "trust": 1,
+      "type": "episodic",
+      "utility_score": 0.5
+    }
+  ],
+  "memory_writes": [],
+  "oracle": {
+    "error_detail": ".....                                                                    [100%]\n5 passed in 0.01s",
+    "error_type": null,
+    "exit_code": 0,
+    "passed": true,
+    "stderr": "",
+    "stdout": ".....                                                                    [100%]\n5 passed in 0.01s\n",
+    "timed_out": false
+  },
+  "ordinal": 23,
+  "pass_at_1": true,
+  "retrieval_decisions": [
+    {
+      "admitted": true,
+      "memory_id": "muninn-2",
+      "reason": "muninn_why",
+      "repo_scope": "todo-flaky",
+      "score": 0.01639344262295082
+    },
+    {
+      "admitted": true,
+      "memory_id": "muninn-4",
+      "reason": "muninn_why",
+      "repo_scope": "todo-flaky",
+      "score": 0.016129032258064516
+    }
+  ],
+  "score": {
+    "agent_diff_files": [
+      "todolite/cli.py",
+      "todolite/store.py"
+    ],
+    "apply": {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": ""
+    },
+    "empty_production_diff": false,
+    "error_detail": ".....                                                                    [100%]\n5 passed in 0.01s",
+    "error_type": null,
+    "passed": true,
+    "policy_rejected": false,
+    "production_diff": "diff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfd..f96bf44 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@ def main(argv=None, stdout=None):\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de5..cd272ca 100644\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@ import json\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@ def save_tasks(path, tasks):\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@ def add_task(path, title, due=None, labels=None):\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@ def update_task(path, task_id, **changes):\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n",
+    "production_files": [
+      "todolite/cli.py",
+      "todolite/store.py"
+    ],
+    "rejected_files": [],
+    "rejected_reasons": {}
+  },
+  "sleep_error": null,
+  "task": {
+    "base_ref": "tasks/todo-flaky/s03/base",
+    "files": [
+      "todolite/cli.py",
+      "todolite/store.py"
+    ],
+    "id": "todo-flaky-s03",
+    "instruction": "Add `purge-done`, preserving monotonic task ids after deleted completed tasks.",
+    "prompt": "Add `purge-done`, preserving monotonic task ids after deleted completed tasks.",
+    "repo": "todolite",
+    "seq_id": "todo-flaky",
+    "seq_type": "flaky-test",
+    "sequence_id": "todo-flaky",
+    "session_index": 3,
+    "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03"
+  },
+  "trajectory": {
+    "budget": {
+      "wake_max_steps": 1
+    },
+    "condition_id": "MUNINN",
+    "created_at": "2026-09-14T10:20:14.508939+00:00",
+    "file_diffs": [
+      "todolite/cli.py",
+      "todolite/store.py"
+    ],
+    "final_outcome": "success",
+    "memory_reads": [
+      "muninn-2",
+      "muninn-4"
+    ],
+    "memory_writes": [],
+    "model_id": "gpt-5.5",
+    "raw_episode": {
+      "actions": [
+        "codex exec"
+      ],
+      "agent_patch": "diff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfd..f96bf44 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@ def main(argv=None, stdout=None):\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de5..cd272ca 100644\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@ import json\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@ def save_tasks(path, tasks):\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@ def add_task(path, title, due=None, labels=None):\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@ def update_task(path, task_id, **changes):\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n",
+      "benchmark_task_id": "todo-flaky-s03",
+      "condition_id": "MUNINN",
+      "error_detail": null,
+      "error_type": null,
+      "failure_observations": [],
+      "file_paths": [
+        "todolite/cli.py",
+        "todolite/store.py"
+      ],
+      "memory_context": [
+        {
+          "confidence": 1.0,
+          "content": "For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 5863f38..f096489 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -61,7 +61,20 @@ def main(argv=None, stdout=None):\n         wanted_status = 'all'\n         while argv:\n             token = argv.pop(0)\n+            if token == '--sort':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --sort value')\n+                    return 2\n+                sort_key = argv.pop(0)\n+                if sort_key != 'title':\n+                    _emit(stdout, f'ERR|usage|unknown sort {sort_key}')\n+                    return 2\n+                continue\n+            _emit(stdout, f'ERR|usage|unknown option {token}')\n+            return 2\n         tasks = store.load_tasks(db_path)\n+        if sort_key == 'title':\n+            tasks = sorted(tasks, key=lambda task: (task['title'].casefold(), task['id']))\n         for task in tasks:\n             _emit(stdout, _format_task(task))\n         return 0",
+          "file_scope": [],
+          "id": "muninn-2",
+          "kind": "memory",
+          "origin": "tool_observed",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "todo-flaky-s01"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 1,
+          "repo_scope": "todo-flaky",
+          "retrieval_tags": [
+            "muninn",
+            "todo-flaky",
+            "episode"
+          ],
+          "risk_score": 0.2,
+          "score": 0.01639344262295082,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "todo-flaky"
+          ],
+          "trust": 1,
+          "type": "episodic",
+          "utility_score": 0.5
+        },
+        {
+          "confidence": 1.0,
+          "content": "For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 6ec516c..16a10e5 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -1,4 +1,5 @@\n import sys\n+from datetime import datetime\n \n from . import store\n \n@@ -17,6 +18,21 @@ def _format_task(task):\n     return '|'.join(parts)\n \n \n+def _is_due_date(value):\n+    if (\n+        len(value) != 10\n+        or value[4] != '-'\n+        or value[7] != '-'\n+        or not (value[:4] + value[5:7] + value[8:]).isdigit()\n+    ):\n+        return False\n+    try:\n+        datetime.strptime(value, '%Y-%m-%d')\n+    except ValueError:\n+        return False\n+    return True\n+\n+\n def _parse_global(argv):\n     db_path = 'tasks.json'\n     argv = list(argv)\n@@ -47,6 +63,15 @@ def main(argv=None, stdout=None):\n         title_parts = []\n         while argv:\n             token = argv.pop(0)\n+            if token == '--due':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --due value')\n+                    return 2\n+                due = argv.pop(0)\n+                if not _is_due_date(due):\n+                    _emit(stdout, f'ERR|usage|invalid due date {due}')\n+                    return 2\n+                continue\n             title_parts.append(token)\n         title = ' '.join(title_parts).strip()\n         if not title:",
+          "file_scope": [],
+          "id": "muninn-4",
+          "kind": "memory",
+          "origin": "tool_observed",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "todo-flaky-s02"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 2,
+          "repo_scope": "todo-flaky",
+          "retrieval_tags": [
+            "muninn",
+            "todo-flaky",
+            "episode"
+          ],
+          "risk_score": 0.2,
+          "score": 0.016129032258064516,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "todo-flaky"
+          ],
+          "trust": 1,
+          "type": "episodic",
+          "utility_score": 0.5
+        }
+      ],
+      "memory_reads": [
+        "muninn-2",
+        "muninn-4"
+      ],
+      "memory_writes": [],
+      "model_id": "gpt-5.5",
+      "observations": [
+        "Implemented `purge-done`.\n\nChanges:\n- Added `purge-done` CLI command returning `OK|purged|N`.\n- Added store-level purge logic that removes completed tasks.\n- Preserved monotonic ids with a `tasks.json.next_id` high-water marker, so adding after purging completed tasks does not reuse deleted ids.\n- Also made `delete_task` preserve that high-water id behavior.\n\nVerification note: I tried to run `pytest -q`, but this container has no `python`, `python3`, or `pytest` executable on PATH, so I couldn\u2019t execute the tests here.\n",
+        "2026-09-14T10:18:02.077893Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f6c-7cfd-71c3-89eb-d9b163274303\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: todo-flaky-s03\n\nInstruction:\nAdd `purge-done`, preserving monotonic task ids after deleted completed tasks.\n\nAdmitted memory context:\n- muninn-2: For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 5863f38..f096489 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -61,7 +61,20 @@ def main(argv=None, stdout=None):\n         wanted_status = 'all'\n         while argv:\n             token = argv.pop(0)\n+            if token == '--sort':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --sort value')\n+                    return 2\n+                sort_key = argv.pop(0)\n+                if sort_key != 'title':\n+                    _emit(stdout, f'ERR|usage|unknown sort {sort_key}')\n+                    return 2\n+                continue\n+            _emit(stdout, f'ERR|usage|unknown option {token}')\n+            return 2\n         tasks = store.load_tasks(db_path)\n+        if sort_key == 'title':\n+            tasks = sorted(tasks, key=lambda task: (task['title'].casefold(), task['id']))\n         for task in tasks:\n             _emit(stdout, _format_task(task))\n         return 0 [status=active, type=episodic]\n- muninn-4: For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/todolite/cli.py b/todolite/cli.py\nindex 6ec516c..16a10e5 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -1,4 +1,5 @@\n import sys\n+from datetime import datetime\n \n from . import store\n \n@@ -17,6 +18,21 @@ def _format_task(task):\n     return '|'.join(parts)\n \n \n+def _is_due_date(value):\n+    if (\n+        len(value) != 10\n+        or value[4] != '-'\n+        or value[7] != '-'\n+        or not (value[:4] + value[5:7] + value[8:]).isdigit()\n+    ):\n+        return False\n+    try:\n+        datetime.strptime(value, '%Y-%m-%d')\n+    except ValueError:\n+        return False\n+    return True\n+\n+\n def _parse_global(argv):\n     db_path = 'tasks.json'\n     argv = list(argv)\n@@ -47,6 +63,15 @@ def main(argv=None, stdout=None):\n         title_parts = []\n         while argv:\n             token = argv.pop(0)\n+            if token == '--due':\n+                if not argv:\n+                    _emit(stdout, 'ERR|usage|missing --due value')\n+                    return 2\n+                due = argv.pop(0)\n+                if not _is_due_date(due):\n+                    _emit(stdout, f'ERR|usage|invalid due date {due}')\n+                    return 2\n+                continue\n             title_parts.append(token)\n         title = ' '.join(title_parts).strip()\n         if not title: [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the tiny todo app first so the new command lands in the same style as the earlier `add` and `list` changes. After that I\u2019ll patch the CLI/store behavior and run the local tests or focused command checks.\nexec\n/bin/bash -lc 'rg --files' in /work\n succeeded in 0ms:\nCONVENTIONS.md\ntests/test_cli.py\ntests/test_due_dates.py\ntests/test_purge_done.py\ntests/test_sort_title.py\ntodolite",
+        "oracle exit=0 passed=True",
+        ".....                                                                    [100%]\n5 passed in 0.01s\n"
+      ],
+      "outcome": "success",
+      "production_diff": "diff --git a/todolite/cli.py b/todolite/cli.py\nindex f477cfd..f96bf44 100644\n--- a/todolite/cli.py\n+++ b/todolite/cli.py\n@@ -92,6 +92,11 @@ def main(argv=None, stdout=None):\n         _emit(stdout, f\"OK|completed|{task['id']}|{task['title']}\")\n         return 0\n \n+    if command == 'purge-done':\n+        purged = store.purge_done(db_path)\n+        _emit(stdout, f'OK|purged|{purged}')\n+        return 0\n+\n     _emit(stdout, f'ERR|unknown_command|{command}')\n     return 2\n \ndiff --git a/todolite/store.py b/todolite/store.py\nindex 3018de5..cd272ca 100644\n--- a/todolite/store.py\n+++ b/todolite/store.py\n@@ -2,6 +2,27 @@ import json\n from pathlib import Path\n \n \n+def _next_id_path(path):\n+    return Path(str(path) + \".next_id\")\n+\n+\n+def _max_task_id(tasks):\n+    return max((task[\"id\"] for task in tasks), default=0)\n+\n+\n+def _load_next_id(path, tasks):\n+    marker = _next_id_path(path)\n+    try:\n+        saved_next_id = int(marker.read_text(encoding=\"utf-8\").strip())\n+    except (OSError, ValueError):\n+        saved_next_id = 0\n+    return max(saved_next_id, _max_task_id(tasks) + 1)\n+\n+\n+def _save_next_id(path, next_id):\n+    _next_id_path(path).write_text(f\"{next_id}\\n\", encoding=\"utf-8\")\n+\n+\n def load_tasks(path):\n     path = Path(path)\n     if not path.exists():\n@@ -16,7 +37,7 @@ def save_tasks(path, tasks):\n \n def add_task(path, title, due=None, labels=None):\n     tasks = load_tasks(path)\n-    next_id = max((task[\"id\"] for task in tasks), default=0) + 1\n+    next_id = _load_next_id(path, tasks)\n     task = {\"id\": next_id, \"title\": title, \"done\": False}\n     if due:\n         task[\"due\"] = due\n@@ -24,6 +45,7 @@ def add_task(path, title, due=None, labels=None):\n         task[\"labels\"] = list(labels)\n     tasks.append(task)\n     save_tasks(path, tasks)\n+    _save_next_id(path, next_id + 1)\n     return task\n \n \n@@ -39,9 +61,22 @@ def update_task(path, task_id, **changes):\n \n def delete_task(path, task_id):\n     tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n     for index, task in enumerate(tasks):\n         if task[\"id\"] == task_id:\n             removed = tasks.pop(index)\n             save_tasks(path, tasks)\n+            _save_next_id(path, next_id)\n             return removed\n     raise KeyError(task_id)\n+\n+\n+def purge_done(path):\n+    tasks = load_tasks(path)\n+    next_id = _load_next_id(path, tasks)\n+    kept = [task for task in tasks if not task.get(\"done\")]\n+    purged = len(tasks) - len(kept)\n+    if purged:\n+        save_tasks(path, kept)\n+        _save_next_id(path, next_id)\n+    return purged\n",
+      "prompt": "Add `purge-done`, preserving monotonic task ids after deleted completed tasks.",
+      "repo_commit": "tasks/todo-flaky/s03/base",
+      "repo_scope": "todo-flaky",
+      "seq_type": "flaky-test",
+      "sequence_id": "todo-flaky",
+      "session_id": "todo-flaky-s03",
+      "sleep_write_count": 2,
+      "successful_recovery": "oracle passed",
+      "task_id": "todo-flaky",
+      "terminal_outcome": "success",
+      "trajectory_id": "todo-flaky-s03-MUNINN-gpt-5.5"
+    },
+    "repo_commit": "tasks/todo-flaky/s03/base",
+    "seed": 1,
+    "session_id": "todo-flaky-s03",
+    "steps": [
+      {
+        "action": "codex exec",
+        "file_diffs": [],
+        "memory_reads": [],
+        "memory_writes": [],
+        "metadata": {
+          "action": "codex exec",
+          "argv": [
+            "/usr/local/bin/docker",
+            "run",
+            "--rm",
+            "-i",
+            "--name",
+            "dreambench-wake-4162589-8840f4e126b2",
+            "--network",
+            "bridge",
+            "--user",
+            "1000:1000",
+            "-e",
+            "CODEX_HOME=/codexhome",
+            "-e",
+            "HOME=/codexhome",
+            "-e",
+            "NO_COLOR=1",
+            "-v",
+            "/home/ilien/.codex:/codex-home:ro",
+            "-v",
+            "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03:/work:rw",
+            "-w",
+            "/work",
+            "dreambench-swe-codex-agent:latest",
+            "codex",
+            "exec",
+            "--sandbox",
+            "danger-full-access",
+            "--skip-git-repo-check",
+            "-c",
+            "approval_policy=never",
+            "-c",
+            "mcp_servers={}",
+            "-m",
+            "gpt-5.5",
+            "-"
+          ],
+          "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03",
+          "jail": {
+            "codex_home_mount": "/codex-home:ro",
+            "container_cwd": "/work",
+            "container_name": "dreambench-wake-4162589-8840f4e126b2",
+            "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03",
+            "image": "dreambench-swe-codex-agent:latest",
+            "inner_codex_sandbox": "danger-full-access",
+            "isolation_mode": "container",
+            "mounts": [
+              "/codex-home",
+              "/work"
+            ],
+            "network": "bridge",
+            "purpose": "wake",
+            "type": "docker-container",
+            "user": "1000:1000",
+            "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/023-todo-flaky-s03",
+            "writable_codex_home": "/tmp/codexhome"
+          }
+        },
+        "observation": "",
+        "step_id": "step_e0840b279a87",
+        "timestamp": "2026-09-14T10:20:14.508918+00:00",
+        "tool_input": null,
+        "tool_name": null,
+        "tool_output": null
+      }
+    ],
+    "task_id": "todo-flaky-s03",
+    "trajectory_id": "traj_8f6faf4fd9d7"
+  }
+}

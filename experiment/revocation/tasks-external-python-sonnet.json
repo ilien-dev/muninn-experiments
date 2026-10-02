@@ -1,0 +1,129 @@
+{
+ "repo": "/home/ilien/.local/share/muninn-bench/external/Python",
+ "base_ref": "688304911c925bd85c0daf7c8e4e6fb1913d5d31",
+ "model": "claude-sonnet-5",
+ "runs": 3,
+ "arms": [
+  "off",
+  "unfiltered",
+  "literal"
+ ],
+ "max_turns": 25,
+ "timeout_s": 600,
+ "seed_transcripts": [],
+ "control_transcripts": [],
+ "tasks": [
+  {
+   "id": "revoke-compression",
+   "inferable": false,
+   "scenario": {
+    "old": "gzip",
+    "new": "zstd",
+    "retired_by": "superseded"
+   },
+   "prompt": "Create docs/policies/compression.md with a one-paragraph statement of this project's current recorded decision on the transport compression codec. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/compression.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/compression.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'gzip'; echo \"$flat\" | grep -qF 'zstd'"
+  },
+  {
+   "id": "revoke-cache-eviction",
+   "inferable": false,
+   "scenario": {
+    "old": "LFU",
+    "new": "LRU with a 300-second TTL",
+    "retired_by": "superseded"
+   },
+   "prompt": "Create docs/policies/cache-eviction.md with a one-paragraph statement of this project's current recorded decision on the cache eviction policy. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/cache-eviction.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/cache-eviction.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'lfu'; echo \"$flat\" | grep -qF 'lru'"
+  },
+  {
+   "id": "revoke-password-hashing",
+   "inferable": false,
+   "scenario": {
+    "old": "bcrypt",
+    "new": "argon2id",
+    "retired_by": "superseded"
+   },
+   "prompt": "Create docs/policies/password-hashing.md with a one-paragraph statement of this project's current recorded decision on the password hashing algorithm. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/password-hashing.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/password-hashing.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'bcrypt'; echo \"$flat\" | grep -qF 'argon2id'"
+  },
+  {
+   "id": "revoke-tls-backend",
+   "inferable": false,
+   "scenario": {
+    "old": "openssl",
+    "new": "rustls",
+    "retired_by": "superseded"
+   },
+   "prompt": "Create docs/policies/tls-backend.md with a one-paragraph statement of this project's current recorded decision on the TLS backend. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/tls-backend.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/tls-backend.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'openssl'; echo \"$flat\" | grep -qF 'rustls'"
+  },
+  {
+   "id": "revoke-wire-format",
+   "inferable": false,
+   "scenario": {
+    "old": "msgpack",
+    "new": "cbor",
+    "retired_by": "superseded"
+   },
+   "prompt": "Create docs/policies/wire-format.md with a one-paragraph statement of this project's current recorded decision on the wire serialisation format. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/wire-format.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/wire-format.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'msgpack'; echo \"$flat\" | grep -qF 'cbor'"
+  },
+  {
+   "id": "revoke-async-runtime",
+   "inferable": false,
+   "scenario": {
+    "old": "async-std",
+    "new": "tokio",
+    "retired_by": "reverted"
+   },
+   "prompt": "Create docs/policies/async-runtime.md with a one-paragraph statement of this project's current recorded decision on the async runtime. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/async-runtime.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/async-runtime.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'async-std'; echo \"$flat\" | grep -qF 'tokio'"
+  },
+  {
+   "id": "revoke-version-scheme",
+   "inferable": false,
+   "scenario": {
+    "old": "calver",
+    "new": "semver",
+    "retired_by": "revoked"
+   },
+   "prompt": "Create docs/policies/version-scheme.md with a one-paragraph statement of this project's current recorded decision on the version numbering scheme. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/version-scheme.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/version-scheme.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'calver'; echo \"$flat\" | grep -qF 'semver'"
+  },
+  {
+   "id": "revoke-license",
+   "inferable": false,
+   "scenario": {
+    "old": "GPL-3.0",
+    "new": "Apache-2.0",
+    "retired_by": "superseded"
+   },
+   "prompt": "Create docs/policies/license.md with a one-paragraph statement of this project's current recorded decision on the source license. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/license.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/license.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'gpl-3.0'; echo \"$flat\" | grep -qF 'apache-2.0'"
+  },
+  {
+   "id": "revoke-tls-verification",
+   "inferable": false,
+   "scenario": {
+    "old": "certificate verification disabled in dev builds",
+    "new": null,
+    "retired_by": "revoked"
+   },
+   "prompt": "Create docs/policies/tls-verification.md with a one-paragraph statement of this project's current recorded decision on TLS certificate verification in development builds. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/tls-verification.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/tls-verification.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'certificate verification disabled in dev builds'"
+  },
+  {
+   "id": "revoke-internal-http",
+   "inferable": false,
+   "scenario": {
+    "old": "plain http allowed for internal hosts",
+    "new": "https everywhere, no plaintext exception",
+    "retired_by": "superseded"
+   },
+   "prompt": "Create docs/policies/internal-http.md with a one-paragraph statement of this project's current recorded decision on plain HTTP for internal hosts. Use only the project's recorded decisions; if nothing current is recorded, write that nothing is recorded. Do not invent a value and do not describe alternatives that were retired.",
+   "oracle": "set -e; f=docs/policies/internal-http.md; test -f $f; flat=$(tr '\\n' ' ' < docs/policies/internal-http.md | tr 'A-Z' 'a-z'); ! echo \"$flat\" | grep -qF 'plain http allowed for internal hosts'; echo \"$flat\" | grep -qF 'https'"
+  }
+ ],
+ "seed_sha256": "223dcf4d0ba200a2824d2cd7ffe2c333728afe65651ea7300783e35f296fa895",
+ "seed_records": "crates/muninn-bench/experiment/revocation/seed.jsonl"
+}

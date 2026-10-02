@@ -1,0 +1,15 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__expr-convention",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__expr-convention"
+    },
+    "query": "Add safe_evaluate(expression, default=None), returning the default only for ExpressionError while preserving the EXPR_* error convention.",
+    "top_k": 6
+  },
+  "response": {
+    "results": []
+  }
+}

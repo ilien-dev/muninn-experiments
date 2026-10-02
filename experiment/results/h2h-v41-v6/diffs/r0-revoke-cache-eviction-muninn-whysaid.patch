@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..ea100c3
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache eviction policy
++
++The project's current recorded position on cache eviction is LFU (least frequently used): the team stated that an LFU cache fits their workload because it keeps frequently accessed items resident. No later statement changes or replaces this, and no further parameters (such as cache size or TTL) are recorded.

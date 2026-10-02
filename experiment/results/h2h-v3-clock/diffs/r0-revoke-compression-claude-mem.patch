@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..c8ace68
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++No transport compression codec decision is currently recorded for this project. The project's recorded decisions cover related but distinct areas of the transport stack — the wire format (msgpack) and TLS implementation (rustls) — but none of them specify a compression codec, so no codec should be assumed or implemented until a decision is explicitly recorded.

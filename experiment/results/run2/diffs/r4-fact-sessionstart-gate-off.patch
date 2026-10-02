@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..022b40e
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++Coste del hook `SessionStart` (compuerta de salud) en p50, sobre un almacén de 5 000
++registros, antes y después de sacar `quick_check` de la ruta de lectura (cambio que
++añadió a la vez el contador `fts_rows` y el `CHECK` sobre `body`).
++
++- **Antes** (con `quick_check` corriendo en la ruta de lectura): no hay número medido
++  en este repositorio. No encontré benchmark, test de rendimiento ni log con esa cifra.
++- **Después** (`quick_check` fuera de la ruta de lectura; check 3 lee
++  `quick_check_result`/`quick_check_at` de meta y el contador `fts_rows` mantenido por
++  trigger — ver `crates/muninn-core/src/health.rs:82-90`): tampoco hay número medido.
++  El comentario del propio código dice "costs well under a millisecond at any store
++  size", pero es una afirmación de diseño, no una medición.
++
++No hay commit ni artefacto de benchmark en el repo que capture el p50 de este hook
++concreto en ninguno de los dos estados. Los únicos números de rendimiento medidos que
++existen en el repo son de otras rutas (p. ej. el hook `UserPromptSubmit`/BM25 en
++`research/00-evidence-log.md`, entradas `[I3]`/`[M2]`: 4.07 ms p50 con 50 000
++registros; 1.034 ms p50 para evaluación de cues con 5 000 memorias), no del
++`SessionStart health gate`.
++
++Si se necesita esta cifra, hay que correr el benchmark y registrar el resultado aquí
++con el commit y el tamaño de almacén usados.

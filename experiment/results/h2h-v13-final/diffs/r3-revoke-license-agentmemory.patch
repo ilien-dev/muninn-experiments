@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..3066fa1
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source License
++
++This project has no current recorded decision on the source license: the `config/decisions/` directory that tracked such decisions is now empty (its prior contents, including the license decision, were removed), so there is nothing currently on record to state here.

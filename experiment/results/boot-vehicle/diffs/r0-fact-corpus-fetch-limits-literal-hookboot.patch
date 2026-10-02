@@ -1,0 +1,25 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..4f939d6
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,19 @@
++# Fetching
++
++Fuente: memoria de transcripts del proyecto (Muninn, trust 1 — visto en
++sesiones anteriores de este proyecto). No hay script ni log de fetch en este
++repo que lo confirme con un exit code o commit.
++
++## Rate limit por dominio
++
++- 12 visitas por ventana de 60 s, por dominio.
++- Cooldown tras romper el límite: 900 s.
++
++## Hosts CDN/mirror usados
++
++- `raw.githubusercontent.com`
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>`
++- `cdn.statically.io` (lento, con timeouts)
++
++Si se necesita confirmar estos valores contra una fuente verificable, no la
++hay en este checkout: no se encontró script de fetch, config, ni log.

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..8d830ca
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS backend
++
++The project's current recorded decision is to use rustls as the TLS backend, chosen because of its better defaults. Related standing decisions are that HTTPS is used everywhere with no exceptions, and that certificate verification is enabled on all builds.

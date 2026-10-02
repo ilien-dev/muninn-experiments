@@ -1,0 +1,2 @@
+{"at":1790121263174,"decision":"deny","harness":"claude-code","rule":"CLAUDE.md:6#0","session":"536cc738-28fe-447d-9ee0-11eb5319bbce","tool":"Bash"}
+{"at":1790121278929,"decision":null,"harness":"claude-code","rule":null,"session":"536cc738-28fe-447d-9ee0-11eb5319bbce","tool":"Bash"}

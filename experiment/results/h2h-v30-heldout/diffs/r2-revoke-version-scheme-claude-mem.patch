@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..cae16e1
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++The project's current recorded decision is to use semantic versioning (semver), in the major.minor.patch form: a major-version bump signals breaking changes, a minor bump signals new backward-compatible features, and a patch bump signals backward-compatible bug fixes. The rationale recorded for this choice is that semver gives users explicit compatibility signals, which helps them decide when and how to update their dependencies.

@@ -1,0 +1,15 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..c3c340d
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,9 @@
++# Cache eviction policy
++
++No cache eviction policy is currently recorded for this project. A search of
++the project's documentation, design notes, threat model, schema, and source
++crates turned up no adopted decision specifying an eviction strategy (e.g.
++LRU, LFU, TTL) for any cache; the only related material is general research
++literature and third-party example files, neither of which constitutes a
++recorded project decision. If a cache eviction policy is decided in the
++future, it should be recorded here.

@@ -1,0 +1,9 @@
+{"at":1789372494141,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[83,84],"tokens":199,"reason":"cue:event:session_start"}
+{"at":1789372494146,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[81],"tokens":0,"reason":"gated:budget"}
+{"at":1789372494146,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[76],"tokens":0,"reason":"gated:budget"}
+{"at":1789372494146,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[62],"tokens":0,"reason":"gated:budget"}
+{"at":1789372494146,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[60],"tokens":0,"reason":"gated:budget"}
+{"at":1789372494146,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789372494146,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[78,64,53],"tokens":578,"reason":"literal"}
+{"at":1789372499003,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[],"tokens":0,"reason":"deny:store-access"}
+{"at":1789372505517,"session":"01a09ee9-69b6-7673-b671-4f624c2acc8e","arm":"literal","ids":[],"tokens":0,"reason":"deny:store-access"}

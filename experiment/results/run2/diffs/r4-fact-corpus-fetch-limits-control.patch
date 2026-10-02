@@ -1,0 +1,24 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..cff2784
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,18 @@
++# Fetching notes
++
++## Rate limit
++
++No visits-per-window, window length, or post-breach cooldown value for this
++fetch is recorded anywhere in this repo (checked `GATE1.md`, `manifest.tsv`,
++`unavailable.tsv`, the `research/` notes, and `muninn-bench` source). `GATE1.md`
++says only that "fetching is rate-limited" and that it is why just 115 of 323
++manifest entries were on disk at measurement time — no numbers behind that
++statement survive. Not writing a figure here rather than inventing one.
++
++## Host
++
++`manifest.tsv`'s header records a single source: files were located via GitHub
++code search (grep.app) on 2026-09-12 and fetched raw from
++`raw.githubusercontent.com`. No CDN or mirror host (e.g. jsDelivr, statically.io)
++appears anywhere in the repo for this corpus — everything went through that one
++host.

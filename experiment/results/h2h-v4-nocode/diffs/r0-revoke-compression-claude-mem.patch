@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..43a8ef4
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++The project's recorded decision is to use zstd as the transport compression algorithm, adopted after benchmarks demonstrated it offers faster compression performance than the previously implemented algorithm.

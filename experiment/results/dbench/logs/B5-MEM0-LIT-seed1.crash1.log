@@ -1,0 +1,35 @@
+2026-09-14 03:52:29.371 | ERROR    | fastembed.common.model_management:retrieve_model_gcs:362 - Could not find the model tar.gz file at /home/ilien/.cache/fastembed/bge-small-en-v1.5 and local_files_only=True.
+2026-09-14 03:52:29.371 | ERROR    | fastembed.common.model_management:download_model:466 - Could not find model in cache_dir
+Traceback (most recent call last):
+  File "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/dreambench/run_bench_ext.py", line 94, in <module>
+    raise SystemExit(run_bench.main(sys.argv[1:]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/src/experiments/run_bench.py", line 193, in main
+    run_benchmark(
+  File "/home/ilien/Projects/dreambench-swe/src/experiments/run_bench.py", line 254, in run_benchmark
+    policy = _policy_for_condition(
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/dreambench/run_bench_ext.py", line 74, in _policy_for_condition
+    client = Memory.from_config(mem0_offline_config(str(run_id or "manual"), seed))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/.venv/lib/python3.12/site-packages/mem0/memory/main.py", line 737, in from_config
+    return cls(config)
+           ^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/.venv/lib/python3.12/site-packages/mem0/memory/main.py", line 491, in __init__
+    self.embedding_model = EmbedderFactory.create(
+                           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/.venv/lib/python3.12/site-packages/mem0/utils/factory.py", line 175, in create
+    return embedder_instance(base_config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/.venv/lib/python3.12/site-packages/mem0/embeddings/fastembed.py", line 16, in __init__
+    self.dense_model = TextEmbedding(model_name=self.config.model)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/.venv/lib/python3.12/site-packages/fastembed/text/text_embedding.py", line 114, in __init__
+    self.model = EMBEDDING_MODEL_TYPE(
+                 ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/.venv/lib/python3.12/site-packages/fastembed/text/onnx_embedding.py", line 252, in __init__
+    self._model_dir = self.download_model(
+                      ^^^^^^^^^^^^^^^^^^^^
+  File "/home/ilien/Projects/dreambench-swe/.venv/lib/python3.12/site-packages/fastembed/common/model_management.py", line 475, in download_model
+    raise ValueError(f"Could not load model {model.model} from any source.")
+ValueError: Could not load model BAAI/bge-small-en-v1.5 from any source.

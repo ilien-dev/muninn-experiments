@@ -1,0 +1,24 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..02ab56b
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,18 @@
++# Perf history
++
++## SessionStart health gate
++
++Store con 5 000 registros.
++
++| Momento | p50 | Fuente |
++|---|---|---|
++| Antes (quick_check en el read path) | 11.9 ms | registro de sesión (muninn episode, trust 1), sin commit ni archivo de benchmark que lo respalde en este repo |
++| Después (quick_check fuera del read path; se añaden el contador `fts_rows` y el CHECK de `body`) | 1.05 ms | registro de sesión (muninn episode, trust 1), sin commit ni archivo de benchmark que lo respalde en este repo |
++
++El cambio de código (mover `quick_check` fuera del read path, añadir `fts_rows` y el CHECK
++de `body`) sí está confirmado en el historial de git de `crates/muninn-core/src/health.rs`.
++Las dos cifras de p50 no tienen un commit ni un archivo de benchmark en este repo que las
++respalde directamente; provienen únicamente de un registro de sesión anterior (trust 1 en
++Muninn: lo que se dijo y lo que se ejecutó, no re-verificado contra el repositorio). Si se
++necesita una cifra con trust 2 (confirmada por exit code o commit), hay que re-correr el
++benchmark de `SessionStart` sobre un store de 5 000 registros y anotar aquí la salida real.

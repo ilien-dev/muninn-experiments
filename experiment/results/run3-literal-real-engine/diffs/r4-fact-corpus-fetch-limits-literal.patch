@@ -1,0 +1,24 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..f387fa1
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,18 @@
++# Fetching this corpus
++
++Files were fetched via Svipall, which enforces a per-domain rate limit:
++
++- **12 visits per 60 s window**, per domain.
++- Breaching it triggers a **900 s (15 min) cooldown** before that domain is usable again.
++
++## Mirror / CDN hosts used
++
++- `raw.githubusercontent.com` — primary source; confirmed by `manifest.tsv`'s header, which
++  records files as "fetched raw via raw.githubusercontent.com".
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>` — fallback mirror.
++- `cdn.statically.io` — fallback mirror; noted as slow / prone to timeouts.
++
++Source: session record (muninn episode, 2026-09-13, trust level 1 — observed in this
++project's own transcript). No separate fetch log or script in this repo pins these
++numbers independently; if that matters, re-check against the actual fetch script/log
++before relying on the exact figures.

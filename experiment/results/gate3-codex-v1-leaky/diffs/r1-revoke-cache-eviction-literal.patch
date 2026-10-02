@@ -1,0 +1,7 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..d47c9bc
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1 @@
++The cache eviction policy is LRU with a 300-second TTL.

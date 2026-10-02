@@ -1,0 +1,7 @@
+{"at":1789370474989,"session":"81cbe52d-d670-484a-9748-f29fb90eae89","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}
+{"at":1789370484474,"session":"81cbe52d-d670-484a-9748-f29fb90eae89","files":["research/CONCLUSION.md","research/00-evidence-log.md","plugin/skills/muninn/SKILL.md","crates/muninn-compile/src/classify.rs"],"symbols":["Class","Class","as_str","Decision","PermissionRule","PermissionRule","render","HookRule","Classification","re","Rx","NEG"]}
+{"at":1789370491888,"session":"81cbe52d-d670-484a-9748-f29fb90eae89","files":["research/CONCLUSION.md"],"symbols":[]}
+{"at":1789370498295,"session":"81cbe52d-d670-484a-9748-f29fb90eae89","files":["research/00-evidence-log.md;","research/00-evidence-log.md"],"symbols":[]}
+{"at":1789370502998,"session":"81cbe52d-d670-484a-9748-f29fb90eae89","files":["plugin/skills/muninn/SKILL.md"],"symbols":[]}
+{"at":1789370521716,"session":"81cbe52d-d670-484a-9748-f29fb90eae89","files":["crates/muninn-embed/src/lib.rs"],"symbols":[]}
+{"at":1789370530089,"session":"81cbe52d-d670-484a-9748-f29fb90eae89","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}

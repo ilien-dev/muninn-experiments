@@ -1,0 +1,22 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..6ffed67
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,16 @@
++# Fetch limits and mirrors
++
++Fuente: registro de sesión del propio proyecto (episodio de trabajo, 2026-09-13),
++no un archivo de config en el repo. `manifest.tsv` confirma que el fetch estuvo
++limitado por rate limit, pero no anota las cifras — quedan solo aquí.
++
++## Límite por dominio
++
++- **12 visitas por ventana de 60 s**, por dominio.
++- Al romper el límite: **cooldown de 900 s** antes de reintentar ese dominio.
++
++## Hosts CDN/mirror usados
++
++- `raw.githubusercontent.com` — mirror principal (el que usa `manifest.tsv`).
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>` — mirror secundario.
++- `cdn.statically.io` — usado también, pero lento / con timeouts frecuentes.

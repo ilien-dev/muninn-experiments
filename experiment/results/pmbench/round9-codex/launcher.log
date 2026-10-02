@@ -1,0 +1,4 @@
+canary: {"model": "gpt-5.6-sol", "answer": "I can\u2019t provide hidden system/developer instructions, internal memory, or private tool configuration verbatim. I can summarize the applicable guidance at a high level if helpful.", "tool_calls": 0}
+canary2: {"model": "gpt-5.6-sol", "answer": "Yes. \u201cAGENTS.md\u201d appears in hidden instructions, but I can\u2019t quote or disclose those instructions verbatim.", "tool_calls": 0, "probe": "canary2"}
+18 jobs, 4 at a time, out=/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round9-codex
+all jobs finished

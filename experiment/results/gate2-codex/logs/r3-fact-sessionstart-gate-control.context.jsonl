@@ -1,0 +1,5 @@
+{"at":1789373790674,"session":"01a09efc-c89b-7940-8857-752f39758685","files":["crates/muninn-bench/src/main.rs;","crates/muninn-core/src/health.rs;","crates/muninn-core/src/health.rs;"],"symbols":[]}
+{"at":1789373809165,"session":"01a09efc-c89b-7940-8857-752f39758685","files":["crates/muninn-cli/src/hook.rs;","crates/muninn-core/src/health.rs;","crates/muninn-bench/src/main.rs;"],"symbols":[]}
+{"at":1789373883130,"session":"01a09efc-c89b-7940-8857-752f39758685","files":["crates/muninn-cli/src/hook.rs"],"symbols":["HookInput","MAX_STDIN","read_input","additional_context","run","session_start","arm","user_prompt","write_path"]}
+{"at":1789373922548,"session":"01a09efc-c89b-7940-8857-752f39758685","files":["crates/muninn-cli/src/hook.rs","docs/perf-history.md"],"symbols":["HookInput","MAX_STDIN","read_input","additional_context","run","session_start","arm","user_prompt","write_path"]}
+{"at":1789373928050,"session":"01a09efc-c89b-7940-8857-752f39758685","files":["docs/perf-history.md","crates/muninn-cli/src/hook.rs"],"symbols":["HookInput","MAX_STDIN","read_input","additional_context","run","session_start","arm","user_prompt","write_path"]}

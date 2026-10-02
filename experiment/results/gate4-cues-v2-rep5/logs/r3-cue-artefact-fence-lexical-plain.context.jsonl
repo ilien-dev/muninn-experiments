@@ -1,0 +1,7 @@
+{"at":1789370407783,"session":"9a2eecb0-57da-4f40-8991-e31e438a587d","files":["crates/muninn-compile/src/emit.rs"],"symbols":["PermissionsFragment","PermissionLists","permissions","HookFile","HookEntry","hooks","Coverage","coverage","report","tests","deny_wins_over_ask_in_fragment"]}
+{"at":1789370425835,"session":"9a2eecb0-57da-4f40-8991-e31e438a587d","files":["crates/muninn-compile/src/lib.rs"],"symbols":["classify","emit","parse","CompiledRule","compile_project"]}
+{"at":1789370428470,"session":"9a2eecb0-57da-4f40-8991-e31e438a587d","files":["crates/muninn-compile/Cargo.toml;"],"symbols":[]}
+{"at":1789370446203,"session":"9a2eecb0-57da-4f40-8991-e31e438a587d","files":["/emit.rs:"],"symbols":[]}
+{"at":1789370464667,"session":"9a2eecb0-57da-4f40-8991-e31e438a587d","files":["crates/muninn-compile/src/emit.rs"],"symbols":["PermissionsFragment","PermissionLists","permissions","HookFile","HookEntry","hooks","Coverage","coverage","report","tests","deny_wins_over_ask_in_fragment"]}
+{"at":1789370468961,"session":"9a2eecb0-57da-4f40-8991-e31e438a587d","files":["crates/muninn-compile/src/emit.rs"],"symbols":["PermissionsFragment","PermissionLists","permissions","HookFile","HookEntry","hooks","Coverage","coverage","report","tests","deny_wins_over_ask_in_fragment"]}
+{"at":1789370471350,"session":"9a2eecb0-57da-4f40-8991-e31e438a587d","files":["crates/muninn-compile/src/emit.rs"],"symbols":["PermissionsFragment","PermissionLists","permissions","HookFile","HookEntry","hooks","Coverage","coverage","report","tests","deny_wins_over_ask_in_fragment"]}

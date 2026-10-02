@@ -1,0 +1,16 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..03e0de8
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,10 @@
++# Performance history
++
++## SessionStart health gate
++
++On a 5k-record store, the measured SessionStart hook p50 was **11.9 ms** before `quick_check` was removed from the read path. After that change, the measured p50 was **1.05 ms**. The latter measurement includes the `fts_rows` counter and the body `CHECK`, which were added at the same time.
++
++| Configuration | SessionStart p50 |
++| --- | ---: |
++| Live `quick_check` on the read path | 11.9 ms |
++| Recorded integrity off the read path, with `fts_rows` counter and body `CHECK` | 1.05 ms |

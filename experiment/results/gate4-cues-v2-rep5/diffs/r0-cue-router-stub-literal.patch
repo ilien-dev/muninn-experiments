@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..8a444f3 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,16 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// The kind of record a `muninn why` question routes to.
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Route {
++    Decision,
++    DeadEnd,
++    Commit,
++    File,
++    Rule,
++}
++
++/// Decides which route a question takes. Stub: filled in Phase 4.
++pub fn route_question(_question: &str) -> Route {
++    todo!("classify question into Decision/DeadEnd/Commit/File/Rule")
++}

@@ -1,0 +1,11 @@
+{
+ "arm": "C1n",
+ "model": "qwen35-4b-q4km.gguf",
+ "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+ "threads": 16,
+ "calls": 629,
+ "full_prompt": false,
+ "wall_s": 1432.4,
+ "started": "2026-09-25T14:03:50.722905+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

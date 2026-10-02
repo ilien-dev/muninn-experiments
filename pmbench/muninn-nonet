@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Round 8 isolation: run the muninn binary inside a fresh network namespace (unshare -rn),
+# so the store under test provably cannot reach anything outside the machine during a run.
+# MUNINN_REAL_BIN names the binary; every argument and environment variable passes through.
+exec unshare -rn "${MUNINN_REAL_BIN:?set MUNINN_REAL_BIN}" "$@"

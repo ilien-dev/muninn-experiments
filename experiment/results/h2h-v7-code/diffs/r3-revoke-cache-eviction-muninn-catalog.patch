@@ -1,0 +1,12 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..4c15474
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,6 @@
++# Cache Eviction Policy
++
++No cache eviction policy is currently recorded in this project. The decision
++configuration that previously tracked this setting was removed from the
++repository tree, and no replacement record exists in the project as of this
++writing.

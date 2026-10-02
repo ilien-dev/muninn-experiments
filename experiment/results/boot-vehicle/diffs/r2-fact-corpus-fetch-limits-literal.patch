@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..2891f6f
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,15 @@
++# Límites de fetch usados para este corpus
++
++Datos tomados de un episodio de sesión anterior de este proyecto (trust 1, sin
++commit ni verificación fresca — no se remidió en esta tarea).
++
++## Límite de tasa por dominio
++
++- 12 visitas por ventana de 60 s, por dominio.
++- Cooldown de 900 s tras una violación del límite.
++
++## Hosts CDN / mirror usados
++
++- `raw.githubusercontent.com`
++- `cdn.jsdelivr.net/gh/owner/repo@branch/path`
++- `cdn.statically.io` (lento, con timeouts frecuentes)

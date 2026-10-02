@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..188c370
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Plain HTTP for internal hosts
++
++The project's current recorded decision is that plaintext HTTP is prohibited everywhere, including host-to-host communication between internal hosts: all communication must use HTTPS, and no carve-outs or exceptions are permitted for internal traffic.

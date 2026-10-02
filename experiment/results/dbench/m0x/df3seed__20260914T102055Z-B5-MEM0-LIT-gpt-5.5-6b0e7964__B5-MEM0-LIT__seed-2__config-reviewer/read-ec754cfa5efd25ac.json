@@ -1,0 +1,15 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer"
+    },
+    "query": "Extend dump_ini with sort_keys=True for deterministic reviewer-friendly output while keeping insertion-order output by default.",
+    "top_k": 6
+  },
+  "response": {
+    "results": []
+  }
+}

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..50184b5
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS certificate verification
++
++The project's current recorded decision is that TLS certificate verification is enabled on all builds, development builds included, with no exception for dev. This is paired with the recorded rule of https everywhere, with no exceptions, so certificate verification applies to every connection the project makes.

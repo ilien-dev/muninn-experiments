@@ -1,0 +1,32 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..3c63691
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,26 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++No measured p95 for the full-recall UserPromptSubmit hook against an adversarial
++30-word synthetic vocabulary was found in this project's own records (research
++logs, benchmark scripts/output, or source comments). A figure for this exact
++scenario (before a term-selection fix, and the fix itself) could not be located
++in `research/00-evidence-log.md`, `research/CONCLUSION.md`,
++`research/CONCLUSION-v1-superada.md`, or the `research/bench/` and
++`crates/muninn-bench/` benchmark code, so no number is recorded here rather
++than estimating one.
++
++The closest documented, source-backed measurements of the full hook path are
++in `research/00-evidence-log.md` [I3] and `research/CONCLUSION.md`:
++
++- Full hook, end-to-end (fork + exec + open SQLite + intent gate + BM25 top-8 +
++  output), 50,000-record index, turn with intent: p50 4.07 ms / p95 4.31 ms.
++- Same setup, turn without intent (gate short-circuits): p50 0.49 ms / p95 0.56 ms.
++
++These do not use an adversarial 30-word vocabulary and are not the number
++requested; they are included only as the nearest verified reference point.
++
++If a measurement for the adversarial 30-word vocabulary case exists, it should
++be added here with a citation to the file/line where it was recorded, and this
++note should be removed.

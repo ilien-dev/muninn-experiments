@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..0ebe72d
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source license
++
++No current decision on the project's source license is recorded. The project's memory holds two conflicting, unconfirmed passing mentions of a license (GPL-3.0 and Apache-2.0), neither of which was recorded as a decision or supersedes the other, so no value is stated here until the license is explicitly decided.

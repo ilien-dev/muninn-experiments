@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..2daf869
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++The project's recorded decision for the transport compression codec is zstd, as recorded in `config/decisions/revoke-compression.json` (set via commit `b7119cf`); this remains the current decision, as no later recorded decision has changed it.

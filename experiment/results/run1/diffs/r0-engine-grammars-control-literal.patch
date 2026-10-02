@@ -1,0 +1,27 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..1e4c49e 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -300,6 +300,22 @@ autoformalización publicada `[U1]`, no se inventa.
+ - Privilegio mínimo: el hook de lectura abre la base en modo solo lectura; solo la ruta
+   de escritura escribe.
+ 
++## 10.1 Gramáticas
++
++Gramáticas de `tree-sitter` compiladas estáticamente en el binario del MVP para el
++grafo de símbolos (sección 8, `muninn-symbols`). Sin `.so`, sin descarga en runtime.
++
++| Lenguaje | Crate | Extensiones |
++|---|---|---|
++| Rust | `tree-sitter-rust` | `.rs` |
++| TypeScript / TSX | `tree-sitter-typescript` | `.ts`, `.tsx`, `.mts`, `.cts` |
++| JavaScript / JSX | `tree-sitter-javascript` | `.js`, `.jsx`, `.mjs`, `.cjs` |
++| Python | `tree-sitter-python` | `.py`, `.pyi` |
++| Go | `tree-sitter-go` | `.go` |
++
++Lenguajes adicionales (Java, C#, Ruby, PHP, C/C++, Kotlin, Swift…) quedan fuera del
++MVP: se añaden por demanda medida.
++
+ ## 11. Salud del motor (P10)
+ 
+ Health gate en `SessionStart`, una línea: `MUNINN 9/9 GREEN` o el nombre del fallo y su

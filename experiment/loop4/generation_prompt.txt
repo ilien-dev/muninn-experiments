@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+{
+"key": "h4-db-migrate#terse",
+"topic": "the database migration tool",
+"old": "Flyway",
+"new": "Atlas",
+"style": "terse"
+},
+{
+"key": "h4-db-migrate#chatty",
+"topic": "the database migration tool",
+"old": "Flyway",
+"new": "Atlas",
+"style": "chatty"
+},
+{
+"key": "h4-db-migrate#Spanish",
+"topic": "the database migration tool",
+"old": "Flyway",
+"new": "Atlas",
+"style": "Spanish"
+},
+{
+"key": "h4-container-reg#terse",
+"topic": "the container registry",
+"old": "Docker Hub",
+"new": "GitHub Container Registry",
+"style": "terse"
+},
+{
+"key": "h4-container-reg#chatty",
+"topic": "the container registry",
+"old": "Docker Hub",
+"new": "GitHub Container Registry",
+"style": "chatty"
+},
+{
+"key": "h4-container-reg#Spanish",
+"topic": "the container registry",
+"old": "Docker Hub",
+"new": "GitHub Container Registry",
+"style": "Spanish"
+},
+{
+"key": "h4-docs-site#terse",
+"topic": "the documentation site generator",
+"old": "Docusaurus",
+"new": "Starlight",
+"style": "terse"
+},
+{
+"key": "h4-docs-site#chatty",
+"topic": "the documentation site generator",
+"old": "Docusaurus",
+"new": "Starlight",
+"style": "chatty"
+},
+{
+"key": "h4-docs-site#Spanish",
+"topic": "the documentation site generator",
+"old": "Docusaurus",
+"new": "Starlight",
+"style": "Spanish"
+},
+{
+"key": "h4-pkg-py#terse",
+"topic": "the Python package manager",
+"old": "pip-tools",
+"new": "uv",
+"style": "terse"
+},
+{
+"key": "h4-pkg-py#chatty",
+"topic": "the Python package manager",
+"old": "pip-tools",
+"new": "uv",
+"style": "chatty"
+},
+{
+"key": "h4-pkg-py#Spanish",
+"topic": "the Python package manager",
+"old": "pip-tools",
+"new": "uv",
+"style": "Spanish"
+},
+{
+"key": "h4-http-rust#terse",
+"topic": "the HTTP client in the Rust service",
+"old": "reqwest",
+"new": "ureq",
+"style": "terse"
+},
+{
+"key": "h4-http-rust#chatty",
+"topic": "the HTTP client in the Rust service",
+"old": "reqwest",
+"new": "ureq",
+"style": "chatty"
+},
+{
+"key": "h4-http-rust#Spanish",
+"topic": "the HTTP client in the Rust service",
+"old": "reqwest",
+"new": "ureq",
+"style": "Spanish"
+},
+{
+"key": "h4-video#terse",
+"topic": "the video transcoding service",
+"old": "AWS MediaConvert",
+"new": "FFmpeg on our workers",
+"style": "terse"
+},
+{
+"key": "h4-video#chatty",
+"topic": "the video transcoding service",
+"old": "AWS MediaConvert",
+"new": "FFmpeg on our workers",
+"style": "chatty"
+},
+{
+"key": "h4-video#Spanish",
+"topic": "the video transcoding service",
+"old": "AWS MediaConvert",
+"new": "FFmpeg on our workers",
+"style": "Spanish"
+},
+{
+"key": "h4-forms#terse",
+"topic": "the form library in the web app",
+"old": "Formik",
+"new": "React Hook Form",
+"style": "terse"
+},
+{
+"key": "h4-forms#chatty",
+"topic": "the form library in the web app",
+"old": "Formik",
+"new": "React Hook Form",
+"style": "chatty"
+},
+{
+"key": "h4-forms#Spanish",
+"topic": "the form library in the web app",
+"old": "Formik",
+"new": "React Hook Form",
+"style": "Spanish"
+},
+{
+"key": "h4-chat#terse",
+"topic": "the team chat integration for alerts",
+"old": "Slack webhooks",
+"new": "Discord webhooks",
+"style": "terse"
+},
+{
+"key": "h4-chat#chatty",
+"topic": "the team chat integration for alerts",
+"old": "Slack webhooks",
+"new": "Discord webhooks",
+"style": "chatty"
+},
+{
+"key": "h4-chat#Spanish",
+"topic": "the team chat integration for alerts",
+"old": "Slack webhooks",
+"new": "Discord webhooks",
+"style": "Spanish"
+},
+{
+"key": "h4-iac#terse",
+"topic": "the infrastructure-as-code tool",
+"old": "Terraform",
+"new": "OpenTofu",
+"style": "terse"
+},
+{
+"key": "h4-iac#chatty",
+"topic": "the infrastructure-as-code tool",
+"old": "Terraform",
+"new": "OpenTofu",
+"style": "chatty"
+},
+{
+"key": "h4-iac#Spanish",
+"topic": "the infrastructure-as-code tool",
+"old": "Terraform",
+"new": "OpenTofu",
+"style": "Spanish"
+},
+{
+"key": "h4-cookies#terse",
+"topic": "third-party cookies on the marketing site",
+"old": "third-party tracking cookies enabled",
+"new": "(withdrawn, no replacement)",
+"style": "terse"
+},
+{
+"key": "h4-cookies#chatty",
+"topic": "third-party cookies on the marketing site",
+"old": "third-party tracking cookies enabled",
+"new": "(withdrawn, no replacement)",
+"style": "chatty"
+},
+{
+"key": "h4-cookies#Spanish",
+"topic": "third-party cookies on the marketing site",
+"old": "third-party tracking cookies enabled",
+"new": "(withdrawn, no replacement)",
+"style": "Spanish"
+}
+]

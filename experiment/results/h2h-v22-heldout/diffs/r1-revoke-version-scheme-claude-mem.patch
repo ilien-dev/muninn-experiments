@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..3803b83
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++This project uses Semantic Versioning (SemVer, `MAJOR.MINOR.PATCH`) for release version numbers. It was chosen because its structured versioning integrates better with standard dependency management practices and the package managers and build tools that resolve dependencies, which suits a library used by other projects.

@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Strict validation should produce actionable line-numbered errors instead of broad ValueError text.\nFor sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/parser.py b/configly/parser.py index 7c673e2..a054652 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False): return '\\n'.join(lines) + ('\\n' if lines else '') -def parse_csv(text): - rows = list(csv.reader(io.StringIO(text))) - if not rows: +def parse_csv(text, strict=False): + reader = csv.reader(io.StringIO(text)) + try: + header_row = next(reader) + except StopIteration: return [] - headers = [normalize_key(header) for header in rows[0]] + headers = [normalize_key(header) for header in header_row] records = [] - for line_no, row in enumerate(rows[1:], start=2): + expected_width = len(headers) + for row in reader: + line_no = reader.line_num + if strict and len(row) != expected_width: + raise ParseError( + f'line {line_no}: expected {expected_width} columns, got {len(row)}' + ) padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records - diff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py index a832293..f270551 100644 --- a/tests/test_strict_csv.py +++ b/tests/test_strict_csv.py @@ -8,5 +8,10 @@ def test_parse_csv_strict_rejects_short_rows_with_line_number(): parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True) +def test_parse_csv_strict_rejects_long_rows_with_line_number(): + with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"): + parse_csv(\"name,age\\nAda,37,engineer\\n\", strict=True) + + def test_parse_csv_default_remains_lenient(): assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py index 7c673e2..a054652 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False): return '\\n'.join(lines) + ('\\n' if lines else '') -def parse_csv(text): - rows = list(csv.reader(io.StringIO(text))) - if not rows: +def parse_csv(text, strict=False): + reader = csv.reader(io.StringIO(text)) + try: + header_row = next(reader) + except StopIteration: return [] - headers = [normalize_key(header) for header in rows[0]] + headers = [normalize_key(header) for header in header_row] records = [] - for line_no, row in enumerate(rows[1:], start=2): + expected_width = len(headers) + for row in reader: + line_no = reader.line_num + if strict and len(row) != expected_width: + raise ParseError( + f'line {line_no}: expected {expected_width} columns, got {len(row)}' + ) padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964",
+      "seed": 2,
+      "sequence_id": "config-reviewer"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "cd0d23cd-5dcd-436d-9029-897400559790",
+        "memory": "Strict validation should produce actionable line-numbered errors instead of broad ValueError text.\nFor sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/parser.py b/configly/parser.py index 7c673e2..a054652 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False): return '\\n'.join(lines) + ('\\n' if lines else '') -def parse_csv(text): - rows = list(csv.reader(io.StringIO(text))) - if not rows: +def parse_csv(text, strict=False): + reader = csv.reader(io.StringIO(text)) + try: + header_row = next(reader) + except StopIteration: return [] - headers = [normalize_key(header) for header in rows[0]] + headers = [normalize_key(header) for header in header_row] records = [] - for line_no, row in enumerate(rows[1:], start=2): + expected_width = len(headers) + for row in reader: + line_no = reader.line_num + if strict and len(row) != expected_width: + raise ParseError( + f'line {line_no}: expected {expected_width} columns, got {len(row)}' + ) padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records - diff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py index a832293..f270551 100644 --- a/tests/test_strict_csv.py +++ b/tests/test_strict_csv.py @@ -8,5 +8,10 @@ def test_parse_csv_strict_rejects_short_rows_with_line_number(): parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True) +def test_parse_csv_strict_rejects_long_rows_with_line_number(): + with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"): + parse_csv(\"name,age\\nAda,37,engineer\\n\", strict=True) + + def test_parse_csv_default_remains_lenient(): assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py index 7c673e2..a054652 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False): return '\\n'.join(lines) + ('\\n' if lines else '') -def parse_csv(text): - rows = list(csv.reader(io.StringIO(text))) - if not rows: +def parse_csv(text, strict=False): + reader = csv.reader(io.StringIO(text)) + try: + header_row = next(reader) + except StopIteration: return [] - headers = [normalize_key(header) for header in rows[0]] + headers = [normalize_key(header) for header in header_row] records = [] - for line_no, row in enumerate(rows[1:], start=2): + expected_width = len(headers) + for row in reader: + line_no = reader.line_num + if strict and len(row) != expected_width: + raise ParseError( + f'line {line_no}: expected {expected_width} columns, got {len(row)}' + ) padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "role": "user"
+      }
+    ]
+  }
+}

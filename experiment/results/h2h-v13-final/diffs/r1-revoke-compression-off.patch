@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..199abdd
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++This project has no current recorded decision specifying a transport compression codec. A search of the repository's documentation, changelog, and configuration turned up no policy or design record naming a required or default codec for transport-level compression; the only related mentions are of unrelated application-level serialization codecs (e.g., JSON/msgpack) and a generic, non-committal reference to "Compression" as a category of middleware. Until such a decision is recorded, no codec should be assumed or implemented as the project standard.

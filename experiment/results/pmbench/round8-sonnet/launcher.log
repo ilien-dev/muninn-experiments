@@ -1,0 +1,8 @@
+canary: {"model": "claude-sonnet-5", "answer": "Here is everything provided to me besides your message itself:\n\n**System context block (userEmail):**\n```\n# userEmail\nThe user's email address is [account e-mail]. Use it only to identify the user, such as for authorship, attribution, or filtering the
+canary2: {"model": "claude-sonnet-5", "answer": "Yes. The following passages mention some of these words:\n\n1. From the **userEmail** context:\n> The user's email address is [account e-mail]. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send i
+48 jobs, 8 at a time, out=/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-sonnet
+canary: {"model": "claude-sonnet-5", "answer": "Here is everything provided to me besides your message:\n\n**System context blocks:**\n\n1. **userEmail context:**\n\"The user's email address is [account e-mail]. Use it only to identify the user, such as for authorship, attribution, or filtering their ow
+canary2: {"model": "claude-sonnet-5", "answer": "Yes, the following passages contain matching words:\n\n1. Contains \"[account e-mail]\":\n> The user's email address is [account e-mail]. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrel
+resume: complete runs kept per (week, arm): {'v9/muninn_store': 2, 'v9/plain_store': 2}; partial dirs removed: 22
+44 jobs, 8 at a time, out=/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-sonnet
+all jobs finished

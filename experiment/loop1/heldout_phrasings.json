@@ -1,0 +1,362 @@
+[
+ {
+  "key": "g3-compression#terse",
+  "a": "use gzip for transport compression",
+  "b": "actually switch to zstd",
+  "c": "also checking header compression options"
+ },
+ {
+  "key": "g3-compression#chatty",
+  "a": "I think we should go with gzip for transport compression—it's pretty standard and widely supported.",
+  "b": "You know what, let me change that decision. Let's use zstd instead—it's got better compression ratios and we've tested it.",
+  "c": "By the way, I was looking at our other compression needs and wondering about the cookie compression strategy."
+ },
+ {
+  "key": "g3-compression#Spanish",
+  "a": "Vamos a usar gzip para la compresión de transporte.",
+  "b": "Cambio de planes: vamos a usar zstd en su lugar.",
+  "c": "Mientras tanto, también necesitamos pensar en la compresión de headers."
+ },
+ {
+  "key": "g3-cache-eviction#terse",
+  "a": "set cache eviction to LFU",
+  "b": "switch to LRU with 300s TTL instead",
+  "c": "need to tune the cache size limits too"
+ },
+ {
+  "key": "g3-cache-eviction#chatty",
+  "a": "I've been thinking about cache eviction, and I want to go with LFU because it works well for our access patterns.",
+  "b": "Actually, I've reconsidered. Let's use LRU with a 300-second TTL—it's simpler and should work better given our load characteristics.",
+  "c": "While we're optimizing the cache layer, we should probably revisit our warming strategy too."
+ },
+ {
+  "key": "g3-cache-eviction#Spanish",
+  "a": "La política de evicción del caché será LFU.",
+  "b": "Mejor dicho, LRU con TTL de 300 segundos.",
+  "c": "También hay que revisar el tamaño del caché entonces."
+ },
+ {
+  "key": "g3-password-hashing#terse",
+  "a": "password hashing: bcrypt",
+  "b": "change to argon2id",
+  "c": "check encryption strength in DB backups"
+ },
+ {
+  "key": "g3-password-hashing#chatty",
+  "a": "For password hashing, let's stick with bcrypt—it's battle-tested and gives us a good safety margin.",
+  "b": "Hold on, I want to revise that. Let's move to argon2id instead. It's more resistant to GPU attacks and fits our security goals better.",
+  "c": "On a related note, we should probably audit our key derivation functions across the codebase."
+ },
+ {
+  "key": "g3-password-hashing#Spanish",
+  "a": "Algoritmo de hashing de contraseñas: bcrypt.",
+  "b": "En realidad, vamos con argon2id.",
+  "c": "También hay que revisar los salts en la base de datos."
+ },
+ {
+  "key": "g3-tls-backend#terse",
+  "a": "TLS backend: openssl",
+  "b": "switch to rustls",
+  "c": "certificate validation also needs review"
+ },
+ {
+  "key": "g3-tls-backend#chatty",
+  "a": "I think we should use OpenSSL for our TLS backend—it's mature and we're already familiar with the configuration.",
+  "b": "Actually, let me reconsider. Rustls is better for our use case—it's written in Rust, safer, and has fewer dependencies.",
+  "c": "While we're updating TLS stuff, let's also audit our certificate pinning strategy."
+ },
+ {
+  "key": "g3-tls-backend#Spanish",
+  "a": "Backend TLS: OpenSSL.",
+  "b": "Vamos a cambiar a Rustls.",
+  "c": "Y también necesitamos revisar la cadena de certificados."
+ },
+ {
+  "key": "g3-wire-format#terse",
+  "a": "wire format: msgpack",
+  "b": "use cbor instead",
+  "c": "serialization benchmarks needed"
+ },
+ {
+  "key": "g3-wire-format#chatty",
+  "a": "For the wire serialization format, I want to go with msgpack—it's compact and has good language support.",
+  "b": "You know, I've changed my mind. Let's use CBOR instead. It's more standardized and we'll get better interoperability.",
+  "c": "Since we're redesigning the protocol, we should benchmark the parsing overhead too."
+ },
+ {
+  "key": "g3-wire-format#Spanish",
+  "a": "Formato de serialización: msgpack.",
+  "b": "Mejor con CBOR.",
+  "c": "Hay que medir la latencia de deserialización también."
+ },
+ {
+  "key": "g3-async-runtime#terse",
+  "a": "async runtime: async-std",
+  "b": "move to tokio",
+  "c": "executor thread pool config review"
+ },
+ {
+  "key": "g3-async-runtime#chatty",
+  "a": "I'd like to use async-std for the async runtime—it's standards-aligned and has a clean API.",
+  "b": "Wait, I'm changing that decision. Let's go with Tokio instead. It has better ecosystem integration and way more community momentum.",
+  "c": "While we're sorting out the async story, let's also review our thread pool configuration."
+ },
+ {
+  "key": "g3-async-runtime#Spanish",
+  "a": "Runtime asincrónico: async-std.",
+  "b": "Cambiamos a tokio.",
+  "c": "Necesitamos revisar también el número de workers."
+ },
+ {
+  "key": "g3-version-scheme#terse",
+  "a": "versioning: calver",
+  "b": "switch to semver",
+  "c": "changelog format needs update"
+ },
+ {
+  "key": "g3-version-scheme#chatty",
+  "a": "For version numbering, let's use CalVer—it makes it clear when things were released and is good for frequent deployments.",
+  "b": "Actually, I want to change that. Let's go with SemVer instead—it better communicates API compatibility to our users.",
+  "c": "Since we're overhauling our versioning approach, we should probably update our changelog format too."
+ },
+ {
+  "key": "g3-version-scheme#Spanish",
+  "a": "Esquema de versiones: calver.",
+  "b": "Mejor con semver.",
+  "c": "El CHANGELOG también necesita ajustes."
+ },
+ {
+  "key": "g3-license#terse",
+  "a": "license: GPL-3.0",
+  "b": "change to Apache-2.0",
+  "c": "also check dependency licenses"
+ },
+ {
+  "key": "g3-license#chatty",
+  "a": "I think GPL-3.0 is the right choice for our source license—it ensures code improvements stay in the community.",
+  "b": "I've reconsidered, and I want to switch to Apache 2.0 instead. It's more permissive for our use case and better for adoption.",
+  "c": "While we're working on licensing, we should audit all our dependencies for license compatibility."
+ },
+ {
+  "key": "g3-license#Spanish",
+  "a": "Licencia del código: GPL-3.0.",
+  "b": "Cambiamos a Apache-2.0.",
+  "c": "También hay que revisar las licencias de las dependencias."
+ },
+ {
+  "key": "g3-tls-verification#terse",
+  "a": "disable TLS cert verification in dev builds",
+  "b": "actually keep verification enabled everywhere",
+  "c": "stricter security checks needed overall"
+ },
+ {
+  "key": "g3-tls-verification#chatty",
+  "a": "I was thinking of disabling TLS certificate verification in development builds to make testing easier.",
+  "b": "Actually, forget that idea. Let's keep certificate verification enabled everywhere—it's not worth the security risk, even for dev.",
+  "c": "Speaking of security, we should probably implement stricter input validation across the board."
+ },
+ {
+  "key": "g3-tls-verification#Spanish",
+  "a": "Desactivar verificación de certificados TLS en desarrollo.",
+  "b": "No, mejor dicho, eso es mala idea. Mantener verificación en todas partes.",
+  "c": "También necesitamos auditar las validaciones de entrada."
+ },
+ {
+  "key": "g3-internal-http#terse",
+  "a": "allow plain HTTP for internal hosts",
+  "b": "require HTTPS everywhere instead",
+  "c": "mTLS setup for service mesh"
+ },
+ {
+  "key": "g3-internal-http#chatty",
+  "a": "I thought we could allow plain HTTP for internal hosts to reduce complexity, but I don't think that's secure enough.",
+  "b": "Let's enforce HTTPS everywhere with no plaintext exceptions—it's stricter but more secure.",
+  "c": "While we're improving our transport security, we should probably add mTLS to our service mesh too."
+ },
+ {
+  "key": "g3-internal-http#Spanish",
+  "a": "HTTP sin encriptación permitido internamente.",
+  "b": "Mejor: HTTPS en todas partes, sin excepciones.",
+  "c": "También queremos implementar mTLS en el service mesh."
+ },
+ {
+  "key": "new-orm#terse",
+  "a": "ORM for billing service: SQLAlchemy",
+  "b": "use Tortoise ORM instead",
+  "c": "database schema validation needed"
+ },
+ {
+  "key": "new-orm#chatty",
+  "a": "For the Python billing service ORM, I want to use SQLAlchemy—it's flexible and we're already familiar with it.",
+  "b": "Actually, let me change that. Let's use Tortoise ORM instead. It's got better async support and is lighter weight.",
+  "c": "While we're picking tools for the service, we should also sort out our database schema validation strategy."
+ },
+ {
+  "key": "new-orm#Spanish",
+  "a": "ORM para el servicio de facturación: SQLAlchemy.",
+  "b": "Cambio: Tortoise ORM.",
+  "c": "Hay que definir también la validación de esquemas."
+ },
+ {
+  "key": "new-base-image#terse",
+  "a": "worker container base: debian-slim",
+  "b": "switch to distroless",
+  "c": "reviewing image sizes across services"
+ },
+ {
+  "key": "new-base-image#chatty",
+  "a": "I want to use debian-slim as the base image for the workers—it strikes a good balance between features and size.",
+  "b": "Actually, let's go with distroless instead. It's much smaller, has fewer vulnerabilities, and still has everything we need.",
+  "c": "Since we're optimizing container images, we should probably audit the sizes of all our other service containers too."
+ },
+ {
+  "key": "new-base-image#Spanish",
+  "a": "Imagen base para workers: debian-slim.",
+  "b": "Mejor con distroless.",
+  "c": "También necesitamos optimizar las imágenes de otros servicios."
+ },
+ {
+  "key": "new-date-lib#terse",
+  "a": "date library: moment.js",
+  "b": "switch to date-fns",
+  "c": "also checking time zone handling"
+ },
+ {
+  "key": "new-date-lib#chatty",
+  "a": "For date handling in the web client, let's use moment.js—it's comprehensive and handles all the edge cases.",
+  "b": "You know what, I want to change that. Let's use date-fns instead. It's more modular, lighter, and better for tree-shaking.",
+  "c": "While we're working on date stuff, we should probably review how we're handling time zones in the API too."
+ },
+ {
+  "key": "new-date-lib#Spanish",
+  "a": "Librería de fechas: moment.js.",
+  "b": "Vamos a cambiar a date-fns.",
+  "c": "También revisar el manejo de zonas horarias."
+ },
+ {
+  "key": "new-ci#terse",
+  "a": "CI: Travis CI",
+  "b": "move to GitHub Actions",
+  "c": "deployment pipeline integration needed"
+ },
+ {
+  "key": "new-ci#chatty",
+  "a": "I think we should use Travis CI for our continuous integration—it's well-integrated with GitHub and reliable.",
+  "b": "Let me change that decision. Let's switch to GitHub Actions instead. It's built into GitHub, much faster, and more cost-effective.",
+  "c": "As long as we're upgrading CI, we should also refactor our deployment pipeline to take full advantage of Actions."
+ },
+ {
+  "key": "new-ci#Spanish",
+  "a": "Proveedor de CI: Travis CI.",
+  "b": "Cambio a GitHub Actions.",
+  "c": "También hay que integrar mejor el despliegue automático."
+ },
+ {
+  "key": "new-flags#terse",
+  "a": "feature flags: LaunchDarkly",
+  "b": "use Unleash instead",
+  "c": "flag cleanup strategy needed"
+ },
+ {
+  "key": "new-flags#chatty",
+  "a": "For feature flags, let's go with LaunchDarkly—it's powerful and integrates well with our stack.",
+  "b": "Actually, I've changed my mind. Let's use Unleash instead. It's open-source, we can self-host it, and it's simpler to operate.",
+  "c": "With Unleash, we should also set up a process for cleaning up old flags regularly."
+ },
+ {
+  "key": "new-flags#Spanish",
+  "a": "Servicio de feature flags: LaunchDarkly.",
+  "b": "Mejor con Unleash.",
+  "c": "Hay que definir también la estrategia de limpieza de flags."
+ },
+ {
+  "key": "new-queue#terse",
+  "a": "background job queue: RabbitMQ",
+  "b": "switch to NATS JetStream",
+  "c": "message retention policy review"
+ },
+ {
+  "key": "new-queue#chatty",
+  "a": "For the background job queue, I want to use RabbitMQ—it's battle-tested and handles complex routing.",
+  "b": "Hold on, let me reconsider. Let's use NATS JetStream instead. It's more modern, simpler to operate, and fits our microservices architecture better.",
+  "c": "With JetStream, we should also review our message retention policies to make sure they align with our requirements."
+ },
+ {
+  "key": "new-queue#Spanish",
+  "a": "Cola de tareas: RabbitMQ.",
+  "b": "Cambio a NATS JetStream.",
+  "c": "Necesitamos revisar también la política de retención de mensajes."
+ },
+ {
+  "key": "new-markdown#terse",
+  "a": "markdown renderer: marked",
+  "b": "use markdown-it instead",
+  "c": "plugin architecture for extensions"
+ },
+ {
+  "key": "new-markdown#chatty",
+  "a": "For the docs site markdown renderer, I think marked is a good choice—it's fast and straightforward.",
+  "b": "Actually, let's switch to markdown-it instead. It has better plugin support and more flexibility for custom extensions.",
+  "c": "Since we're improving our markdown support, we should also plan for a better plugin architecture."
+ },
+ {
+  "key": "new-markdown#Spanish",
+  "a": "Renderizador de markdown: marked.",
+  "b": "Vamos a usar markdown-it.",
+  "c": "Hay que mejorar también el soporte de plugins."
+ },
+ {
+  "key": "new-region#terse",
+  "a": "object storage region: us-east-1",
+  "b": "switch to eu-west-1",
+  "c": "data residency compliance check"
+ },
+ {
+  "key": "new-region#chatty",
+  "a": "I think us-east-1 makes sense for our object storage—it's our primary deployment region anyway.",
+  "b": "You know, we should change that. Let's move to eu-west-1 instead to comply with data residency requirements and reduce latency for EU users.",
+  "c": "While we're moving our data, we should probably audit all our other regional resources for compliance too."
+ },
+ {
+  "key": "new-region#Spanish",
+  "a": "Región de almacenamiento: us-east-1.",
+  "b": "Mejor cambiar a eu-west-1.",
+  "c": "También hay que revisar la conformidad de datos."
+ },
+ {
+  "key": "new-gofmt#terse",
+  "a": "Go formatter: gofmt",
+  "b": "switch to gofumpt",
+  "c": "linting rules in CI pipeline"
+ },
+ {
+  "key": "new-gofmt#chatty",
+  "a": "For Go code formatting, let's stick with gofmt—it's the standard and ensures consistency.",
+  "b": "Actually, I want to change that. Let's use gofumpt instead. It's a strict formatter with better defaults for code style.",
+  "c": "While we're improving our code quality, we should probably expand our linting rules in the CI pipeline."
+ },
+ {
+  "key": "new-gofmt#Spanish",
+  "a": "Formateador de Go: gofmt.",
+  "b": "Cambio a gofumpt.",
+  "c": "Necesitamos también mejorar las reglas de linting."
+ },
+ {
+  "key": "new-errors#terse",
+  "a": "error tracking: Sentry",
+  "b": "switch to Rollbar",
+  "c": "alerting rules configuration review"
+ },
+ {
+  "key": "new-errors#chatty",
+  "a": "For error tracking, let's use Sentry—it's got great dashboards and integrates well with our workflow.",
+  "b": "Let me reconsider. Let's switch to Rollbar instead. It's got better pricing for our scale and superior release tracking.",
+  "c": "As we're moving to Rollbar, we should also review and update all our alerting rules to make sure they're still appropriate."
+ },
+ {
+  "key": "new-errors#Spanish",
+  "a": "Servicio de error tracking: Sentry.",
+  "b": "Cambio a Rollbar.",
+  "c": "Hay que revisar también las reglas de alertas."
+ }
+]

@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..8c8b85e
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The adversarial synthetic corpus uses 30 frequent domain words (plus rare
++identifier variants), as defined by the `WORDS` vocabulary in
++`crates/muninn-bench/src/main.rs`. The full-recall prompt is composed entirely
++of words from that frequent vocabulary.
++
++- **Before the term-selection fix:** no measured full-hook
++  `UserPromptSubmit` p95 for this synthetic workload is recorded in this
++  checkout. In particular, the 35.53 ms p95 in `[H6]` of
++  `research/00-evidence-log.md` is a Python measurement of the BM25 stage on a
++  different, Simple Wikipedia corpus; it is not a measurement of the complete
++  hook and is therefore not used as the pre-fix number here.
++- **Fix:** select at most eight prompt terms by IDF using the store's FTS5
++  vocabulary statistics, discard terms absent from the store, and—once the
++  store has at least 50 active records—discard terms occurring in more than one
++  third of active records. This prevents frequent terms from forcing long
++  posting-list scans. The implementation is `select_terms` in
++  `crates/muninn-core/src/recall.rs`.
++- **After the fix:** **2.085903 ms p95**, measured over 300 full
++  `UserPromptSubmit` hook invocations with 5,000 records and 15,000 cues by
++  `target/release/muninn-bench perf --json` on 2026-09-14. This is the complete
++  subprocess hook path, not just its BM25 stage.

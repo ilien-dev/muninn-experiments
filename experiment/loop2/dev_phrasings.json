@@ -1,0 +1,50 @@
+[
+ {
+  "key": "d-thumb#dev",
+  "a": "sharp for the thumbnails",
+  "b": "swap sharp out, thumbnails go through libvips now",
+  "c": "actually the avatars should stay square"
+ },
+ {
+  "key": "d-apidocs#dev",
+  "a": "hey so for the API docs page I think Swagger UI is the way to go",
+  "b": "actually let's ditch Swagger UI and render the API docs with Redoc instead",
+  "c": "let's use Redoc styling defaults for the landing page too"
+ },
+ {
+  "key": "d-secrets#dev",
+  "a": "app secrets live in Vault",
+  "b": "move the app secrets to Doppler",
+  "c": "use Doppler for the CI pipeline tokens too"
+ },
+ {
+  "key": "d-clitest#dev",
+  "a": "run the CLI tests with pytest",
+  "b": "scratch that, the CLI tests run on ward from now on",
+  "c": "switch the CLI help text to plain English"
+ },
+ {
+  "key": "d-mono#dev",
+  "a": "Lerna manages the monorepo",
+  "b": "we replaced Lerna with Turborepo for the monorepo",
+  "c": "monorepo CI caching goes to GitHub cache"
+ },
+ {
+  "key": "d-pkg#dev",
+  "a": "el gestor de paquetes es npm",
+  "b": "cambia el gestor de paquetes a pnpm",
+  "c": "cambia el README a espa\u00f1ol"
+ },
+ {
+  "key": "d-testdb#dev",
+  "a": "la base de datos de pruebas es SQLite",
+  "b": "ya no usamos SQLite para la base de datos de pruebas, ahora es Postgres en Docker",
+  "c": "ahora los datos de ejemplo van en fixtures JSON"
+ },
+ {
+  "key": "d-staging#dev",
+  "a": "deploy the staging site on Render",
+  "b": "staging site: we're moving off Render to Railway",
+  "c": "deploy previews for pull requests stay on Railway too"
+ }
+]

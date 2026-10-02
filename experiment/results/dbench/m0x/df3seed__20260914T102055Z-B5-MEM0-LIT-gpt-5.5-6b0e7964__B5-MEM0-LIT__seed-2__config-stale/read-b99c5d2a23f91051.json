@@ -1,0 +1,15 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-stale",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-stale"
+    },
+    "query": "Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().",
+    "top_k": 6
+  },
+  "response": {
+    "results": []
+  }
+}

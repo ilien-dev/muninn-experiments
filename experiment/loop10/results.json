@@ -1,0 +1,168 @@
+[
+ {
+  "key": "p10-postgres#terse",
+  "shared": [
+   "user",
+   "data"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "we use PostgreSQL for user data",
+  "b": "user data migrations run in CI"
+ },
+ {
+  "key": "p10-ratelimit#terse",
+  "shared": [
+   "rate",
+   "limit"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "API requests are rate-limited to 100/min",
+  "b": "rate limit errors return 429"
+ },
+ {
+  "key": "p10-nightly#terse",
+  "shared": [
+   "nightly",
+   "tests"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "load tests run nightly",
+  "b": "nightly tests include integration checks"
+ },
+ {
+  "key": "p10-snapshot#terse",
+  "shared": [
+   "incremental",
+   "snapshots"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "storage backups use incremental snapshots",
+  "b": "incremental snapshots take 2 minutes"
+ },
+ {
+  "key": "p10-datadog#terse",
+  "shared": [
+   "Datadog",
+   "monitoring"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "error logs go to Datadog monitoring",
+  "b": "Datadog monitoring includes latency alerts"
+ },
+ {
+  "key": "p10-dynamodb#chatty",
+  "shared": [
+   "DynamoDB",
+   "sessions"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "We're using DynamoDB for sessions to handle the throughput we need",
+  "b": "Sessions in DynamoDB are hashed on user_id so read latency stays low"
+ },
+ {
+  "key": "p10-feature-staging#chatty",
+  "shared": [
+   "feature",
+   "staging"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "We're deploying the new feature to staging to test it thoroughly",
+  "b": "The staging environment uses a feature flag for the new feature release"
+ },
+ {
+  "key": "p10-api-metrics#chatty",
+  "shared": [
+   "API",
+   "metrics"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "I want to add metrics to the API so we can track performance",
+  "b": "API metrics are collected every second and aggregated hourly"
+ },
+ {
+  "key": "p10-auth#chatty",
+  "shared": [
+   "authentication",
+   "module"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "The authentication module needs refactoring because the code is tangled",
+  "b": "The authentication module currently uses OAuth 2.0 for external login"
+ },
+ {
+  "key": "p10-form-validation#chatty",
+  "shared": [
+   "form",
+   "validation"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "We need form validation to catch errors before submitting to the server",
+  "b": "Form validation messages should be clear and specific to each field"
+ },
+ {
+  "key": "p10-redis#Spanish",
+  "shared": [
+   "cach\u00e9",
+   "consultas"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "vamos a usar Redis como cach\u00e9 de las consultas frecuentes",
+  "b": "la cach\u00e9 de consultas tiene un TTL de una hora"
+ },
+ {
+  "key": "p10-eventos#Spanish",
+  "shared": [
+   "eventos",
+   "servicios"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "el servidor centraliza eventos de todos los servicios",
+  "b": "los eventos de los servicios se indexan en Elasticsearch"
+ },
+ {
+  "key": "p10-replicacion#Spanish",
+  "shared": [
+   "replicaci\u00f3n",
+   "datos"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "usamos replicaci\u00f3n de datos entre dos centros",
+  "b": "la replicaci\u00f3n de datos se sincroniza cada minuto"
+ },
+ {
+  "key": "p10-tests-merge#Spanish",
+  "shared": [
+   "tests",
+   "merge"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "los tests de integraci\u00f3n se ejecutan despu\u00e9s de cada merge",
+  "b": "cada merge a main requiere que los tests pasen primero"
+ },
+ {
+  "key": "p10-login#Spanish",
+  "shared": [
+   "rate",
+   "limiting",
+   "login"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "el login tiene rate limiting para prevenir ataques de fuerza bruta",
+  "b": "rate limiting en el login usa una ventana deslizante"
+ }
+]

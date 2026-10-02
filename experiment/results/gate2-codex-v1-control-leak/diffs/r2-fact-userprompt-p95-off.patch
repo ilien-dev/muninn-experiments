@@ -1,0 +1,28 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c5cc07b
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,22 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not contain a measured full-recall p95 for the
++`UserPromptSubmit` hook on the adversarial synthetic 30-word vocabulary from
++before the term-selection fix.
++
++The fix was to select at most eight prompt terms by descending IDF before
++querying FTS5, dropping terms absent from the store and, for stores with at
++least 50 records, terms present in more than one third of the records. This
++keeps long posting lists from dominating the synchronous read path.
++
++The repository also does not contain a measured full-recall p95 for that same
++adversarial synthetic 30-word vocabulary after the fix.
++
++The other recorded measurements are not substitutes for those two missing
++numbers: `[H6]` in `research/00-evidence-log.md` measures only the BM25 stage on
++a different corpus (p95 35.53 ms with 24 terms and 8.75 ms with top-8 IDF
++terms), while `[I3]` reports a 4.31 ms full-hook p95 for a 50,000-record
++prototype measurement without identifying it as the adversarial synthetic
++30-word-vocabulary run.

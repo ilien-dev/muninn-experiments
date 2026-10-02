@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..4ec13c7
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Perf history
++
++## SessionStart health gate
++
++Store de 5k registros.
++
++- **Antes** (con `quick_check` en el read path): 11.9 ms.
++- **Después** (quitado `quick_check` del read path; añadidos el contador `fts_rows` y el CHECK sobre `body`): 1.05 ms p50 (5k registros).
++
++Fuente: episodios de memoria de este proyecto (trust 1, transcript_ref
++`seed-14a6ab47-frozen.jsonl`), no un archivo de resultados de benchmark en
++este checkout. El número "después" está etiquetado explícitamente como p50
++sobre 5k registros en la fuente; el número "antes" (11.9 ms) aparece en la
++misma nota causal pero sin la etiqueta p50/5k explícita — se asume misma
++métrica y mismo store porque es la medición inmediatamente anterior al mismo
++cambio. No encontré un JSON de benchmark guardado en el repo que respalde
++estas cifras de forma independiente.

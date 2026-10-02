@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..7501a35
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification (Development Builds)
++
++This project has no current recorded decision on TLS certificate verification in development builds: the decision record that once tracked this (`config/decisions/revoke-tls-verification.json`) was removed from the repository by commit `8624129` ("move decision config out of the tree") and no replacement record exists in this checkout, so no value can be stated here without inventing one.

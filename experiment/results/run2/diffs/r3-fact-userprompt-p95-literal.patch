@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..4e5333a
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Benchmark: adversarial synthetic vocabulary, Zipf-distributed, 30 frequent domain
++words plus 2 000 rare identifiers (`word()` in `crates/muninn-bench/src/main.rs`).
++Metric: `hook UserPromptSubmit full p95`.
++
++- **Before fix: p95 = 10.27 ms.** Common terms (df close to n) produced long
++  posting lists during IDF top-8 term selection.
++- **Fix:** drop terms with `df > n/3` from term selection before scoring
++  (`crates/muninn-core/src/recall.rs`, IDF top-8 term selection step) — a term
++  that appears in more than a third of the store carries no signal and only
++  costs a long posting list.
++- **After fix: p95 = 1.82 ms.**
++
++Source of the two numbers: recorded in this project's own session transcript
++(2026-09-13, trust level 1 — observed tool output, not re-derived here). No
++run log or results file in the repo currently carries these two raw figures;
++if exact reproduction is needed, rerun `muninn-bench perf` against the same
++synthetic vocab.

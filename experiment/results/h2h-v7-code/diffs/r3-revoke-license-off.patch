@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..19db7bb
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License
++
++This project's recorded license decision is the MIT License, as recorded in the `LICENSE` file at the repository root, copyright (c) 2014-present Manuel Martínez-Almeida.

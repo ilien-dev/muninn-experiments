@@ -1,0 +1,64 @@
+{
+ "heldout8": [
+  {
+   "id": "h8-database",
+   "topic": "relational database engine",
+   "old": "postgres",
+   "new": "mysql"
+  },
+  {
+   "id": "h8-webframework",
+   "topic": "Node.js web server framework",
+   "old": "express",
+   "new": "fastify"
+  },
+  {
+   "id": "h8-testrunner",
+   "topic": "JavaScript test runner",
+   "old": "jest",
+   "new": "vitest"
+  },
+  {
+   "id": "h8-containerruntime",
+   "topic": "container runtime engine",
+   "old": "docker",
+   "new": "podman"
+  },
+  {
+   "id": "h8-packagemanager",
+   "topic": "Node.js package manager",
+   "old": "npm",
+   "new": "pnpm"
+  },
+  {
+   "id": "h8-orm",
+   "topic": "TypeScript ORM layer",
+   "old": "sequelize",
+   "new": "typeorm"
+  },
+  {
+   "id": "h8-logging",
+   "topic": "server logging library",
+   "old": "winston",
+   "new": "pino"
+  },
+  {
+   "id": "h8-apidocs",
+   "topic": "API documentation format",
+   "old": "swagger",
+   "new": "openapi"
+  },
+  {
+   "id": "h8-taskqueue",
+   "topic": "job scheduling library",
+   "old": "bull",
+   "new": "bullmq"
+  },
+  {
+   "id": "h8-cssbundler",
+   "topic": "CSS processing tool",
+   "old": "postcss",
+   "new": "lightningcss"
+  }
+ ]
+}

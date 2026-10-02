@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..4a2eb0c
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++Nothing is currently recorded in this project regarding plain HTTP for internal hosts: the decision file that tracked this (`config/decisions/revoke-internal-http.json`) was removed from the repository, so there is no current, authoritative statement to report here.

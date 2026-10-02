@@ -1,0 +1,14 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..d7264f3
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,8 @@
++## SessionStart health gate
++
++Measured on a 5k-record store:
++
++- **Before** (quick_check still on the read path): **11.9 ms** p50.
++- **After** (quick_check taken off the read path, with the `fts_rows` counter and the body `CHECK` added in the same change): **1.05 ms** p50.
++
++Source: project session transcript (muninn episode #79, tool_observed, trust 1).

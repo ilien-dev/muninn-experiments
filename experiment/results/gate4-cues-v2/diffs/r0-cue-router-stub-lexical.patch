@@ -1,0 +1,22 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..ab25bc0 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,17 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Question shape a `muninn why` query can take (SKILL.md: decision / dead end /
++/// commit / file / rule).
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Route {
++    Decision,
++    Deadend,
++    Commit,
++    File,
++    Rule,
++}
++
++/// Stub: decides which `Route` a question takes. Lexical matching comes in Phase 4.
++pub fn route(_question: &str) -> Route {
++    todo!("lexical route matching, Phase 4")
++}

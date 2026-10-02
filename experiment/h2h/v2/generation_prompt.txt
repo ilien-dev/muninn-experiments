@@ -1,0 +1,65 @@
+Write the messages a software developer would type to a coding assistant across two different days. For each item: (a) a message stating the original project decision, which must contain the exact string given as old; (b) a later message that replaces it with the new decision and contains the exact string given as new, or, when new is null, withdraws the original decision without naming a replacement. Vary the wording across items the way real people write (terse, chatty, with or without a reason). Do not repeat the same sentence template. Mention the subject in (a); in (b) you may or may not repeat it. English only. Output JSON only: a list of {"key","a","b"}.
+
+Items:
+[
+{
+"key": "p0",
+"topic_hint": "compression",
+"old": "gzip",
+"new": "zstd"
+},
+{
+"key": "p1",
+"topic_hint": "cache-eviction",
+"old": "LFU",
+"new": "LRU with a 300-second TTL"
+},
+{
+"key": "p2",
+"topic_hint": "password-hashing",
+"old": "bcrypt",
+"new": "argon2id"
+},
+{
+"key": "p3",
+"topic_hint": "tls-backend",
+"old": "openssl",
+"new": "rustls"
+},
+{
+"key": "p4",
+"topic_hint": "wire-format",
+"old": "msgpack",
+"new": "cbor"
+},
+{
+"key": "p5",
+"topic_hint": "async-runtime",
+"old": "async-std",
+"new": "tokio"
+},
+{
+"key": "p6",
+"topic_hint": "version-scheme",
+"old": "calver",
+"new": "semver"
+},
+{
+"key": "p7",
+"topic_hint": "license",
+"old": "GPL-3.0",
+"new": "Apache-2.0"
+},
+{
+"key": "p8",
+"topic_hint": "tls-verification",
+"old": "certificate verification disabled in dev builds",
+"new": null
+},
+{
+"key": "p9",
+"topic_hint": "internal-http",
+"old": "plain http allowed for internal hosts",
+"new": "https everywhere, no plaintext exception"
+}
+]

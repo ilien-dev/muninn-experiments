@@ -1,0 +1,4 @@
+{"at":1789295653405,"session":"53d88e81-8a9a-45c6-9207-c52269962bf4","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789295664367,"session":"53d88e81-8a9a-45c6-9207-c52269962bf4","files":["~/.claude/projects/-home-ilien-Projects-muninn/*.jsonl"],"symbols":[]}
+{"at":1789295676972,"session":"53d88e81-8a9a-45c6-9207-c52269962bf4","files":["crates/muninn-cli/src/main.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main"]}
+{"at":1789295683469,"session":"53d88e81-8a9a-45c6-9207-c52269962bf4","files":["crates/muninn-cli/src/main.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main"]}

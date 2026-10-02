@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..84428f6
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++This project has no recorded decision specifying a transport compression codec. Nothing is documented in the repository (README, CHANGELOG, or docs) that designates a particular compression scheme for transport; compression is left to be handled by external middleware (e.g. community packages such as those listed under gin-contrib) rather than by a codec choice recorded in this project.

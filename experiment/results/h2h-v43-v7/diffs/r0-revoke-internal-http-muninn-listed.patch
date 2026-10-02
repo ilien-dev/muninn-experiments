@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..47ba0cc
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++The project's current recorded decision is to enforce HTTPS everywhere, with no plaintext HTTP exception for any service; this applies to internal hosts as well, so internal services must be reached over HTTPS like any other.

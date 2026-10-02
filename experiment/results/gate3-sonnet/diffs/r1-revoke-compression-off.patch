@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..310480c
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Codec de compresión de transporte
++
++No hay ninguna decisión registrada en este proyecto sobre el codec de compresión de transporte. Ni `docs/`, ni `design/ENGINE.md`, ni el historial de commits fijan un codec actual para el transporte; `docs/threat-model.md` solo nombra el "transporte en equipo" como un tema futuro, sin especificar codec. Hasta que se registre una decisión, no debe asumirse ningún valor por defecto.

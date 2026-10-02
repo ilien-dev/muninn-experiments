@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..7f0ce1a
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async runtime
++
++No async runtime decision is currently recorded for this project. The only trace in the project's history is a one-line remark in an earlier session ("async-std runtime") that was never recorded as a decision and was never confirmed. It is therefore not treated as a standing policy, and no runtime is designated until one is explicitly decided and recorded.

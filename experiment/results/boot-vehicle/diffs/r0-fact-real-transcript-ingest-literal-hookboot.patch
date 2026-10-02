@@ -1,0 +1,26 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..5096e56
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,20 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured figures available.
++
++There's a smoke test for this already (`crates/muninn-capture/src/lib.rs`,
++`smoke::parses_real_transcripts_when_present`), which parses a real transcript
++from `~/.claude/projects/-home-ilien-Projects-muninn` and prints turn/episode/tool
++counts. It does not print size in MB or wall-clock ingest time.
++
++I tried to run it in this checkout to get numbers. `cargo build` / `cargo test`
++both require approval that this sandbox does not grant, and no `target/` build
++exists here to run directly. So size (MB), turn count, episode count, and
++ingest time are all unmeasured — not filled in to avoid inventing numbers.
++
++To fill this in: run
++`cargo test -p muninn-capture --lib smoke::parses_real_transcripts_when_present -- --nocapture`
++outside this sandbox, wrap it with `time`, and note the size of the transcript
++file it picks (`ls -la` on the first `.jsonl` in that directory).

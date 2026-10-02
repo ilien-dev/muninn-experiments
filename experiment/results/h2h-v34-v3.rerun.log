@@ -1,0 +1,52 @@
+seeded r0 claude-mem -> /tmp/muninn-h2h/h2h-v34-v3/snap-r0-claude-mem
+seeded r0 muninn-base -> /tmp/muninn-h2h/h2h-v34-v3/snap-r0-muninn-base
+seeded r1 claude-mem -> /tmp/muninn-h2h/h2h-v34-v3/snap-r1-claude-mem
+seeded r1 muninn-base -> /tmp/muninn-h2h/h2h-v34-v3/snap-r1-muninn-base
+seeded r2 claude-mem -> /tmp/muninn-h2h/h2h-v34-v3/snap-r2-claude-mem
+seeded r2 muninn-base -> /tmp/muninn-h2h/h2h-v34-v3/snap-r2-muninn-base
+seeded r3 claude-mem -> /tmp/muninn-h2h/h2h-v34-v3/snap-r3-claude-mem
+seeded r3 muninn-base -> /tmp/muninn-h2h/h2h-v34-v3/snap-r3-muninn-base
+seeded r4 claude-mem -> /tmp/muninn-h2h/h2h-v34-v3/snap-r4-claude-mem
+seeded r4 muninn-base -> /tmp/muninn-h2h/h2h-v34-v3/snap-r4-muninn-base
+seeded r5 claude-mem -> /tmp/muninn-h2h/h2h-v34-v3/snap-r5-claude-mem
+seeded r5 muninn-base -> /tmp/muninn-h2h/h2h-v34-v3/snap-r5-muninn-base
+shared r0 muninn-base -> muninn-shown
+shared r1 muninn-base -> muninn-shown
+shared r2 muninn-base -> muninn-shown
+shared r3 muninn-base -> muninn-shown
+shared r4 muninn-base -> muninn-shown
+shared r5 muninn-base -> muninn-shown
+240 cells planned, 32 to run
+r5 revoke-internal-http off -> fail (13s)
+r5 revoke-version-scheme off -> fail (14s)
+r5 revoke-internal-http muninn-shown -> pass (12s)
+r5 revoke-version-scheme claude-mem -> fail (27s)
+r5 revoke-compression muninn-base -> fail (9s)
+r5 revoke-tls-verification off -> pass (15s)
+r5 revoke-license claude-mem -> fail (33s)
+r5 revoke-tls-backend muninn-shown -> pass (11s)
+r5 revoke-wire-format claude-mem -> fail (26s)
+r5 revoke-tls-verification muninn-base -> pass (12s)
+r5 revoke-compression claude-mem -> fail (34s)
+r5 revoke-password-hashing muninn-shown -> pass (10s)
+r5 revoke-tls-backend claude-mem -> pass (27s)
+r5 revoke-compression muninn-shown -> fail (10s)
+r5 revoke-password-hashing off -> fail (12s)
+r5 revoke-license off -> fail (22s)
+r5 revoke-wire-format muninn-base -> fail (10s)
+r5 revoke-tls-backend muninn-base -> pass (10s)
+r5 revoke-password-hashing claude-mem -> pass (31s)
+r5 revoke-tls-verification claude-mem -> pass (29s)
+r5 revoke-cache-eviction muninn-base -> pass (9s)
+r5 revoke-async-runtime muninn-shown -> fail (12s)
+r5 revoke-cache-eviction off -> fail (13s)
+r5 revoke-compression off -> fail (15s)
+r5 revoke-wire-format off -> fail (13s)
+r5 revoke-async-runtime off -> fail (14s)
+r5 revoke-internal-http claude-mem -> pass (26s)
+r5 revoke-cache-eviction claude-mem -> pass (28s)
+r5 revoke-password-hashing muninn-base -> pass (9s)
+r5 revoke-license muninn-shown -> fail (10s)
+r5 revoke-wire-format muninn-shown -> fail (10s)
+r5 revoke-async-runtime muninn-base -> fail (16s)
+all cells finished

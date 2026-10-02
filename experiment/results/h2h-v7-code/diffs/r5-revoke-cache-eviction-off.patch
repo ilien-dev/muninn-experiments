@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..e0c5816
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++No cache eviction policy is currently recorded for this project. A search of the repository's documentation (`docs/`, `CHANGELOG.md`, `README.md`, and related files) found no ADR, RFC, or other recorded decision specifying an eviction strategy (e.g., LRU, LFU, TTL) for any cache used in this codebase.

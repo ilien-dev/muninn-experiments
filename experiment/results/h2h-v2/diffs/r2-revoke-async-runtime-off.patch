@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..52e77b5
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++This project (Gin, a Go web framework) has no recorded decision on an async runtime. A search of the repository's documentation, changelog, and commit history turned up no policy or decision record specifying an async runtime choice; concurrency in this codebase is handled with Go's native goroutines rather than a separate, selectable async runtime, and no current documentation designates one.

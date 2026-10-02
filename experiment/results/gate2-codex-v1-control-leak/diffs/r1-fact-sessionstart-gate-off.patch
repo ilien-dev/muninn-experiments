@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..f6795bd
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured end to end with `muninn-bench perf` on a synthetic store containing
++5,000 records and 15,000 cues, using 300 hook invocations on the same machine:
++
++| Version | SessionStart p50 |
++|---|---:|
++| Before `PRAGMA quick_check` was removed from the read path | 16.732 ms |
++| After `quick_check` was moved off the read path | 0.971 ms |
++
++The after version is the change that also introduced the trigger-maintained
++`fts_rows` counter and the body `CHECK` constraint. The figures above are measured
++hook wall-clock times, including process startup; they are not estimates.

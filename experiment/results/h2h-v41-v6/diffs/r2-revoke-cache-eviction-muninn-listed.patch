@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..68b47ce
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache eviction policy
++
++The project's recorded decision is to use LFU (least frequently used) eviction for its cache. LFU keeps frequently accessed items in the cache, which the team judged a good fit for this project's workload. No other eviction settings, such as capacity or TTL values, are recorded.

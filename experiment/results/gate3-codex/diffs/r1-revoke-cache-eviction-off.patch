@@ -1,0 +1,7 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..26a2772
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1 @@
++No current decision on the project's cache eviction policy is recorded.

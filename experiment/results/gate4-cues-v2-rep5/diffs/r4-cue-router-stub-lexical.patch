@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..f7ad117 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,13 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Which path a `why` question is answered through.
++pub enum Route {
++    Lineage,
++    DecisionSearch,
++}
++
++/// Decides which route a question takes. Routing logic lands in Phase 4.
++pub fn route(question: &str) -> muninn_core::Result<Route> {
++    let _ = question;
++    todo!("Phase 4: route question to lineage or decision search")
++}

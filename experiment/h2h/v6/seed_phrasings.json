@@ -1,0 +1,52 @@
+[
+ {
+  "key": "p0",
+  "a": "We're using gzip for compression, it's simple and widely supported everywhere",
+  "b": "Actually zstd compresses better with way faster decompression on both ends"
+ },
+ {
+  "key": "p1",
+  "a": "LFU cache keeps frequently accessed items around, makes sense for our workload",
+  "b": "Going with LRU with a 300-second TTL, easier to reason about and tune"
+ },
+ {
+  "key": "p2",
+  "a": "bcrypt for password hashing is solid, good cost factors and battle-tested",
+  "b": "Switching to argon2id, much more resistant to GPU-based attacks"
+ },
+ {
+  "key": "p3",
+  "a": "Stick with openssl, it's the standard everyone uses for TLS in production",
+  "b": "Rustls makes sense for our Rust codebase, fewer CVEs and simpler"
+ },
+ {
+  "key": "p4",
+  "a": "msgpack is compact and fast for our internal message serialization protocol",
+  "b": "Let's use cbor instead, better handling of type information across versions"
+ },
+ {
+  "key": "p5",
+  "a": "async-std seemed lightweight and perfect for keeping dependencies minimal",
+  "b": "Moving to tokio, the ecosystem is just too mature and stable to pass up"
+ },
+ {
+  "key": "p6",
+  "a": "calver works for us since the release date actually means something to users",
+  "b": "Semver is better, our API compatibility matters way more than publication dates"
+ },
+ {
+  "key": "p7",
+  "a": "GPL-3.0 ensures the code stays open and free, that's the whole principle here",
+  "b": "Apache-2.0 instead, gives people more freedom to use this in their own projects"
+ },
+ {
+  "key": "p8",
+  "a": "We disable certificate verification in dev builds to make local testing simpler",
+  "b": "Verification on all builds going forward; testing with self-signed certificates instead"
+ },
+ {
+  "key": "p9",
+  "a": "Plain http for internal hosts is fine, they're all behind our firewall anyway",
+  "b": "https everywhere, no plaintext exception; we've got proper cert management now"
+ }
+]

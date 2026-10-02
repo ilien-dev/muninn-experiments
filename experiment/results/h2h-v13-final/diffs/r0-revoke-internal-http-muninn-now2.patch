@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..a66bdf4
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++Per the project's current policy decision, HTTPS is required everywhere with no plaintext exception, meaning plain HTTP is not permitted for internal hosts (or any other host).

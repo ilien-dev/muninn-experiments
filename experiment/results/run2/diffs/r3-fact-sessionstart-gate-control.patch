@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..f76b627
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Perf history
++
++## SessionStart health gate
++
++Cambio: se quitó `quick_check` (integridad de SQLite) del read path del hook
++`SessionStart`. En su lugar, el chequeo 3 ("integrity") lee el resultado ya
++grabado (`meta_get("quick_check_result")`) salvo en modo `live` (`muninn
++doctor`), que sí lo ejecuta. En el mismo cambio se añadieron el contador
++`meta.fts_rows` (mantenido por triggers, para comparar FTS5 contra `record` en
++O(1)) y el `CHECK (length(body) <= 2000)` sobre `record.body`.
++Código: `crates/muninn-core/src/health.rs:82-90`, `crates/muninn-core/src/schema.sql:16,40-59`.
++
++**p50 medido en un store de 5k registros, antes del cambio:** no encontrado.
++Busqué en el historial de git, `research/00-evidence-log.md`, `design/ENGINE.md`
++y los tests de `muninn-cli` — no hay ninguna corrida con el `quick_check` viejo
++todavía en el read path a esta escala.
++
++**p50 medido en un store de 5k registros, después del cambio:** tampoco
++encontrado. Los únicos números de latencia medidos que existen son de otras
++rutas: el hook completo de lectura con léxico da 4,07 ms p50 sobre 50 000
++registros (`[I3]`, `research/00-evidence-log.md:399`), y la evaluación de cues
++da 1,034 ms p50 sobre 5 000 memorias (`[M2]`, `research/00-evidence-log.md:849`).
++Ninguna de las dos mide el health gate de `SessionStart` en sí.
++
++Si se necesita esta cifra, hay que correrla: no existe todavía.

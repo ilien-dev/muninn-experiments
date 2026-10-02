@@ -1,0 +1,19 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..d89a271
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,13 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured figures available.
++
++Searched this checkout for a real Claude Code transcript (session `.jsonl`) and
++for any ingest run over one. Found neither: no transcript file, no ingest log,
++no recorded episode/turn counts, no timing.
++
++Size (MB), turns, episodes, and ingest duration are left blank here rather than
++estimated. Fill this section in from an actual `muninn ingest` run against a
++real transcript once one exists in this checkout.

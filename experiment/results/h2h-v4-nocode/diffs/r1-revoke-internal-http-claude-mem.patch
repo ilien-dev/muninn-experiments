@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..2765f9a
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++This project's current recorded decision establishes an HTTPS-everywhere policy: HTTPS is required for all connections system-wide, with no exceptions for internal hosts, and plaintext HTTP is not permitted anywhere in the architecture.

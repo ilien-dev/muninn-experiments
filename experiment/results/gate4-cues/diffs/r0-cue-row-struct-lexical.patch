@@ -1,0 +1,16 @@
+diff --git a/crates/muninn-symbols/src/lib.rs b/crates/muninn-symbols/src/lib.rs
+index 9d8d534..8eb6d12 100644
+--- a/crates/muninn-symbols/src/lib.rs
++++ b/crates/muninn-symbols/src/lib.rs
+@@ -1 +1,11 @@
+ //! Symbol graph (tree-sitter). Filled in Phase 5.
++
++use serde::{Deserialize, Serialize};
++
++#[derive(Debug, Clone, Serialize, Deserialize, Default)]
++pub struct SymbolRow {
++    pub name: String,
++    pub path: String,
++    pub line: usize,
++    pub hedged: bool,
++}

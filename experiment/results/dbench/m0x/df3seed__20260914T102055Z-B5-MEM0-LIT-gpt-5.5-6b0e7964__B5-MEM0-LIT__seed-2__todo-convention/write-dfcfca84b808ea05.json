@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-convention",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Summary commands still use pipe records, not English sentences.\nFor sequence todo-convention, task todo-convention-s03, the public task prompt was: Add `stats`, emitting exactly STATS|open=N|done=N|total=N with no prose.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964",
+      "seed": 2,
+      "sequence_id": "todo-convention"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-convention"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "8f36966c-f2f8-466c-9958-920ea37fc88b",
+        "memory": "Summary commands still use pipe records, not English sentences.\nFor sequence todo-convention, task todo-convention-s03, the public task prompt was: Add `stats`, emitting exactly STATS|open=N|done=N|total=N with no prose.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

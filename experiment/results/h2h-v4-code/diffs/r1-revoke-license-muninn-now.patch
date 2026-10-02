@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..04a9aef
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License
++
++This project has no recorded policy decision on its source license beyond the `LICENSE` file checked into the repository root, which is the MIT License (Copyright (c) 2014-present Manuel Martínez-Almeida); the repository's commit history contains a single commit and no `config/decisions` (or similar) record documenting a license decision or change, so MIT per `LICENSE` is treated here as the only verifiable, current state.

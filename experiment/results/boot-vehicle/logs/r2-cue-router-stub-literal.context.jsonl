@@ -1,0 +1,8 @@
+{"at":1789296051540,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}
+{"at":1789296064900,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["crates/muninn-why/Cargo.toml"],"symbols":[]}
+{"at":1789296072932,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["crates/muninn-embed/src/lib.rs"],"symbols":[]}
+{"at":1789296073382,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["crates/muninn-symbols/src/lib.rs"],"symbols":[]}
+{"at":1789296073440,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["crates/muninn-core/src/lib.rs"],"symbols":["caps","db","error","health","heartbeat","paths","recall","sanitize","tokens","VERSION"]}
+{"at":1789296093186,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["plugin/commands/why.md"],"symbols":[]}
+{"at":1789296099030,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["crates/muninn-cli/src/main.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main"]}
+{"at":1789296109255,"session":"0ed0a8b5-8861-4089-a5c7-853c68506e24","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}

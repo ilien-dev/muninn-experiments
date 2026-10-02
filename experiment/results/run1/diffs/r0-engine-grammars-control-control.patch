@@ -1,0 +1,24 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..e7fb47e 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -300,6 +300,19 @@ autoformalización publicada `[U1]`, no se inventa.
+ - Privilegio mínimo: el hook de lectura abre la base en modo solo lectura; solo la ruta
+   de escritura escribe.
+ 
++### Gramáticas
++
++Gramáticas tree-sitter compiladas en el binario, para el grafo de símbolos
++(`crates/muninn-symbols`, Fase 5):
++
++| Lenguaje | Crate |
++|---|---|
++| Rust | `tree-sitter-rust` |
++| TypeScript / TSX | `tree-sitter-typescript` |
++| JavaScript / JSX | `tree-sitter-javascript` |
++| Python | `tree-sitter-python` |
++| Go | `tree-sitter-go` |
++
+ ## 11. Salud del motor (P10)
+ 
+ Health gate en `SessionStart`, una línea: `MUNINN 9/9 GREEN` o el nombre del fallo y su

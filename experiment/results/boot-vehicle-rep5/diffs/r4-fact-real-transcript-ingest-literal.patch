@@ -1,0 +1,24 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..d4064bc
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,18 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured figures for ingesting this project's own real Claude Code
++transcript (size in MB, turns/episodes produced, ingest duration) could be
++confirmed from this checkout.
++
++- The repository (working tree, git log, CI artifacts) contains no benchmark
++  output or committed numbers for this run.
++- Muninn's own memory has only a trust-1 (session-transcript-observed, not
++  exit-code- or commit-confirmed) note mentioning a real-transcript ingest;
++  `muninn why` classified the available records as
++  `insufficient: only circumstantial records (trust < 2); do not fill the gap`.
++
++Per the measured-figures-only requirement, no numbers are recorded here.
++Re-run the real-transcript ingest and capture its output (size, turn count,
++episode count, elapsed time) to populate this section.

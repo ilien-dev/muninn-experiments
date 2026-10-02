@@ -1,0 +1,24 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..3f70a2d
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,18 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++Medido en el mismo store de 5 000 registros, p50.
++
++| Momento | p50 | Cambio |
++|---|---|---|
++| Antes | 11.9 ms | `PRAGMA quick_check` corría en la ruta de lectura |
++| Después | 1.05 ms | `quick_check` fuera de la ruta de lectura; se añadió el contador `fts_rows` y el `CHECK` de `body` en su lugar |
++
++Fuente: registro literal de sesión de este proyecto (episodio 79, trust 1 — observado en
++el transcript propio): "Health gate SessionStart 11.9 ms → quick_check off read path,
++fts_rows counter, body CHECK → 1.05 ms." Confirmado en episodio 80: "SessionStart p50
++1.05 ms (5k records)".
++
++No se encontró un log de benchmark aparte (CSV/JSON) para esta corrida; el único número
++medido es el de esos dos episodios.

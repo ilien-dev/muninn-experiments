@@ -1,0 +1,41 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..a632859
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,35 @@
++# Performance history
++
++Dated entries for hook/path costs that changed materially. Each entry states
++what was measured, not an estimate, and says so when only an estimate exists.
++
++## SessionStart health gate
++
++Before: quick_check ran on the read path on every `SessionStart`.
++
++After: quick_check was taken off the read path; the result is now cached and
++checked in O(1), with a trigger-maintained `fts_rows` counter and a body
++`CHECK` added to the schema at the same time (see
++`crates/muninn-core/src/health.rs`, `crates/muninn-core/src/db.rs`).
++
++| | cost |
++|---|---|
++| Before (quick_check on read path) | 11.9 ms |
++| After (quick_check off read path, `fts_rows` counter, body `CHECK`) | 1.05 ms |
++
++These numbers come from a prior session's tool-observed measurement (trust 1,
++not yet corroborated by an exit code or commit in this checkout), not from a
++benchmark artifact committed to this repository — `grep` over `research/` and
++`crates/muninn-bench/` found no matching figures here. The source note does
++not state which percentile these are (this doc assumes p50, matching how the
++task refers to them) or the exact record count of the store used, so treat
++the "5k-record store" framing as the assumed context, not a confirmed detail.
++
++`crates/muninn-bench` ships a `perf` subcommand (`muninn-bench perf --records
++5000`) that reports p50/p95/p99 for `hook SessionStart` directly and would
++give an unambiguous, reproducible number for the current (after) state. It
++was not run for this entry: building the workspace in this session required
++an approval this environment did not grant. Re-running it, and — if the
++pre-change code is still reachable in history — running it again before the
++`quick_check` change, would replace the estimate-flagged parts of this entry
++with a fully measured one.

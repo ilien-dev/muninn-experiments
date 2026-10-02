@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..59434c1
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License
++
++This project is distributed under the MIT License, as recorded in the `LICENSE` file at the repository root (copyright Manuel Martínez-Almeida, 2014-present). The CHANGELOG confirms this as an intentional, recorded decision ("Add MIT license" and "MIT license in every file"). No other license or subsequent change to this decision is recorded in the project.

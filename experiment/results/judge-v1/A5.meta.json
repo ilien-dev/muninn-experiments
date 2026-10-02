@@ -1,0 +1,16 @@
+{
+ "model": "convaiinnovations/laya-multilingual",
+ "threads": 16,
+ "question": {
+  "replaces": {
+   "type": "noul",
+   "instructions": "Does `later` replace, reverse or withdraw what `earlier` states, so that `earlier` is no longer current?"
+  }
+ },
+ "temperatures": "as shipped (uncalibrated)",
+ "arm": "A5",
+ "items": 9810,
+ "wall_s": 439.7,
+ "started": "2026-09-25T00:37:38.551782+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

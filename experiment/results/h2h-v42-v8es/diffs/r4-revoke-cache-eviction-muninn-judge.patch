@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..f9226f4
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache eviction policy
++
++No single current decision on the cache eviction policy is recorded. The project's records hold two entries that disagree, and neither is marked as replacing the other: one names an LFU cache, the other names an LRU cache with a 300-second TTL. Until the project confirms which one stands, this document states no eviction policy or TTL value.

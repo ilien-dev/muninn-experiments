@@ -1,0 +1,16 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..ef32648
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,10 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++Store de prueba: 5k registros.
++
++- **Antes** (con `quick_check` en el read path): p50 = 11.9 ms.
++- **Después** (se sacó `quick_check` del read path, se añadió el contador `fts_rows` y el `CHECK` de `body` a la vez): p50 = 1.05 ms.
++
++Fuente: transcripción de sesión de este proyecto (trust 1, tool_observed), no una medición repetida en esta sesión.

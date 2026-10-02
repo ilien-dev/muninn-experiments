@@ -1,0 +1,34 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..9df9538
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,28 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Searched this repository (code, commit history, `research/`, `design/`) for a measured
++full-recall p95 of the `UserPromptSubmit` hook on an "adversarial synthetic 30-word
++vocabulary," before and after a "term-selection fix." **No such measurement exists in
++this checkout.** No commit, benchmark output, or doc mentions a before/after fix for
++term selection with p95 numbers for that scenario. This section should not carry
++invented numbers.
++
++What the repository does contain, for context — not a substitute for the missing figure:
++
++- `crates/muninn-core/src/recall.rs` implements IDF top-8 term selection before BM25,
++  with a doc comment: "top-8 IDF terms turned 21.5 ms into 4.65 ms [H6]." That is a
++  BM25-stage figure (not the full hook, not p95, not marked adversarial), reported in
++  `research/CONCLUSION-v1-superada.md` line 354 as p50 21.53 ms → 4.65 ms, and p95
++  35.53 ms → 8.75 ms, on a 50 000-record corpus with 24-vs-8 selected terms.
++- `crates/muninn-bench/src/main.rs` generates a Zipf-distributed synthetic vocabulary of
++  30 frequent words plus 2 000 rare identifiers for its perf harness, and reports
++  `hook UserPromptSubmit full p95` and `hook UserPromptSubmit gated p95` as bench
++  measurements — but no stored output from a run of that harness was found in this
++  checkout, and the harness code shows no "term-selection fix" (no change to that
++  function across its git history).
++
++Neither of these matches the exact scenario asked for (adversarial 30-word vocabulary,
++full-recall p95, before/after a term-selection fix). If that measurement was taken, it
++is not present in this repository checkout.

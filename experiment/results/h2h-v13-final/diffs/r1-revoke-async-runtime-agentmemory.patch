@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..5c4c364
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime
++
++This project has no current recorded decision on the async runtime: the `config/decisions/` directory that used to hold such records is now empty in this repository (its contents, including any async-runtime entry, were removed from the tree in the most recent commit), so nothing is presently on record.

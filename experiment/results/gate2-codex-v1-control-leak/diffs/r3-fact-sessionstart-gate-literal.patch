@@ -1,0 +1,19 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6eae6ae
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,13 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured on a 5,000-record store:
++
++| Health-gate implementation | SessionStart p50 |
++| --- | ---: |
++| Before: `PRAGMA quick_check` ran on the read path | 11.9 ms |
++| After: `quick_check` was moved off the read path, the trigger-maintained `fts_rows` counter was added, and the body `CHECK` constraint was added | 1.05 ms |
++
++The after measurement covers those three changes landing together. It does not
++isolate the contribution of `quick_check`, `fts_rows`, or the body constraint.

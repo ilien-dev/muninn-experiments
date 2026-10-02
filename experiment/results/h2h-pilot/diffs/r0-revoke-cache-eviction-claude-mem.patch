@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..e9d725b
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++The project's cache eviction policy is LRU (Least Recently Used), with cached entries expiring via a 300-second TTL (time-to-live). This decision supersedes an earlier selection of LFU (Least Frequently Used), which is no longer in effect.

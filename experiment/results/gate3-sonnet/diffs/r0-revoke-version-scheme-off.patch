@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..e689567
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Esquema de numeración de versiones
++
++No hay ninguna decisión registrada en este proyecto sobre el esquema de numeración de versiones.

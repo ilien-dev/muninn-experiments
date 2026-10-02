@@ -1,0 +1,24 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..324f8a8
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,18 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured figures are available for this project's own real Claude Code
++transcript. I could not find any recorded ingest run (size, turn/episode
++counts, or elapsed time) in this checkout, and this session is sandboxed to
++the working directory, so it cannot read `~/.claude/projects/**/*.jsonl` to
++run the ingest and measure it directly. The only related code found is the
++`parses_real_transcripts_when_present` smoke test in
++`crates/muninn-capture/src/lib.rs`, which prints turn/episode/tool counts
++when such a transcript is present on the machine running it, but its output
++is not captured or stored anywhere in this repo.
++
++This section should be filled in with actual measured numbers (transcript
++size in MB, turn count, episode count, ingest duration) the next time the
++real-transcript smoke test or an equivalent ingest run is executed with its
++output recorded.

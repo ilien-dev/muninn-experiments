@@ -1,0 +1,25 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..4ad1d4b
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,19 @@
++# Performance History
++
++## SessionStart health gate
++
++Measured on a 5k-record store (p50).
++
++| State | p50 latency |
++| --- | --- |
++| Before: `quick_check` on the read path | 11.9 ms |
++| After: `quick_check` off the read path, `fts_rows` counter added, body `CHECK` added | 1.05 ms |
++
++The "after" change moved `quick_check` off the `SessionStart` read path (it now
++only runs at session end and its result is cached in `meta`, see
++`crates/muninn-core/src/db.rs` `record_quick_check` / `crates/muninn-core/src/health.rs`),
++and added the trigger-maintained `fts_rows` counter plus a body `CHECK`
++constraint at the same time.
++
++Source: recorded episode from this project's own transcripts (muninn
++trust-1, tool_observed), not re-measured in this session.

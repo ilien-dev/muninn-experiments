@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..3921517
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Historial de rendimiento
++
++## Real transcript ingest
++
++No encontré una corrida medida de `muninn ingest` sobre el transcript real de
++este proyecto en este worktree: sin log de ingest, sin tamaño en MB, sin
++conteo de turnos ni episodios, sin duración.
++
++Lo que sí existe aquí (`.muninn/muninn.db`) es un store con 82 filas en
++`record`, pero viene de `control_transcripts` — sesiones de un proyecto no
++relacionado, según `experiment/README.md` — no del transcript propio de este
++proyecto, y no trae tamaño de entrada ni duración de ingest registrados.
++
++Faltan los cuatro números pedidos (tamaño en MB, turnos, episodios, duración).
++No los invento aquí.

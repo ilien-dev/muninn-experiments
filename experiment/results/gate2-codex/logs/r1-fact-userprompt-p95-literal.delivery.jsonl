@@ -1,0 +1,7 @@
+{"at":1789372861999,"session":"01a09eef-0766-7133-8527-0826672a6f9d","arm":"literal","ids":[83,84],"tokens":199,"reason":"cue:event:session_start"}
+{"at":1789372862004,"session":"01a09eef-0766-7133-8527-0826672a6f9d","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789372862004,"session":"01a09eef-0766-7133-8527-0826672a6f9d","arm":"literal","ids":[64],"tokens":0,"reason":"gated:budget"}
+{"at":1789372862004,"session":"01a09eef-0766-7133-8527-0826672a6f9d","arm":"literal","ids":[53],"tokens":0,"reason":"gated:budget"}
+{"at":1789372862004,"session":"01a09eef-0766-7133-8527-0826672a6f9d","arm":"literal","ids":[71],"tokens":0,"reason":"gated:budget"}
+{"at":1789372862004,"session":"01a09eef-0766-7133-8527-0826672a6f9d","arm":"literal","ids":[77],"tokens":0,"reason":"gated:budget"}
+{"at":1789372862004,"session":"01a09eef-0766-7133-8527-0826672a6f9d","arm":"literal","ids":[85,60,79],"tokens":635,"reason":"literal"}

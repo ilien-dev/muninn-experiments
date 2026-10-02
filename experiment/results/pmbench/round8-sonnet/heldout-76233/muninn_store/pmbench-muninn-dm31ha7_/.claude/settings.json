@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(muninn why:*)",
+      "Bash(muninn status:*)"
+    ]
+  }
+}

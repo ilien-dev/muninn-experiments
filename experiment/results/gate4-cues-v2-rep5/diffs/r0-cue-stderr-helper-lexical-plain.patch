@@ -1,0 +1,14 @@
+diff --git a/crates/muninn-cli/src/output.rs b/crates/muninn-cli/src/output.rs
+index cfa81e0..b696c73 100644
+--- a/crates/muninn-cli/src/output.rs
++++ b/crates/muninn-cli/src/output.rs
+@@ -25,3 +25,9 @@ pub fn json<T: serde::Serialize>(v: &T) {
+         Err(e) => err(&format!("muninn: json: {e}")),
+     }
+ }
++
++pub fn verbose(s: &str) {
++    if std::env::var_os("MUNINN_VERBOSE").is_some() {
++        err(s);
++    }
++}

@@ -1,0 +1,19 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..0a60d5f 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -338,10 +338,10 @@ híbrido da +2,8 pp de recall@10 `[H4]` a cambio del determinismo `[V4]`.
+ 
+ La telemetría de disparos **no es un oráculo** `[Y1]`. Lo que cuenta:
+ 
+-1. **Cuatro brazos en un harness sin nativa** (OpenCode o Pi): sin memoria · episodios
+-   literales por hook · lo mismo más el filtro · control irrelevante de longitud
+-   igualada. Benchmark multi-sesión con oráculos ejecutables. Línea a batir: 45,56 % de
+-   memoria literal, no 11,67 % `[K2]`.
++1. **Cuatro brazos en Claude Code `-p`** (no interactivo), con `autoMemoryEnabled: false`
++   para anular la memoria nativa: sin memoria · episodios literales por hook · lo mismo
++   más el filtro · control irrelevante de longitud igualada. Benchmark multi-sesión con
++   oráculos ejecutables. Línea a batir: 45,56 % de memoria literal, no 11,67 % `[K2]`.
+ 2. **Control de render** en cualquier comparación de invalidación `[X1]`.
+ 3. **PM-Bench** para F3: 65,1 % publicado, 82,9 % con almacén tipado `[V1]` `[V2]`.
+ 4. **Rejilla de revocación** de `[K7]` (nueve escenarios, nueve modelos) para F1, contra

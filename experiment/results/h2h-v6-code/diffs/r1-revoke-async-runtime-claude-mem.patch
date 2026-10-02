@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..590b6d6
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++Nothing is currently recorded. This project's decision record for the async runtime (`config/decisions/revoke-async-runtime.json`) was removed from the tree in commit `0902efd` ("move decision config out of the tree"), so there is no current recorded decision to state here.

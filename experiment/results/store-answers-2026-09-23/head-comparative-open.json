@@ -1,0 +1,2432 @@
+[
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v3",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": true,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v4",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v5",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": true,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v6",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r0-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": false,
+  "old_typed": false,
+  "new_served": false,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": true,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r1-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r2-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r3-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": true,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r4-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-compression",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-cache-eviction",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-password-hashing",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-tls-backend",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": false
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-wire-format",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-async-runtime",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-version-scheme",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-license",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ },
+ {
+  "grid": "h2h-v32-v7",
+  "seed": "r5-muninn-sparse.jsonl",
+  "scenario": "revoke-internal-http",
+  "new_typed": true,
+  "old_typed": false,
+  "new_served": true,
+  "old_served": true
+ }
+]

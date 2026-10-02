@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..fc93ce6
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License Policy
++
++The project's current recorded decision is to license its source under Apache-2.0, adopted to improve adoption by offering permissive open-source terms with patent protections that are more compatible with commercial and proprietary software ecosystems.

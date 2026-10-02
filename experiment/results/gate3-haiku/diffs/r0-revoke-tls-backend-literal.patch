@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..278e6f7
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS Backend Policy
++
++This project uses **rustls** as its TLS backend. This decision was made in session seed-rev (2026-09-11) and accepted as a reviewed decision.

@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-convention",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "For sequence expr-convention, task expr-convention-s01, the public task prompt was: Add safe_evaluate(expression, default=None), returning the default only for ExpressionError while preserving the EXPR_* error convention.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733",
+      "seed": 3,
+      "sequence_id": "expr-convention"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-convention"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "aa33f26a-c436-45a7-a2aa-25e5cff8a5e8",
+        "memory": "For sequence expr-convention, task expr-convention-s01, the public task prompt was: Add safe_evaluate(expression, default=None), returning the default only for ExpressionError while preserving the EXPR_* error convention.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

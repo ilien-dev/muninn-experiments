@@ -1,0 +1,52 @@
+{
+ "dev": [
+  {
+   "id": "d-thumb",
+   "topic": "the thumbnail generator",
+   "old": "sharp",
+   "new": "libvips"
+  },
+  {
+   "id": "d-apidocs",
+   "topic": "the API docs page renderer",
+   "old": "Swagger UI",
+   "new": "Redoc"
+  },
+  {
+   "id": "d-secrets",
+   "topic": "where app secrets live",
+   "old": "Vault",
+   "new": "Doppler"
+  },
+  {
+   "id": "d-clitest",
+   "topic": "the CLI test runner",
+   "old": "pytest",
+   "new": "ward"
+  },
+  {
+   "id": "d-mono",
+   "topic": "the monorepo tool",
+   "old": "Lerna",
+   "new": "Turborepo"
+  },
+  {
+   "id": "d-pkg",
+   "topic": "el gestor de paquetes",
+   "old": "npm",
+   "new": "pnpm"
+  },
+  {
+   "id": "d-testdb",
+   "topic": "la base de datos de pruebas",
+   "old": "SQLite",
+   "new": "Postgres"
+  },
+  {
+   "id": "d-staging",
+   "topic": "the staging site host",
+   "old": "Render",
+   "new": "Railway"
+  }
+ ]
+}

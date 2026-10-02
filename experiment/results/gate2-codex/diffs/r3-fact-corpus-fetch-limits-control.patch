@@ -1,0 +1,19 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..ec93e63
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,13 @@
++# Corpus fetching
++
++The repository records that the corpus files were fetched raw from
++`raw.githubusercontent.com`. It also records that `grep.app` was used to locate the
++public `CLAUDE.md` and `AGENTS.md` files; `grep.app` was a discovery service, not a
++file-download mirror.
++
++No evidence in this checkout records the per-domain rate limit actually encountered:
++the number of visits allowed, the length of the accounting window, and the cooldown
++after a breach are all unknown. The checkout likewise does not identify any CDN or
++mirror host used to download files other than `raw.githubusercontent.com`. These
++values and hosts are intentionally not inferred from current provider documentation,
++because that would not establish what this corpus fetch actually hit.

@@ -1,0 +1,29 @@
+Failed to load spaCy lemma model: spaCy is not installed. Install it with: pip install mem0ai[nlp]
+Failed to load spaCy full model: spaCy is not installed. Install it with: pip install mem0ai[nlp]
+2026-09-14 04:20:56.131 | ERROR    | fastembed.common.model_management:retrieve_model_gcs:362 - Could not find the model tar.gz file at /home/ilien/.cache/fastembed/bm25 and local_files_only=True.
+2026-09-14 04:20:56.131 | ERROR    | fastembed.common.model_management:download_model:466 - Could not find model in cache_dir
+Failed to load BM25 encoder: Could not load model Qdrant/bm25 from any source.
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata
+add(): ignoring metadata['run_id'] - identity fields cannot be set through metadata

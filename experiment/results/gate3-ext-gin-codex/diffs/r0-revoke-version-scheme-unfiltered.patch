@@ -1,0 +1,7 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..86a3b6e
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1 @@
++This project uses calendar versioning (CalVer) for its version numbering scheme.

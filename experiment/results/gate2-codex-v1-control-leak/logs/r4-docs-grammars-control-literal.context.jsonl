@@ -1,0 +1,6 @@
+{"at":1789371411658,"session":"01a09ed8-b5df-7980-a44a-7012e7549e1f","files":["^(design|docs)/|\\.md$"],"symbols":[]}
+{"at":1789371418644,"session":"01a09ed8-b5df-7980-a44a-7012e7549e1f","files":["crates/*/Cargo.toml"],"symbols":[]}
+{"at":1789371423064,"session":"01a09ed8-b5df-7980-a44a-7012e7549e1f","files":["HEAD:design/ENGINE.md"],"symbols":[]}
+{"at":1789371430098,"session":"01a09ed8-b5df-7980-a44a-7012e7549e1f","files":["]sitter|tree_sitter|TypeScript/TSX|JavaScript/JSX|\\.tsx|\\.jsx"],"symbols":[]}
+{"at":1789371442305,"session":"01a09ed8-b5df-7980-a44a-7012e7549e1f","files":["docs/grammars.md"],"symbols":[]}
+{"at":1789371445387,"session":"01a09ed8-b5df-7980-a44a-7012e7549e1f","files":["docs/grammars.md","docs/grammars.md"],"symbols":[]}

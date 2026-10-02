@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..da5c945
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++This project has no recorded decision on an async runtime. A search of the repository's documentation (including `docs/`, `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, and other markdown files) and its full git history turned up no ADR, RFC, policy document, or other decision record addressing an async runtime, so nothing current is documented here.

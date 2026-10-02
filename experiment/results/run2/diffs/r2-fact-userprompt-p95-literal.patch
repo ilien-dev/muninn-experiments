@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..fbabb64
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Historial de rendimiento
++
++## UserPromptSubmit read path
++
++Vocabulario sintético adversarial de 30 palabras (Zipf).
++
++- Antes del fix de selección de términos: p95 full-recall = **10.27 ms**.
++- Fix: descartar términos con `df > n/3` (document frequency por encima de un tercio de `n`) antes de puntuar por IDF. Implementado en `crates/muninn-core/src/recall.rs:177`.
++- Después del fix: p95 full-recall = **1.82 ms**.
++
++Nota de procedencia: estos dos números vienen de la transcripción de una sesión anterior (trust 1 — observado, no un artefacto de benchmark versionado). No encontré un `results.jsonl` ni log en el repo que registre esta corrida en concreto. El fix en sí (`df > n/3`) sí está confirmado en el código fuente citado arriba.

@@ -1,0 +1,15 @@
+diff --git a/app.py b/app.py
+index b575dda..e9549a0 100644
+--- a/app.py
++++ b/app.py
+@@ -1,2 +1,3 @@
+ def main():
+     return 0
++DONE = 1
+diff --git a/worker-scratch.py b/worker-scratch.py
+new file mode 100644
+index 0000000..795da2f
+--- /dev/null
++++ b/worker-scratch.py
+@@ -0,0 +1 @@
++half-finished refactor, do not ship

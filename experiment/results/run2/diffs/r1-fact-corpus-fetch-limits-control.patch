@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..a39d28a
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,12 @@
++# Corpus fetch: rate limit and hosts
++
++Not recorded.
++
++`GATE1.md` dice que la descarga fue "rate-limited" pero no da ninguna cifra de
++visitas por ventana, duración de la ventana, ni cooldown tras un incumplimiento.
++Ningún otro archivo del repo (scripts, config, logs) indica esos números ni
++nombra un host CDN o espejo usado para traer los archivos.
++
++En vez de inventar cifras, este archivo deja constancia del vacío. Si el
++límite real y los hosts aparecen (script de fetch, log de ejecución), hay que
++reemplazar esta nota con ellos.

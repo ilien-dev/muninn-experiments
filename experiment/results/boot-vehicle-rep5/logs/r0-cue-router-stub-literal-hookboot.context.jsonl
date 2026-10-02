@@ -1,0 +1,7 @@
+{"at":1789352072977,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}
+{"at":1789352073576,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","files":["crates/muninn-why/Cargo.toml"],"symbols":[]}
+{"at":1789352077528,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789352090242,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","files":["plugin/commands/why.md"],"symbols":[]}
+{"at":1789352100597,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","files":["crates/muninn-core/src/*.rs"],"symbols":[]}
+{"at":1789352107557,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","files":["crates/muninn-core/src/recall.rs"],"symbols":["STOP","intent_gate","select_terms","Hit","recall","Delivery","date_of","civil_from_days","render","deliver","tests","gate_and_dates"]}
+{"at":1789352116895,"session":"8e8bb524-9791-46e9-ab04-4ee4eb965035","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}

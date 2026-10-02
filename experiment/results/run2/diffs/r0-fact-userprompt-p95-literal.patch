@@ -1,0 +1,26 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c1e7dac
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,20 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Medido en el vocabulario sintético adversarial de 30 palabras (distribución Zipf,
++`crates/muninn-bench/src/main.rs`, generador `word()`), sobre el hook
++`UserPromptSubmit` en modo full-recall (contrato "hook UserPromptSubmit full p95"
++en `crates/muninn-bench/src/main.rs:720`):
++
++- **Antes del fix de selección de términos:** p95 = **10.27 ms**.
++- **Fix:** descartar términos con `df > n/3` (aparecen en más de un tercio del
++  store — no aportan señal y cuestan una posting list larga), aplicado en la
++  selección de términos de recall (`crates/muninn-core/src/recall.rs:177`,
++  `if n >= 50.0 && df > n / 3.0 { continue; }`).
++- **Después del fix:** p95 = **1.82 ms**.
++
++Procedencia: estos dos números vienen del transcript de la sesión de trabajo del
++14a6ab47 (2026-09-13), no de un artefacto de benchmark versionado en el repo — no
++hay commit ni archivo de resultados que los reproduzca por sí solo. La lógica del
++fix sí está confirmada en el código actual (`recall.rs:177`).

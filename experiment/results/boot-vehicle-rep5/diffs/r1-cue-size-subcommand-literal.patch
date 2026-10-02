@@ -1,0 +1,43 @@
+diff --git a/crates/muninn-bench/src/main.rs b/crates/muninn-bench/src/main.rs
+index 1df2f7b..96ab6cf 100644
+--- a/crates/muninn-bench/src/main.rs
++++ b/crates/muninn-bench/src/main.rs
+@@ -10,7 +10,7 @@ mod experiment;
+ 
+ use anyhow::{Context, Result};
+ use clap::{Parser, Subcommand};
+-use muninn_core::{Db, Mode};
++use muninn_core::{Db, Mode, ProjectPaths};
+ use rusqlite::Connection;
+ use std::io::Write;
+ use std::path::{Path, PathBuf};
+@@ -98,6 +98,12 @@ enum Cmd {
+         #[arg(long)]
+         json: bool,
+     },
++    /// Size in bytes of the store file
++    Size {
++        /// Path to the store file (default: resolved .muninn/muninn.db for the cwd)
++        #[arg(long)]
++        store: Option<PathBuf>,
++    },
+ }
+ 
+ /// Deterministic LCG so every run measures the same data.
+@@ -788,6 +794,16 @@ fn main() -> Result<()> {
+             }
+             Ok(())
+         }
++        Cmd::Size { store } => {
++            let path = store.unwrap_or_else(|| {
++                ProjectPaths::resolve(&std::env::current_dir().unwrap()).db_path()
++            });
++            let bytes = std::fs::metadata(&path)
++                .with_context(|| format!("reading {}", path.display()))?
++                .len();
++            println!("{bytes}");
++            Ok(())
++        }
+     }
+ }
+ 

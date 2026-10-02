@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..2b15c28 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,16 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Question categories `muninn why` routes between (see the `muninn` skill).
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Route {
++    Decision,
++    DeadEnd,
++    Commit,
++    File,
++    Rule,
++}
++
++/// Decide which route a question takes. Routing logic lands in Phase 4.
++pub fn route(_question: &str) -> Route {
++    todo!("Phase 4: route by question type (decision / dead end / commit / file / rule)")
++}

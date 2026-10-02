@@ -1,0 +1,24 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..f5b880c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,18 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The `muninn-bench perf` full-recall case uses the adversarial synthetic store whose
++frequent vocabulary is the 30 words in `crates/muninn-bench/src/main.rs`. With the
++benchmark defaults (5,000 records, 15,000 cues, and 300 hook invocations), the
++`UserPromptSubmit` full-recall p95 was **11.458564 ms** before the term-selection
++fix.
++
++The fix was to discard a candidate prompt term when its document frequency is
++greater than one third of a store containing at least 50 active records, before
++sorting the remaining candidates by IDF and taking the top eight. This prevents
++low-signal terms from forcing FTS5 to traverse the synthetic vocabulary's long
++posting lists.
++
++With that fix in place, the same benchmark measured a full-recall p95 of
++**1.565942 ms**.

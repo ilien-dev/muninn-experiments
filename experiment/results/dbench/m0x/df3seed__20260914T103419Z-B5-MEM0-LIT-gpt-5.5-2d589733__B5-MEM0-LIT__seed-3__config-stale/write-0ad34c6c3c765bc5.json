@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__config-stale",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Config is now the public dict-compatible container. parse_ini must return a plain dict forever.\nFor sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733",
+      "seed": 3,
+      "sequence_id": "config-stale"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__config-stale"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "f81d610f-7c37-49c9-b566-24ea4e0c95f6",
+        "memory": "Config is now the public dict-compatible container. parse_ini must return a plain dict forever.\nFor sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

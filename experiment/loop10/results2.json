@@ -1,0 +1,168 @@
+[
+ {
+  "key": "p11-auth-token#terse",
+  "shared": [
+   "auth",
+   "token"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "the auth token expires after 1 hour",
+  "b": "auth tokens are rotated on refresh"
+ },
+ {
+  "key": "p11-worker-queue#terse",
+  "shared": [
+   "worker",
+   "queue"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "the worker queue uses RabbitMQ",
+  "b": "worker queue backpressure stops after 10k jobs"
+ },
+ {
+  "key": "p11-cloudfront-cache#terse",
+  "shared": [
+   "CloudFront",
+   "cache"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "the CloudFront cache TTL is 86400",
+  "b": "CloudFront cache invalidation runs on deploy"
+ },
+ {
+  "key": "p11-database-schema#terse",
+  "shared": [
+   "database",
+   "schema"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "database schema migrations run on startup",
+  "b": "database schema backups happen hourly"
+ },
+ {
+  "key": "p11-api-gateway#terse",
+  "shared": [
+   "API",
+   "gateway"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "the API gateway throttles at 5000 req/s",
+  "b": "API gateway routes through Lambda"
+ },
+ {
+  "key": "p11-api-response#chatty",
+  "shared": [
+   "API",
+   "response",
+   "cache"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "We cache API responses in Redis for repeated requests",
+  "b": "The API response cache invalidates after 5 minutes"
+ },
+ {
+  "key": "p11-product-catalog#chatty",
+  "shared": [
+   "product",
+   "catalog"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "The Elasticsearch product catalog has 15 shards",
+  "b": "Our product catalog index gets refreshed every night"
+ },
+ {
+  "key": "p11-mobile-app#chatty",
+  "shared": [
+   "mobile",
+   "app"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "We run the mobile app tests in parallel across 8 machines",
+  "b": "The mobile app CI pipeline takes about 12 minutes end-to-end"
+ },
+ {
+  "key": "p11-github-service#chatty",
+  "shared": [
+   "GitHub",
+   "service"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "The GitHub webhook notifies our service when PRs are opened",
+  "b": "Our service sends GitHub notifications on test completion"
+ },
+ {
+  "key": "p11-transaction-logs#chatty",
+  "shared": [
+   "transaction",
+   "logs"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "We store the transaction logs in S3 for compliance",
+  "b": "The transaction logs are compressed before archiving"
+ },
+ {
+  "key": "p11-token-cache#Spanish",
+  "shared": [
+   "cache",
+   "tokens"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "El cache de tokens se sincroniza cada minuto",
+  "b": "Los tokens en cache expiran despu\u00e9s de una hora"
+ },
+ {
+  "key": "p11-pipeline-docker#Spanish",
+  "shared": [
+   "pipeline",
+   "Docker"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "El pipeline de compilaci\u00f3n usa Docker",
+  "b": "Docker en el pipeline ejecuta tests en paralelo"
+ },
+ {
+  "key": "p11-database-logs#Spanish",
+  "shared": [
+   "base de datos",
+   "logs"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "La base de datos de logs comprime archivos viejos",
+  "b": "Los logs de la base de datos se env\u00edan a S3 semanalmente"
+ },
+ {
+  "key": "p11-server-uploads#Spanish",
+  "shared": [
+   "servidor",
+   "uploads"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "El servidor de archivos guarda uploads en el bucket de S3",
+  "b": "Los uploads del servidor se validan antes de guardar"
+ },
+ {
+  "key": "p11-monitor-alerts#Spanish",
+  "shared": [
+   "monitor",
+   "Slack"
+  ],
+  "kept_a": true,
+  "kept_b": true,
+  "a": "El monitor de rendimiento alerta en Slack",
+  "b": "Slack recibe alertas del monitor cada minuto"
+ }
+]

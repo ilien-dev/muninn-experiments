@@ -1,0 +1,51 @@
+diff --git a/crates/muninn-compile/src/emit.rs b/crates/muninn-compile/src/emit.rs
+index a31501b..11cff4e 100644
+--- a/crates/muninn-compile/src/emit.rs
++++ b/crates/muninn-compile/src/emit.rs
+@@ -7,6 +7,7 @@ use std::collections::BTreeMap;
+ 
+ #[derive(Debug, Serialize)]
+ pub struct PermissionsFragment {
++    pub muninn_version: &'static str,
+     pub permissions: PermissionLists,
+ }
+ 
+@@ -35,6 +36,7 @@ pub fn permissions(rules: &[CompiledRule]) -> PermissionsFragment {
+     // a deny rule for X makes an ask rule for X redundant
+     let ask: Vec<String> = ask.into_iter().filter(|a| !deny.contains(a)).collect();
+     PermissionsFragment {
++        muninn_version: muninn_core::VERSION,
+         permissions: PermissionLists {
+             deny: deny.into_iter().collect(),
+             ask,
+@@ -45,6 +47,7 @@ pub fn permissions(rules: &[CompiledRule]) -> PermissionsFragment {
+ #[derive(Debug, Serialize)]
+ pub struct HookFile {
+     pub version: u32,
++    pub muninn_version: &'static str,
+     pub rules: Vec<HookEntry>,
+ }
+ 
+@@ -80,12 +83,14 @@ pub fn hooks(rules: &[CompiledRule]) -> HookFile {
+     });
+     HookFile {
+         version: 1,
++        muninn_version: muninn_core::VERSION,
+         rules: out,
+     }
+ }
+ 
+ #[derive(Debug, Serialize)]
+ pub struct Coverage {
++    pub muninn_version: &'static str,
+     pub total: usize,
+     pub by_class: BTreeMap<String, usize>,
+     pub interpretive_fraction: f64,
+@@ -103,6 +108,7 @@ pub fn coverage(rules: &[CompiledRule], without_rationale: usize) -> Coverage {
+     }
+     let interp = by_class.get("interpretive_only").copied().unwrap_or(0);
+     Coverage {
++        muninn_version: muninn_core::VERSION,
+         total: rules.len(),
+         interpretive_fraction: if rules.is_empty() {
+             0.0

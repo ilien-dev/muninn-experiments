@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..f3fa814
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache eviction policy
++
++The project's current recorded decision is to use LRU (Least Recently Used) eviction for the wire transmission cache, with cache entries expiring after a 300-second time-to-live (TTL).

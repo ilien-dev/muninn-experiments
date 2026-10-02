@@ -1,0 +1,1128 @@
+=== LLM Instructions ===
+Each step shows a vignette and three options (A/B/C).
+Choose one of A/B/C to advance.
+A step-level action menu is shown before each choice.
+Optionally perform tasks by returning action handles from the menu.
+Output must be JSON with action=choose, action=check_time, action=query_state.
+Example: {"action":"choose","choice":"B","task_ids":["task_3"]}
+Example (state query): {"action":"query_state","choice":"NONE","task_ids":[],"channel":"calendar"}
+Example (time check): {"action":"check_time","choice":"NONE","task_ids":[],"channel":"clock"}
+Some cues are only visible via state channels; they will not appear in the vignette.
+State query responses appear as: State [channel]: <message>.
+Available channels for query_state: appointment_portal, bank_balance, calendar, clock, course_portal, email, laundry_status, library_hold, price_tracker, reservation_waitlist, shipment_status.
+Time is hidden unless you use check_time.
+
+Regular tasks for every day:
+- Take antibiotic at breakfast and dinner.
+- Take asthma medication at 11:00 and 21:00.
+
+=== Monday ===
+Today's loose plan:
+- Finish the intake form when the portal posts it.
+- Grab the grocery bag when it appears on the pickup shelf.
+- Move the appointment when a better slot opens.
+- Pick up the hold when the library notice says it is ready.
+- Pick up the replacement filter when the hardware counter clears.
+- Print the parking receipt when the kiosk starts blinking.
+- Return the library book when the return slot is open.
+- Send the library email at 11:50.
+
+Breakfast comes together while you're already thinking two steps ahead.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_22: Take antibiotic at breakfast.
+- task_17: Pick up the hold.
+- task_9: Organize your bag.
+- task_18: Print the parking receipt.
+- task_14: Take asthma medication at 11:00.
+- task_2: Move the appointment.
+- task_6: Read a book blurb.
+- task_16: Finish the intake form.
+- task_7: Take antibiotic at dinner.
+- task_5: Pick up the replacement filter.
+- task_13: Send the library email.
+- task_20: Grab the grocery bag.
+- task_3: Return the library book.
+- task_10: Take asthma medication at 21:00.
+- task_4: Clean the mug in the sink.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_22"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_breakfast
+
+You get a follow-up with corrected instructions for pick up the replacement filter. You have a feeling the appointment portal may open a better slot later. Instead of the earlier cue, watch for the follow-up text before you pick up the replacement filter.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_17: Pick up the hold.
+- task_5: Pick up the replacement filter.
+- task_20: Grab the grocery bag.
+- task_12: Look up a recipe.
+- task_7: Take antibiotic at dinner.
+- task_3: Return the library book.
+- task_13: Send the library email.
+- task_18: Print the parking receipt.
+- task_16: Finish the intake form.
+- task_11: Straighten the couch pillows.
+- task_8: Browse a dinner menu.
+- task_2: Move the appointment.
+- task_14: Take asthma medication at 11:00.
+- task_10: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+For a moment, you have a feeling the appointment portal may open a better slot later. You add a reminder to yourself: On Thursday, Bring the referral slip when you notice the clinic check-in window.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_16: Finish the intake form.
+- task_13: Send the library email.
+- task_10: Take asthma medication at 21:00.
+- task_18: Print the parking receipt.
+- task_14: Take asthma medication at 11:00.
+- task_3: Return the library book.
+- task_17: Pick up the hold.
+- task_7: Take antibiotic at dinner.
+- task_19: Check the weather.
+- task_20: Grab the grocery bag.
+- task_2: Move the appointment.
+- task_1: Make a cup of tea.
+- task_9: Organize your bag.
+- task_5: Pick up the replacement filter.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+You know you still have to send the library email today.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_14: Take asthma medication at 11:00.
+- task_12: Look up a recipe.
+- task_4: Clean the mug in the sink.
+- task_20: Grab the grocery bag.
+- task_13: Send the library email.
+- task_18: Print the parking receipt.
+- task_16: Finish the intake form.
+- task_2: Move the appointment.
+- task_10: Take asthma medication at 21:00.
+- task_17: Pick up the hold.
+- task_7: Take antibiotic at dinner.
+- task_3: Return the library book.
+- task_1: Make a cup of tea.
+- task_5: Pick up the replacement filter.
+Raw LLM response (schema, attempt 1/2): '{"action":"check_time","choice":"NONE","task_ids":[],"channel":"clock"}' (finish_reason=stop)
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 220 min
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_14"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) asthma_1100
+
+You clear a little space, glance at the referral slip, and keep the afternoon together.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_3: Return the library book.
+- task_16: Finish the intake form.
+- task_17: Pick up the hold.
+- task_18: Print the parking receipt.
+- task_7: Take antibiotic at dinner.
+- task_10: Take asthma medication at 21:00.
+- task_11: Straighten the couch pillows.
+- task_2: Move the appointment.
+- task_13: Send the library email.
+- task_5: Pick up the replacement filter.
+- task_8: Browse a dinner menu.
+- task_1: Make a cup of tea.
+- task_20: Grab the grocery bag.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+The hardware counter is finally clear enough to walk up to.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_18: Print the parking receipt.
+- task_5: Pick up the replacement filter.
+- task_2: Move the appointment.
+- task_17: Pick up the hold.
+- task_1: Make a cup of tea.
+- task_13: Send the library email.
+- task_3: Return the library book.
+- task_16: Finish the intake form.
+- task_7: Take antibiotic at dinner.
+- task_20: Grab the grocery bag.
+- task_11: Straighten the couch pillows.
+- task_10: Take asthma medication at 21:00.
+- task_19: Check the weather.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+The parking receipt kiosk near the clinic is blinking again. A follow-up text comes in with the final location.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_13: Send the library email.
+- task_7: Take antibiotic at dinner.
+- task_15: Send a quick text to a friend.
+- task_5: Pick up the replacement filter.
+- task_2: Move the appointment.
+- task_20: Grab the grocery bag.
+- task_18: Print the parking receipt.
+- task_10: Take asthma medication at 21:00.
+- task_11: Straighten the couch pillows.
+- task_16: Finish the intake form.
+- task_6: Read a book blurb.
+- task_17: Pick up the hold.
+- task_3: Return the library book.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_18"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) parking_receipt_kiosk_d1
+
+A quick correction comes in before you get to return the library book. Instead of the earlier cue, watch for the updated pickup message before you return the library book.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_3: Return the library book.
+- task_17: Pick up the hold.
+- task_10: Take asthma medication at 21:00.
+- task_19: Check the weather.
+- task_20: Grab the grocery bag.
+- task_9: Organize your bag.
+- task_13: Send the library email.
+- task_7: Take antibiotic at dinner.
+- task_16: Finish the intake form.
+- task_15: Send a quick text to a friend.
+- task_5: Pick up the replacement filter.
+- task_2: Move the appointment.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+The grocery pickup shelf has your bag set aside.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_13: Send the library email.
+- task_10: Take asthma medication at 21:00.
+- task_19: Check the weather.
+- task_3: Return the library book.
+- task_20: Grab the grocery bag.
+- task_7: Take antibiotic at dinner.
+- task_17: Pick up the hold.
+- task_16: Finish the intake form.
+- task_5: Pick up the replacement filter.
+- task_15: Send a quick text to a friend.
+- task_9: Organize your bag.
+- task_2: Move the appointment.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_20"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) grocery_pickup_shelf_d1
+
+The library return slot is open as you walk by.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_10: Take asthma medication at 21:00.
+- task_7: Take antibiotic at dinner.
+- task_5: Pick up the replacement filter.
+- task_3: Return the library book.
+- task_9: Organize your bag.
+- task_13: Send the library email.
+- task_16: Finish the intake form.
+- task_17: Pick up the hold.
+- task_2: Move the appointment.
+- task_19: Check the weather.
+- task_8: Browse a dinner menu.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A
+
+Dinner is one more moving part in the evening rather than a full break from it.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_10: Take asthma medication at 21:00.
+- task_5: Pick up the replacement filter.
+- task_17: Pick up the hold.
+- task_3: Return the library book.
+- task_11: Straighten the couch pillows.
+- task_1: Make a cup of tea.
+- task_7: Take antibiotic at dinner.
+- task_13: Send the library email.
+- task_2: Move the appointment.
+- task_16: Finish the intake form.
+- task_19: Check the weather.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_7"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_dinner
+
+You brush your teeth, check that the referral slip is still where you need it, and head to bed.
+A) Brush your teeth
+B) Read a page
+C) Plug in your phone
+
+Step action menu:
+- task_9: Organize your bag.
+- task_13: Send the library email.
+- task_2: Move the appointment.
+- task_16: Finish the intake form.
+- task_12: Look up a recipe.
+- task_17: Pick up the hold.
+- task_3: Return the library book.
+- task_8: Browse a dinner menu.
+- task_5: Pick up the replacement filter.
+- task_10: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_10"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) asthma_2100
+
+An updated pickup message comes through with the final details.
+A) Stand up
+B) Walk once around the room
+C) Refill your mug
+
+Step action menu:
+- task_5: Pick up the replacement filter.
+- task_13: Send the library email.
+- task_21: Queue up a playlist.
+- task_12: Look up a recipe.
+- task_17: Pick up the hold.
+- task_3: Return the library book.
+- task_4: Clean the mug in the sink.
+- task_2: Move the appointment.
+- task_16: Finish the intake form.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_17"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) library_hold_ready_d1
+
+=== Tuesday ===
+Before the day gets crowded, these are the main things you need to keep track of:
+- Adjust the prep plan when the calendar room shift appears.
+- Check in with your manager at 15:20.
+- Forward the vendor reply when the email lands.
+- Give the quick update when your manager stops at the doorway.
+- Move the check-in when the calendar update moves the call.
+- Pick up the room key when the conference room screen flashes your room assignment.
+- Send the budget note at 16:15.
+
+Breakfast is less about food than about getting your bearings.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_14: Straighten the couch pillows.
+- task_20: Adjust the prep plan.
+- task_13: Sort the mail.
+- task_18: Forward the vendor reply.
+- task_5: Take asthma medication at 21:00.
+- task_3: Plug in the tablet.
+- task_4: Move the check-in.
+- task_22: Take asthma medication at 11:00.
+- task_21: Take antibiotic at dinner.
+- task_7: Take antibiotic at breakfast.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_7"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_breakfast
+
+You still need to check in with your manager later.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_17: Send a quick text to a friend.
+- task_4: Move the check-in.
+- task_20: Adjust the prep plan.
+- task_15: Switch over the laundry basket.
+- task_6: Wipe down the counter.
+- task_22: Take asthma medication at 11:00.
+- task_21: Take antibiotic at dinner.
+- task_5: Take asthma medication at 21:00.
+- task_18: Forward the vendor reply.
+- task_8: Check in with your manager.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_8"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) check_in_manager_1_d2
+
+You have a feeling the calendar may shift again before the day is over. You add a reminder to yourself: On Wednesday, Email the room change note when you notice the lab cubby.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_3: Plug in the tablet.
+- task_2: Send the budget note.
+- task_18: Forward the vendor reply.
+- task_22: Take asthma medication at 11:00.
+- task_20: Adjust the prep plan.
+- task_4: Move the check-in.
+- task_10: Put away the dishes.
+- task_8: Check in with your manager.
+- task_1: Order a snack.
+- task_5: Take asthma medication at 21:00.
+- task_21: Take antibiotic at dinner.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+You expect another email to land later. You jot down a quick reminder: On Wednesday, Carry the prescription receipt when you notice the lab drop box.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_5: Take asthma medication at 21:00.
+- task_15: Switch over the laundry basket.
+- task_1: Order a snack.
+- task_18: Forward the vendor reply.
+- task_4: Move the check-in.
+- task_21: Take antibiotic at dinner.
+- task_2: Send the budget note.
+- task_20: Adjust the prep plan.
+- task_14: Straighten the couch pillows.
+- task_8: Check in with your manager.
+- task_22: Take asthma medication at 11:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"check_time","choice":"NONE","task_ids":[],"channel":"clock"}' (finish_reason=stop)
+Model action: query_state clock
+State [clock]: Time 10:00 | Stopwatch: 130 min
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_22"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) asthma_1100
+
+The conference room screen flashes your room assignment.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_2: Send the budget note.
+- task_8: Check in with your manager.
+- task_4: Move the check-in.
+- task_18: Forward the vendor reply.
+- task_9: Refill your water bottle.
+- task_3: Plug in the tablet.
+- task_21: Take antibiotic at dinner.
+- task_20: Adjust the prep plan.
+- task_13: Sort the mail.
+- task_5: Take asthma medication at 21:00.
+- task_22: Take asthma medication at 11:00.
+- task_11: Pick up the room key.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_11"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) conference_screen_d2
+
+A short follow-up changes the timing for check in with your manager. The timing shifts a little: check in with your manager moves to 15:55.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_18: Forward the vendor reply.
+- task_8: Check in with your manager.
+- task_22: Take asthma medication at 11:00.
+- task_19: Clean the keyboard.
+- task_20: Adjust the prep plan.
+- task_16: Reply in the group chat.
+- task_21: Take antibiotic at dinner.
+- task_2: Send the budget note.
+- task_4: Move the check-in.
+- task_3: Plug in the tablet.
+- task_5: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+The timing for send the budget note shifts a bit on your phone. A reschedule note lands for send the budget note: move it to 15:55.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_18: Forward the vendor reply.
+- task_5: Take asthma medication at 21:00.
+- task_8: Check in with your manager.
+- task_2: Send the budget note.
+- task_20: Adjust the prep plan.
+- task_15: Switch over the laundry basket.
+- task_4: Move the check-in.
+- task_3: Plug in the tablet.
+- task_1: Order a snack.
+- task_22: Take asthma medication at 11:00.
+- task_21: Take antibiotic at dinner.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+You keep meaning to send the budget note.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_20: Adjust the prep plan.
+- task_2: Send the budget note.
+- task_21: Take antibiotic at dinner.
+- task_4: Move the check-in.
+- task_18: Forward the vendor reply.
+- task_17: Send a quick text to a friend.
+- task_22: Take asthma medication at 11:00.
+- task_8: Check in with your manager.
+- task_1: Order a snack.
+- task_13: Sort the mail.
+- task_5: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"check_time","choice":"NONE","task_ids":[],"channel":"clock"}' (finish_reason=stop)
+Model action: query_state clock
+State [clock]: Time 15:55 | Stopwatch: 485 min
+Raw LLM response (schema, attempt 1/2): 'Es la hora reprogramada (15:55) para ambas tareas.\n\n{"action":"choose","choice":"C","task_ids":["task_8","task_2"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) check_in_manager_1_d2, send_budget_note_2_d2
+
+Your manager pauses at the doorway on the way to another meeting.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_18: Forward the vendor reply.
+- task_1: Order a snack.
+- task_21: Take antibiotic at dinner.
+- task_4: Move the check-in.
+- task_9: Refill your water bottle.
+- task_5: Take asthma medication at 21:00.
+- task_20: Adjust the prep plan.
+- task_22: Take asthma medication at 11:00.
+- task_12: Give the quick update.
+- task_3: Plug in the tablet.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_12"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) manager_door_d2
+
+You put one thing away, glance at the draft on your screen, and keep going.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_3: Plug in the tablet.
+- task_1: Order a snack.
+- task_4: Move the check-in.
+- task_10: Put away the dishes.
+- task_20: Adjust the prep plan.
+- task_18: Forward the vendor reply.
+- task_21: Take antibiotic at dinner.
+- task_22: Take asthma medication at 11:00.
+- task_5: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A
+
+You pause long enough to put dinner together.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_17: Send a quick text to a friend.
+- task_18: Forward the vendor reply.
+- task_21: Take antibiotic at dinner.
+- task_22: Take asthma medication at 11:00.
+- task_20: Adjust the prep plan.
+- task_10: Put away the dishes.
+- task_4: Move the check-in.
+- task_1: Order a snack.
+- task_5: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_21"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_dinner
+
+You check the lock, set the note on your phone down, and let the day end.
+A) Brush your teeth
+B) Read a page
+C) Plug in your phone
+
+Step action menu:
+- task_13: Sort the mail.
+- task_20: Adjust the prep plan.
+- task_22: Take asthma medication at 11:00.
+- task_9: Refill your water bottle.
+- task_3: Plug in the tablet.
+- task_18: Forward the vendor reply.
+- task_4: Move the check-in.
+- task_5: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_5"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) asthma_2100
+
+You set out tomorrow's things, move the room note into place, and head toward bed.
+A) Stand up
+B) Walk once around the room
+C) Refill your mug
+
+Step action menu:
+- task_6: Wipe down the counter.
+- task_18: Forward the vendor reply.
+- task_14: Straighten the couch pillows.
+- task_4: Move the check-in.
+- task_22: Take asthma medication at 11:00.
+- task_1: Order a snack.
+- task_20: Adjust the prep plan.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A
+
+=== Wednesday ===
+You start the day with a short mental list:
+- Call the insurance desk at 12:45.
+- Check the grade when it is released.
+- Collect the reserve reading when the library hold is ready.
+- Drop off the sample slip when the lab drop box is unlocked.
+- Move money when the balance drops below $95.
+- Pay the co-op dues at 11:50.
+- Pick up the handout packet when it shows up in the lab cubby.
+
+Breakfast gives you one last orderly moment before the day gets busier.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_7: Carry the prescription receipt.
+- task_17: Move money.
+- task_18: Take antibiotic at dinner.
+- task_9: Take asthma medication at 11:00.
+- task_11: Check the grade.
+- task_10: Water the plants.
+- task_6: Call the insurance desk.
+- task_15: Take asthma medication at 21:00.
+- task_8: Email the room change note.
+- task_22: Take antibiotic at breakfast.
+- task_1: Drop off the sample slip.
+- task_23: Collect the reserve reading.
+- task_2: Pay the co-op dues.
+- task_24: Label a folder.
+- task_12: Pick up the handout packet.
+- task_5: Straighten the couch pillows.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_22"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_breakfast
+
+You get a note that paying the co-op dues does not need to happen after all. You keep meaning to call the insurance desk. You leave yourself a note: On Friday, Carry the laundry soap when you notice the laundry room cart. You get word that paying the co-op dues no longer needs to happen today.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_17: Move money.
+- task_2: Pay the co-op dues.
+- task_11: Check the grade.
+- task_9: Take asthma medication at 11:00.
+- task_15: Take asthma medication at 21:00.
+- task_14: Call a friend.
+- task_24: Label a folder.
+- task_1: Drop off the sample slip.
+- task_13: Clear off the desk.
+- task_12: Pick up the handout packet.
+- task_18: Take antibiotic at dinner.
+- task_6: Call the insurance desk.
+- task_23: Collect the reserve reading.
+- task_8: Email the room change note.
+- task_7: Carry the prescription receipt.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+You keep meaning to pay the co-op dues. You suspect the course portal could change again later. You jot down a quick reminder: On Thursday, Carry the spare tote bag when you notice the parcel counter.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_13: Clear off the desk.
+- task_15: Take asthma medication at 21:00.
+- task_7: Carry the prescription receipt.
+- task_2: Pay the co-op dues.
+- task_8: Email the room change note.
+- task_9: Take asthma medication at 11:00.
+- task_12: Pick up the handout packet.
+- task_17: Move money.
+- task_11: Check the grade.
+- task_18: Take antibiotic at dinner.
+- task_16: Clear old downloads.
+- task_23: Collect the reserve reading.
+- task_6: Call the insurance desk.
+- task_1: Drop off the sample slip.
+- task_10: Water the plants.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+You notice the lab drop box is unlocked for afternoon drop-offs. A short cancellation note about calling the insurance desk shows up on your phone. A quick message clears it: you do not need to worry about calling the insurance desk today.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_11: Check the grade.
+- task_6: Call the insurance desk.
+- task_3: Refill your water bottle.
+- task_7: Carry the prescription receipt.
+- task_1: Drop off the sample slip.
+- task_2: Pay the co-op dues.
+- task_8: Email the room change note.
+- task_23: Collect the reserve reading.
+- task_17: Move money.
+- task_15: Take asthma medication at 21:00.
+- task_18: Take antibiotic at dinner.
+- task_9: Take asthma medication at 11:00.
+- task_5: Straighten the couch pillows.
+- task_12: Pick up the handout packet.
+- task_21: Move the blanket off the chair.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"B","task_ids":["task_1","task_7"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose B + action(s) lab_dropbox_d3, crossday_1
+
+You clear a little space, glance at the pharmacy receipt, and keep the afternoon together.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_17: Move money.
+- task_15: Take asthma medication at 21:00.
+- task_11: Check the grade.
+- task_8: Email the room change note.
+- task_23: Collect the reserve reading.
+- task_6: Call the insurance desk.
+- task_2: Pay the co-op dues.
+- task_21: Move the blanket off the chair.
+- task_18: Take antibiotic at dinner.
+- task_12: Pick up the handout packet.
+- task_9: Take asthma medication at 11:00.
+- task_5: Straighten the couch pillows.
+- task_4: Skim the headlines.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+Your lab cubby has the handout packet tucked inside it.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_17: Move money.
+- task_11: Check the grade.
+- task_2: Pay the co-op dues.
+- task_6: Call the insurance desk.
+- task_21: Move the blanket off the chair.
+- task_14: Call a friend.
+- task_3: Refill your water bottle.
+- task_18: Take antibiotic at dinner.
+- task_12: Pick up the handout packet.
+- task_8: Email the room change note.
+- task_9: Take asthma medication at 11:00.
+- task_23: Collect the reserve reading.
+- task_15: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_12"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) lab_cubby_d3
+
+You clear a little space, glance at the loose receipt, and keep the afternoon together.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_2: Pay the co-op dues.
+- task_6: Call the insurance desk.
+- task_23: Collect the reserve reading.
+- task_15: Take asthma medication at 21:00.
+- task_4: Skim the headlines.
+- task_21: Move the blanket off the chair.
+- task_18: Take antibiotic at dinner.
+- task_17: Move money.
+- task_9: Take asthma medication at 11:00.
+- task_5: Straighten the couch pillows.
+- task_11: Check the grade.
+- task_8: Email the room change note.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_23"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) library_hold_second_ready_d3
+
+You keep in mind that your balance might dip later.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_2: Pay the co-op dues.
+- task_20: Wipe down the counter.
+- task_9: Take asthma medication at 11:00.
+- task_16: Clear old downloads.
+- task_11: Check the grade.
+- task_18: Take antibiotic at dinner.
+- task_6: Call the insurance desk.
+- task_8: Email the room change note.
+- task_15: Take asthma medication at 21:00.
+- task_17: Move money.
+- task_23: Collect the reserve reading.
+- task_14: Call a friend.
+Raw LLM response (schema, attempt 1/2): '{"action":"query_state","choice":"NONE","task_ids":[],"channel":"bank_balance"}' (finish_reason=stop)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"B","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose B
+
+You make dinner while trying not to lose track of the rest of the evening.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_6: Call the insurance desk.
+- task_20: Wipe down the counter.
+- task_8: Email the room change note.
+- task_16: Clear old downloads.
+- task_23: Collect the reserve reading.
+- task_15: Take asthma medication at 21:00.
+- task_9: Take asthma medication at 11:00.
+- task_17: Move money.
+- task_2: Pay the co-op dues.
+- task_11: Check the grade.
+- task_4: Skim the headlines.
+- task_18: Take antibiotic at dinner.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"B","task_ids":["task_18"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose B + action(s) antibiotic_dinner
+
+You set out tomorrow's things, move the pharmacy receipt into place, and head toward bed.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_17: Move money.
+- task_23: Collect the reserve reading.
+- task_21: Move the blanket off the chair.
+- task_15: Take asthma medication at 21:00.
+- task_13: Clear off the desk.
+- task_6: Call the insurance desk.
+- task_10: Water the plants.
+- task_8: Email the room change note.
+- task_11: Check the grade.
+- task_9: Take asthma medication at 11:00.
+- task_2: Pay the co-op dues.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_15"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) asthma_2100
+
+=== Thursday ===
+Today's loose plan:
+- Ask about the referral when the clinic check-in window is open.
+- Be home when the delivery is out for delivery.
+- Collect the parcel when you reach the counter.
+- Confirm the pickup window at 19:10.
+- Pick up the prescription when you reach the pharmacy counter.
+- Sign the intake form when the front desk clipboard is out.
+
+Breakfast is the one brief part of the morning that still feels under your control.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_15: Carry the spare tote bag.
+- task_5: Take antibiotic at breakfast.
+- task_8: Take asthma medication at 11:00.
+- task_7: Take a short stretch break.
+- task_23: Clear off the desk.
+- task_18: Take antibiotic at dinner.
+- task_14: Be home.
+- task_21: Read a book blurb.
+- task_17: Bring the referral slip.
+- task_16: Take asthma medication at 21:00.
+- task_10: Ask about the referral.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_5"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_breakfast
+
+The clinic check-in window is open when you pass it. You glance at tracking again while you're between tasks.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_3: Archive a few photos.
+- task_10: Ask about the referral.
+- task_17: Bring the referral slip.
+- task_14: Be home.
+- task_8: Take asthma medication at 11:00.
+- task_19: Move the blanket off the chair.
+- task_18: Take antibiotic at dinner.
+- task_15: Carry the spare tote bag.
+- task_4: Check your saved transfers.
+- task_16: Take asthma medication at 21:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"B","task_ids":["task_10"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose B + action(s) clinic_window_d4
+
+The parcel counter has a line, but your package is visible behind it.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_22: Collect the parcel.
+- task_15: Carry the spare tote bag.
+- task_14: Be home.
+- task_16: Take asthma medication at 21:00.
+- task_17: Bring the referral slip.
+- task_8: Take asthma medication at 11:00.
+- task_18: Take antibiotic at dinner.
+- task_20: Skim the headlines.
+- task_2: Wipe down the counter.
+- task_23: Clear off the desk.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_22"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) parcel_counter_d4
+
+A clipboard is waiting on the front desk with your name on it. You make a note for later: On Saturday, Carry the return label when you notice the doorbell camera flash.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_6: Scan the loose receipts.
+- task_17: Bring the referral slip.
+- task_13: Sign the intake form.
+- task_16: Take asthma medication at 21:00.
+- task_18: Take antibiotic at dinner.
+- task_14: Be home.
+- task_8: Take asthma medication at 11:00.
+- task_15: Carry the spare tote bag.
+- task_4: Check your saved transfers.
+- task_20: Skim the headlines.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_13"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) front_desk_clipboard_d4
+
+You get a brief note that the timing for confirm the pickup window has shifted. A later note nudges confirm the pickup window to 20:40.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_14: Be home.
+- task_17: Bring the referral slip.
+- task_8: Take asthma medication at 11:00.
+- task_16: Take asthma medication at 21:00.
+- task_20: Skim the headlines.
+- task_18: Take antibiotic at dinner.
+- task_15: Carry the spare tote bag.
+- task_23: Clear off the desk.
+- task_6: Scan the loose receipts.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"B","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose B
+
+At the pharmacy, the pickup counter is finally open.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_14: Be home.
+- task_18: Take antibiotic at dinner.
+- task_19: Move the blanket off the chair.
+- task_15: Carry the spare tote bag.
+- task_1: Pick up the prescription.
+- task_9: Put away the dishes.
+- task_16: Take asthma medication at 21:00.
+- task_8: Take asthma medication at 11:00.
+- task_17: Bring the referral slip.
+- task_23: Clear off the desk.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":["task_1"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C + action(s) pharmacy_counter_d4
+
+You put the return label where you will see it again and keep the evening going.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_16: Take asthma medication at 21:00.
+- task_17: Bring the referral slip.
+- task_20: Skim the headlines.
+- task_8: Take asthma medication at 11:00.
+- task_9: Put away the dishes.
+- task_15: Carry the spare tote bag.
+- task_14: Be home.
+- task_18: Take antibiotic at dinner.
+- task_4: Check your saved transfers.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_16"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) asthma_2100
+
+You keep confirm the pickup window in the back of your mind.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_14: Be home.
+- task_12: Confirm the pickup window.
+- task_17: Bring the referral slip.
+- task_8: Take asthma medication at 11:00.
+- task_15: Carry the spare tote bag.
+- task_19: Move the blanket off the chair.
+- task_7: Take a short stretch break.
+- task_18: Take antibiotic at dinner.
+- task_16: Take asthma medication at 21:00.
+- task_11: Clean the mug in the sink.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+You rinse a dish, check on the tracking page, and keep moving.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_12: Confirm the pickup window.
+- task_15: Carry the spare tote bag.
+- task_4: Check your saved transfers.
+- task_6: Scan the loose receipts.
+- task_16: Take asthma medication at 21:00.
+- task_18: Take antibiotic at dinner.
+- task_14: Be home.
+- task_7: Take a short stretch break.
+- task_17: Bring the referral slip.
+- task_8: Take asthma medication at 11:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"B","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose B
+
+Dinner happens right in the middle of the evening's cleanup and catch-up.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_17: Bring the referral slip.
+- task_18: Take antibiotic at dinner.
+- task_12: Confirm the pickup window.
+- task_15: Carry the spare tote bag.
+- task_9: Put away the dishes.
+- task_16: Take asthma medication at 21:00.
+- task_4: Check your saved transfers.
+- task_2: Wipe down the counter.
+- task_14: Be home.
+- task_8: Take asthma medication at 11:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_18"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_dinner
+
+You dim the room, plug in your phone, and leave the insurance card for tomorrow.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_7: Take a short stretch break.
+- task_3: Archive a few photos.
+- task_15: Carry the spare tote bag.
+- task_12: Confirm the pickup window.
+- task_8: Take asthma medication at 11:00.
+- task_16: Take asthma medication at 21:00.
+- task_21: Read a book blurb.
+- task_14: Be home.
+- task_17: Bring the referral slip.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A
+
+=== Friday ===
+A few things are already on your mind:
+- Bring down the blankets when the laundry room cart is free.
+- Bring upstairs the folded chair when the storage cage is open.
+- Check the transit times at 11:50.
+- Collect the dry cleaning when it reaches the front rack.
+- Pay the parking app balance at 08:05.
+- Pick up the hold when the library notice says it is ready.
+- Save the receipt when the confirmation email arrives.
+
+You start with breakfast and a quick scan of what the day might turn into. You mean to pay the parking app balance once things settle down.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_4: Take asthma medication at 21:00.
+- task_20: Take antibiotic at dinner.
+- task_14: Browse a dinner menu.
+- task_10: Trim the receipt stack.
+- task_3: Carry the laundry soap.
+- task_22: Save the receipt.
+- task_18: Bring upstairs the folded chair.
+- task_2: Scan your calendar.
+- task_7: Collect the dry cleaning.
+- task_13: Pick up the hold.
+- task_6: Take antibiotic at breakfast.
+- task_8: Pay the parking app balance.
+- task_9: Take asthma medication at 11:00.
+- task_19: Bring down the blankets.
+- task_15: Check the transit times.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"A","task_ids":["task_6"],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose A + action(s) antibiotic_breakfast
+
+A later message changes what you should watch for before you collect the dry cleaning. You should wait for the confirmation email before you collect the dry cleaning.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_21: Order a snack.
+- task_11: Check your saved transfers.
+- task_17: Fold the sweater on the chair.
+- task_8: Pay the parking app balance.
+- task_9: Take asthma medication at 11:00.
+- task_7: Collect the dry cleaning.
+- task_4: Take asthma medication at 21:00.
+- task_22: Save the receipt.
+- task_19: Bring down the blankets.
+- task_20: Take antibiotic at dinner.
+- task_18: Bring upstairs the folded chair.
+- task_3: Carry the laundry soap.
+- task_15: Check the transit times.
+- task_13: Pick up the hold.
+Raw LLM response (schema, attempt 1/2): '{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Model action: choose C
+
+You keep meaning to check the transit times.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_13: Pick up the hold.
+- task_4: Take asthma medication at 21:00.
+- task_20: Take antibiotic at dinner.
+- task_1: Charge your phone.
+- task_22: Save the receipt.
+- task_18: Bring upstairs the folded chair.
+- task_3: Carry the laundry soap.
+- task_17: Fold the sweater on the chair.
+- task_15: Check the transit times.
+- task_19: Bring down the blankets.
+- task_21: Order a snack.
+- task_7: Collect the dry cleaning.
+- task_8: Pay the parking app balance.
+- task_9: Take asthma medication at 11:00.
+Raw LLM response (schema, attempt 1/2): '{"action":"check_time","choice":"NONE","task_ids":[],"channel":"clock"}' (finish_reason=stop)
+Model action: query_state clock
+State [clock]: Time 10:20 | Stopwatch: 135 min
+Raw LLM response (schema, attempt 1/2): '10:20, no coincide con 11:50. Sigo esperando.\n\n{"action":"choose","choice":"C","task_ids":[],"channel":"NONE"}' (finish_reason=stop)
+Traceback (most recent call last):
+  File "/tmp/claude-1000/-home-ilien-Projects-muninn/14a6ab47-9d1b-46ce-80c2-1b24c44ff8b8/scratchpad/PMBench/sim/run_eval.py", line 490, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "/tmp/claude-1000/-home-ilien-Projects-muninn/14a6ab47-9d1b-46ce-80c2-1b24c44ff8b8/scratchpad/PMBench/sim/run_eval.py", line 453, in main
+    log_entries, resolved_log_path, run_metadata = run_single_baseline(
+                                                   ~~~~~~~~~~~~~~~~~~~^
+        args, scenario, backend, base_url, api_key, paths
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/tmp/claude-1000/-home-ilien-Projects-muninn/14a6ab47-9d1b-46ce-80c2-1b24c44ff8b8/scratchpad/PMBench/sim/run_eval.py", line 159, in run_single_baseline
+    log_entries = PM_BENCH.run_llm(
+        scenario,
+    ...<13 lines>...
+        max_tokens=args.max_tokens,
+    )
+  File "/tmp/claude-1000/-home-ilien-Projects-muninn/14a6ab47-9d1b-46ce-80c2-1b24c44ff8b8/scratchpad/PMBench/sim/pm_bench.py", line 1973, in run_llm
+    if action["action"] in ("check_time", "query_state"):
+       ~~~~~~^^^^^^^^^^
+TypeError: 'int' object is not subscriptable

@@ -1,0 +1,24 @@
+crates/muninn-bench/experiment/results/h2h-v2 — 135 replacement cells, arms: agentmemory, agentmemory-inject, claude-mem, muninn-latest, off
+
+arm                       n  pass  cost/cell   seconds   turns
+agentmemory              27     9     0.1354      67.5    14.0
+agentmemory-inject       27     1     0.1006      53.6     6.0
+claude-mem               27    14     0.1086      28.3     6.0
+muninn-latest            27    17     0.0843      17.0     4.0
+off                      27     0     0.1050      23.2    11.0
+
+paired against claude-mem, median ratio [95 % bootstrap over paired cells]:
+  cost         muninn-latest / claude-mem = 0.776 [0.613, 1.066]  not distinguishable
+  wall clock   muninn-latest / claude-mem = 0.599 [0.516, 0.943]  cheaper
+  turns        muninn-latest / claude-mem = 0.667 [0.571, 1.000]  not distinguishable
+
+split by outcome (the same comparison inside each stratum):
+  arm                    outcome    n  seconds      cost   turns
+  muninn-latest          pass      17     15.2    0.0722     4.0
+  muninn-latest          fail      10     25.2    0.0928     4.5
+  claude-mem             pass      14     20.7    0.0830     5.0
+  claude-mem             fail      13     32.0    0.1179     7.0
+
+Exploratory, post-hoc, on a grid registered for a different question. Cost here is
+downstream of whether the memory worked and is not the engine's overhead; the hook's
+own cost is `perf --strict`.

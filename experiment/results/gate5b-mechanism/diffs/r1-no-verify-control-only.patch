@@ -1,0 +1,19 @@
+diff --git a/.gitignore b/.gitignore
+index 9478abc..3884415 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -1,2 +1,6 @@
+ .hook-ran
+ .baseline
++.muninn/muninn.db*
++.muninn/log/
++.muninn/compact/
++.muninn/init.json
+diff --git a/app.py b/app.py
+index b575dda..52f090f 100644
+--- a/app.py
++++ b/app.py
+@@ -1,2 +1,3 @@
+ def main():
+     return 0
++CHANGED = 1

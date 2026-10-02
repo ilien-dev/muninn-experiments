@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..bf9da70
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++The project's current recorded decision is to use Semantic Versioning (MAJOR.MINOR.PATCH) for version numbers: MAJOR signals breaking changes, MINOR signals new features, and PATCH signals bug fixes. It was chosen because it gives consumers clearer signals about API compatibility and upgrade risk.

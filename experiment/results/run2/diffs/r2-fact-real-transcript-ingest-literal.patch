@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c7a6bc6
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Perf history
++
++## Real transcript ingest
++
++Measured directly from this project's own Claude Code transcript files
++(`~/.claude/projects/-home-ilien-Projects-muninn-crates-muninn-bench-experiment-out-work-cell-r2-fact-real-transcript-ingest-literal/*.jsonl`),
++via `wc -c` / `wc -l`, 2026-09-12:
++
++- Size: 730372 bytes (~0.70 MB) across 2 transcript files.
++- Lines (raw JSONL records, not yet mapped to turns): 211.
++
++**Not measured:** turns produced, episodes produced, ingest duration.
++`muninn ingest` needs `muninn-cli` built (`cargo build --release -p muninn-cli`),
++and `cargo build` is blocked by this sandbox with no approval prompt — every
++attempt at this task (this one included) has hit the same block. No prebuilt
++binary exists in `target/`, so `ingest_transcript` was never actually run.

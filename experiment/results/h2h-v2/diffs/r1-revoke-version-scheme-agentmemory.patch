@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..2ecd413
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++This project has no recorded decision on a version numbering scheme. A search of the repository's documentation (README.md, CONTRIBUTING.md, CHANGELOG.md, CODE_OF_CONDUCT.md, BENCHMARKS.md, docs/doc.md, and .github/) turned up no policy, ADR, or other statement adopting or defining a versioning convention, so none is recorded here.

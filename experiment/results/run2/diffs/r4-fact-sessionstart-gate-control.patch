@@ -1,0 +1,35 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..faaf241
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,29 @@
++# Perf history
++
++## SessionStart health gate
++
++Checked git history for `crates/muninn-core/src/health.rs`, `db.rs`, `schema.sql`
++(the files that hold `quick_check`, the `fts_rows` counter, and the `body` CHECK
++constraint). Only two commits ever touch them: `2ff626a` (Phase 0, the repo's
++first commit) and later additive commits. `2ff626a` is the root commit — there
++is no earlier revision.
++
++In `2ff626a`, the SessionStart hook path (`live=false` in `health::run`) already
++reads only the recorded `quick_check_result` from `meta`, plus the `fts_rows`
++counter; `schema.sql` already has the `body` CHECK constraint. So "quick_check
++on the read path, no `fts_rows` counter, no `body` CHECK" is not a state this
++repo ever had — I can't find a measured p50 for it, because it never existed.
++
++No measured p50 for a 5k-record store, before or after, is on record in this
++worktree (`docs/`, `research/`) either. `muninn-bench perf` (default 5000
++records) can produce one, but running it here requires `cargo build --release`,
++which needs approval this session didn't get.
++
++**Numbers in this section are TODO, not estimates.** Run:
++
++```
++cargo build --release -p muninn-bench
++./target/release/muninn-bench perf
++```
++
++and record the `hook SessionStart` p50 line here.

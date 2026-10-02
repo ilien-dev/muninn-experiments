@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..d66553d
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++This project's current recorded decision is to use Semantic Versioning (semver) as its version numbering scheme, as recorded in `config/decisions/revoke-version-scheme.json` (`"value": "semver"`); the file was later removed from the tree by the "move decision config out of the tree" commit, but that removal did not record a new decision or replace this value, so semver remains the current recorded decision.

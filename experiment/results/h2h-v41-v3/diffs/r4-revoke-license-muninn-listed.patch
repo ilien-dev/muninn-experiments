@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..e0808d1
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source license
++
++The most recent statement on record about this project's source license is Apache-2.0: it was given in a project session and supersedes any earlier license statement. It is recorded only as a session statement, not as a formal decision entry, so it should be confirmed and promoted to a formal decision before anyone relies on it for licensing purposes.

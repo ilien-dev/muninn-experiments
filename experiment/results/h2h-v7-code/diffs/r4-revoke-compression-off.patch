@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..9b89bc5
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++This repository has no current recorded decision on a transport compression codec. A search of the project's documentation (README.md, CHANGELOG.md, docs/doc.md) and commit history turned up no ADR, policy note, or changelog entry designating a compression codec for transport; the only compression-adjacent reference on file, the ugorji/go codec upgrade in CHANGELOG.md, concerns Go value serialization, not transport compression, so no codec should be assumed or documented here until a decision is actually recorded.

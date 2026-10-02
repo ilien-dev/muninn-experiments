@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..d3f835a
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++This project's version numbering scheme is Semantic Versioning (semver). This value was recorded in `config/decisions/revoke-version-scheme.json`, which was later relocated out of the tree in the "move decision config out of the tree" commit; that relocation did not change or retire the recorded value, so semver remains the current decision.

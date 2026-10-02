@@ -1,0 +1,23 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..f84ab7b
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,17 @@
++# Corpus fetching
++
++The corpus fetch had to respect a per-domain limit of **12 visits in a
++60-second window**. After breaching that limit, the domain entered a
++**900-second (15-minute) cooldown**.
++
++Files were fetched through these hosts:
++
++- `raw.githubusercontent.com`
++- `cdn.jsdelivr.net`, using paths of the form
++  `https://cdn.jsdelivr.net/gh/owner/repo@branch/path`
++- `cdn.statically.io`
++
++`cdn.statically.io` was used as a mirror, but requests to it were slow and
++sometimes timed out. The corpus manifest independently identifies
++`raw.githubusercontent.com` as the raw-file source; the rate-limit values and
++mirror usage above are the values recorded during the actual fetch run.

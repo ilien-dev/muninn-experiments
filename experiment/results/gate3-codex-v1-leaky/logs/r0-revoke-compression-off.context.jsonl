@@ -1,0 +1,3 @@
+{"at":1789308083380,"session":"01a09b12-1932-7b41-bd2e-59bc3e445fac","files":[".codex/hooks.json","codex/hooks.json","plugin/skills/muninn/SKILL.md","crates/muninn-core/src/paths.rs","crates/muninn-bench/experiment/tasks.json"],"symbols":["ProjectPaths","ProjectPaths","from_root","resolve","db_path","records_dir","compiled_dir","log_dir","compact_dir","heartbeat_log","trace_log","index_md"]}
+{"at":1789308094238,"session":"01a09b12-1932-7b41-bd2e-59bc3e445fac","files":["docs/policies/compression.md"],"symbols":[]}
+{"at":1789308098421,"session":"01a09b12-1932-7b41-bd2e-59bc3e445fac","files":["docs/policies/compression.md","docs/policies/compression.md)","docs/policies/compression.md","docs/policies/compression.md"],"symbols":[]}

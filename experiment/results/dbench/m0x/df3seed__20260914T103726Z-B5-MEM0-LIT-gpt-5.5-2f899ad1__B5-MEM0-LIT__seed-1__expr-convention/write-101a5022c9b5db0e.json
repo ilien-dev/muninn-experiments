@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__expr-convention",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "All public expression failures use EXPR_<CODE>: <message>.\nFor sequence expr-convention, task expr-convention-s02, the public task prompt was: Add evaluate_many(lines), ignoring blank lines and reporting failures as EXPR_BATCH with the failing 1-based line number.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1",
+      "seed": 1,
+      "sequence_id": "expr-convention"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__expr-convention"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "8c3cb773-cd97-411f-b7c7-e3a7f141444d",
+        "memory": "All public expression failures use EXPR_<CODE>: <message>.\nFor sequence expr-convention, task expr-convention-s02, the public task prompt was: Add evaluate_many(lines), ignoring blank lines and reporting failures as EXPR_BATCH with the failing 1-based line number.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

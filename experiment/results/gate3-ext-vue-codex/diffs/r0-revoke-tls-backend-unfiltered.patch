@@ -1,0 +1,7 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..8ddf789
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1 @@
++This project uses OpenSSL as its TLS backend and requires TLS certificate verification in all builds, including development builds.

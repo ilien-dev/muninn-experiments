@@ -1,0 +1,7 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..27aaad7
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1 @@
++The project's source license is Apache-2.0.

@@ -1,0 +1,4 @@
+history rewrite 2026-09-14; re-stamped pre-registration commits (old -> new):
+19e9e70 -> d375a2632efe4b77301634315907ece9df7434cc
+c357381 -> 8d8ca81ff7d43b5c065c4f6768dbe0fa349f2aee
+3be3593 -> 742f751808f64e34cd67e3fdf9b9d06d798d9b43

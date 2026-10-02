@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..3718bea
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime
++
++The project's recorded decision is to use tokio as the async runtime. An earlier decision had selected async-std, but that choice was superseded when the team switched to tokio for its more mature ecosystem, with broader third-party crate and community support than async-std.

@@ -1,0 +1,14 @@
+{"at":1789367718099,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[83,84],"tokens":193,"reason":"cue:event:session_start"}
+{"at":1789367718171,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[81],"tokens":0,"reason":"gated:budget"}
+{"at":1789367718171,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[76],"tokens":0,"reason":"gated:budget"}
+{"at":1789367718171,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[60],"tokens":0,"reason":"gated:budget"}
+{"at":1789367718171,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[80],"tokens":0,"reason":"gated:budget"}
+{"at":1789367718171,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789367718171,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[78,64,53],"tokens":569,"reason":"literal"}
+{"at":1789367729684,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[88],"tokens":0,"reason":"cue:dir:crates/muninn-capture/src,symbol:redact@post_tool"}
+{"at":1789367729684,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[88],"tokens":50,"reason":"literal:post_tool"}
+{"at":1789367784785,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[89],"tokens":0,"reason":"cue:symbol:tests@post_tool"}
+{"at":1789367784785,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[89],"tokens":54,"reason":"literal:post_tool"}
+{"at":1789367823035,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[90],"tokens":0,"reason":"cue:dir:crates/muninn-bench/src,symbol:pct@post_tool"}
+{"at":1789367823036,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[90],"tokens":64,"reason":"literal:post_tool"}
+{"at":1789367865551,"session":"b10508f0-be31-4954-bee5-b692b72ba32f","arm":"literal","ids":[],"tokens":0,"reason":"gated:intent"}

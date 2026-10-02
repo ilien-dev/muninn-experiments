@@ -1,0 +1,26 @@
+{
+ "model": "claude-sonnet-5",
+ "store": "muninn-shadow",
+ "base_url": "http://127.0.0.1:30002/v1",
+ "host": "dev",
+ "python": "3.14.7",
+ "scaffold_sha256": "76432aef225a51ff6f1e3576d1977e92dae0d38fc7bfdf6a1bc7e675ea05b593",
+ "scenario": "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round9-sonnet/weeks/heldout-10517.json",
+ "scenario_sha256": "f368fc9752d3460cb7be9a3b515853d42512bdfeab33084bc08237e8eaf4228f",
+ "pm_bench_py_sha256": "d8ec27d8dcf4679d7a789c52fc305286df460844d47e9f116b81f2400ac254d8",
+ "pmbench_commit": "e1093c470c8981daf522d4ef047a7c3a71e077d7",
+ "muninn_bin": "/home/ilien/Projects/muninn/crates/muninn-bench/pmbench/muninn-nonet",
+ "muninn_bin_sha256": "2169993994707ae2e4b8fd9476c5e98ebdc18d408d4c622d9bab2ff88dc127cd",
+ "muninn_version": "",
+ "muninn_real_bin": "/home/ilien/Projects/muninn/target/release/muninn",
+ "muninn_real_bin_sha256": "9c8c80b942682d15e71f23a35165e78c4be7d749599eb4c315589d7ebdd0a825",
+ "muninn_commit": "0d31700f9c9e01c6afa56907ab34939c775db620",
+ "bridge_canary": {
+  "model": "claude-sonnet-5",
+  "answer": "Here is everything provided to me besides this message, listed verbatim:\n\n**System prompt:**\n\"You are a Claude agent, built on Anthropic's Claude Agent SDK.You answer questions.\n\nAnswer in at most 300 tokens.\"\n\n**userEmail context block:**\n\"# userEmail\nThe user's email address is [account e-mail]. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks.\n\nIMPORTANT: this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.\"\n\n**Environment system-reminder:**\n\"# Environment\nYou have been invoked in the following environment: \n - Primary working directory: /tmp/muninn-bridge-cwd\n - Is a git repository: false\n - Platform: linux\n - Shell: bash\n - OS Version: Linux 7.2.4-zen2-1-zen\"\n\n**Model system-reminder:**\n\"You are powered by the model named Sonnet 5. The exact model ID is claude-sonnet-5. Assistant knowledge cutoff is January 2026.\"\n\n**Token count system-reminder:**\n\"<total_tokens>15000000 tokens left</total_tokens>\"\n\n**Date system-reminder:**\n\"Today's date is 2026-09-14.\"",
+  "input_tokens": 524,
+  "num_turns": 1,
+  "bridge": "claude_bridge.py"
+ },
+ "log": "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round9-sonnet/heldout-10517/muninn_store/muninn-shadow-store-20260914-022207-2635395-claude-sonnet-5/muninn-shadow-store-20260914-022207-2635395-claude-sonnet-5.jsonl"
+}

@@ -1,0 +1,24 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..8c9ef0d 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,19 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Which lookup `muninn why` performs for one question.
++pub enum Route {
++    /// `muninn why <id>` — one decision, by its id.
++    ById,
++    /// `muninn why "<question>"` — free-text search over records.
++    ByQuestion,
++}
++
++/// Picks the route for one `muninn why` argument.
++pub fn route(input: &str) -> Route {
++    let id = input.strip_prefix('#').unwrap_or(input);
++    if !id.is_empty() && id.chars().all(|c| c.is_ascii_digit()) {
++        Route::ById
++    } else {
++        Route::ByQuestion
++    }
++}

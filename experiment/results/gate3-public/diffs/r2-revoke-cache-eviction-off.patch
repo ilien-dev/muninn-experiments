@@ -1,0 +1,18 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..66086f7
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,12 @@
++# Cache eviction
++
++Muninn does not implement a cache/memory eviction policy of its own: compression
++and eviction of accumulated memory is recorded as delegated to existing,
++externally measured systems rather than built in-project. The recorded basis is
++MemForest (arXiv:2609.08273), which partitions memory into EventTrees with
++progressive fusion and, under Mem0, retains 97.1% of performance while
++compressing 50% of history with a 1.89x retrieval speedup (99.7% retention at
++50% compression and 2.24x speedup under M3-Agent); the project's conclusion from
++this evidence is explicit: "La compresión y el desalojo son un problema resuelto
++por otros y medido. Se delega" (compression and eviction are a problem already
++solved by others and measured — it is delegated) [N3].

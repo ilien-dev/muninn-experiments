@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..fef3ad1
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire Serialisation Format
++
++Nothing is currently recorded. This project's other technical choices (compression, version scheme, password hashing, async runtime) are tracked as committed decision files under `config/decisions/`, but no such file exists for the wire serialisation format, and no commit has established one. Mentions of msgpack or cbor for this project exist only in chat history, not as a recorded project decision, so no format should be treated as settled until one is committed.

@@ -1,0 +1,50 @@
+[
+  {
+    "model": "llama3.1:8b",
+    "mem0_prompt": [
+      {
+        "input": "For production secrets we use HashiCorp Vault.",
+        "facts": []
+      },
+      {
+        "input": "We're going with gRPC for service-to-service communication.",
+        "facts": []
+      },
+      {
+        "input": "Moving to AWS Secrets Manager instead.",
+        "facts": []
+      },
+      {
+        "input": "The async runtime is tokio, not async-std.",
+        "facts": []
+      }
+    ],
+    "plain_prompt": [
+      {
+        "input": "For production secrets we use HashiCorp Vault.",
+        "facts": []
+      },
+      {
+        "input": "We're going with gRPC for service-to-service communication.",
+        "facts": [
+          {
+            "technology": "gRPC",
+            "decision": "service-to-service communication"
+          }
+        ]
+      },
+      {
+        "input": "Moving to AWS Secrets Manager instead.",
+        "facts": []
+      },
+      {
+        "input": "The async runtime is tokio, not async-std.",
+        "facts": [
+          "The async runtime is tokio, not async-std."
+        ]
+      }
+    ],
+    "mem0_extracted": 0,
+    "plain_extracted": 2
+  }
+]

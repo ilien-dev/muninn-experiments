@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..7e2eb51
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source License Policy
++
++The project's decision configuration (`config/decisions/`) no longer contains a license record — it was removed from the tree in the "move decision config out of the tree" commit — so there is currently no recorded decision on the source license in the project.

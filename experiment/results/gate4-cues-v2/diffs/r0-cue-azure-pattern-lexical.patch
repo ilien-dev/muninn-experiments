@@ -1,0 +1,26 @@
+diff --git a/crates/muninn-capture/src/redact.rs b/crates/muninn-capture/src/redact.rs
+index eec1ce2..e489409 100644
+--- a/crates/muninn-capture/src/redact.rs
++++ b/crates/muninn-capture/src/redact.rs
+@@ -13,6 +13,7 @@ fn patterns() -> &'static [Regex] {
+             r"sk-[A-Za-z0-9]{20,}",
+             r"ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}",
+             r"AKIA[0-9A-Z]{16}",
++            r"[A-Za-z0-9+/]{86}==",
+             r"xox[baprs]-[A-Za-z0-9\-]{10,}",
+             r"AIza[0-9A-Za-z_\-]{30,}",
+             r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----",
+@@ -91,4 +92,13 @@ mod tests {
+         let t = "qA7zP2mX9kL4vB8nR1tY6wC3eH5jD0sF2gK8uN4pQ7";
+         assert!(redact(t).contains("[redacted]"));
+     }
++
++    #[test]
++    fn redacts_azure_storage_account_key() {
++        // poison_pill fixture: 88-char base64 shape used by Azure storage account keys
++        let s = "poison_pill AccountKey=Az9Bx8Cw7+Az9Bx8Cw7+Az9Bx8Cw7+Az9Bx8Cw7+Az9Bx8Cw7+Az9Bx8Cw7+Az9Bx8Cw7+Az9Bx8Cw7+Dv6Eu5==;EndpointSuffix=core.windows.net";
++        let r = redact(s);
++        assert!(!r.contains("Az9Bx8Cw7+Az9Bx8Cw7+"));
++        assert!(r.contains("[redacted]"));
++    }
+ }

@@ -1,0 +1,19 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..bf88f2f
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,13 @@
++# Perf history
++
++## SessionStart health gate
++
++**Después** (`quick_check` fuera de la ruta de lectura; añadidos en el mismo commit
++el contador O(1) `fts_rows` y el `CHECK` de longitud de body): **SessionStart p50 1.05 ms**,
++medido sobre 5 000 registros / 15 000 cues. Fuente: commit `2ff626a` ("Phase 0: foundations —
++store, health gate, heartbeats, hooks, init/clean, fault suite, perf contracts").
++
++**Antes** (con `quick_check` todavía en la ruta de lectura): sin medición encontrada.
++`2ff626a` es el primer commit del repo — introduce la compuerta de salud, el contador
++`fts_rows` y el `CHECK` del body a la vez, así que no existe un commit previo con el
++estado antiguo para medirlo. No invento la cifra.

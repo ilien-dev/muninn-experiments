@@ -1,0 +1,2959 @@
+
+Regular tasks for every day:
+- Take antibiotic at breakfast and dinner.
+- Take asthma medication at 11:00 and 21:00.
+
+=== Monday ===
+A few things are already on your mind:
+- Confirm the guest count at 12:25.
+- Drop off the poster tube when the studio lobby lights come on.
+- Hand over the spare charger when you get a patio table.
+- Leave the borrowed book when the courtyard bench is free.
+- Pay the co-op dues at 12:25.
+- Reply to the follow-up form email when it arrives.
+
+Breakfast is less about food than about getting your bearings.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_7: Take antibiotic at dinner.
+- task_16: Take asthma medication at 11:00.
+- task_22: Take antibiotic at breakfast.
+- task_18: Take a short stretch break.
+- task_6: Tidy the entryway.
+- task_2: Take asthma medication at 21:00.
+- task_20: Reply to the follow-up form email.
+- task_15: Wipe down the counter.
+Model action: query_state clock
+State [clock]: Time 07:50 | Stopwatch: 0 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) antibiotic_breakfast
+
+You get a brief note that the timing for pay the co-op dues has shifted. You keep telling yourself to pay the co-op dues before too long. You make a note for later: On Thursday, Bring the referral slip when you notice the parking receipt kiosk. A later note nudges pay the co-op dues to 16:15.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_14: Make a cup of tea.
+- task_15: Wipe down the counter.
+- task_17: Pay the co-op dues.
+- task_22: Take antibiotic at breakfast.
+- task_16: Take asthma medication at 11:00.
+- task_3: Queue up a playlist.
+- task_7: Take antibiotic at dinner.
+- task_2: Take asthma medication at 21:00.
+- task_20: Reply to the follow-up form email.
+Model action: query_state clock
+State [clock]: Time 08:20 | Stopwatch: 30 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B
+
+A quick scheduling note about confirm the guest count comes in. You expect another email to land later. The timing shifts a little: confirm the guest count moves to 18:50.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_13: Trim the receipt stack.
+- task_17: Pay the co-op dues.
+- task_22: Take antibiotic at breakfast.
+- task_2: Take asthma medication at 21:00.
+- task_20: Reply to the follow-up form email.
+- task_16: Take asthma medication at 11:00.
+- task_7: Take antibiotic at dinner.
+- task_8: Charge your phone.
+- task_5: Fold the sweater on the chair.
+Model action: query_state clock
+State [clock]: Time 09:25 | Stopwatch: 95 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C
+
+You don't want to forget to confirm the guest count. You add a reminder to yourself: On Tuesday, Bring the lab form when you notice the front desk clipboard.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_20: Reply to the follow-up form email.
+- task_8: Charge your phone.
+- task_3: Queue up a playlist.
+- task_19: Confirm the guest count.
+- task_7: Take antibiotic at dinner.
+- task_16: Take asthma medication at 11:00.
+- task_2: Take asthma medication at 21:00.
+- task_22: Take antibiotic at breakfast.
+- task_15: Wipe down the counter.
+- task_17: Pay the co-op dues.
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 190 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: New email: follow-up form is ready.
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B + task(s) asthma_1100, email_form_followup_d1
+
+You put the charger where you can see it and sort out the next two errands.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_17: Pay the co-op dues.
+- task_14: Make a cup of tea.
+- task_22: Take antibiotic at breakfast.
+- task_2: Take asthma medication at 21:00.
+- task_1: Call a friend.
+- task_7: Take antibiotic at dinner.
+- task_16: Take asthma medication at 11:00.
+- task_20: Reply to the follow-up form email.
+- task_15: Wipe down the counter.
+- task_19: Confirm the guest count.
+Model action: query_state clock
+State [clock]: Time 12:25 | Stopwatch: 275 min
+Model action: choose B
+
+You line up the loose receipt with the rest of your things and keep the day moving.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_5: Fold the sweater on the chair.
+- task_1: Call a friend.
+- task_16: Take asthma medication at 11:00.
+- task_7: Take antibiotic at dinner.
+- task_17: Pay the co-op dues.
+- task_20: Reply to the follow-up form email.
+- task_22: Take antibiotic at breakfast.
+- task_19: Confirm the guest count.
+- task_8: Charge your phone.
+- task_2: Take asthma medication at 21:00.
+Model action: query_state clock
+State [clock]: Time 13:00 | Stopwatch: 310 min
+Model action: choose A
+
+You look over the note on your phone, send one quick reply, and move on.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_20: Reply to the follow-up form email.
+- task_18: Take a short stretch break.
+- task_19: Confirm the guest count.
+- task_16: Take asthma medication at 11:00.
+- task_7: Take antibiotic at dinner.
+- task_2: Take asthma medication at 21:00.
+- task_22: Take antibiotic at breakfast.
+- task_1: Call a friend.
+- task_17: Pay the co-op dues.
+- task_13: Trim the receipt stack.
+Model action: query_state clock
+State [clock]: Time 15:20 | Stopwatch: 450 min
+Model action: choose B
+
+You set the charger on the table for a minute and look over the rest of the afternoon.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_5: Fold the sweater on the chair.
+- task_19: Confirm the guest count.
+- task_2: Take asthma medication at 21:00.
+- task_15: Wipe down the counter.
+- task_7: Take antibiotic at dinner.
+- task_17: Pay the co-op dues.
+- task_22: Take antibiotic at breakfast.
+- task_9: Sort the mail.
+- task_20: Reply to the follow-up form email.
+- task_16: Take asthma medication at 11:00.
+Model action: query_state clock
+State [clock]: Time 16:15 | Stopwatch: 505 min
+Model action: choose C + task(s) pay_coop_dues_1_d1
+
+The studio lobby lights are on early tonight. The courtyard bench is finally empty for a minute.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_21: Drop off the poster tube.
+- task_2: Take asthma medication at 21:00.
+- task_5: Fold the sweater on the chair.
+- task_17: Pay the co-op dues.
+- task_19: Confirm the guest count.
+- task_22: Take antibiotic at breakfast.
+- task_20: Reply to the follow-up form email.
+- task_7: Take antibiotic at dinner.
+- task_4: Leave the borrowed book.
+- task_9: Sort the mail.
+- task_13: Trim the receipt stack.
+- task_16: Take asthma medication at 11:00.
+Model action: query_state clock
+State [clock]: Time 18:00 | Stopwatch: 610 min
+Model action: choose A + task(s) studio_lobby_d1, courtyard_bench_d1
+
+Dinner happens right in the middle of the evening's cleanup and catch-up. A patio table finally opens up at the cafe.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_20: Reply to the follow-up form email.
+- task_17: Pay the co-op dues.
+- task_4: Leave the borrowed book.
+- task_2: Take asthma medication at 21:00.
+- task_22: Take antibiotic at breakfast.
+- task_7: Take antibiotic at dinner.
+- task_5: Fold the sweater on the chair.
+- task_10: Hand over the spare charger.
+- task_14: Make a cup of tea.
+- task_19: Confirm the guest count.
+- task_16: Take asthma medication at 11:00.
+- task_21: Drop off the poster tube.
+- task_15: Wipe down the counter.
+Model action: query_state clock
+State [clock]: Time 18:50 | Stopwatch: 660 min
+Model action: choose C + task(s) antibiotic_dinner, cafe_patio_table_d1, confirm_guest_count_2_d1
+
+You turn down the lights, leave your bag out for tomorrow, and settle in for the night.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_2: Take asthma medication at 21:00.
+- task_10: Hand over the spare charger.
+- task_19: Confirm the guest count.
+- task_4: Leave the borrowed book.
+- task_21: Drop off the poster tube.
+- task_17: Pay the co-op dues.
+- task_22: Take antibiotic at breakfast.
+- task_20: Reply to the follow-up form email.
+- task_16: Take asthma medication at 11:00.
+- task_7: Take antibiotic at dinner.
+- task_8: Charge your phone.
+- task_11: Water the plants.
+- task_1: Call a friend.
+Model action: query_state clock
+State [clock]: Time 21:00 | Stopwatch: 790 min
+Model action: choose A + task(s) asthma_2100
+
+You dim the room, plug in your phone, and leave the borrowed book for tomorrow.
+A) Brush your teeth
+B) Read a page
+C) Plug in your phone
+
+Step action menu:
+- task_19: Confirm the guest count.
+- task_21: Drop off the poster tube.
+- task_10: Hand over the spare charger.
+- task_4: Leave the borrowed book.
+- task_13: Trim the receipt stack.
+- task_7: Take antibiotic at dinner.
+- task_3: Queue up a playlist.
+- task_22: Take antibiotic at breakfast.
+- task_14: Make a cup of tea.
+- task_17: Pay the co-op dues.
+- task_20: Reply to the follow-up form email.
+- task_2: Take asthma medication at 21:00.
+- task_16: Take asthma medication at 11:00.
+Model action: choose A
+
+=== Tuesday ===
+Today's loose plan:
+- Buzz in the courier when the doorbell camera flashes.
+- Collect the package when the locker light turns green.
+- Confirm the pickup window at 11:20.
+- Drop off the sample slip when the lab drop box is unlocked.
+- Move money when the balance drops below $95.
+- Sign the intake form when the front desk clipboard is out.
+
+You start with breakfast and a quick scan of what the day might turn into.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_11: Bring the lab form.
+- task_5: Take asthma medication at 11:00.
+- task_18: Put away the dishes.
+- task_4: Take asthma medication at 21:00.
+- task_10: Look up a recipe.
+- task_21: Move money.
+- task_13: Read a book blurb.
+- task_22: Take antibiotic at dinner.
+- task_7: Take antibiotic at breakfast.
+Model action: query_state clock
+State [clock]: Time 07:50 | Stopwatch: 0 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) antibiotic_breakfast
+
+You jot down a quick reminder: On Wednesday, Bring the parcel slip when you notice the loading dock sign.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_3: Label a folder.
+- task_4: Take asthma medication at 21:00.
+- task_21: Move money.
+- task_6: Switch over the laundry basket.
+- task_17: Take a short stretch break.
+- task_22: Take antibiotic at dinner.
+- task_7: Take antibiotic at breakfast.
+- task_5: Take asthma medication at 11:00.
+- task_11: Bring the lab form.
+- task_20: Confirm the pickup window.
+Model action: query_state clock
+State [clock]: Time 09:10 | Stopwatch: 80 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B
+
+You don't want to forget to confirm the pickup window.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_8: Clean the keyboard.
+- task_10: Look up a recipe.
+- task_11: Bring the lab form.
+- task_22: Take antibiotic at dinner.
+- task_21: Move money.
+- task_4: Take asthma medication at 21:00.
+- task_14: Rearrange the stack of books.
+- task_20: Confirm the pickup window.
+- task_5: Take asthma medication at 11:00.
+- task_7: Take antibiotic at breakfast.
+Model action: query_state clock
+State [clock]: Time 09:25 | Stopwatch: 95 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C
+
+A later message changes what you should watch for before you drop off the sample slip. You should wait for the note by the side door before you drop off the sample slip.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_4: Take asthma medication at 21:00.
+- task_18: Put away the dishes.
+- task_11: Bring the lab form.
+- task_7: Take antibiotic at breakfast.
+- task_5: Take asthma medication at 11:00.
+- task_21: Move money.
+- task_23: Archive a few photos.
+- task_10: Look up a recipe.
+- task_20: Confirm the pickup window.
+- task_22: Take antibiotic at dinner.
+Model action: query_state clock
+State [clock]: Time 10:40 | Stopwatch: 170 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C
+
+A quick correction comes in before you get to sign the intake form. You should wait for the confirmation email before you sign the intake form.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_21: Move money.
+- task_4: Take asthma medication at 21:00.
+- task_13: Read a book blurb.
+- task_20: Confirm the pickup window.
+- task_8: Clean the keyboard.
+- task_7: Take antibiotic at breakfast.
+- task_2: Plug in the tablet.
+- task_5: Take asthma medication at 11:00.
+- task_22: Take antibiotic at dinner.
+- task_11: Bring the lab form.
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 190 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B + task(s) asthma_1100
+
+You keep in mind that your balance might dip later.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_11: Bring the lab form.
+- task_20: Confirm the pickup window.
+- task_22: Take antibiotic at dinner.
+- task_15: Review your notes.
+- task_21: Move money.
+- task_8: Clean the keyboard.
+- task_7: Take antibiotic at breakfast.
+- task_9: Order a snack.
+- task_4: Take asthma medication at 21:00.
+- task_5: Take asthma medication at 11:00.
+Model action: query_state clock
+State [clock]: Time 11:20 | Stopwatch: 210 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) confirm_pickup_window_1_d2
+
+You notice the lab drop box is unlocked for afternoon drop-offs.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_11: Bring the lab form.
+- task_5: Take asthma medication at 11:00.
+- task_20: Confirm the pickup window.
+- task_1: Drop off the sample slip.
+- task_21: Move money.
+- task_6: Switch over the laundry basket.
+- task_4: Take asthma medication at 21:00.
+- task_8: Clean the keyboard.
+- task_23: Archive a few photos.
+- task_22: Take antibiotic at dinner.
+- task_7: Take antibiotic at breakfast.
+Model action: query_state clock
+State [clock]: Time 11:50 | Stopwatch: 240 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C
+
+You sit down for a moment, check your keys, and keep going.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_21: Move money.
+- task_1: Drop off the sample slip.
+- task_7: Take antibiotic at breakfast.
+- task_4: Take asthma medication at 21:00.
+- task_11: Bring the lab form.
+- task_3: Label a folder.
+- task_22: Take antibiotic at dinner.
+- task_20: Confirm the pickup window.
+- task_10: Look up a recipe.
+- task_13: Read a book blurb.
+- task_5: Take asthma medication at 11:00.
+Model action: query_state clock
+State [clock]: Time 12:25 | Stopwatch: 275 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C
+
+A clipboard is waiting on the front desk with your name on it.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_2: Plug in the tablet.
+- task_6: Switch over the laundry basket.
+- task_8: Clean the keyboard.
+- task_12: Sign the intake form.
+- task_21: Move money.
+- task_7: Take antibiotic at breakfast.
+- task_4: Take asthma medication at 21:00.
+- task_5: Take asthma medication at 11:00.
+- task_20: Confirm the pickup window.
+- task_22: Take antibiotic at dinner.
+- task_11: Bring the lab form.
+- task_1: Drop off the sample slip.
+Model action: query_state clock
+State [clock]: Time 12:45 | Stopwatch: 295 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) crossday_1
+
+The doorbell camera flashes while you're still nearby.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_12: Sign the intake form.
+- task_20: Confirm the pickup window.
+- task_21: Move money.
+- task_1: Drop off the sample slip.
+- task_19: Buzz in the courier.
+- task_4: Take asthma medication at 21:00.
+- task_11: Bring the lab form.
+- task_6: Switch over the laundry basket.
+- task_7: Take antibiotic at breakfast.
+- task_22: Take antibiotic at dinner.
+- task_5: Take asthma medication at 11:00.
+- task_14: Rearrange the stack of books.
+- task_8: Clean the keyboard.
+Model action: query_state clock
+State [clock]: Time 13:55 | Stopwatch: 365 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) doorbell_camera_flash_d2
+
+The package locker light is finally green instead of red.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_14: Rearrange the stack of books.
+- task_12: Sign the intake form.
+- task_10: Look up a recipe.
+- task_19: Buzz in the courier.
+- task_16: Collect the package.
+- task_7: Take antibiotic at breakfast.
+- task_21: Move money.
+- task_22: Take antibiotic at dinner.
+- task_4: Take asthma medication at 21:00.
+- task_1: Drop off the sample slip.
+- task_20: Confirm the pickup window.
+- task_3: Label a folder.
+- task_11: Bring the lab form.
+- task_5: Take asthma medication at 11:00.
+Model action: query_state clock
+State [clock]: Time 18:00 | Stopwatch: 610 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $92.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A
+
+Dinner feels more like a pause button than a real stop.
+A) Brush your teeth
+B) Read a page
+C) Plug in your phone
+
+Step action menu:
+- task_16: Collect the package.
+- task_11: Bring the lab form.
+- task_4: Take asthma medication at 21:00.
+- task_7: Take antibiotic at breakfast.
+- task_21: Move money.
+- task_5: Take asthma medication at 11:00.
+- task_19: Buzz in the courier.
+- task_8: Clean the keyboard.
+- task_23: Archive a few photos.
+- task_2: Plug in the tablet.
+- task_1: Drop off the sample slip.
+- task_20: Confirm the pickup window.
+- task_22: Take antibiotic at dinner.
+- task_12: Sign the intake form.
+Model action: query_state clock
+State [clock]: Time 20:40 | Stopwatch: 770 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $92.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) antibiotic_dinner
+
+A note by the side door clears up where to go. A confirmation email comes in with the final details.
+A) Stand up
+B) Walk once around the room
+C) Refill your mug
+
+Step action menu:
+- task_7: Take antibiotic at breakfast.
+- task_12: Sign the intake form.
+- task_21: Move money.
+- task_19: Buzz in the courier.
+- task_1: Drop off the sample slip.
+- task_18: Put away the dishes.
+- task_17: Take a short stretch break.
+- task_11: Bring the lab form.
+- task_5: Take asthma medication at 11:00.
+- task_4: Take asthma medication at 21:00.
+- task_16: Collect the package.
+- task_22: Take antibiotic at dinner.
+- task_6: Switch over the laundry basket.
+- task_20: Confirm the pickup window.
+Model action: query_state clock
+State [clock]: Time 21:00 | Stopwatch: 790 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $92.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) asthma_2100, lab_dropbox_d2
+
+You dim the room, plug in your phone, and leave the return label for tomorrow.
+A) Scan the shelf
+B) Look up
+C) Check your pocket
+
+Step action menu:
+- task_20: Confirm the pickup window.
+- task_23: Archive a few photos.
+- task_5: Take asthma medication at 11:00.
+- task_6: Switch over the laundry basket.
+- task_12: Sign the intake form.
+- task_4: Take asthma medication at 21:00.
+- task_11: Bring the lab form.
+- task_8: Clean the keyboard.
+- task_22: Take antibiotic at dinner.
+- task_16: Collect the package.
+- task_1: Drop off the sample slip.
+- task_19: Buzz in the courier.
+- task_7: Take antibiotic at breakfast.
+- task_21: Move money.
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $92.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B
+
+=== Wednesday ===
+A few things are already on your mind:
+- Ask about the boxed lamp when the loading dock sign points to pickup.
+- Be home when the delivery is out for delivery.
+- Pick up the poster tube when it reaches the mailroom shelf.
+- Pick up the prescription when you reach the pharmacy counter.
+- Record the meter reading at 17:25.
+
+You make breakfast while trying to remember what needs to happen first. You glance at tracking again while you're between tasks.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_8: Read a book blurb.
+- task_14: Bring the parcel slip.
+- task_16: Take antibiotic at dinner.
+- task_13: Take asthma medication at 11:00.
+- task_4: Pick up the poster tube.
+- task_17: Wipe your glasses.
+- task_3: Ask about the boxed lamp.
+- task_11: Take asthma medication at 21:00.
+- task_21: Record the meter reading.
+- task_19: Take antibiotic at breakfast.
+- task_12: Browse a dinner menu.
+- task_18: Be home.
+- task_2: Pick up the prescription.
+Model action: query_state clock
+State [clock]: Time 07:35 | Stopwatch: 0 min
+Model action: choose A + task(s) antibiotic_breakfast
+
+You add a reminder to yourself: On Thursday, Carry the prescription receipt when you notice the clinic check-in window.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_16: Take antibiotic at dinner.
+- task_18: Be home.
+- task_3: Ask about the boxed lamp.
+- task_13: Take asthma medication at 11:00.
+- task_21: Record the meter reading.
+- task_11: Take asthma medication at 21:00.
+- task_8: Read a book blurb.
+- task_7: Straighten the couch pillows.
+- task_19: Take antibiotic at breakfast.
+- task_14: Bring the parcel slip.
+- task_20: Sharpen a few pencils.
+- task_2: Pick up the prescription.
+- task_4: Pick up the poster tube.
+Model action: query_state clock
+State [clock]: Time 09:10 | Stopwatch: 95 min
+Model action: choose B
+
+A reschedule note about record the meter reading flashes across the top of your screen. A quick update comes in: record the meter reading should happen at 21:35 instead of 17:25.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_21: Record the meter reading.
+- task_7: Straighten the couch pillows.
+- task_13: Take asthma medication at 11:00.
+- task_11: Take asthma medication at 21:00.
+- task_4: Pick up the poster tube.
+- task_2: Pick up the prescription.
+- task_16: Take antibiotic at dinner.
+- task_3: Ask about the boxed lamp.
+- task_19: Take antibiotic at breakfast.
+- task_17: Wipe your glasses.
+- task_14: Bring the parcel slip.
+- task_18: Be home.
+- task_15: Move the blanket off the chair.
+Model action: query_state clock
+State [clock]: Time 10:00 | Stopwatch: 145 min
+Model action: choose C
+
+You mean to record the meter reading once things settle down.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_14: Bring the parcel slip.
+- task_2: Pick up the prescription.
+- task_3: Ask about the boxed lamp.
+- task_12: Browse a dinner menu.
+- task_6: Clean the keyboard.
+- task_4: Pick up the poster tube.
+- task_18: Be home.
+- task_11: Take asthma medication at 21:00.
+- task_13: Take asthma medication at 11:00.
+- task_19: Take antibiotic at breakfast.
+- task_16: Take antibiotic at dinner.
+- task_1: Take a short stretch break.
+- task_21: Record the meter reading.
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 205 min
+Model action: choose B + task(s) asthma_1100
+
+A quick follow-up arrives and cancels picking up the prescription. A follow-up comes in saying you do not need to handle picking up the prescription today.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_11: Take asthma medication at 21:00.
+- task_13: Take asthma medication at 11:00.
+- task_3: Ask about the boxed lamp.
+- task_4: Pick up the poster tube.
+- task_21: Record the meter reading.
+- task_14: Bring the parcel slip.
+- task_18: Be home.
+- task_1: Take a short stretch break.
+- task_19: Take antibiotic at breakfast.
+- task_2: Pick up the prescription.
+- task_16: Take antibiotic at dinner.
+- task_12: Browse a dinner menu.
+- task_5: Send a quick text to a friend.
+Model action: query_state clock
+State [clock]: Time 11:35 | Stopwatch: 240 min
+Model action: choose C
+
+The loading dock sign is pointing to a temporary pickup spot today.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_11: Take asthma medication at 21:00.
+- task_3: Ask about the boxed lamp.
+- task_18: Be home.
+- task_14: Bring the parcel slip.
+- task_1: Take a short stretch break.
+- task_20: Sharpen a few pencils.
+- task_6: Clean the keyboard.
+- task_19: Take antibiotic at breakfast.
+- task_2: Pick up the prescription.
+- task_4: Pick up the poster tube.
+- task_16: Take antibiotic at dinner.
+- task_21: Record the meter reading.
+- task_13: Take asthma medication at 11:00.
+Model action: query_state clock
+State [clock]: Time 12:25 | Stopwatch: 290 min
+Model action: choose C + task(s) crossday_6, loading_dock_sign_d3
+
+A tube-shaped package is sitting alone on the mailroom shelf.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_21: Record the meter reading.
+- task_5: Send a quick text to a friend.
+- task_14: Bring the parcel slip.
+- task_2: Pick up the prescription.
+- task_13: Take asthma medication at 11:00.
+- task_19: Take antibiotic at breakfast.
+- task_1: Take a short stretch break.
+- task_18: Be home.
+- task_11: Take asthma medication at 21:00.
+- task_16: Take antibiotic at dinner.
+- task_12: Browse a dinner menu.
+- task_3: Ask about the boxed lamp.
+- task_4: Pick up the poster tube.
+Model action: query_state clock
+State [clock]: Time 15:05 | Stopwatch: 450 min
+Model action: choose B + task(s) mailroom_shelf_d3
+
+At the pharmacy, the pickup counter is finally open.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_18: Be home.
+- task_16: Take antibiotic at dinner.
+- task_21: Record the meter reading.
+- task_14: Bring the parcel slip.
+- task_10: Check the weather.
+- task_3: Ask about the boxed lamp.
+- task_20: Sharpen a few pencils.
+- task_19: Take antibiotic at breakfast.
+- task_4: Pick up the poster tube.
+- task_13: Take asthma medication at 11:00.
+- task_11: Take asthma medication at 21:00.
+- task_2: Pick up the prescription.
+- task_15: Move the blanket off the chair.
+Model action: query_state clock
+State [clock]: Time 15:55 | Stopwatch: 500 min
+Model action: choose B
+
+You rinse a dish, check on the pickup code, and keep moving.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_14: Bring the parcel slip.
+- task_10: Check the weather.
+- task_4: Pick up the poster tube.
+- task_18: Be home.
+- task_2: Pick up the prescription.
+- task_13: Take asthma medication at 11:00.
+- task_16: Take antibiotic at dinner.
+- task_11: Take asthma medication at 21:00.
+- task_21: Record the meter reading.
+- task_3: Ask about the boxed lamp.
+- task_5: Send a quick text to a friend.
+- task_15: Move the blanket off the chair.
+- task_19: Take antibiotic at breakfast.
+Model action: query_state clock
+State [clock]: Time 17:25 | Stopwatch: 590 min
+Model action: choose A
+
+Dinner arrives after the day has already started spilling into the night.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_13: Take asthma medication at 11:00.
+- task_4: Pick up the poster tube.
+- task_21: Record the meter reading.
+- task_16: Take antibiotic at dinner.
+- task_7: Straighten the couch pillows.
+- task_11: Take asthma medication at 21:00.
+- task_18: Be home.
+- task_3: Ask about the boxed lamp.
+- task_14: Bring the parcel slip.
+- task_19: Take antibiotic at breakfast.
+- task_17: Wipe your glasses.
+- task_1: Take a short stretch break.
+- task_2: Pick up the prescription.
+Model action: query_state clock
+State [clock]: Time 19:25 | Stopwatch: 710 min
+Model action: choose A + task(s) antibiotic_dinner
+
+You turn down the lights, leave the pharmacy receipt out for tomorrow, and settle in for the night.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_2: Pick up the prescription.
+- task_4: Pick up the poster tube.
+- task_21: Record the meter reading.
+- task_9: Clear old downloads.
+- task_19: Take antibiotic at breakfast.
+- task_14: Bring the parcel slip.
+- task_13: Take asthma medication at 11:00.
+- task_17: Wipe your glasses.
+- task_18: Be home.
+- task_3: Ask about the boxed lamp.
+- task_16: Take antibiotic at dinner.
+- task_5: Send a quick text to a friend.
+- task_11: Take asthma medication at 21:00.
+Model action: query_state clock
+State [clock]: Time 21:00 | Stopwatch: 805 min
+Model action: choose C + task(s) asthma_2100
+
+You set out tomorrow's things, move your keys into place, and head toward bed.
+A) Brush your teeth
+B) Read a page
+C) Plug in your phone
+
+Step action menu:
+- task_8: Read a book blurb.
+- task_21: Record the meter reading.
+- task_3: Ask about the boxed lamp.
+- task_14: Bring the parcel slip.
+- task_18: Be home.
+- task_13: Take asthma medication at 11:00.
+- task_19: Take antibiotic at breakfast.
+- task_11: Take asthma medication at 21:00.
+- task_2: Pick up the prescription.
+- task_4: Pick up the poster tube.
+- task_5: Send a quick text to a friend.
+- task_7: Straighten the couch pillows.
+- task_16: Take antibiotic at dinner.
+Model action: query_state clock
+State [clock]: Time 21:35 | Stopwatch: 840 min
+Model action: choose C + task(s) record_meter_reading_1_d3
+
+=== Thursday ===
+You start the day with a short mental list:
+- Ask about the referral when the clinic check-in window is open.
+- Print the parking receipt when the kiosk starts blinking.
+- Reply to the follow-up form email when it arrives.
+- Submit the timesheet at 14:10.
+
+Breakfast lands right before the rest of the day starts competing for space.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_12: Take asthma medication at 11:00.
+- task_21: Carry the prescription receipt.
+- task_5: Take antibiotic at breakfast.
+- task_16: Take antibiotic at dinner.
+- task_6: Reply to the follow-up form email.
+- task_4: Print the parking receipt.
+- task_20: Rearrange the stack of books.
+- task_14: Fold the sweater on the chair.
+- task_18: Submit the timesheet.
+- task_15: Bring the referral slip.
+- task_17: Put away the dishes.
+- task_8: Take asthma medication at 21:00.
+- task_9: Ask about the referral.
+Model action: query_state clock
+State [clock]: Time 08:05 | Stopwatch: 0 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) antibiotic_breakfast
+
+A brief update comes in saying you can skip asking about the referral. For a moment, you expect another email to land later. A quick message clears it: you do not need to worry about asking about the referral today.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_6: Reply to the follow-up form email.
+- task_4: Print the parking receipt.
+- task_18: Submit the timesheet.
+- task_7: Switch over the laundry basket.
+- task_5: Take antibiotic at breakfast.
+- task_15: Bring the referral slip.
+- task_21: Carry the prescription receipt.
+- task_8: Take asthma medication at 21:00.
+- task_16: Take antibiotic at dinner.
+- task_9: Ask about the referral.
+- task_2: Water the plants.
+- task_12: Take asthma medication at 11:00.
+- task_10: Reply in the group chat.
+Model action: query_state clock
+State [clock]: Time 09:10 | Stopwatch: 65 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C
+
+You don't want to forget to submit the timesheet. You leave yourself a note: On Friday, Take the meter photo when you notice the storage cage.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_8: Take asthma medication at 21:00.
+- task_15: Bring the referral slip.
+- task_5: Take antibiotic at breakfast.
+- task_4: Print the parking receipt.
+- task_20: Rearrange the stack of books.
+- task_9: Ask about the referral.
+- task_21: Carry the prescription receipt.
+- task_12: Take asthma medication at 11:00.
+- task_16: Take antibiotic at dinner.
+- task_11: Scan your calendar.
+- task_18: Submit the timesheet.
+- task_13: Check the weather.
+- task_6: Reply to the follow-up form email.
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 175 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) asthma_1100
+
+The clinic check-in window is open when you pass it. You add a reminder to yourself: On Sunday, Return the spare key when you notice your friend's bike at the rack.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_21: Carry the prescription receipt.
+- task_16: Take antibiotic at dinner.
+- task_15: Bring the referral slip.
+- task_19: Sharpen a few pencils.
+- task_12: Take asthma medication at 11:00.
+- task_9: Ask about the referral.
+- task_5: Take antibiotic at breakfast.
+- task_7: Switch over the laundry basket.
+- task_18: Submit the timesheet.
+- task_8: Take asthma medication at 21:00.
+- task_4: Print the parking receipt.
+- task_11: Scan your calendar.
+- task_6: Reply to the follow-up form email.
+Model action: query_state clock
+State [clock]: Time 11:20 | Stopwatch: 195 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: New email: follow-up form is ready.
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B + task(s) crossday_3, email_form_followup_d4
+
+You check the time, tuck away the appointment note, and head to the next thing.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_21: Carry the prescription receipt.
+- task_19: Sharpen a few pencils.
+- task_16: Take antibiotic at dinner.
+- task_9: Ask about the referral.
+- task_18: Submit the timesheet.
+- task_8: Take asthma medication at 21:00.
+- task_12: Take asthma medication at 11:00.
+- task_11: Scan your calendar.
+- task_5: Take antibiotic at breakfast.
+- task_15: Bring the referral slip.
+- task_20: Rearrange the stack of books.
+- task_4: Print the parking receipt.
+- task_6: Reply to the follow-up form email.
+Model action: query_state clock
+State [clock]: Time 11:50 | Stopwatch: 225 min
+Model action: choose A
+
+You clear a little space, glance at the appointment note, and keep the afternoon together.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_20: Rearrange the stack of books.
+- task_5: Take antibiotic at breakfast.
+- task_12: Take asthma medication at 11:00.
+- task_15: Bring the referral slip.
+- task_3: Move the blanket off the chair.
+- task_21: Carry the prescription receipt.
+- task_18: Submit the timesheet.
+- task_4: Print the parking receipt.
+- task_8: Take asthma medication at 21:00.
+- task_10: Reply in the group chat.
+- task_16: Take antibiotic at dinner.
+- task_9: Ask about the referral.
+- task_6: Reply to the follow-up form email.
+Model action: query_state clock
+State [clock]: Time 14:10 | Stopwatch: 365 min
+Model action: choose A + task(s) submit_timesheet_1_d4
+
+You sit down for a moment, check your bag, and keep going.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_12: Take asthma medication at 11:00.
+- task_9: Ask about the referral.
+- task_3: Move the blanket off the chair.
+- task_21: Carry the prescription receipt.
+- task_4: Print the parking receipt.
+- task_7: Switch over the laundry basket.
+- task_16: Take antibiotic at dinner.
+- task_8: Take asthma medication at 21:00.
+- task_15: Bring the referral slip.
+- task_11: Scan your calendar.
+- task_5: Take antibiotic at breakfast.
+- task_18: Submit the timesheet.
+- task_6: Reply to the follow-up form email.
+Model action: query_state clock
+State [clock]: Time 15:05 | Stopwatch: 420 min
+Model action: choose B
+
+The parking receipt kiosk near the clinic is blinking again.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_10: Reply in the group chat.
+- task_1: Charge your phone.
+- task_4: Print the parking receipt.
+- task_18: Submit the timesheet.
+- task_14: Fold the sweater on the chair.
+- task_15: Bring the referral slip.
+- task_21: Carry the prescription receipt.
+- task_8: Take asthma medication at 21:00.
+- task_9: Ask about the referral.
+- task_16: Take antibiotic at dinner.
+- task_5: Take antibiotic at breakfast.
+- task_12: Take asthma medication at 11:00.
+- task_6: Reply to the follow-up form email.
+Model action: query_state clock
+State [clock]: Time 15:55 | Stopwatch: 470 min
+Model action: choose A + task(s) crossday_7, parking_receipt_kiosk_d4
+
+You rinse a dish, check on the insurance card, and keep moving.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_12: Take asthma medication at 11:00.
+- task_19: Sharpen a few pencils.
+- task_4: Print the parking receipt.
+- task_5: Take antibiotic at breakfast.
+- task_14: Fold the sweater on the chair.
+- task_15: Bring the referral slip.
+- task_8: Take asthma medication at 21:00.
+- task_18: Submit the timesheet.
+- task_9: Ask about the referral.
+- task_7: Switch over the laundry basket.
+- task_6: Reply to the follow-up form email.
+- task_21: Carry the prescription receipt.
+- task_16: Take antibiotic at dinner.
+Model action: query_state clock
+State [clock]: Time 18:00 | Stopwatch: 595 min
+Model action: choose B
+
+You pull dinner together before the rest of the night gets thinner and quieter.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_9: Ask about the referral.
+- task_5: Take antibiotic at breakfast.
+- task_4: Print the parking receipt.
+- task_8: Take asthma medication at 21:00.
+- task_21: Carry the prescription receipt.
+- task_7: Switch over the laundry basket.
+- task_6: Reply to the follow-up form email.
+- task_12: Take asthma medication at 11:00.
+- task_18: Submit the timesheet.
+- task_15: Bring the referral slip.
+- task_16: Take antibiotic at dinner.
+- task_13: Check the weather.
+- task_3: Move the blanket off the chair.
+Model action: query_state clock
+State [clock]: Time 18:50 | Stopwatch: 645 min
+Model action: choose A + task(s) antibiotic_dinner
+
+You dim the room, plug in your phone, and leave the appointment note for tomorrow.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_6: Reply to the follow-up form email.
+- task_5: Take antibiotic at breakfast.
+- task_8: Take asthma medication at 21:00.
+- task_14: Fold the sweater on the chair.
+- task_2: Water the plants.
+- task_17: Put away the dishes.
+- task_15: Bring the referral slip.
+- task_16: Take antibiotic at dinner.
+- task_12: Take asthma medication at 11:00.
+- task_18: Submit the timesheet.
+- task_21: Carry the prescription receipt.
+- task_4: Print the parking receipt.
+- task_9: Ask about the referral.
+Model action: query_state clock
+State [clock]: Time 21:00 | Stopwatch: 775 min
+Model action: choose A + task(s) asthma_2100
+
+=== Friday ===
+Today's loose plan:
+- Bring upstairs the folded chair when the storage cage is open.
+- Call the insurance desk at 13:20.
+- Meet the technician when the repair van pulls up.
+- Move the appointment when a better slot opens.
+- Move the laundry when the cycle ends.
+- Take the photo of the leak note when the roof access sign is uncovered.
+
+Breakfast is the one brief part of the morning that still feels under your control. You start a laundry cycle before you leave it alone.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_4: Take asthma medication at 11:00.
+- task_20: Take antibiotic at dinner.
+- task_21: Refill your water bottle.
+- task_19: Read a book blurb.
+- task_1: Call the insurance desk.
+- task_3: Move the laundry.
+- task_5: Take the photo of the leak note.
+- task_10: Take a short stretch break.
+- task_11: Take the meter photo.
+- task_6: Take antibiotic at breakfast.
+- task_18: Bring upstairs the folded chair.
+- task_9: Move the appointment.
+- task_8: Meet the technician.
+- task_14: Take asthma medication at 21:00.
+Model action: query_state clock
+State [clock]: Time 09:10 | Stopwatch: 0 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: in progress.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) antibiotic_breakfast
+
+A short follow-up changes the timing for call the insurance desk. The latest update puts call the insurance desk at 12:45.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_17: Plug in the tablet.
+- task_12: Label a folder.
+- task_2: Sharpen a few pencils.
+- task_5: Take the photo of the leak note.
+- task_20: Take antibiotic at dinner.
+- task_1: Call the insurance desk.
+- task_9: Move the appointment.
+- task_11: Take the meter photo.
+- task_3: Move the laundry.
+- task_6: Take antibiotic at breakfast.
+- task_18: Bring upstairs the folded chair.
+- task_14: Take asthma medication at 21:00.
+- task_4: Take asthma medication at 11:00.
+- task_8: Meet the technician.
+Model action: query_state clock
+State [clock]: Time 10:40 | Stopwatch: 90 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: in progress.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A
+
+You get a follow-up with corrected instructions for take the photo of the leak note. Instead of the earlier cue, watch for the note by the side door before you take the photo of the leak note.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_8: Meet the technician.
+- task_9: Move the appointment.
+- task_6: Take antibiotic at breakfast.
+- task_7: Look at the map.
+- task_11: Take the meter photo.
+- task_18: Bring upstairs the folded chair.
+- task_14: Take asthma medication at 21:00.
+- task_2: Sharpen a few pencils.
+- task_4: Take asthma medication at 11:00.
+- task_3: Move the laundry.
+- task_17: Plug in the tablet.
+- task_1: Call the insurance desk.
+- task_5: Take the photo of the leak note.
+- task_20: Take antibiotic at dinner.
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 110 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: in progress.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B + task(s) asthma_1100
+
+The repair van is parked outside earlier than expected.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_4: Take asthma medication at 11:00.
+- task_5: Take the photo of the leak note.
+- task_6: Take antibiotic at breakfast.
+- task_16: Switch over the laundry basket.
+- task_3: Move the laundry.
+- task_18: Bring upstairs the folded chair.
+- task_1: Call the insurance desk.
+- task_14: Take asthma medication at 21:00.
+- task_22: Move the blanket off the chair.
+- task_10: Take a short stretch break.
+- task_11: Take the meter photo.
+- task_20: Take antibiotic at dinner.
+- task_9: Move the appointment.
+- task_8: Meet the technician.
+Model action: query_state clock
+State [clock]: Time 11:35 | Stopwatch: 145 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: in progress.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B + task(s) repair_van_d5
+
+You keep call the insurance desk in the back of your mind.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_20: Take antibiotic at dinner.
+- task_5: Take the photo of the leak note.
+- task_19: Read a book blurb.
+- task_11: Take the meter photo.
+- task_8: Meet the technician.
+- task_3: Move the laundry.
+- task_22: Move the blanket off the chair.
+- task_2: Sharpen a few pencils.
+- task_18: Bring upstairs the folded chair.
+- task_1: Call the insurance desk.
+- task_14: Take asthma medication at 21:00.
+- task_4: Take asthma medication at 11:00.
+- task_6: Take antibiotic at breakfast.
+- task_9: Move the appointment.
+Model action: query_state clock
+State [clock]: Time 12:45 | Stopwatch: 215 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: in progress.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) call_insurance_1_d5
+
+You clear a little space, glance at the pickup code, and keep the afternoon together.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_8: Meet the technician.
+- task_1: Call the insurance desk.
+- task_2: Sharpen a few pencils.
+- task_4: Take asthma medication at 11:00.
+- task_20: Take antibiotic at dinner.
+- task_6: Take antibiotic at breakfast.
+- task_18: Bring upstairs the folded chair.
+- task_9: Move the appointment.
+- task_11: Take the meter photo.
+- task_19: Read a book blurb.
+- task_5: Take the photo of the leak note.
+- task_14: Take asthma medication at 21:00.
+- task_12: Label a folder.
+- task_3: Move the laundry.
+Model action: query_state clock
+State [clock]: Time 13:00 | Stopwatch: 230 min
+Model action: query_state appointment_portal
+State [appointment_portal]: Appointment portal: earlier slot available.
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: in progress.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) appointment_reschedule_open_d5
+
+You check the time, tuck away the folded towel, and head to the next thing.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_19: Read a book blurb.
+- task_14: Take asthma medication at 21:00.
+- task_5: Take the photo of the leak note.
+- task_1: Call the insurance desk.
+- task_20: Take antibiotic at dinner.
+- task_3: Move the laundry.
+- task_9: Move the appointment.
+- task_8: Meet the technician.
+- task_4: Take asthma medication at 11:00.
+- task_18: Bring upstairs the folded chair.
+- task_11: Take the meter photo.
+- task_17: Plug in the tablet.
+- task_6: Take antibiotic at breakfast.
+- task_15: Fold the sweater on the chair.
+Model action: query_state clock
+State [clock]: Time 13:20 | Stopwatch: 250 min
+Model action: choose A
+
+The roof access sign is temporarily uncovered while maintenance is there.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_8: Meet the technician.
+- task_9: Move the appointment.
+- task_2: Sharpen a few pencils.
+- task_4: Take asthma medication at 11:00.
+- task_20: Take antibiotic at dinner.
+- task_17: Plug in the tablet.
+- task_12: Label a folder.
+- task_1: Call the insurance desk.
+- task_6: Take antibiotic at breakfast.
+- task_5: Take the photo of the leak note.
+- task_14: Take asthma medication at 21:00.
+- task_18: Bring upstairs the folded chair.
+- task_3: Move the laundry.
+- task_11: Take the meter photo.
+Model action: query_state clock
+State [clock]: Time 18:00 | Stopwatch: 530 min
+Model action: choose A
+
+The storage cage has been left open for deliveries again.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_8: Meet the technician.
+- task_14: Take asthma medication at 21:00.
+- task_10: Take a short stretch break.
+- task_2: Sharpen a few pencils.
+- task_9: Move the appointment.
+- task_18: Bring upstairs the folded chair.
+- task_6: Take antibiotic at breakfast.
+- task_5: Take the photo of the leak note.
+- task_4: Take asthma medication at 11:00.
+- task_20: Take antibiotic at dinner.
+- task_3: Move the laundry.
+- task_22: Move the blanket off the chair.
+- task_11: Take the meter photo.
+- task_1: Call the insurance desk.
+Model action: query_state clock
+State [clock]: Time 18:15 | Stopwatch: 545 min
+Model action: choose A + task(s) crossday_2, storage_cage_d5
+
+Dinner is one more moving part in the evening rather than a full break from it.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_14: Take asthma medication at 21:00.
+- task_11: Take the meter photo.
+- task_22: Move the blanket off the chair.
+- task_9: Move the appointment.
+- task_3: Move the laundry.
+- task_18: Bring upstairs the folded chair.
+- task_5: Take the photo of the leak note.
+- task_20: Take antibiotic at dinner.
+- task_4: Take asthma medication at 11:00.
+- task_8: Meet the technician.
+- task_1: Call the insurance desk.
+- task_16: Switch over the laundry basket.
+- task_6: Take antibiotic at breakfast.
+- task_15: Fold the sweater on the chair.
+Model action: query_state clock
+State [clock]: Time 19:25 | Stopwatch: 615 min
+Model action: choose C + task(s) antibiotic_dinner
+
+You brush your teeth, check that the referral slip is still where you need it, and head to bed.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_6: Take antibiotic at breakfast.
+- task_18: Bring upstairs the folded chair.
+- task_20: Take antibiotic at dinner.
+- task_13: Rearrange the stack of books.
+- task_8: Meet the technician.
+- task_9: Move the appointment.
+- task_12: Label a folder.
+- task_3: Move the laundry.
+- task_11: Take the meter photo.
+- task_14: Take asthma medication at 21:00.
+- task_15: Fold the sweater on the chair.
+- task_4: Take asthma medication at 11:00.
+- task_5: Take the photo of the leak note.
+- task_1: Call the insurance desk.
+Model action: query_state clock
+State [clock]: Time 21:00 | Stopwatch: 710 min
+Model action: choose B + task(s) asthma_2100
+
+For a moment, a note by the side door clears up where to go.
+A) Brush your teeth
+B) Read a page
+C) Plug in your phone
+
+Step action menu:
+- task_17: Plug in the tablet.
+- task_20: Take antibiotic at dinner.
+- task_9: Move the appointment.
+- task_3: Move the laundry.
+- task_11: Take the meter photo.
+- task_5: Take the photo of the leak note.
+- task_4: Take asthma medication at 11:00.
+- task_13: Rearrange the stack of books.
+- task_6: Take antibiotic at breakfast.
+- task_1: Call the insurance desk.
+- task_18: Bring upstairs the folded chair.
+- task_15: Fold the sweater on the chair.
+- task_8: Meet the technician.
+- task_14: Take asthma medication at 21:00.
+Model action: choose C + task(s) roof_access_sign_d5
+
+=== Saturday ===
+Today's loose plan:
+- Buy the filter when the price drops below $55.
+- Collect the dry cleaning when it reaches the front rack.
+- Pay the parking app balance at 07:35.
+- Pick up the replacement filter when the hardware counter clears.
+- Pick up the room key when the conference room screen flashes your room assignment.
+
+You put breakfast together while mentally sorting out the day. You still need to pay the parking app balance later.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_7: Clear old downloads.
+- task_5: Take antibiotic at dinner.
+- task_18: Water the plants.
+- task_4: Take asthma medication at 11:00.
+- task_12: Pick up the room key.
+- task_20: Take asthma medication at 21:00.
+- task_1: Trim the receipt stack.
+- task_15: Take antibiotic at breakfast.
+- task_19: Pay the parking app balance.
+- task_6: Buy the filter.
+Model action: query_state clock
+State [clock]: Time 07:35 | Stopwatch: 0 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) antibiotic_breakfast, pay_parking_app_1_d6
+
+The conference room screen flashes your room assignment.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_4: Take asthma medication at 11:00.
+- task_8: Archive a few photos.
+- task_12: Pick up the room key.
+- task_15: Take antibiotic at breakfast.
+- task_7: Clear old downloads.
+- task_6: Buy the filter.
+- task_19: Pay the parking app balance.
+- task_20: Take asthma medication at 21:00.
+- task_3: Put away the dishes.
+- task_5: Take antibiotic at dinner.
+Model action: query_state clock
+State [clock]: Time 08:55 | Stopwatch: 80 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) conference_screen_d6
+
+You put the badge where you can see it and sort out the next two errands.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_10: Fold the sweater on the chair.
+- task_6: Buy the filter.
+- task_7: Clear old downloads.
+- task_5: Take antibiotic at dinner.
+- task_4: Take asthma medication at 11:00.
+- task_12: Pick up the room key.
+- task_19: Pay the parking app balance.
+- task_15: Take antibiotic at breakfast.
+- task_18: Water the plants.
+- task_20: Take asthma medication at 21:00.
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 205 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) asthma_1100
+
+You leave yourself a note: On Sunday, Leave the charger when you notice the community bulletin board.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_15: Take antibiotic at breakfast.
+- task_20: Take asthma medication at 21:00.
+- task_19: Pay the parking app balance.
+- task_4: Take asthma medication at 11:00.
+- task_8: Archive a few photos.
+- task_17: Sort the mail.
+- task_6: Buy the filter.
+- task_5: Take antibiotic at dinner.
+- task_12: Pick up the room key.
+- task_16: Plug in the tablet.
+Model action: query_state clock
+State [clock]: Time 12:45 | Stopwatch: 310 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C
+
+The hardware counter is finally clear enough to walk up to.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_12: Pick up the room key.
+- task_3: Put away the dishes.
+- task_4: Take asthma medication at 11:00.
+- task_20: Take asthma medication at 21:00.
+- task_6: Buy the filter.
+- task_5: Take antibiotic at dinner.
+- task_19: Pay the parking app balance.
+- task_9: Pick up the replacement filter.
+- task_15: Take antibiotic at breakfast.
+- task_7: Clear old downloads.
+- task_18: Water the plants.
+Model action: query_state clock
+State [clock]: Time 15:05 | Stopwatch: 450 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) hardware_counter_d6
+
+The dry cleaner has your order hanging on the front rack.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_5: Take antibiotic at dinner.
+- task_14: Collect the dry cleaning.
+- task_9: Pick up the replacement filter.
+- task_3: Put away the dishes.
+- task_4: Take asthma medication at 11:00.
+- task_10: Fold the sweater on the chair.
+- task_7: Clear old downloads.
+- task_15: Take antibiotic at breakfast.
+- task_6: Buy the filter.
+- task_20: Take asthma medication at 21:00.
+- task_19: Pay the parking app balance.
+- task_12: Pick up the room key.
+Model action: query_state clock
+State [clock]: Time 16:50 | Stopwatch: 555 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) dry_cleaner_rack_d6
+
+You pause with a glass of water, look at the draft on your screen, and see what is still unresolved.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_16: Plug in the tablet.
+- task_15: Take antibiotic at breakfast.
+- task_5: Take antibiotic at dinner.
+- task_12: Pick up the room key.
+- task_19: Pay the parking app balance.
+- task_20: Take asthma medication at 21:00.
+- task_9: Pick up the replacement filter.
+- task_11: Straighten the couch pillows.
+- task_14: Collect the dry cleaning.
+- task_4: Take asthma medication at 11:00.
+- task_6: Buy the filter.
+- task_10: Fold the sweater on the chair.
+Model action: query_state clock
+State [clock]: Time 17:05 | Stopwatch: 570 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B
+
+You clear a little space on the counter, move the draft on your screen aside, and look at what remains.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_18: Water the plants.
+- task_12: Pick up the room key.
+- task_4: Take asthma medication at 11:00.
+- task_15: Take antibiotic at breakfast.
+- task_14: Collect the dry cleaning.
+- task_1: Trim the receipt stack.
+- task_19: Pay the parking app balance.
+- task_9: Pick up the replacement filter.
+- task_20: Take asthma medication at 21:00.
+- task_6: Buy the filter.
+- task_5: Take antibiotic at dinner.
+- task_11: Straighten the couch pillows.
+Model action: query_state clock
+State [clock]: Time 18:50 | Stopwatch: 675 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: filter is $54.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) price_drop_54_d6
+
+You make dinner while trying not to lose track of the rest of the evening.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_19: Pay the parking app balance.
+- task_15: Take antibiotic at breakfast.
+- task_5: Take antibiotic at dinner.
+- task_9: Pick up the replacement filter.
+- task_20: Take asthma medication at 21:00.
+- task_14: Collect the dry cleaning.
+- task_3: Put away the dishes.
+- task_8: Archive a few photos.
+- task_6: Buy the filter.
+- task_4: Take asthma medication at 11:00.
+- task_12: Pick up the room key.
+- task_13: Rearrange the stack of books.
+Model action: query_state clock
+State [clock]: Time 20:00 | Stopwatch: 745 min
+Model action: choose A + task(s) antibiotic_dinner
+
+You brush your teeth, check that the repair note is still where you need it, and head to bed.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_5: Take antibiotic at dinner.
+- task_15: Take antibiotic at breakfast.
+- task_8: Archive a few photos.
+- task_19: Pay the parking app balance.
+- task_16: Plug in the tablet.
+- task_20: Take asthma medication at 21:00.
+- task_6: Buy the filter.
+- task_1: Trim the receipt stack.
+- task_12: Pick up the room key.
+- task_9: Pick up the replacement filter.
+- task_4: Take asthma medication at 11:00.
+- task_14: Collect the dry cleaning.
+Model action: query_state clock
+State [clock]: Time 21:00 | Stopwatch: 805 min
+Model action: choose C + task(s) asthma_2100
+
+You turn down the lights, leave the library slip out for tomorrow, and settle in for the night.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_18: Water the plants.
+- task_19: Pay the parking app balance.
+- task_9: Pick up the replacement filter.
+- task_4: Take asthma medication at 11:00.
+- task_12: Pick up the room key.
+- task_14: Collect the dry cleaning.
+- task_5: Take antibiotic at dinner.
+- task_16: Plug in the tablet.
+- task_20: Take asthma medication at 21:00.
+- task_15: Take antibiotic at breakfast.
+- task_6: Buy the filter.
+- task_2: Move the blanket off the chair.
+Model action: choose A
+
+=== Sunday ===
+You start the day with a short mental list:
+- Accept the reservation when the waitlist opens a slot.
+- Ask for the oversized parcel when the tag appears at the concierge counter.
+- Check the meetup note when the community bulletin board is updated.
+- Confirm the guest count at 20:40.
+- Drop off the tote bag when you spot your friend's bike at the rack.
+- Text your roommate about the plan at 20:20.
+
+Breakfast gives you one last orderly moment before the day gets busier.
+A) Pour coffee
+B) Open a note
+C) Check the window
+
+Step action menu:
+- task_19: Take asthma medication at 11:00.
+- task_23: Check your saved transfers.
+- task_8: Leave the charger.
+- task_9: Take asthma medication at 21:00.
+- task_6: Queue up a playlist.
+- task_15: Take a short stretch break.
+- task_10: Take antibiotic at breakfast.
+- task_12: Return the spare key.
+- task_22: Accept the reservation.
+- task_21: Take antibiotic at dinner.
+Model action: query_state clock
+State [clock]: Time 08:05 | Stopwatch: 0 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose A + task(s) antibiotic_breakfast
+
+You keep text your roommate about the plan in the back of your mind.
+A) Reply quickly
+B) Keep walking
+C) Put the phone away
+
+Step action menu:
+- task_23: Check your saved transfers.
+- task_8: Leave the charger.
+- task_9: Take asthma medication at 21:00.
+- task_21: Take antibiotic at dinner.
+- task_22: Accept the reservation.
+- task_19: Take asthma medication at 11:00.
+- task_15: Take a short stretch break.
+- task_12: Return the spare key.
+- task_10: Take antibiotic at breakfast.
+- task_2: Organize your bag.
+Model action: query_state clock
+State [clock]: Time 10:00 | Stopwatch: 115 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B
+
+A reschedule note about text your roommate about the plan flashes across the top of your screen. You still need to confirm the guest count later. You get a small scheduling change: text your roommate about the plan is better at 13:35.
+A) Fill a bottle
+B) Look around
+C) Keep moving
+
+Step action menu:
+- task_8: Leave the charger.
+- task_21: Take antibiotic at dinner.
+- task_9: Take asthma medication at 21:00.
+- task_23: Check your saved transfers.
+- task_22: Accept the reservation.
+- task_14: Confirm the guest count.
+- task_12: Return the spare key.
+- task_1: Trim the receipt stack.
+- task_10: Take antibiotic at breakfast.
+- task_19: Take asthma medication at 11:00.
+- task_5: Order a snack.
+Model action: query_state clock
+State [clock]: Time 11:00 | Stopwatch: 175 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) asthma_1100
+
+You may hear back from the waitlist later.
+A) Stack papers
+B) Take a breath
+C) Check the time
+
+Step action menu:
+- task_9: Take asthma medication at 21:00.
+- task_19: Take asthma medication at 11:00.
+- task_13: Text your roommate about the plan.
+- task_12: Return the spare key.
+- task_16: Skim the headlines.
+- task_10: Take antibiotic at breakfast.
+- task_14: Confirm the guest count.
+- task_8: Leave the charger.
+- task_17: Clean the keyboard.
+- task_21: Take antibiotic at dinner.
+- task_22: Accept the reservation.
+- task_15: Take a short stretch break.
+Model action: query_state clock
+State [clock]: Time 12:25 | Stopwatch: 260 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B
+
+The community bulletin board has a fresh note pinned up.
+A) Order lunch
+B) Sit down
+C) Tidy your bag
+
+Step action menu:
+- task_18: Check the meetup note.
+- task_21: Take antibiotic at dinner.
+- task_22: Accept the reservation.
+- task_8: Leave the charger.
+- task_11: Straighten the couch pillows.
+- task_10: Take antibiotic at breakfast.
+- task_23: Check your saved transfers.
+- task_19: Take asthma medication at 11:00.
+- task_3: Read a book blurb.
+- task_9: Take asthma medication at 21:00.
+- task_12: Return the spare key.
+- task_13: Text your roommate about the plan.
+- task_14: Confirm the guest count.
+Model action: query_state clock
+State [clock]: Time 13:35 | Stopwatch: 330 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose C + task(s) crossday_4, community_board_d7, text_roommate_2_d7
+
+Your friend's bike is already locked at the rack outside. A short follow-up changes the timing for confirm the guest count. You get a small scheduling change: confirm the guest count is better at 20:00.
+A) Open the app
+B) Flag it for later
+C) Keep your place in line
+
+Step action menu:
+- task_16: Skim the headlines.
+- task_11: Straighten the couch pillows.
+- task_6: Queue up a playlist.
+- task_14: Confirm the guest count.
+- task_10: Take antibiotic at breakfast.
+- task_8: Leave the charger.
+- task_12: Return the spare key.
+- task_7: Drop off the tote bag.
+- task_19: Take asthma medication at 11:00.
+- task_22: Accept the reservation.
+- task_18: Check the meetup note.
+- task_13: Text your roommate about the plan.
+- task_9: Take asthma medication at 21:00.
+- task_21: Take antibiotic at dinner.
+Model action: query_state clock
+State [clock]: Time 18:15 | Stopwatch: 610 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: (no updates)
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B + task(s) crossday_5, friend_bike_rack_d7
+
+You pause with a glass of water, look at the loose receipt, and see what is still unresolved.
+A) Step outside
+B) Stretch your shoulders
+C) Read the sign
+
+Step action menu:
+- task_22: Accept the reservation.
+- task_19: Take asthma medication at 11:00.
+- task_12: Return the spare key.
+- task_10: Take antibiotic at breakfast.
+- task_13: Text your roommate about the plan.
+- task_3: Read a book blurb.
+- task_18: Check the meetup note.
+- task_5: Order a snack.
+- task_8: Leave the charger.
+- task_14: Confirm the guest count.
+- task_9: Take asthma medication at 21:00.
+- task_7: Drop off the tote bag.
+- task_21: Take antibiotic at dinner.
+- task_17: Clean the keyboard.
+Model action: query_state clock
+State [clock]: Time 20:00 | Stopwatch: 715 min
+Model action: query_state appointment_portal
+State [appointment_portal]: (no updates)
+Model action: query_state bank_balance
+State [bank_balance]: Balance check: $220.
+Model action: query_state calendar
+State [calendar]: (no updates)
+Model action: query_state course_portal
+State [course_portal]: (no updates)
+Model action: query_state email
+State [email]: (no updates)
+Model action: query_state laundry_status
+State [laundry_status]: Laundry status: idle.
+Model action: query_state library_hold
+State [library_hold]: (no updates)
+Model action: query_state price_tracker
+State [price_tracker]: Price check: item is $99.
+Model action: query_state reservation_waitlist
+State [reservation_waitlist]: Waitlist update: a table is available.
+Model action: query_state shipment_status
+State [shipment_status]: Delivery status: no active shipment.
+Model action: choose B + task(s) reservation_slot_open_d7, confirm_guest_count_1_d7
+
+The concierge counter has your oversized parcel tag clipped to the side.
+A) Clear a spot
+B) Lean on the counter
+C) Check your messages
+
+Step action menu:
+- task_4: Call a friend.
+- task_20: Ask for the oversized parcel.
+- task_13: Text your roommate about the plan.
+- task_22: Accept the reservation.
+- task_10: Take antibiotic at breakfast.
+- task_14: Confirm the guest count.
+- task_19: Take asthma medication at 11:00.
+- task_7: Drop off the tote bag.
+- task_5: Order a snack.
+- task_12: Return the spare key.
+- task_21: Take antibiotic at dinner.
+- task_8: Leave the charger.
+- task_9: Take asthma medication at 21:00.
+- task_6: Queue up a playlist.
+- task_18: Check the meetup note.
+Model action: query_state clock
+State [clock]: Time 20:20 | Stopwatch: 735 min
+Model action: choose A + task(s) concierge_counter_d7
+
+Dinner is mostly a marker that the day has tilted into evening.
+A) Pull up a list
+B) Take a sip of water
+C) Look for a pen
+
+Step action menu:
+- task_22: Accept the reservation.
+- task_14: Confirm the guest count.
+- task_18: Check the meetup note.
+- task_13: Text your roommate about the plan.
+- task_5: Order a snack.
+- task_21: Take antibiotic at dinner.
+- task_7: Drop off the tote bag.
+- task_12: Return the spare key.
+- task_9: Take asthma medication at 21:00.
+- task_6: Queue up a playlist.
+- task_10: Take antibiotic at breakfast.
+- task_8: Leave the charger.
+- task_20: Ask for the oversized parcel.
+- task_1: Trim the receipt stack.
+- task_19: Take asthma medication at 11:00.
+Model action: query_state clock
+State [clock]: Time 20:40 | Stopwatch: 755 min
+Model action: choose B + task(s) antibiotic_dinner
+
+You check the lock, set your bag down, and let the day end.
+A) Make a note
+B) Adjust your bag
+C) Wait a moment
+
+Step action menu:
+- task_12: Return the spare key.
+- task_13: Text your roommate about the plan.
+- task_7: Drop off the tote bag.
+- task_22: Accept the reservation.
+- task_3: Read a book blurb.
+- task_10: Take antibiotic at breakfast.
+- task_18: Check the meetup note.
+- task_4: Call a friend.
+- task_6: Queue up a playlist.
+- task_21: Take antibiotic at dinner.
+- task_14: Confirm the guest count.
+- task_8: Leave the charger.
+- task_19: Take asthma medication at 11:00.
+- task_9: Take asthma medication at 21:00.
+- task_20: Ask for the oversized parcel.
+Model action: query_state clock
+State [clock]: Time 21:00 | Stopwatch: 775 min
+Model action: choose C + task(s) asthma_2100
+
+You brush your teeth, check that the note on your phone is still where you need it, and head to bed.
+A) Start dinner
+B) Put a pan on
+C) Rinse vegetables
+
+Step action menu:
+- task_8: Leave the charger.
+- task_12: Return the spare key.
+- task_21: Take antibiotic at dinner.
+- task_7: Drop off the tote bag.
+- task_6: Queue up a playlist.
+- task_18: Check the meetup note.
+- task_20: Ask for the oversized parcel.
+- task_22: Accept the reservation.
+- task_10: Take antibiotic at breakfast.
+- task_4: Call a friend.
+- task_17: Clean the keyboard.
+- task_9: Take asthma medication at 21:00.
+- task_14: Confirm the guest count.
+- task_13: Text your roommate about the plan.
+- task_19: Take asthma medication at 11:00.
+Model action: choose A
+
+Wrote log: /home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-codex/heldout-10517/plain_store/plain-store-20260913-203657-2282980-gpt-5.6-sol/plain-store-20260913-203657-2282980-gpt-5.6-sol.jsonl
+model calls: 173 | est input tokens: 146394 | guard events: 0
+=== PM-Bench Report ===
+Run timing: start 2026-09-14T02:36:57.049Z | end 2026-09-14T02:52:24.596Z | duration 15m 27.5s
+Hit: 66 | Late: 0 | Miss: 5 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | state query calls: 508 | check_time calls: 78 | Actions: 66
+Exact-set: matches 79 | mismatches 4 | reward 75
+Set micro: TP 66 | FP 0 | FN 5
+Cross-day: hit 7 | late 0 | miss 0 | total 7
+Updates: hit 8 | late 0 | miss 1 | canceled 2 | total 11 | violations 0
+Rates: hit 93.0% | late 0.0% | miss 7.0% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss 0.0% | update miss 11.1% | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 95.2% | exact-set avg reward 0.904 | set_precision 100.0% | set_recall 93.0% | set_f1 96.4%
+State query calls by channel (overall): appointment_portal=43 | bank_balance=43 | calendar=43 | clock=78 | course_portal=43 | email=43 | laundry_status=43 | library_hold=43 | price_tracker=43 | reservation_waitlist=43 | shipment_status=43
+Hit rates (by modality): event 89.6% | time 100.0%
+Monitoring categories (overall): no-proactive hit 38 | late 0 | miss 2 | total 40 | hit-rate 95.0% | any-rate 95.0%
+Monitoring categories (overall): proactive-required hit 28 | late 0 | miss 3 | total 31 | hit-rate(no-late-credit) 90.3% | any-rate 90.3%
+Proactive-required by channel (no late credit):
+  appointment_portal: hit 1 | late 0 | miss 0 | total 1 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  bank_balance: hit 0 | late 0 | miss 1 | total 1 | hit-rate(no-late-credit) 0.0% | any-rate 0.0%
+  clock: hit 23 | late 0 | miss 0 | total 23 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  email: hit 2 | late 0 | miss 0 | total 2 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  laundry_status: hit 0 | late 0 | miss 1 | total 1 | hit-rate(no-late-credit) 0.0% | any-rate 0.0%
+  price_tracker: hit 1 | late 0 | miss 0 | total 1 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  reservation_waitlist: hit 1 | late 0 | miss 0 | total 1 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  shipment_status: hit 0 | late 0 | miss 1 | total 1 | hit-rate(no-late-credit) 0.0% | any-rate 0.0%
+
+Monday
+  Hit: 10 | Late: 0 | Miss: 0 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | check_time calls: 11 | Actions: 10
+  Exact-set: matches 12 | mismatches 0 | reward 12
+  Set micro: TP 10 | FP 0 | FN 0
+  Cross-day: hit 0 | late 0 | miss 0 | total 0
+  Updates: hit 2 | late 0 | miss 0 | canceled 0 | total 2 | violations 0
+  Rates: hit 100.0% | late 0.0% | miss 0.0% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss n/a | update miss 0.0% | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 100.0% | exact-set avg reward 1.000 | set_precision 100.0% | set_recall 100.0% | set_f1 100.0%
+  State query calls by channel: appointment_portal=4 | bank_balance=4 | calendar=4 | clock=11 | course_portal=4 | email=4 | laundry_status=4 | library_hold=4 | price_tracker=4 | reservation_waitlist=4 | shipment_status=4
+  Hit rates (by modality): event 100.0% | time 100.0%
+  Monitoring categories: no-proactive hit 5 | late 0 | miss 0 | total 5 | hit-rate 100.0% | any-rate 100.0%
+  Monitoring categories: proactive-required hit 5 | late 0 | miss 0 | total 5 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  By type:
+    event: hit 6 | late 0 | miss 0 | total 6
+    time: hit 4 | late 0 | miss 0 | total 4
+  By regularity:
+    regular: hit 4 | late 0 | miss 0 | total 4
+    irregular: hit 6 | late 0 | miss 0 | total 6
+  By monitoring:
+    no_proactive_monitoring: hit 5 | late 0 | miss 0 | total 5
+    proactive_monitoring_required: hit 5 | late 0 | miss 0 | total 5
+  Proactive required by channel:
+    clock: hit 4 | late 0 | miss 0 | total 4
+    email: hit 1 | late 0 | miss 0 | total 1
+
+Tuesday
+  Hit: 8 | Late: 0 | Miss: 3 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | check_time calls: 13 | Actions: 8
+  Exact-set: matches 12 | mismatches 2 | reward 10
+  Set micro: TP 8 | FP 0 | FN 3
+  Cross-day: hit 1 | late 0 | miss 0 | total 1
+  Updates: hit 1 | late 0 | miss 1 | canceled 0 | total 2 | violations 0
+  Rates: hit 72.7% | late 0.0% | miss 27.3% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss 0.0% | update miss 50.0% | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 85.7% | exact-set avg reward 0.714 | set_precision 100.0% | set_recall 72.7% | set_f1 84.2%
+  State query calls by channel: appointment_portal=14 | bank_balance=14 | calendar=14 | clock=13 | course_portal=14 | email=14 | laundry_status=14 | library_hold=14 | price_tracker=14 | reservation_waitlist=14 | shipment_status=14
+  Hit rates (by modality): event 62.5% | time 100.0%
+  Monitoring categories: no-proactive hit 5 | late 0 | miss 2 | total 7 | hit-rate 71.4% | any-rate 71.4%
+  Monitoring categories: proactive-required hit 3 | late 0 | miss 1 | total 4 | hit-rate(no-late-credit) 75.0% | any-rate 75.0%
+  By type:
+    event: hit 5 | late 0 | miss 3 | total 8
+    time: hit 3 | late 0 | miss 0 | total 3
+  By regularity:
+    regular: hit 4 | late 0 | miss 0 | total 4
+    irregular: hit 4 | late 0 | miss 3 | total 7
+  By monitoring:
+    no_proactive_monitoring: hit 5 | late 0 | miss 2 | total 7
+    proactive_monitoring_required: hit 3 | late 0 | miss 1 | total 4
+  Proactive required by channel:
+    bank_balance: hit 0 | late 0 | miss 1 | total 1
+    clock: hit 3 | late 0 | miss 0 | total 3
+
+Wednesday
+  Hit: 8 | Late: 0 | Miss: 1 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | check_time calls: 12 | Actions: 8
+  Exact-set: matches 11 | mismatches 1 | reward 10
+  Set micro: TP 8 | FP 0 | FN 1
+  Cross-day: hit 1 | late 0 | miss 0 | total 1
+  Updates: hit 1 | late 0 | miss 0 | canceled 1 | total 2 | violations 0
+  Rates: hit 88.9% | late 0.0% | miss 11.1% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss 0.0% | update miss 0.0% | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 91.7% | exact-set avg reward 0.833 | set_precision 100.0% | set_recall 88.9% | set_f1 94.1%
+  State query calls by channel: clock=12
+  Hit rates (by modality): event 83.3% | time 100.0%
+  Monitoring categories: no-proactive hit 5 | late 0 | miss 0 | total 5 | hit-rate 100.0% | any-rate 100.0%
+  Monitoring categories: proactive-required hit 3 | late 0 | miss 1 | total 4 | hit-rate(no-late-credit) 75.0% | any-rate 75.0%
+  By type:
+    event: hit 5 | late 0 | miss 1 | total 6
+    time: hit 3 | late 0 | miss 0 | total 3
+  By regularity:
+    regular: hit 4 | late 0 | miss 0 | total 4
+    irregular: hit 4 | late 0 | miss 1 | total 5
+  By monitoring:
+    no_proactive_monitoring: hit 5 | late 0 | miss 0 | total 5
+    proactive_monitoring_required: hit 3 | late 0 | miss 1 | total 4
+  Proactive required by channel:
+    clock: hit 3 | late 0 | miss 0 | total 3
+    shipment_status: hit 0 | late 0 | miss 1 | total 1
+
+Thursday
+  Hit: 9 | Late: 0 | Miss: 0 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | check_time calls: 11 | Actions: 9
+  Exact-set: matches 11 | mismatches 0 | reward 11
+  Set micro: TP 9 | FP 0 | FN 0
+  Cross-day: hit 2 | late 0 | miss 0 | total 2
+  Updates: hit 0 | late 0 | miss 0 | canceled 1 | total 1 | violations 0
+  Rates: hit 100.0% | late 0.0% | miss 0.0% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss 0.0% | update miss n/a | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 100.0% | exact-set avg reward 1.000 | set_precision 100.0% | set_recall 100.0% | set_f1 100.0%
+  State query calls by channel: appointment_portal=4 | bank_balance=4 | calendar=4 | clock=11 | course_portal=4 | email=4 | laundry_status=4 | library_hold=4 | price_tracker=4 | reservation_waitlist=4 | shipment_status=4
+  Hit rates (by modality): event 100.0% | time 100.0%
+  Monitoring categories: no-proactive hit 5 | late 0 | miss 0 | total 5 | hit-rate 100.0% | any-rate 100.0%
+  Monitoring categories: proactive-required hit 4 | late 0 | miss 0 | total 4 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  By type:
+    event: hit 6 | late 0 | miss 0 | total 6
+    time: hit 3 | late 0 | miss 0 | total 3
+  By regularity:
+    regular: hit 4 | late 0 | miss 0 | total 4
+    irregular: hit 5 | late 0 | miss 0 | total 5
+  By monitoring:
+    no_proactive_monitoring: hit 5 | late 0 | miss 0 | total 5
+    proactive_monitoring_required: hit 4 | late 0 | miss 0 | total 4
+  Proactive required by channel:
+    clock: hit 3 | late 0 | miss 0 | total 3
+    email: hit 1 | late 0 | miss 0 | total 1
+
+Friday
+  Hit: 10 | Late: 0 | Miss: 1 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | check_time calls: 11 | Actions: 10
+  Exact-set: matches 11 | mismatches 1 | reward 10
+  Set micro: TP 10 | FP 0 | FN 1
+  Cross-day: hit 1 | late 0 | miss 0 | total 1
+  Updates: hit 2 | late 0 | miss 0 | canceled 0 | total 2 | violations 0
+  Rates: hit 90.9% | late 0.0% | miss 9.1% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss 0.0% | update miss 0.0% | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 91.7% | exact-set avg reward 0.833 | set_precision 100.0% | set_recall 90.9% | set_f1 95.2%
+  State query calls by channel: appointment_portal=6 | bank_balance=6 | calendar=6 | clock=11 | course_portal=6 | email=6 | laundry_status=6 | library_hold=6 | price_tracker=6 | reservation_waitlist=6 | shipment_status=6
+  Hit rates (by modality): event 87.5% | time 100.0%
+  Monitoring categories: no-proactive hit 6 | late 0 | miss 0 | total 6 | hit-rate 100.0% | any-rate 100.0%
+  Monitoring categories: proactive-required hit 4 | late 0 | miss 1 | total 5 | hit-rate(no-late-credit) 80.0% | any-rate 80.0%
+  By type:
+    event: hit 7 | late 0 | miss 1 | total 8
+    time: hit 3 | late 0 | miss 0 | total 3
+  By regularity:
+    regular: hit 4 | late 0 | miss 0 | total 4
+    irregular: hit 6 | late 0 | miss 1 | total 7
+  By monitoring:
+    no_proactive_monitoring: hit 6 | late 0 | miss 0 | total 6
+    proactive_monitoring_required: hit 4 | late 0 | miss 1 | total 5
+  Proactive required by channel:
+    appointment_portal: hit 1 | late 0 | miss 0 | total 1
+    clock: hit 3 | late 0 | miss 0 | total 3
+    laundry_status: hit 0 | late 0 | miss 1 | total 1
+
+Saturday
+  Hit: 9 | Late: 0 | Miss: 0 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | check_time calls: 10 | Actions: 9
+  Exact-set: matches 11 | mismatches 0 | reward 11
+  Set micro: TP 9 | FP 0 | FN 0
+  Cross-day: hit 0 | late 0 | miss 0 | total 0
+  Updates: hit 0 | late 0 | miss 0 | canceled 0 | total 0 | violations 0
+  Rates: hit 100.0% | late 0.0% | miss 0.0% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss n/a | update miss n/a | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 100.0% | exact-set avg reward 1.000 | set_precision 100.0% | set_recall 100.0% | set_f1 100.0%
+  State query calls by channel: appointment_portal=8 | bank_balance=8 | calendar=8 | clock=10 | course_portal=8 | email=8 | laundry_status=8 | library_hold=8 | price_tracker=8 | reservation_waitlist=8 | shipment_status=8
+  Hit rates (by modality): event 100.0% | time 100.0%
+  Monitoring categories: no-proactive hit 5 | late 0 | miss 0 | total 5 | hit-rate 100.0% | any-rate 100.0%
+  Monitoring categories: proactive-required hit 4 | late 0 | miss 0 | total 4 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  By type:
+    event: hit 6 | late 0 | miss 0 | total 6
+    time: hit 3 | late 0 | miss 0 | total 3
+  By regularity:
+    regular: hit 4 | late 0 | miss 0 | total 4
+    irregular: hit 5 | late 0 | miss 0 | total 5
+  By monitoring:
+    no_proactive_monitoring: hit 5 | late 0 | miss 0 | total 5
+    proactive_monitoring_required: hit 4 | late 0 | miss 0 | total 4
+  Proactive required by channel:
+    clock: hit 3 | late 0 | miss 0 | total 3
+    price_tracker: hit 1 | late 0 | miss 0 | total 1
+
+Sunday
+  Hit: 12 | Late: 0 | Miss: 0 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | check_time calls: 10 | Actions: 12
+  Exact-set: matches 11 | mismatches 0 | reward 11
+  Set micro: TP 12 | FP 0 | FN 0
+  Cross-day: hit 2 | late 0 | miss 0 | total 2
+  Updates: hit 2 | late 0 | miss 0 | canceled 0 | total 2 | violations 0
+  Rates: hit 100.0% | late 0.0% | miss 0.0% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss 0.0% | update miss 0.0% | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 100.0% | exact-set avg reward 1.000 | set_precision 100.0% | set_recall 100.0% | set_f1 100.0%
+  State query calls by channel: appointment_portal=7 | bank_balance=7 | calendar=7 | clock=10 | course_portal=7 | email=7 | laundry_status=7 | library_hold=7 | price_tracker=7 | reservation_waitlist=7 | shipment_status=7
+  Hit rates (by modality): event 100.0% | time 100.0%
+  Monitoring categories: no-proactive hit 7 | late 0 | miss 0 | total 7 | hit-rate 100.0% | any-rate 100.0%
+  Monitoring categories: proactive-required hit 5 | late 0 | miss 0 | total 5 | hit-rate(no-late-credit) 100.0% | any-rate 100.0%
+  By type:
+    event: hit 8 | late 0 | miss 0 | total 8
+    time: hit 4 | late 0 | miss 0 | total 4
+  By regularity:
+    regular: hit 4 | late 0 | miss 0 | total 4
+    irregular: hit 8 | late 0 | miss 0 | total 8
+  By monitoring:
+    no_proactive_monitoring: hit 7 | late 0 | miss 0 | total 7
+    proactive_monitoring_required: hit 5 | late 0 | miss 0 | total 5
+  Proactive required by channel:
+    clock: hit 4 | late 0 | miss 0 | total 4
+    reservation_waitlist: hit 1 | late 0 | miss 0 | total 1

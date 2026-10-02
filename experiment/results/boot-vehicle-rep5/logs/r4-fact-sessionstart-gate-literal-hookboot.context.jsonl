@@ -1,0 +1,6 @@
+{"at":1789368468245,"session":"7e741196-8757-4bd6-8da0-ae957acd5b91","files":["docs/format.md"],"symbols":[]}
+{"at":1789368473350,"session":"7e741196-8757-4bd6-8da0-ae957acd5b91","files":["crates/muninn-core/src/health.rs"],"symbols":["Status","Check","Report","Report","reds","colds","is_green","summary","check","run","tests","fresh_project_is_green_or_cold_never_red"]}
+{"at":1789368482696,"session":"7e741196-8757-4bd6-8da0-ae957acd5b91","files":["research/bench/bench_readpath.py"],"symbols":["BUDGET_TOKENS","INTENT","read_path","run","pct"]}
+{"at":1789368486805,"session":"7e741196-8757-4bd6-8da0-ae957acd5b91","files":["research/*.md","design/*.md"],"symbols":[]}
+{"at":1789368492826,"session":"7e741196-8757-4bd6-8da0-ae957acd5b91","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789368499693,"session":"7e741196-8757-4bd6-8da0-ae957acd5b91","files":["docs/perf-history.md"],"symbols":[]}

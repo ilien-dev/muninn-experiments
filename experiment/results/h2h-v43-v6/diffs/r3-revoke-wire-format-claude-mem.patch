@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..942e384
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire Format
++
++The project's current recorded decision is that the internal message serialization protocol is CBOR (Concise Binary Object Representation), chosen because it preserves richer type information when messages are serialized and deserialized across different protocol versions, which eases forward and backward compatibility as message schemas evolve.

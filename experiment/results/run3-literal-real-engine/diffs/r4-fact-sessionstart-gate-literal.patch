@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..49fbb70
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Perf history
++
++## SessionStart health gate
++
++Store size: 5k records.
++
++- Antes (quick_check en el read path): **11.9 ms**. La cifra registrada no
++  especifica percentil.
++- Después (quick_check fuera del read path, más contador `fts_rows` y el
++  `CHECK` de longitud en `body`, ambos añadidos en el mismo cambio): **p50 1.05 ms**.
++
++Fuente: episodios de sesión (trust 1, transcript observado), no benchmark
++re-ejecutado en este checkout:
++`.muninn/records/episode/79.md` (línea "Health gate SessionStart 11.9 ms →
++quick_check off read path, fts_rows counter, body CHECK → 1.05 ms.") y
++`.muninn/records/episode/80.md` ("SessionStart p50 1.05 ms (5k records)").

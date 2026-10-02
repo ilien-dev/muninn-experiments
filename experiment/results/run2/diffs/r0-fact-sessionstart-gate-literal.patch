@@ -1,0 +1,14 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..4afc3d1
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,8 @@
++# Perf history
++
++## SessionStart health gate
++
++Store: 5k records.
++
++- **Después** (quick_check fuera del read path, contador `fts_rows`, CHECK de body añadidos): SessionStart p50 = **1.05 ms**. Medido y registrado en el commit `2ff626a` ("Phase 0: foundations — store, health gate, heartbeats, hooks, init/clean, fault suite, perf contracts").
++- **Antes**: SessionStart p50 = 11.9 ms, según registro de sesión del proyecto (episodio, trust 1: observado en transcript, no confirmado por commit ni artefacto en este repo). No hay medición independiente verificable en el repo para este número; se anota con esa reserva en vez de darlo como confirmado.

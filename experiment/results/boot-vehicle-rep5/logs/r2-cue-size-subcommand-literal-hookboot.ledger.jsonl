@@ -1,0 +1,14 @@
+{"at":1789367372315,"id":83,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789367372315,"id":84,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789367372390,"id":79,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367372390,"id":75,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367372390,"id":64,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367372390,"id":74,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367372390,"id":63,"reason":"literal:gated:budget","tokens":0}
+{"at":1789367372390,"id":90,"reason":"literal:literal","tokens":160}
+{"at":1789367372390,"id":78,"reason":"literal:literal","tokens":160}
+{"at":1789367372390,"id":67,"reason":"literal:literal","tokens":160}
+{"at":1789367410004,"id":86,"reason":"literal:cue:dir:crates/muninn-core/src,symbol:BUSY_BACKOFF_MS,symbol:Db,symbol:Mode,symbol:SCHEMA_SQL,symbol:SCHEMA_VERSION,symbol:check_schema_not_newer,symbol:migrate,symbol:open,symbol:quick_check,symbol:record_quick_check,symbol:schema_version@post_tool","tokens":0}
+{"at":1789367410004,"id":86,"reason":"literal:literal:post_tool","tokens":51}
+{"at":1789367419066,"id":87,"reason":"literal:cue:dir:crates/muninn-cli/src@post_tool","tokens":0}
+{"at":1789367419066,"id":87,"reason":"literal:literal:post_tool","tokens":59}

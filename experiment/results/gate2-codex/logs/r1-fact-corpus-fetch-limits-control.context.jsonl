@@ -1,0 +1,4 @@
+{"at":1789372927518,"session":"01a09eef-beda-74c3-bcc7-5598f498a3aa","files":["crates/muninn-bench/corpora/claude-md/GATE1.md;","crates/muninn-bench/corpora/claude-md/manifest.tsv"],"symbols":[]}
+{"at":1789372934772,"session":"01a09eef-beda-74c3-bcc7-5598f498a3aa","files":["(visits?|requests?)\\s*(per|/)\\s*([0-9]+|minute|hour)|[0-9]+\\s*(visits?|requests?).*(seconds?|minutes?|hours?)|cooldown|raw\\.githubusercontent\\.com|cdn\\.jsdelivr\\.net|github\\.com"],"symbols":[]}
+{"at":1789372956227,"session":"01a09eef-beda-74c3-bcc7-5598f498a3aa","files":["crates/muninn-bench/corpora/claude-md/FETCHING.md"],"symbols":[]}
+{"at":1789372962041,"session":"01a09eef-beda-74c3-bcc7-5598f498a3aa","files":["crates/muninn-bench/corpora/claude-md/FETCHING.md;","crates/muninn-bench/corpora/claude-md/FETCHING.md"],"symbols":[]}

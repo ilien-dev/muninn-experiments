@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..23678be
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS backend policy
++
++No current decision on the TLS backend is recorded for this project. The recorded decisions do not settle which TLS implementation to use: an earlier selection for cryptographic operations was reopened for reconsideration without a resolution being recorded. The only current recorded decision touching TLS is that HTTPS is required for all services, with no plaintext exceptions. That decision does not name a backend. Until a backend decision is recorded, this document specifies none.

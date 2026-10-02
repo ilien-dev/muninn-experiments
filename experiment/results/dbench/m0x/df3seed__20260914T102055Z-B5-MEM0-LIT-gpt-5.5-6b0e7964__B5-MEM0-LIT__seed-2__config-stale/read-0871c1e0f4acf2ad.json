@@ -1,0 +1,70 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-stale",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-stale"
+    },
+    "query": "Add parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:27:36.466330+00:00",
+        "hash": "fdef0dd3fa5fc6e2619766020824a8fb",
+        "id": "5ed0ff15-a07b-4042-9372-9fc0f019871b",
+        "memory": "Config is now the public dict-compatible container. parse_ini must return a plain dict forever.\nFor sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/__init__.py b/configly/__init__.py index 370d76a..d4205e0 100644 --- a/configly/__init__.py +++ b/configly/__init__.py @@ -1 +1 @@ -from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini +from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini diff --git a/configly/parser.py b/configly/parser.py index 9dca90a..e35cd5c 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -1,11 +1,31 @@ import csv import io +from collections.abc import Mapping class ParseError(ValueError): pass +class Config(dict): + def get_path(self, path, default=None): + current = self + for part in path.split('.'): + if not isinstance(current, Mapping) or part not in current: + return default + current = current[part] + return current + + def as_dict(self): + return {key: self._as_plain_dict(value) for key, value in self.items()} + + @classmethod + def _as_plain_dict(cls, value): + if isinstance(value, Mapping): + return {key: cls._as_plain_dict(nested) for key, nested in value.items()} + return value + + def normalize_key(key): return key.strip().lower().replace('-', '_') @@ -28,7 +48,7 @@ def parse_ini(text): key, value = line.split('=', 1) value = value.strip() data[current][normalize_key(key)] = value - return data + return Config(data) def dump_ini(config): @@ -50,4 +70,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe public production diff was: diff --git a/configly/__init__.py b/configly/__init__.py index 370d76a..d4205e0 100644 --- a/configly/__init__.py +++ b/configly/__init__.py @@ -1 +1 @@ -from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini +from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini diff --git a/configly/parser.py b/configly/parser.py index 9dca90a..e35cd5c 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -1,11 +1,31 @@ import csv import io +from collections.abc import Mapping class ParseError(ValueError): pass +class Config(dict): + def get_path(self, path, default=None): + current = self + for part in path.split('.'): + if not isinstance(current, Mapping) or part not in current: + return default + current = current[part] + return current + + def as_dict(self): + return {key: self._as_plain_dict(value) for key, value in self.items()} + + @classmethod + def _as_plain_dict(cls, value): + if isinstance(value, Mapping): + return {key: cls._as_plain_dict(nested) for key, nested in value.items()} + return value + + def normalize_key(key): return key.strip().lower().replace('-', '_') @@ -28,7 +48,7 @@ def parse_ini(text): key, value = line.split('=', 1) value = value.strip() data[current][normalize_key(key)] = value - return data + return Config(data) def dump_ini(config): @@ -50,4 +70,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.672779848871125,
+        "updated_at": "2026-09-14T10:27:36.466330+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-stale"
+      },
+      {
+        "created_at": "2026-09-14T10:30:12.858000+00:00",
+        "hash": "8a2816568a86834f7c1e78f0a2748992",
+        "id": "a7830ea3-669c-4b8e-9cd2-487dbdb70ff3",
+        "memory": "Use Config-preserving deep section merges. Use shallow dict.update for config overlays.\nFor sequence config-stale, task config-stale-s03, the public task prompt was: Add merge_configs(base, override), returning a Config deep merge without mutating either input.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/__init__.py b/configly/__init__.py index db76b92..f1e3dd9 100644 --- a/configly/__init__.py +++ b/configly/__init__.py @@ -1 +1 @@ -from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config +from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini diff --git a/configly/parser.py b/configly/parser.py index 368c4c4..935d72a 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -1,5 +1,7 @@ import csv import io +from collections.abc import Mapping +from copy import deepcopy class ParseError(ValueError): @@ -26,6 +28,27 @@ class Config(dict): return default +def _copy_config_value(value): + if isinstance(value, Mapping): + return {key: _copy_config_value(nested) for key, nested in value.items()} + return deepcopy(value) + + +def _merge_config_values(base, override): + merged = _copy_config_value(base) + for key, override_value in override.items(): + base_value = merged.get(key) + if isinstance(base_value, Mapping) and isinstance(override_value, Mapping): + merged[key] = _merge_config_values(base_value, override_value) + else: + merged[key] = _copy_config_value(override_value) + return merged + + +def merge_configs(base, override): + return Config(_merge_config_values(base, override)) + + def parse_ini(text): data = {} current = None @@ -66,4 +89,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe public production diff was: diff --git a/configly/__init__.py b/configly/__init__.py index db76b92..f1e3dd9 100644 --- a/configly/__init__.py +++ b/configly/__init__.py @@ -1 +1 @@ -from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config +from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini diff --git a/configly/parser.py b/configly/parser.py index 368c4c4..935d72a 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -1,5 +1,7 @@ import csv import io +from collections.abc import Mapping +from copy import deepcopy class ParseError(ValueError): @@ -26,6 +28,27 @@ class Config(dict): return default +def _copy_config_value(value): + if isinstance(value, Mapping): + return {key: _copy_config_value(nested) for key, nested in value.items()} + return deepcopy(value) + + +def _merge_config_values(base, override): + merged = _copy_config_value(base) + for key, override_value in override.items(): + base_value = merged.get(key) + if isinstance(base_value, Mapping) and isinstance(override_value, Mapping): + merged[key] = _merge_config_values(base_value, override_value) + else: + merged[key] = _copy_config_value(override_value) + return merged + + +def merge_configs(base, override): + return Config(_merge_config_values(base, override)) + + def parse_ini(text): data = {} current = None @@ -66,4 +89,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.6309396419188438,
+        "updated_at": "2026-09-14T10:30:12.858000+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-stale"
+      },
+      {
+        "created_at": "2026-09-14T10:29:08.373888+00:00",
+        "hash": "a8e528dd3aff151662ec82d117fc6483",
+        "id": "eafbe9fb-d516-4ff4-b790-896f3d526f8f",
+        "memory": "New callers should use Config helpers where available. Callers index nested dictionaries directly.\nFor sequence config-stale, task config-stale-s02, the public task prompt was: Add Config.select(section, default=None), returning a copy of that section without abandoning dict compatibility.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/parser.py b/configly/parser.py index 39c74f5..7134a63 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -11,6 +11,11 @@ def normalize_key(key): class Config(dict): + def select(self, section, default=None): + if section not in self: + return default + return dict(self[section]) + def get_path(self, path, default=None): section, _, key = path.partition('.') if not section or not key: @@ -61,4 +66,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py index 39c74f5..7134a63 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -11,6 +11,11 @@ def normalize_key(key): class Config(dict): + def select(self, section, default=None): + if section not in self: + return default + return dict(self[section]) + def get_path(self, path, default=None): section, _, key = path.partition('.') if not section or not key: @@ -61,4 +66,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.6238702947903737,
+        "updated_at": "2026-09-14T10:29:08.373888+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-stale"
+      }
+    ]
+  }
+}

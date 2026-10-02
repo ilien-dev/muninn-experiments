@@ -1,0 +1,29 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..67b469f
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,23 @@
++# Corpus fetch limits
++
++`manifest.tsv` (323 entries) was fetched raw, subject to the "Svipall" per-domain
++rate limit observed while building this corpus:
++
++- **12 visits per 60 s window**, per domain.
++- **900 s cooldown** imposed after a breach of that window.
++
++This is why `GATE1.md` notes fetching is rate-limited and only 115 of 323 entries
++were on disk at measurement time, with the rest fetched incrementally.
++
++## Hosts used
++
++- `raw.githubusercontent.com` — primary source (see the header row of
++  `manifest.tsv`).
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>` — mirror.
++- `cdn.statically.io` — mirror; observed to be slow / prone to timeouts.
++
++`out_file` for fetched content landed flat in `~/.svipall/out/`.
++
++Note: these figures come from this project's own session record (a trust-1,
++tool-observed Muninn episode), not from a config file checked into this repo —
++no fetch script or rate-limit config was found in the repository itself.

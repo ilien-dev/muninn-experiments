@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..7a95231
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Política de evicción de caché
++
++La política de evicción de caché registrada para este proyecto es LRU (Least Recently Used) con un TTL (Time To Live) de 300 segundos. Esta decisión fue establecida por el usuario el 11 de septiembre de 2026 y representa el plan actual tras reemplazar una decisión anterior de LFU (Least Frequently Used).

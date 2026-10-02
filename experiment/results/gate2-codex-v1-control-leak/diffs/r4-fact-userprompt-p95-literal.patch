@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c38d356
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++On the adversarial synthetic corpus whose vocabulary contained only 30 words,
++the measured full-recall p95 for the `UserPromptSubmit` hook was **10.27 ms**.
++
++The term-selection fix drops a candidate term before IDF ranking when its
++document frequency is greater than one third of the store (`df > n / 3`, for
++stores with at least 50 records). Such terms carry little discriminating signal
++while forcing long posting-list reads. The benchmark corpus was also changed
++from the adversarial 30-word vocabulary to a Zipf-distributed vocabulary (30
++frequent domain words plus 2,000 rare identifiers), so the measured improvement
++should not be attributed to the selector change alone.
++
++After those changes, the measured full-recall p95 for `UserPromptSubmit` was
++**1.82 ms**.

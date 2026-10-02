@@ -1,0 +1,64 @@
+{
+ "heldout5": [
+  {
+   "id": "h5-vector",
+   "topic": "the vector database for semantic search",
+   "old": "Pinecone",
+   "new": "pgvector"
+  },
+  {
+   "id": "h5-mobile",
+   "topic": "the cross-platform mobile framework",
+   "old": "React Native",
+   "new": "Flutter"
+  },
+  {
+   "id": "h5-payments",
+   "topic": "the payment processor for subscriptions",
+   "old": "Braintree",
+   "new": "Stripe Billing"
+  },
+  {
+   "id": "h5-monitoring",
+   "topic": "uptime monitoring for the public endpoints",
+   "old": "Pingdom",
+   "new": "Better Stack"
+  },
+  {
+   "id": "h5-json-go",
+   "topic": "the JSON library in the Go services",
+   "old": "encoding/json",
+   "new": "sonic"
+  },
+  {
+   "id": "h5-orm-rb",
+   "topic": "the background job library in the Rails app",
+   "old": "Sidekiq",
+   "new": "GoodJob"
+  },
+  {
+   "id": "h5-storage",
+   "topic": "where user uploads are stored",
+   "old": "Amazon S3",
+   "new": "Cloudflare R2"
+  },
+  {
+   "id": "h5-schema",
+   "topic": "the schema validation library in the TypeScript API",
+   "old": "Joi",
+   "new": "Zod"
+  },
+  {
+   "id": "h5-secrets2",
+   "topic": "how environment secrets reach the CI jobs",
+   "old": "plain repository variables",
+   "new": "OIDC short-lived credentials"
+  },
+  {
+   "id": "h5-beta",
+   "topic": "the public beta signup page",
+   "old": "a public beta signup page",
+   "new": null
+  }
+ ]
+}

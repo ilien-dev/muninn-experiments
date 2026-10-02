@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6f3e828
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++Full-recall p95 of the `UserPromptSubmit` hook, measured on the adversarial
++synthetic 30-word vocabulary (`crates/muninn-bench`, Zipf-distributed
++vocabulary: 30 frequent domain words plus 2 000 rare identifiers):
++
++- **Before the term-selection fix: 10.27 ms p95.**
++- **Fix:** in `select_terms` (`crates/muninn-core/src/recall.rs`), drop prompt
++  terms whose document frequency `df` exceeds `n/3` (once the store has at
++  least 50 records) before scoring by IDF. A term that appears in more than a
++  third of the store carries no discriminative signal but still costs a long
++  posting-list scan, so excluding it from the top-k selection removes that
++  cost from the hot path.
++- **After the term-selection fix: 1.82 ms p95.**
++
++These numbers come from this project's own recorded measurements (bench runs
++observed in this project's transcripts); no other measured p95 for this
++specific scenario (adversarial 30-word vocabulary, full recall) was found
++committed in the repository, so no additional figures are reported here.

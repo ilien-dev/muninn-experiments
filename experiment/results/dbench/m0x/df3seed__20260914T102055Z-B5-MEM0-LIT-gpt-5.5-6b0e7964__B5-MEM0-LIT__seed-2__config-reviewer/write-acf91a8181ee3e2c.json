@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Type coercion must be explicit. Do not surprise existing string-only callers.\nFor sequence config-reviewer, task config-reviewer-s02, the public task prompt was: Add parse_ini(..., coerce=True) to opt into bool/int coercion; default parsing must keep string values.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/parser.py b/configly/parser.py index 4fe784f..4e0a1fe 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -10,7 +10,19 @@ def normalize_key(key): return key.strip().lower().replace('-', '_') -def parse_ini(text): +def coerce_value(value): + lowered = value.lower() + if lowered == 'true': + return True + if lowered == 'false': + return False + try: + return int(value) + except ValueError: + return value + + +def parse_ini(text, coerce=False): data = {} current = None for line_no, raw_line in enumerate(text.splitlines(), start=1): @@ -27,7 +39,7 @@ def parse_ini(text): raise ParseError(f'line {line_no}: key outside section') key, value = line.split('=', 1) value = value.strip() - data[current][normalize_key(key)] = value + data[current][normalize_key(key)] = coerce_value(value) if coerce else value return data @@ -53,4 +65,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py index 4fe784f..4e0a1fe 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -10,7 +10,19 @@ def normalize_key(key): return key.strip().lower().replace('-', '_') -def parse_ini(text): +def coerce_value(value): + lowered = value.lower() + if lowered == 'true': + return True + if lowered == 'false': + return False + try: + return int(value) + except ValueError: + return value + + +def parse_ini(text, coerce=False): data = {} current = None for line_no, raw_line in enumerate(text.splitlines(), start=1): @@ -27,7 +39,7 @@ def parse_ini(text): raise ParseError(f'line {line_no}: key outside section') key, value = line.split('=', 1) value = value.strip() - data[current][normalize_key(key)] = value + data[current][normalize_key(key)] = coerce_value(value) if coerce else value return data @@ -53,4 +65,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964",
+      "seed": 2,
+      "sequence_id": "config-reviewer"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "d947562c-3ef6-4a76-8c34-c6d32310b306",
+        "memory": "Type coercion must be explicit. Do not surprise existing string-only callers.\nFor sequence config-reviewer, task config-reviewer-s02, the public task prompt was: Add parse_ini(..., coerce=True) to opt into bool/int coercion; default parsing must keep string values.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/parser.py b/configly/parser.py index 4fe784f..4e0a1fe 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -10,7 +10,19 @@ def normalize_key(key): return key.strip().lower().replace('-', '_') -def parse_ini(text): +def coerce_value(value): + lowered = value.lower() + if lowered == 'true': + return True + if lowered == 'false': + return False + try: + return int(value) + except ValueError: + return value + + +def parse_ini(text, coerce=False): data = {} current = None for line_no, raw_line in enumerate(text.splitlines(), start=1): @@ -27,7 +39,7 @@ def parse_ini(text): raise ParseError(f'line {line_no}: key outside section') key, value = line.split('=', 1) value = value.strip() - data[current][normalize_key(key)] = value + data[current][normalize_key(key)] = coerce_value(value) if coerce else value return data @@ -53,4 +65,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py index 4fe784f..4e0a1fe 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -10,7 +10,19 @@ def normalize_key(key): return key.strip().lower().replace('-', '_') -def parse_ini(text): +def coerce_value(value): + lowered = value.lower() + if lowered == 'true': + return True + if lowered == 'false': + return False + try: + return int(value) + except ValueError: + return value + + +def parse_ini(text, coerce=False): data = {} current = None for line_no, raw_line in enumerate(text.splitlines(), start=1): @@ -27,7 +39,7 @@ def parse_ini(text): raise ParseError(f'line {line_no}: key outside section') key, value = line.split('=', 1) value = value.strip() - data[current][normalize_key(key)] = value + data[current][normalize_key(key)] = coerce_value(value) if coerce else value return data @@ -53,4 +65,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "role": "user"
+      }
+    ]
+  }
+}

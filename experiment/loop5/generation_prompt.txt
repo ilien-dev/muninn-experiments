@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+{
+"key": "h5-vector#terse",
+"topic": "the vector database for semantic search",
+"old": "Pinecone",
+"new": "pgvector",
+"style": "terse"
+},
+{
+"key": "h5-vector#chatty",
+"topic": "the vector database for semantic search",
+"old": "Pinecone",
+"new": "pgvector",
+"style": "chatty"
+},
+{
+"key": "h5-vector#Spanish",
+"topic": "the vector database for semantic search",
+"old": "Pinecone",
+"new": "pgvector",
+"style": "Spanish"
+},
+{
+"key": "h5-mobile#terse",
+"topic": "the cross-platform mobile framework",
+"old": "React Native",
+"new": "Flutter",
+"style": "terse"
+},
+{
+"key": "h5-mobile#chatty",
+"topic": "the cross-platform mobile framework",
+"old": "React Native",
+"new": "Flutter",
+"style": "chatty"
+},
+{
+"key": "h5-mobile#Spanish",
+"topic": "the cross-platform mobile framework",
+"old": "React Native",
+"new": "Flutter",
+"style": "Spanish"
+},
+{
+"key": "h5-payments#terse",
+"topic": "the payment processor for subscriptions",
+"old": "Braintree",
+"new": "Stripe Billing",
+"style": "terse"
+},
+{
+"key": "h5-payments#chatty",
+"topic": "the payment processor for subscriptions",
+"old": "Braintree",
+"new": "Stripe Billing",
+"style": "chatty"
+},
+{
+"key": "h5-payments#Spanish",
+"topic": "the payment processor for subscriptions",
+"old": "Braintree",
+"new": "Stripe Billing",
+"style": "Spanish"
+},
+{
+"key": "h5-monitoring#terse",
+"topic": "uptime monitoring for the public endpoints",
+"old": "Pingdom",
+"new": "Better Stack",
+"style": "terse"
+},
+{
+"key": "h5-monitoring#chatty",
+"topic": "uptime monitoring for the public endpoints",
+"old": "Pingdom",
+"new": "Better Stack",
+"style": "chatty"
+},
+{
+"key": "h5-monitoring#Spanish",
+"topic": "uptime monitoring for the public endpoints",
+"old": "Pingdom",
+"new": "Better Stack",
+"style": "Spanish"
+},
+{
+"key": "h5-json-go#terse",
+"topic": "the JSON library in the Go services",
+"old": "encoding/json",
+"new": "sonic",
+"style": "terse"
+},
+{
+"key": "h5-json-go#chatty",
+"topic": "the JSON library in the Go services",
+"old": "encoding/json",
+"new": "sonic",
+"style": "chatty"
+},
+{
+"key": "h5-json-go#Spanish",
+"topic": "the JSON library in the Go services",
+"old": "encoding/json",
+"new": "sonic",
+"style": "Spanish"
+},
+{
+"key": "h5-orm-rb#terse",
+"topic": "the background job library in the Rails app",
+"old": "Sidekiq",
+"new": "GoodJob",
+"style": "terse"
+},
+{
+"key": "h5-orm-rb#chatty",
+"topic": "the background job library in the Rails app",
+"old": "Sidekiq",
+"new": "GoodJob",
+"style": "chatty"
+},
+{
+"key": "h5-orm-rb#Spanish",
+"topic": "the background job library in the Rails app",
+"old": "Sidekiq",
+"new": "GoodJob",
+"style": "Spanish"
+},
+{
+"key": "h5-storage#terse",
+"topic": "where user uploads are stored",
+"old": "Amazon S3",
+"new": "Cloudflare R2",
+"style": "terse"
+},
+{
+"key": "h5-storage#chatty",
+"topic": "where user uploads are stored",
+"old": "Amazon S3",
+"new": "Cloudflare R2",
+"style": "chatty"
+},
+{
+"key": "h5-storage#Spanish",
+"topic": "where user uploads are stored",
+"old": "Amazon S3",
+"new": "Cloudflare R2",
+"style": "Spanish"
+},
+{
+"key": "h5-schema#terse",
+"topic": "the schema validation library in the TypeScript API",
+"old": "Joi",
+"new": "Zod",
+"style": "terse"
+},
+{
+"key": "h5-schema#chatty",
+"topic": "the schema validation library in the TypeScript API",
+"old": "Joi",
+"new": "Zod",
+"style": "chatty"
+},
+{
+"key": "h5-schema#Spanish",
+"topic": "the schema validation library in the TypeScript API",
+"old": "Joi",
+"new": "Zod",
+"style": "Spanish"
+},
+{
+"key": "h5-secrets2#terse",
+"topic": "how environment secrets reach the CI jobs",
+"old": "plain repository variables",
+"new": "OIDC short-lived credentials",
+"style": "terse"
+},
+{
+"key": "h5-secrets2#chatty",
+"topic": "how environment secrets reach the CI jobs",
+"old": "plain repository variables",
+"new": "OIDC short-lived credentials",
+"style": "chatty"
+},
+{
+"key": "h5-secrets2#Spanish",
+"topic": "how environment secrets reach the CI jobs",
+"old": "plain repository variables",
+"new": "OIDC short-lived credentials",
+"style": "Spanish"
+},
+{
+"key": "h5-beta#terse",
+"topic": "the public beta signup page",
+"old": "a public beta signup page",
+"new": "(withdrawn, no replacement)",
+"style": "terse"
+},
+{
+"key": "h5-beta#chatty",
+"topic": "the public beta signup page",
+"old": "a public beta signup page",
+"new": "(withdrawn, no replacement)",
+"style": "chatty"
+},
+{
+"key": "h5-beta#Spanish",
+"topic": "the public beta signup page",
+"old": "a public beta signup page",
+"new": "(withdrawn, no replacement)",
+"style": "Spanish"
+}
+]

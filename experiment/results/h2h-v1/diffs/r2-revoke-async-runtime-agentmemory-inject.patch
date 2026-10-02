@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..9bde1c0
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++No async runtime decision is currently recorded for this project. This repository (`gin`) is a Go HTTP framework built on Go's standard `net/http` and goroutine model, and it contains no ADR, design doc, changelog entry, or other project record establishing or changing an async runtime choice (e.g., Rust runtimes such as tokio or async-std); this document will be updated if and when such a decision is actually recorded in the project.

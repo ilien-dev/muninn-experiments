@@ -1,0 +1,46 @@
+seeded r0 muninn-listed -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r0-muninn-listed
+seeded r0 claude-mem -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r0-claude-mem
+seeded r1 muninn-listed -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r1-muninn-listed
+seeded r1 claude-mem -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r1-claude-mem
+seeded r2 muninn-listed -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r2-muninn-listed
+seeded r2 claude-mem -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r2-claude-mem
+seeded r3 muninn-listed -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r3-muninn-listed
+seeded r3 claude-mem -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r3-claude-mem
+seeded r4 muninn-listed -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r4-muninn-listed
+seeded r4 claude-mem -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r4-claude-mem
+seeded r5 muninn-listed -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r5-muninn-listed
+seeded r5 claude-mem -> /home/ilien/.cache/muninn-h2h-work/muninn-h2h/h2h-v43-v6/snap-r5-claude-mem
+120 cells planned, 30 to run
+port 38103 is already in use, skipping it
+port 38105 is already in use, skipping it
+r0 revoke-compression claude-mem -> pass (35s)
+r0 revoke-wire-format claude-mem -> pass (38s)
+r0 revoke-password-hashing claude-mem -> pass (41s)
+r0 revoke-tls-backend claude-mem -> pass (21s)
+r0 revoke-internal-http claude-mem -> pass (37s)
+r0 revoke-tls-verification claude-mem -> pass (43s)
+r0 revoke-license claude-mem -> pass (32s)
+r0 revoke-cache-eviction claude-mem -> pass (26s)
+r0 revoke-async-runtime claude-mem -> pass (23s)
+r0 revoke-version-scheme claude-mem -> pass (33s)
+r1 revoke-tls-verification claude-mem -> pass (29s)
+r1 revoke-wire-format claude-mem -> pass (29s)
+r1 revoke-cache-eviction claude-mem -> pass (28s)
+r1 revoke-tls-backend claude-mem -> pass (29s)
+r1 revoke-async-runtime claude-mem -> pass (19s)
+r1 revoke-license claude-mem -> pass (31s)
+r1 revoke-password-hashing claude-mem -> pass (16s)
+r1 revoke-internal-http claude-mem -> pass (18s)
+r1 revoke-version-scheme claude-mem -> pass (19s)
+r1 revoke-compression claude-mem -> pass (22s)
+r2 revoke-wire-format claude-mem -> pass (21s)
+r2 revoke-cache-eviction claude-mem -> pass (26s)
+r2 revoke-tls-backend claude-mem -> pass (28s)
+r2 revoke-password-hashing claude-mem -> pass (26s)
+r2 revoke-compression claude-mem -> pass (29s)
+r2 revoke-version-scheme claude-mem -> pass (25s)
+r2 revoke-license claude-mem -> pass (32s)
+r2 revoke-internal-http claude-mem -> pass (27s)
+r2 revoke-tls-verification claude-mem -> pass (27s)
+r2 revoke-async-runtime claude-mem -> pass (22s)
+all cells finished

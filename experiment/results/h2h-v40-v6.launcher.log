@@ -1,0 +1,73 @@
+port 38100 is already in use, skipping it
+port 38101 is already in use, skipping it
+port 38106 is already in use, skipping it
+seeded r0 muninn-whysaid -> /tmp/muninn-h2h/h2h-v40-v6/snap-r0-muninn-whysaid
+seeded r1 muninn-whysaid -> /tmp/muninn-h2h/h2h-v40-v6/snap-r1-muninn-whysaid
+seeded r2 muninn-whysaid -> /tmp/muninn-h2h/h2h-v40-v6/snap-r2-muninn-whysaid
+port 38108 is already in use, skipping it
+seeded r3 muninn-whysaid -> /tmp/muninn-h2h/h2h-v40-v6/snap-r3-muninn-whysaid
+seeded r4 muninn-whysaid -> /tmp/muninn-h2h/h2h-v40-v6/snap-r4-muninn-whysaid
+seeded r5 muninn-whysaid -> /tmp/muninn-h2h/h2h-v40-v6/snap-r5-muninn-whysaid
+60 cells planned, 60 to run
+port 38110 is already in use, skipping it
+r0 revoke-version-scheme muninn-whysaid -> pass (8s)
+r0 revoke-password-hashing muninn-whysaid -> fail (10s)
+r0 revoke-internal-http muninn-whysaid -> pass (11s)
+r0 revoke-compression muninn-whysaid -> pass (9s)
+r0 revoke-license muninn-whysaid -> pass (11s)
+r0 revoke-tls-verification muninn-whysaid -> pass (11s)
+r0 revoke-tls-backend muninn-whysaid -> pass (10s)
+r0 revoke-wire-format muninn-whysaid -> pass (10s)
+r0 revoke-cache-eviction muninn-whysaid -> pass (11s)
+r0 revoke-async-runtime muninn-whysaid -> pass (13s)
+r1 revoke-wire-format muninn-whysaid -> pass (10s)
+r1 revoke-async-runtime muninn-whysaid -> fail (18s)
+r1 revoke-license muninn-whysaid -> pass (11s)
+r1 revoke-tls-backend muninn-whysaid -> pass (15s)
+r1 revoke-password-hashing muninn-whysaid -> pass (10s)
+r1 revoke-cache-eviction muninn-whysaid -> pass (12s)
+r1 revoke-internal-http muninn-whysaid -> pass (10s)
+r1 revoke-tls-verification muninn-whysaid -> pass (17s)
+r1 revoke-version-scheme muninn-whysaid -> fail (10s)
+r1 revoke-compression muninn-whysaid -> pass (10s)
+r2 revoke-wire-format muninn-whysaid -> pass (10s)
+r2 revoke-compression muninn-whysaid -> fail (11s)
+r2 revoke-tls-backend muninn-whysaid -> pass (13s)
+r2 revoke-license muninn-whysaid -> pass (11s)
+r2 revoke-password-hashing muninn-whysaid -> pass (10s)
+r2 revoke-internal-http muninn-whysaid -> pass (10s)
+r2 revoke-version-scheme muninn-whysaid -> pass (12s)
+r2 revoke-tls-verification muninn-whysaid -> pass (13s)
+r2 revoke-async-runtime muninn-whysaid -> pass (11s)
+r2 revoke-cache-eviction muninn-whysaid -> fail (12s)
+r3 revoke-license muninn-whysaid -> fail (11s)
+r3 revoke-compression muninn-whysaid -> fail (10s)
+r3 revoke-version-scheme muninn-whysaid -> pass (10s)
+r3 revoke-async-runtime muninn-whysaid -> fail (12s)
+r3 revoke-tls-verification muninn-whysaid -> fail (17s)
+r3 revoke-wire-format muninn-whysaid -> pass (10s)
+r3 revoke-internal-http muninn-whysaid -> pass (11s)
+r3 revoke-cache-eviction muninn-whysaid -> fail (18s)
+r3 revoke-password-hashing muninn-whysaid -> pass (10s)
+r3 revoke-tls-backend muninn-whysaid -> pass (11s)
+r4 revoke-password-hashing muninn-whysaid -> pass (10s)
+r4 revoke-compression muninn-whysaid -> fail (10s)
+r4 revoke-cache-eviction muninn-whysaid -> fail (13s)
+r4 revoke-wire-format muninn-whysaid -> pass (17s)
+r4 revoke-license muninn-whysaid -> pass (11s)
+r4 revoke-version-scheme muninn-whysaid -> pass (10s)
+r4 revoke-tls-backend muninn-whysaid -> pass (12s)
+r4 revoke-async-runtime muninn-whysaid -> pass (11s)
+r4 revoke-tls-verification muninn-whysaid -> pass (12s)
+r5 revoke-internal-http muninn-whysaid -> pass (10s)
+r4 revoke-internal-http muninn-whysaid -> pass (12s)
+r5 revoke-version-scheme muninn-whysaid -> pass (9s)
+r5 revoke-compression muninn-whysaid -> pass (10s)
+r5 revoke-tls-backend muninn-whysaid -> pass (19s)
+r5 revoke-tls-verification muninn-whysaid -> pass (11s)
+r5 revoke-password-hashing muninn-whysaid -> fail (11s)
+r5 revoke-cache-eviction muninn-whysaid -> pass (11s)
+r5 revoke-async-runtime muninn-whysaid -> pass (10s)
+r5 revoke-license muninn-whysaid -> pass (12s)
+r5 revoke-wire-format muninn-whysaid -> pass (10s)
+all cells finished

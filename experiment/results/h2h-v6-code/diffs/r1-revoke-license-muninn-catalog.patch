@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..76f65ec
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License
++
++The project's current recorded decision is to use the Apache-2.0 license, changed from the prior GPL-3.0 license for better adoption.

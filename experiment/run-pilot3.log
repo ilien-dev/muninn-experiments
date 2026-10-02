@@ -1,0 +1,28 @@
+plan: 4 cells (4 tasks × 1 arms × 1 runs), model claude-sonnet-5, base HEAD of /home/ilien/Projects/muninn
+seed transcripts: 1
+[  1/4] run 0 fact-real-transcript-ingest literal …
+[  2/4] run 0 fact-userprompt-p95 literal …
+[  3/4] run 0 fact-corpus-fetch-limits literal …
+[  3/4] run 0 fact-corpus-fetch-limits literal → pass (18s, 680 tok, $0.112)
+[  4/4] run 0 fact-sessionstart-gate literal …
+[  4/4] run 0 fact-sessionstart-gate literal → fail (42s, 696 tok, $0.182)
+[  1/4] run 0 fact-real-transcript-ingest literal → fail (90s, 564 tok, $0.297)
+[  2/4] run 0 fact-userprompt-p95 literal → fail (142s, 696 tok, $0.506)
+
+# Gate 2 experiment — 4 cells, model claude-sonnet-5, 1 run(s)
+
+| arm | non-inferable pass | inferable pass | errors | delivered tokens (mean) | hook p95 ms (max) | cost/cell (mean) |
+|---|---|---|---|---|---|---|
+| literal | 1/4 (25%) | n/a | 0 | 659 | 0.98 | $0.274 |
+
+## Per task
+
+| task | inferable | literal | 
+|---|---|---|
+| fact-userprompt-p95 | false | 0/1 | 
+| fact-sessionstart-gate | false | 0/1 | 
+| fact-corpus-fetch-limits | false | 1/1 | 
+| fact-real-transcript-ingest | false | 0/1 | 
+
+Total model cost: $1.10. Errors are excluded from pass rates and listed in results.jsonl.
+

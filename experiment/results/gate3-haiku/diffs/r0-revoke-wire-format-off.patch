@@ -1,0 +1,10 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..5a931cf
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,4 @@
++# Wire Serialisation Format
++
++No recorded decision on wire serialisation format currently exists in this project.
++The portable format (Markdown with frontmatter plus SQLite) and export format (JSONL) are documented in `docs/format.md`, but no explicit decision has been recorded regarding how data is serialized for transmission over network boundaries or between processes.

@@ -1,0 +1,56 @@
+diff --git a/crates/muninn-compile/src/emit.rs b/crates/muninn-compile/src/emit.rs
+index a31501b..56a1782 100644
+--- a/crates/muninn-compile/src/emit.rs
++++ b/crates/muninn-compile/src/emit.rs
+@@ -5,8 +5,12 @@ use crate::CompiledRule;
+ use serde::Serialize;
+ use std::collections::BTreeMap;
+ 
++/// Compiler version stamped onto every emitted JSON artefact.
++const FENCE_TOKEN: &str = env!("CARGO_PKG_VERSION");
++
+ #[derive(Debug, Serialize)]
+ pub struct PermissionsFragment {
++    pub fence_token: &'static str,
+     pub permissions: PermissionLists,
+ }
+ 
+@@ -35,6 +39,7 @@ pub fn permissions(rules: &[CompiledRule]) -> PermissionsFragment {
+     // a deny rule for X makes an ask rule for X redundant
+     let ask: Vec<String> = ask.into_iter().filter(|a| !deny.contains(a)).collect();
+     PermissionsFragment {
++        fence_token: FENCE_TOKEN,
+         permissions: PermissionLists {
+             deny: deny.into_iter().collect(),
+             ask,
+@@ -45,6 +50,7 @@ pub fn permissions(rules: &[CompiledRule]) -> PermissionsFragment {
+ #[derive(Debug, Serialize)]
+ pub struct HookFile {
+     pub version: u32,
++    pub fence_token: &'static str,
+     pub rules: Vec<HookEntry>,
+ }
+ 
+@@ -80,12 +86,14 @@ pub fn hooks(rules: &[CompiledRule]) -> HookFile {
+     });
+     HookFile {
+         version: 1,
++        fence_token: FENCE_TOKEN,
+         rules: out,
+     }
+ }
+ 
+ #[derive(Debug, Serialize)]
+ pub struct Coverage {
++    pub fence_token: &'static str,
+     pub total: usize,
+     pub by_class: BTreeMap<String, usize>,
+     pub interpretive_fraction: f64,
+@@ -103,6 +111,7 @@ pub fn coverage(rules: &[CompiledRule], without_rationale: usize) -> Coverage {
+     }
+     let interp = by_class.get("interpretive_only").copied().unwrap_or(0);
+     Coverage {
++        fence_token: FENCE_TOKEN,
+         total: rules.len(),
+         interpretive_fraction: if rules.is_empty() {
+             0.0

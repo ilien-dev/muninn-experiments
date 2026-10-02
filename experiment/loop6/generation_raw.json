@@ -1,0 +1,184 @@
+```json
+[
+  {
+    "key": "h6-grpc#terse",
+    "a": "using gRPC for service-to-service communication",
+    "b": "switching to ConnectRPC instead",
+    "c": "need to update protobuf generation pipeline"
+  },
+  {
+    "key": "h6-grpc#chatty",
+    "a": "thinking gRPC is the way to go for our internal services—solid ecosystem, good performance, everyone knows it",
+    "b": "actually, let me reconsider. ConnectRPC cuts down on boilerplate and the http/2 support is cleaner. switching to that",
+    "c": "we should check if our RPC middleware is compatible with the new setup"
+  },
+  {
+    "key": "h6-grpc#Spanish",
+    "a": "vamos a usar gRPC para comunicación entre nuestros servicios internos",
+    "b": "mejor cambiar a ConnectRPC, es más simple de mantener",
+    "c": "tenemos que regenerar todas las definiciones de protobuf"
+  },
+  {
+    "key": "h6-secrets-store#terse",
+    "a": "HashiCorp Vault for production secrets",
+    "b": "moving to AWS Secrets Manager",
+    "c": "update IAM policies for credential rotation"
+  },
+  {
+    "key": "h6-secrets-store#chatty",
+    "a": "we'll use HashiCorp Vault for handling our production secrets—solid for rotation and audit trails",
+    "b": "on second thought, AWS Secrets Manager makes more sense. way simpler integration with our existing AWS stuff, less infrastructure to babysit",
+    "c": "we should probably document the emergency access procedure"
+  },
+  {
+    "key": "h6-secrets-store#Spanish",
+    "a": "los secretos de producción van en HashiCorp Vault",
+    "b": "mejor AWS Secrets Manager, se integra mejor con nuestra infraestructura",
+    "c": "habría que revisar los permisos de acceso a los secretos de la base de datos"
+  },
+  {
+    "key": "h6-css#terse",
+    "a": "styled-components for web app styling",
+    "b": "switching to Tailwind CSS",
+    "c": "need to rebuild the component library"
+  },
+  {
+    "key": "h6-css#chatty",
+    "a": "let's go with styled-components for the web app. css-in-js gives us good scoping, dynamic styling is clean, and the bundle isn't too bad",
+    "b": "hmm, reconsidering this. Tailwind is way faster to iterate with, the bundle is actually smaller, and half the team already loves it. let's migrate",
+    "c": "we should probably audit the button states while we're refactoring the styles"
+  },
+  {
+    "key": "h6-css#Spanish",
+    "a": "estamos usando styled-components para los estilos del sitio",
+    "b": "mejor cambiar a Tailwind CSS, es más rápido y los bundles pesan menos",
+    "c": "hay que revisar la consistencia de colores en todos los componentes"
+  },
+  {
+    "key": "h6-tracing#terse",
+    "a": "Jaeger for distributed tracing",
+    "b": "switching to Grafana Tempo",
+    "c": "instrument the remaining microservices"
+  },
+  {
+    "key": "h6-tracing#chatty",
+    "a": "Jaeger's a solid choice for distributed tracing. it's battle-tested, the UI is solid for debugging, and it just works",
+    "b": "actually, Grafana Tempo is the better move now. it integrates seamlessly with our Grafana setup, the operational overhead is lower, and the cost is way better",
+    "c": "we need to add more span context to the payment flow—it's harder to debug right now"
+  },
+  {
+    "key": "h6-tracing#Spanish",
+    "a": "Jaeger para rastreo distribuido en la arquitectura de microservicios",
+    "b": "vamos a cambiar a Grafana Tempo, funciona mejor con nuestro stack",
+    "c": "necesitamos añadir más instrumentación en el flujo de checkout"
+  },
+  {
+    "key": "h6-http-go#terse",
+    "a": "using net/http for the Go API",
+    "b": "migrating to chi",
+    "c": "refactor middleware chain"
+  },
+  {
+    "key": "h6-http-go#chatty",
+    "a": "we'll stick with the standard net/http library for the Go API. it's in the stdlib, no dependencies, does what we need",
+    "b": "wait, chi is worth switching to. cleaner routing DSL, middleware composition is way less painful, still lightweight, and it's pretty battle-tested",
+    "c": "we should add request validation middleware once we switch to the new router"
+  },
+  {
+    "key": "h6-http-go#Spanish",
+    "a": "la API en Go va a usar net/http",
+    "b": "mejor cambiar a chi, tiene un routing más limpio",
+    "c": "hay que mejorar el manejo de errores en todos los endpoints"
+  },
+  {
+    "key": "h6-notify#terse",
+    "a": "Firebase Cloud Messaging for push notifications",
+    "b": "switching to OneSignal",
+    "c": "rebuild notification templates"
+  },
+  {
+    "key": "h6-notify#chatty",
+    "a": "Firebase Cloud Messaging is fine for our push notifications—we've been using it, it works, integrates with our Firebase setup",
+    "b": "let me revisit this. OneSignal gives us a way better dashboard, built-in segmentation is solid, scheduling is cleaner, and the pricing model makes more sense",
+    "c": "we should probably split notifications into transactional and marketing tiers"
+  },
+  {
+    "key": "h6-notify#Spanish",
+    "a": "estamos usando Firebase Cloud Messaging para las notificaciones push",
+    "b": "mejor cambiar a OneSignal, tiene herramientas mejores para segmentación",
+    "c": "necesitamos mejorar los filtros de notificaciones para no abrumar a los usuarios"
+  },
+  {
+    "key": "h6-runtime-js#terse",
+    "a": "Node.js for server runtime",
+    "b": "switching to Bun",
+    "c": "update deployment scripts"
+  },
+  {
+    "key": "h6-runtime-js#chatty",
+    "a": "Node.js is solid for the server runtime. mature, everyone knows it, package ecosystem is huge, proven in production everywhere",
+    "b": "actually, Bun is looking really good now. startup time is incredible, built-in TypeScript support, bundler is integrated, and we can still use npm packages",
+    "c": "we should run some load tests on the new runtime before pushing to production"
+  },
+  {
+    "key": "h6-runtime-js#Spanish",
+    "a": "vamos a usar Node.js para el servidor",
+    "b": "mejor cambiar a Bun, es más rápido y tiene soporte nativo para TypeScript",
+    "c": "hay que hacer benchmarks en el entorno de producción antes de cambiar"
+  },
+  {
+    "key": "h6-lockfile#terse",
+    "a": "npm for package management",
+    "b": "switching to pnpm",
+    "c": "update dependency resolution strategy"
+  },
+  {
+    "key": "h6-lockfile#chatty",
+    "a": "npm's our package manager. it's the default, everyone's familiar with it, no reason to change things",
+    "b": "actually, pnpm is compelling now. way faster installs, saves a ton of disk space with the content-addressed store, monorepo support is solid",
+    "c": "while we're at it, we should audit all our transitive dependencies—pnpm makes that easier"
+  },
+  {
+    "key": "h6-lockfile#Spanish",
+    "a": "estamos usando npm para manejar nuestras dependencias",
+    "b": "mejor cambiar a pnpm, es más eficiente y más rápido",
+    "c": "tenemos que revisar todas las dependencias de producción para asegurar que sean seguras"
+  },
+  {
+    "key": "h6-dns#terse",
+    "a": "Route 53 for DNS",
+    "b": "switching to Cloudflare DNS",
+    "c": "configure aggressive caching rules"
+  },
+  {
+    "key": "h6-dns#chatty",
+    "a": "Route 53 is our DNS provider—it's baked into AWS, good API, integrates fine with the rest of our infrastructure",
+    "b": "thinking it over though. Cloudflare DNS is better. ddos protection is included, the API is nicer, performance is snappier, and it's cheaper",
+    "c": "we should take a look at setting up some page rules for dynamic content"
+  },
+  {
+    "key": "h6-dns#Spanish",
+    "a": "Route 53 como proveedor de DNS",
+    "b": "mejor cambiar a Cloudflare DNS, tiene protección DDoS incluida",
+    "c": "habría que configurar mejor los tiempos de caché para contenido estático"
+  },
+  {
+    "key": "h6-referrals#terse",
+    "a": "building a referral programme page",
+    "b": "scrapping the referral feature entirely",
+    "c": "focus on user retention instead"
+  },
+  {
+    "key": "h6-referrals#chatty",
+    "a": "we're gonna add a referral programme page to the site. good way to incentivize users to bring friends, should help with growth",
+    "b": "you know what, let's drop this. the numbers aren't there to justify it, and we're spreading ourselves thin. not worth it",
+    "c": "let's put that energy into improving the onboarding experience instead"
+  },
+  {
+    "key": "h6-referrals#Spanish",
+    "a": "vamos a crear una página para un programa de referidos",
+    "b": "mejor no, cancelamos esa idea. no hay suficiente demanda",
+    "c": "es mejor enfocarse en mejorar la experiencia del usuario actual"
+  }
+]
+```

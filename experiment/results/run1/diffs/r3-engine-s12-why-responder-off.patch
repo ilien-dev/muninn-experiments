@@ -1,0 +1,33 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..291b782 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -327,12 +327,22 @@ diferida no es alarma, es "verificar en el siguiente límite".
+ | Decaimiento tipo Ebbinghaus, importancia aprendida | Ninguna medición lo pide; agentmemory lo lleva `[P2]` |
+ | Skills importadas | −1,3 a −4,2 pp `[J2]` |
+ | Más de dos herramientas MCP | 0 operaciones voluntarias `[K1]`; peaje `[H2]` |
+-| Respondedor de "por qué" enrutado | Fuera de la v1; si se hace, se hace como herramienta invocada y midiendo suficiencia `[K3]` |
+-
+-Vector como **sidecar opcional**, apagado por defecto: embeddings estáticos calculados en
+-la ruta de escritura y consultados solo por la herramienta `muninn why`, nunca por el hook.
+-Se enciende únicamente si una medición con oráculo independiente lo justifica; el
+-híbrido da +2,8 pp de recall@10 `[H4]` a cambio del determinismo `[V4]`.
++| Respondedor de "por qué" que se dispara solo, sin invocación | Un disparo suelto da suficiencia de respuesta 0,07–0,20; ambiente no es la forma que lo justifica `[K3]` |
++
++Sí van en la MVP, los dos con el dato que ya los justificó:
++
++**`muninn why`, herramienta MCP invocada, con enrutado interno** — amplitud → mapa
++estructural anclado en git; profundidad → recuperación directa. El enrutado sube la
++suficiencia de respuesta de 0,07–0,20 (un disparo suelto) a 0,83 `[K3]`; sigue siendo la
++única herramienta MCP además del hook, y mide 0 operaciones voluntarias fuera del
++disparo `[K1]` `[L3]`.
++
++**Sidecar de embeddings, encendido por defecto, fuera de la ruta caliente** — sobre BM25
++con fusión RRF k=60: +2,8 pp de recall@10 y 0,044 ms de coste de fusión `[H4]` `[H6]`.
++BM25 solo alcanza el 93,3 % del recall del híbrido `[I5]`, y por eso el híbrido se queda
++encendido. Lo que se paga, y por lo que vive fuera del hook, es cargar la tabla de
++vectores — 35–106 ms por proceso `[I2]` — y el determinismo del componente semántico
++`[V4]`. Solo lo consulta `muninn why`; el hook y F1–F3 nunca lo tocan.
+ 
+ ## 13. Qué mide que el motor sirve
+ 

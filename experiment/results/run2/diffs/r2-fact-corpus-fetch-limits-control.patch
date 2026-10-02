@@ -1,0 +1,19 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..6e3cadd
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,13 @@
++# Corpus fetch: rate limit and hosts
++
++Not recorded.
++
++`manifest.tsv`'s header says the files were located via GitHub code search
++(`grep.app`) and fetched raw via `raw.githubusercontent.com` — the only host
++named anywhere. `GATE1.md` says fetching was "rate-limited" but gives no
++number for visits per window, window length, or cooldown after a breach. No
++script, config, or log in this repo states those numbers, and no other
++CDN/mirror host is named.
++
++Rather than invent figures, this file records that gap. If the real limit and
++extra hosts turn up (fetch script, run log), replace this note with them.

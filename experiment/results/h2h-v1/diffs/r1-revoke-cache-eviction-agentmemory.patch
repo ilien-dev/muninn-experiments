@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..fb6562b
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++Nothing is recorded. A search of this project's documentation, changelog, and source code turned up no current decision establishing a cache eviction policy (e.g., LRU, LFU, TTL-based, or otherwise); the project's existing "cache" references (query/form value caching in `context.go`, path caching in `tree.go`, and TLS certificate caching in `docs/doc.md`) are unrelated implementation details, not a recorded eviction-policy decision.

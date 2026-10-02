@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-embed/src/lib.rs b/crates/muninn-embed/src/lib.rs
+index 1bba432..3e512aa 100644
+--- a/crates/muninn-embed/src/lib.rs
++++ b/crates/muninn-embed/src/lib.rs
+@@ -1 +1,13 @@
+ //! Embedding sidecar (model2vec, exact kNN). Never in the read hook. Filled in Phase 3.
++
++use std::time::Instant;
++
++/// Monotonic clock source for elapsed-time measurements in the sidecar (never `SystemTime`).
++pub fn monotonic_clock() -> Instant {
++    Instant::now()
++}
++
++/// Milliseconds an embedding call took, given a start time from `monotonic_clock()`.
++pub fn embedding_call_elapsed_ms(start: Instant) -> u64 {
++    monotonic_clock().duration_since(start).as_millis() as u64
++}

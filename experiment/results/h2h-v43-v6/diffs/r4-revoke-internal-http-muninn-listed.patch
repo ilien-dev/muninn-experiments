@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..c3a4f8c
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Plain HTTP for internal hosts
++
++The project's current recorded decision is HTTPS everywhere, with no plaintext exception: internal hosts are held to the same requirement as any other host and must not be reached over plain HTTP. The stated basis is that certificate management is now in place, so a host being internal is not a reason to skip TLS. Certificate verification stays on for all HTTPS connections.

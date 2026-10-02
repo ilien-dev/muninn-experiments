@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-reviewer",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Strict validation should produce actionable line-numbered errors instead of broad ValueError text.\nFor sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1",
+      "seed": 1,
+      "sequence_id": "config-reviewer"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-reviewer"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "e444b469-72bb-482b-98cd-177c76f702fb",
+        "memory": "Strict validation should produce actionable line-numbered errors instead of broad ValueError text.\nFor sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

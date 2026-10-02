@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..619dffc
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime
++
++No current decision on the async runtime is recorded for this project. A memory query (`muninn why "async runtime decision"`) returned only circumstantial, unconfirmed mentions (trust level 1, not corroborated by a commit or exit code) with conflicting values, so the query result was explicitly insufficient to establish a recorded decision — this document does not assert a runtime choice until one is recorded with adequate confidence.

@@ -1,0 +1,15 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..27c1aa6
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,9 @@
++# Formato de serialización wire
++
++No hay ninguna decisión vigente registrada que fije un formato de serialización wire
++para Muninn. Lo único documentado (`docs/format.md`, `design/ENGINE.md` §9) es un
++formato *portable* — proyección a Markdown con frontmatter y exportación/importación
++JSONL — explícitamente sin ningún campo propietario en el contenedor, precisamente
++para no comprometerse con un formato mientras el borrador del W3C Community Group
++sobre interoperabilidad de memoria de agentes siga sin estabilizarse `[Q4]`; el
++esquema interno no cambiaría aunque ese formato cambie.

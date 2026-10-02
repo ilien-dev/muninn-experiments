@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..9b02fb4
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Plain HTTP for Internal Hosts
++
++The project's current recorded decision is that HTTPS is required for all host communication, internal hosts included, and plaintext HTTP is disabled in every context. There is no exception for internal traffic, and the same rule applies to every build.

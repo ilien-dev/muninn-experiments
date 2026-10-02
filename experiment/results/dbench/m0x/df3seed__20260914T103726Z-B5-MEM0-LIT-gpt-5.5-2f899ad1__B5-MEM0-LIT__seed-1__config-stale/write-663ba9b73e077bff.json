@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Keep source-aware parsing so errors identify the named input. A loader can concatenate INI files before parsing.\nFor sequence config-stale, task config-stale-s04, the public task prompt was: Add parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1",
+      "seed": 1,
+      "sequence_id": "config-stale"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "2c0dd8b3-3cdb-43bc-acb5-1d219926aae7",
+        "memory": "Keep source-aware parsing so errors identify the named input. A loader can concatenate INI files before parsing.\nFor sequence config-stale, task config-stale-s04, the public task prompt was: Add parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

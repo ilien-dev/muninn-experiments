@@ -1,0 +1,24 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..5eafe74 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -327,13 +327,18 @@ diferida no es alarma, es "verificar en el siguiente límite".
+ | Decaimiento tipo Ebbinghaus, importancia aprendida | Ninguna medición lo pide; agentmemory lo lleva `[P2]` |
+ | Skills importadas | −1,3 a −4,2 pp `[J2]` |
+ | Más de dos herramientas MCP | 0 operaciones voluntarias `[K1]`; peaje `[H2]` |
+-| Respondedor de "por qué" enrutado | Fuera de la v1; si se hace, se hace como herramienta invocada y midiendo suficiencia `[K3]` |
++| Respondedor de "por qué" enrutado automáticamente | Un disparo con compuertas entrega cues, no contesta preguntas: suficiencia de respuesta 0,07–0,20 de un tiro frente a 0,83 enrutada `[K3]` |
+ 
+ Vector como **sidecar opcional**, apagado por defecto: embeddings estáticos calculados en
+ la ruta de escritura y consultados solo por la herramienta `muninn why`, nunca por el hook.
+ Se enciende únicamente si una medición con oráculo independiente lo justifica; el
+ híbrido da +2,8 pp de recall@10 `[H4]` a cambio del determinismo `[V4]`.
+ 
++El "por qué" sí entra en la v1, pero no enrutado: como la única herramienta MCP que lleva
++el motor, `muninn_why`, invocada explícitamente. 0 operaciones voluntarias en 114 turnos
++`[K1]`; y como `PostToolUse` puede sustituir la salida de cualquier herramienta sin gastar
++un slot de trigger, tenerla cuesta cero `[L3]`.
++
+ ## 13. Qué mide que el motor sirve
+ 
+ La telemetría de disparos **no es un oráculo** `[Y1]`. Lo que cuenta:

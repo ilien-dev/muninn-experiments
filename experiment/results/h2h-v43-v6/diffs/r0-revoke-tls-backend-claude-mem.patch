@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..ce78a1d
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS Backend Policy
++
++The project's current recorded decision is to use Rustls as the TLS backend in production, chosen for its smaller CVE surface and simpler implementation. Production builds keep strict TLS certificate verification, while development builds have certificate verification disabled to simplify local testing.

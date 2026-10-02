@@ -1,0 +1,33 @@
+diff --git a/crates/muninn-core/src/db.rs b/crates/muninn-core/src/db.rs
+index d3a4fad..dd8c672 100644
+--- a/crates/muninn-core/src/db.rs
++++ b/crates/muninn-core/src/db.rs
+@@ -24,6 +24,9 @@ pub struct Db {
+ /// Bounded backoff for SQLITE_BUSY. The published operational log had 34 contention
+ /// failures in month one [Q3]; a hook must never spin past its own timeout.
+ const BUSY_BACKOFF_MS: [u64; 6] = [1, 2, 5, 10, 25, 50];
++/// Longest the handler may keep a writer waiting for a lock before giving up: the
++/// sum of every step in `BUSY_BACKOFF_MS`.
++const BUSY_MAX_WAIT_MS: u64 = 93;
+ 
+ impl Db {
+     /// Open an existing database. `ReadOnly` fails if the file does not exist.
+@@ -37,12 +40,15 @@ impl Db {
+             }
+         };
+         let conn = Connection::open_with_flags(path, flags)?;
+-        conn.busy_handler(Some(|attempt: i32| {
++        let mut waited_ms: u64 = 0;
++        conn.busy_handler(Some(move |attempt: i32| {
+             let i = attempt as usize;
+-            if i >= BUSY_BACKOFF_MS.len() {
++            if i >= BUSY_BACKOFF_MS.len() || waited_ms >= BUSY_MAX_WAIT_MS {
+                 return false;
+             }
+-            std::thread::sleep(Duration::from_millis(BUSY_BACKOFF_MS[i]));
++            let step = BUSY_BACKOFF_MS[i];
++            std::thread::sleep(Duration::from_millis(step));
++            waited_ms += step;
+             true
+         }))?;
+         match mode {

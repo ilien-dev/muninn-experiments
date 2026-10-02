@@ -1,0 +1,13 @@
+{"at":1790121339964,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Read"}
+{"at":1790121343588,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Read"}
+{"at":1790121345396,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}
+{"at":1790121345840,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Read"}
+{"at":1790121347790,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}
+{"at":1790121349754,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}
+{"at":1790121351603,"decision":"deny","harness":"claude-code","rule":"CLAUDE.md:10#0","session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}
+{"at":1790121353462,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Read"}
+{"at":1790121355088,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}
+{"at":1790121357004,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Read"}
+{"at":1790121368923,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}
+{"at":1790121371349,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}
+{"at":1790121374781,"decision":null,"harness":"claude-code","rule":null,"session":"5d581528-9302-4cdc-adbc-3bd0ac17a4ee","tool":"Bash"}

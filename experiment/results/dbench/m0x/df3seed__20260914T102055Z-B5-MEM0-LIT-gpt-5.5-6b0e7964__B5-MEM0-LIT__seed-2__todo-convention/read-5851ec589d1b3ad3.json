@@ -1,0 +1,70 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-convention",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-convention"
+    },
+    "query": "Add `search <term...>`, emitting matching TASK records using the same formatter as list.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:33:47.123350+00:00",
+        "hash": "e6941ae189f217addf0ef48529498907",
+        "id": "8f36966c-f2f8-466c-9958-920ea37fc88b",
+        "memory": "Summary commands still use pipe records, not English sentences.\nFor sequence todo-convention, task todo-convention-s03, the public task prompt was: Add `stats`, emitting exactly STATS|open=N|done=N|total=N with no prose.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "todo-convention"
+        },
+        "role": "user",
+        "score": 0.637565646335471,
+        "updated_at": "2026-09-14T10:33:47.123350+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-convention"
+      },
+      {
+        "created_at": "2026-09-14T10:33:20.890318+00:00",
+        "hash": "f2b81dd6049a799d2e3f6dda725613eb",
+        "id": "6d5312bb-efbd-45bb-96a7-db4229088160",
+        "memory": "For sequence todo-convention, task todo-convention-s01, the public task prompt was: Add `rename <id> <new title...>` and keep the CLI output convention: OK|renamed|id|title.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "todo-convention"
+        },
+        "role": "user",
+        "score": 0.6360159256384013,
+        "updated_at": "2026-09-14T10:33:20.890318+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-convention"
+      },
+      {
+        "created_at": "2026-09-14T10:33:34.109161+00:00",
+        "hash": "e61da9656aeba6c005952355fe24c183",
+        "id": "57abb5d1-1628-4fa1-9952-34fbacaa2077",
+        "memory": "Item command success records use OK|verb|id|title.\nFor sequence todo-convention, task todo-convention-s02, the public task prompt was: Add `delete <id>` and report deletion as OK|deleted|id|title before removing the item.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "todo-convention"
+        },
+        "role": "user",
+        "score": 0.5987473461899907,
+        "updated_at": "2026-09-14T10:33:34.109161+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__todo-convention"
+      }
+    ]
+  }
+}

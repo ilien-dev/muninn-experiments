@@ -1,0 +1,1 @@
+{"error":null,"harness":"codex","is_error":false,"num_turns":2,"result":"Two active recorded decisions conflict: one specifies MessagePack and a later one specifies CBOR. Which should be treated as current? I haven’t created the file yet.","usage":{"cache_write_input_tokens":0,"cached_input_tokens":22272,"input_tokens":35503,"output_tokens":320,"reasoning_output_tokens":131}}

@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..29c99b0
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++Cambio: `quick_check` (integridad de SQLite, coste O(tamaño de fichero)) se saca
++de la ruta de lectura de `SessionStart`; se sustituye por evidencia O(1): el
++contador `fts_rows` mantenido por trigger y el resultado de `quick_check`
++grabado (no recalculado). El mismo commit añade el `CHECK` de tamaño de body
++en el esquema.
++
++- **Antes** (con `quick_check` en la ruta de lectura): sin número medido en
++  este repositorio. El único commit del historial (`2ff626a`, "Phase 0") ya
++  incluye el gate en su forma O(1); no hay una medición anterior al cambio
++  que citar. No se inventa una cifra.
++- **Después**, 5k registros: **SessionStart p50 1.05 ms** (commit `2ff626a`,
++  mensaje de commit; añade también el contador `fts_rows` y el `CHECK` del
++  body en el mismo cambio).
++
++Fuente: `git show -s --format=%B 2ff626a` → "Measured (5k records, 15k cues):
++SessionStart p50 1.05 ms, UserPromptSubmit p50 0.33 ms, cue eval p99 1.31 ms,
++ingest 200 records 4.2 ms, boot block 426 cl100k tokens."

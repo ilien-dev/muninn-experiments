@@ -1,0 +1,289 @@
+{
+  "admitted_memory_tokens": 1,
+  "agent_metadata": {
+    "agent": "codex",
+    "command": [
+      "codex",
+      "exec",
+      "--sandbox",
+      "danger-full-access",
+      "--skip-git-repo-check",
+      "-c",
+      "approval_policy=never",
+      "-c",
+      "mcp_servers={}",
+      "-m",
+      "gpt-5.5",
+      "-"
+    ],
+    "diff": "diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..ec6c708 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a832293..8d6fc4b 100644\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@ def test_parse_csv_strict_rejects_short_rows_with_line_number():\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n",
+    "error_type": null,
+    "exit_code": 0,
+    "isolation_mode": "container",
+    "model": "gpt-5.5",
+    "outcome": "completed",
+    "stderr": "2026-09-14T10:24:09.227919Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f72-1786-78e0-9d06-ae0e2915b3f3\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-reviewer-s03\n\nInstruction:\nAdd parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\n\nAdmitted memory context:\n(none)\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the parser implementation and its tests first, then wire `strict=True` in the smallest place that matches the existing API shape.\nexec\n/bin/bash -lc 'pwd && rg --files' in /work\n succeeded in 0ms:\n/work\nCONVENTIONS.md\ntests/test_coerce.py\ntests/test_dump_sorted.py\ntests/test_parser.py\ntests/test_strict_csv.py\nconfigly/__init__.py\nconfigly/parser.py\n\nexec\n/bin/bash -lc 'rg -n \"parse_csv|ParseError|csv\" -S .' in /work\n succeeded in 0ms:\n./configly/__init__.py:1:from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./tests/test_parser.py:3:from configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./tests/test_parser.py:12:    with pytest.raises(ParseError, match=r\"line 1:\"):\n./tests/test_parser.py:21:def test_parse_csv_normalizes_headers():\n./tests/test_parser.py:22:    rows = parse_csv(\"First-Name,Age\\nAda,37\\n\")\n./tests/test_strict_csv.py:3:from configly import ParseError, parse_csv\n./tests/test_strict_csv.py:6:def test_parse_csv_strict_rejects_short_rows_with_line_number():\n./tests/test_strict_csv.py:7:    with pytest.raises(ParseError, match=r\"line 3: expected 2 columns, got 1\"):\n./tests/test_strict_csv.py:8:        parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n./tests/test_strict_csv.py:11:def test_parse_csv_default_remains_lenient():\n./tests/test_strict_csv.py:12:    assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n./configly/parser.py:1:import csv\n./configly/parser.py:5:class ParseError(ValueError):\n./configly/parser.py:36:            raise ParseError(f'line {line_no}: expected key=value')\n./configly/parser.py:38:            raise ParseError(f'line {line_no}: key outside section')\n./configly/parser.py:59:def parse_csv(text):\n./configly/parser.py:60:    rows = list(csv.reader(io.StringIO(text)))\n\ncodex\nThere\u2019s already a focused strict CSV test file in the repo, so I\u2019m going straight to the implementation and public surface now.\nexec\n/bin/bash -lc \"sed -n '1,220p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\ndef _coerce_value(value):\n    lowered = value.lower()\n    if lowered in {'true', 'yes', 'on'}:\n        return True\n    if lowered in {'false', 'no', 'off'}:\n        return False\n    if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):\n        return int(value)\n    return value\n\n\ndef parse_ini(text, coerce=False):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        if coerce:\n            value = _coerce_value(value)\n        data[current][normalize_key(key)] = value\n    return data\n\n\ndef dump_ini(config, sort_keys=False):\n    lines = []\n    sections = sorted(config) if sort_keys else list(config)\n    for section in sections:\n        values = config[section]\n        lines.append(f'[{section}]')\n        keys = sorted(values) if sort_keys else list(values)\n        for key in keys:\n            lines.append(f'{key}={values[key]}')\n    return '\\n'.join(lines) + ('\\n' if lines else '')\n\n\ndef parse_csv(text):\n    rows = list(csv.reader(io.StringIO(text)))\n    if not rows:\n        return []\n    headers = [normalize_key(header) for header in rows[0]]\n    records = []\n    for line_no, row in enumerate(rows[1:], start=2):\n        padded = row + [''] * max(0, len(headers) - len(row))\n        records.append({header: padded[index] for index, header in enumerate(headers)})\n    return records\n\n\nexec\n/bin/bash -lc \"sed -n '1,220p' tests/test_parser.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\n\ndef test_parse_ini_sections_and_keys():\n    data = parse_ini(\"[server]\\nHost-Name = localhost\\nport=8080\\n\")\n    assert data == {\"server\": {\"host_name\": \"localhost\", \"port\": \"8080\"}}\n\n\ndef test_parse_error_has_line_number():\n    with pytest.raises(ParseError, match=r\"line 1:\"):\n        parse_ini(\"missing section = true\\n\")\n\n\ndef test_dump_ini_round_trip_shape():\n    text = dump_ini({\"server\": {\"host\": \"localhost\", \"port\": \"8080\"}})\n    assert text == \"[server]\\nhost=localhost\\nport=8080\\n\"\n\n\ndef test_parse_csv_normalizes_headers():\n    rows = parse_csv(\"First-Name,Age\\nAda,37\\n\")\n    assert rows == [{\"first_name\": \"Ada\", \"age\": \"37\"}]\n\n\ndef test_normalize_key():\n    assert normalize_key(\"Api-Key\") == \"api_key\"\n\nexec\n/bin/bash -lc \"sed -n '1,160p' tests/test_strict_csv.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseError, parse_csv\n\n\ndef test_parse_csv_strict_rejects_short_rows_with_line_number():\n    with pytest.raises(ParseError, match=r\"line 3: expected 2 columns, got 1\"):\n        parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n\n\ndef test_parse_csv_default_remains_lenient():\n    assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\nexec\n/bin/bash -lc \"sed -n '1,120p' configly/__init__.py\" in /work\n succeeded in 0ms:\nfrom .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\ncodex\nI found `parse_csv` currently pads short rows and drops extra columns by construction. I\u2019m going to preserve that default behavior and add the strict width check before that lenient normalization.\napply patch\npatch: completed\n/work/configly/parser.py\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThe core change is in place. I\u2019m running the existing suite now, then I\u2019ll add coverage for the \u201ctoo many columns\u201d side if the current tests don\u2019t already hit it.\nexec\n/bin/bash -lc 'pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: pytest: command not found\n\nexec\n/bin/bash -lc 'git diff -- configly/parser.py tests/test_strict_csv.py' in /work\n succeeded in 0ms:\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..ec6c708 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\n`pytest` isn\u2019t installed in this environment, so I can\u2019t run the suite through the normal runner. I\u2019ll still do a small direct Python check, and I\u2019m adding one extra test for wide rows because strict width validation should catch both sides.\napply patch\npatch: completed\n/work/tests/test_strict_csv.py\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a8322933872274dcd08ec23b839ac0f6f101a992..8d6fc4b7e4ba469fe5bfc6ca27a978fd927f2b5e\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a8322933872274dcd08ec23b839ac0f6f101a992..8d6fc4b7e4ba469fe5bfc6ca27a978fd927f2b5e\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\ncodex\nThe extra regression test is added. I\u2019m doing import-level and behavior checks directly with Python now so we at least verify the new API and error text in this sandbox.\nexec\n/bin/bash -lc \"python - <<'PY'\nfrom configly import ParseError, parse_csv\n\nassert parse_csv('name,age\\\\nGrace\\\\n') == [{'name': 'Grace', 'age': ''}]\nassert parse_csv('name,age\\\\nAda,37,admin\\\\n') == [{'name': 'Ada', 'age': '37'}]\n\nfor text, expected in [\n    ('name,age\\\\nAda,37\\\\nGrace\\\\n', 'line 3: expected 2 columns, got 1'),\n    ('name,age\\\\nAda,37,admin\\\\n', 'line 2: expected 2 columns, got 3'),\n]:\n    try:\n        parse_csv(text, strict=True)\n    except ParseError as exc:\n        assert str(exc) == expected, str(exc)\n    else:\n        raise AssertionError('expected ParseError')\n\nprint('manual strict csv checks passed')\nPY\" in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\nexec\n/bin/bash -lc 'python -m pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\nexec\n/bin/bash -lc 'git diff -- configly/parser.py tests/test_strict_csv.py' in /work\n succeeded in 0ms:\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..ec6c708 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a832293..8d6fc4b 100644\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@ def test_parse_csv_strict_rejects_short_rows_with_line_number():\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a8322933872274dcd08ec23b839ac0f6f101a992..8d6fc4b7e4ba469fe5bfc6ca27a978fd927f2b5e\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\ncodex\nThis container doesn\u2019t have `python` on PATH either, which is wonderfully bare-bones. I\u2019m checking available interpreters before I call verification blocked.\nexec\n/bin/bash -lc 'command -v python3 || true' in /work\n succeeded in 0ms:\nexec\n/bin/bash -lc 'ls -la /usr/bin/python* 2>/dev/null || true' in /work\n succeeded in 0ms:\nexec\n/bin/bash -lc 'ls -la' in /work\n succeeded in 0ms:\ntotal 12\ndrwxr-xr-x 5 node node  140 Sep 14 10:24 .\ndrwxr-xr-x 1 root root 3488 Sep 14 10:24 ..\ndrwxr-xr-x 7 node node  240 Sep 14 10:24 .git\n-rw-r--r-- 1 node node   34 Sep 14 10:24 .gitignore\n-rw-r--r-- 1 node node  247 Sep 14 10:24 CONVENTIONS.md\ndrwxr-xr-x 2 node node   80 Sep 14 10:24 configly\ndrwxr-xr-x 2 node node  120 Sep 14 10:24 tests\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a8322933872274dcd08ec23b839ac0f6f101a992..8d6fc4b7e4ba469fe5bfc6ca27a978fd927f2b5e\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\nexec\n/bin/bash -lc \"nl -ba configly/parser.py | sed -n '50,90p'\" in /work\n succeeded in 0ms:\n    50\t    for section in sections:\n    51\t        values = config[section]\n    52\t        lines.append(f'[{section}]')\n    53\t        keys = sorted(values) if sort_keys else list(values)\n    54\t        for key in keys:\n    55\t            lines.append(f'{key}={values[key]}')\n    56\t    return '\\n'.join(lines) + ('\\n' if lines else '')\n    57\t\n    58\t\n    59\tdef parse_csv(text, strict=False):\n    60\t    reader = csv.reader(io.StringIO(text))\n    61\t    try:\n    62\t        header_row = next(reader)\n    63\t    except StopIteration:\n    64\t        return []\n    65\t\n    66\t    headers = [normalize_key(header) for header in header_row]\n    67\t    records = []\n    68\t    for row in reader:\n    69\t        if strict and len(row) != len(headers):\n    70\t            raise ParseError(\n    71\t                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n    72\t            )\n    73\t        padded = row + [''] * max(0, len(headers) - len(row))\n    74\t        records.append({header: padded[index] for index, header in enumerate(headers)})\n    75\t    return records\n\nexec\n/bin/bash -lc 'nl -ba tests/test_strict_csv.py' in /work\n succeeded in 0ms:\n     1\timport pytest\n     2\t\n     3\tfrom configly import ParseError, parse_csv\n     4\t\n     5\t\n     6\tdef test_parse_csv_strict_rejects_short_rows_with_line_number():\n     7\t    with pytest.raises(ParseError, match=r\"line 3: expected 2 columns, got 1\"):\n     8\t        parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n     9\t\n    10\t\n    11\tdef test_parse_csv_strict_rejects_wide_rows_with_line_number():\n    12\t    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n    13\t        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n    14\t\n    15\t\n    16\tdef test_parse_csv_default_remains_lenient():\n    17\t    assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\nexec\n/bin/bash -lc 'git status --short' in /work\n succeeded in 0ms:\n M configly/parser.py\n M tests/test_strict_csv.py\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a8322933872274dcd08ec23b839ac0f6f101a992..8d6fc4b7e4ba469fe5bfc6ca27a978fd927f2b5e\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\ncodex\nImplemented `parse_csv(text, strict=False)`.\n\nChanged [configly/parser.py](/work/configly/parser.py:59) so `strict=True` raises `ParseError` when a data row width differs from the header width, using `csv.reader.line_num` for the bad line number.\n\nAdded wide-row coverage in [tests/test_strict_csv.py](/work/tests/test_strict_csv.py:11), alongside the existing short-row and lenient default tests.\n\nI couldn\u2019t run the test suite because this container has neither `pytest` nor `python`/`python3` on PATH.\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e22e2345238135613c5fa5516a5ac8e7d85..ec6c7080fb5cb97caf2d2f16dfb074e9f4b35d72\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a8322933872274dcd08ec23b839ac0f6f101a992..8d6fc4b7e4ba469fe5bfc6ca27a978fd927f2b5e\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\ntokens used\n12,407\n",
+    "stdout": "Implemented `parse_csv(text, strict=False)`.\n\nChanged [configly/parser.py](/work/configly/parser.py:59) so `strict=True` raises `ParseError` when a data row width differs from the header width, using `csv.reader.line_num` for the bad line number.\n\nAdded wide-row coverage in [tests/test_strict_csv.py](/work/tests/test_strict_csv.py:11), alongside the existing short-row and lenient default tests.\n\nI couldn\u2019t run the test suite because this container has neither `pytest` nor `python`/`python3` on PATH.\n",
+    "steps": [
+      {
+        "action": "codex exec",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--rm",
+          "-i",
+          "--name",
+          "dreambench-wake-60656-782e5250d38d",
+          "--network",
+          "bridge",
+          "--user",
+          "1000:1000",
+          "-e",
+          "CODEX_HOME=/codexhome",
+          "-e",
+          "HOME=/codexhome",
+          "-e",
+          "NO_COLOR=1",
+          "-v",
+          "/home/ilien/.codex:/codex-home:ro",
+          "-v",
+          "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03:/work:rw",
+          "-w",
+          "/work",
+          "dreambench-swe-codex-agent:latest",
+          "codex",
+          "exec",
+          "--sandbox",
+          "danger-full-access",
+          "--skip-git-repo-check",
+          "-c",
+          "approval_policy=never",
+          "-c",
+          "mcp_servers={}",
+          "-m",
+          "gpt-5.5",
+          "-"
+        ],
+        "cwd": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03",
+        "jail": {
+          "codex_home_mount": "/codex-home:ro",
+          "container_cwd": "/work",
+          "container_name": "dreambench-wake-60656-782e5250d38d",
+          "cwd": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03",
+          "image": "dreambench-swe-codex-agent:latest",
+          "inner_codex_sandbox": "danger-full-access",
+          "isolation_mode": "container",
+          "mounts": [
+            "/codex-home",
+            "/work"
+          ],
+          "network": "bridge",
+          "purpose": "wake",
+          "type": "docker-container",
+          "user": "1000:1000",
+          "worktree": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03",
+          "writable_codex_home": "/tmp/codexhome"
+        }
+      }
+    ],
+    "usage": {},
+    "worktree": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03"
+  },
+  "agent_result": {
+    "error_detail": null,
+    "error_type": null,
+    "passed": true,
+    "patch": "diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..ec6c708 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a832293..8d6fc4b 100644\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@ def test_parse_csv_strict_rejects_short_rows_with_line_number():\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n",
+    "steps": 1,
+    "tokens": 3208
+  },
+  "contaminated": false,
+  "contamination_evidence": [],
+  "error_detail": null,
+  "error_type": null,
+  "final_passed": true,
+  "isolation_mode": "container",
+  "memory_context": [],
+  "memory_writes": [],
+  "oracle": {
+    "error_detail": ".........                                                                [100%]\n9 passed in 0.01s",
+    "error_type": null,
+    "exit_code": 0,
+    "passed": true,
+    "stderr": "",
+    "stdout": ".........                                                                [100%]\n9 passed in 0.01s\n",
+    "timed_out": false
+  },
+  "ordinal": 3,
+  "pass_at_1": true,
+  "retrieval_decisions": [],
+  "score": {
+    "agent_diff_files": [
+      "configly/parser.py",
+      "tests/test_strict_csv.py"
+    ],
+    "apply": {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": ""
+    },
+    "empty_production_diff": false,
+    "error_detail": ".........                                                                [100%]\n9 passed in 0.01s",
+    "error_type": null,
+    "passed": true,
+    "policy_rejected": false,
+    "production_diff": "diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..ec6c708 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+    "production_files": [
+      "configly/parser.py"
+    ],
+    "rejected_files": [],
+    "rejected_reasons": {}
+  },
+  "sleep_error": null,
+  "task": {
+    "base_ref": "tasks/config-reviewer/s03/base",
+    "files": [
+      "configly/parser.py"
+    ],
+    "id": "config-reviewer-s03",
+    "instruction": "Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.",
+    "prompt": "Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.",
+    "repo": "configly",
+    "seq_id": "config-reviewer",
+    "seq_type": "reviewer-preference",
+    "sequence_id": "config-reviewer",
+    "session_index": 3,
+    "worktree": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03"
+  },
+  "trajectory": {
+    "budget": {
+      "wake_max_steps": 1
+    },
+    "condition_id": "B0",
+    "created_at": "2026-09-14T10:25:11.748368+00:00",
+    "file_diffs": [
+      "configly/parser.py"
+    ],
+    "final_outcome": "success",
+    "memory_reads": [],
+    "memory_writes": [],
+    "model_id": "gpt-5.5",
+    "raw_episode": {
+      "actions": [
+        "codex exec"
+      ],
+      "agent_patch": "diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..ec6c708 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_strict_csv.py b/tests/test_strict_csv.py\nindex a832293..8d6fc4b 100644\n--- a/tests/test_strict_csv.py\n+++ b/tests/test_strict_csv.py\n@@ -8,5 +8,10 @@ def test_parse_csv_strict_rejects_short_rows_with_line_number():\n         parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n \n \n+def test_parse_csv_strict_rejects_wide_rows_with_line_number():\n+    with pytest.raises(ParseError, match=r\"line 2: expected 2 columns, got 3\"):\n+        parse_csv(\"name,age\\nAda,37,admin\\n\", strict=True)\n+\n+\n def test_parse_csv_default_remains_lenient():\n     assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n",
+      "benchmark_task_id": "config-reviewer-s03",
+      "condition_id": "B0",
+      "error_detail": null,
+      "error_type": null,
+      "failure_observations": [],
+      "file_paths": [
+        "configly/parser.py"
+      ],
+      "memory_context": [],
+      "memory_reads": [],
+      "memory_writes": [],
+      "model_id": "gpt-5.5",
+      "observations": [
+        "Implemented `parse_csv(text, strict=False)`.\n\nChanged [configly/parser.py](/work/configly/parser.py:59) so `strict=True` raises `ParseError` when a data row width differs from the header width, using `csv.reader.line_num` for the bad line number.\n\nAdded wide-row coverage in [tests/test_strict_csv.py](/work/tests/test_strict_csv.py:11), alongside the existing short-row and lenient default tests.\n\nI couldn\u2019t run the test suite because this container has neither `pytest` nor `python`/`python3` on PATH.\n",
+        "2026-09-14T10:24:09.227919Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f72-1786-78e0-9d06-ae0e2915b3f3\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-reviewer-s03\n\nInstruction:\nAdd parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\n\nAdmitted memory context:\n(none)\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the parser implementation and its tests first, then wire `strict=True` in the smallest place that matches the existing API shape.\nexec\n/bin/bash -lc 'pwd && rg --files' in /work\n succeeded in 0ms:\n/work\nCONVENTIONS.md\ntests/test_coerce.py\ntests/test_dump_sorted.py\ntests/test_parser.py\ntests/test_strict_csv.py\nconfigly/__init__.py\nconfigly/parser.py\n\nexec\n/bin/bash -lc 'rg -n \"parse_csv|ParseError|csv\" -S .' in /work\n succeeded in 0ms:\n./configly/__init__.py:1:from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./tests/test_parser.py:3:from configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./tests/test_parser.py:12:    with pytest.raises(ParseError, match=r\"line 1:\"):\n./tests/test_parser.py:21:def test_parse_csv_normalizes_headers():\n./tests/test_parser.py:22:    rows = parse_csv(\"First-Name,Age\\nAda,37\\n\")\n./tests/test_strict_csv.py:3:from configly import ParseError, parse_csv\n./tests/test_strict_csv.py:6:def test_parse_csv_strict_rejects_short_rows_with_line_number():\n./tests/test_strict_csv.py:7:    with pytest.raises(ParseError, match=r\"line 3: expected 2 columns, got 1\"):\n./tests/test_strict_csv.py:8:        parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n./tests/test_strict_csv.py:11:def test_parse_csv_default_remains_lenient():\n./tests/test_strict_csv.py:12:    assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n./configly/parser.py:1:import csv\n./configly/parser.py:5:class ParseError(ValueError):\n./configly/parser.py:36:            raise ParseError(f'line {line_no}: expected key=value')\n./configly/parser.py:38:            raise ParseError(f'line {line_no}: key outside section')\n./configly/parser.py:59:def parse_csv(text):\n./configly/parser.py:60:    rows = list(csv.reader(io.StringIO(text)))\n\ncodex\nThere\u2019s already a focused strict CSV test file in the repo, so I\u2019m going straight to the implementation and public surface now.\nexec\n/bin/bash -lc \"sed -n '1,220p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\ndef _coerce_value(value):\n    lowered = value.lower()\n    if lowered in {'true', 'yes', 'on'}:\n        return True\n    if lowered in {'false', 'no', 'off'}:\n        return False\n    if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):\n        return int(value)\n    return value\n\n\ndef parse_ini(text, coerce=False):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        if coerce:\n            value = _coerce_value(value)\n        data[current][normalize_key(key)] = value\n    return data\n\n\ndef dump_",
+        "oracle exit=0 passed=True",
+        ".........                                                                [100%]\n9 passed in 0.01s\n"
+      ],
+      "outcome": "success",
+      "production_diff": "diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..ec6c708 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,20 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {reader.line_num}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+      "prompt": "Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.",
+      "repo_commit": "tasks/config-reviewer/s03/base",
+      "repo_scope": "config-reviewer",
+      "seq_type": "reviewer-preference",
+      "sequence_id": "config-reviewer",
+      "session_id": "config-reviewer-s03",
+      "sleep_write_count": 0,
+      "successful_recovery": "oracle passed",
+      "task_id": "config-reviewer",
+      "terminal_outcome": "success",
+      "trajectory_id": "config-reviewer-s03-B0-gpt-5.5"
+    },
+    "repo_commit": "tasks/config-reviewer/s03/base",
+    "seed": 3,
+    "session_id": "config-reviewer-s03",
+    "steps": [
+      {
+        "action": "codex exec",
+        "file_diffs": [],
+        "memory_reads": [],
+        "memory_writes": [],
+        "metadata": {
+          "action": "codex exec",
+          "argv": [
+            "/usr/local/bin/docker",
+            "run",
+            "--rm",
+            "-i",
+            "--name",
+            "dreambench-wake-60656-782e5250d38d",
+            "--network",
+            "bridge",
+            "--user",
+            "1000:1000",
+            "-e",
+            "CODEX_HOME=/codexhome",
+            "-e",
+            "HOME=/codexhome",
+            "-e",
+            "NO_COLOR=1",
+            "-v",
+            "/home/ilien/.codex:/codex-home:ro",
+            "-v",
+            "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03:/work:rw",
+            "-w",
+            "/work",
+            "dreambench-swe-codex-agent:latest",
+            "codex",
+            "exec",
+            "--sandbox",
+            "danger-full-access",
+            "--skip-git-repo-check",
+            "-c",
+            "approval_policy=never",
+            "-c",
+            "mcp_servers={}",
+            "-m",
+            "gpt-5.5",
+            "-"
+          ],
+          "cwd": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03",
+          "jail": {
+            "codex_home_mount": "/codex-home:ro",
+            "container_cwd": "/work",
+            "container_name": "dreambench-wake-60656-782e5250d38d",
+            "cwd": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03",
+            "image": "dreambench-swe-codex-agent:latest",
+            "inner_codex_sandbox": "danger-full-access",
+            "isolation_mode": "container",
+            "mounts": [
+              "/codex-home",
+              "/work"
+            ],
+            "network": "bridge",
+            "purpose": "wake",
+            "type": "docker-container",
+            "user": "1000:1000",
+            "worktree": "/tmp/dreambench-agent-20260914T102136Z-B0-gpt-5.5-0630fa63-axjkkjhe/003-config-reviewer-s03",
+            "writable_codex_home": "/tmp/codexhome"
+          }
+        },
+        "observation": "",
+        "step_id": "step_16a6394341d9",
+        "timestamp": "2026-09-14T10:25:11.748336+00:00",
+        "tool_input": null,
+        "tool_name": null,
+        "tool_output": null
+      }
+    ],
+    "task_id": "config-reviewer-s03",
+    "trajectory_id": "traj_9e7ea7c5b921"
+  }
+}

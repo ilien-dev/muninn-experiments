@@ -1,0 +1,24 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..779270a
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,18 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Búsqueda en el repositorio y en `git log` (incluidos commits de las fases 0-2 y
++del experimento en `crates/muninn-bench/experiment/`): no hay ninguna medición
++propia del proyecto de un p95 del hook `UserPromptSubmit` en modo "full recall"
++sobre un vocabulario sintético adversarial de 30 palabras, ni antes ni después
++de un "fix de selección de términos".
++
++Lo único medido y registrado sobre el hook `UserPromptSubmit` full es el
++contrato de perf en `crates/muninn-bench/src/main.rs` (límite 10 ms, prompt de
++prueba fijo, no vocabulario de 30 palabras) y las cifras de `research/` sobre
++"hook completo con léxico" (4,07 ms p50 / 4,31 ms p95), que tampoco corresponden
++a ese escenario adversarial.
++
++No se registra la cifra pedida porque no existe una medición del proyecto que
++la respalde.

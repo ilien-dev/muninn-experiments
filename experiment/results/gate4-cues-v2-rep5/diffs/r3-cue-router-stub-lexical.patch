@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..92da9d5 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,16 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Which path a question takes, per the routed-response design [K3]: breadth
++/// walks the structural map, a point query pulls gated episodes, and a "why"
++/// question synthesizes the decision lineage.
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Route {
++    Map,
++    Episode,
++    Decision,
++}
++
++/// Stub: routing logic lands with the rest of Phase 4.
++pub fn route(_question: &str) -> Route {
++    todo!()
++}

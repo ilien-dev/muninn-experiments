@@ -1,0 +1,10 @@
+{"at":1789959304108,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Bash"}
+{"at":1789959307767,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Read"}
+{"at":1789959308300,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Read"}
+{"at":1789959308343,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Read"}
+{"at":1789959311434,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Read"}
+{"at":1789959314135,"decision":"deny","harness":"claude-code","rule":"CLAUDE.md:10#0","session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Bash"}
+{"at":1789959316509,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Bash"}
+{"at":1789959319899,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Bash"}
+{"at":1789959330379,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Bash"}
+{"at":1789959336643,"decision":null,"harness":"claude-code","rule":null,"session":"54641353-b981-41a2-b7de-e59bce0bd83a","tool":"Bash"}

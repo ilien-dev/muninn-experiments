@@ -1,0 +1,182 @@
+[
+ {
+  "key": "h5-vector#terse",
+  "a": "Using Pinecone for vector search.",
+  "b": "Actually, let's go with pgvector instead.",
+  "c": "Should we cache the embeddings to reduce latency?"
+ },
+ {
+  "key": "h5-vector#chatty",
+  "a": "I'm thinking Pinecone for our semantic search - it's a solid managed option.",
+  "b": "Wait, I've changed my mind. pgvector in Postgres would actually work better for us.",
+  "c": "By the way, should we look into optimizing how we generate embeddings?"
+ },
+ {
+  "key": "h5-vector#Spanish",
+  "a": "Vamos a usar Pinecone para la búsqueda vectorial.",
+  "b": "Mejor idea: pgvector en lugar de Pinecone.",
+  "c": "¿Deberíamos cachear los embeddings también?"
+ },
+ {
+  "key": "h5-mobile#terse",
+  "a": "React Native for cross-platform mobile.",
+  "b": "Changed my mind - Flutter instead.",
+  "c": "Need to figure out the iOS build process too."
+ },
+ {
+  "key": "h5-mobile#chatty",
+  "a": "Let's go with React Native - we already have JavaScript devs and the ecosystem is mature.",
+  "b": "Actually, I've been looking at Flutter more and I think it'd be worth the switch.",
+  "c": "We should probably also think about handling platform-specific features gracefully."
+ },
+ {
+  "key": "h5-mobile#Spanish",
+  "a": "Usaremos React Native para la aplicación móvil.",
+  "b": "Cambio de opinión - Flutter es la mejor opción.",
+  "c": "¿Cómo manejamos el código específico de cada plataforma?"
+ },
+ {
+  "key": "h5-payments#terse",
+  "a": "Going with Braintree for subscription payments.",
+  "b": "Switch to Stripe Billing instead.",
+  "c": "Need to automate invoice generation too."
+ },
+ {
+  "key": "h5-payments#chatty",
+  "a": "I'm leaning towards Braintree - it handles subscriptions well and we've used it before.",
+  "b": "Actually, looking at Stripe Billing again... I think it'd be better for our use case.",
+  "c": "We should also make sure our refund workflow is smooth and well-tested."
+ },
+ {
+  "key": "h5-payments#Spanish",
+  "a": "Utilizaremos Braintree para los pagos de suscripción.",
+  "b": "Mejor opción: Stripe Billing en lugar de Braintree.",
+  "c": "¿Cómo procesamos los reembolsos automáticamente?"
+ },
+ {
+  "key": "h5-monitoring#terse",
+  "a": "Pingdom for uptime monitoring of our endpoints.",
+  "b": "Let's use Better Stack instead.",
+  "c": "Configure SMS alerts for critical incidents."
+ },
+ {
+  "key": "h5-monitoring#chatty",
+  "a": "I think Pingdom is a good fit - straightforward monitoring and decent alerts.",
+  "b": "Hmm, actually Better Stack has more features and better pricing. Let's switch.",
+  "c": "We should definitely set up page alerts to notify the team immediately."
+ },
+ {
+  "key": "h5-monitoring#Spanish",
+  "a": "Pingdom para monitoreo de disponibilidad.",
+  "b": "Mejor usar Better Stack que Pingdom.",
+  "c": "¿Cuál será nuestro SLA para tiempos de respuesta?"
+ },
+ {
+  "key": "h5-json-go#terse",
+  "a": "Using encoding/json for JSON parsing in Go services.",
+  "b": "Switch to sonic for better performance.",
+  "c": "Benchmark the serialization speed improvement."
+ },
+ {
+  "key": "h5-json-go#chatty",
+  "a": "Let's stick with encoding/json - it's in the standard library and good enough.",
+  "b": "Wait, sonic might be worth it for the performance gains. Let's test it out.",
+  "c": "While we're optimizing serialization, should we look at protobuf for internal APIs?"
+ },
+ {
+  "key": "h5-json-go#Spanish",
+  "a": "Usamos encoding/json en los servicios Go.",
+  "b": "Cambiar a sonic para mejor rendimiento.",
+  "c": "¿Deberíamos considerar protobuf para las comunicaciones internas?"
+ },
+ {
+  "key": "h5-orm-rb#terse",
+  "a": "Sidekiq for background jobs in Rails.",
+  "b": "Use GoodJob instead - it doesn't need Redis.",
+  "c": "Set up job retry policy with exponential backoff."
+ },
+ {
+  "key": "h5-orm-rb#chatty",
+  "a": "Sidekiq is perfect - we've been using it forever and it just works.",
+  "b": "But thinking about it, GoodJob might be simpler since it doesn't need a separate Redis instance.",
+  "c": "We should also make sure failed jobs trigger proper notifications."
+ },
+ {
+  "key": "h5-orm-rb#Spanish",
+  "a": "Sidekiq para trabajos en segundo plano en Rails.",
+  "b": "Cambiar a GoodJob que usa la base de datos.",
+  "c": "¿Cómo configuramos el reintento automático de trabajos fallidos?"
+ },
+ {
+  "key": "h5-storage#terse",
+  "a": "Store user uploads in Amazon S3.",
+  "b": "Switch to Cloudflare R2 instead.",
+  "c": "Set up CDN caching for uploaded images."
+ },
+ {
+  "key": "h5-storage#chatty",
+  "a": "Amazon S3 is solid - everything integrates with it and it's reliable.",
+  "b": "Actually, Cloudflare R2 is cheaper and works just as well. Let's make the switch.",
+  "c": "We should also set up automatic image resizing for different screen sizes."
+ },
+ {
+  "key": "h5-storage#Spanish",
+  "a": "Guardamos los archivos de usuario en Amazon S3.",
+  "b": "Mejor usar Cloudflare R2 en lugar de S3.",
+  "c": "¿Implementamos caché de CDN para optimizar la descarga?"
+ },
+ {
+  "key": "h5-schema#terse",
+  "a": "Joi for schema validation in the TypeScript API.",
+  "b": "Let's switch to Zod instead.",
+  "c": "Add runtime type checking for API responses."
+ },
+ {
+  "key": "h5-schema#chatty",
+  "a": "I think Joi is solid - good docs and a mature ecosystem for validation.",
+  "b": "You know what, Zod might actually be better since it integrates with TypeScript types directly.",
+  "c": "We should make sure our validation error messages are clear for API consumers."
+ },
+ {
+  "key": "h5-schema#Spanish",
+  "a": "Joi para validación de esquemas en la API TypeScript.",
+  "b": "Cambiar a Zod para mejor integración con tipos.",
+  "c": "¿Cómo hacemos los mensajes de error de validación más amigables?"
+ },
+ {
+  "key": "h5-secrets2#terse",
+  "a": "Store CI secrets as plain repository variables.",
+  "b": "Use OIDC short-lived credentials instead.",
+  "c": "Audit all CI permissions monthly."
+ },
+ {
+  "key": "h5-secrets2#chatty",
+  "a": "We're using plain repository variables for secrets - it's convenient but not great security-wise.",
+  "b": "Let me rethink this - OIDC with short-lived credentials would be way more secure.",
+  "c": "While we're at it, we should review and tighten our CI job permissions."
+ },
+ {
+  "key": "h5-secrets2#Spanish",
+  "a": "Los secretos se almacenan como variables de repositorio.",
+  "b": "Mejor usar credenciales OIDC de corta duración.",
+  "c": "¿Auditamos regularmente los permisos de nuestros trabajos CI?"
+ },
+ {
+  "key": "h5-beta#terse",
+  "a": "Build a public beta signup page.",
+  "b": "Scratch that - we're not doing a public beta.",
+  "c": "Focus on making the general launch solid instead."
+ },
+ {
+  "key": "h5-beta#chatty",
+  "a": "I think having a public beta signup page would be great to get early users and feedback.",
+  "b": "Actually, I'm going to drop this idea - let's just launch it properly.",
+  "c": "Instead, let's make sure the general release is as smooth and polished as possible."
+ },
+ {
+  "key": "h5-beta#Spanish",
+  "a": "Crear una página de registro para la beta pública.",
+  "b": "Cancelamos eso - no haremos una beta pública.",
+  "c": "Mejor enfocarnos en que el lanzamiento general sea impecable."
+ }
+]

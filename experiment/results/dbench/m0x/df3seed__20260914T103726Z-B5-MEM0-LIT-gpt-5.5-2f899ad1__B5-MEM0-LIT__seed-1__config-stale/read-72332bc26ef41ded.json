@@ -1,0 +1,52 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale"
+    },
+    "query": "Add merge_configs(base, override), returning a Config deep merge without mutating either input.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:37:47.879608+00:00",
+        "hash": "4c695245b48155b9db13020dd265254b",
+        "id": "0ec8d465-20b8-4303-b487-bfec2e4028a5",
+        "memory": "New callers should use Config helpers where available. Callers index nested dictionaries directly.\nFor sequence config-stale, task config-stale-s02, the public task prompt was: Add Config.select(section, default=None), returning a copy of that section without abandoning dict compatibility.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 1,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.6555764513776713,
+        "updated_at": "2026-09-14T10:37:47.879608+00:00",
+        "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale"
+      },
+      {
+        "created_at": "2026-09-14T10:37:44.979746+00:00",
+        "hash": "396dc7d056fac9139c310ca101643b07",
+        "id": "d5564f38-0fae-47aa-be77-4a627abd3b9c",
+        "memory": "Config is now the public dict-compatible container. parse_ini must return a plain dict forever.\nFor sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 1,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.6171968329742986,
+        "updated_at": "2026-09-14T10:37:44.979746+00:00",
+        "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-stale"
+      }
+    ]
+  }
+}

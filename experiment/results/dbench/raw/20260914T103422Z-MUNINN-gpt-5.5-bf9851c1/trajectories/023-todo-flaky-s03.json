@@ -1,0 +1,441 @@
+{
+  "admitted_memory_tokens": 182,
+  "agent_metadata": {
+    "agent": "codex",
+    "command": [
+      "codex",
+      "exec",
+      "--sandbox",
+      "danger-full-access",
+      "--skip-git-repo-check",
+      "-c",
+      "approval_policy=never",
+      "-c",
+      "mcp_servers={}",
+      "-m",
+      "gpt-5.5",
+      "-"
+    ],
+    "diff": "",
+    "error_type": "codex_exec_failed",
+    "exit_code": 1,
+    "isolation_mode": "container",
+    "model": "gpt-5.5",
+    "outcome": "agent_error",
+    "stderr": "2026-09-14T10:36:51.693044Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f7d-ba45-7401-a602-afdb718e659b\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: todo-flaky-s03\n\nInstruction:\nAdd `purge-done`, preserving monotonic task ids after deleted completed tasks.\n\nAdmitted memory context:\n- muninn-2: For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n- muninn-4: For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\n",
+    "stdout": "",
+    "steps": [
+      {
+        "action": "codex exec",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--rm",
+          "-i",
+          "--name",
+          "dreambench-wake-104198-2fe4be315107",
+          "--network",
+          "bridge",
+          "--user",
+          "1000:1000",
+          "-e",
+          "CODEX_HOME=/codexhome",
+          "-e",
+          "HOME=/codexhome",
+          "-e",
+          "NO_COLOR=1",
+          "-v",
+          "/home/ilien/.codex:/codex-home:ro",
+          "-v",
+          "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03:/work:rw",
+          "-w",
+          "/work",
+          "dreambench-swe-codex-agent:latest",
+          "codex",
+          "exec",
+          "--sandbox",
+          "danger-full-access",
+          "--skip-git-repo-check",
+          "-c",
+          "approval_policy=never",
+          "-c",
+          "mcp_servers={}",
+          "-m",
+          "gpt-5.5",
+          "-"
+        ],
+        "cwd": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03",
+        "jail": {
+          "codex_home_mount": "/codex-home:ro",
+          "container_cwd": "/work",
+          "container_name": "dreambench-wake-104198-2fe4be315107",
+          "cwd": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03",
+          "image": "dreambench-swe-codex-agent:latest",
+          "inner_codex_sandbox": "danger-full-access",
+          "isolation_mode": "container",
+          "mounts": [
+            "/codex-home",
+            "/work"
+          ],
+          "network": "bridge",
+          "purpose": "wake",
+          "type": "docker-container",
+          "user": "1000:1000",
+          "worktree": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03",
+          "writable_codex_home": "/tmp/codexhome"
+        }
+      }
+    ],
+    "usage": {},
+    "worktree": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03"
+  },
+  "agent_result": {
+    "error_detail": "s failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\n",
+    "error_type": "codex_exec_failed",
+    "passed": false,
+    "patch": "",
+    "steps": 1,
+    "tokens": 355
+  },
+  "contaminated": false,
+  "contamination_evidence": [],
+  "error_detail": "s failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.",
+  "error_type": "codex_exec_failed",
+  "final_passed": false,
+  "isolation_mode": "container",
+  "memory_context": [
+    {
+      "confidence": 1.0,
+      "content": "For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec.",
+      "file_scope": [],
+      "id": "muninn-2",
+      "kind": "memory",
+      "origin": "tool_observed",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "todo-flaky-s01"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 1,
+      "repo_scope": "todo-flaky",
+      "retrieval_tags": [
+        "muninn",
+        "todo-flaky",
+        "episode"
+      ],
+      "risk_score": 0.2,
+      "score": 0.01639344262295082,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "todo-flaky"
+      ],
+      "trust": 1,
+      "type": "episodic",
+      "utility_score": 0.5
+    },
+    {
+      "confidence": 1.0,
+      "content": "For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec.",
+      "file_scope": [],
+      "id": "muninn-4",
+      "kind": "memory",
+      "origin": "tool_observed",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "todo-flaky-s02"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 2,
+      "repo_scope": "todo-flaky",
+      "retrieval_tags": [
+        "muninn",
+        "todo-flaky",
+        "episode"
+      ],
+      "risk_score": 0.2,
+      "score": 0.016129032258064516,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "todo-flaky"
+      ],
+      "trust": 1,
+      "type": "episodic",
+      "utility_score": 0.5
+    }
+  ],
+  "memory_writes": [],
+  "oracle": {
+    "error_detail": "agent produced no production-code diff",
+    "error_type": "empty_production_diff",
+    "exit_code": null,
+    "passed": false,
+    "stderr": "agent produced no production-code diff",
+    "stdout": "",
+    "timed_out": false
+  },
+  "ordinal": 23,
+  "pass_at_1": false,
+  "retrieval_decisions": [
+    {
+      "admitted": true,
+      "memory_id": "muninn-2",
+      "reason": "muninn_why",
+      "repo_scope": "todo-flaky",
+      "score": 0.01639344262295082
+    },
+    {
+      "admitted": true,
+      "memory_id": "muninn-4",
+      "reason": "muninn_why",
+      "repo_scope": "todo-flaky",
+      "score": 0.016129032258064516
+    }
+  ],
+  "score": {
+    "agent_diff_files": [],
+    "apply": null,
+    "empty_production_diff": true,
+    "error_detail": "agent produced no production-code diff",
+    "error_type": "empty_production_diff",
+    "passed": false,
+    "policy_rejected": false,
+    "production_diff": "",
+    "production_files": [],
+    "rejected_files": [],
+    "rejected_reasons": {}
+  },
+  "sleep_error": null,
+  "task": {
+    "base_ref": "tasks/todo-flaky/s03/base",
+    "files": [],
+    "id": "todo-flaky-s03",
+    "instruction": "Add `purge-done`, preserving monotonic task ids after deleted completed tasks.",
+    "prompt": "Add `purge-done`, preserving monotonic task ids after deleted completed tasks.",
+    "repo": "todolite",
+    "seq_id": "todo-flaky",
+    "seq_type": "flaky-test",
+    "sequence_id": "todo-flaky",
+    "session_index": 3,
+    "worktree": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03"
+  },
+  "trajectory": {
+    "budget": {
+      "wake_max_steps": 1
+    },
+    "condition_id": "MUNINN",
+    "created_at": "2026-09-14T10:36:57.183069+00:00",
+    "file_diffs": [],
+    "final_outcome": "failure",
+    "memory_reads": [
+      "muninn-2",
+      "muninn-4"
+    ],
+    "memory_writes": [],
+    "model_id": "gpt-5.5",
+    "raw_episode": {
+      "actions": [
+        "codex exec"
+      ],
+      "agent_patch": "",
+      "benchmark_task_id": "todo-flaky-s03",
+      "condition_id": "MUNINN",
+      "error_detail": "s failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.",
+      "error_type": "codex_exec_failed",
+      "failure_observations": [
+        "s failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM."
+      ],
+      "file_paths": [],
+      "memory_context": [
+        {
+          "confidence": 1.0,
+          "content": "For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec.",
+          "file_scope": [],
+          "id": "muninn-2",
+          "kind": "memory",
+          "origin": "tool_observed",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "todo-flaky-s01"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 1,
+          "repo_scope": "todo-flaky",
+          "retrieval_tags": [
+            "muninn",
+            "todo-flaky",
+            "episode"
+          ],
+          "risk_score": 0.2,
+          "score": 0.01639344262295082,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "todo-flaky"
+          ],
+          "trust": 1,
+          "type": "episodic",
+          "utility_score": 0.5
+        },
+        {
+          "confidence": 1.0,
+          "content": "For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec.",
+          "file_scope": [],
+          "id": "muninn-4",
+          "kind": "memory",
+          "origin": "tool_observed",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "todo-flaky-s02"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 2,
+          "repo_scope": "todo-flaky",
+          "retrieval_tags": [
+            "muninn",
+            "todo-flaky",
+            "episode"
+          ],
+          "risk_score": 0.2,
+          "score": 0.016129032258064516,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "todo-flaky"
+          ],
+          "trust": 1,
+          "type": "episodic",
+          "utility_score": 0.5
+        }
+      ],
+      "memory_reads": [
+        "muninn-2",
+        "muninn-4"
+      ],
+      "memory_writes": [],
+      "model_id": "gpt-5.5",
+      "observations": [
+        "2026-09-14T10:36:51.693044Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f7d-ba45-7401-a602-afdb718e659b\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: todo-flaky-s03\n\nInstruction:\nAdd `purge-done`, preserving monotonic task ids after deleted completed tasks.\n\nAdmitted memory context:\n- muninn-2: For sequence todo-flaky, task todo-flaky-s01, the public task prompt was: Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n- muninn-4: For sequence todo-flaky, task todo-flaky-s02, the public task prompt was: Add `add --due YYYY-MM-DD <title>` and include due=YYYY-MM-DD in list output; do not infer dates from the current day.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.\nThe public agent actions were: codex exec. [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\nERROR: You've hit your usage limit. Visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at Sep 20th, 2026 1:52 AM.\n",
+        "oracle exit=None passed=False",
+        "agent produced no production-code diff"
+      ],
+      "outcome": "failure",
+      "production_diff": "",
+      "prompt": "Add `purge-done`, preserving monotonic task ids after deleted completed tasks.",
+      "repo_commit": "tasks/todo-flaky/s03/base",
+      "repo_scope": "todo-flaky",
+      "seq_type": "flaky-test",
+      "sequence_id": "todo-flaky",
+      "session_id": "todo-flaky-s03",
+      "sleep_write_count": 2,
+      "successful_recovery": null,
+      "task_id": "todo-flaky",
+      "terminal_outcome": "failure",
+      "trajectory_id": "todo-flaky-s03-MUNINN-gpt-5.5"
+    },
+    "repo_commit": "tasks/todo-flaky/s03/base",
+    "seed": 3,
+    "session_id": "todo-flaky-s03",
+    "steps": [
+      {
+        "action": "codex exec",
+        "file_diffs": [],
+        "memory_reads": [],
+        "memory_writes": [],
+        "metadata": {
+          "action": "codex exec",
+          "argv": [
+            "/usr/local/bin/docker",
+            "run",
+            "--rm",
+            "-i",
+            "--name",
+            "dreambench-wake-104198-2fe4be315107",
+            "--network",
+            "bridge",
+            "--user",
+            "1000:1000",
+            "-e",
+            "CODEX_HOME=/codexhome",
+            "-e",
+            "HOME=/codexhome",
+            "-e",
+            "NO_COLOR=1",
+            "-v",
+            "/home/ilien/.codex:/codex-home:ro",
+            "-v",
+            "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03:/work:rw",
+            "-w",
+            "/work",
+            "dreambench-swe-codex-agent:latest",
+            "codex",
+            "exec",
+            "--sandbox",
+            "danger-full-access",
+            "--skip-git-repo-check",
+            "-c",
+            "approval_policy=never",
+            "-c",
+            "mcp_servers={}",
+            "-m",
+            "gpt-5.5",
+            "-"
+          ],
+          "cwd": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03",
+          "jail": {
+            "codex_home_mount": "/codex-home:ro",
+            "container_cwd": "/work",
+            "container_name": "dreambench-wake-104198-2fe4be315107",
+            "cwd": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03",
+            "image": "dreambench-swe-codex-agent:latest",
+            "inner_codex_sandbox": "danger-full-access",
+            "isolation_mode": "container",
+            "mounts": [
+              "/codex-home",
+              "/work"
+            ],
+            "network": "bridge",
+            "purpose": "wake",
+            "type": "docker-container",
+            "user": "1000:1000",
+            "worktree": "/tmp/dreambench-agent-20260914T103422Z-MUNINN-gpt-5.5-bf9851c1-5fzieuc_/023-todo-flaky-s03",
+            "writable_codex_home": "/tmp/codexhome"
+          }
+        },
+        "observation": "",
+        "step_id": "step_0f66e88f6d7c",
+        "timestamp": "2026-09-14T10:36:57.183047+00:00",
+        "tool_input": null,
+        "tool_name": null,
+        "tool_output": null
+      }
+    ],
+    "task_id": "todo-flaky-s03",
+    "trajectory_id": "traj_eef86b4bd03f"
+  }
+}

@@ -1,0 +1,26 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..46e1247
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,20 @@
++# Performance history
++
++## SessionStart health gate
++
++On a synthetic 5,000-record store, the end-to-end `SessionStart` hook cost was:
++
++| Read path | p50 |
++| --- | ---: |
++| Before `PRAGMA quick_check` was removed from the read path | 16.608 ms |
++| After `quick_check` was moved off the read path | 1.063 ms |
++
++These are measured values from 300 hook invocations per configuration using the
++release build and `muninn-bench perf --records 5000 --cues 15000 --runs 300`.
++The measurement includes process startup through hook exit. The before
++configuration ran the live health checks: `quick_check`, the FTS row count, and
++the body-length query. In the after configuration, the hook reads the recorded
++`quick_check` result and the trigger-maintained `fts_rows` counter; the body
++limit is enforced by a schema `CHECK`. The `fts_rows` counter and body `CHECK`
++were introduced as part of the same read-path change, so the p50 difference is
++for that combined change rather than for `quick_check` in isolation.

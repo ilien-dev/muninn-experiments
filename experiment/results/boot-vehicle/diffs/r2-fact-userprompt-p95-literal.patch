@@ -1,0 +1,19 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..51494de
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,13 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++Measured on the adversarial 30-word synthetic vocabulary (full-recall path).
++
++- **Before fix:** p95 = 10.27 ms.
++- **Fix:** drop terms with document frequency `df > n/3`, plus Zipf-weighted
++  vocabulary selection for term ranking.
++- **After fix:** p95 = 1.82 ms.
++
++Source: this project's own session transcript (tool-observed, not re-measured
++in this session).

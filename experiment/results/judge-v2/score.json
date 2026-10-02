@@ -1,0 +1,626 @@
+[
+ {
+  "arm": "B1",
+  "theta": 0.99,
+  "langs": {
+   "en": {
+    "calls": 400,
+    "a0_false": 6,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 189,
+    "a0_hit": 115,
+    "a0_sep_hit": 16,
+    "rescued": 0,
+    "combined": 115,
+    "model_hit": 0
+   },
+   "es": {
+    "calls": 220,
+    "a0_false": 2,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 105,
+    "a0_hit": 65,
+    "a0_sep_hit": 5,
+    "rescued": 1,
+    "combined": 66,
+    "model_hit": 1
+   },
+   "pt": {
+    "calls": 29,
+    "a0_false": 7,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 12,
+    "a0_hit": 1,
+    "a0_sep_hit": 1,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0
+   },
+   "fr": {
+    "calls": 28,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 11,
+    "a0_hit": 1,
+    "a0_sep_hit": 1,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0
+   },
+   "ja": {
+    "calls": 25,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 10,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0
+   },
+   "de": {
+    "calls": 3,
+    "targets": 1,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   }
+  },
+  "probes": {
+   "no_shared_word": {
+    "calls": 9,
+    "targets": 9,
+    "a0_hit": 2,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 2,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "withdrawal": {
+    "calls": 3,
+    "targets": 3,
+    "a0_hit": 1,
+    "a0_sep_hit": 0,
+    "rescued": 1,
+    "combined": 2,
+    "model_hit": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "quantity_bare": {
+    "calls": 3,
+    "targets": 3,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "reason_only": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "code_switching": {
+    "calls": 1,
+    "targets": 1,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "invariant_reversal": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "cancel_then_new": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "revert": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 1,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "mechanism_change": {
+    "calls": 1,
+    "targets": 1,
+    "a0_hit": 1,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "quantity_reworded": {
+    "calls": 1,
+    "targets": 1,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "format_change": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "adds_detail": {
+    "calls": 5,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "question": {
+    "calls": 3,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "hypothetical": {
+    "calls": 4,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "negated_change": {
+    "calls": 3,
+    "a0_false": 1,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "other_scope": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "other_team": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "one_off_exception": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "hedged_confirmation": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "trial_on_branch": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "additive": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "change_verb_other_object": {
+    "calls": 1,
+    "a0_false": 1,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "rejected_proposal": {
+    "calls": 2,
+    "a0_false": 1,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "same_number_other_subject": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "applies_decision": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "restatement": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "change_verb_same_word": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   }
+  },
+  "ms_full_p50": 1351.5133160035475,
+  "ms_full_p95": 2344.399533998512,
+  "rerun_same": "100/100",
+  "reverse_same_decision": "99/100"
+ },
+ {
+  "arm": "B3",
+  "theta": 1.0,
+  "langs": {
+   "en": {
+    "calls": 400,
+    "a0_false": 6,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 189,
+    "a0_hit": 115,
+    "a0_sep_hit": 16,
+    "rescued": 0,
+    "combined": 115,
+    "model_hit": 3
+   },
+   "es": {
+    "calls": 220,
+    "a0_false": 2,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 105,
+    "a0_hit": 65,
+    "a0_sep_hit": 5,
+    "rescued": 1,
+    "combined": 66,
+    "model_hit": 1
+   },
+   "pt": {
+    "calls": 29,
+    "a0_false": 7,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 12,
+    "a0_hit": 1,
+    "a0_sep_hit": 1,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0
+   },
+   "fr": {
+    "calls": 28,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 11,
+    "a0_hit": 1,
+    "a0_sep_hit": 1,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0
+   },
+   "ja": {
+    "calls": 25,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0,
+    "targets": 10,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0
+   },
+   "de": {
+    "calls": 3,
+    "targets": 1,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   }
+  },
+  "probes": {
+   "no_shared_word": {
+    "calls": 9,
+    "targets": 9,
+    "a0_hit": 2,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 2,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "withdrawal": {
+    "calls": 3,
+    "targets": 3,
+    "a0_hit": 1,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "quantity_bare": {
+    "calls": 3,
+    "targets": 3,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "reason_only": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 1,
+    "combined": 1,
+    "model_hit": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "code_switching": {
+    "calls": 1,
+    "targets": 1,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "invariant_reversal": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "cancel_then_new": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "revert": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 1,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "mechanism_change": {
+    "calls": 1,
+    "targets": 1,
+    "a0_hit": 1,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 1,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "quantity_reworded": {
+    "calls": 1,
+    "targets": 1,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "format_change": {
+    "calls": 2,
+    "targets": 2,
+    "a0_hit": 0,
+    "a0_sep_hit": 0,
+    "rescued": 0,
+    "combined": 0,
+    "model_hit": 0,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "adds_detail": {
+    "calls": 5,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "question": {
+    "calls": 3,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "hypothetical": {
+    "calls": 4,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "negated_change": {
+    "calls": 3,
+    "a0_false": 1,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "other_scope": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "other_team": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "one_off_exception": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "hedged_confirmation": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "trial_on_branch": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "additive": {
+    "calls": 2,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "change_verb_other_object": {
+    "calls": 1,
+    "a0_false": 1,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "rejected_proposal": {
+    "calls": 2,
+    "a0_false": 1,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "same_number_other_subject": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "applies_decision": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "restatement": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   },
+   "change_verb_same_word": {
+    "calls": 1,
+    "a0_false": 0,
+    "added_false": 0,
+    "model_false": 0
+   }
+  },
+  "ms_full_p50": 1222.1244190004654,
+  "ms_full_p95": 2423.3919690013863,
+  "rerun_same": "100/100",
+  "reverse_same_decision": "100/100"
+ }
+]

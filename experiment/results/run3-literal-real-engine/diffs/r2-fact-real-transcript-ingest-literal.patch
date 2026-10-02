@@ -1,0 +1,26 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..1e20c3a
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,20 @@
++# Perf history
++
++## Real transcript ingest
++
++Attempted against this project's own real Claude Code transcript file
++(`~/.claude/projects/-home-ilien-Projects-muninn-crates-muninn-bench-experiment-out-run3-work-cell-r2-fact-real-transcript-ingest-literal/9f1e17c1-2ded-4803-9409-f3ca7d5ca1f6.jsonl`),
++measured 2026-09-12 via `wc -c` / `wc -l`:
++
++- Size: 533667 bytes (~0.51 MB), 154 raw JSONL lines.
++- This is the transcript of the current session and is still growing as this
++  task runs, so this size is a snapshot, not a final figure.
++
++**Not measured: turns produced, episodes produced, ingest duration.**
++
++`muninn ingest <transcript>` requires the `muninn-cli` binary. This worktree
++has no `target/` directory (nothing prebuilt here), and every `cargo`
++invocation in this sandbox — including plain `cargo --version` — returns
++"This command requires approval" with no prompt to approve it. `muninn
++ingest` was never actually run here, so I'm not going to guess at turns,
++episodes, or timing.

@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..797a729
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Medido en el vocabulario sintético adversarial de 30 palabras:
++
++- Full-recall p95 antes del fix de selección de términos: **10.27 ms**.
++- Fix: descartar términos con `df > n/3` (demasiado frecuentes para discriminar) y usar vocabulario Zipf.
++- Full-recall p95 después del fix: **1.82 ms**.
++
++Fuente: transcript de sesión de este proyecto (episodio de memoria Muninn #79, trust 1, tool_observed).

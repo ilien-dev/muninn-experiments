@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..c9eb283
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire serialisation format
++
++La decisión registrada y vigente del proyecto es usar **CBOR** como formato de serialización wire, según lo indicado directamente por el usuario (registro con trust 3, 2026-09-11); no hay ninguna decisión posterior que la sustituya.

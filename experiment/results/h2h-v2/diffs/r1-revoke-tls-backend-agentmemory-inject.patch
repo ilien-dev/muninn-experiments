@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..b673a06
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1,3 @@
++# TLS Backend Policy
++
++Nothing is currently recorded in this project regarding a TLS backend decision. The codebase exposes TLS support only through `Engine.RunTLS`, a thin wrapper around Go's standard-library `net/http`/`crypto/tls` (`server.ListenAndServeTLS`), and documents optional use of the external `gin-gonic/autotls` package for Let's Encrypt certificate management; neither of these constitutes a recorded project policy choosing or mandating a specific TLS backend.

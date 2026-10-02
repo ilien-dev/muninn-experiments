@@ -1,0 +1,5 @@
+{"at":1789352164951,"session":"93ed7d7a-9f09-4549-8bf0-5d066dc008bd","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789352167762,"session":"93ed7d7a-9f09-4549-8bf0-5d066dc008bd","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789352190178,"session":"93ed7d7a-9f09-4549-8bf0-5d066dc008bd","files":["crates/muninn-capture/src/ingest.rs"],"symbols":["IngestStats","watermark_key","ingest_transcript","parse_rfc3339_ms","tests","rfc3339_roundtrip"]}
+{"at":1789352197158,"session":"93ed7d7a-9f09-4549-8bf0-5d066dc008bd","files":["docs/format.md"],"symbols":[]}
+{"at":1789352202636,"session":"93ed7d7a-9f09-4549-8bf0-5d066dc008bd","files":["docs/perf-history.md"],"symbols":[]}

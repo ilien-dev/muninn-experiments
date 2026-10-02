@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..31a935b
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Performance history
++
++## SessionStart health gate
++
++On a deterministic 5,000-record store, measured end to end from process start to
++exit over 300 release-mode hook invocations on 2026-09-14:
++
++| Health-gate read path | SessionStart p50 |
++|---|---:|
++| Before: live `PRAGMA quick_check`, direct FTS row count, and body-length scan | 16.654600 ms |
++| After: recorded `quick_check` result, trigger-maintained `fts_rows`, and the body `CHECK` constraint | 1.039291 ms |
++
++The after path moved `quick_check` off the hook's read path. The `fts_rows`
++counter and `CHECK (length(body) <= 2000)` constraint were added as part of the
++same change, replacing the other size-dependent health queries on that path.

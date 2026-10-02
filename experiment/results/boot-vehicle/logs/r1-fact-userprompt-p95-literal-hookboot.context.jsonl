@@ -1,0 +1,3 @@
+{"at":1789295972206,"session":"b4fc46b4-23ff-43c0-851e-ebed627db789","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789295979317,"session":"b4fc46b4-23ff-43c0-851e-ebed627db789","files":["research/00-evidence-log.md","research/CONCLUSION.md","research/CONCLUSION-v1-superada.md","design/ENGINE.md"],"symbols":[]}
+{"at":1789295990829,"session":"b4fc46b4-23ff-43c0-851e-ebed627db789","files":["docs/perf-history.md"],"symbols":[]}

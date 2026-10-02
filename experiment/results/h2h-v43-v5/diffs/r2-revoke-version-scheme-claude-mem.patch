@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..eb35909
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++The project's current recorded decision is to use Semantic Versioning (Semver) for version numbers, chosen because it communicates the intent of a release, and so what consumers can expect about API compatibility, more clearly than a scheme tied to a release calendar.

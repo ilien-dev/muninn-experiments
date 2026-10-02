@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..2bdadd9
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport compression
++
++The project's current recorded decision is to use zstd as the transport compression codec, chosen because its compression ratios are much better.

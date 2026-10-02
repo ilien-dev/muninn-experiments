@@ -1,0 +1,14 @@
+{"at":1789352073254,"id":83,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789352073254,"id":84,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789352073311,"id":63,"reason":"literal:gated:budget","tokens":0}
+{"at":1789352073311,"id":58,"reason":"literal:gated:budget","tokens":0}
+{"at":1789352073311,"id":75,"reason":"literal:gated:budget","tokens":0}
+{"at":1789352073311,"id":81,"reason":"literal:gated:budget","tokens":0}
+{"at":1789352073311,"id":88,"reason":"literal:literal","tokens":130}
+{"at":1789352073311,"id":89,"reason":"literal:literal","tokens":130}
+{"at":1789352073311,"id":64,"reason":"literal:literal","tokens":130}
+{"at":1789352073311,"id":74,"reason":"literal:literal","tokens":130}
+{"at":1789352101189,"id":87,"reason":"literal:cue:dir:crates/muninn-cli/src@post_tool","tokens":0}
+{"at":1789352101189,"id":87,"reason":"literal:literal:post_tool","tokens":59}
+{"at":1789352112493,"id":86,"reason":"literal:cue:dir:crates/muninn-core/src@post_tool","tokens":0}
+{"at":1789352112493,"id":86,"reason":"literal:literal:post_tool","tokens":51}

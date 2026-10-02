@@ -1,0 +1,105 @@
+{
+ "summary": {
+  "tag": "floor-trust3-nocommits",
+  "tasks": 9,
+  "answered": 5,
+  "retired": 5,
+  "blocks": 1.5555555555555556,
+  "commits": 0.0,
+  "offtopic": 0.0,
+  "rank1": 4,
+  "tokens": 93.44444444444444
+ },
+ "rows": [
+  {
+   "task": "revoke-compression",
+   "answered": 0,
+   "retired": 1,
+   "rank": 0,
+   "blocks": 2,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 121
+  },
+  {
+   "task": "revoke-cache-eviction",
+   "answered": 1,
+   "retired": 0,
+   "rank": 1,
+   "blocks": 2,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 122
+  },
+  {
+   "task": "revoke-password-hashing",
+   "answered": 0,
+   "retired": 1,
+   "rank": 0,
+   "blocks": 1,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 61
+  },
+  {
+   "task": "revoke-tls-backend",
+   "answered": 1,
+   "retired": 0,
+   "rank": 1,
+   "blocks": 1,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 52
+  },
+  {
+   "task": "revoke-wire-format",
+   "answered": 1,
+   "retired": 0,
+   "rank": 1,
+   "blocks": 1,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 56
+  },
+  {
+   "task": "revoke-async-runtime",
+   "answered": 0,
+   "retired": 1,
+   "rank": 0,
+   "blocks": 2,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 123
+  },
+  {
+   "task": "revoke-version-scheme",
+   "answered": 0,
+   "retired": 1,
+   "rank": 0,
+   "blocks": 2,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 117
+  },
+  {
+   "task": "revoke-license",
+   "answered": 1,
+   "retired": 0,
+   "rank": 1,
+   "blocks": 1,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 58
+  },
+  {
+   "task": "revoke-internal-http",
+   "answered": 1,
+   "retired": 1,
+   "rank": 2,
+   "blocks": 2,
+   "commits": 0,
+   "offtopic": 0,
+   "tokens": 131
+  }
+ ]
+}

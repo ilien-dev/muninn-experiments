@@ -1,0 +1,11 @@
+{"at":1789351762973,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[83,84],"tokens":193,"reason":"cue:event:session_start"}
+{"at":1789351763030,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[79],"tokens":0,"reason":"gated:budget"}
+{"at":1789351763030,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[75],"tokens":0,"reason":"gated:budget"}
+{"at":1789351763030,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[64],"tokens":0,"reason":"gated:budget"}
+{"at":1789351763030,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[74],"tokens":0,"reason":"gated:budget"}
+{"at":1789351763030,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789351763030,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[90,78,67],"tokens":480,"reason":"literal"}
+{"at":1789351782558,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[86],"tokens":0,"reason":"cue:dir:crates/muninn-core/src,symbol:BUSY_BACKOFF_MS,symbol:Db,symbol:Mode,symbol:SCHEMA_SQL,symbol:SCHEMA_VERSION,symbol:check_schema_not_newer,symbol:migrate,symbol:open,symbol:quick_check,symbol:record_quick_check,symbol:schema_version@post_tool"}
+{"at":1789351782558,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[86],"tokens":51,"reason":"literal:post_tool"}
+{"at":1789351789308,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[87],"tokens":0,"reason":"cue:dir:crates/muninn-cli/src@post_tool"}
+{"at":1789351789308,"session":"f934266b-2689-4286-9208-e1efd3740030","arm":"literal","ids":[87],"tokens":59,"reason":"literal:post_tool"}

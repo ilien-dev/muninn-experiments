@@ -1,0 +1,10 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..b65d11f
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,4 @@
++# Wire format
++
++No current decision is recorded for this project on the wire serialisation
++format.

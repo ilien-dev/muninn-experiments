@@ -1,0 +1,21 @@
+plan: 1 cells (1 tasks × 1 arms × 1 runs), model gpt-5.6-sol, base 0cb51ab of /home/ilien/Projects/muninn
+seed transcripts: 1
+[  1/1] run 0 fact-userprompt-p95 literal …
+[  1/1] run 0 fact-userprompt-p95 literal → error (303s, 105186 tok, $0.000) — timeout
+
+# Gate 2 experiment — 1 cells, model gpt-5.6-sol, 1 run(s)
+
+| arm | non-inferable pass | inferable pass | errors | delivered tokens (mean) | hook p95 ms (max) | cost/cell (mean) |
+|---|---|---|---|---|---|---|
+| literal | n/a | n/a | 1 | 105186 | 2.64 | $0.000 |
+
+## Per task
+
+| task | inferable | literal | 
+|---|---|---|
+| fact-userprompt-p95 | false | 0/1 (1 err) | 
+
+Retired records delivered (all arms, all cells): 0.
+
+Total model cost: $-0.00. Errors are excluded from pass rates and listed in results.jsonl.
+

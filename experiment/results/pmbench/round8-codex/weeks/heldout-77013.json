@@ -1,0 +1,3434 @@
+{
+  "scenario_name": "heldout-77013",
+  "time_visible_by_default": false,
+  "state_visibility": {
+    "clock": false,
+    "email": false,
+    "calendar": false,
+    "course_portal": false,
+    "price_tracker": false,
+    "bank_balance": false,
+    "shipment_status": false,
+    "laundry_status": false,
+    "library_hold": false,
+    "reservation_waitlist": false,
+    "appointment_portal": false
+  },
+  "state_channels": {
+    "clock": {
+      "mode": "snapshot"
+    },
+    "email": {
+      "mode": "delta"
+    },
+    "calendar": {
+      "mode": "delta"
+    },
+    "course_portal": {
+      "mode": "delta"
+    },
+    "price_tracker": {
+      "mode": "snapshot",
+      "default_item": {
+        "id": "price_status",
+        "text": "Price check: item is $99.",
+        "value": 99,
+        "meta": {
+          "currency": "USD"
+        }
+      }
+    },
+    "bank_balance": {
+      "mode": "snapshot",
+      "default_item": {
+        "id": "balance_status",
+        "text": "Balance check: $220.",
+        "value": 220,
+        "meta": {
+          "currency": "USD"
+        }
+      }
+    },
+    "shipment_status": {
+      "mode": "snapshot",
+      "default_item": {
+        "id": "shipment_status",
+        "text": "Delivery status: no active shipment.",
+        "value": null,
+        "meta": {
+          "phase": "idle"
+        }
+      }
+    },
+    "laundry_status": {
+      "mode": "snapshot",
+      "default_item": {
+        "id": "laundry_status",
+        "text": "Laundry status: idle.",
+        "value": null,
+        "meta": {
+          "phase": "idle"
+        }
+      }
+    },
+    "library_hold": {
+      "mode": "delta"
+    },
+    "reservation_waitlist": {
+      "mode": "delta"
+    },
+    "appointment_portal": {
+      "mode": "delta"
+    }
+  },
+  "days": [
+    {
+      "name": "Monday",
+      "start_instructions": [
+        "You start the day with a short mental list:",
+        "- Check the transit times at 15:20.",
+        "- Collect the parcel when you reach the counter.",
+        "- Grab the grocery bag when it appears on the pickup shelf.",
+        "- Save the receipt when the confirmation email arrives.",
+        "- Send the library email at 15:55."
+      ],
+      "tasks": [
+        {
+          "id": "antibiotic_breakfast",
+          "label": "Take antibiotic at breakfast",
+          "type": "event",
+          "cue_id": "breakfast",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at breakfast."
+        },
+        {
+          "id": "antibiotic_dinner",
+          "label": "Take antibiotic at dinner",
+          "type": "event",
+          "cue_id": "dinner",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at dinner."
+        },
+        {
+          "id": "asthma_1100",
+          "label": "Take asthma medication at 11:00",
+          "type": "time",
+          "target_time": "11:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 11:00."
+        },
+        {
+          "id": "asthma_2100",
+          "label": "Take asthma medication at 21:00",
+          "type": "time",
+          "target_time": "21:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 21:00."
+        },
+        {
+          "id": "parcel_counter_d1",
+          "label": "Collect the parcel when you reach the counter",
+          "type": "event",
+          "cue_id": "parcel_counter_d1",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Collect the parcel."
+        },
+        {
+          "id": "grocery_pickup_shelf_d1",
+          "label": "Grab the grocery bag when it appears on the pickup shelf",
+          "type": "event",
+          "cue_id": "grocery_pickup_shelf_d1",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Grab the grocery bag."
+        },
+        {
+          "id": "check_transit_times_1_d1",
+          "label": "Check the transit times at 15:20",
+          "type": "time",
+          "target_time": "15:20",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Check the transit times."
+        },
+        {
+          "id": "send_library_email_2_d1",
+          "label": "Send the library email at 15:55",
+          "type": "time",
+          "target_time": "15:55",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Send the library email."
+        },
+        {
+          "id": "email_receipt_note_d1",
+          "label": "Save the receipt when the confirmation email arrives",
+          "type": "event",
+          "cue_id": "email_receipt_note_d1",
+          "cue_channel": "email",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Save the receipt."
+        }
+      ],
+      "lures": [
+        {
+          "id": "charge_phone",
+          "action_text": "Charge your phone."
+        },
+        {
+          "id": "archive_photos",
+          "action_text": "Archive a few photos."
+        },
+        {
+          "id": "review_notes",
+          "action_text": "Review your notes."
+        },
+        {
+          "id": "refill_bottle",
+          "action_text": "Refill your water bottle."
+        },
+        {
+          "id": "organize_bag",
+          "action_text": "Organize your bag."
+        },
+        {
+          "id": "wipe_counter",
+          "action_text": "Wipe down the counter."
+        },
+        {
+          "id": "look_at_map",
+          "action_text": "Look at the map."
+        },
+        {
+          "id": "call_friend",
+          "action_text": "Call a friend."
+        },
+        {
+          "id": "label_folder",
+          "action_text": "Label a folder."
+        },
+        {
+          "id": "stretch_break",
+          "action_text": "Take a short stretch break."
+        },
+        {
+          "id": "check_weather",
+          "action_text": "Check the weather."
+        },
+        {
+          "id": "plug_in_tablet",
+          "action_text": "Plug in the tablet."
+        }
+      ],
+      "steps": [
+        {
+          "id": "d1_s1",
+          "time": "07:20",
+          "text": "Breakfast comes together while you're already thinking two steps ahead.",
+          "options": [
+            "A) Pour coffee",
+            "B) Open a note",
+            "C) Check the window"
+          ],
+          "cues": [
+            "breakfast"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_breakfast",
+                "task_handle": "task_21"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d1_s2",
+          "time": "07:35",
+          "text": "You expect another email to land later. You leave yourself a note: On Thursday, Carry the spare tote bag when you notice the library return slot.",
+          "options": [
+            "A) Reply quickly",
+            "B) Keep walking",
+            "C) Put the phone away"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d1_s3",
+          "time": "08:05",
+          "text": "The timing for check the transit times shifts a bit on your phone. You make a note for later: On Thursday, Carry the side-door note when you notice the rain canopy. You get a small scheduling change: check the transit times is better at 18:50.",
+          "options": [
+            "A) Fill a bottle",
+            "B) Look around",
+            "C) Keep moving"
+          ],
+          "cues": [
+            "reschedule_notice_check_transit_times_1_d1_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "check_transit_times_1_d1",
+              "action": "reschedule",
+              "new_target_time": "18:50",
+              "new_label": "Check the transit times at 18:50",
+              "new_action_text": "Check the transit times.",
+              "cue_id": "reschedule_notice_check_transit_times_1_d1_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d1_s4",
+          "time": "11:00",
+          "text": "A quick scheduling note about send the library email comes in. The timing shifts a little: send the library email moves to 20:20.",
+          "options": [
+            "A) Stack papers",
+            "B) Take a breath",
+            "C) Check the time"
+          ],
+          "cues": [
+            "reschedule_notice_send_library_email_2_d1_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "send_library_email_2_d1",
+              "action": "reschedule",
+              "new_target_time": "20:20",
+              "new_label": "Send the library email at 20:20",
+              "new_action_text": "Send the library email.",
+              "cue_id": "reschedule_notice_send_library_email_2_d1_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_1100",
+                "task_handle": "task_2"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d1_s5",
+          "time": "13:55",
+          "text": "You know you still have to check the transit times today.",
+          "options": [
+            "A) Order lunch",
+            "B) Sit down",
+            "C) Tidy your bag"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d1_s6",
+          "time": "15:20",
+          "text": "You still need to send the library email later.",
+          "options": [
+            "A) Open the app",
+            "B) Flag it for later",
+            "C) Keep your place in line"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d1_s7",
+          "time": "15:55",
+          "text": "You clear a little space, glance at the pickup code, and keep the afternoon together.",
+          "options": [
+            "A) Step outside",
+            "B) Stretch your shoulders",
+            "C) Read the sign"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d1_s8",
+          "time": "16:50",
+          "text": "The parcel counter has a line, but your package is visible behind it.",
+          "options": [
+            "A) Clear a spot",
+            "B) Lean on the counter",
+            "C) Check your messages"
+          ],
+          "cues": [
+            "parcel_counter_d1"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "parcel_counter_d1",
+                "task_handle": "task_7"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d1_s9",
+          "time": "18:50",
+          "text": "The grocery pickup shelf has your bag set aside.",
+          "options": [
+            "A) Pull up a list",
+            "B) Take a sip of water",
+            "C) Look for a pen"
+          ],
+          "cues": [
+            "grocery_pickup_shelf_d1"
+          ],
+          "updates": [],
+          "state_events": {
+            "email": [
+              {
+                "id": "email_receipt_note_d1",
+                "text": "New email: purchase confirmation received.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "grocery_pickup_shelf_d1",
+                "task_handle": "task_19"
+              },
+              {
+                "id": "email_receipt_note_d1",
+                "task_handle": "task_4"
+              },
+              {
+                "id": "check_transit_times_1_d1",
+                "task_handle": "task_8"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d1_s10",
+          "time": "20:20",
+          "text": "You put the tote bag where you will see it again and keep the evening going.",
+          "options": [
+            "A) Make a note",
+            "B) Adjust your bag",
+            "C) Wait a moment"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "send_library_email_2_d1",
+                "task_handle": "task_12"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d1_s11",
+          "time": "20:40",
+          "text": "You pause long enough to put dinner together.",
+          "options": [
+            "A) Start dinner",
+            "B) Put a pan on",
+            "C) Rinse vegetables"
+          ],
+          "cues": [
+            "dinner"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_dinner",
+                "task_handle": "task_15"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d1_s12",
+          "time": "21:00",
+          "text": "You brush your teeth, check that your keys is still where you need it, and head to bed.",
+          "options": [
+            "A) Brush your teeth",
+            "B) Read a page",
+            "C) Plug in your phone"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_2100",
+                "task_handle": "task_13"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d1_s13",
+          "time": "22:10",
+          "text": "You plug in your phone, set the tracking page aside, and call it a night.",
+          "options": [
+            "A) Stand up",
+            "B) Walk once around the room",
+            "C) Refill your mug"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tuesday",
+      "start_instructions": [
+        "A few things are already on your mind:",
+        "- Ask about the boxed lamp when the loading dock sign points to pickup.",
+        "- Ask for the oversized parcel when the tag appears at the concierge counter.",
+        "- Call the insurance desk at 11:20.",
+        "- Collect the dry cleaning when it reaches the front rack.",
+        "- Finish the intake form when the portal posts it.",
+        "- Pay the parking app balance at 11:35.",
+        "- Pick up the replacement filter when the hardware counter clears.",
+        "- Save the receipt when the confirmation email arrives."
+      ],
+      "tasks": [
+        {
+          "id": "antibiotic_breakfast",
+          "label": "Take antibiotic at breakfast",
+          "type": "event",
+          "cue_id": "breakfast",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at breakfast."
+        },
+        {
+          "id": "antibiotic_dinner",
+          "label": "Take antibiotic at dinner",
+          "type": "event",
+          "cue_id": "dinner",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at dinner."
+        },
+        {
+          "id": "asthma_1100",
+          "label": "Take asthma medication at 11:00",
+          "type": "time",
+          "target_time": "11:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 11:00."
+        },
+        {
+          "id": "asthma_2100",
+          "label": "Take asthma medication at 21:00",
+          "type": "time",
+          "target_time": "21:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 21:00."
+        },
+        {
+          "id": "concierge_counter_d2",
+          "label": "Ask for the oversized parcel when the tag appears at the concierge counter",
+          "type": "event",
+          "cue_id": "concierge_counter_d2",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Ask for the oversized parcel."
+        },
+        {
+          "id": "dry_cleaner_rack_d2",
+          "label": "Collect the dry cleaning when it reaches the front rack",
+          "type": "event",
+          "cue_id": "dry_cleaner_rack_d2",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Collect the dry cleaning."
+        },
+        {
+          "id": "hardware_counter_d2",
+          "label": "Pick up the replacement filter when the hardware counter clears",
+          "type": "event",
+          "cue_id": "hardware_counter_d2",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Pick up the replacement filter."
+        },
+        {
+          "id": "loading_dock_sign_d2",
+          "label": "Ask about the boxed lamp when the loading dock sign points to pickup",
+          "type": "event",
+          "cue_id": "loading_dock_sign_d2",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Ask about the boxed lamp."
+        },
+        {
+          "id": "pay_parking_app_1_d2",
+          "label": "Pay the parking app balance at 11:35",
+          "type": "time",
+          "target_time": "11:35",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Pay the parking app balance."
+        },
+        {
+          "id": "call_insurance_2_d2",
+          "label": "Call the insurance desk at 11:20",
+          "type": "time",
+          "target_time": "11:20",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Call the insurance desk."
+        },
+        {
+          "id": "appointment_form_ready_d2",
+          "label": "Finish the intake form when the portal posts it",
+          "type": "event",
+          "cue_id": "appointment_form_ready_d2",
+          "cue_channel": "appointment_portal",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Finish the intake form."
+        },
+        {
+          "id": "email_receipt_note_d2",
+          "label": "Save the receipt when the confirmation email arrives",
+          "type": "event",
+          "cue_id": "email_receipt_note_d2",
+          "cue_channel": "email",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Save the receipt."
+        }
+      ],
+      "lures": [
+        {
+          "id": "sort_mail",
+          "action_text": "Sort the mail."
+        },
+        {
+          "id": "clean_mug",
+          "action_text": "Clean the mug in the sink."
+        },
+        {
+          "id": "organize_bag",
+          "action_text": "Organize your bag."
+        },
+        {
+          "id": "refill_bottle",
+          "action_text": "Refill your water bottle."
+        },
+        {
+          "id": "check_transfers",
+          "action_text": "Check your saved transfers."
+        },
+        {
+          "id": "read_blurb",
+          "action_text": "Read a book blurb."
+        },
+        {
+          "id": "text_friend",
+          "action_text": "Send a quick text to a friend."
+        },
+        {
+          "id": "check_weather",
+          "action_text": "Check the weather."
+        },
+        {
+          "id": "look_at_map",
+          "action_text": "Look at the map."
+        },
+        {
+          "id": "water_plants",
+          "action_text": "Water the plants."
+        },
+        {
+          "id": "wipe_glasses",
+          "action_text": "Wipe your glasses."
+        }
+      ],
+      "steps": [
+        {
+          "id": "d2_s1",
+          "time": "08:05",
+          "text": "Breakfast gives you one last orderly moment before the day gets busier.",
+          "options": [
+            "A) Pour coffee",
+            "B) Open a note",
+            "C) Check the window"
+          ],
+          "cues": [
+            "breakfast"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_breakfast",
+                "task_handle": "task_7"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s2",
+          "time": "10:00",
+          "text": "A short follow-up changes the timing for pay the parking app balance. You don't want to forget to pay the parking app balance. The latest update puts pay the parking app balance at 17:40.",
+          "options": [
+            "A) Reply quickly",
+            "B) Keep walking",
+            "C) Put the phone away"
+          ],
+          "cues": [
+            "reschedule_notice_pay_parking_app_1_d2_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "pay_parking_app_1_d2",
+              "action": "reschedule",
+              "new_target_time": "17:40",
+              "new_label": "Pay the parking app balance at 17:40",
+              "new_action_text": "Pay the parking app balance.",
+              "cue_id": "reschedule_notice_pay_parking_app_1_d2_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d2_s3",
+          "time": "10:40",
+          "text": "For a moment, you expect another email to land later. You jot down a quick reminder: On Friday, Email the room change note when you notice the campus notice board.",
+          "options": [
+            "A) Fill a bottle",
+            "B) Look around",
+            "C) Keep moving"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d2_s4",
+          "time": "11:00",
+          "text": "A reschedule note about call the insurance desk flashes across the top of your screen. You still need to call the insurance desk later. A reschedule note lands for call the insurance desk: move it to 11:35.",
+          "options": [
+            "A) Stack papers",
+            "B) Take a breath",
+            "C) Check the time"
+          ],
+          "cues": [
+            "reschedule_notice_call_insurance_2_d2_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "call_insurance_2_d2",
+              "action": "reschedule",
+              "new_target_time": "11:35",
+              "new_label": "Call the insurance desk at 11:35",
+              "new_action_text": "Call the insurance desk.",
+              "cue_id": "reschedule_notice_call_insurance_2_d2_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_1100",
+                "task_handle": "task_5"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s5",
+          "time": "11:20",
+          "text": "The hardware counter is finally clear enough to walk up to.",
+          "options": [
+            "A) Order lunch",
+            "B) Sit down",
+            "C) Tidy your bag"
+          ],
+          "cues": [
+            "hardware_counter_d2"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "hardware_counter_d2",
+                "task_handle": "task_3"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s6",
+          "time": "11:35",
+          "text": "The loading dock sign is pointing to a temporary pickup spot today.",
+          "options": [
+            "A) Open the app",
+            "B) Flag it for later",
+            "C) Keep your place in line"
+          ],
+          "cues": [
+            "loading_dock_sign_d2"
+          ],
+          "updates": [],
+          "state_events": {
+            "appointment_portal": [
+              {
+                "id": "appointment_form_ready_d2",
+                "text": "Appointment portal: intake form posted.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "loading_dock_sign_d2",
+                "task_handle": "task_10"
+              },
+              {
+                "id": "call_insurance_2_d2",
+                "task_handle": "task_21"
+              },
+              {
+                "id": "appointment_form_ready_d2",
+                "task_handle": "task_23"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s7",
+          "time": "12:25",
+          "text": "The dry cleaner has your order hanging on the front rack.",
+          "options": [
+            "A) Step outside",
+            "B) Stretch your shoulders",
+            "C) Read the sign"
+          ],
+          "cues": [
+            "dry_cleaner_rack_d2"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "dry_cleaner_rack_d2",
+                "task_handle": "task_12"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s8",
+          "time": "17:40",
+          "text": "You set your bag down, check the receipt stack, and keep the evening in order.",
+          "options": [
+            "A) Clear a spot",
+            "B) Lean on the counter",
+            "C) Check your messages"
+          ],
+          "cues": [],
+          "updates": [],
+          "state_events": {
+            "email": [
+              {
+                "id": "email_receipt_note_d2",
+                "text": "New email: purchase confirmation received.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "email_receipt_note_d2",
+                "task_handle": "task_1"
+              },
+              {
+                "id": "pay_parking_app_1_d2",
+                "task_handle": "task_2"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s9",
+          "time": "18:15",
+          "text": "The concierge counter has your oversized parcel tag clipped to the side.",
+          "options": [
+            "A) Pull up a list",
+            "B) Take a sip of water",
+            "C) Look for a pen"
+          ],
+          "cues": [
+            "concierge_counter_d2"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "concierge_counter_d2",
+                "task_handle": "task_19"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s10",
+          "time": "18:35",
+          "text": "Dinner is mostly a marker that the day has tilted into evening.",
+          "options": [
+            "A) Make a note",
+            "B) Adjust your bag",
+            "C) Wait a moment"
+          ],
+          "cues": [
+            "dinner"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_dinner",
+                "task_handle": "task_22"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d2_s11",
+          "time": "21:00",
+          "text": "You set out tomorrow's things, move the loose receipt into place, and head toward bed.",
+          "options": [
+            "A) Start dinner",
+            "B) Put a pan on",
+            "C) Rinse vegetables"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_2100",
+                "task_handle": "task_4"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Wednesday",
+      "start_instructions": [
+        "Today's loose plan:",
+        "- Confirm the pickup window at 14:45.",
+        "- Email the vendor at 14:45.",
+        "- Move the appointment when a better slot opens.",
+        "- Pick up the prescription when you reach the pharmacy counter.",
+        "- Sign the intake form when the front desk clipboard is out."
+      ],
+      "tasks": [
+        {
+          "id": "antibiotic_breakfast",
+          "label": "Take antibiotic at breakfast",
+          "type": "event",
+          "cue_id": "breakfast",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at breakfast."
+        },
+        {
+          "id": "antibiotic_dinner",
+          "label": "Take antibiotic at dinner",
+          "type": "event",
+          "cue_id": "dinner",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at dinner."
+        },
+        {
+          "id": "asthma_1100",
+          "label": "Take asthma medication at 11:00",
+          "type": "time",
+          "target_time": "11:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 11:00."
+        },
+        {
+          "id": "asthma_2100",
+          "label": "Take asthma medication at 21:00",
+          "type": "time",
+          "target_time": "21:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 21:00."
+        },
+        {
+          "id": "pharmacy_counter_d3",
+          "label": "Pick up the prescription when you reach the pharmacy counter",
+          "type": "event",
+          "cue_id": "pharmacy_counter_d3",
+          "regular": false,
+          "encoding": "step:d3_s8",
+          "action_text": "Pick up the prescription."
+        },
+        {
+          "id": "front_desk_clipboard_d3",
+          "label": "Sign the intake form when the front desk clipboard is out",
+          "type": "event",
+          "cue_id": "front_desk_clipboard_d3",
+          "regular": false,
+          "encoding": "step:d3_s9",
+          "action_text": "Sign the intake form."
+        },
+        {
+          "id": "email_vendor_1_d3",
+          "label": "Email the vendor at 14:45",
+          "type": "time",
+          "target_time": "14:45",
+          "regular": false,
+          "encoding": "step:d3_s5",
+          "action_text": "Email the vendor."
+        },
+        {
+          "id": "confirm_pickup_window_2_d3",
+          "label": "Confirm the pickup window at 14:45",
+          "type": "time",
+          "target_time": "14:45",
+          "regular": false,
+          "encoding": "step:d3_s7",
+          "action_text": "Confirm the pickup window."
+        },
+        {
+          "id": "appointment_reschedule_open_d3",
+          "label": "Move the appointment when a better slot opens",
+          "type": "event",
+          "cue_id": "appointment_reschedule_open_d3",
+          "cue_channel": "appointment_portal",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Move the appointment."
+        }
+      ],
+      "lures": [
+        {
+          "id": "clean_mug",
+          "action_text": "Clean the mug in the sink."
+        },
+        {
+          "id": "look_at_map",
+          "action_text": "Look at the map."
+        },
+        {
+          "id": "wipe_glasses",
+          "action_text": "Wipe your glasses."
+        },
+        {
+          "id": "read_blurb",
+          "action_text": "Read a book blurb."
+        },
+        {
+          "id": "check_weather",
+          "action_text": "Check the weather."
+        },
+        {
+          "id": "refill_bottle",
+          "action_text": "Refill your water bottle."
+        },
+        {
+          "id": "skim_headlines",
+          "action_text": "Skim the headlines."
+        },
+        {
+          "id": "review_notes",
+          "action_text": "Review your notes."
+        },
+        {
+          "id": "move_blanket",
+          "action_text": "Move the blanket off the chair."
+        },
+        {
+          "id": "charge_phone",
+          "action_text": "Charge your phone."
+        },
+        {
+          "id": "scan_calendar",
+          "action_text": "Scan your calendar."
+        }
+      ],
+      "steps": [
+        {
+          "id": "d3_s1",
+          "time": "07:20",
+          "text": "You put breakfast together while mentally sorting out the day.",
+          "options": [
+            "A) Pour coffee",
+            "B) Open a note",
+            "C) Check the window"
+          ],
+          "cues": [
+            "breakfast"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_breakfast",
+                "task_handle": "task_18"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d3_s2",
+          "time": "08:05",
+          "text": "A quick correction comes in before you get to pick up the prescription. The new instruction is to use the note by the side door as the cue for pick up the prescription.",
+          "options": [
+            "A) Reply quickly",
+            "B) Keep walking",
+            "C) Put the phone away"
+          ],
+          "cues": [
+            "override_notice_pharmacy_counter_d3_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "pharmacy_counter_d3",
+              "action": "override",
+              "new_cue_id": "override_pharmacy_counter_d3_d0",
+              "new_label": "Pick up the prescription when you notice the note by the side door",
+              "new_action_text": "Pick up the prescription.",
+              "cue_id": "override_notice_pharmacy_counter_d3_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d3_s3",
+          "time": "08:40",
+          "text": "You add a reminder to yourself: On Thursday, Bring down the spare linens when you notice the storage cage. You add a reminder to yourself: On Thursday, Bring the backup key when you notice the detour arrow.",
+          "options": [
+            "A) Fill a bottle",
+            "B) Look around",
+            "C) Keep moving"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d3_s4",
+          "time": "09:25",
+          "text": "You still need to confirm the pickup window later.",
+          "options": [
+            "A) Stack papers",
+            "B) Take a breath",
+            "C) Check the time"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d3_s5",
+          "time": "11:00",
+          "text": "You still need to email the vendor later.",
+          "options": [
+            "A) Order lunch",
+            "B) Sit down",
+            "C) Tidy your bag"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_1100",
+                "task_handle": "task_9"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d3_s6",
+          "time": "12:45",
+          "text": "You get a follow-up with corrected instructions for sign the intake form. Instead of the earlier cue, watch for the updated pickup message before you sign the intake form.",
+          "options": [
+            "A) Open the app",
+            "B) Flag it for later",
+            "C) Keep your place in line"
+          ],
+          "cues": [
+            "override_notice_front_desk_clipboard_d3_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "front_desk_clipboard_d3",
+              "action": "override",
+              "new_cue_id": "override_front_desk_clipboard_d3_d0",
+              "new_label": "Sign the intake form when the updated pickup message comes in",
+              "new_action_text": "Sign the intake form.",
+              "cue_id": "override_notice_front_desk_clipboard_d3_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d3_s7",
+          "time": "13:55",
+          "text": "You have a feeling the appointment portal may open a better slot later.",
+          "options": [
+            "A) Step outside",
+            "B) Stretch your shoulders",
+            "C) Read the sign"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d3_s8",
+          "time": "14:10",
+          "text": "At the pharmacy, the pickup counter is finally open.",
+          "options": [
+            "A) Clear a spot",
+            "B) Lean on the counter",
+            "C) Check your messages"
+          ],
+          "cues": [
+            "pharmacy_counter_d3"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d3_s9",
+          "time": "14:45",
+          "text": "A clipboard is waiting on the front desk with your name on it.",
+          "options": [
+            "A) Pull up a list",
+            "B) Take a sip of water",
+            "C) Look for a pen"
+          ],
+          "cues": [
+            "front_desk_clipboard_d3"
+          ],
+          "updates": [],
+          "state_events": {
+            "appointment_portal": [
+              {
+                "id": "appointment_reschedule_open_d3",
+                "text": "Appointment portal: earlier slot available.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "appointment_reschedule_open_d3",
+                "task_handle": "task_11"
+              },
+              {
+                "id": "confirm_pickup_window_2_d3",
+                "task_handle": "task_15"
+              },
+              {
+                "id": "email_vendor_1_d3",
+                "task_handle": "task_5"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d3_s10",
+          "time": "16:15",
+          "text": "A note by the side door clears up where to go.",
+          "options": [
+            "A) Make a note",
+            "B) Adjust your bag",
+            "C) Wait a moment"
+          ],
+          "cues": [
+            "override_pharmacy_counter_d3_d0"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "pharmacy_counter_d3",
+                "task_handle": "task_1"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d3_s11",
+          "time": "19:25",
+          "text": "You put the loose receipt where you will see it again and keep the evening going.",
+          "options": [
+            "A) Start dinner",
+            "B) Put a pan on",
+            "C) Rinse vegetables"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d3_s12",
+          "time": "20:20",
+          "text": "Dinner happens right in the middle of the evening's cleanup and catch-up.",
+          "options": [
+            "A) Brush your teeth",
+            "B) Read a page",
+            "C) Plug in your phone"
+          ],
+          "cues": [
+            "dinner"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_dinner",
+                "task_handle": "task_4"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d3_s13",
+          "time": "21:00",
+          "text": "You brush your teeth, check that the parcel slip is still where you need it, and head to bed.",
+          "options": [
+            "A) Stand up",
+            "B) Walk once around the room",
+            "C) Refill your mug"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_2100",
+                "task_handle": "task_10"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d3_s14",
+          "time": "22:45",
+          "text": "An updated pickup message comes through with the final details.",
+          "options": [
+            "A) Scan the shelf",
+            "B) Look up",
+            "C) Check your pocket"
+          ],
+          "cues": [
+            "override_front_desk_clipboard_d3_d0"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "front_desk_clipboard_d3",
+                "task_handle": "task_3"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Thursday",
+      "start_instructions": [
+        "Before the day gets crowded, these are the main things you need to keep track of:",
+        "- Bring upstairs the folded chair when the storage cage is open.",
+        "- Buy the filter when the price drops below $55.",
+        "- Buy the storage bin when the price drops below $75.",
+        "- Check the posted hours when the detour arrow sends you to the side entrance.",
+        "- Collect the folding umbrella when the rain canopy is up.",
+        "- Move the laundry when the cycle ends.",
+        "- Record the meter reading at 19:45.",
+        "- Return the library book when the return slot is open."
+      ],
+      "tasks": [
+        {
+          "id": "antibiotic_breakfast",
+          "label": "Take antibiotic at breakfast",
+          "type": "event",
+          "cue_id": "breakfast",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at breakfast."
+        },
+        {
+          "id": "antibiotic_dinner",
+          "label": "Take antibiotic at dinner",
+          "type": "event",
+          "cue_id": "dinner",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at dinner."
+        },
+        {
+          "id": "asthma_1100",
+          "label": "Take asthma medication at 11:00",
+          "type": "time",
+          "target_time": "11:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 11:00."
+        },
+        {
+          "id": "asthma_2100",
+          "label": "Take asthma medication at 21:00",
+          "type": "time",
+          "target_time": "21:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 21:00."
+        },
+        {
+          "id": "rain_canopy_d4",
+          "label": "Collect the folding umbrella when the rain canopy is up",
+          "type": "event",
+          "cue_id": "rain_canopy_d4",
+          "regular": false,
+          "encoding": "step:d4_s8",
+          "action_text": "Collect the folding umbrella."
+        },
+        {
+          "id": "storage_cage_d4",
+          "label": "Bring upstairs the folded chair when the storage cage is open",
+          "type": "event",
+          "cue_id": "storage_cage_d4",
+          "regular": false,
+          "encoding": "step:d4_s7",
+          "action_text": "Bring upstairs the folded chair."
+        },
+        {
+          "id": "detour_arrow_d4",
+          "label": "Check the posted hours when the detour arrow sends you to the side entrance",
+          "type": "event",
+          "cue_id": "detour_arrow_d4",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Check the posted hours."
+        },
+        {
+          "id": "library_return_slot_d4",
+          "label": "Return the library book when the return slot is open",
+          "type": "event",
+          "cue_id": "library_return_slot_d4",
+          "regular": false,
+          "encoding": "step:d4_s9",
+          "action_text": "Return the library book."
+        },
+        {
+          "id": "record_meter_reading_1_d4",
+          "label": "Record the meter reading at 19:45",
+          "type": "time",
+          "target_time": "19:45",
+          "regular": false,
+          "encoding": "step:d4_s4",
+          "action_text": "Record the meter reading."
+        },
+        {
+          "id": "price_drop_54_d4",
+          "label": "Buy the filter when the price drops below $55",
+          "type": "event",
+          "cue_id": "price_drop_54_d4",
+          "cue_channel": "price_tracker",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Buy the filter."
+        },
+        {
+          "id": "laundry_done_d4",
+          "label": "Move the laundry when the cycle ends",
+          "type": "event",
+          "cue_id": "laundry_done_d4",
+          "cue_channel": "laundry_status",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Move the laundry."
+        },
+        {
+          "id": "price_drop_72_d4",
+          "label": "Buy the storage bin when the price drops below $75",
+          "type": "event",
+          "cue_id": "price_drop_72_d4",
+          "cue_channel": "price_tracker",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Buy the storage bin."
+        },
+        {
+          "id": "crossday_1",
+          "label": "Carry the spare tote bag when you notice the library return slot",
+          "action_text": "Carry the spare tote bag.",
+          "type": "event",
+          "cue_id": "library_return_slot_d4",
+          "regular": false,
+          "encoding": "start",
+          "cross_day": true,
+          "cross_day_offset": 3
+        },
+        {
+          "id": "crossday_2",
+          "label": "Carry the side-door note when you notice the rain canopy",
+          "action_text": "Carry the side-door note.",
+          "type": "event",
+          "cue_id": "rain_canopy_d4",
+          "regular": false,
+          "encoding": "start",
+          "cross_day": true,
+          "cross_day_offset": 3
+        },
+        {
+          "id": "crossday_3",
+          "label": "Bring down the spare linens when you notice the storage cage",
+          "action_text": "Bring down the spare linens.",
+          "type": "event",
+          "cue_id": "storage_cage_d4",
+          "regular": false,
+          "encoding": "start",
+          "cross_day": true,
+          "cross_day_offset": 1
+        },
+        {
+          "id": "crossday_5",
+          "label": "Bring the backup key when you notice the detour arrow",
+          "action_text": "Bring the backup key.",
+          "type": "event",
+          "cue_id": "detour_arrow_d4",
+          "regular": false,
+          "encoding": "start",
+          "cross_day": true,
+          "cross_day_offset": 1
+        }
+      ],
+      "lures": [
+        {
+          "id": "rearrange_books",
+          "action_text": "Rearrange the stack of books."
+        },
+        {
+          "id": "clear_desk",
+          "action_text": "Clear off the desk."
+        },
+        {
+          "id": "switch_laundry",
+          "action_text": "Switch over the laundry basket."
+        },
+        {
+          "id": "reply_group_chat",
+          "action_text": "Reply in the group chat."
+        },
+        {
+          "id": "text_friend",
+          "action_text": "Send a quick text to a friend."
+        },
+        {
+          "id": "move_blanket",
+          "action_text": "Move the blanket off the chair."
+        },
+        {
+          "id": "scan_receipts",
+          "action_text": "Scan the loose receipts."
+        },
+        {
+          "id": "look_up_recipe",
+          "action_text": "Look up a recipe."
+        },
+        {
+          "id": "organize_bag",
+          "action_text": "Organize your bag."
+        },
+        {
+          "id": "clean_keyboard",
+          "action_text": "Clean the keyboard."
+        },
+        {
+          "id": "skim_headlines",
+          "action_text": "Skim the headlines."
+        },
+        {
+          "id": "read_blurb",
+          "action_text": "Read a book blurb."
+        }
+      ],
+      "steps": [
+        {
+          "id": "d4_s1",
+          "time": "07:35",
+          "text": "Breakfast is less about food than about getting your bearings.",
+          "options": [
+            "A) Pour coffee",
+            "B) Open a note",
+            "C) Check the window"
+          ],
+          "cues": [
+            "breakfast"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_breakfast",
+                "task_handle": "task_5"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4_s2",
+          "time": "10:20",
+          "text": "A temporary detour arrow sends you along the side entrance. You start a laundry cycle before you leave it alone.",
+          "options": [
+            "A) Reply quickly",
+            "B) Keep walking",
+            "C) Put the phone away"
+          ],
+          "cues": [
+            "detour_arrow_d4"
+          ],
+          "updates": [],
+          "state_events": {
+            "laundry_status": [
+              {
+                "id": "laundry_done_start_d4",
+                "text": "Laundry status: in progress.",
+                "value": null,
+                "meta": {
+                  "phase": "in_progress"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "detour_arrow_d4",
+                "task_handle": "task_4"
+              },
+              {
+                "id": "crossday_5",
+                "task_handle": "task_6"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4_s3",
+          "time": "11:00",
+          "text": "You get a follow-up with corrected instructions for return the library book. Instead of the earlier cue, watch for the updated pickup message before you return the library book.",
+          "options": [
+            "A) Fill a bottle",
+            "B) Look around",
+            "C) Keep moving"
+          ],
+          "cues": [
+            "override_notice_library_return_slot_d4_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "library_return_slot_d4",
+              "action": "override",
+              "new_cue_id": "override_library_return_slot_d4_d0",
+              "new_label": "Return the library book when the updated pickup message comes in",
+              "new_action_text": "Return the library book.",
+              "cue_id": "override_notice_library_return_slot_d4_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_1100",
+                "task_handle": "task_11"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4_s4",
+          "time": "13:00",
+          "text": "You make a mental note to record the meter reading before the day gets away from you. You make a note for later: On Sunday, Bring the reserve reading when you notice the lecture hall side door.",
+          "options": [
+            "A) Stack papers",
+            "B) Take a breath",
+            "C) Check the time"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d4_s5",
+          "time": "13:55",
+          "text": "You keep in mind that the filter price might drop later.",
+          "options": [
+            "A) Order lunch",
+            "B) Sit down",
+            "C) Tidy your bag"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d4_s6",
+          "time": "15:05",
+          "text": "You line up the note on your phone with the rest of your things and keep the day moving.",
+          "options": [
+            "A) Open the app",
+            "B) Flag it for later",
+            "C) Keep your place in line"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d4_s7",
+          "time": "18:15",
+          "text": "The storage cage has been left open for deliveries again.",
+          "options": [
+            "A) Step outside",
+            "B) Stretch your shoulders",
+            "C) Read the sign"
+          ],
+          "cues": [
+            "storage_cage_d4"
+          ],
+          "updates": [],
+          "state_events": {
+            "price_tracker": [
+              {
+                "id": "price_drop_72_d4",
+                "text": "Price check: storage bin is $72.",
+                "value": 72,
+                "meta": {
+                  "currency": "USD"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "crossday_3",
+                "task_handle": "task_14"
+              },
+              {
+                "id": "price_drop_72_d4",
+                "task_handle": "task_25"
+              },
+              {
+                "id": "storage_cage_d4",
+                "task_handle": "task_26"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4_s8",
+          "time": "19:25",
+          "text": "A rain canopy has been dragged over the sidewalk entrance.",
+          "options": [
+            "A) Clear a spot",
+            "B) Lean on the counter",
+            "C) Check your messages"
+          ],
+          "cues": [
+            "rain_canopy_d4"
+          ],
+          "updates": [],
+          "state_events": {
+            "laundry_status": [
+              {
+                "id": "laundry_done_d4",
+                "text": "Laundry status: cycle complete.",
+                "value": null,
+                "meta": {
+                  "phase": "complete"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "laundry_done_d4",
+                "task_handle": "task_19"
+              },
+              {
+                "id": "crossday_2",
+                "task_handle": "task_28"
+              },
+              {
+                "id": "rain_canopy_d4",
+                "task_handle": "task_9"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4_s9",
+          "time": "19:45",
+          "text": "Dinner arrives after the day has already started spilling into the night. The library return slot is open as you walk by.",
+          "options": [
+            "A) Pull up a list",
+            "B) Take a sip of water",
+            "C) Look for a pen"
+          ],
+          "cues": [
+            "dinner",
+            "library_return_slot_d4"
+          ],
+          "updates": [],
+          "state_events": {
+            "price_tracker": [
+              {
+                "id": "price_drop_54_d4",
+                "text": "Price check: filter is $54.",
+                "value": 54,
+                "meta": {
+                  "currency": "USD"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "price_drop_54_d4",
+                "task_handle": "task_12"
+              },
+              {
+                "id": "record_meter_reading_1_d4",
+                "task_handle": "task_13"
+              },
+              {
+                "id": "antibiotic_dinner",
+                "task_handle": "task_21"
+              },
+              {
+                "id": "crossday_1",
+                "task_handle": "task_3"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d4_s10",
+          "time": "21:00",
+          "text": "For a moment, an updated pickup message comes through with the final details.",
+          "options": [
+            "A) Make a note",
+            "B) Adjust your bag",
+            "C) Wait a moment"
+          ],
+          "cues": [
+            "override_library_return_slot_d4_d0"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "library_return_slot_d4",
+                "task_handle": "task_16"
+              },
+              {
+                "id": "asthma_2100",
+                "task_handle": "task_17"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Friday",
+      "start_instructions": [
+        "Before the day gets crowded, these are the main things you need to keep track of:",
+        "- Add the new block when it appears on your calendar.",
+        "- Buy the workbook when the price drops below $40.",
+        "- Confirm the room number when the seminar sign is updated.",
+        "- Open the discussion thread when it unlocks.",
+        "- Pay the co-op dues at 12:10.",
+        "- Photograph the room change when the campus notice board is updated."
+      ],
+      "tasks": [
+        {
+          "id": "antibiotic_breakfast",
+          "label": "Take antibiotic at breakfast",
+          "type": "event",
+          "cue_id": "breakfast",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at breakfast."
+        },
+        {
+          "id": "antibiotic_dinner",
+          "label": "Take antibiotic at dinner",
+          "type": "event",
+          "cue_id": "dinner",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at dinner."
+        },
+        {
+          "id": "asthma_1100",
+          "label": "Take asthma medication at 11:00",
+          "type": "time",
+          "target_time": "11:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 11:00."
+        },
+        {
+          "id": "asthma_2100",
+          "label": "Take asthma medication at 21:00",
+          "type": "time",
+          "target_time": "21:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 21:00."
+        },
+        {
+          "id": "campus_board_d5",
+          "label": "Photograph the room change when the campus notice board is updated",
+          "type": "event",
+          "cue_id": "campus_board_d5",
+          "regular": false,
+          "encoding": "step:d5_s4",
+          "action_text": "Photograph the room change."
+        },
+        {
+          "id": "seminar_sign_d5",
+          "label": "Confirm the room number when the seminar sign is updated",
+          "type": "event",
+          "cue_id": "seminar_sign_d5",
+          "regular": false,
+          "encoding": "step:d5_s3",
+          "action_text": "Confirm the room number."
+        },
+        {
+          "id": "pay_coop_dues_1_d5",
+          "label": "Pay the co-op dues at 12:10",
+          "type": "time",
+          "target_time": "12:10",
+          "regular": false,
+          "encoding": "step:d5_s2",
+          "action_text": "Pay the co-op dues."
+        },
+        {
+          "id": "price_drop_39_d5",
+          "label": "Buy the workbook when the price drops below $40",
+          "type": "event",
+          "cue_id": "price_drop_39_d5",
+          "cue_channel": "price_tracker",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Buy the workbook."
+        },
+        {
+          "id": "course_discussion_open_d5",
+          "label": "Open the discussion thread when it unlocks",
+          "type": "event",
+          "cue_id": "course_discussion_open_d5",
+          "cue_channel": "course_portal",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Open the discussion thread."
+        },
+        {
+          "id": "calendar_new_block_d5",
+          "label": "Add the new block when it appears on your calendar",
+          "type": "event",
+          "cue_id": "calendar_new_block_d5",
+          "cue_channel": "calendar",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Add the new block."
+        },
+        {
+          "id": "crossday_7",
+          "label": "Email the room change note when you notice the campus notice board",
+          "action_text": "Email the room change note.",
+          "type": "event",
+          "cue_id": "campus_board_d5",
+          "regular": false,
+          "encoding": "start",
+          "cross_day": true,
+          "cross_day_offset": 3
+        }
+      ],
+      "lures": [
+        {
+          "id": "plug_in_tablet",
+          "action_text": "Plug in the tablet."
+        },
+        {
+          "id": "sharpen_pencils",
+          "action_text": "Sharpen a few pencils."
+        },
+        {
+          "id": "read_blurb",
+          "action_text": "Read a book blurb."
+        },
+        {
+          "id": "trim_receipt_stack",
+          "action_text": "Trim the receipt stack."
+        },
+        {
+          "id": "check_weather",
+          "action_text": "Check the weather."
+        },
+        {
+          "id": "brew_tea",
+          "action_text": "Make a cup of tea."
+        },
+        {
+          "id": "stretch_break",
+          "action_text": "Take a short stretch break."
+        },
+        {
+          "id": "clear_downloads",
+          "action_text": "Clear old downloads."
+        },
+        {
+          "id": "scan_receipts",
+          "action_text": "Scan the loose receipts."
+        },
+        {
+          "id": "wipe_glasses",
+          "action_text": "Wipe your glasses."
+        },
+        {
+          "id": "clear_desk",
+          "action_text": "Clear off the desk."
+        }
+      ],
+      "steps": [
+        {
+          "id": "d5_s1",
+          "time": "07:50",
+          "text": "You start with breakfast and a quick scan of what the day might turn into.",
+          "options": [
+            "A) Pour coffee",
+            "B) Open a note",
+            "C) Check the window"
+          ],
+          "cues": [
+            "breakfast"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_breakfast",
+                "task_handle": "task_6"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5_s2",
+          "time": "08:20",
+          "text": "You don't want to forget to pay the co-op dues. You make a note for later: On Sunday, Bring the poster tube when you notice the studio supply table.",
+          "options": [
+            "A) Reply quickly",
+            "B) Keep walking",
+            "C) Put the phone away"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d5_s3",
+          "time": "11:00",
+          "text": "The seminar sign has today's room scribbled in the corner. You have a feeling the calendar may shift again before the day is over.",
+          "options": [
+            "A) Fill a bottle",
+            "B) Look around",
+            "C) Keep moving"
+          ],
+          "cues": [
+            "seminar_sign_d5"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "seminar_sign_d5",
+                "task_handle": "task_5"
+              },
+              {
+                "id": "asthma_1100",
+                "task_handle": "task_9"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5_s4",
+          "time": "12:10",
+          "text": "A fresh notice is pinned to the campus board outside the lab.",
+          "options": [
+            "A) Stack papers",
+            "B) Take a breath",
+            "C) Check the time"
+          ],
+          "cues": [
+            "campus_board_d5"
+          ],
+          "updates": [],
+          "state_events": {
+            "calendar": [
+              {
+                "id": "calendar_new_block_d5",
+                "text": "Calendar update: new block added for today.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "calendar_new_block_d5",
+                "task_handle": "task_1"
+              },
+              {
+                "id": "campus_board_d5",
+                "task_handle": "task_11"
+              },
+              {
+                "id": "pay_coop_dues_1_d5",
+                "task_handle": "task_17"
+              },
+              {
+                "id": "crossday_7",
+                "task_handle": "task_22"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5_s5",
+          "time": "14:45",
+          "text": "You sit down for a moment, check the loose receipt, and keep going.",
+          "options": [
+            "A) Order lunch",
+            "B) Sit down",
+            "C) Tidy your bag"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d5_s6",
+          "time": "15:20",
+          "text": "You line up your keys with the rest of your things and keep the day moving.",
+          "options": [
+            "A) Open the app",
+            "B) Flag it for later",
+            "C) Keep your place in line"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d5_s7",
+          "time": "15:55",
+          "text": "You suspect the course portal could change again later.",
+          "options": [
+            "A) Step outside",
+            "B) Stretch your shoulders",
+            "C) Read the sign"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d5_s8",
+          "time": "18:00",
+          "text": "You set your bag down, check the note on your phone, and keep the evening in order.",
+          "options": [
+            "A) Clear a spot",
+            "B) Lean on the counter",
+            "C) Check your messages"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d5_s9",
+          "time": "18:15",
+          "text": "You pause with a glass of water, look at the note on your phone, and see what is still unresolved.",
+          "options": [
+            "A) Pull up a list",
+            "B) Take a sip of water",
+            "C) Look for a pen"
+          ],
+          "cues": [],
+          "updates": [],
+          "state_events": {
+            "course_portal": [
+              {
+                "id": "course_discussion_open_d5",
+                "text": "Course portal: discussion thread unlocked.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "course_discussion_open_d5",
+                "task_handle": "task_7"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5_s10",
+          "time": "19:25",
+          "text": "You make dinner while trying not to lose track of the rest of the evening.",
+          "options": [
+            "A) Make a note",
+            "B) Adjust your bag",
+            "C) Wait a moment"
+          ],
+          "cues": [
+            "dinner"
+          ],
+          "updates": [],
+          "state_events": {
+            "price_tracker": [
+              {
+                "id": "price_drop_39_d5",
+                "text": "Price check: workbook is $39.",
+                "value": 39,
+                "meta": {
+                  "currency": "USD"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "price_drop_39_d5",
+                "task_handle": "task_13"
+              },
+              {
+                "id": "antibiotic_dinner",
+                "task_handle": "task_20"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5_s11",
+          "time": "21:00",
+          "text": "You check the lock, set the workbook down, and let the day end.",
+          "options": [
+            "A) Start dinner",
+            "B) Put a pan on",
+            "C) Rinse vegetables"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_2100",
+                "task_handle": "task_4"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d5_s12",
+          "time": "21:20",
+          "text": "You brush your teeth, check that the room note is still where you need it, and head to bed.",
+          "options": [
+            "A) Brush your teeth",
+            "B) Read a page",
+            "C) Plug in your phone"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "Saturday",
+      "start_instructions": [
+        "You start the day with a short mental list:",
+        "- Be home when the delivery is out for delivery.",
+        "- Buy the storage bin when the price drops below $75.",
+        "- Call the insurance desk at 14:45.",
+        "- Collect the package when the locker light turns green.",
+        "- Drop off the sample slip when the lab drop box is unlocked.",
+        "- Move the laundry when the cycle ends.",
+        "- Print the parking receipt when the kiosk starts blinking.",
+        "- Record the meter reading at 19:25.",
+        "- Take the photo of the leak note when the roof access sign is uncovered."
+      ],
+      "tasks": [
+        {
+          "id": "antibiotic_breakfast",
+          "label": "Take antibiotic at breakfast",
+          "type": "event",
+          "cue_id": "breakfast",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at breakfast."
+        },
+        {
+          "id": "antibiotic_dinner",
+          "label": "Take antibiotic at dinner",
+          "type": "event",
+          "cue_id": "dinner",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at dinner."
+        },
+        {
+          "id": "asthma_1100",
+          "label": "Take asthma medication at 11:00",
+          "type": "time",
+          "target_time": "11:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 11:00."
+        },
+        {
+          "id": "asthma_2100",
+          "label": "Take asthma medication at 21:00",
+          "type": "time",
+          "target_time": "21:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 21:00."
+        },
+        {
+          "id": "parking_receipt_kiosk_d6",
+          "label": "Print the parking receipt when the kiosk starts blinking",
+          "type": "event",
+          "cue_id": "parking_receipt_kiosk_d6",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Print the parking receipt."
+        },
+        {
+          "id": "lab_dropbox_d6",
+          "label": "Drop off the sample slip when the lab drop box is unlocked",
+          "type": "event",
+          "cue_id": "lab_dropbox_d6",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Drop off the sample slip."
+        },
+        {
+          "id": "roof_access_sign_d6",
+          "label": "Take the photo of the leak note when the roof access sign is uncovered",
+          "type": "event",
+          "cue_id": "roof_access_sign_d6",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Take the photo of the leak note."
+        },
+        {
+          "id": "package_locker_light_d6",
+          "label": "Collect the package when the locker light turns green",
+          "type": "event",
+          "cue_id": "package_locker_light_d6",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Collect the package."
+        },
+        {
+          "id": "record_meter_reading_1_d6",
+          "label": "Record the meter reading at 19:25",
+          "type": "time",
+          "target_time": "19:25",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Record the meter reading."
+        },
+        {
+          "id": "call_insurance_2_d6",
+          "label": "Call the insurance desk at 14:45",
+          "type": "time",
+          "target_time": "14:45",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Call the insurance desk."
+        },
+        {
+          "id": "price_drop_72_d6",
+          "label": "Buy the storage bin when the price drops below $75",
+          "type": "event",
+          "cue_id": "price_drop_72_d6",
+          "cue_channel": "price_tracker",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Buy the storage bin."
+        },
+        {
+          "id": "laundry_done_d6",
+          "label": "Move the laundry when the cycle ends",
+          "type": "event",
+          "cue_id": "laundry_done_d6",
+          "cue_channel": "laundry_status",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Move the laundry."
+        },
+        {
+          "id": "shipment_out_for_delivery_d6",
+          "label": "Be home when the delivery is out for delivery",
+          "type": "event",
+          "cue_id": "shipment_out_for_delivery_d6",
+          "cue_channel": "shipment_status",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Be home."
+        }
+      ],
+      "lures": [
+        {
+          "id": "read_blurb",
+          "action_text": "Read a book blurb."
+        },
+        {
+          "id": "refill_bottle",
+          "action_text": "Refill your water bottle."
+        },
+        {
+          "id": "look_up_recipe",
+          "action_text": "Look up a recipe."
+        },
+        {
+          "id": "wipe_counter",
+          "action_text": "Wipe down the counter."
+        },
+        {
+          "id": "skim_headlines",
+          "action_text": "Skim the headlines."
+        },
+        {
+          "id": "call_friend",
+          "action_text": "Call a friend."
+        },
+        {
+          "id": "brew_tea",
+          "action_text": "Make a cup of tea."
+        },
+        {
+          "id": "review_notes",
+          "action_text": "Review your notes."
+        },
+        {
+          "id": "rearrange_books",
+          "action_text": "Rearrange the stack of books."
+        },
+        {
+          "id": "water_plants",
+          "action_text": "Water the plants."
+        },
+        {
+          "id": "organize_bag",
+          "action_text": "Organize your bag."
+        }
+      ],
+      "steps": [
+        {
+          "id": "d6_s1",
+          "time": "07:20",
+          "text": "Breakfast is the one brief part of the morning that still feels under your control. For a moment, you start a laundry cycle before you leave it alone. You glance at tracking again while you're between tasks.",
+          "options": [
+            "A) Pour coffee",
+            "B) Open a note",
+            "C) Check the window"
+          ],
+          "cues": [
+            "breakfast"
+          ],
+          "updates": [],
+          "state_events": {
+            "laundry_status": [
+              {
+                "id": "laundry_done_start_d6",
+                "text": "Laundry status: in progress.",
+                "value": null,
+                "meta": {
+                  "phase": "in_progress"
+                }
+              }
+            ],
+            "shipment_status": [
+              {
+                "id": "shipment_out_for_delivery_start_d6",
+                "text": "Delivery status: in transit.",
+                "value": null,
+                "meta": {
+                  "phase": "in_progress"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_breakfast",
+                "task_handle": "task_1"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6_s2",
+          "time": "09:10",
+          "text": "The timing for record the meter reading shifts a bit on your phone. The latest update puts record the meter reading at 11:00.",
+          "options": [
+            "A) Reply quickly",
+            "B) Keep walking",
+            "C) Put the phone away"
+          ],
+          "cues": [
+            "reschedule_notice_record_meter_reading_1_d6_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "record_meter_reading_1_d6",
+              "action": "reschedule",
+              "new_target_time": "11:00",
+              "new_label": "Record the meter reading at 11:00",
+              "new_action_text": "Record the meter reading.",
+              "cue_id": "reschedule_notice_record_meter_reading_1_d6_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d6_s3",
+          "time": "09:25",
+          "text": "The parking receipt kiosk near the clinic is blinking again.",
+          "options": [
+            "A) Fill a bottle",
+            "B) Look around",
+            "C) Keep moving"
+          ],
+          "cues": [
+            "parking_receipt_kiosk_d6"
+          ],
+          "updates": [],
+          "state_events": {
+            "shipment_status": [
+              {
+                "id": "shipment_out_for_delivery_d6",
+                "text": "Delivery status: out for delivery.",
+                "value": null,
+                "meta": {
+                  "phase": "complete"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "parking_receipt_kiosk_d6",
+                "task_handle": "task_18"
+              },
+              {
+                "id": "shipment_out_for_delivery_d6",
+                "task_handle": "task_22"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6_s4",
+          "time": "11:00",
+          "text": "You get a note that dropping off the sample slip does not need to happen after all. You keep in mind that the storage bin price might drop later. You get word that dropping off the sample slip no longer needs to happen today.",
+          "options": [
+            "A) Stack papers",
+            "B) Take a breath",
+            "C) Check the time"
+          ],
+          "cues": [
+            "cancel_notice_lab_dropbox_d6_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "lab_dropbox_d6",
+              "action": "cancel",
+              "cue_id": "cancel_notice_lab_dropbox_d6_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_1100",
+                "task_handle": "task_10"
+              },
+              {
+                "id": "record_meter_reading_1_d6",
+                "task_handle": "task_19"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6_s5",
+          "time": "12:45",
+          "text": "You keep telling yourself to call the insurance desk before too long.",
+          "options": [
+            "A) Order lunch",
+            "B) Sit down",
+            "C) Tidy your bag"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d6_s6",
+          "time": "13:00",
+          "text": "For a moment, you make a mental note to record the meter reading before the day gets away from you.",
+          "options": [
+            "A) Open the app",
+            "B) Flag it for later",
+            "C) Keep your place in line"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d6_s7",
+          "time": "14:45",
+          "text": "You notice the lab drop box is unlocked for afternoon drop-offs.",
+          "options": [
+            "A) Step outside",
+            "B) Stretch your shoulders",
+            "C) Read the sign"
+          ],
+          "cues": [
+            "lab_dropbox_d6"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "call_insurance_2_d6",
+                "task_handle": "task_14"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6_s8",
+          "time": "16:15",
+          "text": "You put the repair note where you can see it and sort out the next two errands.",
+          "options": [
+            "A) Clear a spot",
+            "B) Lean on the counter",
+            "C) Check your messages"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d6_s9",
+          "time": "18:15",
+          "text": "The roof access sign is temporarily uncovered while maintenance is there.",
+          "options": [
+            "A) Pull up a list",
+            "B) Take a sip of water",
+            "C) Look for a pen"
+          ],
+          "cues": [
+            "roof_access_sign_d6"
+          ],
+          "updates": [],
+          "state_events": {
+            "price_tracker": [
+              {
+                "id": "price_drop_72_d6",
+                "text": "Price check: storage bin is $72.",
+                "value": 72,
+                "meta": {
+                  "currency": "USD"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "price_drop_72_d6",
+                "task_handle": "task_2"
+              },
+              {
+                "id": "roof_access_sign_d6",
+                "task_handle": "task_23"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6_s10",
+          "time": "19:25",
+          "text": "Dinner is one more moving part in the evening rather than a full break from it. The package locker light is finally green instead of red.",
+          "options": [
+            "A) Make a note",
+            "B) Adjust your bag",
+            "C) Wait a moment"
+          ],
+          "cues": [
+            "dinner",
+            "package_locker_light_d6"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_dinner",
+                "task_handle": "task_17"
+              },
+              {
+                "id": "package_locker_light_d6",
+                "task_handle": "task_21"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6_s11",
+          "time": "21:00",
+          "text": "You check the lock, set the tracking page down, and let the day end.",
+          "options": [
+            "A) Start dinner",
+            "B) Put a pan on",
+            "C) Rinse vegetables"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_2100",
+                "task_handle": "task_8"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d6_s12",
+          "time": "21:20",
+          "text": "You check the lock, set the pharmacy receipt down, and let the day end.",
+          "options": [
+            "A) Brush your teeth",
+            "B) Read a page",
+            "C) Plug in your phone"
+          ],
+          "cues": [],
+          "updates": [],
+          "state_events": {
+            "laundry_status": [
+              {
+                "id": "laundry_done_d6",
+                "text": "Laundry status: cycle complete.",
+                "value": null,
+                "meta": {
+                  "phase": "complete"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "laundry_done_d6",
+                "task_handle": "task_12"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sunday",
+      "start_instructions": [
+        "Today's loose plan:",
+        "- Check the grade when it is released.",
+        "- Collect the reserve reading when the library hold is ready.",
+        "- Move money when the balance drops below $95.",
+        "- Pick up the handout packet when it shows up in the lab cubby.",
+        "- Pick up the loaner kit when it appears on the supply table.",
+        "- Review the lab notes at 21:35.",
+        "- Tape up the notice when the lecture hall side door is propped open."
+      ],
+      "tasks": [
+        {
+          "id": "antibiotic_breakfast",
+          "label": "Take antibiotic at breakfast",
+          "type": "event",
+          "cue_id": "breakfast",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at breakfast."
+        },
+        {
+          "id": "antibiotic_dinner",
+          "label": "Take antibiotic at dinner",
+          "type": "event",
+          "cue_id": "dinner",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take antibiotic at dinner."
+        },
+        {
+          "id": "asthma_1100",
+          "label": "Take asthma medication at 11:00",
+          "type": "time",
+          "target_time": "11:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 11:00."
+        },
+        {
+          "id": "asthma_2100",
+          "label": "Take asthma medication at 21:00",
+          "type": "time",
+          "target_time": "21:00",
+          "regular": true,
+          "encoding": "start",
+          "action_text": "Take asthma medication at 21:00."
+        },
+        {
+          "id": "studio_supply_table_d7",
+          "label": "Pick up the loaner kit when it appears on the supply table",
+          "type": "event",
+          "cue_id": "studio_supply_table_d7",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Pick up the loaner kit."
+        },
+        {
+          "id": "lab_cubby_d7",
+          "label": "Pick up the handout packet when it shows up in the lab cubby",
+          "type": "event",
+          "cue_id": "lab_cubby_d7",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Pick up the handout packet."
+        },
+        {
+          "id": "lecture_side_door_d7",
+          "label": "Tape up the notice when the lecture hall side door is propped open",
+          "type": "event",
+          "cue_id": "lecture_side_door_d7",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Tape up the notice."
+        },
+        {
+          "id": "review_lab_notes_1_d7",
+          "label": "Review the lab notes at 21:35",
+          "type": "time",
+          "target_time": "21:35",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Review the lab notes."
+        },
+        {
+          "id": "course_grade_released_d7",
+          "label": "Check the grade when it is released",
+          "type": "event",
+          "cue_id": "course_grade_released_d7",
+          "cue_channel": "course_portal",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Check the grade."
+        },
+        {
+          "id": "balance_low_95_d7",
+          "label": "Move money when the balance drops below $95",
+          "type": "event",
+          "cue_id": "balance_low_95_d7",
+          "cue_channel": "bank_balance",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Move money."
+        },
+        {
+          "id": "library_hold_second_ready_d7",
+          "label": "Collect the reserve reading when the library hold is ready",
+          "type": "event",
+          "cue_id": "library_hold_second_ready_d7",
+          "cue_channel": "library_hold",
+          "regular": false,
+          "encoding": "start",
+          "action_text": "Collect the reserve reading."
+        },
+        {
+          "id": "crossday_4",
+          "label": "Bring the poster tube when you notice the studio supply table",
+          "action_text": "Bring the poster tube.",
+          "type": "event",
+          "cue_id": "studio_supply_table_d7",
+          "regular": false,
+          "encoding": "start",
+          "cross_day": true,
+          "cross_day_offset": 2
+        },
+        {
+          "id": "crossday_6",
+          "label": "Bring the reserve reading when you notice the lecture hall side door",
+          "action_text": "Bring the reserve reading.",
+          "type": "event",
+          "cue_id": "lecture_side_door_d7",
+          "regular": false,
+          "encoding": "start",
+          "cross_day": true,
+          "cross_day_offset": 3
+        }
+      ],
+      "lures": [
+        {
+          "id": "order_snack",
+          "action_text": "Order a snack."
+        },
+        {
+          "id": "browse_menu",
+          "action_text": "Browse a dinner menu."
+        },
+        {
+          "id": "fold_sweater",
+          "action_text": "Fold the sweater on the chair."
+        },
+        {
+          "id": "archive_photos",
+          "action_text": "Archive a few photos."
+        },
+        {
+          "id": "sort_mail",
+          "action_text": "Sort the mail."
+        },
+        {
+          "id": "stretch_break",
+          "action_text": "Take a short stretch break."
+        },
+        {
+          "id": "clear_downloads",
+          "action_text": "Clear old downloads."
+        },
+        {
+          "id": "clean_keyboard",
+          "action_text": "Clean the keyboard."
+        },
+        {
+          "id": "clean_mug",
+          "action_text": "Clean the mug in the sink."
+        },
+        {
+          "id": "label_folder",
+          "action_text": "Label a folder."
+        },
+        {
+          "id": "queue_playlist",
+          "action_text": "Queue up a playlist."
+        },
+        {
+          "id": "review_notes",
+          "action_text": "Review your notes."
+        }
+      ],
+      "steps": [
+        {
+          "id": "d7_s1",
+          "time": "08:05",
+          "text": "Breakfast lands right before the rest of the day starts competing for space.",
+          "options": [
+            "A) Pour coffee",
+            "B) Open a note",
+            "C) Check the window"
+          ],
+          "cues": [
+            "breakfast"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_breakfast",
+                "task_handle": "task_11"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s2",
+          "time": "08:40",
+          "text": "You shift the reserve reading into your bag and look over what has to happen first.",
+          "options": [
+            "A) Reply quickly",
+            "B) Keep walking",
+            "C) Put the phone away"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d7_s3",
+          "time": "11:00",
+          "text": "You keep telling yourself to review the lab notes before too long.",
+          "options": [
+            "A) Fill a bottle",
+            "B) Look around",
+            "C) Keep moving"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_1100",
+                "task_handle": "task_10"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s4",
+          "time": "12:10",
+          "text": "Your lab cubby has the handout packet tucked inside it.",
+          "options": [
+            "A) Stack papers",
+            "B) Take a breath",
+            "C) Check the time"
+          ],
+          "cues": [
+            "lab_cubby_d7"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "lab_cubby_d7",
+                "task_handle": "task_9"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s5",
+          "time": "12:25",
+          "text": "You get a brief note that the timing for review the lab notes has shifted. A later note nudges review the lab notes to 15:40.",
+          "options": [
+            "A) Order lunch",
+            "B) Sit down",
+            "C) Tidy your bag"
+          ],
+          "cues": [
+            "reschedule_notice_review_lab_notes_1_d7_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "review_lab_notes_1_d7",
+              "action": "reschedule",
+              "new_target_time": "15:40",
+              "new_label": "Review the lab notes at 15:40",
+              "new_action_text": "Review the lab notes.",
+              "cue_id": "reschedule_notice_review_lab_notes_1_d7_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d7_s6",
+          "time": "12:45",
+          "text": "A message lands and knocks taping up the notice off your list. A cancellation note comes through: you can skip taping up the notice today.",
+          "options": [
+            "A) Open the app",
+            "B) Flag it for later",
+            "C) Keep your place in line"
+          ],
+          "cues": [
+            "cancel_notice_lecture_side_door_d7_d0"
+          ],
+          "updates": [
+            {
+              "task_id": "lecture_side_door_d7",
+              "action": "cancel",
+              "cue_id": "cancel_notice_lecture_side_door_d7_d0"
+            }
+          ],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        },
+        {
+          "id": "d7_s7",
+          "time": "13:20",
+          "text": "The lecture hall side door is propped open while the room resets.",
+          "options": [
+            "A) Step outside",
+            "B) Stretch your shoulders",
+            "C) Read the sign"
+          ],
+          "cues": [
+            "lecture_side_door_d7"
+          ],
+          "updates": [],
+          "state_events": {
+            "course_portal": [
+              {
+                "id": "course_grade_released_d7",
+                "text": "Course portal: grade released.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "crossday_6",
+                "task_handle": "task_3"
+              },
+              {
+                "id": "course_grade_released_d7",
+                "task_handle": "task_5"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s8",
+          "time": "15:40",
+          "text": "You put the handout packet where you can see it and sort out the next two errands.",
+          "options": [
+            "A) Clear a spot",
+            "B) Lean on the counter",
+            "C) Check your messages"
+          ],
+          "cues": [],
+          "updates": [],
+          "state_events": {
+            "bank_balance": [
+              {
+                "id": "balance_low_95_d7",
+                "text": "Balance check: $92.",
+                "value": 92,
+                "meta": {
+                  "currency": "USD"
+                }
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "review_lab_notes_1_d7",
+                "task_handle": "task_12"
+              },
+              {
+                "id": "balance_low_95_d7",
+                "task_handle": "task_24"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s9",
+          "time": "18:00",
+          "text": "The studio supply table has the loaner kit set out.",
+          "options": [
+            "A) Pull up a list",
+            "B) Take a sip of water",
+            "C) Look for a pen"
+          ],
+          "cues": [
+            "studio_supply_table_d7"
+          ],
+          "updates": [],
+          "state_events": {
+            "library_hold": [
+              {
+                "id": "library_hold_second_ready_d7",
+                "text": "Library notice: reserve reading is ready.",
+                "value": null,
+                "meta": {}
+              }
+            ]
+          },
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "crossday_4",
+                "task_handle": "task_13"
+              },
+              {
+                "id": "library_hold_second_ready_d7",
+                "task_handle": "task_23"
+              },
+              {
+                "id": "studio_supply_table_d7",
+                "task_handle": "task_6"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s10",
+          "time": "20:40",
+          "text": "You pull dinner together before the rest of the night gets thinner and quieter.",
+          "options": [
+            "A) Make a note",
+            "B) Adjust your bag",
+            "C) Wait a moment"
+          ],
+          "cues": [
+            "dinner"
+          ],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "antibiotic_dinner",
+                "task_handle": "task_22"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s11",
+          "time": "21:00",
+          "text": "You put the last cup in the sink, move the handout packet aside, and get ready for bed.",
+          "options": [
+            "A) Start dinner",
+            "B) Put a pan on",
+            "C) Rinse vegetables"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "due",
+            "actions": [
+              {
+                "id": "asthma_2100",
+                "task_handle": "task_4"
+              }
+            ]
+          }
+        },
+        {
+          "id": "d7_s12",
+          "time": "21:35",
+          "text": "You dim the room, plug in your phone, and leave the handout packet for tomorrow.",
+          "options": [
+            "A) Brush your teeth",
+            "B) Read a page",
+            "C) Plug in your phone"
+          ],
+          "cues": [],
+          "updates": [],
+          "groundtruth": {
+            "status": "none",
+            "actions": []
+          }
+        }
+      ]
+    }
+  ]
+}

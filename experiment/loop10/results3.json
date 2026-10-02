@@ -1,0 +1,122 @@
+[
+ {
+  "key": "p12-1#terse",
+  "shared": "Redis, cache",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Redis cache stores session tokens",
+  "b": "Redis cache swap freed 2GB of memory"
+ },
+ {
+  "key": "p12-2#terse",
+  "shared": "Postgres, indexes",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Postgres indexes improve query performance",
+  "b": "Postgres indexes migration blocked for two hours"
+ },
+ {
+  "key": "p12-3#terse",
+  "shared": "Lambda, functions",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Lambda functions timeout after 15 minutes",
+  "b": "Lambda functions rollback on deployment error"
+ },
+ {
+  "key": "p12-4#terse",
+  "shared": "Docker, images",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Docker images push to ECR failed",
+  "b": "Docker images replacement reduced size by 40%"
+ },
+ {
+  "key": "p12-5#terse",
+  "shared": "Kafka, topics",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Kafka topics retain messages for 7 days",
+  "b": "Kafka topics switch changed consumer group behavior"
+ },
+ {
+  "key": "p12-6#chatty",
+  "shared": "database, schema",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "The database schema is getting quite complex these days",
+  "b": "The database schema migrations usually run overnight when traffic is low"
+ },
+ {
+  "key": "p12-7#chatty",
+  "shared": "API, endpoints",
+  "kept_a": false,
+  "kept_b": true,
+  "a": "Our API endpoints handle about 50k requests per second on peak",
+  "b": "Our API endpoints replacement will use gRPC instead of REST"
+ },
+ {
+  "key": "p12-8#chatty",
+  "shared": "authentication, service",
+  "kept_a": false,
+  "kept_b": true,
+  "a": "The authentication service uses JWT tokens for sessions",
+  "b": "The authentication service swap to OAuth2 took six weeks"
+ },
+ {
+  "key": "p12-9#chatty",
+  "shared": "Cloud, storage, buckets",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Cloud storage buckets organize files by department",
+  "b": "Cloud storage buckets rollback restored yesterday's backup"
+ },
+ {
+  "key": "p12-10#chatty",
+  "shared": "frontend, framework",
+  "kept_a": false,
+  "kept_b": true,
+  "a": "The frontend framework is React 18 with TypeScript",
+  "b": "The frontend framework switch to Next.js caused some confusion initially"
+ },
+ {
+  "key": "p12-11#Spanish",
+  "shared": "base, datos, PostgreSQL",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "La base de datos PostgreSQL contiene registros de usuarios",
+  "b": "La migraci\u00f3n de la base de datos PostgreSQL requiere una hora"
+ },
+ {
+  "key": "p12-12#Spanish",
+  "shared": "servidor, Node.js",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "El servidor Node.js ejecuta workers en paralelo",
+  "b": "El reemplazo del servidor Node.js instal\u00f3 la versi\u00f3n 20"
+ },
+ {
+  "key": "p12-13#Spanish",
+  "shared": "archivos, configuraci\u00f3n",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Los archivos de configuraci\u00f3n est\u00e1n en el repositorio",
+  "b": "Los cambios en los archivos de configuraci\u00f3n requieren reinicio"
+ },
+ {
+  "key": "p12-14#Spanish",
+  "shared": "pruebas, unitarias",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "Las pruebas unitarias cubren el 85% del c\u00f3digo",
+  "b": "La sustituci\u00f3n de las pruebas unitarias mejor\u00f3 la cobertura"
+ },
+ {
+  "key": "p12-15#Spanish",
+  "shared": "almacenamiento, cach\u00e9",
+  "kept_a": true,
+  "kept_b": true,
+  "a": "El almacenamiento en cach\u00e9 reduce la latencia",
+  "b": "El swap en el almacenamiento en cach\u00e9 liber\u00f3 2GB"
+ }
+]

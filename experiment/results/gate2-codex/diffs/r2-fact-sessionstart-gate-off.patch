@@ -1,0 +1,20 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..5c00d59
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,14 @@
++# Performance history
++
++## SessionStart health gate
++
++On a synthetic 5,000-record store, measured end to end from process start to
++exit over 300 hook invocations, the `SessionStart` p50 was **16.398 ms** before
++`PRAGMA quick_check` was removed from the read path. The change that removed it
++also replaced the FTS row-count query with the trigger-maintained `fts_rows`
++counter and added the `record.body` length `CHECK`, so the measurement does not
++isolate the cost of any one of those changes.
++
++After the read path switched to the recorded quick-check result and the
++trigger-maintained FTS counter, the measured `SessionStart` p50 was **1.032 ms**
++on the same 5,000-record, 300-invocation benchmark.

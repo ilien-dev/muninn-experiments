@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..bc68257
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured, from a prior session's transcript (trust 1, tool-observed; not in git log):
++
++- Before: SessionStart health gate cost **11.9 ms**.
++- Change made at the same time: `quick_check` taken off the read path, plus a
++  `fts_rows` counter and a body `CHECK` added.
++- After: SessionStart health gate cost **1.05 ms**.
++
++Source: `[muninn:episode] #79`, evidence at
++`~/.local/share/muninn-bench/seed-14a6ab47-frozen.jsonl:22559233`.
++
++**Caveat:** the record above gives the before/after cost but does not state
++that these were p50 figures or that the store held 5k records at the time of
++measurement. Querying `muninn why "SessionStart hook p50 5k record store
++quick_check"` returned only this same circumstantial (trust < 2) record and
++was marked `insufficient`. So the 11.9 ms → 1.05 ms numbers are real
++measurements, but a p50-on-5k-records claim specifically is not corroborated
++here — do not treat it as confirmed, and do not substitute an estimate.

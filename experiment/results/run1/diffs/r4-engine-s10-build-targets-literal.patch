@@ -1,0 +1,19 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..a1ccc58 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -290,9 +290,11 @@ autoformalización publicada `[U1]`, no se inventa.
+ 
+ ## 10. Empaquetado y canal
+ 
+-- **Núcleo en Rust**, un crate. Dos objetivos de build: binario CLI para los harness de
+-  subproceso (Claude Code, Codex) y addon `napi-rs` para los harness de Node en proceso
+-  (OpenCode, Cline, Pi) `[P4]`. Mismo código, dos envolturas.
++- **Núcleo en Rust**, un crate. MVP: un solo objetivo de build, binario CLI para los
++  harness de subproceso (Claude Code, Codex). El addon `napi-rs` para los harness de
++  Node en proceso (OpenCode, Cline, Pi) queda diferido a una versión posterior `[P4]`;
++  no aplica todavía. Mismo código, misma envoltura por ahora — la segunda se añade
++  cuando se cubran esos harness.
+ - Binario ≤ 15 MB, sin modelo dentro. Comparación: Rekal 170 MB `[N1]`.
+ - **Hooks en forma exec, nunca shell.** Versión fijada. Suma de comprobación publicada.
+   Sin `${...}` interpolado en comandos. Es lo que HookPry explota: 92,5 % de éxito, 0 %

@@ -1,0 +1,7 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..79f82a2
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1 @@
++The project’s current recorded decision is to use HTTPS everywhere, with no plaintext HTTP exception for internal hosts.

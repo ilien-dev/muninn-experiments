@@ -1,0 +1,52 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-generated",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-generated"
+    },
+    "query": "Add the % operator (modulo) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:32:56.093560+00:00",
+        "hash": "708b55ae59241a7490bacf8a92d2d115",
+        "id": "ab6c9115-82c5-4275-a7a0-34922a864bf7",
+        "memory": "Operator help is generated; update it with operator registry changes.\nFor sequence expr-generated, task expr-generated-s02, the public task prompt was: Add the // operator (floor_divide) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "expr-generated"
+        },
+        "role": "user",
+        "score": 0.8077289080607596,
+        "updated_at": "2026-09-14T10:32:56.093560+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-generated"
+      },
+      {
+        "created_at": "2026-09-14T10:32:52.866476+00:00",
+        "hash": "9d0719e70ae590fb357566ed43b0172a",
+        "id": "f5b8e48b-4fc1-492a-afcc-aa215f99e0f5",
+        "memory": "For sequence expr-generated, task expr-generated-s01, the public task prompt was: Add the ** operator (power) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "expr-generated"
+        },
+        "role": "user",
+        "score": 0.7718640779608723,
+        "updated_at": "2026-09-14T10:32:52.866476+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__expr-generated"
+      }
+    ]
+  }
+}

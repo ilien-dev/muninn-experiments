@@ -1,0 +1,30 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..0c031f5
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,24 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not record a measured full-recall `UserPromptSubmit` p95 for
++the adversarial synthetic corpus whose vocabulary was limited to 30 words,
++either before or after the term-selection fix. Those two numbers are therefore
++unknown; they must not be inferred from the other benchmarks in the repository.
++
++The fix was to rank prompt terms by inverse document frequency (IDF), retain at
++most the eight highest-IDF terms, discard terms absent from the store, and skip
++terms occurring in more than one third of a store of at least 50 records. This
++keeps ubiquitous terms—and their long posting lists—out of the FTS5 `MATCH`
++query. The synthetic performance corpus was also changed to combine 30 frequent
++domain words with 2,000 rare identifiers, rather than making every record share
++the same tiny vocabulary.
++
++For context only, the project's recorded 50,000-record Python stage benchmark
++measured BM25 p95 at **35.53 ms** with the first 24 terms and **8.75 ms** with
++the eight highest-IDF terms (`research/00-evidence-log.md`, H6). These are BM25
++stage measurements on a different corpus, not full-hook measurements for the
++adversarial 30-word corpus. Likewise, the recorded **4.31 ms** full-hook p95
++(`research/00-evidence-log.md`, I3) is from the prototype's normal corpus and
++cannot supply the missing adversarial after-value.

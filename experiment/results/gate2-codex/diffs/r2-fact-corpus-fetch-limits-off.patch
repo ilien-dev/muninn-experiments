@@ -1,0 +1,29 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..0ae4788
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,23 @@
++# Corpus fetching
++
++## Rate limit actually encountered
++
++The repository does not retain enough fetch telemetry to state the per-domain rate
++limit that this corpus fetch actually encountered. In particular, no fetch script,
++request log, `Retry-After` response, or limiter configuration is present from which
++to recover:
++
++- the number of visits allowed per window;
++- the window length; or
++- the cooldown applied after a breach.
++
++Those values are therefore **unknown**; no numeric limit is asserted here. The only
++contemporaneous description is in `GATE1.md`, which says that fetching was
++rate-limited and performed incrementally.
++
++## Hosts used
++
++- `raw.githubusercontent.com` — the raw-file host used to fetch the corpus files,
++  recorded in the header of `manifest.tsv`.
++
++No other CDN or mirror host used for the corpus fetch is recorded in this checkout.

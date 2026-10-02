@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..6b89073
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++The project's current recorded decision is to use LRU (Least Recently Used) eviction with a fixed 300-second TTL for the cache layer. It was chosen because a fixed TTL combined with recency-based eviction is simpler to reason about, making cache behavior, expiration, and staleness more predictable.

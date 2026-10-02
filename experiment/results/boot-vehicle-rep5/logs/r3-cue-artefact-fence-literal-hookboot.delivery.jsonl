@@ -1,0 +1,10 @@
+{"at":1789367770671,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[83,84],"tokens":193,"reason":"cue:event:session_start"}
+{"at":1789367770733,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789367770733,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[58],"tokens":0,"reason":"gated:budget"}
+{"at":1789367770733,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[75],"tokens":0,"reason":"gated:budget"}
+{"at":1789367770733,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[81],"tokens":0,"reason":"gated:budget"}
+{"at":1789367770733,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[88,89,64,74],"tokens":520,"reason":"literal"}
+{"at":1789367788406,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[90],"tokens":0,"reason":"cue:dir:crates/muninn-bench/src,symbol:Cli,symbol:Cmd,symbol:DIRS,symbol:Rng,symbol:WORDS,symbol:experiment,symbol:next,symbol:pct,symbol:pick,symbol:populate,symbol:word@post_tool"}
+{"at":1789367788406,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[90],"tokens":64,"reason":"literal:post_tool"}
+{"at":1789367823851,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[87],"tokens":0,"reason":"cue:dir:crates/muninn-cli/src@post_tool"}
+{"at":1789367823851,"session":"6f70537b-de20-4e79-b662-ee1127ef9848","arm":"literal","ids":[87],"tokens":59,"reason":"literal:post_tool"}

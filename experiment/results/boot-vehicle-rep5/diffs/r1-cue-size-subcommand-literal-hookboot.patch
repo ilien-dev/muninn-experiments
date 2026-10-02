@@ -1,0 +1,35 @@
+diff --git a/crates/muninn-cli/src/main.rs b/crates/muninn-cli/src/main.rs
+index d3b6bf6..3bdbf7c 100644
+--- a/crates/muninn-cli/src/main.rs
++++ b/crates/muninn-cli/src/main.rs
+@@ -57,6 +57,8 @@ enum Cmd {
+     Status,
+     /// Full health report
+     Doctor,
++    /// Size in bytes of the store file
++    Bench,
+     /// Hook entry point: reads the harness JSON on stdin
+     Hook { event: String },
+     /// Ingest a transcript file now (what Stop/SessionEnd do automatically)
+@@ -215,6 +217,21 @@ fn main() {
+                 }
+             }
+         }
++        Cmd::Bench => match std::fs::metadata(paths.db_path()) {
++            Ok(m) => {
++                let bytes = m.len();
++                if cli.json {
++                    output::json(&serde_json::json!({ "store_bytes": bytes }));
++                } else {
++                    output::out(&format!("store: {bytes} bytes"));
++                }
++                0
++            }
++            Err(e) => {
++                output::err(&format!("muninn bench: {e}"));
++                1
++            }
++        },
+         Cmd::Hook { event } => hook::run(&event, cli.cwd),
+         Cmd::Ingest { transcript } => match Db::open(&paths.db_path(), Mode::ReadWrite)
+             .map_err(anyhow::Error::from)

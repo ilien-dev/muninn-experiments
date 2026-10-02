@@ -1,0 +1,12 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..7112a6a
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,6 @@
++# Licencia
++
++El proyecto declara su licencia de origen en el campo `license = "MIT"` de `[workspace.package]`
++en `Cargo.toml`, heredado por todos los crates del workspace vía `license.workspace = true`; no
++existe un fichero `LICENSE` en la raíz del repositorio, ni ningún otro documento del proyecto que
++registre una decisión distinta o posterior sobre la licencia.

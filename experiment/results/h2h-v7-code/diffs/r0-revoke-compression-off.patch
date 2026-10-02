@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..f74ea5e
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++This project has no recorded decision specifying a transport compression codec; a search of the repository's documentation (README.md, CHANGELOG.md, docs/doc.md) and codebase turned up no ADR, policy note, or changelog entry naming a chosen codec, only unrelated uses of the word "compression" (e.g., a mention of compression middleware in the gin-contrib ecosystem list) and unrelated uses of "codec" (e.g., the `codec/json` package and the Codecov code-coverage tool), so nothing current is recorded here.

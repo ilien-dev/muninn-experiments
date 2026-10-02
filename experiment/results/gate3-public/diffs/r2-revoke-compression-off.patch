@@ -1,0 +1,12 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..737dda6
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,6 @@
++# Transport compression codec
++
++No current decision is recorded for a transport compression codec: Muninn ships
++as a local, server-less binary with no network transport in its read or write
++path, so no codec choice exists in the project's recorded decisions
++(`research/CONCLUSION.md`, `research/00-evidence-log.md`, `design/ENGINE.md`).

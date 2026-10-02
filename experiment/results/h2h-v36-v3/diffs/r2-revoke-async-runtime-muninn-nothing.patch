@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..21b8e5c
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async runtime
++
++No current decision on the async runtime is recorded for this project. Until one is recorded, this policy sets no value, and no runtime should be assumed from it.

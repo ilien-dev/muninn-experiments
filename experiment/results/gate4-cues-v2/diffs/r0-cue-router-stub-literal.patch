@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..4955ac0 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,13 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Rutas posibles para responder una pregunta de `muninn why`.
++pub enum Route {
++    Episode,
++    Decision,
++    Invariant,
++}
++
++/// Decide la ruta para una pregunta. Sin implementar: Fase 4.
++pub fn route_question(_question: &str) -> Route {
++    todo!("enrutamiento de preguntas, Fase 4")
++}

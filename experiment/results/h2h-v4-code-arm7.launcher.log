@@ -1,0 +1,22 @@
+seeded r0 muninn-floor -> /tmp/muninn-h2h/h2h-v4-code/snap-r0-muninn-floor
+seeded r1 muninn-floor -> /tmp/muninn-h2h/h2h-v4-code/snap-r1-muninn-floor
+seeded r2 muninn-floor -> /tmp/muninn-h2h/h2h-v4-code/snap-r2-muninn-floor
+30 cells planned, 30 to run
+r0 revoke-password-hashing muninn-floor -> fail (38s)
+r0 revoke-version-scheme muninn-floor -> fail (40s)
+r0 revoke-internal-http muninn-floor -> pass (40s)
+r0 revoke-tls-verification muninn-floor -> pass (38s)
+r0 revoke-compression muninn-floor -> fail (45s)
+r0 revoke-license muninn-floor -> fail (68s)
+r0 revoke-tls-backend muninn-floor -> fail (29s)
+r0 revoke-wire-format muninn-floor -> pass (37s)
+r1 revoke-async-runtime muninn-floor -> fail (31s)
+r0 revoke-async-runtime muninn-floor -> fail (61s)
+r0 revoke-cache-eviction muninn-floor -> pass (70s)
+r1 revoke-wire-format muninn-floor -> fail (45s)
+r1 revoke-tls-backend muninn-floor -> fail (49s)
+r1 revoke-password-hashing muninn-floor -> fail (40s)
+r1 revoke-license muninn-floor -> fail (70s)
+r1 revoke-internal-http muninn-floor -> pass (18s)
+r1 revoke-tls-verification muninn-floor -> pass (27s)
+r1 revoke-compression muninn-floor -> fail (33s)

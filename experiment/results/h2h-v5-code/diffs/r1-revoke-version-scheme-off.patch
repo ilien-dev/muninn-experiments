@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..fdb95a7
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++This project has no current recorded decision on a version numbering scheme: no policy, ADR, or other document in this repository specifies or mandates a particular versioning approach (such as Semantic Versioning or Calendar Versioning), and no such decision was found in the project's history.

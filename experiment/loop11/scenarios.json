@@ -1,0 +1,64 @@
+{
+ "heldout11": [
+  {
+   "id": "h11-db-pool",
+   "topic": "database connection pool size",
+   "old": "10 connections",
+   "new": "25 connections"
+  },
+  {
+   "id": "h11-log-rotation",
+   "topic": "log file rotation threshold",
+   "old": "100 MB",
+   "new": "500 MB"
+  },
+  {
+   "id": "h11-batch-size",
+   "topic": "asynchronous batch processing size",
+   "old": "50 items",
+   "new": "200 items"
+  },
+  {
+   "id": "h11-req-timeout",
+   "topic": "HTTP request timeout",
+   "old": "5 seconds",
+   "new": "15 seconds"
+  },
+  {
+   "id": "h11-queue-depth",
+   "topic": "maximum message queue depth",
+   "old": "1000 messages",
+   "new": "5000 messages"
+  },
+  {
+   "id": "h11-session-ttl",
+   "topic": "session token expiration time",
+   "old": "24 hours",
+   "new": "7 days"
+  },
+  {
+   "id": "h11-index-refresh",
+   "topic": "search index rebuild interval",
+   "old": "30 minutes",
+   "new": "5 minutes"
+  },
+  {
+   "id": "h11-rate-limit",
+   "topic": "rate limit tokens per minute",
+   "old": "100 tokens",
+   "new": "500 tokens"
+  },
+  {
+   "id": "h11-buffer-alloc",
+   "topic": "streaming response buffer allocation",
+   "old": "64 MB",
+   "new": "256 MB"
+  },
+  {
+   "id": "h11-sharding",
+   "topic": "data sharding partition count",
+   "old": "16 shards",
+   "new": "64 shards"
+  }
+ ]
+}

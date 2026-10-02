@@ -1,0 +1,31 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..a934f08
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,25 @@
++# Fetching notes for this corpus
++
++## Hosts
++
++Files were located via GitHub code search (`grep.app`) and fetched raw via
++`raw.githubusercontent.com` — this is stated in the header of `manifest.tsv`:
++
++```
++# repo	branch	path — public CLAUDE.md / AGENTS.md files located via GitHub code search (grep.app) on 2026-09-12; fetched raw via raw.githubusercontent.com
++```
++
++No other CDN or mirror host (e.g. jsdelivr, statically) appears anywhere in this
++repository's code, docs, or fetch records. If a mirror was used at some point, it
++left no trace here.
++
++## Rate limit
++
++`GATE1.md` records only a qualitative note: "fetching is rate-limited; the
++remaining entries are fetched incrementally" — 115 of 323 manifest entries were on
++disk at measurement time. No file in this repository states a concrete per-domain
++limit: not visits per window, not the window length, not a cooldown after a
++breach.
++
++I could not find those numbers. Rather than invent a visits/window/cooldown
++figure, this file says so.

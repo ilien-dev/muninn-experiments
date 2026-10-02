@@ -1,0 +1,26 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c42eeb2
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,20 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not contain a recorded full-recall p95 for the adversarial
++synthetic 30-word-vocabulary workload before the term-selection fix. No number is
++reported here for that baseline rather than substituting an estimate.
++
++The fix was to select at most eight prompt terms by inverse document frequency
++(IDF), dropping terms absent from the store and, for stores with at least 50
++active records, terms appearing in more than one third of the store. This keeps
++uninformative high-frequency terms and their long posting lists out of the BM25
++query.
++
++The repository also does not contain a recorded post-fix full-recall p95 tied to
++that specific adversarial synthetic workload. The separately documented
++**4.31 ms p95** is an end-to-end `UserPromptSubmit` measurement on a 50,000-record
++prototype corpus (`research/00-evidence-log.md`, measurement I3); it is not
++identified as the adversarial 30-word-vocabulary result and therefore is not
++used as the post-fix number here.

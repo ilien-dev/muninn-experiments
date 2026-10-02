@@ -1,0 +1,22 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..8e45e67
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,16 @@
++# Fetching — rate limits and mirrors
++
++Source: Muninn episode record for this project (session 14a6ab47, 2026-09-13, trust 1 — observed in this project's own session transcript, not re-verified here).
++
++## Rate limit
++
++- 12 visits per 60 s, per domain.
++- Cooldown after a breach: 900 s.
++
++## Mirror / CDN hosts used
++
++- `raw.githubusercontent.com`
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>`
++- `cdn.statically.io` — noted as slow / prone to timeouts.
++
++Fetched files were written flat into `~/.svipall/out/`.

@@ -1,0 +1,17 @@
+diff --git a/docs/grammars.md b/docs/grammars.md
+new file mode 100644
+index 0000000..507700f
+--- /dev/null
++++ b/docs/grammars.md
+@@ -0,0 +1,11 @@
++# Grammars del symbol graph
++
++Grammars tree-sitter compilados en el binario MVP (`muninn-symbols`, Fase 5), según README.md.
++
++| Lenguaje              | Crate                  | Extensiones    |
++| --------------------- | ----------------------- | -------------- |
++| Rust                  | `tree-sitter-rust`       | `.rs`          |
++| TypeScript/TSX        | `tree-sitter-typescript` | `.ts`, `.tsx`  |
++| JavaScript/JSX        | `tree-sitter-javascript` | `.js`, `.jsx`  |
++| Python                | `tree-sitter-python`     | `.py`          |
++| Go                    | `tree-sitter-go`         | `.go`          |

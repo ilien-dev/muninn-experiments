@@ -1,0 +1,518 @@
+{
+ "model": "gemma4-e4b-q4km.gguf",
+ "sha256": "d35a3aa7a6d47de237fd488bb6f7f3efd62908d828f85a63da0ee93acdbefe9f",
+ "threads": 16,
+ "prefix_tokens_sample": 107,
+ "full_prompt": [
+  {
+   "id": "g3-compression#terse|g3-compression#terse|b",
+   "ms": 681.0090899962233,
+   "same_p": true
+  },
+  {
+   "id": "g3-internal-http#terse|g3-password-hashing#terse|b",
+   "ms": 725.1347700002952,
+   "same_p": true
+  },
+  {
+   "id": "new-gofmt#terse|g3-wire-format#terse|b",
+   "ms": 751.3341509984457,
+   "same_p": true
+  },
+  {
+   "id": "g3-license#terse|g3-license#terse|b",
+   "ms": 740.2865670010215,
+   "same_p": true
+  },
+  {
+   "id": "new-markdown#terse|g3-internal-http#terse|b",
+   "ms": 677.5589490061975,
+   "same_p": true
+  },
+  {
+   "id": "g3-async-runtime#terse|new-date-lib#terse|b",
+   "ms": 684.9742920021527,
+   "same_p": true
+  },
+  {
+   "id": "new-flags#terse|new-flags#terse|b",
+   "ms": 678.1967589995475,
+   "same_p": true
+  },
+  {
+   "id": "g3-tls-backend#terse|new-region#terse|b",
+   "ms": 631.6873480027425,
+   "same_p": true
+  },
+  {
+   "id": "new-date-lib#terse|new-errors#terse|b",
+   "ms": 625.543636000657,
+   "same_p": true
+  },
+  {
+   "id": "g3-cache-eviction#chatty|g3-password-hashing#chatty|b",
+   "ms": 856.5463580016512,
+   "same_p": true
+  },
+  {
+   "id": "new-orm#chatty|g3-wire-format#chatty|b",
+   "ms": 832.7357070011203,
+   "same_p": true
+  },
+  {
+   "id": "new-errors#chatty|g3-version-scheme#chatty|b",
+   "ms": 808.2210360007593,
+   "same_p": false
+  },
+  {
+   "id": "g3-tls-verification#chatty|g3-internal-http#chatty|b",
+   "ms": 726.2031799982651,
+   "same_p": true
+  },
+  {
+   "id": "new-region#chatty|new-base-image#chatty|b",
+   "ms": 789.6675089941709,
+   "same_p": true
+  },
+  {
+   "id": "g3-version-scheme#chatty|new-flags#chatty|b",
+   "ms": 850.2603349988931,
+   "same_p": true
+  },
+  {
+   "id": "new-queue#chatty|new-markdown#chatty|b",
+   "ms": 834.166667998943,
+   "same_p": false
+  },
+  {
+   "id": "g3-wire-format#chatty|new-errors#chatty|b",
+   "ms": 839.2807799973525,
+   "same_p": true
+  },
+  {
+   "id": "new-ci#Spanish|g3-cache-eviction#Spanish|b",
+   "ms": 663.786153003457,
+   "same_p": true
+  },
+  {
+   "id": "g3-password-hashing#Spanish|g3-wire-format#Spanish|b",
+   "ms": 651.4045270014321,
+   "same_p": false
+  },
+  {
+   "id": "new-base-image#Spanish|g3-version-scheme#Spanish|b",
+   "ms": 645.4257250006776,
+   "same_p": true
+  },
+  {
+   "id": "g3-compression#Spanish|g3-internal-http#Spanish|b",
+   "ms": 670.3780650059343,
+   "same_p": false
+  },
+  {
+   "id": "g3-internal-http#Spanish|new-base-image#Spanish|b",
+   "ms": 674.6352280024439,
+   "same_p": false
+  },
+  {
+   "id": "new-gofmt#Spanish|new-ci#Spanish|b",
+   "ms": 643.0445029982366,
+   "same_p": false
+  },
+  {
+   "id": "g3-license#Spanish|new-markdown#Spanish|b",
+   "ms": 672.8967870003544,
+   "same_p": true
+  },
+  {
+   "id": "new-markdown#Spanish|new-gofmt#Spanish|b",
+   "ms": 679.1228700021747,
+   "same_p": false
+  },
+  {
+   "id": "d12-pkg#terse|d12-queue#terse|b",
+   "ms": 645.8511449964135,
+   "same_p": true
+  },
+  {
+   "id": "d12-obs#terse|d12-ci#terse|b",
+   "ms": 615.4745509993518,
+   "same_p": true
+  },
+  {
+   "id": "d12-fmt#terse|d12-auth#terse|b",
+   "ms": 617.998212997918,
+   "same_p": true
+  },
+  {
+   "id": "d12-orm#terse|d12-tpl#terse|b",
+   "ms": 624.2461950023426,
+   "same_p": true
+  },
+  {
+   "id": "d12-tpl#terse|d12-obs#terse|b",
+   "ms": 653.9651889979723,
+   "same_p": true
+  },
+  {
+   "id": "d12-pool#chatty|d12-fmt#chatty|b",
+   "ms": 761.7300459969556,
+   "same_p": false
+  },
+  {
+   "id": "d12-ci#chatty|d12-lint#chatty|b",
+   "ms": 807.4994859998696,
+   "same_p": true
+  },
+  {
+   "id": "d12-auth#chatty|d12-test#chatty|b",
+   "ms": 751.8802109989338,
+   "same_p": true
+  },
+  {
+   "id": "d12-cache#chatty|d12-cache#chatty|b",
+   "ms": 714.8830459991586,
+   "same_p": true
+  },
+  {
+   "id": "d12-queue#Spanish|d12-queue#Spanish|b",
+   "ms": 700.3932289953809,
+   "same_p": true
+  },
+  {
+   "id": "d12-store#Spanish|d12-ci#Spanish|b",
+   "ms": 672.7850059978664,
+   "same_p": true
+  },
+  {
+   "id": "d12-test#Spanish|d12-orm#Spanish|b",
+   "ms": 698.5120579993236,
+   "same_p": false
+  },
+  {
+   "id": "d12-proto#Spanish|d12-pkg#Spanish|b",
+   "ms": 652.3241079994477,
+   "same_p": true
+  },
+  {
+   "id": "d12-http#Spanish|d12-obs#Spanish|b",
+   "ms": 680.7687800028361,
+   "same_p": true
+  },
+  {
+   "id": "h2-cron#terse|h2-i18n#terse|b",
+   "ms": 648.9318969979649,
+   "same_p": true
+  },
+  {
+   "id": "h2-pdf#terse|h2-imgcdn#terse|b",
+   "ms": 632.9064689998631,
+   "same_p": true
+  },
+  {
+   "id": "h2-search#chatty|h2-i18n#chatty|b",
+   "ms": 752.9901320012868,
+   "same_p": true
+  },
+  {
+   "id": "h2-i18n#chatty|h2-imgcdn#chatty|b",
+   "ms": 796.7465210022056,
+   "same_p": true
+  },
+  {
+   "id": "h2-lint#Spanish|h2-i18n#Spanish|b",
+   "ms": 673.2332870014943,
+   "same_p": false
+  },
+  {
+   "id": "h2-mail#Spanish|h2-imgcdn#Spanish|b",
+   "ms": 669.3688759987708,
+   "same_p": true
+  },
+  {
+   "id": "h3-cache#terse|h3-state#terse|b",
+   "ms": 674.1644770008861,
+   "same_p": true
+  },
+  {
+   "id": "h3-telemetry#terse|h3-maps2#terse|b",
+   "ms": 713.7576449968037,
+   "same_p": false
+  },
+  {
+   "id": "h3-build#chatty|h3-tests-e2e#chatty|b",
+   "ms": 884.0236100004404,
+   "same_p": true
+  },
+  {
+   "id": "h3-maps2#chatty|h3-maps2#chatty|b",
+   "ms": 880.6636380031705,
+   "same_p": true
+  },
+  {
+   "id": "h3-auth#Spanish|h3-tests-e2e#Spanish|b",
+   "ms": 655.1990389998537,
+   "same_p": true
+  },
+  {
+   "id": "h3-queue2#Spanish|h3-maps2#Spanish|b",
+   "ms": 679.2073800024809,
+   "same_p": true
+  },
+  {
+   "id": "h4-http-rust#terse|h4-docs-site#terse|b",
+   "ms": 627.8829570001108,
+   "same_p": true
+  },
+  {
+   "id": "h4-pkg-py#terse|h4-chat#terse|b",
+   "ms": 641.2785520005855,
+   "same_p": true
+  },
+  {
+   "id": "h4-docs-site#chatty|h4-docs-site#chatty|b",
+   "ms": 852.1908460024861,
+   "same_p": true
+  },
+  {
+   "id": "h4-container-reg#chatty|h4-chat#chatty|b",
+   "ms": 858.3616190007888,
+   "same_p": true
+  },
+  {
+   "id": "h4-db-migrate#Spanish|h4-docs-site#Spanish|b",
+   "ms": 665.8387139978004,
+   "same_p": true
+  },
+  {
+   "id": "h4-cookies#Spanish|h4-forms#Spanish|b",
+   "ms": 642.5881430041045,
+   "same_p": true
+  },
+  {
+   "id": "h5-secrets2#terse|h5-mobile#terse|b",
+   "ms": 658.4543010030757,
+   "same_p": false
+  },
+  {
+   "id": "h5-schema#terse|h5-storage#terse|b",
+   "ms": 669.8315150060807,
+   "same_p": true
+  },
+  {
+   "id": "h5-storage#chatty|h5-mobile#chatty|b",
+   "ms": 774.7348120028619,
+   "same_p": true
+  },
+  {
+   "id": "h5-orm-rb#chatty|h5-storage#chatty|b",
+   "ms": 763.060156001302,
+   "same_p": true
+  },
+  {
+   "id": "h5-json-go#Spanish|h5-mobile#Spanish|b",
+   "ms": 660.7652620004956,
+   "same_p": true
+  },
+  {
+   "id": "h5-monitoring#Spanish|h5-storage#Spanish|b",
+   "ms": 767.4729779973859,
+   "same_p": false
+  },
+  {
+   "id": "h6-css#terse|h6-secrets-store#terse|b",
+   "ms": 969.5348479945096,
+   "same_p": true
+  },
+  {
+   "id": "h6-secrets-store#terse|h6-runtime-js#terse|b",
+   "ms": 632.6092990057077,
+   "same_p": true
+  },
+  {
+   "id": "h6-grpc#chatty|h6-secrets-store#chatty|b",
+   "ms": 842.2414810047485,
+   "same_p": true
+  },
+  {
+   "id": "h6-referrals#chatty|h6-notify#chatty|b",
+   "ms": 835.5329089972656,
+   "same_p": true
+  },
+  {
+   "id": "h6-dns#Spanish|h6-grpc#Spanish|b",
+   "ms": 681.3229500039597,
+   "same_p": true
+  },
+  {
+   "id": "h6-lockfile#Spanish|h6-notify#Spanish|b",
+   "ms": 682.8980020000017,
+   "same_p": true
+  },
+  {
+   "id": "h7-a11y#terse|h7-pool#terse|b",
+   "ms": 641.3178630027687,
+   "same_p": true
+  },
+  {
+   "id": "h7-fonts#terse|h7-fonts#terse|b",
+   "ms": 650.453155998548,
+   "same_p": true
+  },
+  {
+   "id": "h7-retries#chatty|h7-pool#chatty|b",
+   "ms": 695.8153270024923,
+   "same_p": true
+  },
+  {
+   "id": "h7-mocks#chatty|h7-fonts#chatty|b",
+   "ms": 679.8758299992187,
+   "same_p": true
+  },
+  {
+   "id": "h7-proto#Spanish|h7-pool#Spanish|b",
+   "ms": 659.9906909978017,
+   "same_p": true
+  },
+  {
+   "id": "h7-grid#Spanish|h7-fonts#Spanish|b",
+   "ms": 652.0789179994608,
+   "same_p": true
+  },
+  {
+   "id": "h8-database#terse|h8-database#terse|b",
+   "ms": 610.335709003266,
+   "same_p": true
+  },
+  {
+   "id": "h8-cssbundler#terse|h8-packagemanager#terse|b",
+   "ms": 630.155888000445,
+   "same_p": false
+  },
+  {
+   "id": "h8-taskqueue#terse|h8-cssbundler#terse|b",
+   "ms": 609.1128890038817,
+   "same_p": false
+  },
+  {
+   "id": "h8-apidocs#chatty|h8-packagemanager#chatty|b",
+   "ms": 738.8211860015872,
+   "same_p": true
+  },
+  {
+   "id": "h8-logging#chatty|h8-cssbundler#chatty|b",
+   "ms": 738.1198650036822,
+   "same_p": true
+  },
+  {
+   "id": "h8-orm#Spanish|h8-packagemanager#Spanish|b",
+   "ms": 637.2869509941665,
+   "same_p": false
+  },
+  {
+   "id": "h8-packagemanager#Spanish|h8-cssbundler#Spanish|b",
+   "ms": 652.3338879997027,
+   "same_p": true
+  },
+  {
+   "id": "h9-css-framework#terse|h9-templating#terse|b",
+   "ms": 618.3628230064642,
+   "same_p": true
+  },
+  {
+   "id": "h9-state-mgmt#terse|h9-bundler#terse|b",
+   "ms": 620.3501130003133,
+   "same_p": true
+  },
+  {
+   "id": "h9-http-client#chatty|h9-templating#chatty|b",
+   "ms": 739.2466659948695,
+   "same_p": false
+  },
+  {
+   "id": "h9-msg-queue#chatty|h9-bundler#chatty|b",
+   "ms": 745.3883690031944,
+   "same_p": true
+  },
+  {
+   "id": "h9-bundler#Spanish|h9-css-framework#Spanish|b",
+   "ms": 680.4102200039779,
+   "same_p": true
+  },
+  {
+   "id": "h9-template-lang#Spanish|h9-template-lang#Spanish|b",
+   "ms": 674.7369079967029,
+   "same_p": true
+  },
+  {
+   "id": "h11-rate-limit#terse|h11-req-timeout#terse|b",
+   "ms": 652.9142879953724,
+   "same_p": false
+  },
+  {
+   "id": "h11-index-refresh#terse|h11-buffer-alloc#terse|b",
+   "ms": 653.2555380035774,
+   "same_p": false
+  },
+  {
+   "id": "h11-session-ttl#chatty|h11-req-timeout#chatty|b",
+   "ms": 741.7182270000922,
+   "same_p": true
+  },
+  {
+   "id": "h11-queue-depth#chatty|h11-buffer-alloc#chatty|b",
+   "ms": 708.7784329996794,
+   "same_p": false
+  },
+  {
+   "id": "h11-req-timeout#Spanish|h11-req-timeout#Spanish|b",
+   "ms": 677.6752089936053,
+   "same_p": true
+  },
+  {
+   "id": "h11-batch-size#Spanish|h11-buffer-alloc#Spanish|b",
+   "ms": 661.2456410002778,
+   "same_p": true
+  },
+  {
+   "id": "h6-dns#pt|h6-grpc#pt|c",
+   "ms": 706.303052000294,
+   "same_p": true
+  },
+  {
+   "id": "h6-lockfile#pt|h6-notify#pt|c",
+   "ms": 673.7950469978387,
+   "same_p": true
+  },
+  {
+   "id": "h7-a11y#fr|h7-pool#fr|c",
+   "ms": 691.6306749990326,
+   "same_p": true
+  },
+  {
+   "id": "h7-fonts#fr|h7-fonts#fr|c",
+   "ms": 629.1696979969856,
+   "same_p": true
+  },
+  {
+   "id": "h6-http-go#ja|h6-grpc#ja|c",
+   "ms": 663.5024520001025,
+   "same_p": true
+  },
+  {
+   "id": "h6-tracing#ja|h6-notify#ja|c",
+   "ms": 689.748935001262,
+   "same_p": true
+  },
+  {
+   "id": "p10-dynamodb#fr|third",
+   "ms": 846.5224330066121,
+   "same_p": true
+  }
+ ],
+ "arm": "A3",
+ "items": 9810,
+ "wall_s": 2464.1,
+ "started": "2026-09-25T01:58:54.278692+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

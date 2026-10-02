@@ -1,0 +1,182 @@
+[
+ {
+  "key": "h9-msg-queue#terse",
+  "a": "use rabbitmq for queues",
+  "b": "switch to nats instead",
+  "c": "what about the broker timeout config"
+ },
+ {
+  "key": "h9-msg-queue#chatty",
+  "a": "I think RabbitMQ makes sense for our message queue \u2014 it's mature and we already know it",
+  "b": "Actually, let me change that. NATS would be simpler and handles our load better",
+  "c": "How should we structure message acknowledgments in the queue backend?"
+ },
+ {
+  "key": "h9-msg-queue#Spanish",
+  "a": "Usaremos RabbitMQ para las colas de mensajes",
+  "b": "Mejor cambio a NATS, es m\u00e1s simple y eficiente",
+  "c": "\u00bfC\u00f3mo configuramos la persistencia en el broker?"
+ },
+ {
+  "key": "h9-http-client#terse",
+  "a": "go with axios for http requests",
+  "b": "use got instead",
+  "c": "should the client retry on timeout"
+ },
+ {
+  "key": "h9-http-client#chatty",
+  "a": "Let's use axios for HTTP calls. Good middleware support and solid documentation",
+  "b": "You know what, I'm changing my mind. Got is lighter and handles streaming better",
+  "c": "We need to make sure the client handles connection pooling correctly"
+ },
+ {
+  "key": "h9-http-client#Spanish",
+  "a": "Vamos a usar axios para las peticiones HTTP",
+  "b": "Cambio a got, es m\u00e1s ligero y flexible",
+  "c": "\u00bfEl cliente maneja bien los reintentos autom\u00e1ticos?"
+ },
+ {
+  "key": "h9-state-mgmt#terse",
+  "a": "redux for state management",
+  "b": "switch to zustand",
+  "c": "do we need devtools integration"
+ },
+ {
+  "key": "h9-state-mgmt#chatty",
+  "a": "Redux feels right for this \u2014 lots of complex state transitions and good for debugging",
+  "b": "Wait, I'm reconsidering. Zustand is so much simpler and we don't really need Redux's complexity",
+  "c": "How do we handle state persistence across page reloads?"
+ },
+ {
+  "key": "h9-state-mgmt#Spanish",
+  "a": "Usaremos Redux para la gesti\u00f3n de estado",
+  "b": "Cambio a Zustand, es mucho m\u00e1s simple",
+  "c": "\u00bfNecesitamos sincronizar el estado entre pesta\u00f1as?"
+ },
+ {
+  "key": "h9-css-framework#terse",
+  "a": "tailwindcss for styling",
+  "b": "go with bulma instead",
+  "c": "how do we handle the responsive grid"
+ },
+ {
+  "key": "h9-css-framework#chatty",
+  "a": "Tailwind is perfect \u2014 utility-first and the ecosystem is massive. Very flexible",
+  "b": "Actually, I'm having second thoughts. Bulma would be cleaner and needs less configuration",
+  "c": "What's the best approach for theming with the CSS framework?"
+ },
+ {
+  "key": "h9-css-framework#Spanish",
+  "a": "Usaremos TailwindCSS para los estilos",
+  "b": "Mejor opto por Bulma, es m\u00e1s limpio",
+  "c": "\u00bfC\u00f3mo implementamos el modo oscuro en la hoja de estilos?"
+ },
+ {
+  "key": "h9-templating#terse",
+  "a": "handlebars for templates",
+  "b": "use ejs instead",
+  "c": "can it do server-side rendering"
+ },
+ {
+  "key": "h9-templating#chatty",
+  "a": "Handlebars is a solid choice for templating. Clean syntax and good performance",
+  "b": "On second thought, EJS feels more natural for what we're doing. More JavaScript-like",
+  "c": "Do we need template caching in the rendering pipeline?"
+ },
+ {
+  "key": "h9-templating#Spanish",
+  "a": "Usaremos Handlebars para las plantillas",
+  "b": "Cambio a EJS, es m\u00e1s flexible y potente",
+  "c": "\u00bfLas plantillas necesitan compilaci\u00f3n previa?"
+ },
+ {
+  "key": "h9-type-check#terse",
+  "a": "use flow for type checking",
+  "b": "switch to typescript",
+  "c": "should we enable strict mode in the compiler"
+ },
+ {
+  "key": "h9-type-check#chatty",
+  "a": "Flow is reasonable for gradual typing. Nice that we can opt in incrementally",
+  "b": "Let me change that. TypeScript is the industry standard and has way better tooling support",
+  "c": "We should lock down the tsconfig settings before starting the migration"
+ },
+ {
+  "key": "h9-type-check#Spanish",
+  "a": "Vamos a usar Flow para verificaci\u00f3n de tipos",
+  "b": "Cambio a TypeScript, tiene mejor ecosistema",
+  "c": "\u00bfEl compilador debe estar en modo estricto desde el inicio?"
+ },
+ {
+  "key": "h9-validation#terse",
+  "a": "yup for schema validation",
+  "b": "switch to zod",
+  "c": "do we need async validators"
+ },
+ {
+  "key": "h9-validation#chatty",
+  "a": "Yup is the standard choice for schema validation. Mature and well-documented",
+  "b": "Actually, I'm switching to Zod. Better TypeScript support and feels more type-safe",
+  "c": "How should we handle nested and complex validation schemas?"
+ },
+ {
+  "key": "h9-validation#Spanish",
+  "a": "Usaremos Yup para validaci\u00f3n de esquemas",
+  "b": "Cambio a Zod, tiene mejor soporte de tipos",
+  "c": "\u00bfLa validaci\u00f3n necesita ser asincr\u00f3nica para APIs externas?"
+ },
+ {
+  "key": "h9-datetime#terse",
+  "a": "moment for date operations",
+  "b": "use date-fns instead",
+  "c": "does it handle timezone conversions"
+ },
+ {
+  "key": "h9-datetime#chatty",
+  "a": "Moment is the go-to library for date and time. Everyone uses it and it's battle-tested",
+  "b": "Actually, I'm changing my mind. Date-fns is much lighter and more functional",
+  "c": "We'll need solid timezone handling for users in different regions"
+ },
+ {
+  "key": "h9-datetime#Spanish",
+  "a": "Usaremos Moment para el manejo de fechas",
+  "b": "Cambio a date-fns, es m\u00e1s modular y ligero",
+  "c": "\u00bfC\u00f3mo formateamos las fechas en diferentes locales?"
+ },
+ {
+  "key": "h9-template-lang#terse",
+  "a": "pug for server templates",
+  "b": "switch to nunjucks",
+  "c": "what about template inheritance"
+ },
+ {
+  "key": "h9-template-lang#chatty",
+  "a": "Pug is elegant with its indentation-based syntax. Less boilerplate than traditional templates",
+  "b": "Wait, let me reconsider. Nunjucks is more familiar to the team and easier to maintain",
+  "c": "Do we need support for template macros and partials?"
+ },
+ {
+  "key": "h9-template-lang#Spanish",
+  "a": "Usaremos Pug para las plantillas del servidor",
+  "b": "Cambio a Nunjucks, es m\u00e1s familiar para el equipo",
+  "c": "\u00bfNecesitamos soporte para herencia de plantillas?"
+ },
+ {
+  "key": "h9-bundler#terse",
+  "a": "webpack for bundling",
+  "b": "use parcel instead",
+  "c": "what about code splitting and chunks"
+ },
+ {
+  "key": "h9-bundler#chatty",
+  "a": "Webpack is powerful with lots of control over the build. Complex but flexible",
+  "b": "On second thought, Parcel is way simpler and honestly faster. Let's go with that",
+  "c": "We should test how the bundler handles asset optimization"
+ },
+ {
+  "key": "h9-bundler#Spanish",
+  "a": "Vamos a usar Webpack para el empaquetado",
+  "b": "Cambio a Parcel, es m\u00e1s simple y r\u00e1pido",
+  "c": "\u00bfEl empaquetador maneja bien los assets est\u00e1ticos?"
+ }
+]

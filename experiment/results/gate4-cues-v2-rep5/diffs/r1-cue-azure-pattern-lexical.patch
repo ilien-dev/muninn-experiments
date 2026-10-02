@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-capture/src/redact.rs b/crates/muninn-capture/src/redact.rs
+index eec1ce2..7d409ee 100644
+--- a/crates/muninn-capture/src/redact.rs
++++ b/crates/muninn-capture/src/redact.rs
+@@ -13,6 +13,7 @@ fn patterns() -> &'static [Regex] {
+             r"sk-[A-Za-z0-9]{20,}",
+             r"ghp_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}",
+             r"AKIA[0-9A-Z]{16}",
++            r"(?i)AccountKey=[A-Za-z0-9+/]{86}==",
+             r"xox[baprs]-[A-Za-z0-9\-]{10,}",
+             r"AIza[0-9A-Za-z_\-]{30,}",
+             r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----",
+@@ -90,5 +91,8 @@ mod tests {
+         // an opaque mixed-case token is redacted
+         let t = "qA7zP2mX9kL4vB8nR1tY6wC3eH5jD0sF2gK8uN4pQ7";
+         assert!(redact(t).contains("[redacted]"));
++        // Azure storage account key in a connection string is redacted
++        let conn = "DefaultEndpointsProtocol=https;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;EndpointSuffix=core.windows.net";
++        assert!(!redact(conn).contains("AccountKey=Eby8vdM"));
+     }
+ }

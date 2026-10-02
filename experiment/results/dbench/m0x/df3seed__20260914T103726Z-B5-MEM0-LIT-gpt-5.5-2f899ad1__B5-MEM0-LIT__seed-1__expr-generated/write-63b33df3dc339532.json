@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__expr-generated",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "For sequence expr-generated, task expr-generated-s01, the public task prompt was: Add the ** operator (power) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1",
+      "seed": 1,
+      "sequence_id": "expr-generated"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__expr-generated"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "c95ce57f-97f0-4542-8d1b-5b7f42741a98",
+        "memory": "For sequence expr-generated, task expr-generated-s01, the public task prompt was: Add the ** operator (power) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..52af248
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++This project has no recorded decision on a cache eviction policy. A search of the repository's documentation (`AGENTS.md`, `CONTRIBUTING.md`, `docs/`) and git history turned up no ADR, policy statement, or maintainer decision specifying which eviction strategy (LRU, LFU, or otherwise) should be used; the repository does contain example implementations of several eviction algorithms (e.g. `other/lru_cache.py`, `other/lfu_cache.py`, `other/least_recently_used.py`), but these are educational algorithm demonstrations, not a statement of project policy.

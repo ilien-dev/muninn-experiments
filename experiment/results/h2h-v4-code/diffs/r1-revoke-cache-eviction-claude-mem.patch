@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..e6c3c5c
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++This project's current recorded decision is to use LRU (Least Recently Used) eviction combined with an explicit 300-second time-to-live: cache entries are evicted based on recency of access, and are also expired automatically once they have been in the cache for 300 seconds regardless of how often they were accessed.

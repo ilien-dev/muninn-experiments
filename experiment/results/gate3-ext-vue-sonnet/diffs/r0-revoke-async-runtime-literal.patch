@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..b0bdc8a
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++The project's currently recorded decision is that the async runtime is tokio, per the user's change-of-plan statement recorded in Muninn; no later record retires or replaces this decision.

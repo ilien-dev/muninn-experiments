@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..adbdcaf
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Licencia del código fuente
++
++La decisión registrada actual sobre la licencia de este proyecto es MIT, tal como consta en el campo `license` del `Cargo.toml` raíz y de cada crate del workspace (`muninn-bench`, `muninn-capture`, `muninn-cli`, `muninn-compile`, `muninn-core`, `muninn-embed`, `muninn-symbols`, `muninn-why`), confirmado por el único commit del repositorio.

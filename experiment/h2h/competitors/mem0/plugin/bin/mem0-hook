@@ -1,0 +1,3 @@
+#!/bin/sh
+# the pinned venv, so the cell never resolves a system python or a system mem0
+exec "${MEM0_PYTHON:?MEM0_PYTHON is not set}" "$(dirname "$0")/mem0_hook.py" "$@"

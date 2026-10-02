@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..eea0a95
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Codec de compresión de transporte
++
++La decisión actual registrada para el codec de compresión de transporte es **zstd**.

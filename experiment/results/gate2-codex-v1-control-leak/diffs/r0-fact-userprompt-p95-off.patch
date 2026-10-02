@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..5c4254f
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not contain a measured full-recall p95 for the adversarial
++synthetic corpus whose frequent vocabulary is the 30 words in
++`crates/muninn-bench/src/main.rs`, either before or after the term-selection
++fix. Consequently, no before/after number is reported here.
++
++The fix is in `select_terms` in `crates/muninn-core/src/recall.rs`: after looking
++up document frequency, it drops a term when the store has at least 50 active
++records and the term occurs in more than one third of them. This prevents the
++30 common synthetic terms from producing long FTS5 posting-list scans; the
++remaining candidates are ordered by IDF and limited to eight terms.
++
++The project's other measurements are not substitutes for the missing
++adversarial full-hook figures. In particular, `[H6]` in
++`research/00-evidence-log.md` measures only the BM25 stage on a different
++50,000-record corpus (p95 35.53 ms for the first 24 terms and 8.75 ms for the
++eight highest-IDF terms), while `[I3]` measures the complete hook on that corpus
++at p95 4.31 ms.

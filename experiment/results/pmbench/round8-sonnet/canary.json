@@ -1,0 +1,7 @@
+{
+ "model": "claude-sonnet-5",
+ "answer": "Here is everything provided to me besides your message:\n\n**System context blocks:**\n\n1. **userEmail context:**\n\"The user's email address is [account e-mail].me. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks.\"\n(with note: \"this context may or may not be relevant to your tasks. You should not respond to this context unless it is highly relevant to your task.\")\n\n2. **Environment reminder:**\n\"# Environment\nYou have been invoked in the following environment: \n - Primary working directory: /tmp/muninn-bridge-cwd\n - Is a git repository: false\n - Platform: linux\n - Shell: bash\n - OS Version: Linux 7.2.4-zen2-1-zen\"\n\n3. **Model info reminder:**\n\"You are powered by the model named Sonnet 5. The exact model ID is claude-sonnet-5. Assistant knowledge cutoff is January 2026.\"\n\n4. **Token count reminder:**\n\"<total_tokens>15000000 tokens left</total_tokens>\"\n\n5. **Date reminder:**\n\"Today's date is 2026-09-13.\"\n\n**Preceding instruction (outside the numbered system-reminders, part of the system prompt):**\n\"You are a Claude agent, built on Anthropic's Claude Agent SDK. You answer questions.\nAnswer in at most 300 tokens.\"\n\nThat is the complete set of instructions, rules, memory, and context I was given.",
+ "input_tokens": 524,
+ "num_turns": 1,
+ "bridge": "claude_bridge.py"
+}

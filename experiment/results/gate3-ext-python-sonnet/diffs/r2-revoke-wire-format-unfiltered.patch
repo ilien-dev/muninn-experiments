@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..1a6063c
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire Serialisation Format
++
++Nothing is currently recorded as the project's settled decision on the wire serialisation format: the memory log holds two conflicting, unresolved statements (msgpack, then cbor shortly after) with neither marked as superseding the other, so no current value can be stated here without the user resolving the conflict.

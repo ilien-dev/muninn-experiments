@@ -1,0 +1,18 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..aec8221
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,12 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++Coste del hook SessionStart (p50), store de 5k registros.
++
++| Momento | p50 | Cambio |
++|---|---|---|
++| Antes | 11.9 ms | `quick_check` (`PRAGMA quick_check`) en el read path |
++| Después | 1.05 ms | `quick_check` fuera del read path; contador `fts_rows` en `meta`; CHECK de longitud en `body` |
++
++Fuente: episodios de sesión `.muninn/records/episode/79.md` y `80.md` (trust 1, transcripción de sesión propia). Cifras medidas, no estimadas.

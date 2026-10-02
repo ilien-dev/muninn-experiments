@@ -1,0 +1,70 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-generated",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-generated"
+    },
+    "query": "Add the @ operator (average) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:36:06.291692+00:00",
+        "hash": "a33eedf7fae5e2b33a22bdcbd5271b13",
+        "id": "ecdf9e61-8235-4e3d-89ab-b3fc4c4eedf5",
+        "memory": "Operator help is generated; update it with operator registry changes.\nFor sequence expr-generated, task expr-generated-s03, the public task prompt was: Add the % operator (modulo) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "expr-generated"
+        },
+        "role": "user",
+        "score": 0.7902504523102446,
+        "updated_at": "2026-09-14T10:36:06.291692+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-generated"
+      },
+      {
+        "created_at": "2026-09-14T10:36:00.275477+00:00",
+        "hash": "708b55ae59241a7490bacf8a92d2d115",
+        "id": "b3f87a7c-df0f-4c6c-91a3-38edb7b2455a",
+        "memory": "Operator help is generated; update it with operator registry changes.\nFor sequence expr-generated, task expr-generated-s02, the public task prompt was: Add the // operator (floor_divide) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "expr-generated"
+        },
+        "role": "user",
+        "score": 0.783110779130183,
+        "updated_at": "2026-09-14T10:36:00.275477+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-generated"
+      },
+      {
+        "created_at": "2026-09-14T10:35:56.521234+00:00",
+        "hash": "9d0719e70ae590fb357566ed43b0172a",
+        "id": "dd65b7da-4103-4084-9fac-7b3450408f48",
+        "memory": "For sequence expr-generated, task expr-generated-s01, the public task prompt was: Add the ** operator (power) to the evaluator and regenerate exprmini/operator_help.py from the operator registry.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "expr-generated"
+        },
+        "role": "user",
+        "score": 0.7543648345933278,
+        "updated_at": "2026-09-14T10:35:56.521234+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-generated"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..7dc39d6
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,19 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured run exists in this repository. Searched: every commit on every
++branch reachable from this worktree (`git log --all`), this worktree's
++`.muninn/` store (empty — `records/`, `compiled/`, `compact/` have no files),
++`crates/muninn-bench/` (its ingest benchmark, `ingest_200`, seeds 200
++synthetic records into a synthetic 50 000-record index — not this project's
++own transcript), and `research/00-evidence-log.md` / `research/CONCLUSION.md`
++(their `[I4]` figure, 275 ms, is the same synthetic 200-record run, not a
++real Claude Code transcript).
++
++No file in this checkout records: the transcript's size in MB, the number of
++turns or episodes it produced, or the wall-clock time of ingesting it.
++
++To fill this section, run `muninn ingest` on this project's actual
++`~/.claude/projects/.../*.jsonl` transcript and record: file size (MB),
++turn count, episode count, and elapsed time.

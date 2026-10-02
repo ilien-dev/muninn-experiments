@@ -1,0 +1,52 @@
+[
+ {
+  "key": "p0",
+  "a": "Let's compress everything with gzip, keeps it simple",
+  "b": "Switch to zstd, better compression ratio and faster decompression"
+ },
+ {
+  "key": "p1",
+  "a": "Cache eviction should use LFU, keeps hot items around longer",
+  "b": "LRU with a 300-second TTL is cleaner and way easier to reason about"
+ },
+ {
+  "key": "p2",
+  "a": "Use bcrypt for password hashing, it's the industry standard",
+  "b": "argon2id is better, protects against both GPU and side-channel attacks"
+ },
+ {
+  "key": "p3",
+  "a": "Let's stick with openssl for TLS, tried and tested library",
+  "b": "Switch to rustls instead, pure Rust implementation without the CVE mess"
+ },
+ {
+  "key": "p4",
+  "a": "Using msgpack for serialization, it's fast and space-efficient",
+  "b": "Let's use CBOR instead, better standardization and fewer version issues"
+ },
+ {
+  "key": "p5",
+  "a": "We should use async-std as our async runtime, API is cleaner",
+  "b": "Tokio is the de facto standard and ecosystem support is huge"
+ },
+ {
+  "key": "p6",
+  "a": "Let's use calver, it communicates the release date clearly",
+  "b": "Switch to semver, better for dependency management anyway"
+ },
+ {
+  "key": "p7",
+  "a": "Let's license it under GPL-3.0, copyleft ensures contributions stay free",
+  "b": "Going Apache-2.0 instead, less restrictive and companies will actually use it"
+ },
+ {
+  "key": "p8",
+  "a": "We'll disable certificate verification in dev builds for faster iteration",
+  "b": "Keep verification on all builds, no exceptions for development"
+ },
+ {
+  "key": "p9",
+  "a": "We can allow plain HTTP for internal hosts, no need for the overhead",
+  "b": "Enforce HTTPS everywhere, no plaintext exception even for internal services"
+ }
+]

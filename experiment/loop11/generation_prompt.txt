@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+ {
+  "key": "h11-db-pool#terse",
+  "topic": "database connection pool size",
+  "old": "10 connections",
+  "new": "25 connections",
+  "style": "terse"
+ },
+ {
+  "key": "h11-db-pool#chatty",
+  "topic": "database connection pool size",
+  "old": "10 connections",
+  "new": "25 connections",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-db-pool#Spanish",
+  "topic": "database connection pool size",
+  "old": "10 connections",
+  "new": "25 connections",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-log-rotation#terse",
+  "topic": "log file rotation threshold",
+  "old": "100 MB",
+  "new": "500 MB",
+  "style": "terse"
+ },
+ {
+  "key": "h11-log-rotation#chatty",
+  "topic": "log file rotation threshold",
+  "old": "100 MB",
+  "new": "500 MB",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-log-rotation#Spanish",
+  "topic": "log file rotation threshold",
+  "old": "100 MB",
+  "new": "500 MB",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-batch-size#terse",
+  "topic": "asynchronous batch processing size",
+  "old": "50 items",
+  "new": "200 items",
+  "style": "terse"
+ },
+ {
+  "key": "h11-batch-size#chatty",
+  "topic": "asynchronous batch processing size",
+  "old": "50 items",
+  "new": "200 items",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-batch-size#Spanish",
+  "topic": "asynchronous batch processing size",
+  "old": "50 items",
+  "new": "200 items",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-req-timeout#terse",
+  "topic": "HTTP request timeout",
+  "old": "5 seconds",
+  "new": "15 seconds",
+  "style": "terse"
+ },
+ {
+  "key": "h11-req-timeout#chatty",
+  "topic": "HTTP request timeout",
+  "old": "5 seconds",
+  "new": "15 seconds",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-req-timeout#Spanish",
+  "topic": "HTTP request timeout",
+  "old": "5 seconds",
+  "new": "15 seconds",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-queue-depth#terse",
+  "topic": "maximum message queue depth",
+  "old": "1000 messages",
+  "new": "5000 messages",
+  "style": "terse"
+ },
+ {
+  "key": "h11-queue-depth#chatty",
+  "topic": "maximum message queue depth",
+  "old": "1000 messages",
+  "new": "5000 messages",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-queue-depth#Spanish",
+  "topic": "maximum message queue depth",
+  "old": "1000 messages",
+  "new": "5000 messages",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-session-ttl#terse",
+  "topic": "session token expiration time",
+  "old": "24 hours",
+  "new": "7 days",
+  "style": "terse"
+ },
+ {
+  "key": "h11-session-ttl#chatty",
+  "topic": "session token expiration time",
+  "old": "24 hours",
+  "new": "7 days",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-session-ttl#Spanish",
+  "topic": "session token expiration time",
+  "old": "24 hours",
+  "new": "7 days",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-index-refresh#terse",
+  "topic": "search index rebuild interval",
+  "old": "30 minutes",
+  "new": "5 minutes",
+  "style": "terse"
+ },
+ {
+  "key": "h11-index-refresh#chatty",
+  "topic": "search index rebuild interval",
+  "old": "30 minutes",
+  "new": "5 minutes",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-index-refresh#Spanish",
+  "topic": "search index rebuild interval",
+  "old": "30 minutes",
+  "new": "5 minutes",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-rate-limit#terse",
+  "topic": "rate limit tokens per minute",
+  "old": "100 tokens",
+  "new": "500 tokens",
+  "style": "terse"
+ },
+ {
+  "key": "h11-rate-limit#chatty",
+  "topic": "rate limit tokens per minute",
+  "old": "100 tokens",
+  "new": "500 tokens",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-rate-limit#Spanish",
+  "topic": "rate limit tokens per minute",
+  "old": "100 tokens",
+  "new": "500 tokens",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-buffer-alloc#terse",
+  "topic": "streaming response buffer allocation",
+  "old": "64 MB",
+  "new": "256 MB",
+  "style": "terse"
+ },
+ {
+  "key": "h11-buffer-alloc#chatty",
+  "topic": "streaming response buffer allocation",
+  "old": "64 MB",
+  "new": "256 MB",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-buffer-alloc#Spanish",
+  "topic": "streaming response buffer allocation",
+  "old": "64 MB",
+  "new": "256 MB",
+  "style": "Spanish"
+ },
+ {
+  "key": "h11-sharding#terse",
+  "topic": "data sharding partition count",
+  "old": "16 shards",
+  "new": "64 shards",
+  "style": "terse"
+ },
+ {
+  "key": "h11-sharding#chatty",
+  "topic": "data sharding partition count",
+  "old": "16 shards",
+  "new": "64 shards",
+  "style": "chatty"
+ },
+ {
+  "key": "h11-sharding#Spanish",
+  "topic": "data sharding partition count",
+  "old": "16 shards",
+  "new": "64 shards",
+  "style": "Spanish"
+ }
+]

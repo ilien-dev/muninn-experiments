@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..d52a7f4
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification
++
++This project's recorded decision (`config/decisions/revoke-tls-verification.json`, introduced in the base commit and never subsequently updated by a commit) states that certificate verification is disabled in development builds. Although that decision config file was later removed from the tree in the "move decision config out of the tree" commit alongside several other decision files, that change relocated the config rather than recording a new value, so it does not retire the decision; no later commit has updated or replaced this value, so it remains the current recorded decision.

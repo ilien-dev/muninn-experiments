@@ -1,0 +1,18 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..59e3683
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,12 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++Store de 5k registros.
++
++- **Antes**: 11.9 ms (SessionStart, con `quick_check` en el read path).
++- **Después**: 1.05 ms p50 (SessionStart, tras sacar `quick_check` del read path y añadir el contador `fts_rows` y el CHECK de `body`).
++
++Fuente: episodios de sesión 14a6ab47 (`.muninn/records/episode/79.md`, `.muninn/records/episode/80.md`), trust 1 — observado en transcript, no remedido en este repo.
++
++Nota: el registro no etiqueta el valor "antes" (11.9 ms) explícitamente como p50; solo el "después" lo dice así ("SessionStart p50 1.05 ms (5k records)"). No hay percentil confirmado para el valor "antes" — no lo invento.

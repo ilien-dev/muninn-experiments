@@ -1,0 +1,5 @@
+{"at":1789351785048,"session":"8ae22c3e-8ada-4664-b1e3-9a89d23b4b1e","files":["/\\.git/"],"symbols":[]}
+{"at":1789351788036,"session":"8ae22c3e-8ada-4664-b1e3-9a89d23b4b1e","files":["research/bench/build_corpus.py"],"symbols":["SRC","OUT","TARGET"]}
+{"at":1789351794379,"session":"8ae22c3e-8ada-4664-b1e3-9a89d23b4b1e","files":["crates/muninn-bench/corpora/claude-md/manifest.tsv","crates/muninn-bench/corpora/claude-md/unavailable.tsv","https\\?://[a-zA-Z0-9._-]*","crates/muninn-bench/corpora/claude-md/manifest.tsv"],"symbols":[]}
+{"at":1789351810448,"session":"8ae22c3e-8ada-4664-b1e3-9a89d23b4b1e","files":["/\\.git/"],"symbols":[]}
+{"at":1789351820360,"session":"8ae22c3e-8ada-4664-b1e3-9a89d23b4b1e","files":["crates/muninn-bench/corpora/claude-md/FETCHING.md"],"symbols":[]}

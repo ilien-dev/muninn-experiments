@@ -1,0 +1,23 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..717fe30
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,17 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++On the adversarial synthetic corpus whose vocabulary was limited to 30 words,
++the measured full-recall `UserPromptSubmit` p95 was **10.27 ms** before the
++term-selection fix.
++
++The fix made `select_terms` discard terms occurring in more than one third of
++the store (`df > n / 3`), because those terms have little discriminating value
++and require scanning long posting lists. The synthetic benchmark vocabulary was
++also changed to a Zipf-like distribution: 30 frequent domain words plus 2,000
++rare identifiers, rather than making every document draw only from the same 30
++words.
++
++After those changes, the measured full-recall `UserPromptSubmit` p95 was
++**1.82 ms**.

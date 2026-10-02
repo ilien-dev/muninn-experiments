@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..e90e580
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++The project's current recorded decision is to use Semantic Versioning (SemVer), with versions in the structured major.minor.patch format. The recorded rationale is that SemVer aligns better with dependency management tooling and ecosystem conventions, which makes it a more practical way to manage version constraints and compatibility across dependencies.

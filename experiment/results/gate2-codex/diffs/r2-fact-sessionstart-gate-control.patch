@@ -1,0 +1,32 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..7a2949e
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,26 @@
++# Performance history
++
++## SessionStart health gate
++
++On a synthetic store of 5,000 records and 15,000 cues, the `SessionStart` hook
++has the following measured p50 cost:
++
++| Version | p50 |
++| --- | ---: |
++| Before `PRAGMA quick_check` was removed from the read path | No measured number was found in this checkout or its available history. |
++| After `quick_check` was moved off the read path | 2.141222 ms |
++
++The “after” value was measured on this checkout over 300 hook invocations with:
++
++```console
++target/release/muninn-bench perf --records 5000 --cues 15000 --runs 300 \
++  --muninn /absolute/path/to/target/release/muninn --json
++```
++
++This boundary also introduced the trigger-maintained `meta.fts_rows` counter and
++the `CHECK (length(body) <= 2000)` constraint. Consequently the read-path health
++gate uses recorded `quick_check` evidence and the counter, while the schema
++enforces the body cap. The unavailable “before” value is intentionally not
++reconstructed from the separately documented 9.6 ms `quick_check` cost, since
++adding that figure to the current hook time would be an estimate rather than a
++measurement.

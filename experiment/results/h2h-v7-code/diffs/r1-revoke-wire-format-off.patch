@@ -1,0 +1,9 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..13dc63f
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,3 @@
++# Wire Format
++
++This project has no recorded decision fixing a single wire serialisation format. The codebase supports several formats (including JSON, XML, YAML, TOML, MsgPack, and ProtoBuf) as interchangeable rendering and binding options, but no policy document or decision record in this repository designates any one of them as the project's chosen or mandated wire format.

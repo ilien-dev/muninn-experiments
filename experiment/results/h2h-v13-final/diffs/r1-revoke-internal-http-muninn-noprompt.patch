@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..b6ed04f
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++This project's currently recorded decision is HTTPS everywhere, with no plaintext exception: an earlier architectural allowance for plain HTTP on internal hosts has been revoked, so all traffic — including to internal hosts — must use HTTPS.

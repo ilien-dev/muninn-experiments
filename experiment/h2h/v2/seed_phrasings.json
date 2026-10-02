@@ -1,0 +1,52 @@
+[
+ {
+  "key": "p0",
+  "a": "Compression approach: we're using gzip",
+  "b": "Benchmarks show zstd is faster - let's switch"
+ },
+ {
+  "key": "p1",
+  "a": "We decided on LFU for cache eviction",
+  "b": "Actually LRU with a 300-second TTL would be better"
+ },
+ {
+  "key": "p2",
+  "a": "Password hashing will be bcrypt",
+  "b": "Going with argon2id for better security"
+ },
+ {
+  "key": "p3",
+  "a": "TLS backend: openssl",
+  "b": "Let's use rustls instead"
+ },
+ {
+  "key": "p4",
+  "a": "Wire format: msgpack",
+  "b": "Switching to cbor - it's more compact"
+ },
+ {
+  "key": "p5",
+  "a": "For the async runtime we're using async-std",
+  "b": "Actually tokio has a better ecosystem"
+ },
+ {
+  "key": "p6",
+  "a": "For versioning, we're using calver",
+  "b": "semver is cleaner"
+ },
+ {
+  "key": "p7",
+  "a": "Project license is GPL-3.0",
+  "b": "Changing to Apache-2.0 for better adoption"
+ },
+ {
+  "key": "p8",
+  "a": "We have certificate verification disabled in dev builds as a workaround",
+  "b": "Let's not use that workaround - need verification on all builds"
+ },
+ {
+  "key": "p9",
+  "a": "Architecture allows plain http allowed for internal hosts",
+  "b": "New policy: https everywhere, no plaintext exception"
+ }
+]

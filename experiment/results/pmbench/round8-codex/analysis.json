@@ -1,0 +1,628 @@
+{
+ "args": {
+  "roots": [
+   "codex=crates/muninn-bench/experiment/results/pmbench/round8-codex"
+  ],
+  "json": "crates/muninn-bench/experiment/results/pmbench/round8-codex/analysis.json",
+  "runs": 3,
+  "line": 82.9,
+  "spread_rule": true,
+  "ablation_band": 2.0
+ },
+ "models": {
+  "codex": {
+   "weeks": [
+    "heldout-10517",
+    "heldout-76233",
+    "heldout-77013",
+    "v9"
+   ],
+   "heldout_weeks": [
+    "heldout-10517",
+    "heldout-76233",
+    "heldout-77013"
+   ],
+   "cells": {
+    "heldout-10517/muninn_store": {
+     "runs": [
+      97.8,
+      98.6,
+      97.1
+     ],
+     "n": 3,
+     "mean": 97.83333333333333,
+     "sd": 0.7505553499465134,
+     "min": 97.1,
+     "max": 98.6,
+     "run_files": [
+      "muninn-store-20260913-201702-1861484-gpt-5.6-sol.score.md",
+      "muninn-store-20260913-203142-2180909-gpt-5.6-sol.score.md",
+      "muninn-store-20260913-204647-2475206-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 100.0,
+      "set_recall": 95.8,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 96.8,
+      "false alarm/step": 0.0
+     }
+    },
+    "heldout-10517/plain_store": {
+     "runs": [
+      94.2,
+      96.4,
+      97.8
+     ],
+     "n": 3,
+     "mean": 96.13333333333333,
+     "sd": 1.8147543451754908,
+     "min": 94.2,
+     "max": 97.8,
+     "run_files": [
+      "plain-store-20260913-202344-2005677-gpt-5.6-sol.score.md",
+      "plain-store-20260913-203657-2282980-gpt-5.6-sol.score.md",
+      "plain-store-20260913-205231-2588616-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 99.0,
+      "set_recall": 93.43333333333334,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 92.46666666666665,
+      "false alarm/step": 0.39999999999999997
+     }
+    },
+    "heldout-10517/single_baseline": {
+     "runs": [
+      85.7,
+      87.9,
+      83.1
+     ],
+     "n": 3,
+     "mean": 85.56666666666666,
+     "sd": 2.4027761721253524,
+     "min": 83.1,
+     "max": 87.9,
+     "run_files": [
+      "single-baseline-gpt-56-sol-v9-20260913-202420.score.md",
+      "single-baseline-gpt-56-sol-v9-20260913-203833.score.md",
+      "single-baseline-gpt-56-sol-v9-20260913-205308.score.md"
+     ],
+     "secondary": {
+      "set_precision": 86.23333333333333,
+      "set_recall": 84.96666666666665,
+      "cross-day miss": 0.0,
+      "update miss": 3.6999999999999997,
+      "mod_time": 84.06666666666666,
+      "monitoring_hit": 69.86666666666667,
+      "false alarm/step": 7.6000000000000005
+     }
+    },
+    "heldout-10517/todo_ledger": {
+     "runs": [
+      87.1,
+      87.1,
+      84.3
+     ],
+     "n": 3,
+     "mean": 86.16666666666667,
+     "sd": 1.6165807537309504,
+     "min": 84.3,
+     "max": 87.1,
+     "run_files": [
+      "single-todo-ledger-gpt-56-sol-v9-20260913-203104.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260913-204645.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260914-004742.score.md"
+     ],
+     "secondary": {
+      "set_precision": 87.43333333333334,
+      "set_recall": 84.96666666666667,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 79.73333333333333,
+      "monitoring_hit": 66.63333333333334,
+      "false alarm/step": 4.8
+     }
+    },
+    "heldout-76233/muninn_store": {
+     "runs": [
+      98.7,
+      96.2,
+      96.7
+     ],
+     "n": 3,
+     "mean": 97.2,
+     "sd": 1.3228756555322954,
+     "min": 96.2,
+     "max": 98.7,
+     "run_files": [
+      "muninn-store-20260913-193334-916834-gpt-5.6-sol.score.md",
+      "muninn-store-20260913-194802-1283042-gpt-5.6-sol.score.md",
+      "muninn-store-20260913-200314-1578815-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 99.13333333333333,
+      "set_recall": 95.36666666666667,
+      "cross-day miss": 0.0,
+      "update miss": 7.3999999999999995,
+      "mod_time": 98.66666666666667,
+      "monitoring_hit": 94.86666666666667,
+      "false alarm/step": 0.8666666666666667
+     }
+    },
+    "heldout-76233/plain_store": {
+     "runs": [
+      95.5,
+      96.7,
+      98.7
+     ],
+     "n": 3,
+     "mean": 96.96666666666665,
+     "sd": 1.6165807537309533,
+     "min": 95.5,
+     "max": 98.7,
+     "run_files": [
+      "plain-store-20260913-194315-1172431-gpt-5.6-sol.score.md",
+      "plain-store-20260913-195624-1445999-gpt-5.6-sol.score.md",
+      "plain-store-20260913-201017-1723334-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 99.13333333333333,
+      "set_recall": 94.96666666666665,
+      "cross-day miss": 0.0,
+      "update miss": 7.3999999999999995,
+      "mod_time": 98.66666666666667,
+      "monitoring_hit": 96.56666666666666,
+      "false alarm/step": 0.43333333333333335
+     }
+    },
+    "heldout-76233/single_baseline": {
+     "runs": [
+      78.4,
+      82.4,
+      78.9
+     ],
+     "n": 3,
+     "mean": 79.9,
+     "sd": 2.179449471770337,
+     "min": 78.4,
+     "max": 82.4,
+     "run_files": [
+      "single-baseline-gpt-56-sol-v9-20260913-194421.score.md",
+      "single-baseline-gpt-56-sol-v9-20260913-195818.score.md",
+      "single-baseline-gpt-56-sol-v9-20260913-201205.score.md"
+     ],
+     "secondary": {
+      "set_precision": 82.8,
+      "set_recall": 77.16666666666667,
+      "cross-day miss": 0.0,
+      "update miss": 14.799999999999999,
+      "mod_time": 82.66666666666667,
+      "monitoring_hit": 57.23333333333333,
+      "false alarm/step": 13.566666666666668
+     }
+    },
+    "heldout-76233/todo_ledger": {
+     "runs": [
+      83.0,
+      77.6,
+      80.5
+     ],
+     "n": 3,
+     "mean": 80.36666666666666,
+     "sd": 2.7024680078279095,
+     "min": 77.6,
+     "max": 83.0,
+     "run_files": [
+      "single-todo-ledger-gpt-56-sol-v9-20260913-194714.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260913-200303.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260913-201617.score.md"
+     ],
+     "secondary": {
+      "set_precision": 86.39999999999999,
+      "set_recall": 75.10000000000001,
+      "cross-day miss": 4.766666666666667,
+      "update miss": 14.799999999999999,
+      "mod_time": 80.0,
+      "monitoring_hit": 51.26666666666667,
+      "false alarm/step": 11.433333333333332
+     }
+    },
+    "heldout-77013/muninn_store": {
+     "runs": [
+      98.2,
+      96.9,
+      96.9
+     ],
+     "n": 3,
+     "mean": 97.33333333333333,
+     "sd": 0.7505553499465119,
+     "min": 96.9,
+     "max": 98.2,
+     "run_files": [
+      "muninn-store-20260914-005652-867268-gpt-5.6-sol.score.md",
+      "muninn-store-20260914-011033-1253430-gpt-5.6-sol.score.md",
+      "muninn-store-20260914-012811-1684995-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 97.93333333333334,
+      "set_recall": 96.73333333333333,
+      "cross-day miss": 0.0,
+      "update miss": 0.0,
+      "mod_time": 100.0,
+      "monitoring_hit": 95.93333333333334,
+      "false alarm/step": 0.7999999999999999
+     }
+    },
+    "heldout-77013/plain_store": {
+     "runs": [
+      98.1,
+      98.1,
+      98.1
+     ],
+     "n": 3,
+     "mean": 98.09999999999998,
+     "sd": 0.0,
+     "min": 98.1,
+     "max": 98.1,
+     "run_files": [
+      "plain-store-20260914-005922-936738-gpt-5.6-sol.score.md",
+      "plain-store-20260914-011326-1328451-gpt-5.6-sol.score.md",
+      "plain-store-20260914-012828-1693305-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 98.8,
+      "set_recall": 97.5,
+      "cross-day miss": 0.0,
+      "update miss": 0.0,
+      "mod_time": 100.0,
+      "monitoring_hit": 100.0,
+      "false alarm/step": 1.2
+     }
+    },
+    "heldout-77013/single_baseline": {
+     "runs": [
+      73.9,
+      77.6,
+      77.1
+     ],
+     "n": 3,
+     "mean": 76.2,
+     "sd": 2.0074859899884667,
+     "min": 73.9,
+     "max": 77.6,
+     "run_files": [
+      "single-baseline-gpt-56-sol-v9-20260914-010221.score.md",
+      "single-baseline-gpt-56-sol-v9-20260914-011519.score.md",
+      "single-baseline-gpt-56-sol-v9-20260914-012835.score.md"
+     ],
+     "secondary": {
+      "set_precision": 80.43333333333334,
+      "set_recall": 72.39999999999999,
+      "cross-day miss": 0.0,
+      "update miss": 18.5,
+      "mod_time": 72.0,
+      "monitoring_hit": 49.6,
+      "false alarm/step": 17.066666666666666
+     }
+    },
+    "heldout-77013/todo_ledger": {
+     "runs": [
+      72.5,
+      75.0,
+      76.6
+     ],
+     "n": 3,
+     "mean": 74.7,
+     "sd": 2.06639783197718,
+     "min": 72.5,
+     "max": 76.6,
+     "run_files": [
+      "single-todo-ledger-gpt-56-sol-v9-20260914-010529.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260914-012022.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260914-014722.score.md"
+     ],
+     "secondary": {
+      "set_precision": 80.16666666666667,
+      "set_recall": 69.96666666666667,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 68.0,
+      "monitoring_hit": 43.9,
+      "false alarm/step": 14.700000000000001
+     }
+    },
+    "v9/muninn_store": {
+     "runs": [
+      98.1,
+      98.8,
+      98.1
+     ],
+     "n": 3,
+     "mean": 98.33333333333333,
+     "sd": 0.40414518843273967,
+     "min": 98.1,
+     "max": 98.8,
+     "run_files": [
+      "muninn-store-20260913-084249-2780950-gpt-5.6-sol.score.md",
+      "muninn-store-20260913-190130-14641-gpt-5.6-sol.score.md",
+      "muninn-store-20260913-191928-522179-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 98.8,
+      "set_recall": 97.93333333333334,
+      "cross-day miss": 0.0,
+      "update miss": 11.1,
+      "mod_time": 100.0,
+      "monitoring_hit": 98.26666666666667,
+      "false alarm/step": 1.2
+     }
+    },
+    "v9/plain_store": {
+     "runs": [
+      97.5,
+      96.9,
+      95.0
+     ],
+     "n": 3,
+     "mean": 96.46666666666665,
+     "sd": 1.305118130030127,
+     "min": 95.0,
+     "max": 97.5,
+     "run_files": [
+      "plain-store-20260913-190126-12995-gpt-5.6-sol.score.md",
+      "plain-store-20260913-191542-416293-gpt-5.6-sol.score.md",
+      "plain-store-20260913-193018-823748-gpt-5.6-sol.score.md"
+     ],
+     "secondary": {
+      "set_precision": 96.66666666666667,
+      "set_recall": 96.26666666666667,
+      "cross-day miss": 0.0,
+      "update miss": 18.5,
+      "mod_time": 97.23333333333333,
+      "monitoring_hit": 96.56666666666666,
+      "false alarm/step": 2.5
+     }
+    },
+    "v9/single_baseline": {
+     "runs": [
+      79.7,
+      80.0,
+      80.0
+     ],
+     "n": 3,
+     "mean": 79.89999999999999,
+     "sd": 0.1732050807568861,
+     "min": 79.7,
+     "max": 80.0,
+     "run_files": [
+      "single-baseline-gpt-56-sol-v9-20260913-190128.score.md",
+      "single-baseline-gpt-56-sol-v9-20260913-191817.score.md",
+      "single-baseline-gpt-56-sol-v9-20260913-193043.score.md"
+     ],
+     "secondary": {
+      "set_precision": 82.23333333333333,
+      "set_recall": 77.76666666666667,
+      "cross-day miss": 4.766666666666667,
+      "update miss": 3.6999999999999997,
+      "mod_time": 83.33333333333333,
+      "monitoring_hit": 56.4,
+      "false alarm/step": 9.6
+     }
+    },
+    "v9/todo_ledger": {
+     "runs": [
+      79.2,
+      83.3,
+      81.6
+     ],
+     "n": 3,
+     "mean": 81.36666666666666,
+     "sd": 2.059935274064047,
+     "min": 79.2,
+     "max": 83.3,
+     "run_files": [
+      "single-todo-ledger-gpt-56-sol-v9-20260913-190129.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260913-191923.score.md",
+      "single-todo-ledger-gpt-56-sol-v9-20260913-193312.score.md"
+     ],
+     "secondary": {
+      "set_precision": 85.86666666666667,
+      "set_recall": 77.33333333333333,
+      "cross-day miss": 0.0,
+      "update miss": 3.6999999999999997,
+      "mod_time": 81.93333333333334,
+      "monitoring_hit": 53.0,
+      "false alarm/step": 4.2
+     }
+    }
+   },
+   "contrasts": {
+    "heldout-10517/muninn_store-single_baseline": {
+     "diff_means": 12.266666666666666,
+     "worst_gap": 9.199999999999989
+    },
+    "heldout-10517/muninn_store-todo_ledger": {
+     "diff_means": 11.666666666666657,
+     "worst_gap": 10.0
+    },
+    "heldout-10517/muninn_store-plain_store": {
+     "diff_means": 1.7000000000000028,
+     "worst_gap": -0.7000000000000028
+    },
+    "heldout-10517/plain_store-single_baseline": {
+     "diff_means": 10.566666666666663,
+     "worst_gap": 6.299999999999997
+    },
+    "heldout-76233/muninn_store-single_baseline": {
+     "diff_means": 17.299999999999997,
+     "worst_gap": 13.799999999999997
+    },
+    "heldout-76233/muninn_store-todo_ledger": {
+     "diff_means": 16.833333333333343,
+     "worst_gap": 13.200000000000003
+    },
+    "heldout-76233/muninn_store-plain_store": {
+     "diff_means": 0.2333333333333485,
+     "worst_gap": -2.5
+    },
+    "heldout-76233/plain_store-single_baseline": {
+     "diff_means": 17.06666666666665,
+     "worst_gap": 13.099999999999994
+    },
+    "heldout-77013/muninn_store-single_baseline": {
+     "diff_means": 21.133333333333326,
+     "worst_gap": 19.30000000000001
+    },
+    "heldout-77013/muninn_store-todo_ledger": {
+     "diff_means": 22.633333333333326,
+     "worst_gap": 20.30000000000001
+    },
+    "heldout-77013/muninn_store-plain_store": {
+     "diff_means": -0.7666666666666515,
+     "worst_gap": -1.1999999999999886
+    },
+    "heldout-77013/plain_store-single_baseline": {
+     "diff_means": 21.899999999999977,
+     "worst_gap": 20.5
+    },
+    "v9/muninn_store-single_baseline": {
+     "diff_means": 18.433333333333337,
+     "worst_gap": 18.099999999999994
+    },
+    "v9/muninn_store-todo_ledger": {
+     "diff_means": 16.96666666666667,
+     "worst_gap": 14.799999999999997
+    },
+    "v9/muninn_store-plain_store": {
+     "diff_means": 1.8666666666666742,
+     "worst_gap": 0.5999999999999943
+    },
+    "v9/plain_store-single_baseline": {
+     "diff_means": 16.566666666666663,
+     "worst_gap": 15.0
+    }
+   },
+   "pooled": {
+    "muninn_store-single_baseline": {
+     "observed": 16.899999999999995,
+     "p_one_sided": 0.000125,
+     "p_two_sided": 0.00025,
+     "count_one_sided": 1,
+     "count_two_sided": 2,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      12.58888888888888,
+      20.988888888888894
+     ],
+     "weeks_all_a_above_b": 3
+    },
+    "muninn_store-todo_ledger": {
+     "observed": 17.04444444444444,
+     "p_one_sided": 0.000125,
+     "p_two_sided": 0.00025,
+     "count_one_sided": 1,
+     "count_two_sided": 2,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      11.96666666666666,
+      22.355555555555558
+     ],
+     "weeks_all_a_above_b": 3
+    },
+    "muninn_store-plain_store": {
+     "observed": 0.38888888888889994,
+     "p_one_sided": 0.268625,
+     "p_two_sided": 0.53725,
+     "count_one_sided": 2149,
+     "count_two_sided": 4298,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      -0.9111111111110878,
+      1.9222222222222172
+     ],
+     "weeks_all_a_above_b": 0
+    },
+    "plain_store-single_baseline": {
+     "observed": 16.511111111111095,
+     "p_one_sided": 0.000125,
+     "p_two_sided": 0.00025,
+     "count_one_sided": 1,
+     "count_two_sided": 2,
+     "relabelings": 8000,
+     "exact": true,
+     "weeks": 3,
+     "ci95": [
+      11.033333333333331,
+      21.59999999999998
+     ],
+     "weeks_all_a_above_b": 3
+    }
+   },
+   "rules": {
+    "line": {
+     "line": 82.9,
+     "mean": 97.45555555555556,
+     "met": true
+    },
+    "spread": {
+     "weeks": {
+      "heldout-10517": {
+       "largest_range": 4.800000000000011,
+       "single_baseline": {
+        "diff": 12.266666666666666,
+        "ok": true
+       },
+       "todo_ledger": {
+        "diff": 11.666666666666657,
+        "ok": true
+       }
+      },
+      "heldout-76233": {
+       "largest_range": 5.400000000000006,
+       "single_baseline": {
+        "diff": 17.299999999999997,
+        "ok": true
+       },
+       "todo_ledger": {
+        "diff": 16.833333333333343,
+        "ok": true
+       }
+      },
+      "heldout-77013": {
+       "largest_range": 4.099999999999994,
+       "single_baseline": {
+        "diff": 21.133333333333326,
+        "ok": true
+       },
+       "todo_ledger": {
+        "diff": 22.633333333333326,
+        "ok": true
+       }
+      }
+     },
+     "met": true
+    },
+    "ablation": {
+     "band": 2.0,
+     "pooled_diff": 0.38888888888889994,
+     "worst_gap_beyond_band_per_week": {
+      "heldout-10517": -0.7000000000000028,
+      "heldout-76233": -2.5,
+      "heldout-77013": -0.10000000000000853
+     },
+     "met": true
+    }
+   }
+  }
+ }
+}

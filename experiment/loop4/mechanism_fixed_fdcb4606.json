@@ -1,0 +1,513 @@
+[
+ {
+  "style": "terse",
+  "id": "h4-db-migrate",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-container-reg",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": true,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-docs-site",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-pkg-py",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-http-rust",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-video",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-forms",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": true,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-chat",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-iac",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h4-cookies",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": true,
+  "b_served": true,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode",
+   "invariant"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-db-migrate",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-container-reg",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": true,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-docs-site",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-pkg-py",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-http-rust",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-video",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-forms",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": true,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-chat",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-iac",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h4-cookies",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-db-migrate",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-container-reg",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-docs-site",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-pkg-py",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-http-rust",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-video",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-forms",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-chat",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-iac",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h4-cookies",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": true,
+  "b_served": true,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ }
+]

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..50c236f
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Verification
++
++The project's current recorded decision is that TLS certificate verification is enabled on all builds, development builds included, with no exception for disabling it. Testing that needs a certificate the system does not already trust uses self-signed certificates rather than turning verification off. The project also records a decision of HTTPS everywhere, with no plaintext exception, since certificate management is now in place.

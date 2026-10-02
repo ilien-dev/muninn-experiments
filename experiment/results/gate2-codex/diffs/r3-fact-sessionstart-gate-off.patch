@@ -1,0 +1,24 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..cbc58ba
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,18 @@
++# Performance history
++
++## SessionStart health gate
++
++The relevant comparison is the `SessionStart` hook on a 5,000-record store. The
++change moved `PRAGMA quick_check` off the read path; the trigger-maintained
++`meta.fts_rows` counter and the `CHECK (length(body) <= 2000)` constraint were
++added in the same change.
++
++| Version | `SessionStart` p50 |
++| --- | ---: |
++| Before that change (`quick_check` on the read path) | No measured p50 was found in this checkout. |
++| After that change (`quick_check` recorded on the write path) | No measured p50 was found in this checkout. |
++
++These values are deliberately left unreported rather than inferred from the
++source comment that records `quick_check` alone at 9.6 ms on a 5 MB database;
++that is not a measurement of the complete `SessionStart` hook on the specified
++5,000-record store.

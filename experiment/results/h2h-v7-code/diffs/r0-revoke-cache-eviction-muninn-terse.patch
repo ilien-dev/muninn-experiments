@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..bbcca8e
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++No cache eviction policy is currently recorded for this project. The prior decision record (`config/decisions/revoke-cache-eviction.json`) was removed from the repository in commit `9572dd5` ("move decision config out of the tree"), and no replacement has been recorded since.

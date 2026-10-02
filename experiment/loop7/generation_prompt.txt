@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+ {
+  "key": "h7-pool#terse",
+  "topic": "the database connection pooler",
+  "old": "PgBouncer",
+  "new": "Supavisor",
+  "style": "terse"
+ },
+ {
+  "key": "h7-pool#chatty",
+  "topic": "the database connection pooler",
+  "old": "PgBouncer",
+  "new": "Supavisor",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-pool#Spanish",
+  "topic": "the database connection pooler",
+  "old": "PgBouncer",
+  "new": "Supavisor",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-grid#terse",
+  "topic": "the data grid component in the dashboard",
+  "old": "AG Grid",
+  "new": "TanStack Table",
+  "style": "terse"
+ },
+ {
+  "key": "h7-grid#chatty",
+  "topic": "the data grid component in the dashboard",
+  "old": "AG Grid",
+  "new": "TanStack Table",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-grid#Spanish",
+  "topic": "the data grid component in the dashboard",
+  "old": "AG Grid",
+  "new": "TanStack Table",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-proto#terse",
+  "topic": "the message broker for domain events",
+  "old": "ActiveMQ Artemis",
+  "new": "Redpanda",
+  "style": "terse"
+ },
+ {
+  "key": "h7-proto#chatty",
+  "topic": "the message broker for domain events",
+  "old": "ActiveMQ Artemis",
+  "new": "Redpanda",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-proto#Spanish",
+  "topic": "the message broker for domain events",
+  "old": "ActiveMQ Artemis",
+  "new": "Redpanda",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-mocks#terse",
+  "topic": "how HTTP calls are stubbed in unit tests",
+  "old": "nock",
+  "new": "MSW",
+  "style": "terse"
+ },
+ {
+  "key": "h7-mocks#chatty",
+  "topic": "how HTTP calls are stubbed in unit tests",
+  "old": "nock",
+  "new": "MSW",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-mocks#Spanish",
+  "topic": "how HTTP calls are stubbed in unit tests",
+  "old": "nock",
+  "new": "MSW",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-retries#terse",
+  "topic": "the retry budget for the payment worker",
+  "old": "3 attempts",
+  "new": "7 attempts",
+  "style": "terse"
+ },
+ {
+  "key": "h7-retries#chatty",
+  "topic": "the retry budget for the payment worker",
+  "old": "3 attempts",
+  "new": "7 attempts",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-retries#Spanish",
+  "topic": "the retry budget for the payment worker",
+  "old": "3 attempts",
+  "new": "7 attempts",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-fonts#terse",
+  "topic": "how web fonts are served",
+  "old": "Google Fonts CDN",
+  "new": "self-hosted woff2",
+  "style": "terse"
+ },
+ {
+  "key": "h7-fonts#chatty",
+  "topic": "how web fonts are served",
+  "old": "Google Fonts CDN",
+  "new": "self-hosted woff2",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-fonts#Spanish",
+  "topic": "how web fonts are served",
+  "old": "Google Fonts CDN",
+  "new": "self-hosted woff2",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-a11y#terse",
+  "topic": "the accessibility audit tool in CI",
+  "old": "axe-core",
+  "new": "Pa11y",
+  "style": "terse"
+ },
+ {
+  "key": "h7-a11y#chatty",
+  "topic": "the accessibility audit tool in CI",
+  "old": "axe-core",
+  "new": "Pa11y",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-a11y#Spanish",
+  "topic": "the accessibility audit tool in CI",
+  "old": "axe-core",
+  "new": "Pa11y",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-cadence#terse",
+  "topic": "the release cadence for the mobile app",
+  "old": "weekly releases",
+  "new": "fortnightly releases",
+  "style": "terse"
+ },
+ {
+  "key": "h7-cadence#chatty",
+  "topic": "the release cadence for the mobile app",
+  "old": "weekly releases",
+  "new": "fortnightly releases",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-cadence#Spanish",
+  "topic": "the release cadence for the mobile app",
+  "old": "weekly releases",
+  "new": "fortnightly releases",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-shell#terse",
+  "topic": "the shell used by CI scripts",
+  "old": "bash",
+  "new": "fish",
+  "style": "terse"
+ },
+ {
+  "key": "h7-shell#chatty",
+  "topic": "the shell used by CI scripts",
+  "old": "bash",
+  "new": "fish",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-shell#Spanish",
+  "topic": "the shell used by CI scripts",
+  "old": "bash",
+  "new": "fish",
+  "style": "Spanish"
+ },
+ {
+  "key": "h7-archive#terse",
+  "topic": "where cold backups are kept",
+  "old": "Glacier Deep Archive",
+  "new": "Backblaze B2",
+  "style": "terse"
+ },
+ {
+  "key": "h7-archive#chatty",
+  "topic": "where cold backups are kept",
+  "old": "Glacier Deep Archive",
+  "new": "Backblaze B2",
+  "style": "chatty"
+ },
+ {
+  "key": "h7-archive#Spanish",
+  "topic": "where cold backups are kept",
+  "old": "Glacier Deep Archive",
+  "new": "Backblaze B2",
+  "style": "Spanish"
+ }
+]

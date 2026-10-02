@@ -1,0 +1,16 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..b49e8ad
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,10 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured figures available. This checkout is an isolated worktree with no
++Claude Code transcript for this project on disk, and no `muninn ingest` of a
++real transcript has been run here — `.muninn/records/` is empty and no ingest
++log exists. Size in MB, turn count, episode count and ingest duration are all
++unmeasured; do not treat any number here as real until an actual ingest is run
++and its output captured.

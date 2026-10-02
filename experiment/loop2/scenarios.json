@@ -1,0 +1,64 @@
+{
+ "heldout2": [
+  {
+   "id": "h2-charts",
+   "topic": "the charting library for the admin reports",
+   "old": "Chart.js",
+   "new": "ECharts"
+  },
+  {
+   "id": "h2-mail",
+   "topic": "the provider for transactional email",
+   "old": "SendGrid",
+   "new": "Postmark"
+  },
+  {
+   "id": "h2-lint",
+   "topic": "the linter for the TypeScript packages",
+   "old": "ESLint",
+   "new": "Biome"
+  },
+  {
+   "id": "h2-i18n",
+   "topic": "the internationalisation library",
+   "old": "i18next",
+   "new": "FormatJS"
+  },
+  {
+   "id": "h2-search",
+   "topic": "the search backend",
+   "old": "Elasticsearch",
+   "new": "Meilisearch"
+  },
+  {
+   "id": "h2-pdf",
+   "topic": "the PDF generator for invoices",
+   "old": "wkhtmltopdf",
+   "new": "Gotenberg"
+  },
+  {
+   "id": "h2-cron",
+   "topic": "where scheduled jobs run",
+   "old": "crontab on the VM",
+   "new": "Kubernetes CronJobs"
+  },
+  {
+   "id": "h2-analytics",
+   "topic": "the web analytics tool",
+   "old": "Google Analytics",
+   "new": "Plausible"
+  },
+  {
+   "id": "h2-imgcdn",
+   "topic": "the image CDN",
+   "old": "Cloudinary",
+   "new": "imgix"
+  },
+  {
+   "id": "h2-debug",
+   "topic": "the debug endpoint in production",
+   "old": "a /debug endpoint exposed in production",
+   "new": null
+  }
+ ]
+}

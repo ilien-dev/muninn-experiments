@@ -1,0 +1,4 @@
+{"at":1789352490787,"session":"b952adc9-ea8b-43ee-be2d-a6c9e7f06783","files":["*muninn-core/src/db.rs"],"symbols":[]}
+{"at":1789352494285,"session":"b952adc9-ea8b-43ee-be2d-a6c9e7f06783","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}
+{"at":1789352497664,"session":"b952adc9-ea8b-43ee-be2d-a6c9e7f06783","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}
+{"at":1789352503929,"session":"b952adc9-ea8b-43ee-be2d-a6c9e7f06783","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}

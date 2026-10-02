@@ -1,0 +1,6 @@
+{"at":1789292948604,"session":"210ac450-13fb-494a-ac3e-bf67a276e150","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789292962516,"session":"210ac450-13fb-494a-ac3e-bf67a276e150","files":["crates/muninn-core/src/*.rs"],"symbols":[]}
+{"at":1789292968609,"session":"210ac450-13fb-494a-ac3e-bf67a276e150","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}
+{"at":1789292974912,"session":"210ac450-13fb-494a-ac3e-bf67a276e150","files":["crates/muninn-cli/src/main.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main"]}
+{"at":1789292979581,"session":"210ac450-13fb-494a-ac3e-bf67a276e150","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789292983474,"session":"210ac450-13fb-494a-ac3e-bf67a276e150","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}

@@ -1,0 +1,18 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..25cb287
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,12 @@
++# Perf history
++
++## SessionStart health gate
++
++Store de 5 000 registros. Coste del hook SessionStart (los 9 checks de salud) en p50:
++
++| Momento | p50 | Cambio |
++|---|---|---|
++| Antes | 11.9 ms | `quick_check` (integridad, PRAGMA sobre el fichero completo) corría en la ruta de lectura del hook |
++| Después | 1.05 ms | `quick_check` sacado de la ruta de lectura; se añadió el contador `fts_rows` (mantenido por trigger) y el CHECK sobre `body` |
++
++Fuente del dato: transcripción de sesión de este proyecto (trust 1), no un artefacto de benchmark en el repo — no encontré un script o salida de `criterion`/perf_contract con estas cifras. `crates/muninn-core/src/health.rs:83-89` documenta el diseño resultante ("live=false: solo evidencia O(1)... el gate cuesta bien por debajo de un milisegundo a cualquier tamaño de store") pero no repite los números.

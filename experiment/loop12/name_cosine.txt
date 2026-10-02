@@ -1,0 +1,47 @@
+    Finished `release` profile [optimized] target(s) in 0.03s
+     Running `target/release/examples/name_cosine crates/muninn-bench/experiment/loop12/dev_phrasings.json`
+scenario                                        rank     true  max cross
+loop12::d12-http#chatty                           38   -0.033      0.230
+loop12::d12-queue#terse                           36   -0.101      0.274
+loop12::d12-auth#Spanish                          36   -0.057      0.213
+loop12::d12-lint#Spanish                          32    0.004      0.218
+loop12::d12-queue#chatty                          31   -0.004      0.261
+loop12::d12-fmt#chatty                            31    0.003      0.280
+loop12::d12-lint#terse                            31    0.005      0.218
+loop12::d12-store#terse                           30    0.028      0.235
+loop12::d12-fmt#terse                             29    0.009      0.280
+loop12::d12-test#terse                            29   -0.054      0.044
+loop12::d12-queue#Spanish                         28   -0.025      0.324
+loop12::d12-auth#terse                            28   -0.026      0.213
+loop12::d12-tpl#terse                             28    0.000      0.229
+loop12::d12-auth#chatty                           27   -0.019      0.162
+loop12::d12-obs#chatty                            26    0.021      0.201
+loop12::d12-store#chatty                          25    0.062      0.216
+loop12::d12-test#Spanish                          21   -0.020      0.044
+loop12::d12-proto#Spanish                         19    0.041      0.217
+loop12::d12-lint#chatty                           16    0.066      0.241
+loop12::d12-test#chatty                           16    0.042      0.161
+loop12::d12-obs#Spanish                           15    0.031      0.247
+loop12::d12-store#Spanish                         14    0.097      0.230
+loop12::d12-orm#chatty                            12    0.137      0.333
+loop12::d12-tpl#Spanish                           12    0.058      0.220
+loop12::d12-proto#terse                           12    0.080      0.217
+loop12::d12-orm#Spanish                           11    0.114      0.326
+loop12::d12-tpl#chatty                            11    0.058      0.220
+loop12::d12-obs#terse                             10    0.050      0.247
+loop12::d12-pool#chatty                            7    0.156      0.207
+loop12::d12-ci#chatty                              7    0.139      0.216
+loop12::d12-ci#Spanish                             6    0.184      0.207
+loop12::d12-http#Spanish                           5    0.202      0.340
+loop12::d12-http#terse                             4    0.202      0.340
+loop12::d12-proto#chatty                           4    0.158      0.167
+loop12::d12-pool#Spanish                           3    0.191      0.197
+loop12::d12-cache#terse                            3    0.232      0.330
+loop12::d12-pool#terse                             2    0.191      0.197
+loop12::d12-ci#terse                               2    0.194      0.207
+loop12::d12-cache#Spanish                          2    0.330      0.330
+loop12::d12-orm#terse                              1    0.326      0.304
+
+names on both sides: 42 pairs (3 skipped: one side names nothing)
+true pair ranked first: 3/42
+min true -0.101  vs  max cross 0.340  →  overlapping: no single threshold separates them

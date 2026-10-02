@@ -1,0 +1,22 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..cbf27b5 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,17 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Where a `muninn why` query is answered from.
++pub enum Route {
++    /// `muninn why <id>` — direct record lookup, follow lineage.
++    RecordId(i64),
++    /// `muninn why "<question>"` — lexical search over `record_fts`.
++    Lexical,
++}
++
++/// Decide which route a query takes. Stub: no ranking, no vector sidecar (off by default).
++pub fn route(query: &str) -> Route {
++    match query.trim().parse::<i64>() {
++        Ok(id) => Route::RecordId(id),
++        Err(_) => Route::Lexical,
++    }
++}

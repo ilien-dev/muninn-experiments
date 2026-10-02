@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..87ce7f9
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Política de expulsión de caché
++
++La decisión vigente del proyecto es usar expulsión LRU (least recently used, se descarta primero lo usado hace más tiempo) con un TTL (time to live, tiempo de vida) de 300 segundos.

@@ -1,0 +1,25 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6a1675c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,19 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++The repository does not contain a measured full-recall p95 for the
++`UserPromptSubmit` hook on the adversarial synthetic 30-word vocabulary before
++the term-selection fix. It also does not contain a measured full-recall p95 for
++that exact workload after the fix; those values should not be inferred from the
++other read-path benchmarks.
++
++The fix was to select at most eight prompt terms by inverse document frequency
++(IDF) before issuing the FTS5 BM25 query, dropping terms absent from the store
++and terms whose posting lists are too common to carry useful signal.
++
++For context, the project's recorded stage-level measurement on its 50,000-record
++corpus changed from a p95 of 35.53 ms for BM25 using the first 24 terms to a p95
++of 8.75 ms using the eight highest-IDF terms. These are BM25 stage measurements,
++not the missing end-to-end full-recall `UserPromptSubmit` measurements for the
++adversarial 30-word workload.

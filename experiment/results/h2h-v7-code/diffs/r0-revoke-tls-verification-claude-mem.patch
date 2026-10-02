@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..a60ba44
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification Policy
++
++Certificate verification is required on all builds, including development builds. An earlier workaround that disabled certificate verification in development builds to work around TLS validation issues during the Rustls migration has been reversed; that exemption was found to weaken the security posture and create inconsistency between development and production TLS behavior, so verification is now enforced uniformly across all build types.

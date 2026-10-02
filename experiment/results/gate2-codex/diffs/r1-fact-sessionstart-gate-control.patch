@@ -1,0 +1,31 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..971c533
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,25 @@
++# Performance history
++
++## SessionStart health gate
++
++The health-gate read path changed in one step: `PRAGMA quick_check` was moved
++off the `SessionStart` path, FTS coherence began using the trigger-maintained
++`meta.fts_rows` counter, and the body-size invariant became a schema `CHECK`
++constraint instead of a read-time scan.
++
++| State | Store | SessionStart p50 |
++| --- | ---: | ---: |
++| Before that change | 5,000 records | No measured p50 was found in this checkout or its recorded project history. |
++| After that change | 5,000 records, 15,000 cues | **0.935471 ms** |
++
++The post-change value is measured, not estimated. It is the median of 300 hook
++process invocations from:
++
++```text
++target/release/muninn-bench perf --records 5000 \
++  --muninn /absolute/path/to/target/release/muninn --json
++```
++
++The same run reported `SessionStart` p95 1.217212 ms and p99 1.352321 ms.
++Because no pre-change revision or benchmark result is present, the isolated
++speedup cannot be calculated honestly.

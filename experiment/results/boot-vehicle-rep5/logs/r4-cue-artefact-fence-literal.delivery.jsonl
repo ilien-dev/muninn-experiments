@@ -1,0 +1,8 @@
+{"at":1789368491852,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[83,84],"tokens":193,"reason":"cue:event:session_start"}
+{"at":1789368491920,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789368491920,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[58],"tokens":0,"reason":"gated:budget"}
+{"at":1789368491920,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[75],"tokens":0,"reason":"gated:budget"}
+{"at":1789368491920,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[81],"tokens":0,"reason":"gated:budget"}
+{"at":1789368491920,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[88,89,64,74],"tokens":520,"reason":"literal"}
+{"at":1789368507462,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[87],"tokens":0,"reason":"cue:dir:crates/muninn-cli/src@post_tool"}
+{"at":1789368507462,"session":"d62d84d1-bac8-4150-bb70-ddc560572f11","arm":"literal","ids":[87],"tokens":59,"reason":"literal:post_tool"}

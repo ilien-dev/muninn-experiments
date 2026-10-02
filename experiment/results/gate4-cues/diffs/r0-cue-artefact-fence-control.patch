@@ -1,0 +1,36 @@
+diff --git a/crates/muninn-compile/src/emit.rs b/crates/muninn-compile/src/emit.rs
+index a31501b..d0026b9 100644
+--- a/crates/muninn-compile/src/emit.rs
++++ b/crates/muninn-compile/src/emit.rs
+@@ -7,6 +7,7 @@ use std::collections::BTreeMap;
+ 
+ #[derive(Debug, Serialize)]
+ pub struct PermissionsFragment {
++    pub compiler_version: &'static str,
+     pub permissions: PermissionLists,
+ }
+ 
+@@ -35,6 +36,7 @@ pub fn permissions(rules: &[CompiledRule]) -> PermissionsFragment {
+     // a deny rule for X makes an ask rule for X redundant
+     let ask: Vec<String> = ask.into_iter().filter(|a| !deny.contains(a)).collect();
+     PermissionsFragment {
++        compiler_version: muninn_core::VERSION,
+         permissions: PermissionLists {
+             deny: deny.into_iter().collect(),
+             ask,
+@@ -45,6 +47,7 @@ pub fn permissions(rules: &[CompiledRule]) -> PermissionsFragment {
+ #[derive(Debug, Serialize)]
+ pub struct HookFile {
+     pub version: u32,
++    pub compiler_version: &'static str,
+     pub rules: Vec<HookEntry>,
+ }
+ 
+@@ -80,6 +83,7 @@ pub fn hooks(rules: &[CompiledRule]) -> HookFile {
+     });
+     HookFile {
+         version: 1,
++        compiler_version: muninn_core::VERSION,
+         rules: out,
+     }
+ }

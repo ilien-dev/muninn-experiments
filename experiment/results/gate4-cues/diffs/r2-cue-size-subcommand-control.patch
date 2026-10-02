@@ -1,0 +1,32 @@
+diff --git a/crates/muninn-bench/src/main.rs b/crates/muninn-bench/src/main.rs
+index 1df2f7b..dce5537 100644
+--- a/crates/muninn-bench/src/main.rs
++++ b/crates/muninn-bench/src/main.rs
+@@ -78,6 +78,12 @@ enum Cmd {
+         #[arg(long)]
+         muninn: Option<PathBuf>,
+     },
++    /// Print the size in bytes of the store file
++    Size {
++        /// Project root containing .muninn/muninn.db
++        #[arg(long, default_value = ".")]
++        root: PathBuf,
++    },
+     /// Performance contracts
+     Perf {
+         /// Fail on any contract violation
+@@ -650,6 +656,14 @@ fn main() -> Result<()> {
+             anyhow::ensure!(bin.exists(), "muninn binary not found at {}", bin.display());
+             experiment::run(&config, &out, &bin, dry_run, pilot, runs, model, jobs, rerun_errors, rescore)
+         }
++        Cmd::Size { root } => {
++            let path = root.join(".muninn/muninn.db");
++            let size = std::fs::metadata(&path)
++                .with_context(|| format!("reading {}", path.display()))?
++                .len();
++            println!("{size}");
++            Ok(())
++        }
+         Cmd::Rules {
+             dir,
+             sample,

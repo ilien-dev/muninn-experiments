@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+ {
+  "key": "h8-database#terse",
+  "topic": "relational database engine",
+  "old": "postgres",
+  "new": "mysql",
+  "style": "terse"
+ },
+ {
+  "key": "h8-database#chatty",
+  "topic": "relational database engine",
+  "old": "postgres",
+  "new": "mysql",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-database#Spanish",
+  "topic": "relational database engine",
+  "old": "postgres",
+  "new": "mysql",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-webframework#terse",
+  "topic": "Node.js web server framework",
+  "old": "express",
+  "new": "fastify",
+  "style": "terse"
+ },
+ {
+  "key": "h8-webframework#chatty",
+  "topic": "Node.js web server framework",
+  "old": "express",
+  "new": "fastify",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-webframework#Spanish",
+  "topic": "Node.js web server framework",
+  "old": "express",
+  "new": "fastify",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-testrunner#terse",
+  "topic": "JavaScript test runner",
+  "old": "jest",
+  "new": "vitest",
+  "style": "terse"
+ },
+ {
+  "key": "h8-testrunner#chatty",
+  "topic": "JavaScript test runner",
+  "old": "jest",
+  "new": "vitest",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-testrunner#Spanish",
+  "topic": "JavaScript test runner",
+  "old": "jest",
+  "new": "vitest",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-containerruntime#terse",
+  "topic": "container runtime engine",
+  "old": "docker",
+  "new": "podman",
+  "style": "terse"
+ },
+ {
+  "key": "h8-containerruntime#chatty",
+  "topic": "container runtime engine",
+  "old": "docker",
+  "new": "podman",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-containerruntime#Spanish",
+  "topic": "container runtime engine",
+  "old": "docker",
+  "new": "podman",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-packagemanager#terse",
+  "topic": "Node.js package manager",
+  "old": "npm",
+  "new": "pnpm",
+  "style": "terse"
+ },
+ {
+  "key": "h8-packagemanager#chatty",
+  "topic": "Node.js package manager",
+  "old": "npm",
+  "new": "pnpm",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-packagemanager#Spanish",
+  "topic": "Node.js package manager",
+  "old": "npm",
+  "new": "pnpm",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-orm#terse",
+  "topic": "TypeScript ORM layer",
+  "old": "sequelize",
+  "new": "typeorm",
+  "style": "terse"
+ },
+ {
+  "key": "h8-orm#chatty",
+  "topic": "TypeScript ORM layer",
+  "old": "sequelize",
+  "new": "typeorm",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-orm#Spanish",
+  "topic": "TypeScript ORM layer",
+  "old": "sequelize",
+  "new": "typeorm",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-logging#terse",
+  "topic": "server logging library",
+  "old": "winston",
+  "new": "pino",
+  "style": "terse"
+ },
+ {
+  "key": "h8-logging#chatty",
+  "topic": "server logging library",
+  "old": "winston",
+  "new": "pino",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-logging#Spanish",
+  "topic": "server logging library",
+  "old": "winston",
+  "new": "pino",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-apidocs#terse",
+  "topic": "API documentation format",
+  "old": "swagger",
+  "new": "openapi",
+  "style": "terse"
+ },
+ {
+  "key": "h8-apidocs#chatty",
+  "topic": "API documentation format",
+  "old": "swagger",
+  "new": "openapi",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-apidocs#Spanish",
+  "topic": "API documentation format",
+  "old": "swagger",
+  "new": "openapi",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-taskqueue#terse",
+  "topic": "job scheduling library",
+  "old": "bull",
+  "new": "bullmq",
+  "style": "terse"
+ },
+ {
+  "key": "h8-taskqueue#chatty",
+  "topic": "job scheduling library",
+  "old": "bull",
+  "new": "bullmq",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-taskqueue#Spanish",
+  "topic": "job scheduling library",
+  "old": "bull",
+  "new": "bullmq",
+  "style": "Spanish"
+ },
+ {
+  "key": "h8-cssbundler#terse",
+  "topic": "CSS processing tool",
+  "old": "postcss",
+  "new": "lightningcss",
+  "style": "terse"
+ },
+ {
+  "key": "h8-cssbundler#chatty",
+  "topic": "CSS processing tool",
+  "old": "postcss",
+  "new": "lightningcss",
+  "style": "chatty"
+ },
+ {
+  "key": "h8-cssbundler#Spanish",
+  "topic": "CSS processing tool",
+  "old": "postcss",
+  "new": "lightningcss",
+  "style": "Spanish"
+ }
+]

@@ -1,0 +1,7 @@
+{"at":1789368504415,"session":"2b05ea8c-8dde-4ccf-be4a-3089acb3454b","arm":"literal","ids":[83,84],"tokens":193,"reason":"cue:event:session_start"}
+{"at":1789368504484,"session":"2b05ea8c-8dde-4ccf-be4a-3089acb3454b","arm":"literal","ids":[62],"tokens":0,"reason":"gated:budget"}
+{"at":1789368504484,"session":"2b05ea8c-8dde-4ccf-be4a-3089acb3454b","arm":"literal","ids":[60],"tokens":0,"reason":"gated:budget"}
+{"at":1789368504484,"session":"2b05ea8c-8dde-4ccf-be4a-3089acb3454b","arm":"literal","ids":[63],"tokens":0,"reason":"gated:budget"}
+{"at":1789368504484,"session":"2b05ea8c-8dde-4ccf-be4a-3089acb3454b","arm":"literal","ids":[75],"tokens":0,"reason":"gated:budget"}
+{"at":1789368504484,"session":"2b05ea8c-8dde-4ccf-be4a-3089acb3454b","arm":"literal","ids":[81],"tokens":0,"reason":"gated:budget"}
+{"at":1789368504484,"session":"2b05ea8c-8dde-4ccf-be4a-3089acb3454b","arm":"literal","ids":[93,64,74],"tokens":473,"reason":"literal"}

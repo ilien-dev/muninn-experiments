@@ -1,0 +1,52 @@
+[
+ {
+  "key": "p0",
+  "a": "gzip",
+  "b": "zstd"
+ },
+ {
+  "key": "p1",
+  "a": "LFU eviction",
+  "b": "LRU with 300-second TTL instead"
+ },
+ {
+  "key": "p2",
+  "a": "We're using bcrypt",
+  "b": "argon2id"
+ },
+ {
+  "key": "p3",
+  "a": "openssl for TLS",
+  "b": "rustls. better defaults"
+ },
+ {
+  "key": "p4",
+  "a": "msgpack",
+  "b": "cbor"
+ },
+ {
+  "key": "p5",
+  "a": "async-std runtime",
+  "b": "tokio, ecosystem is bigger"
+ },
+ {
+  "key": "p6",
+  "a": "calver",
+  "b": "semver"
+ },
+ {
+  "key": "p7",
+  "a": "GPL-3.0",
+  "b": "Apache-2.0"
+ },
+ {
+  "key": "p8",
+  "a": "certificate verification disabled in dev builds",
+  "b": "verification on all builds"
+ },
+ {
+  "key": "p9",
+  "a": "plain http for internal hosts",
+  "b": "https everywhere, no exceptions"
+ }
+]

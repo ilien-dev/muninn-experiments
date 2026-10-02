@@ -1,0 +1,22 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..22e02a3 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,17 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++use muninn_core::Result;
++
++/// Which path a `muninn why` question takes before an answer is assembled.
++#[derive(Debug, Clone, Copy, PartialEq, Eq)]
++pub enum Route {
++    /// Question names a decision/fact id: walk its lineage directly.
++    Lineage,
++    /// Free-text question: resolve to a fact first, then walk lineage.
++    Lookup,
++}
++
++/// Decides which route a question takes. Stub: routing logic lands in Phase 4.
++pub fn route_question(_question: &str) -> Result<Route> {
++    unimplemented!("routing logic lands in Phase 4")
++}

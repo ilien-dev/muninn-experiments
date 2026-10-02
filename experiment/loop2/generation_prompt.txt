@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+{
+"key": "h2-charts#terse",
+"topic": "the charting library for the admin reports",
+"old": "Chart.js",
+"new": "ECharts",
+"style": "terse"
+},
+{
+"key": "h2-charts#chatty",
+"topic": "the charting library for the admin reports",
+"old": "Chart.js",
+"new": "ECharts",
+"style": "chatty"
+},
+{
+"key": "h2-charts#Spanish",
+"topic": "the charting library for the admin reports",
+"old": "Chart.js",
+"new": "ECharts",
+"style": "Spanish"
+},
+{
+"key": "h2-mail#terse",
+"topic": "the provider for transactional email",
+"old": "SendGrid",
+"new": "Postmark",
+"style": "terse"
+},
+{
+"key": "h2-mail#chatty",
+"topic": "the provider for transactional email",
+"old": "SendGrid",
+"new": "Postmark",
+"style": "chatty"
+},
+{
+"key": "h2-mail#Spanish",
+"topic": "the provider for transactional email",
+"old": "SendGrid",
+"new": "Postmark",
+"style": "Spanish"
+},
+{
+"key": "h2-lint#terse",
+"topic": "the linter for the TypeScript packages",
+"old": "ESLint",
+"new": "Biome",
+"style": "terse"
+},
+{
+"key": "h2-lint#chatty",
+"topic": "the linter for the TypeScript packages",
+"old": "ESLint",
+"new": "Biome",
+"style": "chatty"
+},
+{
+"key": "h2-lint#Spanish",
+"topic": "the linter for the TypeScript packages",
+"old": "ESLint",
+"new": "Biome",
+"style": "Spanish"
+},
+{
+"key": "h2-i18n#terse",
+"topic": "the internationalisation library",
+"old": "i18next",
+"new": "FormatJS",
+"style": "terse"
+},
+{
+"key": "h2-i18n#chatty",
+"topic": "the internationalisation library",
+"old": "i18next",
+"new": "FormatJS",
+"style": "chatty"
+},
+{
+"key": "h2-i18n#Spanish",
+"topic": "the internationalisation library",
+"old": "i18next",
+"new": "FormatJS",
+"style": "Spanish"
+},
+{
+"key": "h2-search#terse",
+"topic": "the search backend",
+"old": "Elasticsearch",
+"new": "Meilisearch",
+"style": "terse"
+},
+{
+"key": "h2-search#chatty",
+"topic": "the search backend",
+"old": "Elasticsearch",
+"new": "Meilisearch",
+"style": "chatty"
+},
+{
+"key": "h2-search#Spanish",
+"topic": "the search backend",
+"old": "Elasticsearch",
+"new": "Meilisearch",
+"style": "Spanish"
+},
+{
+"key": "h2-pdf#terse",
+"topic": "the PDF generator for invoices",
+"old": "wkhtmltopdf",
+"new": "Gotenberg",
+"style": "terse"
+},
+{
+"key": "h2-pdf#chatty",
+"topic": "the PDF generator for invoices",
+"old": "wkhtmltopdf",
+"new": "Gotenberg",
+"style": "chatty"
+},
+{
+"key": "h2-pdf#Spanish",
+"topic": "the PDF generator for invoices",
+"old": "wkhtmltopdf",
+"new": "Gotenberg",
+"style": "Spanish"
+},
+{
+"key": "h2-cron#terse",
+"topic": "where scheduled jobs run",
+"old": "crontab on the VM",
+"new": "Kubernetes CronJobs",
+"style": "terse"
+},
+{
+"key": "h2-cron#chatty",
+"topic": "where scheduled jobs run",
+"old": "crontab on the VM",
+"new": "Kubernetes CronJobs",
+"style": "chatty"
+},
+{
+"key": "h2-cron#Spanish",
+"topic": "where scheduled jobs run",
+"old": "crontab on the VM",
+"new": "Kubernetes CronJobs",
+"style": "Spanish"
+},
+{
+"key": "h2-analytics#terse",
+"topic": "the web analytics tool",
+"old": "Google Analytics",
+"new": "Plausible",
+"style": "terse"
+},
+{
+"key": "h2-analytics#chatty",
+"topic": "the web analytics tool",
+"old": "Google Analytics",
+"new": "Plausible",
+"style": "chatty"
+},
+{
+"key": "h2-analytics#Spanish",
+"topic": "the web analytics tool",
+"old": "Google Analytics",
+"new": "Plausible",
+"style": "Spanish"
+},
+{
+"key": "h2-imgcdn#terse",
+"topic": "the image CDN",
+"old": "Cloudinary",
+"new": "imgix",
+"style": "terse"
+},
+{
+"key": "h2-imgcdn#chatty",
+"topic": "the image CDN",
+"old": "Cloudinary",
+"new": "imgix",
+"style": "chatty"
+},
+{
+"key": "h2-imgcdn#Spanish",
+"topic": "the image CDN",
+"old": "Cloudinary",
+"new": "imgix",
+"style": "Spanish"
+},
+{
+"key": "h2-debug#terse",
+"topic": "the debug endpoint in production",
+"old": "a /debug endpoint exposed in production",
+"new": "(withdrawn, no replacement)",
+"style": "terse"
+},
+{
+"key": "h2-debug#chatty",
+"topic": "the debug endpoint in production",
+"old": "a /debug endpoint exposed in production",
+"new": "(withdrawn, no replacement)",
+"style": "chatty"
+},
+{
+"key": "h2-debug#Spanish",
+"topic": "the debug endpoint in production",
+"old": "a /debug endpoint exposed in production",
+"new": "(withdrawn, no replacement)",
+"style": "Spanish"
+}
+]

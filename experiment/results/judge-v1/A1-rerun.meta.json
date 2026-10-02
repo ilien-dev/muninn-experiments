@@ -1,0 +1,18 @@
+{
+ "model": "qwen35-4b-q4km.gguf",
+ "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+ "threads": 16,
+ "prefix_tokens_sample": 106,
+ "full_prompt": [
+  {
+   "id": "g3-compression#terse|g3-compression#terse|b",
+   "ms": 677.8812990014558,
+   "same_p": true
+  }
+ ],
+ "arm": "A1",
+ "items": 100,
+ "wall_s": 87.5,
+ "started": "2026-09-25T01:57:26.711694+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

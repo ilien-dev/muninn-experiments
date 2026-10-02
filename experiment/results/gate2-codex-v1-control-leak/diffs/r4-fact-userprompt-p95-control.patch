@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..29e3fc1
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Performance history
++
++## UserPromptSubmit read path
++
++On the adversarial synthetic corpus whose records drew from the same 30-word
++vocabulary, the measured full-recall `UserPromptSubmit` hook p95 was **10.27
++ms** before the term-selection fix. Common terms produced long FTS posting
++lists even though they carried little retrieval signal.
++
++The fix changed term selection to discard a term when its document frequency
++is greater than one third of the store (`df > n / 3`; applied to stores with at
++least 50 records). The synthetic benchmark vocabulary was also changed to a
++Zipf distribution: 30 frequent domain words plus 2,000 rare identifiers, so
++the post-fix measurement is not a controlled one-variable comparison.
++
++With those changes in place, the measured full-recall p95 was **1.82 ms**.

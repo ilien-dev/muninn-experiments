@@ -1,0 +1,182 @@
+[
+ {
+  "key": "h8-database#terse",
+  "a": "going postgres for db",
+  "b": "switching to mysql",
+  "c": "schema migration will need to account for sql differences"
+ },
+ {
+  "key": "h8-database#chatty",
+  "a": "I think Postgres makes sense here. It handles our query patterns well and scales nicely.",
+  "b": "Actually, let me reconsider\u2014MySQL would be better for this. Better compatibility with what we're using.",
+  "c": "So for the connection pooling, should we set up multiple database instances or one?"
+ },
+ {
+  "key": "h8-database#Spanish",
+  "a": "Usamos PostgreSQL para la base de datos principal",
+  "b": "Mejor cambio a MySQL por compatibilidad",
+  "c": "El esquema SQL necesita actualizarse para esas migraciones"
+ },
+ {
+  "key": "h8-webframework#terse",
+  "a": "express for the api",
+  "b": "switch to fastify",
+  "c": "middleware setup will be different"
+ },
+ {
+  "key": "h8-webframework#chatty",
+  "a": "We'll use Express for the web server. It's battle-tested and the team knows it well.",
+  "b": "Wait, let me change that\u2014Fastify is better for performance. We should go with that instead.",
+  "c": "The routing structure will need some tweaks for the new framework"
+ },
+ {
+  "key": "h8-webframework#Spanish",
+  "a": "Express ser\u00e1 nuestro servidor web",
+  "b": "Cambio a Fastify, mejor rendimiento",
+  "c": "Los middlewares necesitan reescritura"
+ },
+ {
+  "key": "h8-testrunner#terse",
+  "a": "jest for tests",
+  "b": "moving to vitest",
+  "c": "test config will need updating"
+ },
+ {
+  "key": "h8-testrunner#chatty",
+  "a": "Jest seems like the right choice for us. Everything we need for unit and integration tests.",
+  "b": "Actually, I'm changing my mind\u2014let's use Vitest instead. Much faster and better with our setup.",
+  "c": "We'll need to update the test configuration and adjust some assertions"
+ },
+ {
+  "key": "h8-testrunner#Spanish",
+  "a": "Jest es nuestra herramienta de testing",
+  "b": "Voy a cambiar a Vitest",
+  "c": "Los archivos de test necesitar\u00e1n migraci\u00f3n"
+ },
+ {
+  "key": "h8-containerruntime#terse",
+  "a": "docker for containers",
+  "b": "switch to podman",
+  "c": "image registry compatibility to verify"
+ },
+ {
+  "key": "h8-containerruntime#chatty",
+  "a": "Docker is the standard, so let's stick with that for containerization.",
+  "b": "Hmm, actually Podman makes more sense for our deployment model.",
+  "c": "We need to make sure our container images work with both systems"
+ },
+ {
+  "key": "h8-containerruntime#Spanish",
+  "a": "Docker ser\u00e1 nuestro runtime de contenedores",
+  "b": "Mejor usar Podman",
+  "c": "Las im\u00e1genes de contenedor deben ser compatibles"
+ },
+ {
+  "key": "h8-packagemanager#terse",
+  "a": "npm for packages",
+  "b": "switch to pnpm",
+  "c": "lockfile format is different"
+ },
+ {
+  "key": "h8-packagemanager#chatty",
+  "a": "We'll use npm. Everyone knows it and the CI setup is straightforward.",
+  "b": "Let me reconsider\u2014pnpm is way more efficient. Let's switch to that instead.",
+  "c": "The dependency resolution is stricter with pnpm, so watch out for that"
+ },
+ {
+  "key": "h8-packagemanager#Spanish",
+  "a": "Npm es nuestro gestor de paquetes",
+  "b": "Cambio a pnpm",
+  "c": "El archivo de bloqueo tendr\u00e1 un formato distinto"
+ },
+ {
+  "key": "h8-orm#terse",
+  "a": "sequelize for orm",
+  "b": "moving to typeorm",
+  "c": "query syntax changes significantly"
+ },
+ {
+  "key": "h8-orm#chatty",
+  "a": "Sequelize is solid for our data layer. Good docs and it works with TypeScript reasonably well.",
+  "b": "Actually, TypeORM is better\u2014it's designed for TypeScript from the ground up.",
+  "c": "Migration scripts will need to be completely rewritten for the new ORM"
+ },
+ {
+  "key": "h8-orm#Spanish",
+  "a": "Usamos Sequelize para la capa de datos",
+  "b": "Cambio a TypeORM",
+  "c": "Las consultas necesitan reescribirse"
+ },
+ {
+  "key": "h8-logging#terse",
+  "a": "winston for logging",
+  "b": "switch to pino",
+  "c": "log format needs updating"
+ },
+ {
+  "key": "h8-logging#chatty",
+  "a": "Winston is solid for logging. Lots of transport options and it's mature.",
+  "b": "Wait, I'm changing that\u2014Pino is much faster and the JSON logging is cleaner.",
+  "c": "We'll need to adjust how we structure our log messages for the new logger"
+ },
+ {
+  "key": "h8-logging#Spanish",
+  "a": "Winston para los logs del servidor",
+  "b": "Cambio a Pino",
+  "c": "La estructura de los mensajes de log debe ajustarse"
+ },
+ {
+  "key": "h8-apidocs#terse",
+  "a": "swagger for api docs",
+  "b": "switch to openapi",
+  "c": "spec file migration is straightforward"
+ },
+ {
+  "key": "h8-apidocs#chatty",
+  "a": "We'll document the API with Swagger. Good tooling and it's what everyone uses.",
+  "b": "Actually, let's go with OpenAPI instead. It's the standard and has better support overall.",
+  "c": "The schema structure is a bit different, so the docs will need reworking"
+ },
+ {
+  "key": "h8-apidocs#Spanish",
+  "a": "Swagger para la documentaci\u00f3n de la API",
+  "b": "Mejor usar OpenAPI",
+  "c": "Los esquemas de la API cambian ligeramente"
+ },
+ {
+  "key": "h8-taskqueue#terse",
+  "a": "bull for job queue",
+  "b": "moving to bullmq",
+  "c": "worker pattern needs refactoring"
+ },
+ {
+  "key": "h8-taskqueue#chatty",
+  "a": "Bull is great for background jobs. Simple and reliable for our scale.",
+  "b": "Let me change that\u2014BullMQ is the newer version and much more stable.",
+  "c": "The job processing patterns will shift a bit with the new queue system"
+ },
+ {
+  "key": "h8-taskqueue#Spanish",
+  "a": "Bull para la cola de trabajos",
+  "b": "Cambio a BullMQ",
+  "c": "Los workers deben ser reescritos"
+ },
+ {
+  "key": "h8-cssbundler#terse",
+  "a": "postcss for css",
+  "b": "switch to lightningcss",
+  "c": "autoprefixer config no longer needed"
+ },
+ {
+  "key": "h8-cssbundler#chatty",
+  "a": "PostCSS is the standard for CSS processing. Good ecosystem of plugins.",
+  "b": "Actually, LightningCSS is better. Faster, simpler, and handles everything we need.",
+  "c": "We can drop some of the PostCSS plugins since LightningCSS has built-in support"
+ },
+ {
+  "key": "h8-cssbundler#Spanish",
+  "a": "PostCSS para procesar CSS",
+  "b": "Cambio a LightningCSS",
+  "c": "Los plugins de CSS se simplificar\u00e1n"
+ }
+]

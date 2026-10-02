@@ -1,0 +1,8 @@
+{"at":1789352469615,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["docs/format.md"],"symbols":[]}
+{"at":1789352480154,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789352483641,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789352486840,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789352513091,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["crates/muninn-bench/Cargo.toml"],"symbols":[]}
+{"at":1789352529036,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["research/00-evidence-log.md"],"symbols":[]}
+{"at":1789352552527,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789352565290,"session":"a86047ee-3a2e-4c2a-b38e-49b7af44037d","files":["docs/perf-history.md"],"symbols":[]}

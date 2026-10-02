@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..b8cc30c
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++This project has no current recorded decision on a transport compression codec. A search of the repository's documentation (README, CHANGELOG, `docs/doc.md`) and its history turned up no policy, ADR, or decision record naming a specific codec for transport compression; the README only lists compression as a supported middleware capability without committing to one, so no codec should be assumed until a decision is recorded here.

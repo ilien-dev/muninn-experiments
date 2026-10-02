@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..053e20c
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++The project's cache eviction policy is Least Recently Used (LRU) with a 300-second time-to-live (TTL) for cache entries: entries are evicted based on access recency, and any entry is also removed once it exceeds the 300-second TTL, ensuring time-bounded freshness of cached data.

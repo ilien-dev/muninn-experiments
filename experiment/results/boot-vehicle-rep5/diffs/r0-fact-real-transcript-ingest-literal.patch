@@ -1,0 +1,34 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..024f7de
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,28 @@
++# Performance history
++
++## Real transcript ingest
++
++No measured figures for ingesting this project's own real Claude Code
++transcript (size in MB, turns produced, episodes produced, ingest duration)
++could be found in this repository or reproduced from within this working
++directory.
++
++What was checked:
++- `crates/muninn-capture/src/lib.rs` has a `parses_real_transcripts_when_present`
++  smoke test that reads real transcripts from
++  `~/.claude/projects/-home-ilien-Projects-muninn` when present, and prints
++  turn/episode/tool counts to stderr — but it does not measure or record wall
++  time, transcript size, or persist its output anywhere, and this session's
++  sandbox does not permit reading outside the current working directory to
++  run it against a real transcript.
++- `research/00-evidence-log.md`, `design/ENGINE.md`, and
++  `crates/muninn-bench/experiment/README.md` describe ingest design and
++  benchmark methodology but contain no recorded run figures for a real
++  transcript.
++- No `results.jsonl`, `summary.md`, or similar benchmark output exists
++  anywhere in the repository.
++
++If this measurement is taken in the future (e.g. by running the smoke test
++above or `muninn ingest` against a real transcript file and timing it),
++record the transcript's file size in MB, the turn and episode counts it
++produced, and the wall-clock ingest duration here.

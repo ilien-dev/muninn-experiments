@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..0b2b81d
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License
++
++The project's workspace manifest (`Cargo.toml`) records the source license as MIT (`license = "MIT"` under `[workspace.package]`, inherited by every crate via `license.workspace = true`); no other current decision on the source license is recorded in the repository.

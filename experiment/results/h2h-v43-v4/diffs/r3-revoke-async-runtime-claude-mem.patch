@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..21653b1
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++Gin's current recorded decision is to use Tokio as its async runtime. The choice rests on Tokio's position as the de facto standard for Rust async applications and its substantially larger ecosystem support, which prioritizes integration and compatibility with existing Rust libraries and community tooling.

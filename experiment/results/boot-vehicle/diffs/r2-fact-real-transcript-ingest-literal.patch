@@ -1,0 +1,28 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..0bd419c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,22 @@
++# Perf history
++
++## Real transcript ingest
++
++Source: this project's own Claude Code transcript —
++`~/.claude/projects/-home-ilien-Projects-muninn-crates-muninn-bench-experiment-out-boot-work-cell-r2-fact-real-transcript-ingest-literal/b7c197ef-e512-427e-b370-1099344d6b4d.jsonl`.
++It is the live transcript of the session that did this measurement, so its size
++is a snapshot at measurement time, not a stable figure.
++
++- **Size measured**: 596,438 bytes (0.57 MB), 213 JSONL lines, via `stat`/`wc -l`.
++- **Turns produced, episodes produced, ingest duration**: not measured. This
++  sandbox blocked every attempt to run the ingest tool — `cargo build`,
++  `cargo --version`, and the pre-built `muninn` binary at
++  `/home/ilien/Projects/muninn/target/release/muninn` all came back
++  "requires approval" with no prompt to approve. `muninn-cli`'s `Ingest`
++  command (`crates/muninn-cli/src/main.rs:219`) is the only code path that
++  produces these numbers (`IngestStats`: `inserted`, `duplicates`, `turns`,
++  `from_offset`/`to_offset`), and it never ran.
++
++No figures are invented here. Re-run `muninn ingest <transcript>` against a
++scratch `MUNINN_ROOT` once binary execution is permitted, and fill in the
++three missing numbers plus a wall-clock time around the call.

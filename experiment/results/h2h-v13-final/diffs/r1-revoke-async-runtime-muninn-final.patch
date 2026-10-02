@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..4735d75
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime
++
++The project's recorded decision for the async runtime is **tokio**, adopted for its better ecosystem. This value was last set in commit `c93afe7` and remains the current recorded decision; the subsequent commit `f7788eb`, which removed the decision config file from the tree, did not record a new value and so does not retire it.

@@ -1,0 +1,6 @@
+{"at":1789373510399,"session":"1b1a75bc-598c-4d48-a509-1baa586c7d4e","arm":"unfiltered","ids":[18],"tokens":80,"reason":"cue:event:session_start"}
+{"at":1789373510468,"session":"1b1a75bc-598c-4d48-a509-1baa586c7d4e","arm":"unfiltered","ids":[4],"tokens":0,"reason":"gated:budget"}
+{"at":1789373510468,"session":"1b1a75bc-598c-4d48-a509-1baa586c7d4e","arm":"unfiltered","ids":[8],"tokens":0,"reason":"gated:budget"}
+{"at":1789373510468,"session":"1b1a75bc-598c-4d48-a509-1baa586c7d4e","arm":"unfiltered","ids":[2],"tokens":0,"reason":"gated:budget"}
+{"at":1789373510468,"session":"1b1a75bc-598c-4d48-a509-1baa586c7d4e","arm":"unfiltered","ids":[6],"tokens":0,"reason":"gated:budget"}
+{"at":1789373510468,"session":"1b1a75bc-598c-4d48-a509-1baa586c7d4e","arm":"unfiltered","ids":[3,1,7,5],"tokens":156,"reason":"literal"}

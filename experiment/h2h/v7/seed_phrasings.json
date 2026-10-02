@@ -1,0 +1,52 @@
+[
+ {
+  "key": "p0",
+  "a": "Going with gzip for the compression layer, it's well-tested and has good tooling",
+  "b": "Actually let's switch to zstd, better compression ratio and the performance is there"
+ },
+ {
+  "key": "p1",
+  "a": "LFU eviction makes sense for our cache layer given the access patterns we're seeing",
+  "b": "Switching to LRU with a 300-second TTL instead, simpler to reason about"
+ },
+ {
+  "key": "p2",
+  "a": "Using bcrypt for password hashing, it's the industry standard and well-maintained",
+  "b": "Let's use argon2id instead, much better resistance to GPU attacks"
+ },
+ {
+  "key": "p3",
+  "a": "Going to stick with openssl since it's what the team knows and it's battle-tested",
+  "b": "Actually rustls is pure Rust and avoids the whole C binding complexity"
+ },
+ {
+  "key": "p4",
+  "a": "msgpack feels right for this serialization use case, compact and widely supported",
+  "b": "Switching over to cbor, better type safety and it handles our schema better"
+ },
+ {
+  "key": "p5",
+  "a": "async-std runtime, it's lightweight and the features we need are all there",
+  "b": "tokio makes more sense actually, ecosystem support is just better across the board"
+ },
+ {
+  "key": "p6",
+  "a": "calver looks like the right choice for how frequently we're releasing updates",
+  "b": "semver gives users much clearer signals about compatibility when we update"
+ },
+ {
+  "key": "p7",
+  "a": "We should go GPL-3.0 for this project, keep it under strong copyleft terms",
+  "b": "Apache-2.0 gives us better adoption and simpler downstream usage terms"
+ },
+ {
+  "key": "p8",
+  "a": "Certificate verification off in dev builds to make local testing easier",
+  "b": "Verification on all builds is the right call, even in development environments"
+ },
+ {
+  "key": "p9",
+  "a": "plain http is fine for internal services, they're behind the firewall anyway",
+  "b": "Enforcing https everywhere, no plaintext exception for any service"
+ }
+]

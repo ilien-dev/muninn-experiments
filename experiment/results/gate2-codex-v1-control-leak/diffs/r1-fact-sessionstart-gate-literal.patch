@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..8225418
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured p50 hook latency on a 5,000-record store:
++
++| State | p50 |
++| --- | ---: |
++| Before `quick_check` was removed from the read path | 11.9 ms |
++| After `quick_check` was removed from the read path | 1.05 ms |
++
++The after measurement includes the changes shipped at the same time: the
++trigger-maintained `fts_rows` counter and the body `CHECK` constraint. Therefore,
++this before/after result measures the combined change and does not isolate the
++individual contribution of any one of those changes.

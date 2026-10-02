@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..2a03d7a
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++The project's current recorded decision is an HTTPS-only policy: plaintext HTTP connections are prohibited across all hosts, including internal ones, with no exceptions. This mandate explicitly reverses an earlier decision that had permitted plain HTTP for internal-host traffic as a performance trade-off, so that carve-out no longer applies and encryption is required uniformly for all traffic.

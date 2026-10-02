@@ -1,0 +1,18 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..d7f27df
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,12 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured on a 5,000-record store, the `SessionStart` health gate had a p50
++latency of **11.9 ms** before `quick_check` was removed from the read path. After
++that change, with the `fts_rows` counter and the body `CHECK` added at the same
++time, the measured p50 was **1.05 ms**.
++
++These measurements compare the complete before and after states. Because the
++three changes landed together, they do not isolate how much of the reduction is
++attributable to any one change.

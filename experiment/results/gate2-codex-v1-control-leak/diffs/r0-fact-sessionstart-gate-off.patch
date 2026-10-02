@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6f78454
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Performance history
++
++## SessionStart health gate
++
++Measured with the release benchmark harness on a synthetic store containing 5,000
++records and 15,000 cues, using 300 hook invocations per configuration:
++
++| Health-gate implementation | SessionStart p50 |
++| --- | ---: |
++| Before: live `PRAGMA quick_check` and live FTS/body validation on the read path | 16.963810 ms |
++| After: recorded `quick_check` result, trigger-maintained `fts_rows`, and the body-length `CHECK` constraint | 1.016761 ms |
++
++These are measured subprocess hook times, not estimates. The after configuration
++moves `quick_check` to the write/session-end path; `SessionStart` reads its recorded
++result and uses the `fts_rows` counter, while SQLite enforces the body bound when a
++record is written.

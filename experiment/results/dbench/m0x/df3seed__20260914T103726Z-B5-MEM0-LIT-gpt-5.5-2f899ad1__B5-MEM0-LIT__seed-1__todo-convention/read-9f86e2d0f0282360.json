@@ -1,0 +1,15 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__todo-convention",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__todo-convention"
+    },
+    "query": "Add `rename <id> <new title...>` and keep the CLI output convention: OK|renamed|id|title.",
+    "top_k": 6
+  },
+  "response": {
+    "results": []
+  }
+}

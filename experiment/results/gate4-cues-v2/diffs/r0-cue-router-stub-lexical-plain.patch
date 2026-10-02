@@ -1,0 +1,16 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..1d3e5fd 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,11 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Placeholder for the route decision. Real routing logic lands in Phase 4.
++pub enum Route {
++    Todo,
++}
++
++/// Decides which route a `muninn why` question takes. Stub.
++pub fn route_question(_question: &str) -> Route {
++    Route::Todo
++}

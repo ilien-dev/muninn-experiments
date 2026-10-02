@@ -1,0 +1,26 @@
+{
+ "launcher_sha256": "982b14ab57d7425a72796bb6f360ae8b2d48279fd350de456deed54b8ecc1764",
+ "scaffold_sha256": "76432aef225a51ff6f1e3576d1977e92dae0d38fc7bfdf6a1bc7e675ea05b593",
+ "claude_bridge_sha256": "a631936a9a7b364aed4e68fdb28c7e565c1df5d1c60e5d28da81b77e559db8b8",
+ "codex_bridge_sha256": "363cdde722f5c29b94dcbd51340ecb69bdace415277b62a42eaa799bf129734e",
+ "muninn_bin_sha256": "9c8c80b942682d15e71f23a35165e78c4be7d749599eb4c315589d7ebdd0a825",
+ "muninn_commit": "e52f55c0a5c5fb7819dd23bd82739c0cf0b4c837",
+ "pmbench_commit": "e1093c470c8981daf522d4ef047a7c3a71e077d7",
+ "pm_bench_py_sha256": "d8ec27d8dcf4679d7a789c52fc305286df460844d47e9f116b81f2400ac254d8",
+ "run_eval_py_sha256": "bd883f7966d872bbae589ef37d592082a46b67bc132050569bd4080f0ebef5ad",
+ "model": "claude-sonnet-5",
+ "bridge": "claude",
+ "base_url": "http://127.0.0.1:30002/v1",
+ "runs": 3,
+ "arms": [
+  "muninn_store",
+  "plain_store"
+ ],
+ "weeks": [
+  "heldout-76233",
+  "heldout-10517",
+  "heldout-77013"
+ ],
+ "prereg_commit": "f173f2dc75625b89f7b0543004ed7cf44c51b399",
+ "started_utc": "2026-09-14T08:13:36Z"
+}

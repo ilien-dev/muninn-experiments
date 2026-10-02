@@ -1,0 +1,5 @@
+{"at":1789352256612,"session":"f797f93c-dc52-4834-bfbc-02c9ba2feb48","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789352301625,"session":"f797f93c-dc52-4834-bfbc-02c9ba2feb48","files":["crates/muninn-cli/src/main.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main"]}
+{"at":1789352317690,"session":"f797f93c-dc52-4834-bfbc-02c9ba2feb48","files":["crates/muninn-cli/src/output.rs"],"symbols":["out","err","json"]}
+{"at":1789352322098,"session":"f797f93c-dc52-4834-bfbc-02c9ba2feb48","files":["crates/muninn-cli/src/main.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main"]}
+{"at":1789352325829,"session":"f797f93c-dc52-4834-bfbc-02c9ba2feb48","files":["crates/muninn-cli/src/main.rs"],"symbols":["compile_cmd","delivery","hook","init","output","pretooluse","Cli","Cmd","not_yet","main"]}

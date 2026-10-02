@@ -1,0 +1,29 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..34990fb
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,23 @@
++# Corpus fetching
++
++The corpus fetch recorded the following per-domain limit:
++
++- **Visits:** 12
++- **Window:** 60 seconds
++- **Cooldown after a breach:** 900 seconds (15 minutes)
++
++The fetch used these source/CDN or mirror hosts:
++
++- `raw.githubusercontent.com`
++- `cdn.jsdelivr.net` (using `/gh/<owner>/<repo>@<branch>/<path>` URLs)
++- `cdn.statically.io`
++
++`cdn.statically.io` was observed to be slow and to time out. Later fetch batches
++were kept to at most 12 visits per domain, spaced by at least 65 seconds, and
++alternated between the raw GitHub and jsDelivr hosts.
++
++These values come from the project's recorded fetch session. The checked-in
++corpus itself independently confirms `raw.githubusercontent.com` in
++`manifest.tsv`, but this checkout contains neither the fetch script nor a raw
++request log with which to independently verify the numeric limits or the two
++mirror hosts.

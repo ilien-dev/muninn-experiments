@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..5984590
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++This project's current recorded decision is that plain HTTP is not permitted anywhere, including for internal hosts: an HTTPS-everywhere policy is enforced project-wide with no plaintext exception, so all network communication must use encrypted HTTPS regardless of environment or build variant.

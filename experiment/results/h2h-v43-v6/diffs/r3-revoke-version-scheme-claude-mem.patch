@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..dad9a32
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++This project uses Semantic Versioning (semver, MAJOR.MINOR.PATCH) for release versioning. The scheme was chosen because it signals API compatibility, and in particular breaking changes, directly in the version number, which matters more to users who depend on the API than the publication date of a release.

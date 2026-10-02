@@ -1,0 +1,3 @@
+{"at":1790121294503,"decision":"deny","harness":"claude-code","rule":"CLAUDE.md:6#0","session":"073fce3a-c18a-4f88-896b-cb758b99571c","tool":"Bash"}
+{"at":1790121299078,"decision":null,"harness":"claude-code","rule":null,"session":"073fce3a-c18a-4f88-896b-cb758b99571c","tool":"Bash"}
+{"at":1790121301879,"decision":null,"harness":"claude-code","rule":null,"session":"073fce3a-c18a-4f88-896b-cb758b99571c","tool":"Bash"}

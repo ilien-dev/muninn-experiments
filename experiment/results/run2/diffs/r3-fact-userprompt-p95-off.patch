@@ -1,0 +1,48 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6b0d4f8
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,42 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++No medí un par antes/después para el hook `UserPromptSubmit` sobre el
++vocabulario sintético adversarial de 30 palabras. Explico qué existe y qué no.
++
++Lo que sí existe:
++
++- `crates/muninn-bench/src/main.rs` define ese vocabulario (30 palabras de
++  dominio, distribución Zipf) y el comando `perf` mide
++  "hook UserPromptSubmit full p95" con él, contra el binario `muninn` real.
++- `crates/muninn-core/src/recall.rs` implementa la selección de términos por
++  IDF (top-8) sobre la que pregunta la tarea. En este repositorio, ese
++  fichero entró ya con la selección top-8 aplicada, en el commit `0dcfc84`
++  ("Phase 2 (part 1): capture, literal episodes, read path, experiment
++  runner"). No hay una versión anterior de `recall.rs` en el historial de
++  git de este checkout, así que no hay una cifra "antes de la corrección"
++  para *este* hook sobre *este* vocabulario: la corrección nunca estuvo sin
++  aplicar en el código que puedo medir.
++- No pude compilar `muninn-bench`/`muninn` en release para correr `perf` yo
++  mismo — el comando de build quedó pendiente de aprobación y no se
++  concedió. No hay binario ya compilado en `target/release/`. Por tanto no
++  tengo tampoco una cifra "después" medida en esta sesión.
++
++Lo único medido en el repo sobre la selección de términos, con número real,
++es un prototipo Python (no el hook Rust, no este vocabulario de 30 palabras):
++corpus real de 50 000 registros, en `research/00-evidence-log.md` [H6]:
++
++| etapa                                  | p50      | p95      |
++|-----------------------------------------|----------|----------|
++| BM25 con los 24 primeros términos        | 21.53 ms | 35.53 ms |
++| BM25 con los 8 términos de mayor IDF     |  4.65 ms |  8.75 ms |
++
++Esas dos filas son el "antes/después" de la misma idea (limitar los términos
++por IDF), pero en otro corpus y en otro lenguaje que el hook de producción.
++No las presento como el p95 del `UserPromptSubmit` real porque no lo son.
++
++Para tener la cifra pedida haría falta: compilar `muninn-cli` y
++`muninn-bench` en release, y correr `muninn-bench perf` sobre el vocabulario
++de 30 palabras, una vez con la selección top-8 desactivada y otra con ella
++activa.

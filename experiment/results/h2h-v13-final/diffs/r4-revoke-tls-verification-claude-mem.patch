@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..d97e5d4
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification (Development Builds)
++
++There is no current recorded decision on TLS certificate verification in development builds: an earlier workaround that disabled certificate verification for dev builds was explicitly revoked by the project ("Let's not use that workaround - need verification on all builds"), and no replacement policy for certificate verification specifically has since been recorded. Related decisions were made afterward about transport encryption more broadly (allowing, and later disallowing, plaintext HTTP for internal hosts), but none of them re-establish a specific rule for certificate verification behavior in development builds, so this remains unresolved and should not be assumed to be either enabled or disabled.

@@ -1,0 +1,26 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..983e0e9 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,21 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++//! Deterministic routing only: no model decides which path a question takes.
++
++/// Which path `muninn why` takes for one question.
++#[derive(Debug, Clone, PartialEq, Eq)]
++pub enum Route {
++    /// Bare record id (e.g. `142` or `#142`): walk lineage from that record.
++    Lineage(i64),
++    /// Free-text question: lexical (BM25) lookup, same engine as the hook.
++    Lexical(String),
++}
++
++/// Decide the route for a `muninn why` question. Deterministic string parsing
++/// only, consistent with the no-model read path (design/ENGINE.md P2).
++pub fn route(question: &str) -> Route {
++    let trimmed = question.trim().trim_start_matches('#');
++    match trimmed.parse::<i64>() {
++        Ok(id) => Route::Lineage(id),
++        Err(_) => Route::Lexical(question.trim().to_string()),
++    }
++}

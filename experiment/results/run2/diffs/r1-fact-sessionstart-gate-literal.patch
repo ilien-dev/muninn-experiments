@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..2e73862
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Historial de rendimiento
++
++## Compuerta de salud en SessionStart
++
++Coste del hook `SessionStart` (p50), con un almacén de 5000 registros.
++
++| Momento | p50 | Cambio |
++|---|---|---|
++| Antes | 11,9 ms | — |
++| Después | 1,05 ms | quick_check fuera de la ruta de lectura, contador `fts_rows`, CHECK de `body` añadidos a la vez |
++
++Fuente: registro de sesión de este proyecto (`muninn:episode`, 2026-09-12, trust 1 —
++observado en la transcripción de una sesión anterior de este mismo proyecto). No se
++re-ejecutó el benchmark en esta sesión: el intento de compilar `muninn-bench` en
++modo release para medirlo de nuevo fue bloqueado (permiso de build denegado). Si se
++necesita una cifra verificada en este entorno, ejecutar:
++
++```
++cargo build --release -p muninn-bench -p muninn-cli
++target/release/muninn-bench perf --records 5000
++```

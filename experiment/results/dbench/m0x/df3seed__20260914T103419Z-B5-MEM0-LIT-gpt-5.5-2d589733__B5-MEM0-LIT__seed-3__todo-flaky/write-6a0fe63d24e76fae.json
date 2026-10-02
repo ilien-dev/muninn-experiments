@@ -1,0 +1,36 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky",
+  "op": "write",
+  "request": {
+    "infer": false,
+    "messages": [
+      {
+        "content": "Filtering failures are due to leftover state between tests. Each test has a fresh file; filtering must be implemented explicitly.\nFor sequence todo-flaky, task todo-flaky-s04, the public task prompt was: Add `list --status open|done|all` filtering while preserving deterministic title sorting when both options are used.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ],
+    "metadata": {
+      "benchmark": "dreambench-swe",
+      "condition": "B5-MEM0-LIT",
+      "mem0_infer": false,
+      "mem0_storage_mode": "literal_raw_text",
+      "run_id": "20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733",
+      "seed": 3,
+      "sequence_id": "todo-flaky"
+    },
+    "storage_mode": "literal_raw_text",
+    "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky"
+  },
+  "response": {
+    "results": [
+      {
+        "actor_id": null,
+        "event": "ADD",
+        "id": "d10a5c3f-0e95-497a-a122-659769e32498",
+        "memory": "Filtering failures are due to leftover state between tests. Each test has a fresh file; filtering must be implemented explicitly.\nFor sequence todo-flaky, task todo-flaky-s04, the public task prompt was: Add `list --status open|done|all` filtering while preserving deterministic title sorting when both options are used.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "role": "user"
+      }
+    ]
+  }
+}

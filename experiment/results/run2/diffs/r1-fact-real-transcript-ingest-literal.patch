@@ -1,0 +1,29 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..07bbd2e
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,23 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured ingest run exists for this project's own real Claude Code
++transcript. `muninn-cli ingest <transcript>` (crates/muninn-cli/src/main.rs:63)
++is the tool that would produce turns/episodes/duration, but it requires a
++release build (`cargo build --release -p muninn-cli`), and `cargo` is blocked
++by this sandbox's permission policy — the build request gets no approval
++prompt, it just fails. No prebuilt `muninn-cli` binary exists anywhere on this
++machine either. Three earlier attempts at this same task (r0, off and control
++arms) hit the identical block.
++
++What is measured, from the transcript files themselves:
++
++- Real transcript for this project checkout (session directory
++  `~/.claude/projects/-home-ilien-Projects-muninn-crates-muninn-bench-experiment-out-work-cell-r1-fact-real-transcript-ingest-literal/`):
++  two `.jsonl` files, `564434` + `140089` = `704523` bytes (~0.67 MB), via `wc -c`.
++
++Not measured — turns produced, episodes produced, ingest duration. Ingest was
++never run, so these numbers do not exist yet. Do not treat any figure for them
++as real until `muninn-cli ingest` actually runs against one of these files and
++its output/log is captured.

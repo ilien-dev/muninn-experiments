@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..c0ea848
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++Nothing is currently recorded for this project's version numbering scheme: the decision config that previously held a value (`config/decisions/revoke-version-scheme.json`) was removed from the repository in commit 33c39da ("move decision config out of the tree") without a replacement being recorded, so there is no current decision on record.

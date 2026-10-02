@@ -1,0 +1,12 @@
+{"at":1789368215043,"id":83,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789368215043,"id":84,"reason":"literal:cue:event:session_start","tokens":96}
+{"at":1789368215115,"id":73,"reason":"literal:gated:budget","tokens":0}
+{"at":1789368215115,"id":67,"reason":"literal:gated:budget","tokens":0}
+{"at":1789368215115,"id":74,"reason":"literal:gated:budget","tokens":0}
+{"at":1789368215115,"id":63,"reason":"literal:gated:budget","tokens":0}
+{"at":1789368215115,"id":61,"reason":"literal:gated:budget","tokens":0}
+{"at":1789368215115,"id":79,"reason":"literal:literal","tokens":208}
+{"at":1789368215115,"id":71,"reason":"literal:literal","tokens":208}
+{"at":1789368215115,"id":64,"reason":"literal:literal","tokens":208}
+{"at":1789368234768,"id":92,"reason":"literal:cue:dir:crates/muninn-symbols/src@post_tool","tokens":0}
+{"at":1789368234768,"id":92,"reason":"literal:literal:post_tool","tokens":53}

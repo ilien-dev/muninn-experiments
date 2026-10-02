@@ -1,0 +1,7 @@
+{
+ "model": "claude-sonnet-5",
+ "answer": "Yes, the following passages contain matching words:\n\n1. Contains \"[account e-mail]\":\n> The user's email address is [account e-mail].me. Use it only to identify the user, such as for authorship, attribution, or filtering their own work. Never send it to an unrelated service, such as in a request header, URL, or payload, unless the user explicitly asks.\n\n2. Contains \"Muninn\":\n> Primary working directory: /tmp/muninn-bridge-cwd",
+ "num_turns": 1,
+ "probe": "canary2",
+ "bridge": "claude_bridge.py"
+}

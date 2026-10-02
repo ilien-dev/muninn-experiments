@@ -1,0 +1,3 @@
+{"at":1789367693423,"session":"770e9065-0fe8-498e-a4a1-f2f86817ad27","files":["docs/*.md"],"symbols":[]}
+{"at":1789367718948,"session":"770e9065-0fe8-498e-a4a1-f2f86817ad27","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789367751291,"session":"770e9065-0fe8-498e-a4a1-f2f86817ad27","files":["docs/perf-history.md"],"symbols":[]}

@@ -1,0 +1,3 @@
+{"at":1789371059569,"session":"01a09ed3-4943-7a43-8cdc-f5ee23b5a942","files":["docs/perf-history.md;","docs/perf-history.md;","crates/muninn-core/src/health.rs","crates/muninn-core/src/db.rs"],"symbols":["Status","Check","Report","Report","reds","colds","is_green","summary","check","run","tests","fresh_project_is_green_or_cold_never_red","SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}
+{"at":1789371069649,"session":"01a09ed3-4943-7a43-8cdc-f5ee23b5a942","files":["docs/perf-history.md"],"symbols":[]}
+{"at":1789371073029,"session":"01a09ed3-4943-7a43-8cdc-f5ee23b5a942","files":["docs/perf-history.md","docs/perf-history.md","docs/perf-history.md"],"symbols":[]}

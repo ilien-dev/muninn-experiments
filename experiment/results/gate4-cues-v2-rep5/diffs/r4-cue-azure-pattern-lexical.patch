@@ -1,0 +1,21 @@
+diff --git a/crates/muninn-capture/src/redact.rs b/crates/muninn-capture/src/redact.rs
+index eec1ce2..68901d2 100644
+--- a/crates/muninn-capture/src/redact.rs
++++ b/crates/muninn-capture/src/redact.rs
+@@ -15,6 +15,7 @@ fn patterns() -> &'static [Regex] {
+             r"AKIA[0-9A-Z]{16}",
+             r"xox[baprs]-[A-Za-z0-9\-]{10,}",
+             r"AIza[0-9A-Za-z_\-]{30,}",
++            r"[A-Za-z0-9+/]{86}==",
+             r"-----BEGIN [A-Z ]*PRIVATE KEY-----[\s\S]*?-----END [A-Z ]*PRIVATE KEY-----",
+             r#"(?i)\b(api[_-]?key|token|secret|password|passwd|authorization)\b\s*[:=]\s*['"]?[A-Za-z0-9_\-./+=]{12,}"#,
+             r"eyJ[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}\.[A-Za-z0-9_\-]{10,}",
+@@ -90,5 +91,8 @@ mod tests {
+         // an opaque mixed-case token is redacted
+         let t = "qA7zP2mX9kL4vB8nR1tY6wC3eH5jD0sF2gK8uN4pQ7";
+         assert!(redact(t).contains("[redacted]"));
++        // an Azure storage account key (88-char base64 ending in ==) is redacted
++        let azure_key = "AbCdEfGh1234567890AbCdEfGh1234567890AbCdEfGh1234567890AbCdEfGh1234567890AbCdEfGh123456==";
++        assert!(!redact(&format!("AccountKey={azure_key}")).contains(azure_key));
+     }
+ }

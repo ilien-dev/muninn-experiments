@@ -1,0 +1,293 @@
+{
+  "admitted_memory_tokens": 1,
+  "agent_metadata": {
+    "agent": "codex",
+    "command": [
+      "codex",
+      "exec",
+      "--sandbox",
+      "danger-full-access",
+      "--skip-git-repo-check",
+      "-c",
+      "approval_policy=never",
+      "-c",
+      "mcp_servers={}",
+      "-m",
+      "gpt-5.5",
+      "-"
+    ],
+    "diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..e35cd5c 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@ def parse_ini(text):\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+    "error_type": null,
+    "exit_code": 0,
+    "isolation_mode": "container",
+    "model": "gpt-5.5",
+    "outcome": "completed",
+    "stderr": "2026-09-14T10:26:30.384342Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f74-3ee6-7460-aadb-a88da9c0c825\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-stale-s01\n\nInstruction:\nIntroduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\n\nAdmitted memory context:\n(none)\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the repo shape and the current `parse_ini` behavior first, then I\u2019ll make the smallest compatible change and run the relevant tests.\nexec\n/bin/bash -lc 'pwd && rg --files' in /work\n succeeded in 0ms:\n/work\nCONVENTIONS.md\nconfigly/__init__.py\nconfigly/parser.py\ntests/test_parser.py\ntests/test_config_container.py\n\nexec\n/bin/bash -lc 'rg \"parse_ini|Config\" -n .' in /work\n succeeded in 0ms:\n./configly/__init__.py:1:from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./configly/parser.py:13:def parse_ini(text):\n./tests/test_config_container.py:1:from configly import Config, parse_ini\n./tests/test_config_container.py:4:def test_parse_ini_returns_dict_compatible_config():\n./tests/test_config_container.py:5:    cfg = parse_ini(\"[server]\\nhost=localhost\\n\")\n./tests/test_config_container.py:6:    assert isinstance(cfg, Config)\n./tests/test_parser.py:3:from configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./tests/test_parser.py:6:def test_parse_ini_sections_and_keys():\n./tests/test_parser.py:7:    data = parse_ini(\"[server]\\nHost-Name = localhost\\nport=8080\\n\")\n./tests/test_parser.py:13:        parse_ini(\"missing section = true\\n\")\n\ncodex\nThere\u2019s already a focused test file for the new container, so I\u2019m going to read the parser and tests together and mirror the repo\u2019s existing style.\nexec\n/bin/bash -lc \"sed -n '1,220p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\ndef parse_ini(text):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        data[current][normalize_key(key)] = value\n    return data\n\n\ndef dump_ini(config):\n    lines = []\n    for section, values in config.items():\n        lines.append(f'[{section}]')\n        for key, value in values.items():\n            lines.append(f'{key}={value}')\n    return '\\n'.join(lines) + ('\\n' if lines else '')\n\n\ndef parse_csv(text):\n    rows = list(csv.reader(io.StringIO(text)))\n    if not rows:\n        return []\n    headers = [normalize_key(header) for header in rows[0]]\n    records = []\n    for line_no, row in enumerate(rows[1:], start=2):\n        padded = row + [''] * max(0, len(headers) - len(row))\n        records.append({header: padded[index] for index, header in enumerate(headers)})\n    return records\n\n\nexec\n/bin/bash -lc \"sed -n '1,200p' configly/__init__.py\" in /work\n succeeded in 0ms:\nfrom .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\nexec\n/bin/bash -lc \"sed -n '1,220p' tests/test_parser.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\n\ndef test_parse_ini_sections_and_keys():\n    data = parse_ini(\"[server]\\nHost-Name = localhost\\nport=8080\\n\")\n    assert data == {\"server\": {\"host_name\": \"localhost\", \"port\": \"8080\"}}\n\n\ndef test_parse_error_has_line_number():\n    with pytest.raises(ParseError, match=r\"line 1:\"):\n        parse_ini(\"missing section = true\\n\")\n\n\ndef test_dump_ini_round_trip_shape():\n    text = dump_ini({\"server\": {\"host\": \"localhost\", \"port\": \"8080\"}})\n    assert text == \"[server]\\nhost=localhost\\nport=8080\\n\"\n\n\ndef test_parse_csv_normalizes_headers():\n    rows = parse_csv(\"First-Name,Age\\nAda,37\\n\")\n    assert rows == [{\"first_name\": \"Ada\", \"age\": \"37\"}]\n\n\ndef test_normalize_key():\n    assert normalize_key(\"Api-Key\") == \"api_key\"\n\nexec\n/bin/bash -lc \"sed -n '1,220p' tests/test_config_container.py\" in /work\n succeeded in 0ms:\nfrom configly import Config, parse_ini\n\n\ndef test_parse_ini_returns_dict_compatible_config():\n    cfg = parse_ini(\"[server]\\nhost=localhost\\n\")\n    assert isinstance(cfg, Config)\n    assert cfg == {\"server\": {\"host\": \"localhost\"}}\n    assert cfg.as_dict() == {\"server\": {\"host\": \"localhost\"}}\n    assert cfg.get_path(\"server.host\") == \"localhost\"\n    assert cfg.get_path(\"server.port\", \"8080\") == \"8080\"\n\nexec\n/bin/bash -lc \"sed -n '1,200p' CONVENTIONS.md\" in /work\n succeeded in 0ms:\n# configly conventions\n\n- Parser errors must include a concrete line number when input text is malformed.\n- Public keys are normalized through `normalize_key`.\n- Data containers should remain dict-compatible when architecture changes add helpers.\n\ncodex\nThe current parser returns a plain nested dict. I\u2019m adding `Config` as a small `dict` subclass in the parser module, exporting it, and keeping `dump_ini` working through normal mapping methods.\napply patch\npatch: completed\n/work/configly/parser.py\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\napply patch\npatch: completed\n/work/configly/__init__.py\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThe container is in place. I\u2019m running the test suite now, and I\u2019ll adjust if the hidden shape implied by the visible tests needs a little more polish.\nexec\n/bin/bash -lc 'pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: pytest: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\n`pytest` isn\u2019t on PATH in this environment, so I\u2019m checking whether it\u2019s available as a Python module before I call the test runner unavailable.\nexec\n/bin/bash -lc 'python -m pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\nexec\n/bin/bash -lc \"python - <<'PY'\nfrom configly import Config, parse_ini\ncfg = parse_ini('[server]\\\\nhost=localhost\\\\n')\nprint(type(cfg).__name__)\nprint(isinstance(cfg, Config))\nprint(cfg == {'server': {'host': 'localhost'}})\nprint(cfg.get_path('server.host'))\nprint(cfg.get_path('server.port', '8080'))\nprint(cfg.as_dict())\nPY\" in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThis image uses `python3` rather than `python`; I\u2019m switching to that and doing both the formal tests and a tiny direct smoke test.\nexec\n/bin/bash -lc 'python3 -m pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python3: command not found\n\nexec\n/bin/bash -lc \"python3 - <<'PY'\nfrom configly import Config, parse_ini\ncfg = parse_ini('[server]\\\\nhost=localhost\\\\n')\nprint(type(cfg).__name__)\nprint(isinstance(cfg, Config))\nprint(cfg == {'server': {'host': 'localhost'}})\nprint(cfg.get_path('server.host'))\nprint(cfg.get_path('server.port', '8080'))\nprint(cfg.as_dict())\nPY\" in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python3: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThere doesn\u2019t appear to be a Python interpreter installed in the runner, which is unusual for a Python repo. I\u2019ll still do a static pass on the package and test files so the implementation is clean for the oracle environment.\nexec\n/bin/bash -lc 'which python python3 python3.12 python3.11 pypy pytest || true' in /work\n succeeded in 0ms:\nexec\n/bin/bash -lc 'git diff -- configly/parser.py configly/__init__.py' in /work\n succeeded in 0ms:\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..e35cd5c 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@ def parse_ini(text):\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\nexec\n/bin/bash -lc \"sed -n '1,200p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\nfrom collections.abc import Mapping\n\n\nclass ParseError(ValueError):\n    pass\n\n\nclass Config(dict):\n    def get_path(self, path, default=None):\n        current = self\n        for part in path.split('.'):\n            if not isinstance(current, Mapping) or part not in current:\n                return default\n            current = current[part]\n        return current\n\n    def as_dict(self):\n        return {key: self._as_plain_dict(value) for key, value in self.items()}\n\n    @classmethod\n    def _as_plain_dict(cls, value):\n        if isinstance(value, Mapping):\n            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n        return value\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\ndef parse_ini(text):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        data[current][normalize_key(key)] = value\n    return Config(data)\n\n\ndef dump_ini(config):\n    lines = []\n    for section, values in config.items():\n        lines.append(f'[{section}]')\n        for key, value in values.items():\n            lines.append(f'{key}={value}')\n    return '\\n'.join(lines) + ('\\n' if lines else '')\n\n\ndef parse_csv(text):\n    rows = list(csv.reader(io.StringIO(text)))\n    if not rows:\n        return []\n    headers = [normalize_key(header) for header in rows[0]]\n    records = []\n    for line_no, row in enumerate(rows[1:], start=2):\n        padded = row + [''] * max(0, len(headers) - len(row))\n        records.append({header: padded[index] for index, header in enumerate(headers)})\n    return records\n\nexec\n/bin/bash -lc \"sed -n '1,50p' configly/__init__.py\" in /work\n succeeded in 0ms:\nfrom .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThe diff is tiny and matches the visible expectations. I\u2019m doing one last whitespace check, since that\u2019s the only local verification available without Python installed here.\nexec\n/bin/bash -lc 'git diff --check' in /work\n succeeded in 0ms:\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nImplemented the `Config` container.\n\nChanged:\n- Added `Config(dict)` in [configly/parser.py](/work/configly/parser.py:9)\n- `parse_ini()` now returns `Config(data)`\n- Added `get_path(path, default=None)` and recursive `as_dict()`\n- Exported `Config` from [configly/__init__.py](/work/configly/__init__.py:1)\n\nVerification:\n- `git diff --check` passed.\n- I could not run tests because this environment has no `python`, `python3`, or `pytest` executable installed.\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..d4205e079307c9c48be05b5e27af84cd8f9bd087\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90adb2c1e4dff733f7d446c8341b031bb110..e35cd5ca8fe8f12a131fd7c351c66532d1a9ecf7\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ntokens used\n15,382\n",
+    "stdout": "Implemented the `Config` container.\n\nChanged:\n- Added `Config(dict)` in [configly/parser.py](/work/configly/parser.py:9)\n- `parse_ini()` now returns `Config(data)`\n- Added `get_path(path, default=None)` and recursive `as_dict()`\n- Exported `Config` from [configly/__init__.py](/work/configly/__init__.py:1)\n\nVerification:\n- `git diff --check` passed.\n- I could not run tests because this environment has no `python`, `python3`, or `pytest` executable installed.\n",
+    "steps": [
+      {
+        "action": "codex exec",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--rm",
+          "-i",
+          "--name",
+          "dreambench-wake-58708-6229a12d2a60",
+          "--network",
+          "bridge",
+          "--user",
+          "1000:1000",
+          "-e",
+          "CODEX_HOME=/codexhome",
+          "-e",
+          "HOME=/codexhome",
+          "-e",
+          "NO_COLOR=1",
+          "-v",
+          "/home/ilien/.codex:/codex-home:ro",
+          "-v",
+          "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01:/work:rw",
+          "-w",
+          "/work",
+          "dreambench-swe-codex-agent:latest",
+          "codex",
+          "exec",
+          "--sandbox",
+          "danger-full-access",
+          "--skip-git-repo-check",
+          "-c",
+          "approval_policy=never",
+          "-c",
+          "mcp_servers={}",
+          "-m",
+          "gpt-5.5",
+          "-"
+        ],
+        "cwd": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01",
+        "jail": {
+          "codex_home_mount": "/codex-home:ro",
+          "container_cwd": "/work",
+          "container_name": "dreambench-wake-58708-6229a12d2a60",
+          "cwd": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01",
+          "image": "dreambench-swe-codex-agent:latest",
+          "inner_codex_sandbox": "danger-full-access",
+          "isolation_mode": "container",
+          "mounts": [
+            "/codex-home",
+            "/work"
+          ],
+          "network": "bridge",
+          "purpose": "wake",
+          "type": "docker-container",
+          "user": "1000:1000",
+          "worktree": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01",
+          "writable_codex_home": "/tmp/codexhome"
+        }
+      }
+    ],
+    "usage": {},
+    "worktree": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01"
+  },
+  "agent_result": {
+    "error_detail": null,
+    "error_type": null,
+    "passed": true,
+    "patch": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..e35cd5c 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@ def parse_ini(text):\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+    "steps": 1,
+    "tokens": 3456
+  },
+  "contaminated": false,
+  "contamination_evidence": [],
+  "error_detail": null,
+  "error_type": null,
+  "final_passed": true,
+  "isolation_mode": "container",
+  "memory_context": [],
+  "memory_writes": [],
+  "oracle": {
+    "error_detail": "......                                                                   [100%]\n6 passed in 0.01s",
+    "error_type": null,
+    "exit_code": 0,
+    "passed": true,
+    "stderr": "",
+    "stdout": "......                                                                   [100%]\n6 passed in 0.01s\n",
+    "timed_out": false
+  },
+  "ordinal": 5,
+  "pass_at_1": true,
+  "retrieval_decisions": [],
+  "score": {
+    "agent_diff_files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "apply": {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": ""
+    },
+    "empty_production_diff": false,
+    "error_detail": "......                                                                   [100%]\n6 passed in 0.01s",
+    "error_type": null,
+    "passed": true,
+    "policy_rejected": false,
+    "production_diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..e35cd5c 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@ def parse_ini(text):\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+    "production_files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "rejected_files": [],
+    "rejected_reasons": {}
+  },
+  "sleep_error": null,
+  "task": {
+    "base_ref": "tasks/config-stale/s01/base",
+    "files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "id": "config-stale-s01",
+    "instruction": "Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().",
+    "prompt": "Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().",
+    "repo": "configly",
+    "seq_id": "config-stale",
+    "seq_type": "stale-architecture",
+    "sequence_id": "config-stale",
+    "session_index": 1,
+    "worktree": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01"
+  },
+  "trajectory": {
+    "budget": {
+      "wake_max_steps": 1
+    },
+    "condition_id": "B5-MEM0-LIT",
+    "created_at": "2026-09-14T10:27:36.384657+00:00",
+    "file_diffs": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "final_outcome": "success",
+    "memory_reads": [],
+    "memory_writes": [],
+    "model_id": "gpt-5.5",
+    "raw_episode": {
+      "actions": [
+        "codex exec"
+      ],
+      "agent_patch": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..e35cd5c 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@ def parse_ini(text):\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+      "benchmark_task_id": "config-stale-s01",
+      "condition_id": "B5-MEM0-LIT",
+      "error_detail": null,
+      "error_type": null,
+      "failure_observations": [],
+      "file_paths": [
+        "configly/__init__.py",
+        "configly/parser.py"
+      ],
+      "memory_context": [],
+      "memory_reads": [],
+      "memory_writes": [],
+      "model_id": "gpt-5.5",
+      "observations": [
+        "Implemented the `Config` container.\n\nChanged:\n- Added `Config(dict)` in [configly/parser.py](/work/configly/parser.py:9)\n- `parse_ini()` now returns `Config(data)`\n- Added `get_path(path, default=None)` and recursive `as_dict()`\n- Exported `Config` from [configly/__init__.py](/work/configly/__init__.py:1)\n\nVerification:\n- `git diff --check` passed.\n- I could not run tests because this environment has no `python`, `python3`, or `pytest` executable installed.\n",
+        "2026-09-14T10:26:30.384342Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f74-3ee6-7460-aadb-a88da9c0c825\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-stale-s01\n\nInstruction:\nIntroduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\n\nAdmitted memory context:\n(none)\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the repo shape and the current `parse_ini` behavior first, then I\u2019ll make the smallest compatible change and run the relevant tests.\nexec\n/bin/bash -lc 'pwd && rg --files' in /work\n succeeded in 0ms:\n/work\nCONVENTIONS.md\nconfigly/__init__.py\nconfigly/parser.py\ntests/test_parser.py\ntests/test_config_container.py\n\nexec\n/bin/bash -lc 'rg \"parse_ini|Config\" -n .' in /work\n succeeded in 0ms:\n./configly/__init__.py:1:from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./configly/parser.py:13:def parse_ini(text):\n./tests/test_config_container.py:1:from configly import Config, parse_ini\n./tests/test_config_container.py:4:def test_parse_ini_returns_dict_compatible_config():\n./tests/test_config_container.py:5:    cfg = parse_ini(\"[server]\\nhost=localhost\\n\")\n./tests/test_config_container.py:6:    assert isinstance(cfg, Config)\n./tests/test_parser.py:3:from configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./tests/test_parser.py:6:def test_parse_ini_sections_and_keys():\n./tests/test_parser.py:7:    data = parse_ini(\"[server]\\nHost-Name = localhost\\nport=8080\\n\")\n./tests/test_parser.py:13:        parse_ini(\"missing section = true\\n\")\n\ncodex\nThere\u2019s already a focused test file for the new container, so I\u2019m going to read the parser and tests together and mirror the repo\u2019s existing style.\nexec\n/bin/bash -lc \"sed -n '1,220p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\ndef parse_ini(text):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        data[current][normalize_key(key)] = value\n    return data\n\n\ndef dump_ini(config):\n    lines = []\n    for section, values in config.items():\n        lines.append(f'[{section}]')\n        for key, value in values.items():\n            lines.append(f'{key}={value}')\n    return '\\n'.join(lines) + ('\\n' if lines else '')\n\n\ndef parse_csv(text):\n    rows = list(csv.reader(io.StringIO(text)))\n    if not rows:\n        return []\n    headers = [normalize_key(header) for header in rows[0]]\n    records = []\n    for line_no, row in enumerate(rows[1:], start=2):\n        padded = row + [''] * max(0, len(headers) - len(row))\n        records.append({header: padded[index] for index, header in enumerate(headers)})\n    return records\n\n\nexec\n/bin/bash -lc \"sed -n '1,200p' configly/__init__.py\" in /work\n succeeded in 0ms:\nfrom .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\nexec\n/bin/bash -lc \"sed -n '1,220p' tests/test_parser.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseErr",
+        "oracle exit=0 passed=True",
+        "......                                                                   [100%]\n6 passed in 0.01s\n"
+      ],
+      "outcome": "success",
+      "production_diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..e35cd5c 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,11 +1,31 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in path.split('.'):\n+            if not isinstance(current, Mapping) or part not in current:\n+                return default\n+            current = current[part]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: self._as_plain_dict(value) for key, value in self.items()}\n+\n+    @classmethod\n+    def _as_plain_dict(cls, value):\n+        if isinstance(value, Mapping):\n+            return {key: cls._as_plain_dict(nested) for key, nested in value.items()}\n+        return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n@@ -28,7 +48,7 @@ def parse_ini(text):\n         key, value = line.split('=', 1)\n         value = value.strip()\n         data[current][normalize_key(key)] = value\n-    return data\n+    return Config(data)\n \n \n def dump_ini(config):\n@@ -50,4 +70,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+      "prompt": "Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().",
+      "repo_commit": "tasks/config-stale/s01/base",
+      "repo_scope": "config-stale",
+      "seq_type": "stale-architecture",
+      "sequence_id": "config-stale",
+      "session_id": "config-stale-s01",
+      "sleep_write_count": 1,
+      "successful_recovery": "oracle passed",
+      "task_id": "config-stale",
+      "terminal_outcome": "success",
+      "trajectory_id": "config-stale-s01-B5-MEM0-LIT-gpt-5.5"
+    },
+    "repo_commit": "tasks/config-stale/s01/base",
+    "seed": 2,
+    "session_id": "config-stale-s01",
+    "steps": [
+      {
+        "action": "codex exec",
+        "file_diffs": [],
+        "memory_reads": [],
+        "memory_writes": [],
+        "metadata": {
+          "action": "codex exec",
+          "argv": [
+            "/usr/local/bin/docker",
+            "run",
+            "--rm",
+            "-i",
+            "--name",
+            "dreambench-wake-58708-6229a12d2a60",
+            "--network",
+            "bridge",
+            "--user",
+            "1000:1000",
+            "-e",
+            "CODEX_HOME=/codexhome",
+            "-e",
+            "HOME=/codexhome",
+            "-e",
+            "NO_COLOR=1",
+            "-v",
+            "/home/ilien/.codex:/codex-home:ro",
+            "-v",
+            "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01:/work:rw",
+            "-w",
+            "/work",
+            "dreambench-swe-codex-agent:latest",
+            "codex",
+            "exec",
+            "--sandbox",
+            "danger-full-access",
+            "--skip-git-repo-check",
+            "-c",
+            "approval_policy=never",
+            "-c",
+            "mcp_servers={}",
+            "-m",
+            "gpt-5.5",
+            "-"
+          ],
+          "cwd": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01",
+          "jail": {
+            "codex_home_mount": "/codex-home:ro",
+            "container_cwd": "/work",
+            "container_name": "dreambench-wake-58708-6229a12d2a60",
+            "cwd": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01",
+            "image": "dreambench-swe-codex-agent:latest",
+            "inner_codex_sandbox": "danger-full-access",
+            "isolation_mode": "container",
+            "mounts": [
+              "/codex-home",
+              "/work"
+            ],
+            "network": "bridge",
+            "purpose": "wake",
+            "type": "docker-container",
+            "user": "1000:1000",
+            "worktree": "/tmp/dreambench-agent-20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964-fxmxijm3/005-config-stale-s01",
+            "writable_codex_home": "/tmp/codexhome"
+          }
+        },
+        "observation": "",
+        "step_id": "step_c6357b8bfb42",
+        "timestamp": "2026-09-14T10:27:36.384631+00:00",
+        "tool_input": null,
+        "tool_name": null,
+        "tool_output": null
+      }
+    ],
+    "task_id": "config-stale-s01",
+    "trajectory_id": "traj_b9f265fb3a46"
+  }
+}

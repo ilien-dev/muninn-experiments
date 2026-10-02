@@ -1,0 +1,493 @@
+[
+ {
+  "style": "terse",
+  "id": "h3-cache",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-orm-js",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "correction",
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-tests-e2e",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-state",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-logs",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-queue2",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-auth",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-maps2",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-build",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "terse",
+  "id": "h3-telemetry",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-cache",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": true,
+  "current_only": false,
+  "a_kinds": [
+   "decision",
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-orm-js",
+  "retired_a": true,
+  "kept_b": false,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": []
+ },
+ {
+  "style": "chatty",
+  "id": "h3-tests-e2e",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-state",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-logs",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-queue2",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "decision",
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-auth",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-maps2",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-build",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "chatty",
+  "id": "h3-telemetry",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-cache",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-orm-js",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-tests-e2e",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-state",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-logs",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": false,
+  "b_served": true,
+  "current_only": true,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-queue2",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-auth",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-maps2",
+  "retired_a": true,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": false,
+  "a_served": false,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-build",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": false,
+  "old_served": true,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ },
+ {
+  "style": "Spanish",
+  "id": "h3-telemetry",
+  "retired_a": false,
+  "kept_b": true,
+  "served_ok": true,
+  "old_served": false,
+  "a_served": true,
+  "b_served": false,
+  "current_only": false,
+  "a_kinds": [
+   "episode"
+  ],
+  "b_kinds": [
+   "decision",
+   "episode"
+  ]
+ }
+]

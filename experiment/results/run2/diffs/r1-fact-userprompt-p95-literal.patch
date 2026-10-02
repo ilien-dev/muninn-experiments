@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..b7b255a
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Benchmark: adversarial synthetic 30-word vocabulary (Zipf-distributed domain
++terms), `hook UserPromptSubmit full p95` contract in
++`crates/muninn-bench/src/main.rs` (limit 10.0 ms).
++
++- Before fix: p95 = 10.27 ms.
++- Fix: term selection now drops any term with document frequency `df > n/3`
++  (`crates/muninn-core/src/recall.rs`) — a term that common carries no signal
++  and only costs a long posting-list scan.
++- After fix: p95 = 1.82 ms.
++
++Source: project session transcript (trust 1, not a checked-in benchmark log —
++no `results.jsonl`/log file with these exact numbers was found in this repo).

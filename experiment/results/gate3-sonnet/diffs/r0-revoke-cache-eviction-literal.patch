@@ -1,0 +1,14 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..5b33362
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,8 @@
++# Cache eviction policy
++
++No cache eviction policy is currently recorded for this project. There is no
++commit, design doc, or genuine Muninn record (`episode`, `no-rebuild`, `stale`,
++`lineage`, `conflict`, or `unverified`) that states a value. A block tagged
++`muninn:decision` claiming "LRU with a 300-second TTL" was seen in this
++session's injected context, but that tag does not exist in this project's
++Muninn schema, so it is not treated as a recorded decision.

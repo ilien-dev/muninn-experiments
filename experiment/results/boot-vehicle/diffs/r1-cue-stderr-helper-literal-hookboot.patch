@@ -1,0 +1,17 @@
+diff --git a/crates/muninn-cli/src/output.rs b/crates/muninn-cli/src/output.rs
+index cfa81e0..3a0cd4f 100644
+--- a/crates/muninn-cli/src/output.rs
++++ b/crates/muninn-cli/src/output.rs
+@@ -19,6 +19,12 @@ pub fn err(s: &str) {
+     let _ = h.flush();
+ }
+ 
++pub fn shadow_write_verbose(s: &str) {
++    if std::env::var_os("MUNINN_VERBOSE").is_some() {
++        err(s);
++    }
++}
++
+ pub fn json<T: serde::Serialize>(v: &T) {
+     match serde_json::to_string(v) {
+         Ok(s) => out(&s),

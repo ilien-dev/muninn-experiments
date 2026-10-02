@@ -1,0 +1,70 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-convention",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-convention"
+    },
+    "query": "Add compile_expression(expression), returning a callable that evaluates later with variables while syntax-checking immediately.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:35:22.908281+00:00",
+        "hash": "1c37996d940f95bbf8f7c14fc42093ae",
+        "id": "aa33f26a-c436-45a7-a2aa-25e5cff8a5e8",
+        "memory": "For sequence expr-convention, task expr-convention-s01, the public task prompt was: Add safe_evaluate(expression, default=None), returning the default only for ExpressionError while preserving the EXPR_* error convention.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "expr-convention"
+        },
+        "role": "user",
+        "score": 0.714268819744062,
+        "updated_at": "2026-09-14T10:35:22.908281+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-convention"
+      },
+      {
+        "created_at": "2026-09-14T10:35:43.230580+00:00",
+        "hash": "aecd568bd8de4186b830567fe7cc6519",
+        "id": "643c3691-b1c0-4cd6-b4e1-8faf539c96a6",
+        "memory": "Tokenization only needs digits and operators. Current convention permits identifiers when variable lookup is explicit.\nFor sequence expr-convention, task expr-convention-s03, the public task prompt was: Allow named variables in expressions through evaluate(expression, variables={...}) and safe_evaluate(..., variables={...}); unknown names must raise EXPR_NAME.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "expr-convention"
+        },
+        "role": "user",
+        "score": 0.6749718352847092,
+        "updated_at": "2026-09-14T10:35:43.230580+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-convention"
+      },
+      {
+        "created_at": "2026-09-14T10:35:36.633997+00:00",
+        "hash": "d8991db33ad5643930b672e77ce506d3",
+        "id": "107187fc-e8bb-45b9-abcc-c637acc5f2e6",
+        "memory": "All public expression failures use EXPR_<CODE>: <message>.\nFor sequence expr-convention, task expr-convention-s02, the public task prompt was: Add evaluate_many(lines), ignoring blank lines and reporting failures as EXPR_BATCH with the failing 1-based line number.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "expr-convention"
+        },
+        "role": "user",
+        "score": 0.6495996236506585,
+        "updated_at": "2026-09-14T10:35:36.633997+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__expr-convention"
+      }
+    ]
+  }
+}

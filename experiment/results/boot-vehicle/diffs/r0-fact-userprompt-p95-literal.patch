@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..a3b922a
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Historial de rendimiento
++
++## Ruta de lectura de UserPromptSubmit
++
++Medido en vocabulario sintético adversarial de 30 palabras.
++
++- **p95 con recall completo, antes del fix**: 10.27 ms.
++- **Fix**: descartar términos con df > n/3 (frecuencia de documento) y usar vocabulario Zipf.
++- **p95 después del fix**: 1.82 ms.
++
++Fuente: episodio de sesión de este proyecto (trust 1, `tool_observed`).

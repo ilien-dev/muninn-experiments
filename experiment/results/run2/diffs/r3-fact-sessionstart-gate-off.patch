@@ -1,0 +1,21 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c63348f
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,15 @@
++# Perf history
++
++## SessionStart health gate
++
++Cost of the `SessionStart` hook (the nine-check health gate), 5k-record store.
++
++- **Before** quick_check was taken off the read path: no measured number found
++  in this repo. The gate was authored directly in its O(1) form in the initial
++  commit (`2ff626a`); there is no prior commit or bench output with `quick_check`
++  running live on the read path to cite a number from.
++- **After** (current form: O(1) gate reading the recorded `quick_check` result,
++  the trigger-maintained `fts_rows` counter, and the `body` length `CHECK`
++  constraint, all added in the same commit): **p50 1.05 ms** at 5k records /
++  15k cues, measured via `muninn-bench perf` and recorded in the `2ff626a`
++  commit message.

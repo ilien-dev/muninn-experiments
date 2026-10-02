@@ -1,0 +1,215 @@
+Write short messages a software developer might type to a coding assistant. For each scenario below give: (a) a message stating the original decision, (b) a later message changing it to the new value (or withdrawing it when the new value says withdrawn), (c) a later message about a different decision that mentions a related word. Use varied natural wording, not templates; write each scenario in its given style (terse, chatty, or Spanish). Output JSON only: a list of objects {"key","a","b","c"} with the keys exactly as given.
+
+Scenarios:
+[
+{
+"key": "h3-cache#terse",
+"topic": "the HTTP cache in front of the API",
+"old": "Varnish",
+"new": "nginx proxy_cache",
+"style": "terse"
+},
+{
+"key": "h3-cache#chatty",
+"topic": "the HTTP cache in front of the API",
+"old": "Varnish",
+"new": "nginx proxy_cache",
+"style": "chatty"
+},
+{
+"key": "h3-cache#Spanish",
+"topic": "the HTTP cache in front of the API",
+"old": "Varnish",
+"new": "nginx proxy_cache",
+"style": "Spanish"
+},
+{
+"key": "h3-orm-js#terse",
+"topic": "the ORM for the Node service",
+"old": "Sequelize",
+"new": "Drizzle",
+"style": "terse"
+},
+{
+"key": "h3-orm-js#chatty",
+"topic": "the ORM for the Node service",
+"old": "Sequelize",
+"new": "Drizzle",
+"style": "chatty"
+},
+{
+"key": "h3-orm-js#Spanish",
+"topic": "the ORM for the Node service",
+"old": "Sequelize",
+"new": "Drizzle",
+"style": "Spanish"
+},
+{
+"key": "h3-tests-e2e#terse",
+"topic": "the end-to-end test framework",
+"old": "Cypress",
+"new": "Playwright",
+"style": "terse"
+},
+{
+"key": "h3-tests-e2e#chatty",
+"topic": "the end-to-end test framework",
+"old": "Cypress",
+"new": "Playwright",
+"style": "chatty"
+},
+{
+"key": "h3-tests-e2e#Spanish",
+"topic": "the end-to-end test framework",
+"old": "Cypress",
+"new": "Playwright",
+"style": "Spanish"
+},
+{
+"key": "h3-state#terse",
+"topic": "state management in the React app",
+"old": "Redux",
+"new": "Zustand",
+"style": "terse"
+},
+{
+"key": "h3-state#chatty",
+"topic": "state management in the React app",
+"old": "Redux",
+"new": "Zustand",
+"style": "chatty"
+},
+{
+"key": "h3-state#Spanish",
+"topic": "state management in the React app",
+"old": "Redux",
+"new": "Zustand",
+"style": "Spanish"
+},
+{
+"key": "h3-logs#terse",
+"topic": "where application logs are shipped",
+"old": "Papertrail",
+"new": "Grafana Loki",
+"style": "terse"
+},
+{
+"key": "h3-logs#chatty",
+"topic": "where application logs are shipped",
+"old": "Papertrail",
+"new": "Grafana Loki",
+"style": "chatty"
+},
+{
+"key": "h3-logs#Spanish",
+"topic": "where application logs are shipped",
+"old": "Papertrail",
+"new": "Grafana Loki",
+"style": "Spanish"
+},
+{
+"key": "h3-queue2#terse",
+"topic": "the task queue for the Python workers",
+"old": "Celery",
+"new": "Dramatiq",
+"style": "terse"
+},
+{
+"key": "h3-queue2#chatty",
+"topic": "the task queue for the Python workers",
+"old": "Celery",
+"new": "Dramatiq",
+"style": "chatty"
+},
+{
+"key": "h3-queue2#Spanish",
+"topic": "the task queue for the Python workers",
+"old": "Celery",
+"new": "Dramatiq",
+"style": "Spanish"
+},
+{
+"key": "h3-auth#terse",
+"topic": "the authentication provider",
+"old": "Auth0",
+"new": "Keycloak",
+"style": "terse"
+},
+{
+"key": "h3-auth#chatty",
+"topic": "the authentication provider",
+"old": "Auth0",
+"new": "Keycloak",
+"style": "chatty"
+},
+{
+"key": "h3-auth#Spanish",
+"topic": "the authentication provider",
+"old": "Auth0",
+"new": "Keycloak",
+"style": "Spanish"
+},
+{
+"key": "h3-maps2#terse",
+"topic": "the geocoding API",
+"old": "Google Geocoding",
+"new": "Nominatim",
+"style": "terse"
+},
+{
+"key": "h3-maps2#chatty",
+"topic": "the geocoding API",
+"old": "Google Geocoding",
+"new": "Nominatim",
+"style": "chatty"
+},
+{
+"key": "h3-maps2#Spanish",
+"topic": "the geocoding API",
+"old": "Google Geocoding",
+"new": "Nominatim",
+"style": "Spanish"
+},
+{
+"key": "h3-build#terse",
+"topic": "the frontend bundler",
+"old": "webpack",
+"new": "Vite",
+"style": "terse"
+},
+{
+"key": "h3-build#chatty",
+"topic": "the frontend bundler",
+"old": "webpack",
+"new": "Vite",
+"style": "chatty"
+},
+{
+"key": "h3-build#Spanish",
+"topic": "the frontend bundler",
+"old": "webpack",
+"new": "Vite",
+"style": "Spanish"
+},
+{
+"key": "h3-telemetry#terse",
+"topic": "sending anonymous usage telemetry from the CLI",
+"old": "telemetry on by default",
+"new": "(withdrawn, no replacement)",
+"style": "terse"
+},
+{
+"key": "h3-telemetry#chatty",
+"topic": "sending anonymous usage telemetry from the CLI",
+"old": "telemetry on by default",
+"new": "(withdrawn, no replacement)",
+"style": "chatty"
+},
+{
+"key": "h3-telemetry#Spanish",
+"topic": "sending anonymous usage telemetry from the CLI",
+"old": "telemetry on by default",
+"new": "(withdrawn, no replacement)",
+"style": "Spanish"
+}
+]

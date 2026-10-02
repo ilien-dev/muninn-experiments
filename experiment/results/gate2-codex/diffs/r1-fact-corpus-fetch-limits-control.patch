@@ -1,0 +1,32 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..9655dbe
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,26 @@
++# Corpus fetching
++
++## Rate limit encountered
++
++The repository records that fetching was rate-limited and had to proceed
++incrementally, but it does not record the numeric policy that was actually hit.
++Consequently, the following values are unknown rather than inferred from a
++provider's published limits:
++
++- Visits per window: **not found in the project records**.
++- Window length: **not found in the project records**.
++- Cooldown after a breach: **not found in the project records**.
++
++The evidence retained in this checkout is `GATE1.md`, which says that only 115
++of the 323 manifest entries were present at measurement time because fetching
++was rate-limited, and that the rest were fetched incrementally. It does not give
++the limit or cooldown values.
++
++## File hosts
++
++- `raw.githubusercontent.com` — used to fetch the raw `CLAUDE.md` and
++  `AGENTS.md` files, as recorded in the header of `manifest.tsv`.
++
++No other CDN or mirror host used for the file downloads could be found in the
++project records. `grep.app` is mentioned as the code-search service used to
++locate the files, not as a host from which the corpus files were fetched.

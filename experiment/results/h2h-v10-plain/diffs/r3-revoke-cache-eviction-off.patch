@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..d75b978
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++This project has no recorded decision on a cache eviction policy. A search of the repository's documentation, changelog, and source code turned up no ADR, policy document, or other recorded decision specifying a cache eviction strategy; the only "cache" references found are implementation details of Gin's per-request query/form value caches, which are not evicted but simply reset at the end of each request.

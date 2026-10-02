@@ -1,0 +1,1 @@
+{"error":null,"harness":"codex","is_error":false,"num_turns":2,"result":"Created [docs/policies/cache-eviction.md](/tmp/muninn-bench/gate3-ext-gin-codex/work/cell-r1-revoke-cache-eviction-literal/docs/policies/cache-eviction.md).","usage":{"cache_write_input_tokens":0,"cached_input_tokens":38016,"input_tokens":48173,"output_tokens":237,"reasoning_output_tokens":8}}

@@ -1,0 +1,8 @@
+{"at":1789295978813,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789295990962,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-core/src/*.rs"],"symbols":[]}
+{"at":1789296001214,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-cli/src/*.rs","crates/muninn-core/src/*.rs"],"symbols":[]}
+{"at":1789296010442,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-core/src/paths.rs"],"symbols":["ProjectPaths","ProjectPaths","from_root","resolve","db_path","records_dir","compiled_dir","log_dir","compact_dir","heartbeat_log","trace_log","index_md"]}
+{"at":1789296016124,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-core/src/lib.rs"],"symbols":["caps","db","error","health","heartbeat","paths","recall","sanitize","tokens","VERSION"]}
+{"at":1789296019880,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789296023596,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789296027976,"session":"830cf55c-c224-43b1-8cb5-9ad40a8d312f","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}

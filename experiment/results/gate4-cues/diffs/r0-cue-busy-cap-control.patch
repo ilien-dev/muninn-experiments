@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-core/src/db.rs b/crates/muninn-core/src/db.rs
+index d3a4fad..9f46ba9 100644
+--- a/crates/muninn-core/src/db.rs
++++ b/crates/muninn-core/src/db.rs
+@@ -21,9 +21,12 @@ pub struct Db {
+     pub mode: Mode,
+ }
+ 
++/// Longest single sleep the busy handler may take before retrying.
++const BUSY_BACKOFF_CAP_MS: u64 = 50;
++
+ /// Bounded backoff for SQLITE_BUSY. The published operational log had 34 contention
+ /// failures in month one [Q3]; a hook must never spin past its own timeout.
+-const BUSY_BACKOFF_MS: [u64; 6] = [1, 2, 5, 10, 25, 50];
++const BUSY_BACKOFF_MS: [u64; 6] = [1, 2, 5, 10, 25, BUSY_BACKOFF_CAP_MS];
+ 
+ impl Db {
+     /// Open an existing database. `ReadOnly` fails if the file does not exist.

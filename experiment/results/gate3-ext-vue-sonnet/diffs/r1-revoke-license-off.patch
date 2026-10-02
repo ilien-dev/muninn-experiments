@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..65ce3d3
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# License
++
++This project is distributed under the MIT License. This is recorded consistently across the repository: the root `LICENSE` file contains the full MIT license text (Copyright (c) 2013-present, Yuxi (Evan) You), the `license` field in `package.json` is set to `"MIT"`, and the `README.md` License section links to the MIT license text.

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..785ba7d
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS Certificate Verification in Development Builds
++
++The project's current recorded decision is that verification is required on all builds, including development environments, with no exceptions, so development builds are not exempt from the verification applied elsewhere. The recorded entry is worded as "Verification on all builds, including development environments" and does not spell out TLS certificate handling in more detail; no further TLS-specific setting, configuration value, or scoped exception is recorded.

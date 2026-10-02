@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..02b7606
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Scheme
++
++The project's current recorded decision is to number releases with Semantic Versioning (semver), using the major.minor.patch format: a major increment signals breaking changes, a minor increment signals backward-compatible features, and a patch increment signals backward-compatible bug fixes. The rationale on record is that this gives users clearer signals about compatibility and update impact when the project publishes new releases.

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..0c71c77
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport compression policy
++
++No formal decision on the transport compression codec is recorded for this project. The most recent statement on the subject, made by the user in an earlier session, was "zstd", but it was a bare remark that was never confirmed as a decision, so it is noted here as the latest word rather than as a settled choice. Until a decision is recorded, treat the codec as not yet decided.

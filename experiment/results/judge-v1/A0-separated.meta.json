@@ -1,0 +1,11 @@
+{
+ "binary": "/home/ilien/Projects/muninn/target/release/muninn",
+ "sha256": "7649a6e0942bac195b5206d02f0db0c400ecf08131d7cfc50edc385719f1510a",
+ "method": "one store per (group, later message): every earlier message of the group, then the later one",
+ "order": "separated",
+ "arm": "A0",
+ "items": 9810,
+ "wall_s": 6.6,
+ "started": "2026-09-25T00:33:15.838296+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

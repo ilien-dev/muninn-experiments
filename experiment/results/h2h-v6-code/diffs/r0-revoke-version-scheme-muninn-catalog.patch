@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..13e9a25
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++This project's recorded decision is to use Semantic Versioning (semver) for its version numbering scheme. An earlier decision to use calendar versioning (calver) was superseded when the project switched to semver, a change reflected in `config/decisions/revoke-version-scheme.json` as of commit `b0198db`.

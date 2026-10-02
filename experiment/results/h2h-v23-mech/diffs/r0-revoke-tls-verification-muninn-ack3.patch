@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..dfbc022
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS certificate verification
++
++The project's current recorded decision is that certificate verification stays enabled on every build, including development builds, with no exceptions for development. This is consistent with the separately recorded rule that HTTPS is enforced everywhere, with no plaintext exception even for internal services.

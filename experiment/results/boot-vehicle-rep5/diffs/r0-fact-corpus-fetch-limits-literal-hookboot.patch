@@ -1,0 +1,27 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..40b771e
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,21 @@
++# Fetching this corpus
++
++The `files/` directory holds real-world `CLAUDE.md`/`AGENTS.md` files located via
++GitHub code search (grep.app) and fetched by the `svipall` fetch tool. Per
++`manifest.tsv`, files were fetched raw via `raw.githubusercontent.com`.
++
++## Per-domain rate limit
++
++The fetcher enforced a per-domain limit of **12 visits per 60-second window**.
++On breach, it applied a **900-second (15-minute) cooldown** before resuming
++requests to that domain.
++
++## Mirror/CDN hosts used
++
++- `raw.githubusercontent.com` (primary; confirmed in `manifest.tsv`'s header)
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>`
++- `cdn.statically.io` (observed to be slow / prone to timeouts)
++
++These mirror values are drawn from this project's own fetch-run history rather
++than the corpus files themselves; only `raw.githubusercontent.com` is directly
++corroborated by an artifact in this repo (`manifest.tsv`).

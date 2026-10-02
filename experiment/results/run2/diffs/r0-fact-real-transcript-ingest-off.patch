@@ -1,0 +1,16 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..1bc70e2
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,10 @@
++# Perf history
++
++## Real transcript ingest
++
++No measured run found in this checkout. This worktree (`cell-r0-fact-real-transcript-ingest-off`)
++has no captured Claude Code transcript file and no ingest log or benchmark output for one — I
++searched `.muninn/`, `crates/muninn-bench/`, and the rest of the tree and found none.
++
++Figures to fill in once a real run exists: transcript size (MB), turns produced, episodes
++produced, ingest wall time.

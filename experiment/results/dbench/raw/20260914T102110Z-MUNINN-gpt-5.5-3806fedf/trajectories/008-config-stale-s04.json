@@ -1,0 +1,460 @@
+{
+  "admitted_memory_tokens": 314,
+  "agent_metadata": {
+    "agent": "codex",
+    "command": [
+      "codex",
+      "exec",
+      "--sandbox",
+      "danger-full-access",
+      "--skip-git-repo-check",
+      "-c",
+      "approval_policy=never",
+      "-c",
+      "mcp_servers={}",
+      "-m",
+      "gpt-5.5",
+      "-"
+    ],
+    "diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fa..54192b9 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00..9e2c4d6 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@ def parse_ini(text):\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@ def merge_configs(base, override):\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n",
+    "error_type": null,
+    "exit_code": 0,
+    "isolation_mode": "container",
+    "model": "gpt-5.5",
+    "outcome": "completed",
+    "stderr": "2026-09-14T10:30:39.125294Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f78-0a8c-7482-abcf-7e4fb8b60156\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-stale-s04\n\nInstruction:\nAdd parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.\n\nAdmitted memory context:\n- muninn-1: Config is now the public dict-compatible container. parse_ini must return a plain dict forever. [status=active, type=human_feedback]\n- muninn-2: For sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..57bdc33 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,17 +1,40 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in str(path).split('.'):\n+            key = normalize_key(part)\n+            if not isinstance(current, Mapping) or key not in current:\n+                return default\n+            current = current[key]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: _plain_dict(value) for key, value in self.items()}\n+\n+\n+def _plain_dict(value):\n+    if isinstance(value, Mapping):\n+        return {key: _plain_dict(item) for key, item in value.items()}\n+    if isinstance(value, list):\n+        return [_plain_dict(item) for item in value]\n+    return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n \n def parse_ini(text):\n-    data = {}\n+    data = Config()\n     current = None\n     for line_no, raw_line in enumerate(text.splitlines(), start=1):\n         line = raw_line.strip()\n@@ -50,4 +73,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(he [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the current parser and tests first so the new helper lands in the same shape as the existing API. The memory note about `parse_ini` returning a plain dict is important, so I\u2019ll keep an eye on that contract while adding `parse_ini_many`.\nexec\n/bin/bash -lc 'git status --short' in /work\nexec\n/bin/bash -lc 'rg --files' in /work\n succeeded in 0ms:\n succeeded in 0ms:\nCONVENTIONS.md\nconfigly/__init__.py\nconfigly/parser.py\ntests/test_parser.py\ntests/test_config_container.py\ntests/test_config_select.py\ntests/test_merge_configs.py\ntests/test_parse_ini_many.py\n\ncodex\nThere are already tests named for this feature, which is a nice breadcrumb. I\u2019m going to read those alongside the parser exports before editing.\nexec\n/bin/bash -lc \"sed -n '1,240p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\nclass Config(dict):\n    def get_path(self, path, default=None):\n        section, _, key = path.partition('.')\n        if not section or not key:\n            return default\n        return self.get(section, {}).get(normalize_key(key), default)\n\n    def as_dict(self):\n        return {section: dict(values) for section, values in self.items()}\n\n    def select(self, section, default=None):\n        if section in self:\n            return dict(self[section])\n        return default\n\n\ndef parse_ini(text):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        data[current][normalize_key(key)] = value\n    return Config(data)\n\n\ndef dump_ini(config):\n    lines = []\n    for section, values in config.items():\n        lines.append(f'[{section}]')\n        for key, value in values.items():\n            lines.append(f'{key}={value}')\n    return '\\n'.join(lines) + ('\\n' if lines else '')\n\n\ndef parse_csv(text):\n    rows = list(csv.reader(io.StringIO(text)))\n    if not rows:\n        return []\n    headers = [normalize_key(header) for header in rows[0]]\n    records = []\n    for line_no, row in enumerate(rows[1:], start=2):\n        padded = row + [''] * max(0, len(headers) - len(row))\n        records.append({header: padded[index] for index, header in enumerate(headers)})\n    return records\n\n\ndef merge_configs(base, override):\n    merged = Config(base).as_dict() if isinstance(base, Config) else {section: dict(values) for section, values in base.items()}\n    other = override.as_dict() if isinstance(override, Config) else {section: dict(values) for section, values in override.items()}\n    for section, values in other.items():\n        merged.setdefault(section, {}).update(values)\n    return Config(merged)\n\n\nexec\n/bin/bash -lc \"sed -n '1,200p' configly/__init__.py\" in /work\n succeeded in 0ms:\nfrom .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_parse_ini_many.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseError, parse_ini_many\n\n\ndef test_parse_ini_many_merges_in_order():\n    cfg = parse_ini_many({\n        \"base.ini\": \"[server]\\nhost=localhost\\nport=8080\\n\",\n        \"prod.ini\": \"[server]\\nport=9090\\n\",\n    })\n    assert cfg.get_path(\"server.host\") == \"localhost\"\n    assert cfg.get_path(\"server.port\") == \"9090\"\n\n\ndef test_parse_ini_many_preserves_source_name_in_errors():\n    with pytest.raises(ParseError, match=r\"bad.ini: line 1:\"):\n        parse_ini_many({\"bad.ini\": \"broken=true\\n\"})\n\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_merge_configs.py\" in /work\n succeeded in 0ms:\nfrom configly import merge_configs, parse_ini\n\n\ndef test_merge_configs_deep_merges_sections_without_mutation():\n    base = parse_ini(\"[server]\\nhost=localhost\\nport=8080\\n\")\n    override = parse_ini(\"[server]\\nport=9090\\n[feature]\\nenabled=yes\\n\")\n    merged = merge_configs(base, override)\n    assert merged.get_path(\"server.host\") == \"localhost\"\n    assert merged.get_path(\"server.port\") == \"9090\"\n    assert merged.get_path(\"feature.enabled\") == \"yes\"\n    assert base.get_path(\"server.port\") == \"8080\"\n\nexec\n/bin/bash -lc \"sed -n '1,220p' tests/test_parser.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\n\ndef test_parse_ini_sections_and_keys():\n    data = parse_ini(\"[server]\\nHost-Name = localhost\\nport=8080\\n\")\n    assert data == {\"server\": {\"host_name\": \"localhost\", \"port\": \"8080\"}}\n\n\ndef test_parse_error_has_line_number():\n    with pytest.raises(ParseError, match=r\"line 1:\"):\n        parse_ini(\"missing section = true\\n\")\n\n\ndef test_dump_ini_round_trip_shape():\n    text = dump_ini({\"server\": {\"host\": \"localhost\", \"port\": \"8080\"}})\n    assert text == \"[server]\\nhost=localhost\\nport=8080\\n\"\n\n\ndef test_parse_csv_normalizes_headers():\n    rows = parse_csv(\"First-Name,Age\\nAda,37\\n\")\n    assert rows == [{\"first_name\": \"Ada\", \"age\": \"37\"}]\n\n\ndef test_normalize_key():\n    assert normalize_key(\"Api-Key\") == \"api_key\"\n\nexec\n/bin/bash -lc 'rg \"parse_ini|Config|parse_ini_many|merge_configs\" -n .' in /work\n succeeded in 0ms:\n./configly/__init__.py:1:from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n./configly/parser.py:13:class Config(dict):\n./configly/parser.py:29:def parse_ini(text):\n./configly/parser.py:47:    return Config(data)\n./configly/parser.py:71:def merge_configs(base, override):\n./configly/parser.py:72:    merged = Config(base).as_dict() if isinstance(base, Config) else {section: dict(values) for section, values in base.items()}\n./configly/parser.py:73:    other = override.as_dict() if isinstance(override, Config) else {section: dict(values) for section, values in override.items()}\n./configly/parser.py:76:    return Config(merged)\n./tests/test_parse_ini_many.py:3:from configly import ParseError, parse_ini_many\n./tests/test_parse_ini_many.py:6:def test_parse_ini_many_merges_in_order():\n./tests/test_parse_ini_many.py:7:    cfg = parse_ini_many({\n./tests/test_parse_ini_many.py:15:def test_parse_ini_many_preserves_source_name_in_errors():\n./tests/test_parse_ini_many.py:17:        parse_ini_many({\"bad.ini\": \"broken=true\\n\"})\n./tests/test_config_container.py:1:from configly import Config, parse_ini\n./tests/test_config_container.py:4:def test_parse_ini_returns_dict_compatible_config():\n./tests/test_config_container.py:5:    cfg = parse_ini(\"[server]\\nhost=localhost\\n\")\n./tests/test_config_container.py:6:    assert isinstance(cfg, Config)\n./tests/test_merge_configs.py:1:from configly import merge_configs, parse_ini\n./tests/test_merge_configs.py:4:def test_merge_configs_deep_merges_sections_without_mutation():\n./tests/test_merge_configs.py:5:    base = parse_ini(\"[server]\\nhost=localhost\\nport=8080\\n\")\n./tests/test_merge_configs.py:6:    override = parse_ini(\"[server]\\nport=9090\\n[feature]\\nenabled=yes\\n\")\n./tests/test_merge_configs.py:7:    merged = merge_configs(base, override)\n./tests/test_parser.py:3:from configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n./tests/test_parser.py:6:def test_parse_ini_sections_and_keys():\n./tests/test_parser.py:7:    data = parse_ini(\"[server]\\nHost-Name = localhost\\nport=8080\\n\")\n./tests/test_parser.py:13:        parse_ini(\"missing section = true\\n\")\n./tests/test_config_select.py:1:from configly import parse_ini\n./tests/test_config_select.py:5:    cfg = parse_ini(\"[server]\\nhost=localhost\\n\")\n\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_config_container.py\" in /work\n succeeded in 0ms:\nfrom configly import Config, parse_ini\n\n\ndef test_parse_ini_returns_dict_compatible_config():\n    cfg = parse_ini(\"[server]\\nhost=localhost\\n\")\n    assert isinstance(cfg, Config)\n    assert cfg == {\"server\": {\"host\": \"localhost\"}}\n    assert cfg.as_dict() == {\"server\": {\"host\": \"localhost\"}}\n    assert cfg.get_path(\"server.host\") == \"localhost\"\n    assert cfg.get_path(\"server.port\", \"8080\") == \"8080\"\n\nexec\n/bin/bash -lc \"sed -n '1,200p' CONVENTIONS.md\" in /work\n succeeded in 0ms:\n# configly conventions\n\n- Parser errors must include a concrete line number when input text is malformed.\n- Public keys are normalized through `normalize_key`.\n- Data containers should remain dict-compatible when architecture changes add helpers.\n\nexec\n/bin/bash -lc \"sed -n '1,240p' tests/test_config_select.py\" in /work\n succeeded in 0ms:\nfrom configly import parse_ini\n\n\ndef test_select_returns_section_copy_or_default():\n    cfg = parse_ini(\"[server]\\nhost=localhost\\n\")\n    selected = cfg.select(\"server\")\n    selected[\"host\"] = \"changed\"\n    assert cfg[\"server\"][\"host\"] == \"localhost\"\n    assert cfg.select(\"missing\", {}) == {}\n\ncodex\nThe visible tests are older-looking in one spot: they still expect `parse_ini` to have `Config` helpers, while the task memory says `parse_ini` must stay a plain dict. I\u2019m going to make the new API robust and narrowly scoped first, then I\u2019ll run the suite and decide whether that stale expectation needs a compatibility shim or a contract correction.\ncodex\nI\u2019ve got the feature shape now: `parse_ini_many` should iterate source/name pairs in insertion order, parse each text, merge later values over earlier ones, and rethrow only `ParseError` with the source name added up front. I\u2019m making that change and exporting it.\napply patch\npatch: completed\n/work/configly/parser.py\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\napply patch\npatch: completed\n/work/configly/__init__.py\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ncodex\nThe first pass is in place. I kept it deliberately close to `merge_configs` so section-level behavior stays consistent with the rest of the package.\nexec\n/bin/bash -lc 'pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: pytest: command not found\n\nexec\n/bin/bash -lc 'git diff -- configly/parser.py configly/__init__.py' in /work\n succeeded in 0ms:\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fa..54192b9 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00..517f0ae 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@ def parse_ini(text):\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@ def merge_configs(base, override):\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ncodex\n`pytest` isn\u2019t on PATH in this environment, so I\u2019m checking whether it\u2019s available as a Python module before doing any further tweaking.\nexec\n/bin/bash -lc 'python -m pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\nexec\n/bin/bash -lc \"python - <<'PY'\nfrom configly import ParseError, parse_ini_many\ncfg = parse_ini_many({'base.ini': '[server]\\\\nhost=localhost\\\\nport=8080\\\\n', 'prod.ini': '[server]\\\\nport=9090\\\\n'})\nprint(type(cfg).__name__, cfg, cfg.get_path('server.port'))\ntry:\n    parse_ini_many({'bad.ini': 'broken=true\\\\n'})\nexcept ParseError as exc:\n    print(str(exc))\nPY\" in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ncodex\nThis container has neither `pytest` nor `python` under the usual command names; I\u2019ll try `python3`, which is common in lean images.\nexec\n/bin/bash -lc 'python3 -m pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python3: command not found\n\nexec\n/bin/bash -lc \"python3 - <<'PY'\nfrom configly import ParseError, parse_ini_many\ncfg = parse_ini_many({'base.ini': '[server]\\\\nhost=localhost\\\\nport=8080\\\\n', 'prod.ini': '[server]\\\\nport=9090\\\\n'})\nprint(type(cfg).__name__, cfg, cfg.get_path('server.port'))\ntry:\n    parse_ini_many({'bad.ini': 'broken=true\\\\n'})\nexcept ParseError as exc:\n    print(str(exc))\nPY\" in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python3: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ncodex\nNo Python interpreter is available in this execution image, so I can\u2019t run the test suite here. I\u2019m doing a static pass now for API edge cases the oracle might exercise.\nexec\n/bin/bash -lc 'command -v python python3 pytest py || true' in /work\n succeeded in 0ms:\nexec\n/bin/bash -lc 'git diff --check' in /work\n succeeded in 0ms:\nexec\n/bin/bash -lc 'git diff --stat' in /work\n succeeded in 0ms:\n configly/__init__.py |  2 +-\n configly/parser.py   | 12 +++++++++++-\n 2 files changed, 12 insertions(+), 2 deletions(-)\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..517f0aef62a0e41c761a1544f9cca06cdab0ef8a\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,17 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    for name, text in named_texts.items():\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +85,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ncodex\nOne small hardening pass: the prompt says \u201cnamed INI strings,\u201d which can naturally be a mapping, but supporting ordered `(name, text)` pairs costs almost nothing and makes the ordering contract explicit.\napply patch\npatch: completed\n/work/configly/parser.py\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..9e2c4d608792db9a228ecf1465c4ac364f11a51c\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..9e2c4d608792db9a228ecf1465c4ac364f11a51c\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ncodex\nThe helper now accepts both normal dict-like inputs and explicit ordered pairs. I\u2019m doing the last static checks since runtime tests can\u2019t execute without Python in this image.\nexec\n/bin/bash -lc 'git diff -- configly/parser.py configly/__init__.py' in /work\n succeeded in 0ms:\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fa..54192b9 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00..9e2c4d6 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@ def parse_ini(text):\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@ def merge_configs(base, override):\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\nexec\n/bin/bash -lc 'git diff --check' in /work\n succeeded in 0ms:\nexec\n/bin/bash -lc 'git status --short' in /work\n succeeded in 0ms:\n M configly/__init__.py\n M configly/parser.py\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..9e2c4d608792db9a228ecf1465c4ac364f11a51c\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ncodex\nImplemented `parse_ini_many(named_texts)` and exported it from `configly`.\n\nWhat changed:\n- Merges named INI sources in order, with later files overriding earlier values.\n- Accepts mappings or ordered `(name, text)` iterables.\n- Wraps `ParseError` messages as `source_name: original error`.\n\nVerification:\n- `git diff --check` passed.\n- Could not run tests because this container has no `python`, `python3`, or `pytest` executable available.\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fad325c97ca2b2acccb37373a400fb56ca3..54192b9c79c88fb784998be004caaafa439f1313\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00168ea2d4480c674f0ded7c51fed93dad1..9e2c4d608792db9a228ecf1465c4ac364f11a51c\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n\ntokens used\n22,532\n",
+    "stdout": "Implemented `parse_ini_many(named_texts)` and exported it from `configly`.\n\nWhat changed:\n- Merges named INI sources in order, with later files overriding earlier values.\n- Accepts mappings or ordered `(name, text)` iterables.\n- Wraps `ParseError` messages as `source_name: original error`.\n\nVerification:\n- `git diff --check` passed.\n- Could not run tests because this container has no `python`, `python3`, or `pytest` executable available.\n",
+    "steps": [
+      {
+        "action": "codex exec",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--rm",
+          "-i",
+          "--name",
+          "dreambench-wake-59394-23c3455c945c",
+          "--network",
+          "bridge",
+          "--user",
+          "1000:1000",
+          "-e",
+          "CODEX_HOME=/codexhome",
+          "-e",
+          "HOME=/codexhome",
+          "-e",
+          "NO_COLOR=1",
+          "-v",
+          "/home/ilien/.codex:/codex-home:ro",
+          "-v",
+          "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04:/work:rw",
+          "-w",
+          "/work",
+          "dreambench-swe-codex-agent:latest",
+          "codex",
+          "exec",
+          "--sandbox",
+          "danger-full-access",
+          "--skip-git-repo-check",
+          "-c",
+          "approval_policy=never",
+          "-c",
+          "mcp_servers={}",
+          "-m",
+          "gpt-5.5",
+          "-"
+        ],
+        "cwd": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04",
+        "jail": {
+          "codex_home_mount": "/codex-home:ro",
+          "container_cwd": "/work",
+          "container_name": "dreambench-wake-59394-23c3455c945c",
+          "cwd": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04",
+          "image": "dreambench-swe-codex-agent:latest",
+          "inner_codex_sandbox": "danger-full-access",
+          "isolation_mode": "container",
+          "mounts": [
+            "/codex-home",
+            "/work"
+          ],
+          "network": "bridge",
+          "purpose": "wake",
+          "type": "docker-container",
+          "user": "1000:1000",
+          "worktree": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04",
+          "writable_codex_home": "/tmp/codexhome"
+        }
+      }
+    ],
+    "usage": {},
+    "worktree": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04"
+  },
+  "agent_result": {
+    "error_detail": null,
+    "error_type": null,
+    "passed": true,
+    "patch": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fa..54192b9 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00..9e2c4d6 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@ def parse_ini(text):\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@ def merge_configs(base, override):\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n",
+    "steps": 1,
+    "tokens": 3820
+  },
+  "contaminated": false,
+  "contamination_evidence": [],
+  "error_detail": null,
+  "error_type": null,
+  "final_passed": true,
+  "isolation_mode": "container",
+  "memory_context": [
+    {
+      "confidence": 1.0,
+      "content": "Config is now the public dict-compatible container. parse_ini must return a plain dict forever.",
+      "file_scope": [],
+      "id": "muninn-1",
+      "kind": "memory",
+      "origin": "user_said",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "config-stale-s01"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 1,
+      "repo_scope": "config-stale",
+      "retrieval_tags": [
+        "muninn",
+        "config-stale",
+        "decision"
+      ],
+      "risk_score": 0.2,
+      "score": 0.01639344262295082,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "config-stale"
+      ],
+      "trust": 3,
+      "type": "human_feedback",
+      "utility_score": 0.5
+    },
+    {
+      "confidence": 1.0,
+      "content": "For sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..57bdc33 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,17 +1,40 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in str(path).split('.'):\n+            key = normalize_key(part)\n+            if not isinstance(current, Mapping) or key not in current:\n+                return default\n+            current = current[key]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: _plain_dict(value) for key, value in self.items()}\n+\n+\n+def _plain_dict(value):\n+    if isinstance(value, Mapping):\n+        return {key: _plain_dict(item) for key, item in value.items()}\n+    if isinstance(value, list):\n+        return [_plain_dict(item) for item in value]\n+    return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n \n def parse_ini(text):\n-    data = {}\n+    data = Config()\n     current = None\n     for line_no, raw_line in enumerate(text.splitlines(), start=1):\n         line = raw_line.strip()\n@@ -50,4 +73,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(he",
+      "file_scope": [],
+      "id": "muninn-2",
+      "kind": "memory",
+      "origin": "tool_observed",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "config-stale-s01"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 2,
+      "repo_scope": "config-stale",
+      "retrieval_tags": [
+        "muninn",
+        "config-stale",
+        "episode"
+      ],
+      "risk_score": 0.2,
+      "score": 0.016129032258064516,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "config-stale"
+      ],
+      "trust": 1,
+      "type": "episodic",
+      "utility_score": 0.5
+    }
+  ],
+  "memory_writes": [],
+  "oracle": {
+    "error_detail": "..........                                                               [100%]\n10 passed in 0.01s",
+    "error_type": null,
+    "exit_code": 0,
+    "passed": true,
+    "stderr": "",
+    "stdout": "..........                                                               [100%]\n10 passed in 0.01s\n",
+    "timed_out": false
+  },
+  "ordinal": 8,
+  "pass_at_1": true,
+  "retrieval_decisions": [
+    {
+      "admitted": true,
+      "memory_id": "muninn-1",
+      "reason": "muninn_why",
+      "repo_scope": "config-stale",
+      "score": 0.01639344262295082
+    },
+    {
+      "admitted": true,
+      "memory_id": "muninn-2",
+      "reason": "muninn_why",
+      "repo_scope": "config-stale",
+      "score": 0.016129032258064516
+    }
+  ],
+  "score": {
+    "agent_diff_files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "apply": {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": ""
+    },
+    "empty_production_diff": false,
+    "error_detail": "..........                                                               [100%]\n10 passed in 0.01s",
+    "error_type": null,
+    "passed": true,
+    "policy_rejected": false,
+    "production_diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fa..54192b9 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00..9e2c4d6 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@ def parse_ini(text):\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@ def merge_configs(base, override):\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n",
+    "production_files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "rejected_files": [],
+    "rejected_reasons": {}
+  },
+  "sleep_error": null,
+  "task": {
+    "base_ref": "tasks/config-stale/s04/base",
+    "files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "id": "config-stale-s04",
+    "instruction": "Add parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.",
+    "prompt": "Add parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.",
+    "repo": "configly",
+    "seq_id": "config-stale",
+    "seq_type": "stale-architecture",
+    "sequence_id": "config-stale",
+    "session_index": 4,
+    "worktree": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04"
+  },
+  "trajectory": {
+    "budget": {
+      "wake_max_steps": 1
+    },
+    "condition_id": "MUNINN",
+    "created_at": "2026-09-14T10:32:27.290455+00:00",
+    "file_diffs": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "final_outcome": "success",
+    "memory_reads": [
+      "muninn-1",
+      "muninn-2"
+    ],
+    "memory_writes": [],
+    "model_id": "gpt-5.5",
+    "raw_episode": {
+      "actions": [
+        "codex exec"
+      ],
+      "agent_patch": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fa..54192b9 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00..9e2c4d6 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@ def parse_ini(text):\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@ def merge_configs(base, override):\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n",
+      "benchmark_task_id": "config-stale-s04",
+      "condition_id": "MUNINN",
+      "error_detail": null,
+      "error_type": null,
+      "failure_observations": [],
+      "file_paths": [
+        "configly/__init__.py",
+        "configly/parser.py"
+      ],
+      "memory_context": [
+        {
+          "confidence": 1.0,
+          "content": "Config is now the public dict-compatible container. parse_ini must return a plain dict forever.",
+          "file_scope": [],
+          "id": "muninn-1",
+          "kind": "memory",
+          "origin": "user_said",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "config-stale-s01"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 1,
+          "repo_scope": "config-stale",
+          "retrieval_tags": [
+            "muninn",
+            "config-stale",
+            "decision"
+          ],
+          "risk_score": 0.2,
+          "score": 0.01639344262295082,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "config-stale"
+          ],
+          "trust": 3,
+          "type": "human_feedback",
+          "utility_score": 0.5
+        },
+        {
+          "confidence": 1.0,
+          "content": "For sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..57bdc33 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,17 +1,40 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in str(path).split('.'):\n+            key = normalize_key(part)\n+            if not isinstance(current, Mapping) or key not in current:\n+                return default\n+            current = current[key]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: _plain_dict(value) for key, value in self.items()}\n+\n+\n+def _plain_dict(value):\n+    if isinstance(value, Mapping):\n+        return {key: _plain_dict(item) for key, item in value.items()}\n+    if isinstance(value, list):\n+        return [_plain_dict(item) for item in value]\n+    return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n \n def parse_ini(text):\n-    data = {}\n+    data = Config()\n     current = None\n     for line_no, raw_line in enumerate(text.splitlines(), start=1):\n         line = raw_line.strip()\n@@ -50,4 +73,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(he",
+          "file_scope": [],
+          "id": "muninn-2",
+          "kind": "memory",
+          "origin": "tool_observed",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "config-stale-s01"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 2,
+          "repo_scope": "config-stale",
+          "retrieval_tags": [
+            "muninn",
+            "config-stale",
+            "episode"
+          ],
+          "risk_score": 0.2,
+          "score": 0.016129032258064516,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "config-stale"
+          ],
+          "trust": 1,
+          "type": "episodic",
+          "utility_score": 0.5
+        }
+      ],
+      "memory_reads": [
+        "muninn-1",
+        "muninn-2"
+      ],
+      "memory_writes": [],
+      "model_id": "gpt-5.5",
+      "observations": [
+        "Implemented `parse_ini_many(named_texts)` and exported it from `configly`.\n\nWhat changed:\n- Merges named INI sources in order, with later files overriding earlier values.\n- Accepts mappings or ordered `(name, text)` iterables.\n- Wraps `ParseError` messages as `source_name: original error`.\n\nVerification:\n- `git diff --check` passed.\n- Could not run tests because this container has no `python`, `python3`, or `pytest` executable available.\n",
+        "2026-09-14T10:30:39.125294Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f78-0a8c-7482-abcf-7e4fb8b60156\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-stale-s04\n\nInstruction:\nAdd parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.\n\nAdmitted memory context:\n- muninn-1: Config is now the public dict-compatible container. parse_ini must return a plain dict forever. [status=active, type=human_feedback]\n- muninn-2: For sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..d4205e0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import Config, ParseError, dump_ini, normalize_key, parse_csv, parse_ini\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..57bdc33 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,17 +1,40 @@\n import csv\n import io\n+from collections.abc import Mapping\n \n \n class ParseError(ValueError):\n     pass\n \n \n+class Config(dict):\n+    def get_path(self, path, default=None):\n+        current = self\n+        for part in str(path).split('.'):\n+            key = normalize_key(part)\n+            if not isinstance(current, Mapping) or key not in current:\n+                return default\n+            current = current[key]\n+        return current\n+\n+    def as_dict(self):\n+        return {key: _plain_dict(value) for key, value in self.items()}\n+\n+\n+def _plain_dict(value):\n+    if isinstance(value, Mapping):\n+        return {key: _plain_dict(item) for key, item in value.items()}\n+    if isinstance(value, list):\n+        return [_plain_dict(item) for item in value]\n+    return value\n+\n+\n def normalize_key(key):\n     return key.strip().lower().replace('-', '_')\n \n \n def parse_ini(text):\n-    data = {}\n+    data = Config()\n     current = None\n     for line_no, raw_line in enumerate(text.splitlines(), start=1):\n         line = raw_line.strip()\n@@ -50,4 +73,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(he [status=active, type=episodic]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the current parser and tests first so the new helper lands in the same shape as the existing API. The memory note about `parse_ini` returning a plain dict is important, so I\u2019ll keep an eye on that contract while adding `parse_ini_many`.\nexec\n/bin/bash -lc 'git status --short' in /work\nexec\n/bin/bash -lc 'rg --files' in /work\n succeeded in 0ms:\n succeeded in 0ms:\nCONVENTIONS.md\nconfigly/__init__.py\nconfigly/parser.py\ntests/test_parser.py\ntests/test_config_container.py\ntests/test_config_select.py\ntests/test_merge_configs.py\ntests/test_parse_ini_many.py\n\ncodex\nThere are already tests named for this feature, which is a nice breadcrumb. I\u2019m going to read those alongside the parser exports before editing.\nexec\n/bin/bash -lc \"sed -n '1,240p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\nclass Config(dict):\n    def get_path(self, path, default=None):\n        section, _, key = path.partition('.')\n        if not section or not key:\n        ",
+        "oracle exit=0 passed=True",
+        "..........                                                               [100%]\n10 passed in 0.01s\n"
+      ],
+      "outcome": "success",
+      "production_diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex f80b1fa..54192b9 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, Config, merge_configs\n+from .parser import Config, ParseError, dump_ini, merge_configs, normalize_key, parse_csv, parse_ini, parse_ini_many\ndiff --git a/configly/parser.py b/configly/parser.py\nindex b4abd00..9e2c4d6 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -47,6 +47,18 @@ def parse_ini(text):\n     return Config(data)\n \n \n+def parse_ini_many(named_texts):\n+    merged = Config()\n+    items = named_texts.items() if hasattr(named_texts, 'items') else named_texts\n+    for name, text in items:\n+        try:\n+            parsed = parse_ini(text)\n+        except ParseError as exc:\n+            raise ParseError(f'{name}: {exc}') from exc\n+        merged = merge_configs(merged, parsed)\n+    return merged\n+\n+\n def dump_ini(config):\n     lines = []\n     for section, values in config.items():\n@@ -74,4 +86,3 @@ def merge_configs(base, override):\n     for section, values in other.items():\n         merged.setdefault(section, {}).update(values)\n     return Config(merged)\n-\n",
+      "prompt": "Add parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.",
+      "repo_commit": "tasks/config-stale/s04/base",
+      "repo_scope": "config-stale",
+      "seq_type": "stale-architecture",
+      "sequence_id": "config-stale",
+      "session_id": "config-stale-s04",
+      "sleep_write_count": 2,
+      "successful_recovery": "oracle passed",
+      "task_id": "config-stale",
+      "terminal_outcome": "success",
+      "trajectory_id": "config-stale-s04-MUNINN-gpt-5.5"
+    },
+    "repo_commit": "tasks/config-stale/s04/base",
+    "seed": 2,
+    "session_id": "config-stale-s04",
+    "steps": [
+      {
+        "action": "codex exec",
+        "file_diffs": [],
+        "memory_reads": [],
+        "memory_writes": [],
+        "metadata": {
+          "action": "codex exec",
+          "argv": [
+            "/usr/local/bin/docker",
+            "run",
+            "--rm",
+            "-i",
+            "--name",
+            "dreambench-wake-59394-23c3455c945c",
+            "--network",
+            "bridge",
+            "--user",
+            "1000:1000",
+            "-e",
+            "CODEX_HOME=/codexhome",
+            "-e",
+            "HOME=/codexhome",
+            "-e",
+            "NO_COLOR=1",
+            "-v",
+            "/home/ilien/.codex:/codex-home:ro",
+            "-v",
+            "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04:/work:rw",
+            "-w",
+            "/work",
+            "dreambench-swe-codex-agent:latest",
+            "codex",
+            "exec",
+            "--sandbox",
+            "danger-full-access",
+            "--skip-git-repo-check",
+            "-c",
+            "approval_policy=never",
+            "-c",
+            "mcp_servers={}",
+            "-m",
+            "gpt-5.5",
+            "-"
+          ],
+          "cwd": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04",
+          "jail": {
+            "codex_home_mount": "/codex-home:ro",
+            "container_cwd": "/work",
+            "container_name": "dreambench-wake-59394-23c3455c945c",
+            "cwd": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04",
+            "image": "dreambench-swe-codex-agent:latest",
+            "inner_codex_sandbox": "danger-full-access",
+            "isolation_mode": "container",
+            "mounts": [
+              "/codex-home",
+              "/work"
+            ],
+            "network": "bridge",
+            "purpose": "wake",
+            "type": "docker-container",
+            "user": "1000:1000",
+            "worktree": "/tmp/dreambench-agent-20260914T102110Z-MUNINN-gpt-5.5-3806fedf-c5ukwxjz/008-config-stale-s04",
+            "writable_codex_home": "/tmp/codexhome"
+          }
+        },
+        "observation": "",
+        "step_id": "step_b31842cc7b8c",
+        "timestamp": "2026-09-14T10:32:27.290430+00:00",
+        "tool_input": null,
+        "tool_name": null,
+        "tool_output": null
+      }
+    ],
+    "task_id": "config-stale-s04",
+    "trajectory_id": "traj_fde2182b6a26"
+  }
+}

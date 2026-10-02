@@ -1,0 +1,43 @@
+Muninn
+Copyright (C) 2026 ilien <code@ilien.dev>
+https://github.com/ilien-dev/muninn
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License, version 3 only, as
+published by the Free Software Foundation (see LICENSE), together with the
+additional terms below.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
+
+
+Additional terms under section 7 of the GNU Affero General Public License
+-------------------------------------------------------------------------
+
+These terms apply to every copy of this program and to every work based on
+it. Under section 7, they may not be removed.
+
+1. Attribution (section 7(b)). You must preserve the following notice,
+   unaltered, in every copy and every modified version you convey:
+
+       Based on Muninn by ilien - https://github.com/ilien-dev/muninn
+
+   Keep it in this NOTICE file, or in a file of equal prominence in the root
+   of the source tree. If the program or a modified version displays
+   Appropriate Legal Notices, an "about" or credits screen, or is offered to
+   users over a network (for example as a hosted or cloud service), the same
+   notice must also appear there, or in that service's documentation or
+   another place its users can reach.
+
+2. Marking of modified versions (section 7(c)). A modified version must be
+   marked as changed from the original, and must not be presented as the
+   original Muninn or as a version published by ilien.
+
+These terms add no restriction on who may run, host, sell or distribute the
+program. Anyone may do so, commercially or not, provided they follow the
+GNU Affero General Public License and the terms above. Under section 13 of
+that license, anyone who offers a modified version to users over a network
+must offer those users the complete corresponding source code of that
+version.

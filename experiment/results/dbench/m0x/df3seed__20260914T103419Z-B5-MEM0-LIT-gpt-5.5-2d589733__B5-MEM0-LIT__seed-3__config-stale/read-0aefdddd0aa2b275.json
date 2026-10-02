@@ -1,0 +1,70 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__config-stale",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__config-stale"
+    },
+    "query": "Add parse_ini_many(named_texts), merging named INI strings in order and prefixing parse errors with the source name.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:35:05.053104+00:00",
+        "hash": "396dc7d056fac9139c310ca101643b07",
+        "id": "f81d610f-7c37-49c9-b566-24ea4e0c95f6",
+        "memory": "Config is now the public dict-compatible container. parse_ini must return a plain dict forever.\nFor sequence config-stale, task config-stale-s01, the public task prompt was: Introduce a dict-compatible Config container returned by parse_ini, with get_path(path, default=None) and as_dict().\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.6558420157573186,
+        "updated_at": "2026-09-14T10:35:05.053104+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__config-stale"
+      },
+      {
+        "created_at": "2026-09-14T10:35:12.678894+00:00",
+        "hash": "9a7dd6388e00675decf761643fe96754",
+        "id": "4f4e35f3-5a6e-4f1c-95dd-bb7743f5fa76",
+        "memory": "Use Config-preserving deep section merges. Use shallow dict.update for config overlays.\nFor sequence config-stale, task config-stale-s03, the public task prompt was: Add merge_configs(base, override), returning a Config deep merge without mutating either input.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.6230613661271682,
+        "updated_at": "2026-09-14T10:35:12.678894+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__config-stale"
+      },
+      {
+        "created_at": "2026-09-14T10:35:08.394959+00:00",
+        "hash": "4c695245b48155b9db13020dd265254b",
+        "id": "a96b437c-88de-441b-82d3-62af19be03d5",
+        "memory": "New callers should use Config helpers where available. Callers index nested dictionaries directly.\nFor sequence config-stale, task config-stale-s02, the public task prompt was: Add Config.select(section, default=None), returning a copy of that section without abandoning dict compatibility.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 3,
+          "sequence_id": "config-stale"
+        },
+        "role": "user",
+        "score": 0.6181973006179948,
+        "updated_at": "2026-09-14T10:35:08.394959+00:00",
+        "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__config-stale"
+      }
+    ]
+  }
+}

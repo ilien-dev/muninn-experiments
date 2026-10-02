@@ -1,0 +1,15 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..ddc9c9c
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,9 @@
++# Performance history
++
++## SessionStart health gate
++
++On a 5,000-record store, the measured `SessionStart` hook cost at p50 was
++**11.9 ms** before `quick_check` was removed from the read path. After that
++change, the measured p50 was **1.05 ms**. The trigger-maintained `fts_rows`
++counter and the `record.body` length `CHECK` constraint were added in the same
++change.

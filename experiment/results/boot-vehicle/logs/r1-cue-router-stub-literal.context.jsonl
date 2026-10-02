@@ -1,0 +1,10 @@
+{"at":1789295678068,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}
+{"at":1789295682105,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["crates/muninn-why/Cargo.toml;"],"symbols":[]}
+{"at":1789295684597,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["crates/muninn-bench/src/main.rs"],"symbols":["experiment","Cli","Cmd","Rng","Rng","next","pick","word","WORDS","DIRS","pct","populate"]}
+{"at":1789295690867,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["crates/muninn-core/src/lib.rs"],"symbols":["caps","db","error","health","heartbeat","paths","recall","sanitize","tokens","VERSION"]}
+{"at":1789295701701,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["README.md"],"symbols":[]}
+{"at":1789295704190,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789295714050,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["design/ENGINE.md"],"symbols":[]}
+{"at":1789295727138,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["crates/muninn-core/src/error.rs"],"symbols":["Error","Error","io","Result"]}
+{"at":1789295734390,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["crates/muninn-embed/src/lib.rs","crates/muninn-symbols/src/lib.rs"],"symbols":[]}
+{"at":1789295744338,"session":"8ae2faff-15e0-4ab0-a371-cf461ebcb6af","files":["crates/muninn-why/src/lib.rs"],"symbols":[]}

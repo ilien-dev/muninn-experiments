@@ -1,0 +1,274 @@
+```json
+[
+  {
+    "key": "d12-pool#terse",
+    "a": "Going with PgBouncer for the connection pool.",
+    "b": "Actually, let's use Supavisor instead.",
+    "c": "The pool config is done."
+  },
+  {
+    "key": "d12-pool#chatty",
+    "a": "I'm thinking we should go with PgBouncer to handle our connection pooling. Seems rock solid.",
+    "b": "Hey, I've been reading about Supavisor and I think it's a better fit for our setup.",
+    "c": "While we're on the topic of pooling, did you check the connection timeout settings?"
+  },
+  {
+    "key": "d12-pool#Spanish",
+    "a": "Usaremos PgBouncer para agrupar las conexiones a la base de datos.",
+    "b": "Mejor aún, vamos a usar Supavisor en su lugar.",
+    "c": "El agrupamiento de conexiones está lista para producción."
+  },
+  {
+    "key": "d12-queue#terse",
+    "a": "Using Sidekiq for background jobs.",
+    "b": "Switching to Oban.",
+    "c": "Job processing is live."
+  },
+  {
+    "key": "d12-queue#chatty",
+    "a": "For background jobs I'm going to set up Sidekiq—it's mature and the whole team knows it.",
+    "b": "Actually, I changed my mind. Oban feels like it'd fit better with our Elixir stuff.",
+    "c": "Speaking of job queues, we should really improve our retry logic anyway."
+  },
+  {
+    "key": "d12-queue#Spanish",
+    "a": "Decidimos usar Sidekiq para las tareas en segundo plano.",
+    "b": "Voy a cambiar a Oban, se adapta mejor a nuestro stack.",
+    "c": "Las tareas en cola están corriendo sin problemas."
+  },
+  {
+    "key": "d12-http#terse",
+    "a": "Going with reqwest for HTTP calls.",
+    "b": "Use hyper instead.",
+    "c": "HTTP layer is set up."
+  },
+  {
+    "key": "d12-http#chatty",
+    "a": "I figured reqwest would be easiest for HTTP requests from the service.",
+    "b": "Actually, hyper gives us more control over the low-level stuff, which we might need down the road.",
+    "c": "While we're working on HTTP, we should also nail down retry policies."
+  },
+  {
+    "key": "d12-http#Spanish",
+    "a": "Vamos a usar reqwest para las solicitudes HTTP.",
+    "b": "Mejor cambiar a hyper para más control sobre los detalles.",
+    "c": "Las llamadas HTTP están funcionando bien."
+  },
+  {
+    "key": "d12-fmt#terse",
+    "a": "Log format: logfmt.",
+    "b": "Change to JSON lines.",
+    "c": "Format is locked in."
+  },
+  {
+    "key": "d12-fmt#chatty",
+    "a": "I think logfmt is the right call for our logs—it's clean and easy to parse.",
+    "b": "You know what, JSON lines is smarter. We can pipe it straight into our data pipeline without any transformation.",
+    "c": "Now that we're thinking about logging, let's establish consistent field names across services."
+  },
+  {
+    "key": "d12-fmt#Spanish",
+    "a": "El formato de registro será logfmt.",
+    "b": "Cambio a JSON Lines, se integra mejor con el pipeline.",
+    "c": "El formato de los registros está definido y listo."
+  },
+  {
+    "key": "d12-ci#terse",
+    "a": "CI on CircleCI.",
+    "b": "Move to GitHub Actions.",
+    "c": "Pipeline is ready."
+  },
+  {
+    "key": "d12-ci#chatty",
+    "a": "For CI let's stick with CircleCI—we've had good experiences with it and it's stable.",
+    "b": "Actually, GitHub Actions makes way more sense now that everything's already on GitHub. One less vendor to deal with.",
+    "c": "Since we're setting up the pipeline, let's make sure we have proper deployment gates too."
+  },
+  {
+    "key": "d12-ci#Spanish",
+    "a": "Usaremos CircleCI para la integración continua.",
+    "b": "Mejor usar GitHub Actions, está integrado en el repositorio.",
+    "c": "El pipeline de CI está listo para ejecutar."
+  },
+  {
+    "key": "d12-store#terse",
+    "a": "Object store: MinIO.",
+    "b": "Switch to Cloudflare R2.",
+    "c": "Storage layer done."
+  },
+  {
+    "key": "d12-store#chatty",
+    "a": "I'm going to set up MinIO so we have complete control over our object storage.",
+    "b": "On second thought, Cloudflare R2 is probably smarter. We save on infrastructure and get a CDN thrown in.",
+    "c": "While we're handling object storage, we should think about backup retention policies."
+  },
+  {
+    "key": "d12-store#Spanish",
+    "a": "El almacenamiento de objetos será MinIO en nuestros servidores.",
+    "b": "Voy a usar Cloudflare R2 en su lugar, es más económico.",
+    "c": "El almacenamiento está configurado y funcionando."
+  },
+  {
+    "key": "d12-lint#terse",
+    "a": "Frontend linter: ESLint.",
+    "b": "Switch to Biome.",
+    "c": "Linting configured."
+  },
+  {
+    "key": "d12-lint#chatty",
+    "a": "ESLint's pretty standard for JavaScript linting, and it has a ton of plugins we can use.",
+    "b": "But Biome looks really promising honestly. Faster, combines linting with formatting, and cleaner output.",
+    "c": "While we're picking a linter, let's also make sure we've got a code formatter that plays nice with it."
+  },
+  {
+    "key": "d12-lint#Spanish",
+    "a": "Usaremos ESLint para el análisis estático del frontend.",
+    "b": "Cambio a Biome, es más rápido y completo.",
+    "c": "El análisis de código está configurado en todos los workflows."
+  },
+  {
+    "key": "d12-orm#terse",
+    "a": "DB layer: Diesel.",
+    "b": "Use SQLx instead.",
+    "c": "Database access is set."
+  },
+  {
+    "key": "d12-orm#chatty",
+    "a": "For the database layer, Diesel seems like the solid choice—it's battle-tested and has great docs.",
+    "b": "Actually, SQLx keeps growing on me. The compile-time checking and simpler approach appeals to me more.",
+    "c": "As long as we're redoing the DB layer, let's also review our connection pooling setup."
+  },
+  {
+    "key": "d12-orm#Spanish",
+    "a": "La capa de base de datos será Diesel.",
+    "b": "Mejor usar SQLx para más flexibilidad y seguridad en tiempo de compilación.",
+    "c": "El acceso a la base de datos está listo en producción."
+  },
+  {
+    "key": "d12-auth#terse",
+    "a": "Session signing: HS256.",
+    "b": "Switch to EdDSA.",
+    "c": "Auth is secure."
+  },
+  {
+    "key": "d12-auth#chatty",
+    "a": "HS256 is straightforward for session signing and the team already knows it.",
+    "b": "But I've been thinking—EdDSA would be cleaner. Asymmetric signatures make key rotation easier.",
+    "c": "While we're on the topic of authentication, let's make sure our token expiration is reasonable."
+  },
+  {
+    "key": "d12-auth#Spanish",
+    "a": "Las sesiones se firmarán con HS256.",
+    "b": "Cambio a EdDSA para mayor seguridad y mejor rotación de claves.",
+    "c": "La autenticación está completamente asegurada."
+  },
+  {
+    "key": "d12-test#terse",
+    "a": "E2E testing: Cypress.",
+    "b": "Use Playwright.",
+    "c": "Tests running."
+  },
+  {
+    "key": "d12-test#chatty",
+    "a": "Cypress seems like the natural choice for end-to-end tests. Good DX, solid docs.",
+    "b": "I've been trying Playwright though and it's honestly really fast. Better multi-browser support too.",
+    "c": "While we're setting up the test suite, let's make sure we have good screenshots and video for failed runs."
+  },
+  {
+    "key": "d12-test#Spanish",
+    "a": "Usaremos Cypress para las pruebas de extremo a extremo.",
+    "b": "Mejor usar Playwright, es más rápido y compatible.",
+    "c": "Las pruebas están configuradas y pasando."
+  },
+  {
+    "key": "d12-pkg#terse",
+    "a": "Package manager: npm.",
+    "b": "Switch to pnpm.",
+    "c": "Dependencies locked."
+  },
+  {
+    "key": "d12-pkg#chatty",
+    "a": "npm is what everyone uses, so let's just stick with it. Simple, familiar, no surprises.",
+    "b": "Actually, pnpm has been growing on me. The disk space savings are real, plus the linking model is smarter.",
+    "c": "Since we're managing dependencies anyway, let's pin versions more aggressively."
+  },
+  {
+    "key": "d12-pkg#Spanish",
+    "a": "El gestor de paquetes será npm.",
+    "b": "Cambio a pnpm para ahorrar espacio en disco.",
+    "c": "Las dependencias están aseguradas con lock file."
+  },
+  {
+    "key": "d12-tpl#terse",
+    "a": "Template engine: Handlebars.",
+    "b": "Switch to Tera.",
+    "c": "Templates working."
+  },
+  {
+    "key": "d12-tpl#chatty",
+    "a": "Handlebars is pretty portable and we know it from the frontend side.",
+    "b": "You know, Tera is probably better for Rust anyway. Better syntax, better integration.",
+    "c": "While we're redoing templates, let's think about caching strategy for generated pages."
+  },
+  {
+    "key": "d12-tpl#Spanish",
+    "a": "El motor de plantillas será Handlebars.",
+    "b": "Mejor usar Tera, está optimizado para Rust.",
+    "c": "Las plantillas están funcionando correctamente en producción."
+  },
+  {
+    "key": "d12-cache#terse",
+    "a": "Cache policy: LFU.",
+    "b": "Change to LRU.",
+    "c": "Caching is live."
+  },
+  {
+    "key": "d12-cache#chatty",
+    "a": "LFU makes sense for our use case—evict the least frequently used items.",
+    "b": "Actually LRU might be simpler to reason about and probably performs better in practice.",
+    "c": "As long as we're tuning cache, we should set up metrics to see what's actually getting hit."
+  },
+  {
+    "key": "d12-cache#Spanish",
+    "a": "La política de caché será LFU.",
+    "b": "Cambio a LRU por simplicidad y rendimiento.",
+    "c": "El caché está listo y monitoreado."
+  },
+  {
+    "key": "d12-proto#terse",
+    "a": "Service protocol: REST.",
+    "b": "Use gRPC.",
+    "c": "Communication layer done."
+  },
+  {
+    "key": "d12-proto#chatty",
+    "a": "REST is simple and every service we have understands it already.",
+    "b": "Wait, gRPC could be better for us. We've got a lot of internal traffic and the performance boost would help.",
+    "c": "Since we're changing the protocol, we'll need to update all client libraries."
+  },
+  {
+    "key": "d12-proto#Spanish",
+    "a": "El protocolo entre servicios será REST.",
+    "b": "Cambio a gRPC para mejor rendimiento y tipado.",
+    "c": "La comunicación entre servicios está establecida."
+  },
+  {
+    "key": "d12-obs#terse",
+    "a": "Traces: Jaeger.",
+    "b": "Switch to OpenTelemetry Collector.",
+    "c": "Observability is up."
+  },
+  {
+    "key": "d12-obs#chatty",
+    "a": "Jaeger's a solid choice for distributed tracing. Good UI, we've used it before.",
+    "b": "But OpenTelemetry Collector would give us more flexibility. Vendor-neutral and we can send traces anywhere.",
+    "c": "While we're getting observability in place, let's make sure we're sampling traces smartly."
+  },
+  {
+    "key": "d12-obs#Spanish",
+    "a": "Las trazas se exportarán con Jaeger.",
+    "b": "Mejor usar OpenTelemetry Collector, es más flexible.",
+    "c": "La observabilidad está configurada en toda la aplicación."
+  }
+]
+```

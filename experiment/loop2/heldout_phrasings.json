@@ -1,0 +1,182 @@
+[
+ {
+  "key": "h2-charts#terse",
+  "a": "Going with Chart.js for admin reports",
+  "b": "Actually switch to ECharts",
+  "c": "Also need to update the charting config"
+ },
+ {
+  "key": "h2-charts#chatty",
+  "a": "I think we should use Chart.js for the admin reports - it's lightweight and familiar to the team",
+  "b": "You know what, I've been looking at ECharts more and it's got way better customization options. Let's go with that instead",
+  "c": "Speaking of the dashboard, we need to make sure all the charts render properly on mobile"
+ },
+ {
+  "key": "h2-charts#Spanish",
+  "a": "Vamos a usar Chart.js para los reportes administrativos",
+  "b": "Mejor cambiamos a ECharts, tiene más funcionalidades",
+  "c": "También necesitamos revisar cómo se ven los gráficos en producción"
+ },
+ {
+  "key": "h2-mail#terse",
+  "a": "Using SendGrid for transactional email",
+  "b": "Switch to Postmark",
+  "c": "Mail provider config needs verification"
+ },
+ {
+  "key": "h2-mail#chatty",
+  "a": "We'll stick with SendGrid for our transactional emails - they've been solid and reliable",
+  "b": "Actually, I've switched us to Postmark. The API is cleaner and the delivery rates are better",
+  "c": "While we're at it, let me double-check all the email templates are formatted correctly"
+ },
+ {
+  "key": "h2-mail#Spanish",
+  "a": "Usaremos SendGrid como proveedor de correo electrónico",
+  "b": "Mejor Postmark, es más confiable",
+  "c": "Los templates de correo necesitan ser revisados"
+ },
+ {
+  "key": "h2-lint#terse",
+  "a": "ESLint for the TS packages",
+  "b": "Use Biome instead",
+  "c": "Linting config needs refactoring"
+ },
+ {
+  "key": "h2-lint#chatty",
+  "a": "We're going to keep using ESLint for TypeScript - it's what the team knows and it works fine",
+  "b": "Hmm, but Biome is so much faster and does both linting and formatting. Let's make the switch",
+  "c": "Once we're on Biome, we can probably drop a bunch of the ESLint plugins we've got"
+ },
+ {
+  "key": "h2-lint#Spanish",
+  "a": "Usaremos ESLint para los paquetes TypeScript",
+  "b": "Mejor Biome, es más rápido",
+  "c": "La configuración de linting será más simple"
+ },
+ {
+  "key": "h2-i18n#terse",
+  "a": "i18next for internationalization",
+  "b": "Switch to FormatJS",
+  "c": "Translation files need updating"
+ },
+ {
+  "key": "h2-i18n#chatty",
+  "a": "Let's go with i18next for our i18n - it's pretty straightforward and has tons of plugins",
+  "b": "After digging into it, I think FormatJS is actually cleaner. The date and plural handling is nicer",
+  "c": "We'll need to refactor how translations are handled in the component layer with the new library"
+ },
+ {
+  "key": "h2-i18n#Spanish",
+  "a": "Usaremos i18next para la internacionalización",
+  "b": "Mejor FormatJS es más limpio",
+  "c": "Los archivos de traducción tendrán un nuevo formato"
+ },
+ {
+  "key": "h2-search#terse",
+  "a": "Elasticsearch for the search backend",
+  "b": "Move to Meilisearch",
+  "c": "Search indexing needs rework"
+ },
+ {
+  "key": "h2-search#chatty",
+  "a": "We'll implement search with Elasticsearch - it's powerful and can handle whatever we throw at it",
+  "b": "Actually, Meilisearch would be better here. It's so much simpler to maintain and the search speed is great for users",
+  "c": "We'll need to rebuild our search index with the new backend"
+ },
+ {
+  "key": "h2-search#Spanish",
+  "a": "Usaremos Elasticsearch para el buscador",
+  "b": "Cambiemos a Meilisearch es más simple",
+  "c": "El contenido tendrá que ser reindexado con el nuevo motor"
+ },
+ {
+  "key": "h2-pdf#terse",
+  "a": "wkhtmltopdf for generating invoices",
+  "b": "Use Gotenberg instead",
+  "c": "PDF styling needs improvement"
+ },
+ {
+  "key": "h2-pdf#chatty",
+  "a": "We'll use wkhtmltopdf to generate invoices - it's solid at converting HTML and we can reuse templates",
+  "b": "I've been having reliability issues with wkhtmltopdf. Let's switch to Gotenberg - it's more stable and plays nice with Docker",
+  "c": "Once we switch to Gotenberg, we should be able to make our invoice formatting way better"
+ },
+ {
+  "key": "h2-pdf#Spanish",
+  "a": "Usaremos wkhtmltopdf para generar PDFs",
+  "b": "Mejor Gotenberg es más estable",
+  "c": "Los documentos tendrán mejor calidad de formato"
+ },
+ {
+  "key": "h2-cron#terse",
+  "a": "Keep cron jobs on the VM via crontab",
+  "b": "Move to Kubernetes CronJobs",
+  "c": "Scheduled jobs need better monitoring"
+ },
+ {
+  "key": "h2-cron#chatty",
+  "a": "We'll keep our scheduled jobs running on crontab - it's simple, it works, and we don't need to overcomplicate things",
+  "b": "Since we're going Kubernetes anyway, let's migrate all our cron jobs to CronJobs. Much easier to manage and monitor",
+  "c": "We should set up proper logging for all the automated tasks once they're in the cluster"
+ },
+ {
+  "key": "h2-cron#Spanish",
+  "a": "Las tareas programadas corren en crontab del servidor",
+  "b": "Migremos a Kubernetes CronJobs",
+  "c": "El monitoreo de trabajos automatizados mejorará"
+ },
+ {
+  "key": "h2-analytics#terse",
+  "a": "Google Analytics for web tracking",
+  "b": "Switch to Plausible",
+  "c": "Analytics dashboard implementation"
+ },
+ {
+  "key": "h2-analytics#chatty",
+  "a": "I think Google Analytics is the right choice - everyone's familiar with it and the data is comprehensive",
+  "b": "You know what, let's go with Plausible instead. It's privacy-first and we really don't need GA's complexity",
+  "c": "With Plausible we can build our own analytics dashboard without depending on Google"
+ },
+ {
+  "key": "h2-analytics#Spanish",
+  "a": "Usaremos Google Analytics para el seguimiento",
+  "b": "Mejor Plausible es más privado",
+  "c": "Las métricas de usuario se verán mejor con la nueva herramienta"
+ },
+ {
+  "key": "h2-imgcdn#terse",
+  "a": "Cloudinary for image CDN",
+  "b": "Switch to imgix",
+  "c": "Image optimization needs tweaking"
+ },
+ {
+  "key": "h2-imgcdn#chatty",
+  "a": "For the image CDN, Cloudinary makes sense - great transformation options and handles everything we need",
+  "b": "Actually, imgix is way cleaner and less bloated. Let's move our images over there",
+  "c": "Image loading performance will get a big boost once we set up caching with the new CDN"
+ },
+ {
+  "key": "h2-imgcdn#Spanish",
+  "a": "Usaremos Cloudinary para servir imágenes",
+  "b": "Mejor imgix es más simple",
+  "c": "La entrega de imágenes será mucho más rápida"
+ },
+ {
+  "key": "h2-debug#terse",
+  "a": "Add /debug endpoint to production",
+  "b": "Remove it, security risk",
+  "c": "Debug info should come from logs"
+ },
+ {
+  "key": "h2-debug#chatty",
+  "a": "We should add a /debug endpoint in production - makes it way easier to troubleshoot issues on the fly",
+  "b": "Actually, that's a huge security hole. Let's remove the /debug endpoint from production",
+  "c": "For debugging, we should rely on structured logging instead of exposing debug endpoints"
+ },
+ {
+  "key": "h2-debug#Spanish",
+  "a": "Agregaremos un endpoint /debug en producción",
+  "b": "Mejor quitarlo es demasiado riesgoso",
+  "c": "El debugging debe hacerse a través de logs estructurados"
+ }
+]

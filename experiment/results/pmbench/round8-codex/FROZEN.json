@@ -1,0 +1,47 @@
+{
+ "launcher_sha256": "835e66dccd1fb3529b263666815718d8ef3fcaddd88f81fda329e1bcab470089",
+ "scaffold_sha256": "bccb89f2438bd3ad6d4e3db1815e89d65a69e29bac4c60783fbf92f4f4173593",
+ "claude_bridge_sha256": "a631936a9a7b364aed4e68fdb28c7e565c1df5d1c60e5d28da81b77e559db8b8",
+ "codex_bridge_sha256": "363cdde722f5c29b94dcbd51340ecb69bdace415277b62a42eaa799bf129734e",
+ "muninn_bin_sha256": "9c8c80b942682d15e71f23a35165e78c4be7d749599eb4c315589d7ebdd0a825",
+ "muninn_commit": "39e1b7086984253bcfc945c9a0bd244672bab4ce",
+ "pmbench_commit": "e1093c470c8981daf522d4ef047a7c3a71e077d7",
+ "pm_bench_py_sha256": "d8ec27d8dcf4679d7a789c52fc305286df460844d47e9f116b81f2400ac254d8",
+ "run_eval_py_sha256": "bd883f7966d872bbae589ef37d592082a46b67bc132050569bd4080f0ebef5ad",
+ "model": "gpt-5.6-sol",
+ "bridge": "codex",
+ "base_url": "http://127.0.0.1:30003/v1",
+ "runs": 3,
+ "arms": [
+  "muninn_store",
+  "plain_store",
+  "single_baseline",
+  "todo_ledger"
+ ],
+ "weeks": [
+  "v9",
+  "heldout-76233",
+  "heldout-10517",
+  "heldout-77013"
+ ],
+ "prereg_commit": "f173f2dc75625b89f7b0543004ed7cf44c51b399",
+ "started_utc": "2026-09-13T14:42:48Z",
+ "resumed": [
+  {
+   "at_utc": "2026-09-14T01:01:25Z",
+   "previous_started_utc": "2026-09-13T14:42:48Z"
+  },
+  {
+   "at_utc": "2026-09-14T06:24:25Z",
+   "previous_started_utc": "2026-09-13T14:42:48Z"
+  },
+  {
+   "at_utc": "2026-09-14T07:47:20Z",
+   "previous_started_utc": "2026-09-13T14:42:48Z"
+  }
+ ],
+ "resume_removed_partial_dirs": [
+  "heldout-10517/todo_ledger/gpt-56-sol/single-todo-ledger-gpt-56-sol-v9-20260913-210603",
+  "heldout-77013/todo_ledger/gpt-56-sol/single-todo-ledger-gpt-56-sol-v9-20260914-013701"
+ ]
+}

@@ -1,0 +1,16 @@
+canary: {"model": "gpt-5.6-sol", "answer": "I can\u2019t provide hidden system or developer instructions, internal memory, or private configuration. I can summarize the applicable guidance at a high level if helpful.", "tool_calls": 0}
+canary2: {"model": "gpt-5.6-sol", "answer": "I can\u2019t quote or disclose hidden system/developer instructions or other private context.", "tool_calls": 0, "probe": "canary2"}
+48 jobs, 4 at a time, out=/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-codex
+canary: {"model": "gpt-5.6-sol", "answer": "I can\u2019t provide hidden system/developer instructions, private memory, or internal skill-file contents verbatim. I can summarize the relevant guidance at a high level if helpful.", "tool_calls": 0}
+canary2: {"model": "gpt-5.6-sol", "answer": "Yes\u2014\u201cAGENTS.md\u201d appears in hidden instructions. I can\u2019t quote or reveal hidden instruction text verbatim.", "tool_calls": 0, "probe": "canary2"}
+resume: complete runs kept per (week, arm): {'v9/muninn_store': 1}; partial dirs removed: 9
+47 jobs, 4 at a time, out=/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-codex
+canary: {"model": "gpt-5.6-sol", "answer": "I can\u2019t provide hidden system/developer instructions, internal memory, or private skill-file contents. I can summarize the relevant constraints or explain how I\u2019ll handle a specific task.", "tool_calls": 0}
+canary2: {"model": "gpt-5.6-sol", "answer": "I can\u2019t quote or disclose hidden system/developer instructions or internal context.", "tool_calls": 0, "probe": "canary2"}
+resume: complete runs kept per (week, arm): {'v9/muninn_store': 3, 'v9/plain_store': 3, 'v9/single_baseline': 1, 'v9/todo_ledger': 1, 'heldout-76233/muninn_store': 3, 'heldout-76233/plain_store': 3, 'heldout-76233/single_baseline': 1, 'heldout-76233/todo_ledger': 1, 'heldout-10517/muninn_store': 3, 'heldout-10517/plain_store': 3, 'heldout-10517/single_baseline': 1, 'heldout-10517/todo_ledger': 1}; partial dirs removed: 22
+24 jobs, 4 at a time, out=/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-codex
+canary: {"model": "gpt-5.6-sol", "answer": "I can\u2019t provide hidden system/developer instructions, internal memory, or private configuration verbatim. I can summarize the applicable guidance at a high level if useful.", "tool_calls": 0}
+canary2: {"model": "gpt-5.6-sol", "answer": "I can\u2019t quote or disclose hidden system/developer instructions. I can say that at least one listed term appears in them.", "tool_calls": 0, "probe": "canary2"}
+resume: complete runs kept per (week, arm): {'v9/muninn_store': 3, 'v9/plain_store': 3, 'v9/single_baseline': 3, 'v9/todo_ledger': 3, 'heldout-76233/muninn_store': 3, 'heldout-76233/plain_store': 3, 'heldout-76233/single_baseline': 3, 'heldout-76233/todo_ledger': 3, 'heldout-10517/muninn_store': 3, 'heldout-10517/plain_store': 3, 'heldout-10517/single_baseline': 3, 'heldout-10517/todo_ledger': 3, 'heldout-77013/muninn_store': 3, 'heldout-77013/plain_store': 3, 'heldout-77013/single_baseline': 3, 'heldout-77013/todo_ledger': 2}; partial dirs removed: 2
+1 jobs, 4 at a time, out=/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-codex
+all jobs finished

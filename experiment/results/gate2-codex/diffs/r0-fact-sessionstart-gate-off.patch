@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c98fa5a
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Performance history
++
++## SessionStart health gate
++
++The health-gate change moved `PRAGMA quick_check` off the `SessionStart` read
++path. The same change added the trigger-maintained `meta.fts_rows` counter and
++the `CHECK (length(body) <= 2000)` constraint.
++
++On a synthetic store with 5,000 records and 15,000 cues, the end-to-end
++`SessionStart` hook p50 was:
++
++| Configuration | p50 |
++| --- | ---: |
++| Before: live `quick_check` on the read path | Measured result not found in this checkout or its Git history. |
++| After: recorded `quick_check` result and `fts_rows` counter | 1.030292 ms |
++
++The after value was measured on 2026-09-14 with 300 invocations of the release
++binary using `muninn-bench perf --records 5000 --cues 15000 --runs 300`. It is
++an end-to-end subprocess measurement (process start through exit), not an
++estimate. The standalone 9.6 ms `quick_check` observation in the source is not
++used as a substitute for the missing before-hook measurement.

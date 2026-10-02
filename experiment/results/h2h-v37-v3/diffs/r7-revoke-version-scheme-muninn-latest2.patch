@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..3f58ceb
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version scheme
++
++This project numbers its releases with semantic versioning (semver), per the most recent statement on the subject in the project's recorded history.

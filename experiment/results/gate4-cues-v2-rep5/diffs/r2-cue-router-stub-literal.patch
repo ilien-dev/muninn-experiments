@@ -1,0 +1,17 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..516a00a 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,12 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Which lookup a `muninn why` query resolves to: a literal record id, or a free-text question.
++pub enum Route {
++    ById(String),
++    Question(String),
++}
++
++/// Decide which route a `muninn why` query takes. Stub: real matching lands in Phase 4.
++pub fn route(_query: &[String]) -> Route {
++    todo!("Phase 4")
++}

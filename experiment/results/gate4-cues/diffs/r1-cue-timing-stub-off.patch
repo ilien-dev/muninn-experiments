@@ -1,0 +1,15 @@
+diff --git a/crates/muninn-embed/src/lib.rs b/crates/muninn-embed/src/lib.rs
+index 1bba432..0537de3 100644
+--- a/crates/muninn-embed/src/lib.rs
++++ b/crates/muninn-embed/src/lib.rs
+@@ -1 +1,10 @@
+ //! Embedding sidecar (model2vec, exact kNN). Never in the read hook. Filled in Phase 3.
++
++use std::time::Instant;
++
++/// Runs an embedding call and returns its result plus the elapsed time in milliseconds.
++pub fn timed_embed_ms<T>(f: impl FnOnce() -> T) -> (T, u64) {
++    let start = Instant::now();
++    let result = f();
++    (result, start.elapsed().as_millis() as u64)
++}

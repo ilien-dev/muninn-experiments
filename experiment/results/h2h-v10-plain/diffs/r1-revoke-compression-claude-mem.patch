@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..0b323dc
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec
++
++No transport compression codec is currently recorded as a project decision. The only recorded finding on this topic is that the gin codebase does not implement any compression mechanism in production code (no gzip, lz4, or similar, and no `Content-Encoding` handling), so there is no incumbent codec and no codec has been chosen to replace or extend that baseline.

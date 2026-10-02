@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..18037ad
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport Compression Codec Policy
++
++This project has no current recorded decision specifying a transport compression codec; no policy, architecture decision record, or other project documentation designates a required or default codec, so none should be assumed until such a decision is recorded here.

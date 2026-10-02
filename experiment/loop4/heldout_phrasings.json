@@ -1,0 +1,182 @@
+[
+ {
+  "key": "h4-db-migrate#terse",
+  "a": "Using Flyway for DB migrations",
+  "b": "Actually switch to Atlas",
+  "c": "What's the rollback strategy if a schema change breaks prod?"
+ },
+ {
+  "key": "h4-db-migrate#chatty",
+  "a": "I think Flyway makes sense for our database migrations. It's solid, well-documented, and I've used it before.",
+  "b": "You know what, I've been looking at Atlas and I think it's the better choice. Let's switch to that instead.",
+  "c": "With the schema changes we're rolling out, should we test the migration scripts on a staging environment first?"
+ },
+ {
+  "key": "h4-db-migrate#Spanish",
+  "a": "Vamos a usar Flyway para las migraciones de la base de datos",
+  "b": "Mejor cambiar a Atlas",
+  "c": "¿Necesitamos validar los cambios de esquema antes de ir a producción?"
+ },
+ {
+  "key": "h4-container-reg#terse",
+  "a": "Container images go to Docker Hub",
+  "b": "Use GitHub Container Registry instead",
+  "c": "Registry auth token in secrets?"
+ },
+ {
+  "key": "h4-container-reg#chatty",
+  "a": "Let's push our container images to Docker Hub. It's simple, it's what we've always done, and it works.",
+  "b": "Actually, I'd rather move to GitHub Container Registry. Keeps everything in one place and makes CI/CD simpler.",
+  "c": "The image pull credentials need to be configured in the deployment manifests."
+ },
+ {
+  "key": "h4-container-reg#Spanish",
+  "a": "Almacenaremos los contenedores en Docker Hub",
+  "b": "Cambiar a GitHub Container Registry",
+  "c": "¿Los runners de CI/CD tienen acceso a la nueva ubicación del registro?"
+ },
+ {
+  "key": "h4-docs-site#terse",
+  "a": "Documentation site built with Docusaurus",
+  "b": "Switch to Starlight",
+  "c": "Build time for the full docs?"
+ },
+ {
+  "key": "h4-docs-site#chatty",
+  "a": "I've decided on Docusaurus for our documentation site. Good theming, great search functionality, and the markdown support is excellent.",
+  "b": "Actually, let me change that—I want to use Starlight instead. It's faster to set up, lighter weight, and the Astro integration feels more modern.",
+  "c": "The static site generation should be noticeably faster with this approach."
+ },
+ {
+  "key": "h4-docs-site#Spanish",
+  "a": "La documentación la hacemos con Docusaurus",
+  "b": "Cambiar a Starlight",
+  "c": "¿El sitio generado está optimizado para buscadores?"
+ },
+ {
+  "key": "h4-pkg-py#terse",
+  "a": "Python package management with pip-tools",
+  "b": "Switch to uv",
+  "c": "Lock file should pin all transitive dependencies"
+ },
+ {
+  "key": "h4-pkg-py#chatty",
+  "a": "I'm going to recommend pip-tools for managing our Python dependencies. The lock file output is clean and it handles version constraints well.",
+  "b": "Wait, I've been reading more about uv and I think we should use that instead. It's significantly faster and the resolver is more robust.",
+  "c": "Make sure we're also pinning all the indirect dependencies in our requirements, not just the direct ones."
+ },
+ {
+  "key": "h4-pkg-py#Spanish",
+  "a": "Para las dependencias de Python usaremos pip-tools",
+  "b": "Mejor usar uv",
+  "c": "¿El archivo de bloqueo incluye todas las dependencias transitivas?"
+ },
+ {
+  "key": "h4-http-rust#terse",
+  "a": "Rust service uses reqwest for HTTP",
+  "b": "Switch to ureq",
+  "c": "Connection timeouts configured?"
+ },
+ {
+  "key": "h4-http-rust#chatty",
+  "a": "We'll use reqwest as the HTTP client for the Rust service. It's async-capable, well-maintained, and handles streaming nicely.",
+  "b": "On second thought, let's go with ureq instead. We don't need the async overhead and ureq will be simpler and lighter.",
+  "c": "The HTTP client should have reasonable defaults for connection pooling and keepalive."
+ },
+ {
+  "key": "h4-http-rust#Spanish",
+  "a": "El cliente HTTP en Rust será reqwest",
+  "b": "Usar ureq en su lugar",
+  "c": "¿Cómo manejamos los reintentos de las solicitudes HTTP fallidas?"
+ },
+ {
+  "key": "h4-video#terse",
+  "a": "Video transcoding using AWS MediaConvert",
+  "b": "Switch to FFmpeg on worker nodes",
+  "c": "CPU allocation per worker for encoding jobs?"
+ },
+ {
+  "key": "h4-video#chatty",
+  "a": "I think we should use AWS MediaConvert for video transcoding. It's a managed service, scales automatically, and we don't have to maintain infrastructure.",
+  "b": "Actually, let me reconsider—let's run FFmpeg on our own worker nodes instead. Better cost control, more flexibility, and we can customize the encoding profiles.",
+  "c": "We'll need to make sure our workers have enough CPU and disk space to handle concurrent encoding tasks."
+ },
+ {
+  "key": "h4-video#Spanish",
+  "a": "Transcodificaremos videos con AWS MediaConvert",
+  "b": "Cambiar a FFmpeg en nuestros workers",
+  "c": "¿Cuánta CPU reservamos por worker para las tareas de codificación?"
+ },
+ {
+  "key": "h4-forms#terse",
+  "a": "Form library: Formik",
+  "b": "Switch to React Hook Form",
+  "c": "Schema validation library for form data?"
+ },
+ {
+  "key": "h4-forms#chatty",
+  "a": "Let's use Formik for form handling in the web app. It has solid validation support, good state management, and the API is straightforward.",
+  "b": "Actually, I'd prefer React Hook Form instead. Better performance characteristics, smaller bundle size, and the hook-based approach feels more natural with modern React.",
+  "c": "We should pair the form library with a schema validator like Zod to ensure consistent validation across the app."
+ },
+ {
+  "key": "h4-forms#Spanish",
+  "a": "Los formularios en la aplicación usarán Formik",
+  "b": "Cambiar a React Hook Form",
+  "c": "¿Validamos los datos del formulario en cliente y servidor?"
+ },
+ {
+  "key": "h4-chat#terse",
+  "a": "Alert notifications via Slack webhooks",
+  "b": "Switch to Discord webhooks",
+  "c": "Alert severity levels in the payload?"
+ },
+ {
+  "key": "h4-chat#chatty",
+  "a": "I think Slack webhooks are the way to go for our alert notifications. Everyone's already on Slack and it integrates smoothly.",
+  "b": "You know what, let's use Discord webhooks instead. Better formatted messages, richer payload options, and the team prefers Discord for notifications anyway.",
+  "c": "The webhook messages should be clear and scannable so people can quickly identify critical alerts."
+ },
+ {
+  "key": "h4-chat#Spanish",
+  "a": "Las alertas se enviarán a Slack mediante webhooks",
+  "b": "Cambiar a webhooks de Discord",
+  "c": "¿Qué canales reciben qué tipos de alertas?"
+ },
+ {
+  "key": "h4-iac#terse",
+  "a": "Infrastructure as code: Terraform",
+  "b": "Switch to OpenTofu",
+  "c": "Remote state storage and locking?"
+ },
+ {
+  "key": "h4-iac#chatty",
+  "a": "We'll use Terraform for managing our infrastructure. It's the industry standard, has a huge ecosystem, and we already have experience with it.",
+  "b": "Wait, I'm going to change that—let's use OpenTofu instead. It's open source, we avoid licensing concerns, and it's a drop-in replacement.",
+  "c": "We need a solid strategy for storing and protecting the state files, especially since multiple people will be working with the infrastructure."
+ },
+ {
+  "key": "h4-iac#Spanish",
+  "a": "Gestionaremos la infraestructura con Terraform",
+  "b": "Cambiar a OpenTofu",
+  "c": "¿Dónde almacenamos el estado y quién tiene acceso?"
+ },
+ {
+  "key": "h4-cookies#terse",
+  "a": "Enable third-party tracking cookies on marketing site",
+  "b": "Never mind, forget the third-party cookies",
+  "c": "Privacy policy covers data collection practices?"
+ },
+ {
+  "key": "h4-cookies#chatty",
+  "a": "I was thinking we should enable third-party tracking cookies on the marketing site for better analytics and user insights.",
+  "b": "Actually, let me withdraw that. Privacy regulations and compliance issues make it more trouble than it's worth.",
+  "c": "Let's make sure our privacy policy is clear about what data we're collecting from visitors."
+ },
+ {
+  "key": "h4-cookies#Spanish",
+  "a": "Habilitar cookies de seguimiento de terceros en el sitio",
+  "b": "Olvidemos eso, mejor no las cookies de terceros",
+  "c": "¿Nuestra política de privacidad explica claramente cómo usamos los datos?"
+ }
+]

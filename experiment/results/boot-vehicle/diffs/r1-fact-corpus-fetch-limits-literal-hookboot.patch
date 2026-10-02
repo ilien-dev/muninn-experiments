@@ -1,0 +1,22 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..f64309a
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,16 @@
++# Fetching notes
++
++Values below come from this project's session history (Svipall fetch logs), not from a
++file checked into this repo — `GATE1.md` only says fetching was rate-limited, without
++numbers.
++
++## Rate limit
++
++- 12 visits per 60 s window, per domain.
++- Breach cooldown: 900 s before that domain is tried again.
++
++## Mirror / CDN hosts used
++
++- `raw.githubusercontent.com` — primary, confirmed in `manifest.tsv` header.
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>` — fallback mirror.
++- `cdn.statically.io` — fallback mirror, slow, frequent timeouts.

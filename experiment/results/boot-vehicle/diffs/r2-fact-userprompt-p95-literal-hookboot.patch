@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..5042347
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Benchmark: full-recall p95 of the `UserPromptSubmit` hook, adversarial synthetic 30-word vocabulary.
++
++- Before fix: **10.27 ms** p95.
++- Fix: drop terms with document frequency `df > n/3`, and use a Zipf-distributed vocabulary for term selection.
++- After fix: **1.82 ms** p95.
++
++Source: project benchmark run (`muninn-bench`), recorded in this project's own session transcripts. No separate written benchmark report was found in the repo to cross-check these numbers against.

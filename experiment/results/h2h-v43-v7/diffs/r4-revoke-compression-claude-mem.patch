@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..383495c
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Compression policy
++
++The project's current recorded decision is to use zstd as the compression codec for the compression layer. It was chosen for its superior compression ratio, and performance validation recorded alongside the decision confirmed that its throughput is acceptable for production use.

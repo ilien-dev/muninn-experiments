@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..d00c1c1
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime
++
++The project's recorded history shows the async runtime decision was changed to tokio, superseding an earlier choice of async-std; however, this record exists only as low-trust, unconfirmed transcript evidence (not verified by an exit code, commit, or explicit statement in this session), so tokio should be treated as the current recorded decision with that caveat rather than as a fully confirmed policy.

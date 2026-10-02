@@ -1,0 +1,27 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..1e573f4
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,21 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++No se encontró, en las mediciones del proyecto, un p95 del hook `UserPromptSubmit`
++corrido específicamente sobre un vocabulario sintético adversarial de 30 palabras.
++No invento la cifra: no está en `research/00-evidence-log.md`, `research/CONCLUSION.md`,
++`research/CONCLUSION-v1-superada.md` ni en el código de benchmark (`crates/muninn-bench`).
++
++Lo que sí está medido, y es el fix de selección de términos más cercano al que se
++pregunta (`research/00-evidence-log.md`, bloque `[H6]`, corpus: 144 487 registros de
++Simple Wikipedia, no el vocabulario de 30 palabras):
++
++- **Antes del fix** — BM25 sobre los 24 primeros términos del prompt: p95 **35.53 ms**.
++- **El fix** — limitar la selección a los 8 términos de mayor IDF antes de tocar FTS5
++  (`select_terms` en `crates/muninn-core/src/recall.rs`).
++- **Después del fix** — BM25 sobre los 8 términos de mayor IDF: p95 **8.75 ms**.
++
++Esta cifra es de la etapa BM25 aislada, no del hook `UserPromptSubmit` completo. El
++p95 medido del hook completo end-to-end (con intención, 50 000 registros, sin el
++vocabulario adversarial) es **4.31 ms** (`[I3]`).

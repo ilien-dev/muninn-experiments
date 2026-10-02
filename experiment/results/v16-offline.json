@@ -1,0 +1,372 @@
+{
+ "cells": 60,
+ "median_ratio_head_over_base": 0.9608270631960949,
+ "ci95": [
+  0.9580012262415696,
+  0.9622689938398358
+ ],
+ "median_base_chars": 3613.5,
+ "median_head_chars": 3461.0,
+ "rows": [
+  {
+   "run": "r0",
+   "task": "revoke-compression",
+   "base": 3898,
+   "head": 3748
+  },
+  {
+   "run": "r0",
+   "task": "revoke-cache-eviction",
+   "base": 3831,
+   "head": 3500
+  },
+  {
+   "run": "r0",
+   "task": "revoke-password-hashing",
+   "base": 3741,
+   "head": 3743
+  },
+  {
+   "run": "r0",
+   "task": "revoke-tls-backend",
+   "base": 3892,
+   "head": 3755
+  },
+  {
+   "run": "r0",
+   "task": "revoke-wire-format",
+   "base": 3917,
+   "head": 3767
+  },
+  {
+   "run": "r0",
+   "task": "revoke-async-runtime",
+   "base": 3924,
+   "head": 3768
+  },
+  {
+   "run": "r0",
+   "task": "revoke-version-scheme",
+   "base": 3896,
+   "head": 3749
+  },
+  {
+   "run": "r0",
+   "task": "revoke-license",
+   "base": 3656,
+   "head": 3500
+  },
+  {
+   "run": "r0",
+   "task": "revoke-tls-verification",
+   "base": 4286,
+   "head": 4149
+  },
+  {
+   "run": "r0",
+   "task": "revoke-internal-http",
+   "base": 3771,
+   "head": 3605
+  },
+  {
+   "run": "r1",
+   "task": "revoke-compression",
+   "base": 4596,
+   "head": 4446
+  },
+  {
+   "run": "r1",
+   "task": "revoke-cache-eviction",
+   "base": 3789,
+   "head": 3458
+  },
+  {
+   "run": "r1",
+   "task": "revoke-password-hashing",
+   "base": 3995,
+   "head": 3997
+  },
+  {
+   "run": "r1",
+   "task": "revoke-tls-backend",
+   "base": 3854,
+   "head": 3717
+  },
+  {
+   "run": "r1",
+   "task": "revoke-wire-format",
+   "base": 3879,
+   "head": 3729
+  },
+  {
+   "run": "r1",
+   "task": "revoke-async-runtime",
+   "base": 3551,
+   "head": 3395
+  },
+  {
+   "run": "r1",
+   "task": "revoke-version-scheme",
+   "base": 4593,
+   "head": 4446
+  },
+  {
+   "run": "r1",
+   "task": "revoke-license",
+   "base": 4640,
+   "head": 4484
+  },
+  {
+   "run": "r1",
+   "task": "revoke-tls-verification",
+   "base": 4079,
+   "head": 3942
+  },
+  {
+   "run": "r1",
+   "task": "revoke-internal-http",
+   "base": 3238,
+   "head": 3240
+  },
+  {
+   "run": "r2",
+   "task": "revoke-compression",
+   "base": 4878,
+   "head": 4728
+  },
+  {
+   "run": "r2",
+   "task": "revoke-cache-eviction",
+   "base": 3514,
+   "head": 3183
+  },
+  {
+   "run": "r2",
+   "task": "revoke-password-hashing",
+   "base": 3328,
+   "head": 3330
+  },
+  {
+   "run": "r2",
+   "task": "revoke-tls-backend",
+   "base": 3262,
+   "head": 3125
+  },
+  {
+   "run": "r2",
+   "task": "revoke-wire-format",
+   "base": 3300,
+   "head": 3150
+  },
+  {
+   "run": "r2",
+   "task": "revoke-async-runtime",
+   "base": 3485,
+   "head": 3329
+  },
+  {
+   "run": "r2",
+   "task": "revoke-version-scheme",
+   "base": 4880,
+   "head": 4733
+  },
+  {
+   "run": "r2",
+   "task": "revoke-license",
+   "base": 4639,
+   "head": 4799
+  },
+  {
+   "run": "r2",
+   "task": "revoke-tls-verification",
+   "base": 3600,
+   "head": 3463
+  },
+  {
+   "run": "r2",
+   "task": "revoke-internal-http",
+   "base": 3421,
+   "head": 3423
+  },
+  {
+   "run": "r3",
+   "task": "revoke-compression",
+   "base": 3463,
+   "head": 3313
+  },
+  {
+   "run": "r3",
+   "task": "revoke-cache-eviction",
+   "base": 3126,
+   "head": 2795
+  },
+  {
+   "run": "r3",
+   "task": "revoke-password-hashing",
+   "base": 3304,
+   "head": 3306
+  },
+  {
+   "run": "r3",
+   "task": "revoke-tls-backend",
+   "base": 3177,
+   "head": 3040
+  },
+  {
+   "run": "r3",
+   "task": "revoke-wire-format",
+   "base": 3206,
+   "head": 3056
+  },
+  {
+   "run": "r3",
+   "task": "revoke-async-runtime",
+   "base": 3478,
+   "head": 3322
+  },
+  {
+   "run": "r3",
+   "task": "revoke-version-scheme",
+   "base": 3705,
+   "head": 3558
+  },
+  {
+   "run": "r3",
+   "task": "revoke-license",
+   "base": 3224,
+   "head": 3068
+  },
+  {
+   "run": "r3",
+   "task": "revoke-tls-verification",
+   "base": 3583,
+   "head": 3446
+  },
+  {
+   "run": "r3",
+   "task": "revoke-internal-http",
+   "base": 3644,
+   "head": 3478
+  },
+  {
+   "run": "r4",
+   "task": "revoke-compression",
+   "base": 4623,
+   "head": 4787
+  },
+  {
+   "run": "r4",
+   "task": "revoke-cache-eviction",
+   "base": 3486,
+   "head": 3155
+  },
+  {
+   "run": "r4",
+   "task": "revoke-password-hashing",
+   "base": 3392,
+   "head": 3394
+  },
+  {
+   "run": "r4",
+   "task": "revoke-tls-backend",
+   "base": 3295,
+   "head": 3158
+  },
+  {
+   "run": "r4",
+   "task": "revoke-wire-format",
+   "base": 3314,
+   "head": 3164
+  },
+  {
+   "run": "r4",
+   "task": "revoke-async-runtime",
+   "base": 3592,
+   "head": 3436
+  },
+  {
+   "run": "r4",
+   "task": "revoke-version-scheme",
+   "base": 4648,
+   "head": 4815
+  },
+  {
+   "run": "r4",
+   "task": "revoke-license",
+   "base": 4715,
+   "head": 4559
+  },
+  {
+   "run": "r4",
+   "task": "revoke-tls-verification",
+   "base": 3559,
+   "head": 3422
+  },
+  {
+   "run": "r4",
+   "task": "revoke-internal-http",
+   "base": 3271,
+   "head": 3105
+  },
+  {
+   "run": "r5",
+   "task": "revoke-compression",
+   "base": 3601,
+   "head": 3451
+  },
+  {
+   "run": "r5",
+   "task": "revoke-cache-eviction",
+   "base": 4168,
+   "head": 3837
+  },
+  {
+   "run": "r5",
+   "task": "revoke-password-hashing",
+   "base": 3717,
+   "head": 3719
+  },
+  {
+   "run": "r5",
+   "task": "revoke-tls-backend",
+   "base": 3584,
+   "head": 3447
+  },
+  {
+   "run": "r5",
+   "task": "revoke-wire-format",
+   "base": 3609,
+   "head": 3459
+  },
+  {
+   "run": "r5",
+   "task": "revoke-async-runtime",
+   "base": 3618,
+   "head": 3468
+  },
+  {
+   "run": "r5",
+   "task": "revoke-version-scheme",
+   "base": 3584,
+   "head": 3437
+  },
+  {
+   "run": "r5",
+   "task": "revoke-license",
+   "base": 3344,
+   "head": 3188
+  },
+  {
+   "run": "r5",
+   "task": "revoke-tls-verification",
+   "base": 3977,
+   "head": 3840
+  },
+  {
+   "run": "r5",
+   "task": "revoke-internal-http",
+   "base": 3354,
+   "head": 3188
+  }
+ ]
+}

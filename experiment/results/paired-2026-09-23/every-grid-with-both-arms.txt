@@ -1,0 +1,42 @@
+h2h-v21-heldout: 54 paired cells
+  muninn-ack2               11 / 54
+  claude-mem                31 / 54
+  agree: 11 both pass, 23 both fail  (34 of 54)
+  disagree: 0 only muninn-ack2, 20 only claude-mem
+  paired (exact McNemar)   p = 0.0000
+  unpaired (exact Fisher)  p = 0.0001
+h2h-v22-heldout: 54 paired cells
+  muninn-ack2               38 / 54
+  claude-mem                38 / 54
+  agree: 28 both pass, 6 both fail  (34 of 54)
+  disagree: 10 only muninn-ack2, 10 only claude-mem
+  paired (exact McNemar)   p = 1.0000
+  unpaired (exact Fisher)  p = 1.0000
+h2h-v24-heldout: 54 paired cells
+  muninn-ack3               35 / 54
+  claude-mem                41 / 54
+  agree: 27 both pass, 5 both fail  (32 of 54)
+  disagree: 8 only muninn-ack3, 14 only claude-mem
+  paired (exact McNemar)   p = 0.2863
+  unpaired (exact Fisher)  p = 0.2920
+h2h-v27-heldout: 54 paired cells
+  muninn-newest             50 / 54
+  claude-mem                50 / 54
+  agree: 47 both pass, 1 both fail  (48 of 54)
+  disagree: 3 only muninn-newest, 3 only claude-mem
+  paired (exact McNemar)   p = 1.0000
+  unpaired (exact Fisher)  p = 1.0000
+h2h-v30-heldout: 54 paired cells
+  muninn-filler             49 / 54
+  claude-mem                46 / 54
+  agree: 41 both pass, 0 both fail  (41 of 54)
+  disagree: 8 only muninn-filler, 5 only claude-mem
+  paired (exact McNemar)   p = 0.5811
+  unpaired (exact Fisher)  p = 0.5558
+h2h-v10-plain: 54 paired cells
+  muninn-catalog            39 / 54
+  claude-mem                33 / 54
+  agree: 26 both pass, 8 both fail  (34 of 54)
+  disagree: 13 only muninn-catalog, 7 only claude-mem
+  paired (exact McNemar)   p = 0.2632
+  unpaired (exact Fisher)  p = 0.3075

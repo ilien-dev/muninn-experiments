@@ -1,0 +1,16 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..0271b77
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,10 @@
++# Performance history
++
++## Real transcript ingest
++
++No measured figures for ingesting this project's own real Claude Code transcript were found in this repository checkout.
++
++- Transcript size: not found.
++- Turns produced: not found.
++- Episodes produced: not found.
++- Ingest duration: not found.

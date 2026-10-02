@@ -1,0 +1,26 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..7dab290
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,20 @@
++# Perf history
++
++## UserPromptSubmit read path
++
++Not found. I searched the repository (source, `research/00-evidence-log.md`,
++`research/CONCLUSION*.md`, `design/ENGINE.md`, git log) for a measured p95 of
++the full `UserPromptSubmit` hook on the adversarial synthetic 30-word
++vocabulary, before and after a term-selection fix, and could not find it.
++
++What exists, for reference, is not the same measurement:
++- `crates/muninn-core/src/recall.rs:4` records a prototype figure for the BM25
++  stage only (not the full hook): top-8 IDF term selection took it from
++  21.5 ms to 4.65 ms (citing `[H6]`), on the Python prototype's corpus — not
++  stated as the 30-word vocabulary.
++- `crates/muninn-bench/src/main.rs` defines a live contract named "hook
++  UserPromptSubmit full p95" (limit 10 ms) that does use the 30-word
++  synthetic vocabulary to populate its store, but no historical before/after
++  result for it is recorded anywhere in this checkout.
++
++If the number exists, it is not in this repository at this commit.

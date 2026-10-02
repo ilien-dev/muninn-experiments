@@ -1,0 +1,9 @@
+llama3.1:8b              Mem0's prompt 0/4   plain prompt 2/4
+    []                                                           ← For production secrets we use HashiCorp Vault.
+    []                                                           ← We're going with gRPC for service-to-service communication.
+    []                                                           ← Moving to AWS Secrets Manager instead.
+    []                                                           ← The async runtime is tokio, not async-std.
+
+models that extract every decision under Mem0's own prompt: none
+→ a Mem0 arm on these models would store nothing, and its score would measure
+  the model's reading of Mem0's prompt rather than Mem0.

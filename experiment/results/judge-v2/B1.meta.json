@@ -1,0 +1,221 @@
+{
+ "arm": "B1",
+ "model": "qwen35-4b-q4km.gguf",
+ "sha256": "13c16f426047e2de38cd075bdade4a7bcbc8c774384876f677740cda65f8a983",
+ "threads": 16,
+ "calls": 930,
+ "reverse": false,
+ "full_prompt": [
+  {
+   "id": "p10-postgres#terse|pairs.json",
+   "ms": 670.960085997649
+  },
+  {
+   "id": "p11-database-schema#terse|pairs2.json",
+   "ms": 653.3513280010084
+  },
+  {
+   "id": "p12-7#chatty|pairs3.json",
+   "ms": 719.2177070028265
+  },
+  {
+   "id": "p10-form-validation#fr|third",
+   "ms": 754.960932994436
+  },
+  {
+   "id": "g3-version-scheme#terse|b",
+   "ms": 1596.2899739970453
+  },
+  {
+   "id": "new-queue#terse|b",
+   "ms": 1617.4965539976256
+  },
+  {
+   "id": "g3-wire-format#chatty|b",
+   "ms": 3256.2042159988778
+  },
+  {
+   "id": "new-ci#chatty|b",
+   "ms": 3271.5646530050435
+  },
+  {
+   "id": "g3-password-hashing#Spanish|b",
+   "ms": 1956.6432930005249
+  },
+  {
+   "id": "new-base-image#Spanish|b",
+   "ms": 1982.7630750005483
+  },
+  {
+   "id": "d12-pool#terse|b",
+   "ms": 1475.3490100047202
+  },
+  {
+   "id": "d12-test#terse|b",
+   "ms": 1458.8599939961568
+  },
+  {
+   "id": "d12-fmt#chatty|b",
+   "ms": 2344.399533998512
+  },
+  {
+   "id": "d12-cache#chatty|b",
+   "ms": 2311.1740390013438
+  },
+  {
+   "id": "d12-lint#Spanish|b",
+   "ms": 1772.8451319999294
+  },
+  {
+   "id": "h2-charts#terse|b",
+   "ms": 1187.28944400209
+  },
+  {
+   "id": "h2-debug#terse|b",
+   "ms": 1166.0340840026038
+  },
+  {
+   "id": "h2-imgcdn#chatty|b",
+   "ms": 1895.1438660005806
+  },
+  {
+   "id": "h2-analytics#Spanish|b",
+   "ms": 1307.5483669963432
+  },
+  {
+   "id": "h3-auth#terse|b",
+   "ms": 1238.908695995633
+  },
+  {
+   "id": "h3-queue2#chatty|b",
+   "ms": 2213.7226069971803
+  },
+  {
+   "id": "h3-logs#Spanish|b",
+   "ms": 1326.7886949979584
+  },
+  {
+   "id": "h4-pkg-py#terse|b",
+   "ms": 1167.642464999517
+  },
+  {
+   "id": "h4-docs-site#chatty|b",
+   "ms": 2235.8857259969227
+  },
+  {
+   "id": "h4-container-reg#Spanish|b",
+   "ms": 1351.5133160035475
+  },
+  {
+   "id": "h5-vector#terse|b",
+   "ms": 1283.2916859988472
+  },
+  {
+   "id": "h5-beta#terse|b",
+   "ms": 1281.6310859998339
+  },
+  {
+   "id": "h5-secrets2#chatty|b",
+   "ms": 1681.8231910001487
+  },
+  {
+   "id": "h5-schema#Spanish|b",
+   "ms": 1405.2347600008943
+  },
+  {
+   "id": "h6-runtime-js#terse|b",
+   "ms": 1128.5983380003017
+  },
+  {
+   "id": "h6-notify#chatty|b",
+   "ms": 2188.081134998356
+  },
+  {
+   "id": "h6-http-go#Spanish|b",
+   "ms": 1472.4723899998935
+  },
+  {
+   "id": "h7-mocks#terse|b",
+   "ms": 1404.6750589986914
+  },
+  {
+   "id": "h7-proto#chatty|b",
+   "ms": 1395.2288959990256
+  },
+  {
+   "id": "h7-grid#Spanish|b",
+   "ms": 1293.8103100023
+  },
+  {
+   "id": "h8-database#terse|b",
+   "ms": 1055.3083359991433
+  },
+  {
+   "id": "h8-cssbundler#terse|b",
+   "ms": 1021.2273500001174
+  },
+  {
+   "id": "h8-taskqueue#chatty|b",
+   "ms": 1722.7321000027587
+  },
+  {
+   "id": "h8-apidocs#Spanish|b",
+   "ms": 1219.2484280021745
+  },
+  {
+   "id": "h9-validation#terse|b",
+   "ms": 1051.642833997903
+  },
+  {
+   "id": "h9-type-check#chatty|b",
+   "ms": 1653.4380390003207
+  },
+  {
+   "id": "h9-templating#Spanish|b",
+   "ms": 1305.1387460000115
+  },
+  {
+   "id": "h11-req-timeout#terse|b",
+   "ms": 1271.1510799999814
+  },
+  {
+   "id": "h11-batch-size#chatty|b",
+   "ms": 1544.6507519955048
+  },
+  {
+   "id": "h11-log-rotation#Spanish|b",
+   "ms": 1368.4438630007207
+  },
+  {
+   "id": "h6-grpc#pt|b",
+   "ms": 1248.6574809954618
+  },
+  {
+   "id": "h6-referrals#pt|b",
+   "ms": 1254.5779529973515
+  },
+  {
+   "id": "h7-shell#fr|b",
+   "ms": 1219.5994180001435
+  },
+  {
+   "id": "h6-lockfile#ja|b",
+   "ms": 1173.6704080030904
+  },
+  {
+   "id": "es13|v1b",
+   "ms": 1872.5505859983969
+  },
+  {
+   "id": "en01|v1b",
+   "ms": 1087.4921790018561
+  },
+  {
+   "id": "en19|v1b",
+   "ms": 1129.3047790022683
+  }
+ ],
+ "wall_s": 1877.5,
+ "started": "2026-09-25T02:48:56.910295+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

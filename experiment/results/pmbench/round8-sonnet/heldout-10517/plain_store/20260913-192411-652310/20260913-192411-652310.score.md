@@ -1,0 +1,192 @@
+# PM-Bench score report
+
+## Summary
+
+Hit: 67 | Late: 0 | Miss: 4 | False alarms: 0 | Commission: 0 | Wrong-content: 0 | Dependency violations: 0 | Overkill steps: 0 | state query calls: 548 | check_time calls: 78 | Actions: 67
+Exact-set: matches 79 | mismatches 4 | reward 75
+Set micro: TP 67 | FP 0 | FN 4
+Cross-day: hit 7 | late 0 | miss 0 | total 7
+Updates: hit 8 | late 0 | miss 1 | canceled 2 | total 11 | violations 0
+Rates: hit 94.4% | late 0.0% | miss 5.6% | false alarm/step 0.0% | commission 0.0% | wrong-content 0.0% | dependency/step 0.0% | overkill/step 0.0% | cross-day miss 0.0% | update miss 11.1% | precision_hit 100.0% | precision_any 100.0% | exact-set match rate 95.2% | exact-set avg reward 0.904 | set_precision 100.0% | set_recall 94.4% | set_f1 97.1%
+Hit rates (by modality): event 91.7% | time 100.0%
+
+## Run Timing
+
+| Field | Value |
+| --- | --- |
+| Started (UTC) | 2026-09-14T01:24:11.391Z |
+| Finished (UTC) | 2026-09-14T01:32:18.313Z |
+| Duration | 8m 6.9s |
+
+## Overall Counts
+
+| Metric | Value |
+| --- | --- |
+| Hit | 67 |
+| Late | 0 |
+| Miss | 4 |
+| False alarms | 0 |
+| Commission | 0 |
+| Wrong-content | 0 |
+| Dependency violations | 0 |
+| Overkill steps | 0 |
+| State query calls | 548 |
+| Check_time calls | 78 |
+| Actions | 67 |
+| Exact-set matches | 79 |
+| Exact-set mismatches | 4 |
+| Exact-set reward | 75 |
+| Set TP | 67 |
+| Set FP | 0 |
+| Set FN | 4 |
+
+## State Query Calls by Channel (Overall)
+
+| Channel | Calls |
+| --- | --- |
+| appointment_portal | 47 |
+| bank_balance | 47 |
+| calendar | 47 |
+| clock | 78 |
+| course_portal | 47 |
+| email | 47 |
+| laundry_status | 47 |
+| library_hold | 47 |
+| price_tracker | 47 |
+| reservation_waitlist | 47 |
+| shipment_status | 47 |
+
+## Overall Rates
+
+| Metric | Value |
+| --- | --- |
+| Hit rate | 94.4% |
+| Late rate | 0.0% |
+| Miss rate | 5.6% |
+| False alarm/step | 0.0% |
+| Commission rate | 0.0% |
+| Wrong-content rate | 0.0% |
+| Dependency/step | 0.0% |
+| Overkill/step | 0.0% |
+| Cross-day miss rate | 0.0% |
+| Update miss rate | 11.1% |
+| Precision hit | 100.0% |
+| Precision any | 100.0% |
+| Exact-set match rate | 95.2% |
+| Exact-set avg reward | 0.904 |
+| Set precision | 100.0% |
+| Set recall | 94.4% |
+| Set F1 | 97.1% |
+
+## Modality Hit Rates
+
+| Modality | Hit | Total | Hit rate |
+| --- | --- | --- | --- |
+| Event | 44 | 48 | 91.7% |
+| Time (time + time_check) | 23 | 23 | 100.0% |
+
+## Monitoring Categories
+
+| Category | Hit | Late | Miss | Total | Hit rate | Any rate (hit+late) |
+| --- | --- | --- | --- | --- | --- | --- |
+| no_proactive_monitoring | 37 | 0 | 3 | 40 | 92.5% | 92.5% |
+| proactive_monitoring_required | 30 | 0 | 1 | 31 | 96.8% | 96.8% |
+
+Note: `proactive_monitoring_required` hit rate is no-late-credit by design.
+
+## Proactive Required by Channel
+
+| Channel | Hit | Late | Miss | Total | Hit rate (no late credit) | Any rate (hit+late) |
+| --- | --- | --- | --- | --- | --- | --- |
+| appointment_portal | 1 | 0 | 0 | 1 | 100.0% | 100.0% |
+| bank_balance | 1 | 0 | 0 | 1 | 100.0% | 100.0% |
+| clock | 23 | 0 | 0 | 23 | 100.0% | 100.0% |
+| email | 2 | 0 | 0 | 2 | 100.0% | 100.0% |
+| laundry_status | 1 | 0 | 0 | 1 | 100.0% | 100.0% |
+| price_tracker | 1 | 0 | 0 | 1 | 100.0% | 100.0% |
+| reservation_waitlist | 1 | 0 | 0 | 1 | 100.0% | 100.0% |
+| shipment_status | 0 | 0 | 1 | 1 | 0.0% | 0.0% |
+
+## Per-Day Summary
+
+| Day | Hit | Late | Miss | Hit rate | Late rate | Miss rate | False alarm/step | Overkill/step | Event hit rate | Time hit rate | No-proactive hit rate | Proactive hit rate (no late credit) | Exact-set match rate | Exact-set avg reward | Set precision | Set recall | Set F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Monday | 9 | 0 | 1 | 90.0% | 0.0% | 10.0% | 0.0% | 0.0% | 83.3% | 100.0% | 80.0% | 100.0% | 91.7% | 0.833 | 100.0% | 90.0% | 94.7% |
+| Tuesday | 10 | 0 | 1 | 90.9% | 0.0% | 9.1% | 0.0% | 0.0% | 87.5% | 100.0% | 85.7% | 100.0% | 92.9% | 0.857 | 100.0% | 90.9% | 95.2% |
+| Wednesday | 8 | 0 | 1 | 88.9% | 0.0% | 11.1% | 0.0% | 0.0% | 83.3% | 100.0% | 100.0% | 75.0% | 91.7% | 0.833 | 100.0% | 88.9% | 94.1% |
+| Thursday | 9 | 0 | 0 | 100.0% | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 1.000 | 100.0% | 100.0% | 100.0% |
+| Friday | 11 | 0 | 0 | 100.0% | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 1.000 | 100.0% | 100.0% | 100.0% |
+| Saturday | 9 | 0 | 0 | 100.0% | 0.0% | 0.0% | 0.0% | 0.0% | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% | 1.000 | 100.0% | 100.0% | 100.0% |
+| Sunday | 11 | 0 | 1 | 91.7% | 0.0% | 8.3% | 0.0% | 0.0% | 87.5% | 100.0% | 85.7% | 100.0% | 90.9% | 0.818 | 100.0% | 91.7% | 95.7% |
+
+## State Query Calls by Channel (Per Day)
+
+| Day | Channel | Calls |
+| --- | --- | --- |
+| Monday | appointment_portal | 4 |
+| Monday | bank_balance | 4 |
+| Monday | calendar | 4 |
+| Monday | clock | 11 |
+| Monday | course_portal | 4 |
+| Monday | email | 4 |
+| Monday | laundry_status | 4 |
+| Monday | library_hold | 4 |
+| Monday | price_tracker | 4 |
+| Monday | reservation_waitlist | 4 |
+| Monday | shipment_status | 4 |
+| Tuesday | appointment_portal | 14 |
+| Tuesday | bank_balance | 14 |
+| Tuesday | calendar | 14 |
+| Tuesday | clock | 13 |
+| Tuesday | course_portal | 14 |
+| Tuesday | email | 14 |
+| Tuesday | laundry_status | 14 |
+| Tuesday | library_hold | 14 |
+| Tuesday | price_tracker | 14 |
+| Tuesday | reservation_waitlist | 14 |
+| Tuesday | shipment_status | 14 |
+| Wednesday | clock | 12 |
+| Thursday | appointment_portal | 4 |
+| Thursday | bank_balance | 4 |
+| Thursday | calendar | 4 |
+| Thursday | clock | 11 |
+| Thursday | course_portal | 4 |
+| Thursday | email | 4 |
+| Thursday | laundry_status | 4 |
+| Thursday | library_hold | 4 |
+| Thursday | price_tracker | 4 |
+| Thursday | reservation_waitlist | 4 |
+| Thursday | shipment_status | 4 |
+| Friday | appointment_portal | 10 |
+| Friday | bank_balance | 10 |
+| Friday | calendar | 10 |
+| Friday | clock | 11 |
+| Friday | course_portal | 10 |
+| Friday | email | 10 |
+| Friday | laundry_status | 10 |
+| Friday | library_hold | 10 |
+| Friday | price_tracker | 10 |
+| Friday | reservation_waitlist | 10 |
+| Friday | shipment_status | 10 |
+| Saturday | appointment_portal | 8 |
+| Saturday | bank_balance | 8 |
+| Saturday | calendar | 8 |
+| Saturday | clock | 10 |
+| Saturday | course_portal | 8 |
+| Saturday | email | 8 |
+| Saturday | laundry_status | 8 |
+| Saturday | library_hold | 8 |
+| Saturday | price_tracker | 8 |
+| Saturday | reservation_waitlist | 8 |
+| Saturday | shipment_status | 8 |
+| Sunday | appointment_portal | 7 |
+| Sunday | bank_balance | 7 |
+| Sunday | calendar | 7 |
+| Sunday | clock | 10 |
+| Sunday | course_portal | 7 |
+| Sunday | email | 7 |
+| Sunday | laundry_status | 7 |
+| Sunday | library_hold | 7 |
+| Sunday | price_tracker | 7 |
+| Sunday | reservation_waitlist | 7 |
+| Sunday | shipment_status | 7 |

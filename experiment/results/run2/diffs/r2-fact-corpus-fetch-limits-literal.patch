@@ -1,0 +1,18 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..29817d5
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,12 @@
++# Fetch limits and mirrors
++
++Per-domain rate limit enforced during corpus fetch (Svipall):
++
++- 12 visits per 60 s window, per domain
++- 900 s cooldown after a breach
++
++Mirror/CDN hosts used to fetch files:
++
++- raw.githubusercontent.com
++- cdn.jsdelivr.net/gh/owner/repo@branch/path
++- cdn.statically.io (slow, occasional timeouts)

@@ -1,0 +1,10 @@
+v9 stats:
+- steps/day: [13, 11, 14, 10, 12, 12, 12]
+- cross-day total: 7
+- update total: 11
+- update mix: {'reschedule': 6, 'override': 3, 'cancel': 2}
+- repeated sentence count: 0
+- top cue family reuse: {'campus_board': 2, 'detour_arrow': 2, 'email_receipt_note': 2, 'laundry_done': 2, 'lecture_side_door': 2, 'library_return_slot': 2, 'price_drop_72': 2, 'rain_canopy': 2}
+- archetypes: ['mixed_logistics', 'errand_heavy', 'meeting_heavy', 'disruption', 'class_learning', 'delivery_watchful', 'admin_catchup']
+solvable: True
+wrote /home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round9-sonnet/weeks/heldout-77013.json

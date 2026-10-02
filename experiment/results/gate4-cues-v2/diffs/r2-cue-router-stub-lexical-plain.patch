@@ -1,0 +1,17 @@
+diff --git a/crates/muninn-why/src/lib.rs b/crates/muninn-why/src/lib.rs
+index 2ad5207..9a54911 100644
+--- a/crates/muninn-why/src/lib.rs
++++ b/crates/muninn-why/src/lib.rs
+@@ -1 +1,12 @@
+ //! Routed "why" responder. An invoked tool, never injected. Filled in Phase 4.
++
++/// Which store a `why` question should be answered from.
++pub enum Route {
++    Lineage,
++    Insufficient,
++}
++
++/// Stub: routing logic lands in Phase 4.
++pub fn route(_question: &str) -> Route {
++    todo!()
++}

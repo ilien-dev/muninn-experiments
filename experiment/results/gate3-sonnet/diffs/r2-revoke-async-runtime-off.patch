@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..2fb32e8
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async runtime
++
++No hay ninguna decisión registrada sobre el runtime async de este proyecto: ningún Cargo.toml declara una dependencia de runtime async (por ejemplo tokio), y no aparece ninguna mención en README.md, design/ENGINE.md, docs/, ni en los archivos de plugin/.

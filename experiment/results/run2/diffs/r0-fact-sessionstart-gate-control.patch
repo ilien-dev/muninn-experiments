@@ -1,0 +1,22 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..28f58b7
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,16 @@
++# Historial de rendimiento
++
++## SessionStart health gate
++
++**Después** (con `quick_check` ya fuera del read path; contador `fts_rows` y el
++CHECK de `body` añadidos en el mismo commit): p50 = **1.05 ms**, medido con 5k
++registros (15k cues). Fuente: mensaje del commit `2ff626a` ("Phase 0:
++foundations — store, health gate, heartbeats, hooks, init/clean, fault suite,
++perf contracts").
++
++**Antes** (con `quick_check` todavía en el read path): no encontrado. Revisé
++el repo entero y todo el log de git (`git log --all -p`) y no hay ningún
++número medido para ese estado — el commit `2ff626a` ya introduce quick_check
++fuera del read path, el contador `fts_rows` y el CHECK de `body` juntos, como
++fundación del proyecto. No hay un commit anterior con la versión "antes". No
++invento el número.

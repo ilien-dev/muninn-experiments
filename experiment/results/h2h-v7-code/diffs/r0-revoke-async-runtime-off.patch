@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..cc11e9c
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++This project has no recorded decision on an async runtime. A search of the repository's documentation and source (including `docs/doc.md`, `README.md`, `CONTRIBUTING.md`, `CHANGELOG.md`, and other project docs) found no policy, ADR, or other recorded statement establishing or retiring an async runtime choice; the only related mentions are example handler code using goroutines, which does not constitute a recorded decision.

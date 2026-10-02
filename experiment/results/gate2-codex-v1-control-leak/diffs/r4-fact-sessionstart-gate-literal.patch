@@ -1,0 +1,18 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..71d09c4
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,12 @@
++# Performance history
++
++## SessionStart health gate
++
++On a 5,000-record store, the measured SessionStart hook p50 was **11.9 ms**
++before `PRAGMA quick_check` was removed from the read path. After that change,
++made together with adding the trigger-maintained `fts_rows` counter and the body
++`CHECK` constraint, the measured p50 was **1.05 ms**.
++
++These are end-to-end measurements of the two configurations. Because the three
++changes landed together, the measurements do not attribute a separate latency
++effect to any one of them.

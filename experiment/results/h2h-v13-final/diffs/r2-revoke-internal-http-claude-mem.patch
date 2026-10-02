@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..28f41eb
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++Plain HTTP is permitted for communication between internal-only services: the architecture requires TLS (via the project's Rustls backend) only at the perimeter for external-facing connections, while trusted internal host-to-host traffic may use unencrypted HTTP to reduce TLS overhead, accepting a deliberate security/performance trade-off for paths that never leave the internal network.

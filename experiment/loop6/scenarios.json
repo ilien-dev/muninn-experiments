@@ -1,0 +1,64 @@
+{
+ "heldout6": [
+  {
+   "id": "h6-grpc",
+   "topic": "the RPC framework for internal services",
+   "old": "gRPC",
+   "new": "ConnectRPC"
+  },
+  {
+   "id": "h6-secrets-store",
+   "topic": "where production secrets are stored",
+   "old": "HashiCorp Vault",
+   "new": "AWS Secrets Manager"
+  },
+  {
+   "id": "h6-css",
+   "topic": "the styling approach in the web app",
+   "old": "styled-components",
+   "new": "Tailwind CSS"
+  },
+  {
+   "id": "h6-tracing",
+   "topic": "the distributed tracing backend",
+   "old": "Jaeger",
+   "new": "Grafana Tempo"
+  },
+  {
+   "id": "h6-http-go",
+   "topic": "the HTTP router in the Go API",
+   "old": "net/http",
+   "new": "chi"
+  },
+  {
+   "id": "h6-notify",
+   "topic": "how push notifications are sent",
+   "old": "Firebase Cloud Messaging",
+   "new": "OneSignal"
+  },
+  {
+   "id": "h6-runtime-js",
+   "topic": "the JavaScript runtime for the server",
+   "old": "Node.js",
+   "new": "Bun"
+  },
+  {
+   "id": "h6-lockfile",
+   "topic": "the Node package manager",
+   "old": "npm",
+   "new": "pnpm"
+  },
+  {
+   "id": "h6-dns",
+   "topic": "the DNS provider",
+   "old": "Route 53",
+   "new": "Cloudflare DNS"
+  },
+  {
+   "id": "h6-referrals",
+   "topic": "the referral programme page",
+   "old": "a referral programme page",
+   "new": "(withdrawn, no replacement)"
+  }
+ ]
+}

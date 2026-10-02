@@ -1,0 +1,14 @@
+diff --git a/docs/policies/wire-format.md b/docs/policies/wire-format.md
+new file mode 100644
+index 0000000..a9bc5fc
+--- /dev/null
++++ b/docs/policies/wire-format.md
+@@ -0,0 +1,8 @@
++# Wire format
++
++The project's recorded decisions (`docs/format.md`, `design/ENGINE.md`) specify
++formats for on-disk storage and portable projection — SQLite as the operational
++store, Markdown with frontmatter as the human-readable projection, and JSONL for
++`muninn export`/`muninn import` — but none of them names a wire serialisation
++format for data transmitted between processes or over a network. Nothing current
++is recorded on this question.

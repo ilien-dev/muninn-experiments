@@ -1,0 +1,51 @@
+{
+ "repo": ".",
+ "base_ref": "HEAD",
+ "model": "claude-sonnet-5",
+ "runs": 5,
+ "arms": [
+  "off",
+  "literal",
+  "control"
+ ],
+ "max_turns": 25,
+ "timeout_s": 600,
+ "seed_transcripts": [
+  "~/.claude/projects/-home-ilien-Projects-muninn/14a6ab47-9d1b-46ce-80c2-1b24c44ff8b8.jsonl"
+ ],
+ "control_transcripts": [
+  "~/.claude/projects/-home-ilien-Projects-video-tiktok-youtube-recorder"
+ ],
+ "tasks": [
+  {
+   "id": "engine-s12-why-responder",
+   "inferable": false,
+   "prompt": "design/ENGINE.md section 12 ('Lo que el motor NO lleva') says the routed 'why' responder is out of v1 and that the embedding sidecar is off by default pending a measurement. README.md says both are part of the MVP. One of them is stale. Fix design/ENGINE.md section 12 so it states what the project actually decided for the MVP, keeping the evidence ids. Edit only that section.",
+   "oracle": "set -e; f=design/ENGINE.md; sec=$(awk '/^## 12/{p=1} /^## 13/{p=0} p' $f | tr '\\n' ' '); ! echo \"$sec\" | grep -q 'Fuera de la v1'; echo \"$sec\" | grep -qiE 'muninn why.{0,160}(MVP|primera versi|v1[^/.a-z0-9])|(MVP|primera versi|v1[^/.a-z0-9]).{0,160}muninn why'; ! echo \"$sec\" | grep -qiE 'apagado por defecto'"
+  },
+  {
+   "id": "engine-s10-build-targets",
+   "inferable": false,
+   "prompt": "design/ENGINE.md section 10 ('Empaquetado y canal') lists two build targets for the MVP: a CLI binary for Claude Code/Codex and a napi-rs addon for OpenCode, Cline and Pi. Update section 10 so it reflects which targets are actually in the MVP and which are deferred to a later version. Edit only that section.",
+   "oracle": "set -e; f=design/ENGINE.md; sec=$(awk '/^## 10/{p=1} /^## 11/{p=0} p' $f | tr '\\n' ' '); echo \"$sec\" | grep -qi 'claude code'; echo \"$sec\" | grep -qi 'codex'; if echo \"$sec\" | grep -qi 'napi'; then echo \"$sec\" | grep -qiE 'napi.{0,240}(diferid|deferred|v1\\.1|posterior|later|despu|no (est|forma) parte|no aplica|todav)|(diferid|deferred|v1\\.1|posterior|later|despu|no aplica).{0,240}napi'; fi"
+  },
+  {
+   "id": "engine-s13-experiment-harness",
+   "inferable": false,
+   "prompt": "design/ENGINE.md section 13 item 1 says the four-arm experiment runs on a harness without native memory (OpenCode or Pi). That is not the harness the project chose for the MVP experiment. Correct item 1 of section 13 to name the harness actually used, and how native memory is handled there. Edit only that item.",
+   "oracle": "set -e; f=design/ENGINE.md; sec=$(awk '/^## 13/{p=1} /^## 14/{p=0} p' $f | tr '\\n' ' '); echo \"$sec\" | grep -qi 'claude code'; ! echo \"$sec\" | grep -q 'OpenCode o Pi'"
+  },
+  {
+   "id": "engine-s11-tenth-check",
+   "inferable": false,
+   "prompt": "design/ENGINE.md section 11 describes nine health checks. The plan adds a tenth check in Phase 3 for the embedding sidecar (fresh or marked cold, never RED by itself). Add it to section 11 and update the summary line format accordingly. Edit only that section.",
+   "oracle": "set -e; f=design/ENGINE.md; sec=$(awk '/^## 11/{p=1} /^## 12/{p=0} p' $f); echo \"$sec\" | grep -qiE 'sidecar|embedding'; echo \"$sec\" | grep -qE '10/10|diez|10\\.'"
+  },
+  {
+   "id": "engine-grammars-control",
+   "inferable": true,
+   "prompt": "Add a short subsection to design/ENGINE.md, after section 10, titled 'Gramáticas' that lists the tree-sitter grammars compiled into the MVP binary for the symbol graph. Keep it to a table.",
+   "oracle": "set -e; f=design/ENGINE.md; grep -qi 'tree-sitter' $f; for l in Rust TypeScript JavaScript Python Go; do grep -q \"$l\" $f; done"
+  }
+ ]
+}

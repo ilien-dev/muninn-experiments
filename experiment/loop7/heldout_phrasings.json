@@ -1,0 +1,182 @@
+[
+ {
+  "key": "h7-pool#terse",
+  "a": "using PgBouncer for pooling",
+  "b": "actually switch to Supavisor",
+  "c": "what's the max connection limit we need?"
+ },
+ {
+  "key": "h7-pool#chatty",
+  "a": "we're gonna use PgBouncer to handle the connection pool",
+  "b": "hold on, let's go with Supavisor instead—better performance",
+  "c": "we should probably bump up the pool size based on load"
+ },
+ {
+  "key": "h7-pool#Spanish",
+  "a": "vamos a usar PgBouncer para el pool de conexiones",
+  "b": "mejor usamos Supavisor, tiene mejor rendimiento",
+  "c": "¿cuántas conexiones máximas necesitamos en producción?"
+ },
+ {
+  "key": "h7-grid#terse",
+  "a": "AG Grid for the dashboard tables",
+  "b": "let's use TanStack Table instead",
+  "c": "need sorting on all columns"
+ },
+ {
+  "key": "h7-grid#chatty",
+  "a": "we decided on AG Grid for the dashboard data tables",
+  "b": "wait actually, TanStack Table is lighter—let's switch",
+  "c": "we should also add filtering to the table view"
+ },
+ {
+  "key": "h7-grid#Spanish",
+  "a": "el dashboard usa AG Grid para las tablas",
+  "b": "mejor usamos TanStack Table, es más eficiente",
+  "c": "¿agregamos búsqueda en tiempo real a la tabla?"
+ },
+ {
+  "key": "h7-proto#terse",
+  "a": "domain events on ActiveMQ Artemis",
+  "b": "switch to Redpanda for throughput",
+  "c": "message retention: 30 days?"
+ },
+ {
+  "key": "h7-proto#chatty",
+  "a": "we're going with ActiveMQ Artemis for the event broker",
+  "b": "actually Redpanda is way faster, let's use that instead",
+  "c": "should we have separate topics for different event types?"
+ },
+ {
+  "key": "h7-proto#Spanish",
+  "a": "usamos ActiveMQ Artemis para los eventos de dominio",
+  "b": "mejor Redpanda, tiene mejor rendimiento",
+  "c": "¿cuántos particiones creamos para los tópicos?"
+ },
+ {
+  "key": "h7-mocks#terse",
+  "a": "HTTP mocking with nock",
+  "b": "use MSW for the tests",
+  "c": "should we mock error responses?"
+ },
+ {
+  "key": "h7-mocks#chatty",
+  "a": "figured we'd stub HTTP calls with nock",
+  "b": "let's switch to MSW—it works better with modern testing",
+  "c": "oh, we probably need to mock websocket connections too"
+ },
+ {
+  "key": "h7-mocks#Spanish",
+  "a": "simulamos las llamadas HTTP con nock",
+  "b": "mejor usamos MSW, es más moderno",
+  "c": "¿necesitamos mockear también los errores de timeout?"
+ },
+ {
+  "key": "h7-retries#terse",
+  "a": "payment worker: 3 attempts",
+  "b": "bump to 7 attempts",
+  "c": "backoff strategy—exponential or linear?"
+ },
+ {
+  "key": "h7-retries#chatty",
+  "a": "we set the payment worker to retry 3 times",
+  "b": "let's increase that to 7 attempts to catch more transients",
+  "c": "how long should we wait between each retry attempt?"
+ },
+ {
+  "key": "h7-retries#Spanish",
+  "a": "el worker de pagos reintentas 3 veces",
+  "b": "aumentemos a 7 intentos",
+  "c": "¿cuál es el delay exponencial entre reintentos?"
+ },
+ {
+  "key": "h7-fonts#terse",
+  "a": "fonts via Google Fonts CDN",
+  "b": "self-host woff2 instead",
+  "c": "subsetting for different locales?"
+ },
+ {
+  "key": "h7-fonts#chatty",
+  "a": "we're using Google Fonts CDN for web fonts",
+  "b": "let's self-host with woff2 format—better privacy and perf",
+  "c": "should we preload the fonts in the HTML head?"
+ },
+ {
+  "key": "h7-fonts#Spanish",
+  "a": "las fuentes vienen de Google Fonts CDN",
+  "b": "mejor hostear nosotros con woff2",
+  "c": "¿precargamos las fuentes en el documento HTML?"
+ },
+ {
+  "key": "h7-a11y#terse",
+  "a": "axe-core for a11y checks in CI",
+  "b": "switch to Pa11y",
+  "c": "color contrast ratios all good?"
+ },
+ {
+  "key": "h7-a11y#chatty",
+  "a": "we're running axe-core for accessibility audits in CI",
+  "b": "let's switch to Pa11y—better integration with our setup",
+  "c": "we should also test keyboard navigation on all pages"
+ },
+ {
+  "key": "h7-a11y#Spanish",
+  "a": "usamos axe-core para auditar accesibilidad",
+  "b": "mejor cambiar a Pa11y en el CI",
+  "c": "¿probamos con lectores de pantalla también?"
+ },
+ {
+  "key": "h7-cadence#terse",
+  "a": "mobile app: weekly releases",
+  "b": "move to fortnightly",
+  "c": "QA needs 5 days per cycle?"
+ },
+ {
+  "key": "h7-cadence#chatty",
+  "a": "we've been doing weekly releases for the mobile app",
+  "b": "let's switch to fortnightly—gives QA more time",
+  "c": "should we launch a beta channel for early testing?"
+ },
+ {
+  "key": "h7-cadence#Spanish",
+  "a": "la app móvil sale cada semana",
+  "b": "mejor cambiar a cada dos semanas",
+  "c": "¿necesitamos un canal beta para usuarios?"
+ },
+ {
+  "key": "h7-shell#terse",
+  "a": "CI scripts in bash",
+  "b": "switch to fish shell",
+  "c": "how to pipe stderr in fish?"
+ },
+ {
+  "key": "h7-shell#chatty",
+  "a": "all our CI scripts are written in bash",
+  "b": "let's rewrite them in fish—the syntax is cleaner",
+  "c": "we'll need to handle environment variables differently"
+ },
+ {
+  "key": "h7-shell#Spanish",
+  "a": "los scripts de CI están en bash",
+  "b": "mejor reescribirlos en fish",
+  "c": "¿cómo pasamos las variables de entorno?"
+ },
+ {
+  "key": "h7-archive#terse",
+  "a": "cold backups on Glacier Deep Archive",
+  "b": "move to Backblaze B2",
+  "c": "retention policy—how long to keep?"
+ },
+ {
+  "key": "h7-archive#chatty",
+  "a": "we're storing cold backups in Glacier Deep Archive",
+  "b": "actually Backblaze B2 is cheaper—let's make the switch",
+  "c": "how often should we do restore drills to verify backups work?"
+ },
+ {
+  "key": "h7-archive#Spanish",
+  "a": "guardamos backups fríos en Glacier Deep Archive",
+  "b": "mejor usamos Backblaze B2, es más barato",
+  "c": "¿cada cuánto verificamos que los backups funcionen?"
+ }
+]

@@ -1,0 +1,5 @@
+{"at":1789373773320,"session":"01a09efc-ef14-7131-afa7-f0192b716b89","arm":"control","ids":[39,69,88,108,147,159],"tokens":641,"reason":"cue:event:session_start"}
+{"at":1789373773320,"session":"01a09efc-ef14-7131-afa7-f0192b716b89","arm":"control","ids":[87],"tokens":0,"reason":"gated:budget"}
+{"at":1789373773320,"session":"01a09efc-ef14-7131-afa7-f0192b716b89","arm":"control","ids":[109],"tokens":0,"reason":"gated:budget"}
+{"at":1789373773320,"session":"01a09efc-ef14-7131-afa7-f0192b716b89","arm":"control","ids":[134],"tokens":0,"reason":"gated:budget"}
+{"at":1789373773326,"session":"01a09efc-ef14-7131-afa7-f0192b716b89","arm":"control","ids":[-98,-99,-1,-102],"tokens":564,"reason":"control"}

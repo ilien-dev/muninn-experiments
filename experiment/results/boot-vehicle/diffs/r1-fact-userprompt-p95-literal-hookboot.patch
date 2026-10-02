@@ -1,0 +1,17 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..c7b3e3b
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,11 @@
++# Historial de rendimiento
++
++## UserPromptSubmit read path
++
++Medición sobre vocabulario sintético adversarial de 30 palabras:
++
++- **p95 de recall completo antes del fix de selección de términos:** 10.27 ms.
++- **Fix:** descartar términos con `df > n/3` (demasiado frecuentes para discriminar) y usar vocabulario Zipf.
++- **p95 después del fix:** 1.82 ms.
++
++Fuente: transcripciones propias del proyecto (episodio de sesión, no un archivo en `research/`). Los números de `research/CONCLUSION.md` y `design/ENGINE.md` (4.31 ms p95, etc.) miden un escenario distinto — el hook completo sobre un store de 50k, no este vocabulario adversarial de 30 palabras — y no deben confundirse con esta cifra.

@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..7121e61
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++Nothing is currently recorded. This project previously tracked an async runtime decision in `config/decisions/revoke-async-runtime.json` (last recorded value `tokio`, before that `async-std`), but that file was deleted in commit `4271540` ("move decision config out of the tree") without any replacement value being added elsewhere in this repository, so as of the current codebase there is no recorded decision on the async runtime to state.

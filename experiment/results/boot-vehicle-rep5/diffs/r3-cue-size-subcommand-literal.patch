@@ -1,0 +1,32 @@
+diff --git a/crates/muninn-bench/src/main.rs b/crates/muninn-bench/src/main.rs
+index 1df2f7b..d64df75 100644
+--- a/crates/muninn-bench/src/main.rs
++++ b/crates/muninn-bench/src/main.rs
+@@ -78,6 +78,12 @@ enum Cmd {
+         #[arg(long)]
+         muninn: Option<PathBuf>,
+     },
++    /// Print the size in bytes of the store file
++    Size {
++        /// Project root (or any directory inside the git worktree)
++        #[arg(long, default_value = ".")]
++        root: PathBuf,
++    },
+     /// Performance contracts
+     Perf {
+         /// Fail on any contract violation
+@@ -660,6 +666,14 @@ fn main() -> Result<()> {
+             holdout,
+             json,
+         } => rules_cmd(&dir, sample, n, seed, labels, list, holdout, json),
++        Cmd::Size { root } => {
++            let paths = muninn_core::ProjectPaths::resolve(&root);
++            let size = std::fs::metadata(paths.db_path())
++                .with_context(|| format!("reading {}", paths.db_path().display()))?
++                .len();
++            println!("{size}");
++            Ok(())
++        }
+         Cmd::Perf {
+             strict,
+             records,

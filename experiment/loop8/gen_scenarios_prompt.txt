@@ -1,0 +1,5 @@
+Invent 10 technical decisions a software team might record, each one later replaced by a different choice. Each must be a value that would literally appear inside a file in the repository (a dependency name, a tool name, a format, a service, a number with its unit), not an abstract policy.
+
+Avoid anything in this list, and anything close to it: PgBouncer, Supavisor, AG Grid, TanStack Table, ActiveMQ, Redpanda, nock, MSW, retry attempts, Google Fonts, woff2, axe-core, Pa11y, release cadence, bash, fish, Glacier, Backblaze, gzip, zstd, LRU, LFU, bcrypt, argon2id, openssl, rustls, msgpack, cbor, async-std, tokio, calver, semver, GPL, Apache.
+
+Output JSON only: a list of 10 objects {"id","topic","old","new"} where id is a short slug prefixed "h8-", topic is a noun phrase naming what the decision is about, old is the first choice and new is the one that replaces it.

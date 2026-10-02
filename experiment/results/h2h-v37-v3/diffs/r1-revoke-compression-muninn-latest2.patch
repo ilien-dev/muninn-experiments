@@ -1,0 +1,9 @@
+diff --git a/docs/policies/compression.md b/docs/policies/compression.md
+new file mode 100644
+index 0000000..febac58
+--- /dev/null
++++ b/docs/policies/compression.md
+@@ -0,0 +1,3 @@
++# Transport compression codec
++
++No decision on the transport compression codec is currently recorded for this project, so no codec is specified here. This document will be updated when a decision is made and recorded.

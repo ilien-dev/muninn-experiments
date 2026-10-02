@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..9f14ea4
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source license
++
++No decision on the source license is currently recorded for this project. The repository contains no decision record, policy, or changelog entry that sets or revises the license choice, so this document states no license value. The `LICENSE` file at the repository root holds the license text as it is checked in, but it is not a recorded decision. Until a decision is recorded, refer to that file for the text as it stands and do not treat it as a settled policy.

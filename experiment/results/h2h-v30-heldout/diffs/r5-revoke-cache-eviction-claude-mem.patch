@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..c3d2502
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++The project's current recorded decision is to use LRU (Least Recently Used) eviction for the cache layer, removing the least recently accessed entry when capacity is reached, combined with a fixed 300-second TTL applied to all cache entries. The rationale recorded for this decision is that LRU with a TTL is simpler to reason about, more predictable, and easier to model and debug than a frequency-based approach.

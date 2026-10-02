@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..b8d8d7c
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async runtime policy
++
++The project's current recorded decision is to use Tokio as its async runtime. The stated reason is that the Tokio ecosystem is too mature to ignore.

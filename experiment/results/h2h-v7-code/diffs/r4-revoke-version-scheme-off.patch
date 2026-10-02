@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..3684530
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++This project has no recorded decision on a version numbering scheme. No document in this repository (README, CONTRIBUTING, CHANGELOG, or any policy/decision records) states or defines a versioning policy such as semantic versioning or calendar versioning; the only related artifact is the `Version` constant in `version.go`, which records the current version string but does not constitute a documented policy.

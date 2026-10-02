@@ -1,0 +1,138 @@
+{
+ "repo": ".",
+ "base_ref": "0cb51ab",
+ "model": "claude-sonnet-5",
+ "runs": 3,
+ "arms": [
+  "literal",
+  "literal-hookboot"
+ ],
+ "max_turns": 25,
+ "timeout_s": 600,
+ "seed_transcripts": [
+  "~/.local/share/muninn-bench/seed-14a6ab47-frozen.jsonl"
+ ],
+ "control_transcripts": [
+  "~/.claude/projects/-home-ilien-Projects-video-tiktok-youtube-recorder"
+ ],
+ "tasks": [
+  {
+   "id": "engine-s12-why-responder",
+   "inferable": false,
+   "prompt": "design/ENGINE.md section 12 ('Lo que el motor NO lleva') says the routed 'why' responder is out of v1. That row is stale: it does not reflect what the project actually decided for the MVP. Fix section 12 so it states the actual decision, keeping the evidence ids. Edit only that section.",
+   "oracle": "set -e; f=design/ENGINE.md; sec=$(awk '/^## 12/{p=1} /^## 13/{p=0} p' $f | tr '\\n' ' '); ! echo \"$sec\" | grep -q 'Fuera de la v1'; echo \"$sec\" | grep -qiE 'muninn why.{0,160}(MVP|primera versi|v1[^/.a-z0-9])|(MVP|primera versi|v1[^/.a-z0-9]).{0,160}muninn why'"
+  },
+  {
+   "id": "fact-userprompt-p95",
+   "inferable": false,
+   "prompt": "Create docs/perf-history.md with a section 'UserPromptSubmit read path'. Record, from the project's own measurements, what the full-recall p95 of the UserPromptSubmit hook was on the adversarial synthetic 30-word vocabulary before the term-selection fix, what the fix was, and the p95 after it. Use the measured numbers, not estimates; if you cannot find a measured number, say so in the file instead of inventing one.",
+   "oracle": "set -e; f=docs/perf-history.md; flat=$(tr '\\n' ' ' < $f); echo \"$flat\" | grep -qE '10[.,]27'; echo \"$flat\" | grep -qE '1[.,]8[0-9]?( |\\*| ?ms)'"
+  },
+  {
+   "id": "fact-sessionstart-gate",
+   "inferable": false,
+   "prompt": "Create or extend docs/perf-history.md with a section 'SessionStart health gate'. Record what the SessionStart hook cost at p50 on a 5k-record store before quick_check was taken off the read path (with the fts_rows counter and the body CHECK added at the same time), and after. Use the measured numbers, not estimates; if you cannot find a measured number, say so in the file instead of inventing one.",
+   "oracle": "set -e; f=docs/perf-history.md; flat=$(tr '\\n' ' ' < $f); echo \"$flat\" | grep -qE '11[.,]9'; echo \"$flat\" | grep -qE '1[.,]05'"
+  },
+  {
+   "id": "fact-corpus-fetch-limits",
+   "inferable": false,
+   "prompt": "Write crates/muninn-bench/corpora/claude-md/FETCHING.md: the per-domain rate limit the corpus fetch had to respect (how many visits per window, the window length, and the cooldown after a breach), and the CDN/mirror hosts that were used to fetch the files. Use the values the project actually hit; if you cannot find them, say so in the file instead of inventing them.",
+   "oracle": "set -e; f=crates/muninn-bench/corpora/claude-md/FETCHING.md; grep -qE '(^|[^0-9])12([^0-9]|$)' $f; grep -qE '(^|[^0-9])60 ?(s|seg|sec|second|segundo)|per minute|por minuto|minute window' $f; grep -qE '(^|[^0-9])900([^0-9]|$)|15 ?min' $f; grep -qi 'jsdelivr' $f; grep -qi 'statically' $f"
+  },
+  {
+   "id": "fact-real-transcript-ingest",
+   "inferable": false,
+   "prompt": "Add to docs/perf-history.md a section 'Real transcript ingest' with the measured figures for ingesting this project's own real Claude Code transcript: its size in MB, how many turns and episodes it produced, and how long the ingest took. Measured figures only; if you cannot find them, say so in the file instead of inventing them.",
+   "oracle": "set -e; f=docs/perf-history.md; flat=$(tr '\\n' ' ' < $f); echo \"$flat\" | grep -qE '21([.,]0)? ?MB'; echo \"$flat\" | grep -qiE '30.{0,40}(turn|turno)|(turn|turno).{0,40}(^|[^0-9.])30([^0-9]|$)'; echo \"$flat\" | grep -qiE '20.{0,40}episod|episod.{0,40}(^|[^0-9.])20([^0-9]|$)'; echo \"$flat\" | grep -qE '(^|[^0-9.])30 ?ms'"
+  },
+  {
+   "id": "docs-grammars-control",
+   "inferable": true,
+   "prompt": "Create docs/grammars.md with a table of the tree-sitter grammars compiled into the MVP binary for the symbol graph: one row per language with the crate name and the file extensions it covers. Take the information from the design documents in this repository.",
+   "oracle": "set -e; f=docs/grammars.md; for l in Rust TypeScript JavaScript Python Go; do grep -q \"$l\" $f; done; grep -q '|' $f; grep -q '\\.rs' $f; grep -q '\\.py' $f; grep -q '\\.go' $f"
+  },
+  {
+   "id": "cue-busy-cap",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-core/src/db.rs",
+    "token": "backoff_ceiling"
+   },
+   "prompt": "In the core crate, give the database busy handler a named constant for the longest it may keep waiting, and use it there. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-core/src/db.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'backoff_ceiling'"
+  },
+  {
+   "id": "cue-stderr-helper",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-cli/src/output.rs",
+    "token": "shadow_write"
+   },
+   "prompt": "In the CLI crate, next to the existing output routines, add one that prints a line to stderr only when MUNINN_VERBOSE is set. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-cli/src/output.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'shadow_write'"
+  },
+  {
+   "id": "cue-azure-pattern",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-capture/src/redact.rs",
+    "token": "poison_pill"
+   },
+   "prompt": "In the capture crate, add a redaction pattern for Azure storage account keys, with its unit test. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-capture/src/redact.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'poison_pill'"
+  },
+  {
+   "id": "cue-artefact-fence",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-compile/src/emit.rs",
+    "token": "fence_token"
+   },
+   "prompt": "Make every emitted JSON artefact of the rule compiler carry the compiler version. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-compile/src/emit.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'fence_token'"
+  },
+  {
+   "id": "cue-size-subcommand",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-bench/src/main.rs",
+    "token": "drain_first"
+   },
+   "prompt": "Add a bench subcommand that prints the size in bytes of the store file. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-bench/src/main.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'drain_first'"
+  },
+  {
+   "id": "cue-timing-stub",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-embed/src/lib.rs",
+    "token": "monotonic_clock"
+   },
+   "prompt": "In the embedding crate, add a function that returns how long an embedding call took, in milliseconds. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-embed/src/lib.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'monotonic_clock'"
+  },
+  {
+   "id": "cue-row-struct",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-symbols/src/lib.rs",
+    "token": "hedged"
+   },
+   "prompt": "In the symbol graph crate, add a struct representing one row of a symbol table (name, path, line). Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-symbols/src/lib.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'hedged'"
+  },
+  {
+   "id": "cue-router-stub",
+   "inferable": false,
+   "scenario": {
+    "file": "crates/muninn-why/src/lib.rs",
+    "token": "grace_window"
+   },
+   "prompt": "In the why crate, add a function stub that decides which route a question takes. Keep the change small and consistent with the project's recorded decisions for the file you edit; touch one file only.",
+   "oracle": "set -e; f=crates/muninn-why/src/lib.rs; test -f $f; tr 'A-Z' 'a-z' < $f | grep -qF 'grace_window'"
+  }
+ ],
+ "seed_sha256": "223dcf4d0ba200a2824d2cd7ffe2c333728afe65651ea7300783e35f296fa895",
+ "seed_records": "crates/muninn-bench/experiment/cues/seed.jsonl"
+}

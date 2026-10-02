@@ -1,0 +1,52 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer"
+    },
+    "query": "Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:23:55.522097+00:00",
+        "hash": "0f403b7710c17aa63b8e0f56d8ed9a2b",
+        "id": "d947562c-3ef6-4a76-8c34-c6d32310b306",
+        "memory": "Type coercion must be explicit. Do not surprise existing string-only callers.\nFor sequence config-reviewer, task config-reviewer-s02, the public task prompt was: Add parse_ini(..., coerce=True) to opt into bool/int coercion; default parsing must keep string values.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/parser.py b/configly/parser.py index 4fe784f..4e0a1fe 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -10,7 +10,19 @@ def normalize_key(key): return key.strip().lower().replace('-', '_') -def parse_ini(text): +def coerce_value(value): + lowered = value.lower() + if lowered == 'true': + return True + if lowered == 'false': + return False + try: + return int(value) + except ValueError: + return value + + +def parse_ini(text, coerce=False): data = {} current = None for line_no, raw_line in enumerate(text.splitlines(), start=1): @@ -27,7 +39,7 @@ def parse_ini(text): raise ParseError(f'line {line_no}: key outside section') key, value = line.split('=', 1) value = value.strip() - data[current][normalize_key(key)] = value + data[current][normalize_key(key)] = coerce_value(value) if coerce else value return data @@ -53,4 +65,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py index 4fe784f..4e0a1fe 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -10,7 +10,19 @@ def normalize_key(key): return key.strip().lower().replace('-', '_') -def parse_ini(text): +def coerce_value(value): + lowered = value.lower() + if lowered == 'true': + return True + if lowered == 'false': + return False + try: + return int(value) + except ValueError: + return value + + +def parse_ini(text, coerce=False): data = {} current = None for line_no, raw_line in enumerate(text.splitlines(), start=1): @@ -27,7 +39,7 @@ def parse_ini(text): raise ParseError(f'line {line_no}: key outside section') key, value = line.split('=', 1) value = value.strip() - data[current][normalize_key(key)] = value + data[current][normalize_key(key)] = coerce_value(value) if coerce else value return data @@ -53,4 +65,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "config-reviewer"
+        },
+        "role": "user",
+        "score": 0.6841019651362579,
+        "updated_at": "2026-09-14T10:23:55.522097+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer"
+      },
+      {
+        "created_at": "2026-09-14T10:22:35.084221+00:00",
+        "hash": "375bbee11ac40ab3f81effa0366bfa3b",
+        "id": "6425aa61-f62a-44c0-93aa-19ac541b19e6",
+        "memory": "Prefer explicit opt-in flags for deterministic formatting; do not silently change default output order.\nFor sequence config-reviewer, task config-reviewer-s01, the public task prompt was: Extend dump_ini with sort_keys=True for deterministic reviewer-friendly output while keeping insertion-order output by default.\nThe public agent actions were: codex exec.\nThe public agent patch was: diff --git a/configly/parser.py b/configly/parser.py index 9dca90a..fc8309c 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -31,11 +31,13 @@ def parse_ini(text): return data -def dump_ini(config): +def dump_ini(config, sort_keys=False): lines = [] - for section, values in config.items(): + sections = sorted(config.items()) if sort_keys else config.items() + for section, values in sections: lines.append(f'[{section}]') - for key, value in values.items(): + keys = sorted(values.items()) if sort_keys else values.items() + for key, value in keys: lines.append(f'{key}={value}') return '\\n'.join(lines) + ('\\n' if lines else '') @@ -50,4 +52,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py index 9dca90a..fc8309c 100644 --- a/configly/parser.py +++ b/configly/parser.py @@ -31,11 +31,13 @@ def parse_ini(text): return data -def dump_ini(config): +def dump_ini(config, sort_keys=False): lines = [] - for section, values in config.items(): + sections = sorted(config.items()) if sort_keys else config.items() + for section, values in sections: lines.append(f'[{section}]') - for key, value in values.items(): + keys = sorted(values.items()) if sort_keys else values.items() + for key, value in keys: lines.append(f'{key}={value}') return '\\n'.join(lines) + ('\\n' if lines else '') @@ -50,4 +52,3 @@ def parse_csv(text): padded = row + [''] * max(0, len(headers) - len(row)) records.append({header: padded[index] for index, header in enumerate(headers)}) return records -\nThe task outcome was passed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 2,
+          "sequence_id": "config-reviewer"
+        },
+        "role": "user",
+        "score": 0.6376738258029404,
+        "updated_at": "2026-09-14T10:22:35.084221+00:00",
+        "user_id": "df3seed__20260914T102055Z-B5-MEM0-LIT-gpt-5.5-6b0e7964__B5-MEM0-LIT__seed-2__config-reviewer"
+      }
+    ]
+  }
+}

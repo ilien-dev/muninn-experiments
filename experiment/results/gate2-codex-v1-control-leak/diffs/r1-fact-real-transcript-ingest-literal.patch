@@ -1,0 +1,12 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..6845746
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,6 @@
++# Performance history
++
++## Real transcript ingest
++
++Ingesting this project's own 21 MB Claude Code transcript produced 30 turns and
++20 episodes in 30 ms.

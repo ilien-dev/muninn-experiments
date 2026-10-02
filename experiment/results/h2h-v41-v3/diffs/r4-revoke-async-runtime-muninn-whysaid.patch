@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..165b684
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async runtime
++
++The most recent thing recorded about this project's async runtime is the statement "async-std runtime", made by the project owner in an earlier session, and no later statement changes or withdraws it, so async-std is the runtime on record. It was captured as a session statement rather than as a formal decision record, and no rationale was recorded with it.

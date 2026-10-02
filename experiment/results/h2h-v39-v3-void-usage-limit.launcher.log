@@ -1,0 +1,6 @@
+seeded r0 claude-mem -> /tmp/muninn-h2h/h2h-v39-v3/snap-r0-claude-mem
+seeded r0 muninn-whysaid -> /tmp/muninn-h2h/h2h-v39-v3/snap-r0-muninn-whysaid
+seeded r1 claude-mem -> /tmp/muninn-h2h/h2h-v39-v3/snap-r1-claude-mem
+seeded r1 muninn-whysaid -> /tmp/muninn-h2h/h2h-v39-v3/snap-r1-muninn-whysaid
+seeded r2 claude-mem -> /tmp/muninn-h2h/h2h-v39-v3/snap-r2-claude-mem
+seeded r2 muninn-whysaid -> /tmp/muninn-h2h/h2h-v39-v3/snap-r2-muninn-whysaid

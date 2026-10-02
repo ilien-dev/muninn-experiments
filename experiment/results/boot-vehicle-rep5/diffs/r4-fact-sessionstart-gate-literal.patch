@@ -1,0 +1,37 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..94556eb
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,31 @@
++# Performance history
++
++## SessionStart health gate
++
++Cost of the `SessionStart` health gate on a 5k-record store, p50:
++
++| | p50 |
++|---|---|
++| Before (`quick_check` on the read path) | 11.9 ms |
++| After (`quick_check` off the read path, `fts_rows` counter, `body` CHECK added) | 1.05 ms |
++
++These are measured numbers from an earlier session of this project (tool-observed,
++not a re-derivation or estimate), recorded in
++`~/.local/share/muninn-bench/seed-14a6ab47-frozen.jsonl:22559233`. They were not
++independently re-measured in this session: `cargo build --release -p muninn-cli -p
++muninn-bench` was not run here (the command required approval that wasn't granted),
++so the `muninn-bench perf` tool (`crates/muninn-bench/src/main.rs`, default
++`--records 5000`, reports `SessionStart` hook p50/p95/p99) was not executed to
++corroborate the after-number live. If these figures need to be reverified, run:
++
++```
++cargo build --release -p muninn-cli -p muninn-bench
++target/release/muninn-bench perf --records 5000
++```
++
++The current code already reflects the "after" state: `quick_check` no longer runs
++live on the read path (`crates/muninn-core/src/db.rs::record_quick_check`, cached
++via `meta_get("quick_check_at")`/`meta_get("quick_check_result")` and consulted
++in O(1) by `crates/muninn-core/src/health.rs`), the `fts_rows` counter is read
++from `meta` (`health.rs:294`), and `record.body` carries `CHECK (length(body) <=
++2000)` in `crates/muninn-core/src/schema.sql:16`.

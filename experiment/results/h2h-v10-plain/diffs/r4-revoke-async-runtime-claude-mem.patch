@@ -1,0 +1,9 @@
+diff --git a/docs/policies/async-runtime.md b/docs/policies/async-runtime.md
+new file mode 100644
+index 0000000..80fa258
+--- /dev/null
++++ b/docs/policies/async-runtime.md
+@@ -0,0 +1,3 @@
++# Async Runtime Policy
++
++No final async runtime decision is currently recorded for this project. The record shows async-std was initially selected, after which the choice was reconsidered toward tokio on the stated rationale of ecosystem advantages; however, the same record explicitly notes that the runtime selection "remains under evaluation," so no settled current choice exists to document here.

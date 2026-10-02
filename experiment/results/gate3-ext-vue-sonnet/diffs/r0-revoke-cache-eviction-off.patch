@@ -1,0 +1,9 @@
+diff --git a/docs/policies/cache-eviction.md b/docs/policies/cache-eviction.md
+new file mode 100644
+index 0000000..e56c489
+--- /dev/null
++++ b/docs/policies/cache-eviction.md
+@@ -0,0 +1,3 @@
++# Cache Eviction Policy
++
++No cache eviction policy is currently recorded for this project. A search of the repository (including source, package manifests, and documentation) found no ADR, design document, or other recorded decision specifying a cache eviction policy; the only related references are third-party `lru-cache` library usages in `packages/compiler-sfc`, which are implementation details and not a documented project policy.

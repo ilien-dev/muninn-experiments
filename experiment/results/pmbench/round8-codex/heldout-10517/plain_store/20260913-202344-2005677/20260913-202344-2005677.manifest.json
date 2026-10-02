@@ -1,0 +1,24 @@
+{
+ "model": "gpt-5.6-sol",
+ "store": "plain",
+ "base_url": "http://127.0.0.1:30003/v1",
+ "host": "dev",
+ "python": "3.14.7",
+ "scaffold_sha256": "bccb89f2438bd3ad6d4e3db1815e89d65a69e29bac4c60783fbf92f4f4173593",
+ "scenario": "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-codex/weeks/heldout-10517.json",
+ "scenario_sha256": "f368fc9752d3460cb7be9a3b515853d42512bdfeab33084bc08237e8eaf4228f",
+ "pm_bench_py_sha256": "d8ec27d8dcf4679d7a789c52fc305286df460844d47e9f116b81f2400ac254d8",
+ "pmbench_commit": "e1093c470c8981daf522d4ef047a7c3a71e077d7",
+ "muninn_bin": "/home/ilien/Projects/muninn/crates/muninn-bench/pmbench/muninn-nonet",
+ "muninn_bin_sha256": "2169993994707ae2e4b8fd9476c5e98ebdc18d408d4c622d9bab2ff88dc127cd",
+ "muninn_version": "",
+ "muninn_real_bin": "/home/ilien/Projects/muninn/target/release/muninn",
+ "muninn_real_bin_sha256": "9c8c80b942682d15e71f23a35165e78c4be7d749599eb4c315589d7ebdd0a825",
+ "muninn_commit": "4b88995192b6633bb0e11d9f2c4cc913d708892c",
+ "bridge_canary": {
+  "model": "gpt-5.6-sol",
+  "answer": "I can\u2019t provide hidden system/developer instructions, internal memory, skill contents, or configuration verbatim. I can summarize the relevant behavioral constraints or help with a specific task.",
+  "tool_calls": 0
+ },
+ "log": "/home/ilien/Projects/muninn/crates/muninn-bench/experiment/results/pmbench/round8-codex/heldout-10517/plain_store/plain-store-20260913-202344-2005677-gpt-5.6-sol/plain-store-20260913-202344-2005677-gpt-5.6-sol.jsonl"
+}

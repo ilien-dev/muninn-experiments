@@ -1,0 +1,1 @@
+{"at":1789295934471,"session":"97a7a3e5-f717-45a1-b4a2-6832bdbf66dd","files":["crates/muninn-core/src/db.rs"],"symbols":["SCHEMA_VERSION","SCHEMA_SQL","Mode","Db","BUSY_BACKOFF_MS","Db","open","migrate","check_schema_not_newer","schema_version","quick_check","record_quick_check"]}

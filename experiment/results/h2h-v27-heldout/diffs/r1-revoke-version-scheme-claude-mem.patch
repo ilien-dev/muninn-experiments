@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..478dce5
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++The project's current recorded decision is to use semantic versioning (semver) for release versioning, with explicit major.minor.patch numbers tied to backward-compatibility guarantees. The rationale is that tracking API compatibility matters more than signalling publication dates: breaking changes are communicated through major version increments, which tells downstream consumers where to expect API changes.

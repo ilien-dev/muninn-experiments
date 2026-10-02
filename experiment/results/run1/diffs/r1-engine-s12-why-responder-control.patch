@@ -1,0 +1,23 @@
+diff --git a/design/ENGINE.md b/design/ENGINE.md
+index 548bad4..f212886 100644
+--- a/design/ENGINE.md
++++ b/design/ENGINE.md
+@@ -329,10 +329,14 @@ diferida no es alarma, es "verificar en el siguiente límite".
+ | Más de dos herramientas MCP | 0 operaciones voluntarias `[K1]`; peaje `[H2]` |
+ | Respondedor de "por qué" enrutado | Fuera de la v1; si se hace, se hace como herramienta invocada y midiendo suficiencia `[K3]` |
+ 
+-Vector como **sidecar opcional**, apagado por defecto: embeddings estáticos calculados en
+-la ruta de escritura y consultados solo por la herramienta `muninn why`, nunca por el hook.
+-Se enciende únicamente si una medición con oráculo independiente lo justifica; el
+-híbrido da +2,8 pp de recall@10 `[H4]` a cambio del determinismo `[V4]`.
++Vector como **sidecar**, en el MVP y encendido por defecto, pero nunca en el hook:
++embeddings estáticos calculados en la ruta de escritura y consultados solo por la
++herramienta `muninn why`. La medición ya está hecha, no pendiente: el híbrido da
+++2,8 pp de recall@10 sobre BM25 `[H4]` `[I5]`, y cargar la tabla cuesta 35–106 ms por
++proceso, de 25x a 100x el coste de toda la búsqueda `[I2]`, así que la rama vectorial
++no puede vivir en la ruta síncrona. Lo que la mantiene fuera del hook no es la falta
++de dato sino el determinismo: HNSW no es determinista en el 80 % de las consultas
++frente a Jaccard 1,0 de BM25 `[V4]`.
+ 
+ ## 13. Qué mide que el motor sirve
+ 

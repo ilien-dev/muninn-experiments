@@ -1,0 +1,7 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..78afcc6
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1 @@
++The project's source code is licensed under the MIT License.

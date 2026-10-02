@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..4ab0090
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version Numbering Scheme
++
++Nothing is currently recorded in this project regarding a decided version numbering scheme. The workspace crate versions are set to `0.1.0` in `Cargo.toml`, but no recorded decision documents the reasoning, constraints, or rules governing how versions should be incremented or formatted going forward.

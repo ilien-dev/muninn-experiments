@@ -1,0 +1,9 @@
+diff --git a/docs/policies/tls-verification.md b/docs/policies/tls-verification.md
+new file mode 100644
+index 0000000..0f60fdd
+--- /dev/null
++++ b/docs/policies/tls-verification.md
+@@ -0,0 +1,3 @@
++# TLS certificate verification
++
++TLS certificate verification is enabled in all builds, development builds included, and there is no exception for any build type. Local and development testing uses self-signed certificates, which are verified like any other certificate. HTTPS is used everywhere, with no plaintext HTTP exception, including for internal hosts, because certificate management is now in place.

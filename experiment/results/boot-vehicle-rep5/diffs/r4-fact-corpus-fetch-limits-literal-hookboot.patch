@@ -1,0 +1,30 @@
+diff --git a/crates/muninn-bench/corpora/claude-md/FETCHING.md b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+new file mode 100644
+index 0000000..963ccc1
+--- /dev/null
++++ b/crates/muninn-bench/corpora/claude-md/FETCHING.md
+@@ -0,0 +1,24 @@
++# Fetching
++
++Source: `manifest.tsv` (323 entries), public `CLAUDE.md` / `AGENTS.md` files located via
++GitHub code search (grep.app), fetched raw. Files are fetched incrementally, not all at
++once, because the fetch has to respect a per-domain rate limit (see `GATE1.md`: 115 of
++323 files were on disk at measurement time).
++
++## Rate limit
++
++Per-domain limit observed for this corpus's fetch (Svipall): **12 visits per 60 s
++window per domain**, with a **900 s cooldown** imposed after a breach.
++
++## Hosts used
++
++- `raw.githubusercontent.com` — primary, used for the bulk of `manifest.tsv`.
++- `cdn.jsdelivr.net/gh/<owner>/<repo>@<branch>/<path>` — mirror.
++- `cdn.statically.io` — mirror; observed to be slow / prone to timeouts.
++
++`unavailable.tsv` records entries that could not be fetched (e.g. 404s).
++
++These figures come from project memory of the fetch run (trust level 1: observed in
++this project's own transcripts, not read back out of a committed log file), not from a
++document in this repository. If you need to re-verify them, re-run the fetch and watch
++for 429/backoff behavior against each host.

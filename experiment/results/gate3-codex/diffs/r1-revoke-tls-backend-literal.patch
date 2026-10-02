@@ -1,0 +1,7 @@
+diff --git a/docs/policies/tls-backend.md b/docs/policies/tls-backend.md
+new file mode 100644
+index 0000000..92b653a
+--- /dev/null
++++ b/docs/policies/tls-backend.md
+@@ -0,0 +1 @@
++The project’s current recorded decision is to use rustls as the TLS backend.

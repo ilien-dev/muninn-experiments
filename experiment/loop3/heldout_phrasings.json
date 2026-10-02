@@ -1,0 +1,182 @@
+[
+ {
+  "key": "h3-cache#terse",
+  "a": "Let's go with Varnish for the cache layer",
+  "b": "Actually, switch to nginx proxy_cache",
+  "c": "Thinking we should proxy WebSocket connections differently"
+ },
+ {
+  "key": "h3-cache#chatty",
+  "a": "I think we should use Varnish for the HTTP cache in front of the API. It's pretty mature and has a good track record.",
+  "b": "On second thought, let's use nginx proxy_cache instead. It'll be simpler to manage alongside our other nginx configs.",
+  "c": "By the way, we need to reconsider how we're handling proxy authentication for the backend services."
+ },
+ {
+  "key": "h3-cache#Spanish",
+  "a": "Vamos a usar Varnish para el cache HTTP",
+  "b": "Mejor cambiar a nginx proxy_cache",
+  "c": "Necesitamos mejorar la configuración del proxy para las conexiones HTTPS"
+ },
+ {
+  "key": "h3-orm-js#terse",
+  "a": "Going with Sequelize for the Node ORM",
+  "b": "Nope, let's use Drizzle instead",
+  "c": "Need to review our database schema design approach anyway"
+ },
+ {
+  "key": "h3-orm-js#chatty",
+  "a": "I've decided we should use Sequelize for the Node service ORM. It has pretty comprehensive docs and good TypeScript support.",
+  "b": "Changing my mind—let's use Drizzle instead. The API is cleaner and it feels more modern.",
+  "c": "While we're at it, we should refactor how we're handling database migrations and seeding."
+ },
+ {
+  "key": "h3-orm-js#Spanish",
+  "a": "Usaremos Sequelize para el ORM en Node",
+  "b": "Cambio de planes, mejor Drizzle",
+  "c": "Tenemos que revisar también cómo manejamos las relaciones entre tablas"
+ },
+ {
+  "key": "h3-tests-e2e#terse",
+  "a": "E2E tests with Cypress",
+  "b": "Use Playwright instead",
+  "c": "Also need to set up better test data fixtures"
+ },
+ {
+  "key": "h3-tests-e2e#chatty",
+  "a": "Let's go with Cypress for our end-to-end tests. The UI is nice and it has good community support.",
+  "b": "Actually, I think Playwright would be better. It's faster and works better across different browsers.",
+  "c": "We should also think about how we're organizing our test scenarios and what coverage we really need."
+ },
+ {
+  "key": "h3-tests-e2e#Spanish",
+  "a": "Cypress para las pruebas E2E",
+  "b": "Mejor usemos Playwright",
+  "c": "Hay que mejorar también cómo organizamos los casos de prueba"
+ },
+ {
+  "key": "h3-state#terse",
+  "a": "Redux for React state management",
+  "b": "Actually Zustand",
+  "c": "Might want to rethink how we're storing user preferences"
+ },
+ {
+  "key": "h3-state#chatty",
+  "a": "I think Redux is the way to go for state management in the React app. It's battle-tested and everyone knows it.",
+  "b": "Reconsidering—let's use Zustand instead. It's much simpler and we probably don't need Redux's complexity.",
+  "c": "In that case, we should also simplify how we're passing context down the component tree."
+ },
+ {
+  "key": "h3-state#Spanish",
+  "a": "Vamos a usar Redux para el estado de React",
+  "b": "Mejor Zustand, es más simple",
+  "c": "Tenemos que replantear también cómo compartimos el estado entre componentes"
+ },
+ {
+  "key": "h3-logs#terse",
+  "a": "Sending logs to Papertrail",
+  "b": "Switch to Grafana Loki",
+  "c": "Also need to add structured logging to the API"
+ },
+ {
+  "key": "h3-logs#chatty",
+  "a": "Let's use Papertrail for shipping our application logs. It's easy to set up and the search is pretty good.",
+  "b": "Wait, let me reconsider. Grafana Loki would integrate better with our existing monitoring stack.",
+  "c": "Speaking of monitoring, we should also improve our alerting rules and dashboards."
+ },
+ {
+  "key": "h3-logs#Spanish",
+  "a": "Los logs van a Papertrail",
+  "b": "Cambiar a Grafana Loki",
+  "c": "También necesitamos mejorar nuestro sistema de alertas"
+ },
+ {
+  "key": "h3-queue2#terse",
+  "a": "Celery for task queue",
+  "b": "Use Dramatiq",
+  "c": "Need to handle retries better anyway"
+ },
+ {
+  "key": "h3-queue2#chatty",
+  "a": "I think we should use Celery for the task queue in the Python workers. It's widely used and has lots of features.",
+  "b": "On reflection, Dramatiq seems like a better fit. It's simpler and more straightforward for our use case.",
+  "c": "We'll need to think about how we're handling failed jobs and retries with the new system."
+ },
+ {
+  "key": "h3-queue2#Spanish",
+  "a": "Usaremos Celery para la cola de tareas",
+  "b": "Mejor Dramatiq",
+  "c": "Tenemos que mejorar cómo manejamos los errores en las tareas"
+ },
+ {
+  "key": "h3-auth#terse",
+  "a": "Auth0 for authentication",
+  "b": "Switch to Keycloak",
+  "c": "Need to review token refresh flow"
+ },
+ {
+  "key": "h3-auth#chatty",
+  "a": "Let's use Auth0 as our authentication provider. It's got great features and handles a lot of the complexity for us.",
+  "b": "Actually, I'm changing course. Let's go with Keycloak instead—it gives us more control and is self-hosted.",
+  "c": "This means we should also look at how we're validating tokens on the backend."
+ },
+ {
+  "key": "h3-auth#Spanish",
+  "a": "Usaremos Auth0 para la autenticación",
+  "b": "Mejor usar Keycloak",
+  "c": "Hay que revisar cómo validamos los tokens en el servidor"
+ },
+ {
+  "key": "h3-maps2#terse",
+  "a": "Google Geocoding for location data",
+  "b": "Switch to Nominatim",
+  "c": "Should cache geocoding results anyway"
+ },
+ {
+  "key": "h3-maps2#chatty",
+  "a": "For the geocoding API, let's use Google Geocoding. It's accurate and reliable.",
+  "b": "Changing my mind—let's use Nominatim instead. It's open source and avoids vendor lock-in.",
+  "c": "We should also think about adding a caching layer for location lookups to reduce API calls."
+ },
+ {
+  "key": "h3-maps2#Spanish",
+  "a": "Usaremos Google Geocoding para la búsqueda de ubicaciones",
+  "b": "Mejor cambiar a Nominatim",
+  "c": "Necesitamos caché para las búsquedas de geolocalización"
+ },
+ {
+  "key": "h3-build#terse",
+  "a": "webpack for bundling the frontend",
+  "b": "Use Vite instead",
+  "c": "Build times have been a pain point for a while"
+ },
+ {
+  "key": "h3-build#chatty",
+  "a": "I think webpack is a solid choice for the frontend bundler. It's been battle-tested and handles complex scenarios.",
+  "b": "Actually, let me reconsider. Vite is much faster and the dev experience is better.",
+  "c": "Now that we're thinking about build speed, we should also optimize how we're code-splitting the application."
+ },
+ {
+  "key": "h3-build#Spanish",
+  "a": "Usar webpack para empaquetar el frontend",
+  "b": "Cambiar a Vite",
+  "c": "El tiempo de compilación es un problema que hemos tenido por mucho tiempo"
+ },
+ {
+  "key": "h3-telemetry#terse",
+  "a": "Include telemetry by default in the CLI",
+  "b": "Remove it",
+  "c": "Users were concerned about privacy anyway"
+ },
+ {
+  "key": "h3-telemetry#chatty",
+  "a": "Let's add telemetry to the CLI so we can understand how users are using it. It'll be on by default but they can opt out.",
+  "b": "Actually, let's drop this idea altogether. Users have expressed privacy concerns and we don't really need it.",
+  "c": "While we're focused on user trust, we should review our privacy policy too."
+ },
+ {
+  "key": "h3-telemetry#Spanish",
+  "a": "Incluiremos telemetría activada por defecto en el CLI",
+  "b": "Mejor no incluir telemetría",
+  "c": "Los usuarios están preocupados por la privacidad de todas formas"
+ }
+]

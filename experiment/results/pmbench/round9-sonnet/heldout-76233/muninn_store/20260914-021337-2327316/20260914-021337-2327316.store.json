@@ -1,0 +1,1271 @@
+{
+ "i1": {
+  "iid": "i1",
+  "text": "Take antibiotic",
+  "trigger": {
+   "kind": "event",
+   "cue": "breakfast"
+  },
+  "day": null,
+  "daily": true,
+  "status": "pending",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday",
+   "Tuesday",
+   "Wednesday",
+   "Thursday",
+   "Friday",
+   "Saturday",
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s1",
+   "done@d2_s1",
+   "done@d3_s1",
+   "done@d4_s1",
+   "done@d5_s1",
+   "done@d6_s1",
+   "done@d7_s1"
+  ],
+  "revised_step": ""
+ },
+ "i2": {
+  "iid": "i2",
+  "text": "Take antibiotic",
+  "trigger": {
+   "kind": "event",
+   "cue": "dinner"
+  },
+  "day": null,
+  "daily": true,
+  "status": "pending",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday",
+   "Tuesday",
+   "Wednesday",
+   "Thursday",
+   "Friday",
+   "Saturday",
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s10",
+   "done@d2_s9",
+   "done@d3_s9",
+   "done@d4_s8",
+   "done@d5_s9",
+   "done@d6_s11",
+   "done@d7_s11"
+  ],
+  "revised_step": ""
+ },
+ "i3": {
+  "iid": "i3",
+  "text": "Take asthma medication",
+  "trigger": {
+   "kind": "time",
+   "at": "11:00"
+  },
+  "day": null,
+  "daily": true,
+  "status": "pending",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday",
+   "Tuesday",
+   "Wednesday",
+   "Thursday",
+   "Friday",
+   "Saturday",
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s3",
+   "done@d2_s4",
+   "done@d3_s4",
+   "done@d4_s3",
+   "done@d5_s4",
+   "done@d6_s4",
+   "done@d7_s4"
+  ],
+  "revised_step": ""
+ },
+ "i4": {
+  "iid": "i4",
+  "text": "Take asthma medication",
+  "trigger": {
+   "kind": "time",
+   "at": "21:00"
+  },
+  "day": null,
+  "daily": true,
+  "status": "pending",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday",
+   "Tuesday",
+   "Wednesday",
+   "Thursday",
+   "Friday",
+   "Saturday",
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s11",
+   "done@d2_s10",
+   "done@d3_s10",
+   "done@d4_s9",
+   "done@d5_s10",
+   "done@d6_s12",
+   "done@d7_s12"
+  ],
+  "revised_step": ""
+ },
+ "i5": {
+  "iid": "i5",
+  "text": "Ask about the referral",
+  "trigger": {
+   "kind": "channel",
+   "channel": "appointment_portal",
+   "condition": "clinic check-in window is open"
+  },
+  "day": "Monday",
+  "daily": false,
+  "status": "expired",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "expire@Monday"
+  ],
+  "revised_step": ""
+ },
+ "i6": {
+  "iid": "i6",
+  "text": "Email the vendor",
+  "trigger": {
+   "kind": "time",
+   "at": "12:10"
+  },
+  "day": "Monday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "reschedule->12:10@d1_s3",
+   "done@d1_s4"
+  ],
+  "revised_step": "d1_s3"
+ },
+ "i7": {
+  "iid": "i7",
+  "text": "Move money",
+  "trigger": {
+   "kind": "channel",
+   "channel": "bank_balance",
+   "condition": "balance drops below $95"
+  },
+  "day": "Monday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s4"
+  ],
+  "revised_step": ""
+ },
+ "i8": {
+  "iid": "i8",
+  "text": "Move the appointment",
+  "trigger": {
+   "kind": "channel",
+   "channel": "appointment_portal",
+   "condition": "a better slot opens"
+  },
+  "day": "Monday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s6"
+  ],
+  "revised_step": ""
+ },
+ "i9": {
+  "iid": "i9",
+  "text": "Pick up the prescription",
+  "trigger": {
+   "kind": "event",
+   "cue": "reach the pharmacy counter"
+  },
+  "day": "Monday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s6"
+  ],
+  "revised_step": ""
+ },
+ "i10": {
+  "iid": "i10",
+  "text": "Print the parking receipt",
+  "trigger": {
+   "kind": "event",
+   "cue": "kiosk starts blinking"
+  },
+  "day": "Monday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "done@d1_s7"
+  ],
+  "revised_step": ""
+ },
+ "i11": {
+  "iid": "i11",
+  "text": "Submit the timesheet",
+  "trigger": {
+   "kind": "time",
+   "at": "16:30"
+  },
+  "day": "Monday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "Monday:plan",
+  "done_days": [
+   "Monday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Monday:plan",
+   "reschedule->16:30@d1_s5",
+   "done@d1_s8"
+  ],
+  "revised_step": "d1_s5"
+ },
+ "i12": {
+  "iid": "i12",
+  "text": "Leave the doorman note",
+  "trigger": {
+   "kind": "event",
+   "cue": "notices the loading dock sign"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "d1_s2",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@d1_s2",
+   "done@d2_s5"
+  ],
+  "revised_step": ""
+ },
+ "i13": {
+  "iid": "i13",
+  "text": "Bring the return receipt",
+  "trigger": {
+   "kind": "event",
+   "cue": "notices the dry cleaner rack"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Monday",
+  "created_step": "d1_s2",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@d1_s2",
+   "done@d2_s6"
+  ],
+  "revised_step": ""
+ },
+ "i14": {
+  "iid": "i14",
+  "text": "Ask about the boxed lamp",
+  "trigger": {
+   "kind": "event",
+   "cue": "loading dock sign points to pickup"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "Tuesday:plan",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Tuesday:plan",
+   "done@d2_s5"
+  ],
+  "revised_step": ""
+ },
+ "i15": {
+  "iid": "i15",
+  "text": "Check the transit times",
+  "trigger": {
+   "kind": "time",
+   "at": "11:00"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "Tuesday:plan",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Tuesday:plan",
+   "reschedule->11:00@d2_s1",
+   "done@d2_s4"
+  ],
+  "revised_step": "d2_s1"
+ },
+ "i16": {
+  "iid": "i16",
+  "text": "Collect the dry cleaning",
+  "trigger": {
+   "kind": "event",
+   "cue": "dry cleaning reaches the front rack"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "Tuesday:plan",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Tuesday:plan",
+   "done@d2_s6"
+  ],
+  "revised_step": ""
+ },
+ "i17": {
+  "iid": "i17",
+  "text": "Pick up the hold",
+  "trigger": {
+   "kind": "channel",
+   "channel": "library_hold",
+   "condition": "ready"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "Tuesday:plan",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Tuesday:plan",
+   "done@d2_s8"
+  ],
+  "revised_step": ""
+ },
+ "i18": {
+  "iid": "i18",
+  "text": "Save the receipt",
+  "trigger": {
+   "kind": "channel",
+   "channel": "email",
+   "condition": "confirmation arrives"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "Tuesday:plan",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Tuesday:plan",
+   "done@d2_s8"
+  ],
+  "revised_step": ""
+ },
+ "i19": {
+  "iid": "i19",
+  "text": "Send the library email",
+  "trigger": {
+   "kind": "time",
+   "at": "19:10"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "Tuesday:plan",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Tuesday:plan",
+   "reschedule->19:10@d2_s2",
+   "done@d2_s9"
+  ],
+  "revised_step": "d2_s2"
+ },
+ "i20": {
+  "iid": "i20",
+  "text": "Take the photo of the leak note",
+  "trigger": {
+   "kind": "event",
+   "cue": "roof access sign is uncovered"
+  },
+  "day": "Tuesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "Tuesday:plan",
+  "done_days": [
+   "Tuesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Tuesday:plan",
+   "done@d2_s8"
+  ],
+  "revised_step": ""
+ },
+ "i21": {
+  "iid": "i21",
+  "text": "Bring the extra hanger set",
+  "trigger": {
+   "kind": "event",
+   "cue": "notices the parcel counter"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Tuesday",
+  "created_step": "d2_s3",
+  "done_days": [
+   "Thursday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@d2_s3",
+   "done@d4_s5"
+  ],
+  "revised_step": ""
+ },
+ "i22": {
+  "iid": "i22",
+  "text": "Add the new block",
+  "trigger": {
+   "kind": "channel",
+   "channel": "calendar",
+   "condition": "new block appears"
+  },
+  "day": "Wednesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Wednesday",
+  "created_step": "Wednesday:plan",
+  "done_days": [
+   "Wednesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Wednesday:plan",
+   "done@d3_s6"
+  ],
+  "revised_step": ""
+ },
+ "i23": {
+  "iid": "i23",
+  "text": "Bring down the blankets",
+  "trigger": {
+   "kind": "channel",
+   "channel": "laundry_status",
+   "condition": "cart is free"
+  },
+  "day": "Wednesday",
+  "daily": false,
+  "status": "expired",
+  "created_day": "Wednesday",
+  "created_step": "Wednesday:plan",
+  "done_days": [],
+  "record_id": null,
+  "history": [
+   "add@Wednesday:plan",
+   "expire@Wednesday"
+  ],
+  "revised_step": ""
+ },
+ "i24": {
+  "iid": "i24",
+  "text": "Buy the filter",
+  "trigger": {
+   "kind": "channel",
+   "channel": "price_tracker",
+   "condition": "price drops below $55"
+  },
+  "day": "Wednesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Wednesday",
+  "created_step": "Wednesday:plan",
+  "done_days": [
+   "Wednesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Wednesday:plan",
+   "done@d3_s8"
+  ],
+  "revised_step": ""
+ },
+ "i25": {
+  "iid": "i25",
+  "text": "Move the laundry",
+  "trigger": {
+   "kind": "channel",
+   "channel": "laundry_status",
+   "condition": "cycle ends"
+  },
+  "day": "Wednesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Wednesday",
+  "created_step": "Wednesday:plan",
+  "done_days": [
+   "Wednesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Wednesday:plan",
+   "done@d3_s9"
+  ],
+  "revised_step": ""
+ },
+ "i26": {
+  "iid": "i26",
+  "text": "Send the repair photo",
+  "trigger": {
+   "kind": "time",
+   "at": "17:05"
+  },
+  "day": "Wednesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Wednesday",
+  "created_step": "Wednesday:plan",
+  "done_days": [
+   "Wednesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Wednesday:plan",
+   "reschedule->17:05@d3_s3",
+   "done@d3_s8"
+  ],
+  "revised_step": "d3_s3"
+ },
+ "i27": {
+  "iid": "i27",
+  "text": "Take the notice",
+  "trigger": {
+   "kind": "event",
+   "cue": "building mail slot is cracked open"
+  },
+  "day": "Wednesday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Wednesday",
+  "created_step": "Wednesday:plan",
+  "done_days": [
+   "Wednesday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Wednesday:plan",
+   "done@d3_s7"
+  ],
+  "revised_step": ""
+ },
+ "i28": {
+  "iid": "i28",
+  "text": "Email the room change note",
+  "trigger": {
+   "kind": "event",
+   "cue": "studio supply table is noticed"
+  },
+  "day": "Saturday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Wednesday",
+  "created_step": "d3_s2",
+  "done_days": [
+   "Saturday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@d3_s2",
+   "done@d6_s9"
+  ],
+  "revised_step": ""
+ },
+ "i29": {
+  "iid": "i29",
+  "text": "Bring the borrowed book",
+  "trigger": {
+   "kind": "event",
+   "cue": "courtyard bench is free"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Wednesday",
+  "created_step": "d3_s4",
+  "done_days": [
+   "Thursday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@d3_s4",
+   "override->when: courtyard bench is free@Thursday:plan",
+   "done@d4_s7"
+  ],
+  "revised_step": "Thursday:plan"
+ },
+ "i30": {
+  "iid": "i30",
+  "text": "Call the insurance desk",
+  "trigger": {
+   "kind": "time",
+   "at": "14:10"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Thursday",
+  "created_step": "Thursday:plan",
+  "done_days": [
+   "Thursday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Thursday:plan",
+   "done@d4_s5"
+  ],
+  "revised_step": ""
+ },
+ "i31": {
+  "iid": "i31",
+  "text": "Collect the parcel",
+  "trigger": {
+   "kind": "event",
+   "cue": "reaches the parcel counter"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "expired",
+  "created_day": "Thursday",
+  "created_step": "Thursday:plan",
+  "done_days": [],
+  "record_id": null,
+  "history": [
+   "add@Thursday:plan",
+   "expire@Thursday"
+  ],
+  "revised_step": ""
+ },
+ "i32": {
+  "iid": "i32",
+  "text": "Finish the intake form",
+  "trigger": {
+   "kind": "channel",
+   "channel": "appointment_portal",
+   "condition": "form is posted"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Thursday",
+  "created_step": "Thursday:plan",
+  "done_days": [
+   "Thursday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Thursday:plan",
+   "done@d4_s4"
+  ],
+  "revised_step": ""
+ },
+ "i33": {
+  "iid": "i33",
+  "text": "Grab the grocery bag",
+  "trigger": {
+   "kind": "event",
+   "cue": "note by the side door is noticed"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Thursday",
+  "created_step": "Thursday:plan",
+  "done_days": [
+   "Thursday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Thursday:plan",
+   "override->when: note by the side door is noticed@d4_s4",
+   "done@d4_s8"
+  ],
+  "revised_step": "d4_s4"
+ },
+ "i34": {
+  "iid": "i34",
+  "text": "Pay the parking app balance",
+  "trigger": {
+   "kind": "time",
+   "at": "13:00"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Thursday",
+  "created_step": "Thursday:plan",
+  "done_days": [
+   "Thursday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Thursday:plan",
+   "done@d4_s4"
+  ],
+  "revised_step": ""
+ },
+ "i35": {
+  "iid": "i35",
+  "text": "Pick up the hold",
+  "trigger": {
+   "kind": "channel",
+   "channel": "library_hold",
+   "condition": "notice says ready"
+  },
+  "day": "Thursday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Thursday",
+  "created_step": "Thursday:plan",
+  "done_days": [
+   "Thursday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Thursday:plan",
+   "done@d4_s8"
+  ],
+  "revised_step": ""
+ },
+ "i36": {
+  "iid": "i36",
+  "text": "Bring the library receipt",
+  "trigger": {
+   "kind": "event",
+   "cue": "hardware counter is noticed"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Thursday",
+  "created_step": "d4_s2",
+  "done_days": [
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@d4_s2",
+   "done@d7_s9"
+  ],
+  "revised_step": ""
+ },
+ "i37": {
+  "iid": "i37",
+  "text": "Buy the storage bin",
+  "trigger": {
+   "kind": "channel",
+   "channel": "price_tracker",
+   "condition": "price drops below $75"
+  },
+  "day": "Friday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Friday",
+  "created_step": "Friday:plan",
+  "done_days": [
+   "Friday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Friday:plan",
+   "done@d5_s9"
+  ],
+  "revised_step": ""
+ },
+ "i38": {
+  "iid": "i38",
+  "text": "Check in with your manager",
+  "trigger": {
+   "kind": "channel",
+   "channel": "calendar",
+   "condition": "the call moves"
+  },
+  "day": "Friday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Friday",
+  "created_step": "Friday:plan",
+  "done_days": [
+   "Friday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Friday:plan",
+   "done@d5_s6"
+  ],
+  "revised_step": ""
+ },
+ "i39": {
+  "iid": "i39",
+  "text": "Meet the technician",
+  "trigger": {
+   "kind": "event",
+   "cue": "repair van pulls up"
+  },
+  "day": "Friday",
+  "daily": false,
+  "status": "canceled",
+  "created_day": "Friday",
+  "created_step": "Friday:plan",
+  "done_days": [],
+  "record_id": null,
+  "history": [
+   "add@Friday:plan",
+   "cancel@d5_s3"
+  ],
+  "revised_step": ""
+ },
+ "i40": {
+  "iid": "i40",
+  "text": "Record the meter reading",
+  "trigger": {
+   "kind": "time",
+   "at": "20:20"
+  },
+  "day": "Friday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Friday",
+  "created_step": "Friday:plan",
+  "done_days": [
+   "Friday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Friday:plan",
+   "reschedule->20:20@d5_s7",
+   "done@d5_s9"
+  ],
+  "revised_step": "d5_s7"
+ },
+ "i41": {
+  "iid": "i41",
+  "text": "Reset your badge",
+  "trigger": {
+   "kind": "event",
+   "cue": "lobby badge reader blinks yellow"
+  },
+  "day": "Friday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Friday",
+  "created_step": "Friday:plan",
+  "done_days": [
+   "Friday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Friday:plan",
+   "done@d5_s3"
+  ],
+  "revised_step": ""
+ },
+ "i42": {
+  "iid": "i42",
+  "text": "Sign for the envelope",
+  "trigger": {
+   "kind": "event",
+   "cue": "courier reaches the desk"
+  },
+  "day": "Friday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Friday",
+  "created_step": "Friday:plan",
+  "done_days": [
+   "Friday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Friday:plan",
+   "done@d5_s7"
+  ],
+  "revised_step": ""
+ },
+ "i43": {
+  "iid": "i43",
+  "text": "Carry the lab handout",
+  "trigger": {
+   "kind": "event",
+   "cue": "campus notice board is noticed"
+  },
+  "day": "Saturday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Friday",
+  "created_step": "d5_s4",
+  "done_days": [
+   "Saturday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@d5_s4",
+   "done@d6_s2"
+  ],
+  "revised_step": ""
+ },
+ "i44": {
+  "iid": "i44",
+  "text": "Check the lab portal",
+  "trigger": {
+   "kind": "time",
+   "at": "16:15"
+  },
+  "day": "Saturday",
+  "daily": false,
+  "status": "canceled",
+  "created_day": "Saturday",
+  "created_step": "Saturday:plan",
+  "done_days": [],
+  "record_id": null,
+  "history": [
+   "add@Saturday:plan",
+   "cancel@d6_s7"
+  ],
+  "revised_step": ""
+ },
+ "i45": {
+  "iid": "i45",
+  "text": "Finish the intake form",
+  "trigger": {
+   "kind": "channel",
+   "channel": "course_portal",
+   "condition": "portal posts the form"
+  },
+  "day": "Saturday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Saturday",
+  "created_step": "Saturday:plan",
+  "done_days": [
+   "Saturday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Saturday:plan",
+   "done@d6_s4"
+  ],
+  "revised_step": ""
+ },
+ "i46": {
+  "iid": "i46",
+  "text": "Move the appointment",
+  "trigger": {
+   "kind": "channel",
+   "channel": "appointment_portal",
+   "condition": "a better slot opens"
+  },
+  "day": "Saturday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Saturday",
+  "created_step": "Saturday:plan",
+  "done_days": [
+   "Saturday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Saturday:plan",
+   "done@d6_s4"
+  ],
+  "revised_step": ""
+ },
+ "i47": {
+  "iid": "i47",
+  "text": "Photograph the room change",
+  "trigger": {
+   "kind": "event",
+   "cue": "campus notice board is updated"
+  },
+  "day": "Saturday",
+  "daily": false,
+  "status": "expired",
+  "created_day": "Saturday",
+  "created_step": "Saturday:plan",
+  "done_days": [],
+  "record_id": null,
+  "history": [
+   "add@Saturday:plan",
+   "expire@Saturday"
+  ],
+  "revised_step": ""
+ },
+ "i48": {
+  "iid": "i48",
+  "text": "Pick up the loaner kit",
+  "trigger": {
+   "kind": "event",
+   "cue": "an item appears on the supply table"
+  },
+  "day": "Saturday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Saturday",
+  "created_step": "Saturday:plan",
+  "done_days": [
+   "Saturday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Saturday:plan",
+   "done@d6_s9"
+  ],
+  "revised_step": ""
+ },
+ "i49": {
+  "iid": "i49",
+  "text": "Be home for the delivery",
+  "trigger": {
+   "kind": "event",
+   "cue": "delivery is out for delivery"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "expired",
+  "created_day": "Sunday",
+  "created_step": "Sunday:plan",
+  "done_days": [],
+  "record_id": null,
+  "history": [
+   "add@Sunday:plan",
+   "expire@Sunday"
+  ],
+  "revised_step": ""
+ },
+ "i50": {
+  "iid": "i50",
+  "text": "Buzz in the courier",
+  "trigger": {
+   "kind": "event",
+   "cue": "doorbell camera flashes"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Sunday",
+  "created_step": "Sunday:plan",
+  "done_days": [
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Sunday:plan",
+   "done@d7_s6"
+  ],
+  "revised_step": ""
+ },
+ "i51": {
+  "iid": "i51",
+  "text": "Check the transit times",
+  "trigger": {
+   "kind": "time",
+   "at": "14:10"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Sunday",
+  "created_step": "Sunday:plan",
+  "done_days": [
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Sunday:plan",
+   "done@d7_s7"
+  ],
+  "revised_step": ""
+ },
+ "i52": {
+  "iid": "i52",
+  "text": "Pay the parking app balance",
+  "trigger": {
+   "kind": "time",
+   "at": "09:10"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Sunday",
+  "created_step": "Sunday:plan",
+  "done_days": [
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Sunday:plan",
+   "done@d7_s2"
+  ],
+  "revised_step": ""
+ },
+ "i53": {
+  "iid": "i53",
+  "text": "Pick up the poster tube",
+  "trigger": {
+   "kind": "event",
+   "cue": "updated pickup message arrives"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Sunday",
+  "created_step": "Sunday:plan",
+  "done_days": [
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Sunday:plan",
+   "override->when: updated pickup message arrives@d7_s2",
+   "done@d7_s5"
+  ],
+  "revised_step": "d7_s2"
+ },
+ "i54": {
+  "iid": "i54",
+  "text": "Pick up the replacement filter",
+  "trigger": {
+   "kind": "event",
+   "cue": "an updated pickup message arrives"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Sunday",
+  "created_step": "Sunday:plan",
+  "done_days": [
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Sunday:plan",
+   "override->when: an updated pickup message arrives@d7_s7",
+   "done@d7_s8"
+  ],
+  "revised_step": "d7_s7"
+ },
+ "i55": {
+  "iid": "i55",
+  "text": "Return the library book",
+  "trigger": {
+   "kind": "event",
+   "cue": "return slot is open"
+  },
+  "day": "Sunday",
+  "daily": false,
+  "status": "done",
+  "created_day": "Sunday",
+  "created_step": "Sunday:plan",
+  "done_days": [
+   "Sunday"
+  ],
+  "record_id": null,
+  "history": [
+   "add@Sunday:plan",
+   "done@d7_s10"
+  ],
+  "revised_step": ""
+ }
+}

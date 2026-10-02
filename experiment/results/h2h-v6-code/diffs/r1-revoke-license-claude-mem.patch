@@ -1,0 +1,9 @@
+diff --git a/docs/policies/license.md b/docs/policies/license.md
+new file mode 100644
+index 0000000..6cef6c5
+--- /dev/null
++++ b/docs/policies/license.md
+@@ -0,0 +1,3 @@
++# Source License Policy
++
++No current decision on the project's source license is recorded. The prior decision record for this topic was removed from the repository (commit `18cf27f`, "move decision config out of the tree"), and no replacement record exists in the tree, so there is nothing current to state here.

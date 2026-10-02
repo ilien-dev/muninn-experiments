@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..16726fb
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Plain HTTP for internal hosts
++
++The project's current recorded decision is "HTTPS everywhere, no exceptions": plain HTTP is not permitted, and that includes internal hosts. All connections, internal ones too, must use HTTPS. The project also records that certificate verification stays on in all builds.

@@ -1,0 +1,15 @@
+{
+ "model": "mdeberta/onnx/model.onnx",
+ "sha256": "425210a8a917c6a5e7c5b6b33d0f942d5137a634755e0f916d822ba894163794",
+ "labels": {
+  "0": "entailment",
+  "1": "neutral",
+  "2": "contradiction"
+ },
+ "threads": 16,
+ "arm": "A4",
+ "items": 9810,
+ "wall_s": 196.8,
+ "started": "2026-09-25T00:34:17.209218+00:00",
+ "cpu": "AMD Ryzen 9 7950X3D, 16 cores"
+}

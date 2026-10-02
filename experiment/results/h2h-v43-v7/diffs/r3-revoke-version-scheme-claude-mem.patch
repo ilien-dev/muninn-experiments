@@ -1,0 +1,9 @@
+diff --git a/docs/policies/version-scheme.md b/docs/policies/version-scheme.md
+new file mode 100644
+index 0000000..8376b25
+--- /dev/null
++++ b/docs/policies/version-scheme.md
+@@ -0,0 +1,3 @@
++# Version numbering scheme
++
++The project's current recorded decision is to use Semantic Versioning (semver) for release numbering: the major version signals breaking changes, the minor version signals backward-compatible new features, and the patch version signals backward-compatible bug fixes. The stated rationale is that this lets users judge the safety of an update from the version number alone, without reading release notes.

@@ -1,0 +1,39 @@
+plan: 8 cells (4 tasks × 2 arms × 1 runs), model claude-sonnet-5, base 0cb51ab of /home/ilien/Projects/muninn
+seed transcripts: 1
+[  1/8] run 0 cue-azure-pattern literal …
+[  2/8] run 0 cue-router-stub lexical …
+[  3/8] run 0 cue-timing-stub literal …
+[  3/8] run 0 cue-timing-stub literal → pass (37s, 1161 tok, $0.196)
+[  4/8] run 0 cue-timing-stub lexical …
+[  2/8] run 0 cue-router-stub lexical → fail (40s, 604 tok, $0.199)
+[  5/8] run 0 cue-router-stub literal …
+[  1/8] run 0 cue-azure-pattern literal → pass (54s, 1154 tok, $0.230)
+[  6/8] run 0 cue-busy-cap lexical …
+[  6/8] run 0 cue-busy-cap lexical → fail (11s, 600 tok, $0.119)
+[  7/8] run 0 cue-azure-pattern lexical …
+[  5/8] run 0 cue-router-stub literal → fail (34s, 1108 tok, $0.189)
+[  8/8] run 0 cue-busy-cap literal …
+[  4/8] run 0 cue-timing-stub lexical → fail (54s, 604 tok, $0.204)
+[  8/8] run 0 cue-busy-cap literal → pass (24s, 1104 tok, $0.166)
+[  7/8] run 0 cue-azure-pattern lexical → pass (58s, 596 tok, $0.268)
+
+# Gate 2 experiment — 8 cells, model claude-sonnet-5, 1 run(s)
+
+| arm | non-inferable pass | inferable pass | errors | delivered tokens (mean) | hook p95 ms (max) | cost/cell (mean) |
+|---|---|---|---|---|---|---|
+| lexical | 1/4 (25%) | n/a | 0 | 601 | 1.44 | $0.197 |
+| literal | 3/4 (75%) | n/a | 0 | 1132 | 1.48 | $0.195 |
+
+## Per task
+
+| task | inferable | lexical | literal | 
+|---|---|---|---|
+| cue-busy-cap | false | 0/1 | 1/1 | 
+| cue-azure-pattern | false | 1/1 | 1/1 | 
+| cue-timing-stub | false | 0/1 | 1/1 | 
+| cue-router-stub | false | 0/1 | 0/1 | 
+
+Retired records delivered (all arms, all cells): 0.
+
+Total model cost: $1.57. Errors are excluded from pass rates and listed in results.jsonl.
+

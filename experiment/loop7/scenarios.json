@@ -1,0 +1,64 @@
+{
+ "heldout7": [
+  {
+   "id": "h7-pool",
+   "topic": "the database connection pooler",
+   "old": "PgBouncer",
+   "new": "Supavisor"
+  },
+  {
+   "id": "h7-grid",
+   "topic": "the data grid component in the dashboard",
+   "old": "AG Grid",
+   "new": "TanStack Table"
+  },
+  {
+   "id": "h7-proto",
+   "topic": "the message broker for domain events",
+   "old": "ActiveMQ Artemis",
+   "new": "Redpanda"
+  },
+  {
+   "id": "h7-mocks",
+   "topic": "how HTTP calls are stubbed in unit tests",
+   "old": "nock",
+   "new": "MSW"
+  },
+  {
+   "id": "h7-retries",
+   "topic": "the retry budget for the payment worker",
+   "old": "3 attempts",
+   "new": "7 attempts"
+  },
+  {
+   "id": "h7-fonts",
+   "topic": "how web fonts are served",
+   "old": "Google Fonts CDN",
+   "new": "self-hosted woff2"
+  },
+  {
+   "id": "h7-a11y",
+   "topic": "the accessibility audit tool in CI",
+   "old": "axe-core",
+   "new": "Pa11y"
+  },
+  {
+   "id": "h7-cadence",
+   "topic": "the release cadence for the mobile app",
+   "old": "weekly releases",
+   "new": "fortnightly releases"
+  },
+  {
+   "id": "h7-shell",
+   "topic": "the shell used by CI scripts",
+   "old": "bash",
+   "new": "fish"
+  },
+  {
+   "id": "h7-archive",
+   "topic": "where cold backups are kept",
+   "old": "Glacier Deep Archive",
+   "new": "Backblaze B2"
+  }
+ ]
+}

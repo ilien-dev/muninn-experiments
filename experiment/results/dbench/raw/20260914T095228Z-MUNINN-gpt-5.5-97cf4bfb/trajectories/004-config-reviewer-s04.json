@@ -1,0 +1,704 @@
+{
+  "admitted_memory_tokens": 564,
+  "agent_metadata": {
+    "agent": "codex",
+    "command": [
+      "codex",
+      "exec",
+      "--sandbox",
+      "danger-full-access",
+      "--skip-git-repo-check",
+      "-c",
+      "approval_policy=never",
+      "-c",
+      "mcp_servers={}",
+      "-m",
+      "gpt-5.5",
+      "-"
+    ],
+    "diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..51483c0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab74..88dd92e 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@ def parse_csv(text, strict=False):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf7..f1939c3 100644\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@ def test_redact_uses_normalized_secret_keys_and_does_not_mutate():\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n",
+    "error_type": null,
+    "exit_code": 0,
+    "isolation_mode": "container",
+    "model": "gpt-5.5",
+    "outcome": "completed",
+    "stderr": "2026-09-14T09:55:10.046245Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f57-8dab-78e2-90d2-08cc7670bec0\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-reviewer-s04\n\nInstruction:\nAdd redact(config, secrets=(...)) returning a redacted copy for secret-like keys without mutating the original config.\n\nAdmitted memory context:\n- muninn-2: For sequence config-reviewer, task config-reviewer-s01, the public task prompt was: Extend dump_ini with sort_keys=True for deterministic reviewer-friendly output while keeping insertion-order output by default.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..d6f8fe7 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -31,11 +31,13 @@ def parse_ini(text):\n     return data\n \n \n-def dump_ini(config):\n+def dump_ini(config, sort_keys=False):\n     lines = []\n-    for section, values in config.items():\n+    sections = sorted(config.items()) if sort_keys else config.items()\n+    for section, values in sections:\n         lines.append(f'[{section}]')\n-        for key, value in values.items():\n+        items = sorted(values.items()) if sort_keys else values.items()\n+        for key, value in items:\n             lines.append(f'{key}={value}')\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n@@ -50,4 +52,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n- [status=active, type=episodic]\n- muninn-6: For sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..b6cee3b 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        line_no = reader.line_num\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {line_no}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n- [status=active, type=episodic]\n- muninn-3: Type coercion must be explicit. Do not surprise existing string-only callers. [status=active, type=human_feedback]\n- muninn-5: Strict validation should produce actionable line-numbered errors instead of broad ValueError text. [status=active, type=human_feedback]\n- muninn-1: Prefer explicit opt-in flags for deterministic formatting; do not silently change default output order. [status=active, type=human_feedback]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the tiny surface area first, then add the redaction helper in the same style as the existing parser utilities and cover it with focused tests.\nexec\n/bin/bash -lc 'rg --files' in /work\n succeeded in 0ms:\nCONVENTIONS.md\nconfigly/__init__.py\nconfigly/parser.py\ntests/test_coerce.py\ntests/test_dump_sorted.py\ntests/test_parser.py\ntests/test_redact.py\ntests/test_strict_csv.py\n\nexec\n/bin/bash -lc 'git status --short' in /work\n succeeded in 0ms:\ncodex\nThere\u2019s already a `test_redact.py`, so this task likely comes with the oracle-shaped expectations in the repo. I\u2019m reading those alongside the package exports before touching code.\nexec\n/bin/bash -lc \"sed -n '1,220p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\ndef _coerce_value(value):\n    lowered = value.lower()\n    if lowered in {'true', 'yes', 'on'}:\n        return True\n    if lowered in {'false', 'no', 'off'}:\n        return False\n    if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):\n        return int(value)\n    return value\n\n\ndef parse_ini(text, coerce=False):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        if coerce:\n            value = _coerce_value(value)\n        data[current][normalize_key(key)] = value\n    return data\n\n\ndef dump_ini(config, sort_keys=False):\n    lines = []\n    sections = sorted(config) if sort_keys else list(config)\n    for section in sections:\n        values = config[section]\n        lines.append(f'[{section}]')\n        keys = sorted(values) if sort_keys else list(values)\n        for key in keys:\n            lines.append(f'{key}={values[key]}')\n    return '\\n'.join(lines) + ('\\n' if lines else '')\n\n\ndef parse_csv(text, strict=False):\n    rows = list(csv.reader(io.StringIO(text)))\n    if not rows:\n        return []\n    headers = [normalize_key(header) for header in rows[0]]\n    records = []\n    for line_no, row in enumerate(rows[1:], start=2):\n        if strict and len(row) != len(headers):\n            raise ParseError(f'line {line_no}: expected {len(headers)} columns, got {len(row)}')\n        padded = row + [''] * max(0, len(headers) - len(row))\n        records.append({header: padded[index] for index, header in enumerate(headers)})\n    return records\n\n\nexec\n/bin/bash -lc \"sed -n '1,200p' configly/__init__.py\" in /work\n succeeded in 0ms:\nfrom .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\nexec\n/bin/bash -lc \"sed -n '1,220p' tests/test_parser.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n\n\ndef test_parse_ini_sections_and_keys():\n    data = parse_ini(\"[server]\\nHost-Name = localhost\\nport=8080\\n\")\n    assert data == {\"server\": {\"host_name\": \"localhost\", \"port\": \"8080\"}}\n\n\ndef test_parse_error_has_line_number():\n    with pytest.raises(ParseError, match=r\"line 1:\"):\n        parse_ini(\"missing section = true\\n\")\n\n\ndef test_dump_ini_round_trip_shape():\n    text = dump_ini({\"server\": {\"host\": \"localhost\", \"port\": \"8080\"}})\n    assert text == \"[server]\\nhost=localhost\\nport=8080\\n\"\n\n\ndef test_parse_csv_normalizes_headers():\n    rows = parse_csv(\"First-Name,Age\\nAda,37\\n\")\n    assert rows == [{\"first_name\": \"Ada\", \"age\": \"37\"}]\n\n\ndef test_normalize_key():\n    assert normalize_key(\"Api-Key\") == \"api_key\"\n\nexec\n/bin/bash -lc \"sed -n '1,220p' tests/test_redact.py\" in /work\n succeeded in 0ms:\nfrom configly import redact\n\n\ndef test_redact_uses_normalized_secret_keys_and_does_not_mutate():\n    config = {\"auth\": {\"api_key\": \"abc\", \"token\": \"def\", \"user\": \"ada\"}}\n    redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n    assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n    assert config[\"auth\"][\"api_key\"] == \"abc\"\n\nexec\n/bin/bash -lc \"sed -n '1,220p' CONVENTIONS.md\" in /work\n succeeded in 0ms:\n# configly conventions\n\n- Parser errors must include a concrete line number when input text is malformed.\n- Public keys are normalized through `normalize_key`.\n- Data containers should remain dict-compatible when architecture changes add helpers.\n\ncodex\nThe visible test confirms two key bits: secret names are normalized with `normalize_key`, and the original nested dict must stay untouched. I\u2019m going to keep the implementation dict-compatible and conservative.\nexec\n/bin/bash -lc \"sed -n '1,200p' tests/test_coerce.py\" in /work\n succeeded in 0ms:\nfrom configly import parse_ini\n\n\ndef test_parse_ini_coerce_is_explicit():\n    text = \"[feature]\\nenabled=true\\ncount=3\\nname=alpha\\n\"\n    assert parse_ini(text)[\"feature\"][\"enabled\"] == \"true\"\n    parsed = parse_ini(text, coerce=True)\n    assert parsed[\"feature\"] == {\"enabled\": True, \"count\": 3, \"name\": \"alpha\"}\n\nexec\n/bin/bash -lc 'rg \"redact|secret|password|token|api\" -n .' in /work\n succeeded in 0ms:\n./tests/test_redact.py:1:from configly import redact\n./tests/test_redact.py:4:def test_redact_uses_normalized_secret_keys_and_does_not_mutate():\n./tests/test_redact.py:5:    config = {\"auth\": {\"api_key\": \"abc\", \"token\": \"def\", \"user\": \"ada\"}}\n./tests/test_redact.py:6:    redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n./tests/test_redact.py:7:    assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n./tests/test_redact.py:8:    assert config[\"auth\"][\"api_key\"] == \"abc\"\n./tests/test_parser.py:27:    assert normalize_key(\"Api-Key\") == \"api_key\"\n\nexec\n/bin/bash -lc \"sed -n '1,200p' tests/test_dump_sorted.py\" in /work\n succeeded in 0ms:\nfrom configly import dump_ini\n\n\ndef test_dump_ini_can_sort_sections_and_keys_without_changing_default():\n    config = {\"z\": {\"b\": \"2\", \"a\": \"1\"}, \"a\": {\"k\": \"v\"}}\n    assert dump_ini(config) == \"[z]\\nb=2\\na=1\\n[a]\\nk=v\\n\"\n    assert dump_ini(config, sort_keys=True) == \"[a]\\nk=v\\n[z]\\na=1\\nb=2\\n\"\n\nexec\n/bin/bash -lc \"sed -n '1,200p' tests/test_strict_csv.py\" in /work\n succeeded in 0ms:\nimport pytest\n\nfrom configly import ParseError, parse_csv\n\n\ndef test_parse_csv_strict_rejects_short_rows_with_line_number():\n    with pytest.raises(ParseError, match=r\"line 3: expected 2 columns, got 1\"):\n        parse_csv(\"name,age\\nAda,37\\nGrace\\n\", strict=True)\n\n\ndef test_parse_csv_default_remains_lenient():\n    assert parse_csv(\"name,age\\nGrace\\n\") == [{\"name\": \"Grace\", \"age\": \"\"}]\n\ncodex\nI\u2019m adding `redact` as a recursive mapping/list copier so it behaves like a real \u201credacted copy,\u201d not just a shallow wrapper. Secret matching will use normalized key equality, with a small default set for common config secret names.\napply patch\npatch: completed\n/work/configly/parser.py\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\napply patch\npatch: completed\n/work/configly/__init__.py\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThe helper is in place and exported. I\u2019m going to run the suite now, then I\u2019ll tighten behavior if the tests expose a different expected edge.\nexec\n/bin/bash -lc 'pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: pytest: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\n`pytest` isn\u2019t on PATH in this environment, so I\u2019m checking whether it\u2019s available through the active Python module path before deciding whether verification is blocked.\nexec\n/bin/bash -lc 'python -m pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\nexec\n/bin/bash -lc 'python3 -m pytest -q' in /work\n exited 127 in 0ms:\n/bin/bash: line 1: python3: command not found\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThere doesn\u2019t appear to be a Python executable available either, which is a bit austere. I\u2019ll still do a static sanity pass and inspect the diff so I don\u2019t leave anything sloppy.\nexec\n/bin/bash -lc 'git diff -- configly/parser.py configly/__init__.py tests/test_redact.py' in /work\n succeeded in 0ms:\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..51483c0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab74..e81395d 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@ import csv\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@ def parse_csv(text, strict=False):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\nexec\n/bin/bash -lc 'command -v python python3 pytest py uv' in /work\n exited 1 in 0ms:\nexec\n/bin/bash -lc 'git status --short' in /work\n succeeded in 0ms:\n M configly/__init__.py\n M configly/parser.py\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n\ncodex\nThe diff is narrow and the runtime tools really do seem absent, so no local test execution is possible here. I\u2019m going to add a couple of focused regression tests while I\u2019m in the file, since the behavior has a few easy-to-miss edges.\napply patch\npatch: completed\n/work/tests/test_redact.py\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..063b69c9e85aab0e282771abd6cc5a234c080e09\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"password\": \"abc\", \"secret_key\": \"def\", \"user\": \"ada\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"user\": \"ada\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..e81395d6318484baabde12bbc78d5408b631b2a8\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -2,6 +2,19 @@\n import io\n \n \n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'password',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n+\n+\n class ParseError(ValueError):\n     pass\n \n@@ -56,6 +69,24 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def redact_value(value):\n+        if isinstance(value, dict):\n+            return {\n+                key: REDACTED if normalize_key(str(key)) in secret_keys else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +99,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..063b69c9e85aab0e282771abd6cc5a234c080e09\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"password\": \"abc\", \"secret_key\": \"def\", \"user\": \"ada\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"user\": \"ada\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ncodex\nOne nuance I\u2019m tightening before I stop: \u201csecret-like\u201d usually means names such as `db_password` or `github_token`, not only exact `password` and `token`. I\u2019m making that match boundary-aware so words like `tokenizer` won\u2019t be swept up accidentally.\napply patch\npatch: completed\n/work/configly/parser.py\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..88dd92e34c54e63a6c8c9d449666f3696704f306\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..063b69c9e85aab0e282771abd6cc5a234c080e09\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"password\": \"abc\", \"secret_key\": \"def\", \"user\": \"ada\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"user\": \"ada\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..88dd92e34c54e63a6c8c9d449666f3696704f306\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..063b69c9e85aab0e282771abd6cc5a234c080e09\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"password\": \"abc\", \"secret_key\": \"def\", \"user\": \"ada\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"user\": \"ada\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ncodex\nI\u2019ve kept the matching normalized and boundary-based. One extra test will pin that down without making the suite noisy.\napply patch\npatch: completed\n/work/tests/test_redact.py\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..88dd92e34c54e63a6c8c9d449666f3696704f306\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..f1939c3037362ee0d225cec050a7e75c312bfd1c\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..88dd92e34c54e63a6c8c9d449666f3696704f306\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..f1939c3037362ee0d225cec050a7e75c312bfd1c\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ncodex\nThe implementation and tests are now in their final shape. I\u2019m doing one last read of the touched files and status so the handoff is crisp.\nexec\n/bin/bash -lc \"sed -n '1,150p' configly/parser.py\" in /work\n succeeded in 0ms:\nimport csv\nimport io\nfrom collections.abc import Mapping\n\n\nDEFAULT_SECRETS = (\n    'api_key',\n    'access_token',\n    'auth_token',\n    'client_secret',\n    'credential',\n    'credentials',\n    'password',\n    'passphrase',\n    'private_key',\n    'secret',\n    'secret_key',\n    'token',\n)\nREDACTED = '<redacted>'\n\n\nclass ParseError(ValueError):\n    pass\n\n\ndef normalize_key(key):\n    return key.strip().lower().replace('-', '_')\n\n\ndef _coerce_value(value):\n    lowered = value.lower()\n    if lowered in {'true', 'yes', 'on'}:\n        return True\n    if lowered in {'false', 'no', 'off'}:\n        return False\n    if value.isdigit() or (value.startswith('-') and value[1:].isdigit()):\n        return int(value)\n    return value\n\n\ndef parse_ini(text, coerce=False):\n    data = {}\n    current = None\n    for line_no, raw_line in enumerate(text.splitlines(), start=1):\n        line = raw_line.strip()\n        if not line or line.startswith('#') or line.startswith(';'):\n            continue\n        if line.startswith('[') and line.endswith(']'):\n            current = normalize_key(line[1:-1])\n            data.setdefault(current, {})\n            continue\n        if '=' not in line:\n            raise ParseError(f'line {line_no}: expected key=value')\n        if current is None:\n            raise ParseError(f'line {line_no}: key outside section')\n        key, value = line.split('=', 1)\n        value = value.strip()\n        if coerce:\n            value = _coerce_value(value)\n        data[current][normalize_key(key)] = value\n    return data\n\n\ndef dump_ini(config, sort_keys=False):\n    lines = []\n    sections = sorted(config) if sort_keys else list(config)\n    for section in sections:\n        values = config[section]\n        lines.append(f'[{section}]')\n        keys = sorted(values) if sort_keys else list(values)\n        for key in keys:\n            lines.append(f'{key}={values[key]}')\n    return '\\n'.join(lines) + ('\\n' if lines else '')\n\n\ndef redact(config, secrets=DEFAULT_SECRETS):\n    secret_keys = {normalize_key(secret) for secret in secrets}\n\n    def is_secret_key(key):\n        normalized = normalize_key(str(key))\n        return any(\n            normalized == secret\n            or normalized.startswith(f'{secret}_')\n            or normalized.endswith(f'_{secret}')\n            or f'_{secret}_' in normalized\n            for secret in secret_keys\n        )\n\n    def redact_value(value):\n        if isinstance(value, Mapping):\n            return {\n                key: REDACTED if is_secret_key(key) else redact_value(inner)\n                for key, inner in value.items()\n            }\n        if isinstance(value, list):\n            return [redact_value(item) for item in value]\n        if isinstance(value, tuple):\n            return tuple(redact_value(item) for item in value)\n        return value\n\n    return redact_value(config)\n\n\ndef parse_csv(text, strict=False):\n    rows = list(csv.reader(io.StringIO(text)))\n    if not rows:\n        return []\n    headers = [normalize_key(header) for header in rows[0]]\n    records = []\n    for line_no, row in enumerate(rows[1:], start=2):\n        if strict and len(row) != len(headers):\n            raise ParseError(f'line {line_no}: expected {len(headers)} columns, got {len(row)}')\n        padded = row + [''] * max(0, len(headers) - len(row))\n        records.append({header: padded[index] for index, header in enumerate(headers)})\n    return records\n\nexec\n/bin/bash -lc 'git diff --check' in /work\n succeeded in 0ms:\nexec\n/bin/bash -lc \"sed -n '1,120p' tests/test_redact.py\" in /work\n succeeded in 0ms:\nfrom configly import redact\n\n\ndef test_redact_uses_normalized_secret_keys_and_does_not_mutate():\n    config = {\"auth\": {\"api_key\": \"abc\", \"token\": \"def\", \"user\": \"ada\"}}\n    redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n    assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n    assert config[\"auth\"][\"api_key\"] == \"abc\"\n\n\ndef test_redact_uses_common_default_secret_keys():\n    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n    assert redact(config) == {\n        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n    }\n\n\ndef test_redact_copies_nested_containers():\n    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n    redacted = redact(config)\n    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n    assert redacted is not config\n    assert redacted[\"services\"] is not config[\"services\"]\n\nexec\n/bin/bash -lc 'git status --short' in /work\n succeeded in 0ms:\n M configly/__init__.py\n M configly/parser.py\n M tests/test_redact.py\n\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..88dd92e34c54e63a6c8c9d449666f3696704f306\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..f1939c3037362ee0d225cec050a7e75c312bfd1c\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ncodex\nImplemented `redact(config, secrets=...)` and exported it from `configly`.\n\nWhat changed:\n- Added `redact` in [configly/parser.py](/work/configly/parser.py), returning a redacted copy without mutating the original.\n- Secret matching uses `normalize_key`, supports custom `secrets`, and catches boundary-style names like `db_password` while avoiding words like `tokenizer`.\n- Handles nested mappings, lists, and tuples.\n- Exported via [configly/__init__.py](/work/configly/__init__.py).\n- Added focused coverage in [tests/test_redact.py](/work/tests/test_redact.py).\n\nVerification:\n- `git diff --check` passed.\n- Could not run pytest because this environment has no `pytest`, `python`, or `python3` executable available.\ndiff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76af1764bfce6faaf3af514957e892f669f2..51483c03a694d5597b077f74c3474fce13ed1c85\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab743cd3faa0034c0ce1577e01e23c78b2077..88dd92e34c54e63a6c8c9d449666f3696704f306\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf771a6195ae2aa84c764d2a4365605c1edc..f1939c3037362ee0d225cec050a7e75c312bfd1c\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n\ntokens used\n27,278\n",
+    "stdout": "Implemented `redact(config, secrets=...)` and exported it from `configly`.\n\nWhat changed:\n- Added `redact` in [configly/parser.py](/work/configly/parser.py), returning a redacted copy without mutating the original.\n- Secret matching uses `normalize_key`, supports custom `secrets`, and catches boundary-style names like `db_password` while avoiding words like `tokenizer`.\n- Handles nested mappings, lists, and tuples.\n- Exported via [configly/__init__.py](/work/configly/__init__.py).\n- Added focused coverage in [tests/test_redact.py](/work/tests/test_redact.py).\n\nVerification:\n- `git diff --check` passed.\n- Could not run pytest because this environment has no `pytest`, `python`, or `python3` executable available.\n",
+    "steps": [
+      {
+        "action": "codex exec",
+        "argv": [
+          "/usr/local/bin/docker",
+          "run",
+          "--rm",
+          "-i",
+          "--name",
+          "dreambench-wake-4162589-83cbe6779db3",
+          "--network",
+          "bridge",
+          "--user",
+          "1000:1000",
+          "-e",
+          "CODEX_HOME=/codexhome",
+          "-e",
+          "HOME=/codexhome",
+          "-e",
+          "NO_COLOR=1",
+          "-v",
+          "/home/ilien/.codex:/codex-home:ro",
+          "-v",
+          "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04:/work:rw",
+          "-w",
+          "/work",
+          "dreambench-swe-codex-agent:latest",
+          "codex",
+          "exec",
+          "--sandbox",
+          "danger-full-access",
+          "--skip-git-repo-check",
+          "-c",
+          "approval_policy=never",
+          "-c",
+          "mcp_servers={}",
+          "-m",
+          "gpt-5.5",
+          "-"
+        ],
+        "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04",
+        "jail": {
+          "codex_home_mount": "/codex-home:ro",
+          "container_cwd": "/work",
+          "container_name": "dreambench-wake-4162589-83cbe6779db3",
+          "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04",
+          "image": "dreambench-swe-codex-agent:latest",
+          "inner_codex_sandbox": "danger-full-access",
+          "isolation_mode": "container",
+          "mounts": [
+            "/codex-home",
+            "/work"
+          ],
+          "network": "bridge",
+          "purpose": "wake",
+          "type": "docker-container",
+          "user": "1000:1000",
+          "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04",
+          "writable_codex_home": "/tmp/codexhome"
+        }
+      }
+    ],
+    "usage": {},
+    "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04"
+  },
+  "agent_result": {
+    "error_detail": null,
+    "error_type": null,
+    "passed": true,
+    "patch": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..51483c0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab74..88dd92e 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@ def parse_csv(text, strict=False):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf7..f1939c3 100644\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@ def test_redact_uses_normalized_secret_keys_and_does_not_mutate():\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n",
+    "steps": 1,
+    "tokens": 7161
+  },
+  "contaminated": false,
+  "contamination_evidence": [],
+  "error_detail": null,
+  "error_type": null,
+  "final_passed": true,
+  "isolation_mode": "container",
+  "memory_context": [
+    {
+      "confidence": 1.0,
+      "content": "For sequence config-reviewer, task config-reviewer-s01, the public task prompt was: Extend dump_ini with sort_keys=True for deterministic reviewer-friendly output while keeping insertion-order output by default.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..d6f8fe7 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -31,11 +31,13 @@ def parse_ini(text):\n     return data\n \n \n-def dump_ini(config):\n+def dump_ini(config, sort_keys=False):\n     lines = []\n-    for section, values in config.items():\n+    sections = sorted(config.items()) if sort_keys else config.items()\n+    for section, values in sections:\n         lines.append(f'[{section}]')\n-        for key, value in values.items():\n+        items = sorted(values.items()) if sort_keys else values.items()\n+        for key, value in items:\n             lines.append(f'{key}={value}')\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n@@ -50,4 +52,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-",
+      "file_scope": [],
+      "id": "muninn-2",
+      "kind": "memory",
+      "origin": "tool_observed",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "config-reviewer-s01"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 1,
+      "repo_scope": "config-reviewer",
+      "retrieval_tags": [
+        "muninn",
+        "config-reviewer",
+        "episode"
+      ],
+      "risk_score": 0.2,
+      "score": 0.01639344262295082,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "config-reviewer"
+      ],
+      "trust": 1,
+      "type": "episodic",
+      "utility_score": 0.5
+    },
+    {
+      "confidence": 1.0,
+      "content": "For sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..b6cee3b 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        line_no = reader.line_num\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {line_no}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-",
+      "file_scope": [],
+      "id": "muninn-6",
+      "kind": "memory",
+      "origin": "tool_observed",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "config-reviewer-s03"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 2,
+      "repo_scope": "config-reviewer",
+      "retrieval_tags": [
+        "muninn",
+        "config-reviewer",
+        "episode"
+      ],
+      "risk_score": 0.2,
+      "score": 0.016129032258064516,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "config-reviewer"
+      ],
+      "trust": 1,
+      "type": "episodic",
+      "utility_score": 0.5
+    },
+    {
+      "confidence": 1.0,
+      "content": "Type coercion must be explicit. Do not surprise existing string-only callers.",
+      "file_scope": [],
+      "id": "muninn-3",
+      "kind": "memory",
+      "origin": "user_said",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "config-reviewer-s02"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 3,
+      "repo_scope": "config-reviewer",
+      "retrieval_tags": [
+        "muninn",
+        "config-reviewer",
+        "decision"
+      ],
+      "risk_score": 0.2,
+      "score": 0.015873015873015872,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "config-reviewer"
+      ],
+      "trust": 3,
+      "type": "human_feedback",
+      "utility_score": 0.5
+    },
+    {
+      "confidence": 1.0,
+      "content": "Strict validation should produce actionable line-numbered errors instead of broad ValueError text.",
+      "file_scope": [],
+      "id": "muninn-5",
+      "kind": "memory",
+      "origin": "user_said",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "config-reviewer-s03"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 4,
+      "repo_scope": "config-reviewer",
+      "retrieval_tags": [
+        "muninn",
+        "config-reviewer",
+        "decision"
+      ],
+      "risk_score": 0.2,
+      "score": 0.015625,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "config-reviewer"
+      ],
+      "trust": 3,
+      "type": "human_feedback",
+      "utility_score": 0.5
+    },
+    {
+      "confidence": 1.0,
+      "content": "Prefer explicit opt-in flags for deterministic formatting; do not silently change default output order.",
+      "file_scope": [],
+      "id": "muninn-1",
+      "kind": "memory",
+      "origin": "user_said",
+      "provenance": {
+        "command_outputs": [],
+        "file_paths": [],
+        "human_feedback_ids": [],
+        "repo_commits": [],
+        "task_ids": [
+          "config-reviewer-s01"
+        ],
+        "trajectory_ids": []
+      },
+      "rank": 5,
+      "repo_scope": "config-reviewer",
+      "retrieval_tags": [
+        "muninn",
+        "config-reviewer",
+        "decision"
+      ],
+      "risk_score": 0.2,
+      "score": 0.015384615384615385,
+      "staleness_score": 0.0,
+      "status": "active",
+      "superseded_by": [],
+      "task_scope": [
+        "config-reviewer"
+      ],
+      "trust": 3,
+      "type": "human_feedback",
+      "utility_score": 0.5
+    }
+  ],
+  "memory_writes": [],
+  "oracle": {
+    "error_detail": "..........                                                               [100%]\n10 passed in 0.01s",
+    "error_type": null,
+    "exit_code": 0,
+    "passed": true,
+    "stderr": "",
+    "stdout": "..........                                                               [100%]\n10 passed in 0.01s\n",
+    "timed_out": false
+  },
+  "ordinal": 4,
+  "pass_at_1": true,
+  "retrieval_decisions": [
+    {
+      "admitted": true,
+      "memory_id": "muninn-2",
+      "reason": "muninn_why",
+      "repo_scope": "config-reviewer",
+      "score": 0.01639344262295082
+    },
+    {
+      "admitted": true,
+      "memory_id": "muninn-6",
+      "reason": "muninn_why",
+      "repo_scope": "config-reviewer",
+      "score": 0.016129032258064516
+    },
+    {
+      "admitted": true,
+      "memory_id": "muninn-3",
+      "reason": "muninn_why",
+      "repo_scope": "config-reviewer",
+      "score": 0.015873015873015872
+    },
+    {
+      "admitted": true,
+      "memory_id": "muninn-5",
+      "reason": "muninn_why",
+      "repo_scope": "config-reviewer",
+      "score": 0.015625
+    },
+    {
+      "admitted": true,
+      "memory_id": "muninn-1",
+      "reason": "muninn_why",
+      "repo_scope": "config-reviewer",
+      "score": 0.015384615384615385
+    }
+  ],
+  "score": {
+    "agent_diff_files": [
+      "configly/__init__.py",
+      "configly/parser.py",
+      "tests/test_redact.py"
+    ],
+    "apply": {
+      "exit_code": 0,
+      "passed": true,
+      "stderr": "",
+      "stdout": ""
+    },
+    "empty_production_diff": false,
+    "error_detail": "..........                                                               [100%]\n10 passed in 0.01s",
+    "error_type": null,
+    "passed": true,
+    "policy_rejected": false,
+    "production_diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..51483c0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab74..88dd92e 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@ def parse_csv(text, strict=False):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+    "production_files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "rejected_files": [],
+    "rejected_reasons": {}
+  },
+  "sleep_error": null,
+  "task": {
+    "base_ref": "tasks/config-reviewer/s04/base",
+    "files": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "id": "config-reviewer-s04",
+    "instruction": "Add redact(config, secrets=(...)) returning a redacted copy for secret-like keys without mutating the original config.",
+    "prompt": "Add redact(config, secrets=(...)) returning a redacted copy for secret-like keys without mutating the original config.",
+    "repo": "configly",
+    "seq_id": "config-reviewer",
+    "seq_type": "reviewer-preference",
+    "sequence_id": "config-reviewer",
+    "session_index": 4,
+    "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04"
+  },
+  "trajectory": {
+    "budget": {
+      "wake_max_steps": 1
+    },
+    "condition_id": "MUNINN",
+    "created_at": "2026-09-14T09:57:05.614667+00:00",
+    "file_diffs": [
+      "configly/__init__.py",
+      "configly/parser.py"
+    ],
+    "final_outcome": "success",
+    "memory_reads": [
+      "muninn-2",
+      "muninn-6",
+      "muninn-3",
+      "muninn-5",
+      "muninn-1"
+    ],
+    "memory_writes": [],
+    "model_id": "gpt-5.5",
+    "raw_episode": {
+      "actions": [
+        "codex exec"
+      ],
+      "agent_patch": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..51483c0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab74..88dd92e 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@ def parse_csv(text, strict=False):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\ndiff --git a/tests/test_redact.py b/tests/test_redact.py\nindex a36abf7..f1939c3 100644\n--- a/tests/test_redact.py\n+++ b/tests/test_redact.py\n@@ -6,3 +6,18 @@ def test_redact_uses_normalized_secret_keys_and_does_not_mutate():\n     redacted = redact(config, secrets=(\"API-Key\", \"token\"))\n     assert redacted == {\"auth\": {\"api_key\": \"<redacted>\", \"token\": \"<redacted>\", \"user\": \"ada\"}}\n     assert config[\"auth\"][\"api_key\"] == \"abc\"\n+\n+\n+def test_redact_uses_common_default_secret_keys():\n+    config = {\"auth\": {\"db_password\": \"abc\", \"secret_key\": \"def\", \"tokenizer\": \"bpe\"}}\n+    assert redact(config) == {\n+        \"auth\": {\"db_password\": \"<redacted>\", \"secret_key\": \"<redacted>\", \"tokenizer\": \"bpe\"}\n+    }\n+\n+\n+def test_redact_copies_nested_containers():\n+    config = {\"services\": [{\"name\": \"api\", \"token\": \"abc\"}]}\n+    redacted = redact(config)\n+    assert redacted == {\"services\": [{\"name\": \"api\", \"token\": \"<redacted>\"}]}\n+    assert redacted is not config\n+    assert redacted[\"services\"] is not config[\"services\"]\n",
+      "benchmark_task_id": "config-reviewer-s04",
+      "condition_id": "MUNINN",
+      "error_detail": null,
+      "error_type": null,
+      "failure_observations": [],
+      "file_paths": [
+        "configly/__init__.py",
+        "configly/parser.py"
+      ],
+      "memory_context": [
+        {
+          "confidence": 1.0,
+          "content": "For sequence config-reviewer, task config-reviewer-s01, the public task prompt was: Extend dump_ini with sort_keys=True for deterministic reviewer-friendly output while keeping insertion-order output by default.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..d6f8fe7 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -31,11 +31,13 @@ def parse_ini(text):\n     return data\n \n \n-def dump_ini(config):\n+def dump_ini(config, sort_keys=False):\n     lines = []\n-    for section, values in config.items():\n+    sections = sorted(config.items()) if sort_keys else config.items()\n+    for section, values in sections:\n         lines.append(f'[{section}]')\n-        for key, value in values.items():\n+        items = sorted(values.items()) if sort_keys else values.items()\n+        for key, value in items:\n             lines.append(f'{key}={value}')\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n@@ -50,4 +52,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-",
+          "file_scope": [],
+          "id": "muninn-2",
+          "kind": "memory",
+          "origin": "tool_observed",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "config-reviewer-s01"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 1,
+          "repo_scope": "config-reviewer",
+          "retrieval_tags": [
+            "muninn",
+            "config-reviewer",
+            "episode"
+          ],
+          "risk_score": 0.2,
+          "score": 0.01639344262295082,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "config-reviewer"
+          ],
+          "trust": 1,
+          "type": "episodic",
+          "utility_score": 0.5
+        },
+        {
+          "confidence": 1.0,
+          "content": "For sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..b6cee3b 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        line_no = reader.line_num\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {line_no}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-",
+          "file_scope": [],
+          "id": "muninn-6",
+          "kind": "memory",
+          "origin": "tool_observed",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "config-reviewer-s03"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 2,
+          "repo_scope": "config-reviewer",
+          "retrieval_tags": [
+            "muninn",
+            "config-reviewer",
+            "episode"
+          ],
+          "risk_score": 0.2,
+          "score": 0.016129032258064516,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "config-reviewer"
+          ],
+          "trust": 1,
+          "type": "episodic",
+          "utility_score": 0.5
+        },
+        {
+          "confidence": 1.0,
+          "content": "Type coercion must be explicit. Do not surprise existing string-only callers.",
+          "file_scope": [],
+          "id": "muninn-3",
+          "kind": "memory",
+          "origin": "user_said",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "config-reviewer-s02"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 3,
+          "repo_scope": "config-reviewer",
+          "retrieval_tags": [
+            "muninn",
+            "config-reviewer",
+            "decision"
+          ],
+          "risk_score": 0.2,
+          "score": 0.015873015873015872,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "config-reviewer"
+          ],
+          "trust": 3,
+          "type": "human_feedback",
+          "utility_score": 0.5
+        },
+        {
+          "confidence": 1.0,
+          "content": "Strict validation should produce actionable line-numbered errors instead of broad ValueError text.",
+          "file_scope": [],
+          "id": "muninn-5",
+          "kind": "memory",
+          "origin": "user_said",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "config-reviewer-s03"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 4,
+          "repo_scope": "config-reviewer",
+          "retrieval_tags": [
+            "muninn",
+            "config-reviewer",
+            "decision"
+          ],
+          "risk_score": 0.2,
+          "score": 0.015625,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "config-reviewer"
+          ],
+          "trust": 3,
+          "type": "human_feedback",
+          "utility_score": 0.5
+        },
+        {
+          "confidence": 1.0,
+          "content": "Prefer explicit opt-in flags for deterministic formatting; do not silently change default output order.",
+          "file_scope": [],
+          "id": "muninn-1",
+          "kind": "memory",
+          "origin": "user_said",
+          "provenance": {
+            "command_outputs": [],
+            "file_paths": [],
+            "human_feedback_ids": [],
+            "repo_commits": [],
+            "task_ids": [
+              "config-reviewer-s01"
+            ],
+            "trajectory_ids": []
+          },
+          "rank": 5,
+          "repo_scope": "config-reviewer",
+          "retrieval_tags": [
+            "muninn",
+            "config-reviewer",
+            "decision"
+          ],
+          "risk_score": 0.2,
+          "score": 0.015384615384615385,
+          "staleness_score": 0.0,
+          "status": "active",
+          "superseded_by": [],
+          "task_scope": [
+            "config-reviewer"
+          ],
+          "trust": 3,
+          "type": "human_feedback",
+          "utility_score": 0.5
+        }
+      ],
+      "memory_reads": [
+        "muninn-2",
+        "muninn-6",
+        "muninn-3",
+        "muninn-5",
+        "muninn-1"
+      ],
+      "memory_writes": [],
+      "model_id": "gpt-5.5",
+      "observations": [
+        "Implemented `redact(config, secrets=...)` and exported it from `configly`.\n\nWhat changed:\n- Added `redact` in [configly/parser.py](/work/configly/parser.py), returning a redacted copy without mutating the original.\n- Secret matching uses `normalize_key`, supports custom `secrets`, and catches boundary-style names like `db_password` while avoiding words like `tokenizer`.\n- Handles nested mappings, lists, and tuples.\n- Exported via [configly/__init__.py](/work/configly/__init__.py).\n- Added focused coverage in [tests/test_redact.py](/work/tests/test_redact.py).\n\nVerification:\n- `git diff --check` passed.\n- Could not run pytest because this environment has no `pytest`, `python`, or `python3` executable available.\n",
+        "2026-09-14T09:55:10.046245Z ERROR codex_models_manager::cache: failed to load models cache: missing field `base_instructions` at line 133 column 5\nOpenAI Codex v0.142.0\n--------\nworkdir: /work\nmodel: gpt-5.5\nprovider: openai\napproval: never\nsandbox: danger-full-access\nreasoning effort: high\nreasoning summaries: none\nsession id: 01a09f57-8dab-78e2-90d2-08cc7670bec0\n--------\nuser\nYou are solving one DreamBench-SWE task in the current repository.\n\nTask id: config-reviewer-s04\n\nInstruction:\nAdd redact(config, secrets=(...)) returning a redacted copy for secret-like keys without mutating the original config.\n\nAdmitted memory context:\n- muninn-2: For sequence config-reviewer, task config-reviewer-s01, the public task prompt was: Extend dump_ini with sort_keys=True for deterministic reviewer-friendly output while keeping insertion-order output by default.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 9dca90a..d6f8fe7 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -31,11 +31,13 @@ def parse_ini(text):\n     return data\n \n \n-def dump_ini(config):\n+def dump_ini(config, sort_keys=False):\n     lines = []\n-    for section, values in config.items():\n+    sections = sorted(config.items()) if sort_keys else config.items()\n+    for section, values in sections:\n         lines.append(f'[{section}]')\n-        for key, value in values.items():\n+        items = sorted(values.items()) if sort_keys else values.items()\n+        for key, value in items:\n             lines.append(f'{key}={value}')\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n@@ -50,4 +52,3 @@ def parse_csv(text):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n- [status=active, type=episodic]\n- muninn-6: For sequence config-reviewer, task config-reviewer-s03, the public task prompt was: Add parse_csv(..., strict=True) so malformed row widths raise ParseError with the bad line number.\nThe task outcome was passed.\nThe public agent actions were: codex exec.\nThe public production diff was: diff --git a/configly/parser.py b/configly/parser.py\nindex 7c673e2..b6cee3b 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -56,14 +56,21 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n-def parse_csv(text):\n-    rows = list(csv.reader(io.StringIO(text)))\n-    if not rows:\n+def parse_csv(text, strict=False):\n+    reader = csv.reader(io.StringIO(text))\n+    try:\n+        header_row = next(reader)\n+    except StopIteration:\n         return []\n-    headers = [normalize_key(header) for header in rows[0]]\n+\n+    headers = [normalize_key(header) for header in header_row]\n     records = []\n-    for line_no, row in enumerate(rows[1:], start=2):\n+    for row in reader:\n+        line_no = reader.line_num\n+        if strict and len(row) != len(headers):\n+            raise ParseError(\n+                f'line {line_no}: expected {len(headers)} columns, got {len(row)}'\n+            )\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n- [status=active, type=episodic]\n- muninn-3: Type coercion must be explicit. Do not surprise existing string-only callers. [status=active, type=human_feedback]\n- muninn-5: Strict validation should produce actionable line-numbered errors instead of broad ValueError text. [status=active, type=human_feedback]\n- muninn-1: Prefer explicit opt-in flags for deterministic formatting; do not silently change default output order. [status=active, type=human_feedback]\n\nEdit the repository to satisfy the task oracle. Do not use network calls.\ncodex\nI\u2019ll inspect the tiny surface area first, then add the redaction helper in the same style as the existing parser ",
+        "oracle exit=0 passed=True",
+        "..........                                                               [100%]\n10 passed in 0.01s\n"
+      ],
+      "outcome": "success",
+      "production_diff": "diff --git a/configly/__init__.py b/configly/__init__.py\nindex 370d76a..51483c0 100644\n--- a/configly/__init__.py\n+++ b/configly/__init__.py\n@@ -1 +1 @@\n-from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini\n+from .parser import ParseError, dump_ini, normalize_key, parse_csv, parse_ini, redact\ndiff --git a/configly/parser.py b/configly/parser.py\nindex 632ab74..88dd92e 100644\n--- a/configly/parser.py\n+++ b/configly/parser.py\n@@ -1,5 +1,23 @@\n import csv\n import io\n+from collections.abc import Mapping\n+\n+\n+DEFAULT_SECRETS = (\n+    'api_key',\n+    'access_token',\n+    'auth_token',\n+    'client_secret',\n+    'credential',\n+    'credentials',\n+    'password',\n+    'passphrase',\n+    'private_key',\n+    'secret',\n+    'secret_key',\n+    'token',\n+)\n+REDACTED = '<redacted>'\n \n \n class ParseError(ValueError):\n@@ -56,6 +74,34 @@ def dump_ini(config, sort_keys=False):\n     return '\\n'.join(lines) + ('\\n' if lines else '')\n \n \n+def redact(config, secrets=DEFAULT_SECRETS):\n+    secret_keys = {normalize_key(secret) for secret in secrets}\n+\n+    def is_secret_key(key):\n+        normalized = normalize_key(str(key))\n+        return any(\n+            normalized == secret\n+            or normalized.startswith(f'{secret}_')\n+            or normalized.endswith(f'_{secret}')\n+            or f'_{secret}_' in normalized\n+            for secret in secret_keys\n+        )\n+\n+    def redact_value(value):\n+        if isinstance(value, Mapping):\n+            return {\n+                key: REDACTED if is_secret_key(key) else redact_value(inner)\n+                for key, inner in value.items()\n+            }\n+        if isinstance(value, list):\n+            return [redact_value(item) for item in value]\n+        if isinstance(value, tuple):\n+            return tuple(redact_value(item) for item in value)\n+        return value\n+\n+    return redact_value(config)\n+\n+\n def parse_csv(text, strict=False):\n     rows = list(csv.reader(io.StringIO(text)))\n     if not rows:\n@@ -68,4 +114,3 @@ def parse_csv(text, strict=False):\n         padded = row + [''] * max(0, len(headers) - len(row))\n         records.append({header: padded[index] for index, header in enumerate(headers)})\n     return records\n-\n",
+      "prompt": "Add redact(config, secrets=(...)) returning a redacted copy for secret-like keys without mutating the original config.",
+      "repo_commit": "tasks/config-reviewer/s04/base",
+      "repo_scope": "config-reviewer",
+      "seq_type": "reviewer-preference",
+      "sequence_id": "config-reviewer",
+      "session_id": "config-reviewer-s04",
+      "sleep_write_count": 2,
+      "successful_recovery": "oracle passed",
+      "task_id": "config-reviewer",
+      "terminal_outcome": "success",
+      "trajectory_id": "config-reviewer-s04-MUNINN-gpt-5.5"
+    },
+    "repo_commit": "tasks/config-reviewer/s04/base",
+    "seed": 1,
+    "session_id": "config-reviewer-s04",
+    "steps": [
+      {
+        "action": "codex exec",
+        "file_diffs": [],
+        "memory_reads": [],
+        "memory_writes": [],
+        "metadata": {
+          "action": "codex exec",
+          "argv": [
+            "/usr/local/bin/docker",
+            "run",
+            "--rm",
+            "-i",
+            "--name",
+            "dreambench-wake-4162589-83cbe6779db3",
+            "--network",
+            "bridge",
+            "--user",
+            "1000:1000",
+            "-e",
+            "CODEX_HOME=/codexhome",
+            "-e",
+            "HOME=/codexhome",
+            "-e",
+            "NO_COLOR=1",
+            "-v",
+            "/home/ilien/.codex:/codex-home:ro",
+            "-v",
+            "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04:/work:rw",
+            "-w",
+            "/work",
+            "dreambench-swe-codex-agent:latest",
+            "codex",
+            "exec",
+            "--sandbox",
+            "danger-full-access",
+            "--skip-git-repo-check",
+            "-c",
+            "approval_policy=never",
+            "-c",
+            "mcp_servers={}",
+            "-m",
+            "gpt-5.5",
+            "-"
+          ],
+          "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04",
+          "jail": {
+            "codex_home_mount": "/codex-home:ro",
+            "container_cwd": "/work",
+            "container_name": "dreambench-wake-4162589-83cbe6779db3",
+            "cwd": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04",
+            "image": "dreambench-swe-codex-agent:latest",
+            "inner_codex_sandbox": "danger-full-access",
+            "isolation_mode": "container",
+            "mounts": [
+              "/codex-home",
+              "/work"
+            ],
+            "network": "bridge",
+            "purpose": "wake",
+            "type": "docker-container",
+            "user": "1000:1000",
+            "worktree": "/tmp/dreambench-agent-20260914T095228Z-MUNINN-gpt-5.5-97cf4bfb-eb1mmx01/004-config-reviewer-s04",
+            "writable_codex_home": "/tmp/codexhome"
+          }
+        },
+        "observation": "",
+        "step_id": "step_05d23cf1a378",
+        "timestamp": "2026-09-14T09:57:05.614644+00:00",
+        "tool_input": null,
+        "tool_name": null,
+        "tool_output": null
+      }
+    ],
+    "task_id": "config-reviewer-s04",
+    "trajectory_id": "traj_a867f1e8a39c"
+  }
+}

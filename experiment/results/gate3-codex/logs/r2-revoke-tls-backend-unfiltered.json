@@ -1,0 +1,1 @@
+{"error":null,"harness":"codex","is_error":false,"num_turns":2,"result":"Hay dos decisiones vigentes y contradictorias registradas: OpenSSL (#92) y rustls (#93). ¿Cuál debe prevalecer para poder crear `docs/policies/tls-backend.md`?","usage":{"cache_write_input_tokens":0,"cached_input_tokens":26880,"input_tokens":33498,"output_tokens":314,"reasoning_output_tokens":145}}

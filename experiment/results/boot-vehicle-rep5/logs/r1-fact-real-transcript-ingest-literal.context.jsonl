@@ -1,0 +1,4 @@
+{"at":1789352169741,"session":"995dea19-2e4d-4bfa-bf4c-75e23a19841f","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789352174609,"session":"995dea19-2e4d-4bfa-bf4c-75e23a19841f","files":["crates/muninn-capture/src/lib.rs"],"symbols":["claude","codex","episode","ingest","model","redact","parse_any","smoke","parses_real_transcripts_when_present"]}
+{"at":1789352191370,"session":"995dea19-2e4d-4bfa-bf4c-75e23a19841f","files":["research/00-evidence-log.md","design/ENGINE.md"],"symbols":[]}
+{"at":1789352202428,"session":"995dea19-2e4d-4bfa-bf4c-75e23a19841f","files":["docs/perf-history.md"],"symbols":[]}

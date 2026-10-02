@@ -1,0 +1,19 @@
+diff --git a/docs/perf-history.md b/docs/perf-history.md
+new file mode 100644
+index 0000000..3da65ab
+--- /dev/null
++++ b/docs/perf-history.md
+@@ -0,0 +1,13 @@
++# Perf history
++
++## SessionStart health gate
++
++Después: SessionStart p50 1.05 ms (5k records, 15k cues), medido en el commit
++2ff626a ("Phase 0: foundations — store, health gate, heartbeats, hooks,
++init/clean, fault suite, perf contracts"). En ese mismo commit ya se añadieron
++el contador `fts_rows` y el `body CHECK`, y `quick_check` solo corre en vivo
++en `doctor`; el hook de lectura usa el resultado grabado (`quick_check_result`
++/ `quick_check_at`).
++
++Antes: no encontré una cifra medida en el repositorio ni en `git log` para el
++estado anterior (quick_check corriendo en el read path). No la invento.

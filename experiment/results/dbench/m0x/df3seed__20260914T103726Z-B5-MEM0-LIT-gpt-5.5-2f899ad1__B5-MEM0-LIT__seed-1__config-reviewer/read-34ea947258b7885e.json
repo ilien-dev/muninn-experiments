@@ -1,0 +1,34 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-reviewer",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-reviewer"
+    },
+    "query": "Add parse_ini(..., coerce=True) to opt into bool/int coercion; default parsing must keep string values.",
+    "top_k": 6
+  },
+  "response": {
+    "results": [
+      {
+        "created_at": "2026-09-14T10:37:30.496254+00:00",
+        "hash": "11c20180228eb8475db213eab36b8e4f",
+        "id": "08ddeabc-2be3-4ac7-b60e-7189e90a268b",
+        "memory": "Prefer explicit opt-in flags for deterministic formatting; do not silently change default output order.\nFor sequence config-reviewer, task config-reviewer-s01, the public task prompt was: Extend dump_ini with sort_keys=True for deterministic reviewer-friendly output while keeping insertion-order output by default.\nThe public agent actions were: codex exec.\nThe task outcome was failed.\nThe public error type was codex_exec_failed.",
+        "metadata": {
+          "benchmark": "dreambench-swe",
+          "condition": "B5-MEM0-LIT",
+          "mem0_infer": false,
+          "mem0_storage_mode": "literal_raw_text",
+          "seed": 1,
+          "sequence_id": "config-reviewer"
+        },
+        "role": "user",
+        "score": 0.6768899761252107,
+        "updated_at": "2026-09-14T10:37:30.496254+00:00",
+        "user_id": "df3seed__20260914T103726Z-B5-MEM0-LIT-gpt-5.5-2f899ad1__B5-MEM0-LIT__seed-1__config-reviewer"
+      }
+    ]
+  }
+}

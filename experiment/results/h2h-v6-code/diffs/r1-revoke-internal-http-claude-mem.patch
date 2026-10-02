@@ -1,0 +1,9 @@
+diff --git a/docs/policies/internal-http.md b/docs/policies/internal-http.md
+new file mode 100644
+index 0000000..76da2c3
+--- /dev/null
++++ b/docs/policies/internal-http.md
+@@ -0,0 +1,3 @@
++# Internal HTTP Policy
++
++The project's current recorded decision is an HTTPS-only policy that applies globally: all communication must use HTTPS, and plaintext HTTP is disallowed everywhere, including between internal hosts, with no exception for internal or development traffic.

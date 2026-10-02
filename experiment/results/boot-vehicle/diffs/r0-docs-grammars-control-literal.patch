@@ -1,0 +1,19 @@
+diff --git a/docs/grammars.md b/docs/grammars.md
+new file mode 100644
+index 0000000..aad434c
+--- /dev/null
++++ b/docs/grammars.md
+@@ -0,0 +1,13 @@
++# Gramáticas tree-sitter del MVP
++
++Lenguajes del grafo de símbolos en el binario MVP, según `README.md` (línea 17-18).
++El crate `muninn-symbols` es un stub a la espera de Fase 5; los nombres de crate
++son los estándar de cada gramática en crates.io.
++
++| Lenguaje | Crate | Extensiones |
++|---|---|---|
++| Rust | `tree-sitter-rust` | `.rs` |
++| TypeScript/TSX | `tree-sitter-typescript` | `.ts`, `.tsx` |
++| JavaScript/JSX | `tree-sitter-javascript` | `.js`, `.jsx` |
++| Python | `tree-sitter-python` | `.py` |
++| Go | `tree-sitter-go` | `.go` |

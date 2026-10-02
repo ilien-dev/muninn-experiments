@@ -1,0 +1,15 @@
+{
+  "backend": "oss-offline",
+  "namespace": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky",
+  "op": "read",
+  "request": {
+    "filters": {
+      "user_id": "df3seed__20260914T103419Z-B5-MEM0-LIT-gpt-5.5-2d589733__B5-MEM0-LIT__seed-3__todo-flaky"
+    },
+    "query": "Implement `list --sort title` with case-insensitive title sorting and id as the tie-breaker.",
+    "top_k": 6
+  },
+  "response": {
+    "results": []
+  }
+}
