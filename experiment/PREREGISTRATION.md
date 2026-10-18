@@ -6938,3 +6938,22 @@ filters themselves stay frozen.
 - **Otherwise it does not ship**, and the reading is published.
 - With about 120 items the estimate is coarse. Its 95 % interval is reported beside the point
   value. The rule is applied to the point value.
+
+## Result of extract-v2, 2026-10-18 — the filters do not ship, again
+
+`results/extract-v2/items.jsonl` holds one row per item: shape, label, and whether the filters
+build emits it. No text is committed.
+
+- **Labels.** sha256 prefix `9eeda3ec57126029`: 68 KEEP, 47 NOISE, 5 UNSURE.
+- **Filters dump.** sha256 prefix `7f6bdf3affde20a9`. It emits no item the base does not.
+
+| | value | 95 % (Wilson) | rule | |
+|---|---|---|---|---|
+| NOISE no longer emitted | 6 / 47 = **12.8 %** | 6.0 – 25.2 % | ≥ 30 % | **fails** |
+| KEEP lost | 3 / 68 = **4.4 %** | 1.5 – 12.2 % | ≤ 5 % | holds |
+| precision | 59.1 % → 61.3 % | | reported | |
+
+**The filters do not ship.** Two readings on messages they were not designed on, 23.5 % and
+12.8 %, both below the bar. They remove the kinds of noise they were written for, and the
+noise on unseen messages is mostly of other kinds. A new filter needs its own design split
+and its own fresh test.
