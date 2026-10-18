@@ -1,0 +1,71 @@
+{
+ "dev_filters": {
+  "keep": 147,
+  "noise": 132,
+  "noise_removed": 75,
+  "keep_lost": 36,
+  "unsure": 20,
+  "prec_base": 0.527,
+  "prec_new": 0.661
+ },
+ "dev_filters_typed_only": {
+  "keep": 113,
+  "noise": 102,
+  "noise_removed": 45,
+  "keep_lost": 2,
+  "unsure": 14,
+  "prec_base": 0.526,
+  "prec_new": 0.661
+ },
+ "dev_shipped": {
+  "keep": 147,
+  "noise": 132,
+  "noise_removed": 30,
+  "keep_lost": 34,
+  "unsure": 20,
+  "prec_base": 0.527,
+  "prec_new": 0.526
+ },
+ "test_filters": {
+  "keep": 108,
+  "noise": 98,
+  "noise_removed": 23,
+  "keep_lost": 5,
+  "unsure": 10,
+  "prec_base": 0.524,
+  "prec_new": 0.579
+ },
+ "test_filters_typed_only": {
+  "keep": 108,
+  "noise": 98,
+  "noise_removed": 23,
+  "keep_lost": 5,
+  "unsure": 10,
+  "prec_base": 0.524,
+  "prec_new": 0.579
+ },
+ "test_shipped": {
+  "keep": 108,
+  "noise": 98,
+  "noise_removed": 0,
+  "keep_lost": 0,
+  "unsure": 10,
+  "prec_base": 0.524,
+  "prec_new": 0.524
+ },
+ "sources": {
+  "dev/plain": 218,
+  "test/plain": 206,
+  "dev/compact_flag": 70,
+  "test/notfound": 6,
+  "test/toolresult": 4,
+  "dev/notfound": 9,
+  "dev/toolresult": 2
+ },
+ "bodies_under_two_kinds": 21,
+ "labels": {
+  "KEEP": 255,
+  "NOISE": 230,
+  "UNSURE": 30
+ }
+}

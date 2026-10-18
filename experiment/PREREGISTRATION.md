@@ -6834,3 +6834,56 @@ Sources per split:
 - **dev:** 219 typed prompts, 69 summaries, 2 answers to the assistant's questions, 9 not
   traced.
 - **test:** 206 typed prompts, 0 summaries, 4 answers, 6 not traced.
+
+## Result of extract-v1, 2026-10-18 — the filters do not ship; the summary fix does
+
+`results/extract-v1/items.jsonl` holds one row per item: an opaque row number, shape, split,
+source, label, and whether each build emits it. `results/extract-v1/summary.json` holds the figures.
+No message text is committed.
+
+- **Labels.** Labelled by `claude-opus-5-5` (sha256 prefix `eeda8238e42b01b1`): 255 KEEP,
+  230 NOISE, 30 UNSURE.
+- **Filters build.** A local muninn build, designed on dev only and not kept in the
+  repository's history, because its comments and tests quoted the person's messages. It drops five kinds of
+  candidate:
+  - a story told in the past;
+  - a question whose `?` sits before an image placeholder;
+  - a bug report that names no wanted behaviour;
+  - pasted code, and a header line ending in `:`;
+  - the tail of a hard-wrapped line, which is now joined back to its sentence.
+
+  Guard identical, tests pass.
+
+**Test split (the decision)**
+
+| | value | rule | |
+|---|---|---|---|
+| NOISE no longer emitted | 23 / 98 = **23.5 %** | ≥ 30 % | **fails** |
+| KEEP lost | 5 / 108 = **4.6 %** | ≤ 5 % | holds |
+| precision | 52.4 % → 57.9 % | reported | |
+| UNSURE | 10 | reported | |
+
+**The filters do not ship.**
+
+**Dev split (where they were designed)**
+- Typed prompts only: 45 / 102 NOISE dropped (44 %), 2 / 113 KEEP lost.
+- Read against test's 23.5 %, the gap is what designing on one split and scoring on another
+  is for. The narrative and bug-report forms on dev came mostly from two stores' sessions.
+  That test's noise takes other forms is a conjecture: no test text was read.
+
+**The summary fix ships**, as the addendum registered (muninn `63c58879`).
+- It removes **70** dev items and nothing else. That is the 69 traced, plus one sentence that
+  appears both in a typed prompt and in the summary that actually produced it.
+- Guard identical; on test it changes nothing.
+- The labeller marked 34 of the 70 KEEP: they restate standing rules.
+  They go anyway. A summary's restatement is the assistant's paraphrase, and trust derives
+  from origin. The rules they restate are in CLAUDE.md, or in the person's own messages,
+  where they keep their own records.
+
+**Also reported:**
+- **21 bodies are active under two kinds at once.** Decision with invariant, or correction with
+  decision; e.g. a single `siempre` sentence that also carries `en lugar de`. Not changed here.
+- **Untraced items:** 15. Sources not found by text search; they are kept in every measure.
+
+**What would test a filter next.** A fresh split from sessions after 2026-10-18. The test
+split above has been read once and is now spent.
