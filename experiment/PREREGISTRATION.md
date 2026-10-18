@@ -6895,3 +6895,46 @@ No message text is committed.
 
 **What would test a filter next.** A fresh split from sessions after 2026-10-18. The test
 split above has been read once and is now spent.
+
+---
+
+# Pre-registration — extract-v2: extract-v1's filters, frozen, on messages they were never shown
+
+Registered 2026-10-18, before any item of this corpus was read or labelled.
+
+**Why.** extract-v1's filters failed on its test split (23.5 % of noise removed, against 30 %).
+That split is spent. This is one more reading, on a corpus none of the filters' design saw. The
+filters themselves stay frozen.
+
+## Items
+
+- **Corpus.** Every top-level transcript in twelve `~/.claude/projects/` directories of the
+  same person that extract-v1 did not use. Directories of automated runs are excluded: the
+  temp directory and the validation sandboxes. No project is named here.
+- **Base.** muninn `53feddfb`, which includes the summary fix.
+  - 123 `user_said` candidates, 120 distinct items.
+  - Shapes: `said:change` 66, `invariant` 24, `said:state` 18, `correction` 12.
+  - Dump sha256 prefix `46e4f6733d17166e`.
+- **Filters build.** The same base with extract-v1's filter logic applied unchanged. Only the
+  test modules differ. `extract.rs` sha256 prefix `2694b3ada8cdd611`.
+  - On extract-v1's own corpus it reproduces that experiment's filter verdicts item for item.
+    The only differences are 6 items from sessions newer than that dump.
+  - Guard identical (`22d665d2fe691e47`).
+- **Privacy.** As in extract-v1: no text, no project name, no hash of any text is committed.
+
+## Labels
+
+- **Labeller.** A fresh agent with extract-v1's rubric word for word. It sees no split, no
+  filter and no build output.
+- **Split.** All 120 items are test. Nothing here is used to design anything.
+
+## Decision rule — extract-v1's, unchanged
+
+- **Ships** if all four hold:
+  1. ≥ 30 % of NOISE items no longer emitted;
+  2. ≤ 5 % of KEEP items lost;
+  3. guard identical;
+  4. tests pass.
+- **Otherwise it does not ship**, and the reading is published.
+- With about 120 items the estimate is coarse. Its 95 % interval is reported beside the point
+  value. The rule is applied to the point value.
