@@ -6875,6 +6875,8 @@ No message text is committed.
 - It removes **70** dev items and nothing else. That is the 69 traced, plus one sentence that
   appears both in a typed prompt and in the summary that actually produced it.
 - Guard identical; on test it changes nothing.
+- Records already on file are retired once by `maintain` (muninn `retire_summary_records`). On
+  copies of four stores that retired 19 in one and none in the other three.
 - The labeller marked 34 of the 70 KEEP: they restate standing rules.
   They go anyway. A summary's restatement is the assistant's paraphrase, and trust derives
   from origin. The rules they restate are in CLAUDE.md, or in the person's own messages,
@@ -6884,6 +6886,12 @@ No message text is committed.
 - **21 bodies are active under two kinds at once.** Decision with invariant, or correction with
   decision; e.g. a single `siempre` sentence that also carries `en lugar de`. Not changed here.
 - **Untraced items:** 15. Sources not found by text search; they are kept in every measure.
+
+**Disclosures.**
+- Before this registration existed, the designer had read 45 records sampled from the stores
+  across both splits.
+- The registration and its addendum are local commits, not externally timestamped, and
+  nothing was pushed before the test split was scored.
 
 **What would test a filter next.** A fresh split from sessions after 2026-10-18. The test
 split above has been read once and is now spent.
