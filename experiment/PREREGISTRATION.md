@@ -6815,3 +6815,22 @@ Reported whatever the outcome:
 - the number of items active under two kinds at once.
 
 **Cost.** Zero agent cells. One labelling agent pass over about 515 short texts.
+
+## Addendum to extract-v1, 2026-10-18 — before any label was read: a fifth of the items are not the person's words
+
+Tracing each item to the transcript line it came from, with no label yet read:
+- **69 of 515 items come from compaction summaries.** These are lines with
+  `isCompactSummary: true`, whose text begins `<artifact-content-authored-by-others/>` and only
+  then `This session is being continued…`.
+- The extractor already refuses to type a summary: `user_candidates` and
+  `is_compaction_summary` check the prompt's **start**. The tag the harness now puts in front
+  defeats that check, so these 69 entered at `user_said`, trust 3.
+- Restoring that refusal is a bug fix to a standing rule (trust derives from origin), not a
+  filter under test, and it ships whatever this experiment reads.
+- **All 69 fall in the dev split** (the split is by session, and they come from a few long
+  sessions). The test split holds none, so the decision rule above is unaffected.
+
+Sources per split:
+- **dev:** 219 typed prompts, 69 summaries, 2 answers to the assistant's questions, 9 not
+  traced.
+- **test:** 206 typed prompts, 0 summaries, 4 answers, 6 not traced.
