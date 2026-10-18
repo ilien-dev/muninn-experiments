@@ -6723,3 +6723,95 @@ pass.
 - **`v6` re-seeding.** Three claude-mem seedings in `v6` failed with its worker down
   (`worker is not running` / `_read_status()`), not with the usage window. They were re-seeded
   as registered, and all 54 cells ran.
+
+---
+
+# Pre-registration — extract-v1: what the extractor keeps from a person's real messages
+
+Registered 2026-10-18, before any message was labelled and before the extractor was changed.
+
+**Why.** Every grid so far measured the extractor on fixture messages written for it. This
+measures it on the messages one person actually wrote, across several of their own projects
+(about 3 000 sessions). Reading the stores those projects built:
+- The session-start budget holds six or seven invariants.
+- In two of the stores, those slots held sentence fragments, a bug report whose only rule
+  word was the verb `deber` used in another sense, and narrative text dictated as content for
+  something else.
+
+The question is whether a change to the extractor removes that kind of candidate without losing
+the ones a later session needs.
+
+## Items
+
+- **Source.** `extract_dump transcripts` (muninn `440ca825`, `examples/extract_dump.rs`, sha256
+  prefix `353fa1710899dba3`) is run on every top-level `*.jsonl` under the projects'
+  `~/.claude/projects/` directories.
+- **Base output.** 550 candidates with `origin = user_said`, of which 515 are distinct items.
+  An item is a hash of project, kind and body. The dump's sha256 prefix is `bd8e65638bdb7a6f`.
+  By shape:
+  - `said:change`: 272
+  - `invariant`: 173
+  - `correction`: 63
+  - `said:state`: 42
+- **Privacy.** The texts are the person's own messages and this repository is public, so they
+  are **not committed**. `extract-v1/` holds an opaque row number, shape, split, label and each
+  build's verdict, and nothing else: no project name and no hash of any text.
+
+## Split, fixed now
+
+- An item goes to **dev** when the first byte of sha256(session id) is even, and to **test**
+  otherwise.
+- The split is by session, so a message that yields both a decision and an invariant stays on
+  one side.
+- Sizes: dev 299, test 216.
+- Filters are designed on dev only. The test items are scored once, by the rule below.
+
+## Labels
+
+All 515 items are labelled before any filter is written. The labeller is a separate agent
+(`claude-opus-5-5`) that sees the text and the rubric, and neither the split nor any filter.
+These are the model's labels, not the person's.
+
+- **KEEP**: a later session in this project should know it and act on it. That covers:
+  - a rule or preference that stands;
+  - a decision on a value or an approach;
+  - a correction that implies a standing fix;
+  - a specification of how something must behave;
+  - an answer that picks an option.
+- **NOISE**: anything else. That covers:
+  - a question or a request to explain;
+  - a one-off operational instruction (commit, push, close it);
+  - a status report with no desired behaviour;
+  - text dictated as content for something else, or a narrative of the past;
+  - a fragment that means nothing on its own;
+  - pasted material (a bullet from a plan, a UI label, a log line).
+- **UNSURE**: either reading is defensible. Excluded from the primary measure and reported.
+
+## Guard, fixed now
+
+- **Fixture messages.** `extract_dump phrasings` on every `h2h/*/seed_phrasings.json` and on
+  `loop12/scenarios.json`: 75 candidates, sha256 prefix `22d665d2fe691e47`.
+  - The set of `(session, kind, shape, body)` it emits must be **identical** after the change.
+  - These are the messages the head-to-head grids were seeded from, so an identical guard
+    leaves every v43 cell's seed unchanged.
+- **Tests.** `cargo test --workspace --features exact-tokens` must pass unchanged, including
+  every extractor test from loops 1–12.
+
+## Decision rule
+
+Measured on the **test** split, KEEP and NOISE items only:
+
+- **Ships** if all four hold:
+  1. at least **30 %** of the NOISE items that base kept are no longer emitted;
+  2. at most **5 %** of the KEEP items that base kept are lost;
+  3. the guard is identical;
+  4. the tests pass.
+- **Does not ship** otherwise, and the result is published as the reading.
+
+Reported whatever the outcome:
+- precision before and after (KEEP / (KEEP + NOISE));
+- the same two rates on dev;
+- the UNSURE count;
+- the number of items active under two kinds at once.
+
+**Cost.** Zero agent cells. One labelling agent pass over about 515 short texts.
