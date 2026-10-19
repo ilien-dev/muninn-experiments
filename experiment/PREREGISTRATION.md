@@ -6723,3 +6723,237 @@ pass.
 - **`v6` re-seeding.** Three claude-mem seedings in `v6` failed with its worker down
   (`worker is not running` / `_read_status()`), not with the usage window. They were re-seeded
   as registered, and all 54 cells ran.
+
+---
+
+# Pre-registration — extract-v1: what the extractor keeps from a person's real messages
+
+Registered 2026-10-18, before any message was labelled and before the extractor was changed.
+
+**Why.** Every grid so far measured the extractor on fixture messages written for it. This
+measures it on the messages one person actually wrote, across several of their own projects
+(about 3 000 sessions). Reading the stores those projects built:
+- The session-start budget holds six or seven invariants.
+- In two of the stores, those slots held sentence fragments, a bug report whose only rule
+  word was the verb `deber` used in another sense, and narrative text dictated as content for
+  something else.
+
+The question is whether a change to the extractor removes that kind of candidate without losing
+the ones a later session needs.
+
+## Items
+
+- **Source.** `extract_dump transcripts` (muninn `440ca825`, `examples/extract_dump.rs`, sha256
+  prefix `353fa1710899dba3`) is run on every top-level `*.jsonl` under the projects'
+  `~/.claude/projects/` directories.
+- **Base output.** 550 candidates with `origin = user_said`, of which 515 are distinct items.
+  An item is a hash of project, kind and body. The dump's sha256 prefix is `bd8e65638bdb7a6f`.
+  By shape:
+  - `said:change`: 272
+  - `invariant`: 173
+  - `correction`: 63
+  - `said:state`: 42
+- **Privacy.** The texts are the person's own messages and this repository is public, so they
+  are **not committed**. `extract-v1/` holds an opaque row number, shape, split, label and each
+  build's verdict, and nothing else: no project name and no hash of any text.
+
+## Split, fixed now
+
+- An item goes to **dev** when the first byte of sha256(session id) is even, and to **test**
+  otherwise.
+- The split is by session, so a message that yields both a decision and an invariant stays on
+  one side.
+- Sizes: dev 299, test 216.
+- Filters are designed on dev only. The test items are scored once, by the rule below.
+
+## Labels
+
+All 515 items are labelled before any filter is written. The labeller is a separate agent
+(`claude-opus-5-5`) that sees the text and the rubric, and neither the split nor any filter.
+These are the model's labels, not the person's.
+
+- **KEEP**: a later session in this project should know it and act on it. That covers:
+  - a rule or preference that stands;
+  - a decision on a value or an approach;
+  - a correction that implies a standing fix;
+  - a specification of how something must behave;
+  - an answer that picks an option.
+- **NOISE**: anything else. That covers:
+  - a question or a request to explain;
+  - a one-off operational instruction (commit, push, close it);
+  - a status report with no desired behaviour;
+  - text dictated as content for something else, or a narrative of the past;
+  - a fragment that means nothing on its own;
+  - pasted material (a bullet from a plan, a UI label, a log line).
+- **UNSURE**: either reading is defensible. Excluded from the primary measure and reported.
+
+## Guard, fixed now
+
+- **Fixture messages.** `extract_dump phrasings` on every `h2h/*/seed_phrasings.json` and on
+  `loop12/scenarios.json`: 75 candidates, sha256 prefix `22d665d2fe691e47`.
+  - The set of `(session, kind, shape, body)` it emits must be **identical** after the change.
+  - These are the messages the head-to-head grids were seeded from, so an identical guard
+    leaves every v43 cell's seed unchanged.
+- **Tests.** `cargo test --workspace --features exact-tokens` must pass unchanged, including
+  every extractor test from loops 1–12.
+
+## Decision rule
+
+Measured on the **test** split, KEEP and NOISE items only:
+
+- **Ships** if all four hold:
+  1. at least **30 %** of the NOISE items that base kept are no longer emitted;
+  2. at most **5 %** of the KEEP items that base kept are lost;
+  3. the guard is identical;
+  4. the tests pass.
+- **Does not ship** otherwise, and the result is published as the reading.
+
+Reported whatever the outcome:
+- precision before and after (KEEP / (KEEP + NOISE));
+- the same two rates on dev;
+- the UNSURE count;
+- the number of items active under two kinds at once.
+
+**Cost.** Zero agent cells. One labelling agent pass over about 515 short texts.
+
+## Addendum to extract-v1, 2026-10-18 — before any label was read: a fifth of the items are not the person's words
+
+Tracing each item to the transcript line it came from, with no label yet read:
+- **69 of 515 items come from compaction summaries.** These are lines with
+  `isCompactSummary: true`, whose text begins `<artifact-content-authored-by-others/>` and only
+  then `This session is being continued…`.
+- The extractor already refuses to type a summary: `user_candidates` and
+  `is_compaction_summary` check the prompt's **start**. The tag the harness now puts in front
+  defeats that check, so these 69 entered at `user_said`, trust 3.
+- Restoring that refusal is a bug fix to a standing rule (trust derives from origin), not a
+  filter under test, and it ships whatever this experiment reads.
+- **All 69 fall in the dev split** (the split is by session, and they come from a few long
+  sessions). The test split holds none, so the decision rule above is unaffected.
+
+Sources per split:
+- **dev:** 219 typed prompts, 69 summaries, 2 answers to the assistant's questions, 9 not
+  traced.
+- **test:** 206 typed prompts, 0 summaries, 4 answers, 6 not traced.
+
+## Result of extract-v1, 2026-10-18 — the filters do not ship; the summary fix does
+
+`results/extract-v1/items.jsonl` holds one row per item: an opaque row number, shape, split,
+source, label, and whether each build emits it. `results/extract-v1/summary.json` holds the figures.
+No message text is committed.
+
+- **Labels.** Labelled by `claude-opus-5-5` (sha256 prefix `eeda8238e42b01b1`): 255 KEEP,
+  230 NOISE, 30 UNSURE.
+- **Filters build.** A local muninn build, designed on dev only and not kept in the
+  repository's history, because its comments and tests quoted the person's messages. It drops five kinds of
+  candidate:
+  - a story told in the past;
+  - a question whose `?` sits before an image placeholder;
+  - a bug report that names no wanted behaviour;
+  - pasted code, and a header line ending in `:`;
+  - the tail of a hard-wrapped line, which is now joined back to its sentence.
+
+  Guard identical, tests pass.
+
+**Test split (the decision)**
+
+| | value | rule | |
+|---|---|---|---|
+| NOISE no longer emitted | 23 / 98 = **23.5 %** | ≥ 30 % | **fails** |
+| KEEP lost | 5 / 108 = **4.6 %** | ≤ 5 % | holds |
+| precision | 52.4 % → 57.9 % | reported | |
+| UNSURE | 10 | reported | |
+
+**The filters do not ship.**
+
+**Dev split (where they were designed)**
+- Typed prompts only: 45 / 102 NOISE dropped (44 %), 2 / 113 KEEP lost.
+- Read against test's 23.5 %, the gap is what designing on one split and scoring on another
+  is for. The narrative and bug-report forms on dev came mostly from two stores' sessions.
+  That test's noise takes other forms is a conjecture: no test text was read.
+
+**The summary fix ships**, as the addendum registered (muninn `63c58879`).
+- It removes **70** dev items and nothing else. That is the 69 traced, plus one sentence that
+  appears both in a typed prompt and in the summary that actually produced it.
+- Guard identical; on test it changes nothing.
+- Records already on file are retired once by `maintain` (muninn `retire_summary_records`). On
+  copies of four stores that retired 19 in one and none in the other three.
+- The labeller marked 34 of the 70 KEEP: they restate standing rules.
+  They go anyway. A summary's restatement is the assistant's paraphrase, and trust derives
+  from origin. The rules they restate are in CLAUDE.md, or in the person's own messages,
+  where they keep their own records.
+
+**Also reported:**
+- **21 bodies are active under two kinds at once.** Decision with invariant, or correction with
+  decision; e.g. a single `siempre` sentence that also carries `en lugar de`. Not changed here.
+- **Untraced items:** 15. Sources not found by text search; they are kept in every measure.
+
+**Disclosures.**
+- Before this registration existed, the designer had read 45 records sampled from the stores
+  across both splits.
+- The registration and its addendum are local commits, not externally timestamped, and
+  nothing was pushed before the test split was scored.
+
+**What would test a filter next.** A fresh split from sessions after 2026-10-18. The test
+split above has been read once and is now spent.
+
+---
+
+# Pre-registration — extract-v2: extract-v1's filters, frozen, on messages they were never shown
+
+Registered 2026-10-18, before any item of this corpus was read or labelled.
+
+**Why.** extract-v1's filters failed on its test split (23.5 % of noise removed, against 30 %).
+That split is spent. This is one more reading, on a corpus none of the filters' design saw. The
+filters themselves stay frozen.
+
+## Items
+
+- **Corpus.** Every top-level transcript in twelve `~/.claude/projects/` directories of the
+  same person that extract-v1 did not use. Directories of automated runs are excluded: the
+  temp directory and the validation sandboxes. No project is named here.
+- **Base.** muninn `53feddfb`, which includes the summary fix.
+  - 123 `user_said` candidates, 120 distinct items.
+  - Shapes: `said:change` 66, `invariant` 24, `said:state` 18, `correction` 12.
+  - Dump sha256 prefix `46e4f6733d17166e`.
+- **Filters build.** The same base with extract-v1's filter logic applied unchanged. Only the
+  test modules differ. `extract.rs` sha256 prefix `2694b3ada8cdd611`.
+  - On extract-v1's own corpus it reproduces that experiment's filter verdicts item for item.
+    The only differences are 6 items from sessions newer than that dump.
+  - Guard identical (`22d665d2fe691e47`).
+- **Privacy.** As in extract-v1: no text, no project name, no hash of any text is committed.
+
+## Labels
+
+- **Labeller.** A fresh agent with extract-v1's rubric word for word. It sees no split, no
+  filter and no build output.
+- **Split.** All 120 items are test. Nothing here is used to design anything.
+
+## Decision rule — extract-v1's, unchanged
+
+- **Ships** if all four hold:
+  1. ≥ 30 % of NOISE items no longer emitted;
+  2. ≤ 5 % of KEEP items lost;
+  3. guard identical;
+  4. tests pass.
+- **Otherwise it does not ship**, and the reading is published.
+- With about 120 items the estimate is coarse. Its 95 % interval is reported beside the point
+  value. The rule is applied to the point value.
+
+## Result of extract-v2, 2026-10-18 — the filters do not ship, again
+
+`results/extract-v2/items.jsonl` holds one row per item: shape, label, and whether the filters
+build emits it. No text is committed.
+
+- **Labels.** sha256 prefix `9eeda3ec57126029`: 68 KEEP, 47 NOISE, 5 UNSURE.
+- **Filters dump.** sha256 prefix `7f6bdf3affde20a9`. It emits no item the base does not.
+
+| | value | 95 % (Wilson) | rule | |
+|---|---|---|---|---|
+| NOISE no longer emitted | 6 / 47 = **12.8 %** | 6.0 – 25.2 % | ≥ 30 % | **fails** |
+| KEEP lost | 3 / 68 = **4.4 %** | 1.5 – 12.2 % | ≤ 5 % | holds |
+| precision | 59.1 % → 61.3 % | | reported | |
+
+**The filters do not ship.** Two readings on messages they were not designed on, 23.5 % and
+12.8 %, both below the bar. They remove the kinds of noise they were written for, and the
+noise on unseen messages is mostly of other kinds. A new filter needs its own design split
+and its own fresh test.
