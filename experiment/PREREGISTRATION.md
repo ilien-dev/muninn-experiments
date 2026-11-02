@@ -7086,3 +7086,9 @@ Section C is read again with one change: a commit takes the scenario's own time 
 the base commit one hour before the first message. Dates stay fixed, so hashes stay stable. Both
 builds run on this version and rule 3 is unchanged. The evaluator's copy is committed under
 `results/usage-v1/`.
+
+## Amendment to usage-v2, 2026-11-02 — before any question was written
+
+This repository's store holds 7 distinct typed Spanish records, not 30, because almost everything said
+here is kept as episodes. The 30 items are those 7 plus Spanish statements from episodes, drawn by
+the same seed (20261102). The bar stays 5 of 30.
