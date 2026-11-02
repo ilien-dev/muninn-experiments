@@ -7092,3 +7092,9 @@ builds run on this version and rule 3 is unchanged. The evaluator's copy is comm
 This repository's store holds 7 distinct typed Spanish records, not 30, because almost everything said
 here is kept as episodes. The 30 items are those 7 plus Spanish statements from episodes, drawn by
 the same seed (20261102). The bar stays 5 of 30.
+
+## Second amendment to usage-v2, 2026-11-02 — before any question was written
+
+Episodes in this repository's store add 4, for 11. The 30 items are drawn instead from the typed
+Spanish `user_said` records of all ten stores, same seed, and each question runs on its own store's
+copy. Only counts are committed, as in usage-v1.
