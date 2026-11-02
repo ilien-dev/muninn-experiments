@@ -7073,3 +7073,16 @@ other read hooks. Otherwise the hook ships off, or not at all if it adds nothing
 reading (6 of 79 blocks useful, 0 harmful) is about usefulness and adds no cell that would overturn
 it. The default does not change. Session-start ranking is left alone: two filters failed their
 tests, and a third needs a fresh design split.
+
+## Amendment to usage-v1, 2026-11-02 — after the first held-out reading, before any fix was changed for it
+
+The first reading failed rule 3: on `loop8` the candidate read `retired_a` 18/30 against 30/30. The
+cause is in the fixture. `eval_all.py` dates every commit `2026-09-01T09:NN` to keep hashes stable,
+while the messages run from 09:00 in thirty-minute steps, so most commits are dated before the
+message whose value they replace. The candidate refuses a commit older than the statement, which is
+what it was built to do. That reading is kept in the results as it came out.
+
+Section C is read again with one change: a commit takes the scenario's own time at that step, and
+the base commit one hour before the first message. Dates stay fixed, so hashes stay stable. Both
+builds run on this version and rule 3 is unchanged. The evaluator's copy is committed under
+`results/usage-v1/`.
