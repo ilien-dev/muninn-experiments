@@ -6957,3 +6957,119 @@ build emits it. No text is committed.
 12.8 %, both below the bar. They remove the kinds of noise they were written for, and the
 noise on unseen messages is mostly of other kinds. A new filter needs its own design split
 and its own fresh test.
+
+
+---
+
+# Pre-registration — usage-v1: what one person's sessions say Muninn retired wrongly
+
+Registered 2026-11-02, before any cell of this experiment ran.
+
+**Why.** A review of 773 top-level sessions and 1,200 subagent transcripts found 95 typed records
+retired with a replacement. Labelled without seeing the code, 2 of those retirements were valid
+and 26 pointed at an unrelated record. The fixes were written while reading those 95, so they are
+a design set: a better score on them shows the bug is gone and nothing more. The held-out reading
+below is what can fail.
+
+**Builds.** Base: `0c2c82092` (1.1.0), binary sha256 prefix `076695f1d58628e4`. Candidate: the same
+commit plus the working diff of `fix/usage-review-1.1.1`, binary sha256 prefix `67dcab1f5413dcb5`.
+
+**Privacy.** Muninn's rule that raw results are committed meets the owner's rule that those
+projects stay private. Only counts and record ids are committed. No text, project name, path or
+hash of a text. `results/usage-v1/` holds those counts.
+
+## A. Replay of real sessions
+
+- **Corpus.** The transcripts each of the ten stores names in `transcript_ref`, oldest session
+  first. Sessions that ran in parallel are replayed one after another.
+- **Cells.** Two arms, base and candidate, each on a fresh store in a local clone of the project.
+  Each transcript grows one user prompt at a time and `muninn ingest` runs after each, which is
+  what `Stop` does. At the end of a session the clone is checked out at the last commit before that
+  moment, both git watermarks are set to the session's start, and `muninn maintain` runs.
+  Without that step the watermark would be today and no commit would be read. No model runs.
+- **Outcome.** Each of the 95 labelled retirements is found in each arm by its text and read as
+  active, retired or absent.
+
+## B. The repair on copies of the real stores
+
+Run the candidate's `maintain` on a copy of each store and read which of the 95 came back.
+
+## C. Held-out regression
+
+`experiment/loop8/eval_all.py` with arms `both` and `noise`, orders `adjacent` and `blocks`, on the
+held-out scenarios, base against candidate. None of these scenarios informed the fixes.
+
+## D. Latency
+
+`cargo run --release -p muninn-bench -- perf --strict` on one machine, base against candidate.
+
+## E. `queued_command`
+
+Of the 33 real queued messages found in the review, how many the candidate's replay stores. The
+candidate must add no record built from a task notification or a peer message.
+
+## F. Decision rule, fixed now
+
+The deterministic fixes ship if all of these hold:
+
+1. **Fewer false retirements (A).** Records labelled `loss` that are retired: candidate < base.
+2. **Valid retirements survive.** Both retirements labelled valid still happen in A and neither is
+   restored in B. An item absent from a replay arm counts as not measured and is reported.
+3. **Held-out (C).** In every arm and order, `retired_a` and `kept_b` do not fall below base, and
+   `retired_a` on `noise` stays 0.
+4. **Latency (D).** No hook's p95 rises by more than 10 % over base on the same machine.
+
+If rule 3 fails, the change that causes it is reverted and the rule is read again.
+
+---
+
+# Pre-registration — usage-v2: asking `muninn why` in the language of the records
+
+Registered 2026-11-02, before any question below was written.
+
+**Why.** In the review, 52 of 80 English `why` calls came back `insufficient` against 24 of 63
+Spanish ones, and 6 of 8 English questions moved to `sufficient` when translated. Those 8 were
+translated by the reviewer and `sufficient` is not `correct`. [Z2] did not test this.
+
+**Items.** 30 records from this repository's own store: `user_said`, typed, in Spanish, active. The
+store is the only one that can be published about. They are drawn by a fixed seed. A model that
+reads no code writes one question per record, in English and in Spanish, without using the record's
+distinctive words. The question files are hashed before any run.
+
+**Outcome.** Whether the target record's id appears in `muninn why`'s output (recall at the `why`
+budget), and the `sufficient` marker. Both languages, on the candidate binary.
+
+**Decision rule.** One sentence goes into the boot summary asking for `why` questions in the
+language of the records, if recall in Spanish exceeds recall in English by 5 or more items of 30,
+and `init --check-budget` still passes. Otherwise nothing changes.
+
+---
+
+# Pre-registration — usage-v3: memory for subagents
+
+Registered 2026-11-02, before any cell ran.
+
+**Why.** 1 of 1,200 subagents received memory; 667 of them write files. `SubagentStart` accepts
+`additionalContext`. It is a new hook on a read path, so it needs a latency figure, and a cost that
+is paid on every subagent, so it needs evidence that an agent uses what it is given.
+
+**Cells.** A fixture repository with recorded decisions that the code does not show. A headless
+Claude Code session is asked to delegate a task to a subagent, where doing the task right depends on
+one recorded decision. Six tasks, one cell per task per arm: `off` (today) and `on` (`SubagentStart`
+delivers the invariants and the catalogue). Same model in both arms.
+
+**Outcome.** Whether the delivered files follow the recorded decision, scored by a script on the
+files.
+
+**Decision rule.** Ships on by default if `on` beats `off` by 2 or more tasks of 6, `off` never beats
+`on`, and the hook's p95 in `perf --strict` is within the 10 ms contract's measured baseline for the
+other read hooks. Otherwise the hook ships off, or not at all if it adds nothing.
+
+---
+
+# Not registered here: `prompt_delivery` and session-start ranking
+
+`prompt-delivery off` has a registered answer: the closing suite did not adopt it. The review's
+reading (6 of 79 blocks useful, 0 harmful) is about usefulness and adds no cell that would overturn
+it. The default does not change. Session-start ranking is left alone: two filters failed their
+tests, and a third needs a fresh design split.
