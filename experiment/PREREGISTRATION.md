@@ -7123,3 +7123,10 @@ share at least 15 % of their content words. And messages of several lines were s
 one ordinary word left a line of code, so past 12 content words only a word spelled like a name counts.
 Both are fitted to the labels; only rule 3's held-out sets, which they did not see, can speak for them.
 The final binary is `6f99b53cc90bd897` plus a change of test text only.
+
+## Amendment to usage-v1, 2026-11-02 — before the final replay
+
+The long-statement guard changed none of the 95 labelled items on the replay, so it is removed: a rule
+with no measured effect does not ship. The restatement bar moves from 15 % to 10 %, because this
+engine's own word list read one of the two valid pairs below 15 %. Fitted to the design set, as before.
+The dependency updates of the four open bumps (`rusqlite` 0.41 among them) are in the final binary.
