@@ -7098,3 +7098,18 @@ the same seed (20261102). The bar stays 5 of 30.
 Episodes in this repository's store add 4, for 11. The 30 items are drawn instead from the typed
 Spanish `user_said` records of all ten stores, same seed, and each question runs on its own store's
 copy. Only counts are committed, as in usage-v1.
+
+## Result of usage-v2, 2026-11-02
+
+Questions sha256 prefix `83ff8cae70f0c743`, binary `5140f4612cf8e855`. Target record reached: Spanish
+**27/30**, English **5/30**, 22 items reached only in Spanish and 0 only in English. `sufficient`: 29
+against 12. The rule needs a margin of 5 and reads 22. **The sentence ships.** A model wrote the
+questions from the records, so they may sit closer to the records' wording than a real question does.
+
+## usage-v3, cells fixed before any ran
+
+Six one-line rules go in each cell's store as `user_said` invariants. Six tasks, each of which has an
+obvious default that one rule forbids (CSV delimiter, HTTP timeout, money, retry count, log prefix,
+timestamp format). The main session is told to delegate and to pass only the task. Its own SessionStart
+hook still runs, as in real use. `claude-sonnet-5-5`, `--setting-sources project`. A task passes if the
+written Python matches a regular expression fixed in `results/usage-v3/grid3.py` before the first cell.
