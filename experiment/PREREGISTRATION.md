@@ -6957,3 +6957,214 @@ build emits it. No text is committed.
 12.8 %, both below the bar. They remove the kinds of noise they were written for, and the
 noise on unseen messages is mostly of other kinds. A new filter needs its own design split
 and its own fresh test.
+
+
+---
+
+# Pre-registration — usage-v1: what one person's sessions say Muninn retired wrongly
+
+Registered 2026-11-02, before any cell of this experiment ran.
+
+**Why.** A review of 773 top-level sessions and 1,200 subagent transcripts found 95 typed records
+retired with a replacement. Labelled without seeing the code, 2 of those retirements were valid
+and 26 pointed at an unrelated record. The fixes were written while reading those 95, so they are
+a design set: a better score on them shows the bug is gone and nothing more. The held-out reading
+below is what can fail.
+
+**Builds.** Base: `0c2c82092` (1.1.0), binary sha256 prefix `076695f1d58628e4`. Candidate: the same
+commit plus the working diff of `fix/usage-review-1.1.1`, binary sha256 prefix `67dcab1f5413dcb5`.
+
+**Privacy.** Muninn's rule that raw results are committed meets the owner's rule that those
+projects stay private. Only counts and record ids are committed. No text, project name, path or
+hash of a text. `results/usage-v1/` holds those counts.
+
+## A. Replay of real sessions
+
+- **Corpus.** The transcripts each of the ten stores names in `transcript_ref`, oldest session
+  first. Sessions that ran in parallel are replayed one after another.
+- **Cells.** Two arms, base and candidate, each on a fresh store in a local clone of the project.
+  Each transcript grows one user prompt at a time and `muninn ingest` runs after each, which is
+  what `Stop` does. At the end of a session the clone is checked out at the last commit before that
+  moment, both git watermarks are set to the session's start, and `muninn maintain` runs.
+  Without that step the watermark would be today and no commit would be read. No model runs.
+- **Outcome.** Each of the 95 labelled retirements is found in each arm by its text and read as
+  active, retired or absent.
+
+## B. The repair on copies of the real stores
+
+Run the candidate's `maintain` on a copy of each store and read which of the 95 came back.
+
+## C. Held-out regression
+
+`experiment/loop8/eval_all.py` with arms `both` and `noise`, orders `adjacent` and `blocks`, on the
+held-out scenarios, base against candidate. None of these scenarios informed the fixes.
+
+## D. Latency
+
+`cargo run --release -p muninn-bench -- perf --strict` on one machine, base against candidate.
+
+## E. `queued_command`
+
+Of the 33 real queued messages found in the review, how many the candidate's replay stores. The
+candidate must add no record built from a task notification or a peer message.
+
+## F. Decision rule, fixed now
+
+The deterministic fixes ship if all of these hold:
+
+1. **Fewer false retirements (A).** Records labelled `loss` that are retired: candidate < base.
+2. **Valid retirements survive.** Both retirements labelled valid still happen in A and neither is
+   restored in B. An item absent from a replay arm counts as not measured and is reported.
+3. **Held-out (C).** In every arm and order, `retired_a` and `kept_b` do not fall below base, and
+   `retired_a` on `noise` stays 0.
+4. **Latency (D).** No hook's p95 rises by more than 10 % over base on the same machine.
+
+If rule 3 fails, the change that causes it is reverted and the rule is read again.
+
+---
+
+# Pre-registration — usage-v2: asking `muninn why` in the language of the records
+
+Registered 2026-11-02, before any question below was written.
+
+**Why.** In the review, 52 of 80 English `why` calls came back `insufficient` against 24 of 63
+Spanish ones, and 6 of 8 English questions moved to `sufficient` when translated. Those 8 were
+translated by the reviewer and `sufficient` is not `correct`. [Z2] did not test this.
+
+**Items.** 30 records from this repository's own store: `user_said`, typed, in Spanish, active. The
+store is the only one that can be published about. They are drawn by a fixed seed. A model that
+reads no code writes one question per record, in English and in Spanish, without using the record's
+distinctive words. The question files are hashed before any run.
+
+**Outcome.** Whether the target record's id appears in `muninn why`'s output (recall at the `why`
+budget), and the `sufficient` marker. Both languages, on the candidate binary.
+
+**Decision rule.** One sentence goes into the boot summary asking for `why` questions in the
+language of the records, if recall in Spanish exceeds recall in English by 5 or more items of 30,
+and `init --check-budget` still passes. Otherwise nothing changes.
+
+---
+
+# Pre-registration — usage-v3: memory for subagents
+
+Registered 2026-11-02, before any cell ran.
+
+**Why.** 1 of 1,200 subagents received memory; 667 of them write files. `SubagentStart` accepts
+`additionalContext`. It is a new hook on a read path, so it needs a latency figure, and a cost that
+is paid on every subagent, so it needs evidence that an agent uses what it is given.
+
+**Cells.** A fixture repository with recorded decisions that the code does not show. A headless
+Claude Code session is asked to delegate a task to a subagent, where doing the task right depends on
+one recorded decision. Six tasks, one cell per task per arm: `off` (today) and `on` (`SubagentStart`
+delivers the invariants and the catalogue). Same model in both arms.
+
+**Outcome.** Whether the delivered files follow the recorded decision, scored by a script on the
+files.
+
+**Decision rule.** Ships on by default if `on` beats `off` by 2 or more tasks of 6, `off` never beats
+`on`, and the hook's p95 in `perf --strict` is within the 10 ms contract's measured baseline for the
+other read hooks. Otherwise the hook ships off, or not at all if it adds nothing.
+
+---
+
+# Not registered here: `prompt_delivery` and session-start ranking
+
+`prompt-delivery off` has a registered answer: the closing suite did not adopt it. The review's
+reading (6 of 79 blocks useful, 0 harmful) is about usefulness and adds no cell that would overturn
+it. The default does not change. Session-start ranking is left alone: two filters failed their
+tests, and a third needs a fresh design split.
+
+## Amendment to usage-v1, 2026-11-02 — after the first held-out reading, before any fix was changed for it
+
+The first reading failed rule 3: on `loop8` the candidate read `retired_a` 18/30 against 30/30. The
+cause is in the fixture. `eval_all.py` dates every commit `2026-09-01T09:NN` to keep hashes stable,
+while the messages run from 09:00 in thirty-minute steps, so most commits are dated before the
+message whose value they replace. The candidate refuses a commit older than the statement, which is
+what it was built to do. That reading is kept in the results as it came out.
+
+Section C is read again with one change: a commit takes the scenario's own time at that step, and
+the base commit one hour before the first message. Dates stay fixed, so hashes stay stable. Both
+builds run on this version and rule 3 is unchanged. The evaluator's copy is committed under
+`results/usage-v1/`.
+
+## Amendment to usage-v2, 2026-11-02 — before any question was written
+
+This repository's store holds 7 distinct typed Spanish records, not 30, because almost everything said
+here is kept as episodes. The 30 items are those 7 plus Spanish statements from episodes, drawn by
+the same seed (20261102). The bar stays 5 of 30.
+
+## Second amendment to usage-v2, 2026-11-02 — before any question was written
+
+Episodes in this repository's store add 4, for 11. The 30 items are drawn instead from the typed
+Spanish `user_said` records of all ten stores, same seed, and each question runs on its own store's
+copy. Only counts are committed, as in usage-v1.
+
+## Result of usage-v2, 2026-11-02
+
+Questions sha256 prefix `83ff8cae70f0c743`, binary `5140f4612cf8e855`. Target record reached: Spanish
+**27/30**, English **5/30**, 22 items reached only in Spanish and 0 only in English. `sufficient`: 29
+against 12. The rule needs a margin of 5 and reads 22. **The sentence ships.** A model wrote the
+questions from the records, so they may sit closer to the records' wording than a real question does.
+
+## usage-v3, cells fixed before any ran
+
+Six one-line rules go in each cell's store as `user_said` invariants. Six tasks, each of which has an
+obvious default that one rule forbids (CSV delimiter, HTTP timeout, money, retry count, log prefix,
+timestamp format). The main session is told to delegate and to pass only the task. Its own SessionStart
+hook still runs, as in real use. `claude-sonnet-5-5`, `--setting-sources project`. A task passes if the
+written Python matches a regular expression fixed in `results/usage-v3/grid3.py` before the first cell.
+
+## Amendment to usage-v1, 2026-11-02 — changes made after reading the design set, before the final replay
+
+Reading A on the first candidate, against the 95 labels, showed two things. Both valid retirements had
+happened by accident: each was a correction retired by the turn-index collision, so fixing the
+collision undid them. A correction now replaces an earlier one of the same session only when they
+share at least 15 % of their content words. And messages of several lines were still retired because
+one ordinary word left a line of code, so past 12 content words only a word spelled like a name counts.
+Both are fitted to the labels; only rule 3's held-out sets, which they did not see, can speak for them.
+The final binary is `6f99b53cc90bd897` plus a change of test text only.
+
+## Amendment to usage-v1, 2026-11-02 — before the final replay
+
+The long-statement guard changed none of the 95 labelled items on the replay, so it is removed: a rule
+with no measured effect does not ship. The restatement bar moves from 15 % to 10 %, because this
+engine's own word list read one of the two valid pairs below 15 %. Fitted to the design set, as before.
+The dependency updates of the four open bumps (`rusqlite` 0.41 among them) are in the final binary.
+
+## Result of usage-v1, 2026-11-02
+
+Final candidate binary sha256 prefix `97fc25b5d59c763d` (the second amendment's build). Counts in
+`results/usage-v1/`; no text, project name or path.
+
+- **A, replay.** Records labelled `loss` that end retired: base **20**, candidate **9** (active 3 → 14).
+  Retired by an unrelated record: 21 → 8. Corrections retired by a same-subject correction from the
+  turn-index collision: 19 → 0. Retirements handed to an older record: 64 → 9.
+- **B, repair on copies.** 56 records restored across the ten stores: 35 episodes, 14 corrections,
+  4 decisions, 3 invariants. Of the 95 labelled: 21, that is 13 `unrelated` and `loss`, 1 `unrelated`
+  and not a loss, and 7 `old_not_a_fact`; neither `valid` item. Of the 14 losses checked by hand, 7.
+- **C, held-out, dated fixture.** Identical to base in every arm and order. `loop8` both: adjacent
+  `retired_a` 30/30, `kept_b` 30/30; blocks 29/30, 30/30. `loop7` both: adjacent 27/30, 30/30; blocks
+  27/30, 28/30. `noise`: `retired_a` 0/30 everywhere. The first, undated reading stays as it came out.
+- **D, latency.** Seven interleaved runs of `muninn-bench perf` (300 runs each), same bench binary, in
+  `results/usage-v1/perf_interleaved.txt`. Median p95, base against candidate: SessionStart 8.92 / 8.43 ms,
+  UserPromptSubmit gated 5.48 / 5.14, full 10.57 / 9.66. The full prompt hook is over its 10 ms limit on
+  this machine in both builds, depending on the run.
+- **E, `queued_command`.** Of the 33 queued messages, 31 were missing from the stores; the other 2 were
+  already on record and are not scored. Of the 31: base 0, candidate 28.
+  Records built from a task notification or peer message: 2 in both arms, so the candidate adds none.
+
+Rule 1 holds (9 < 20). Rule 2 holds: both valid retirements happen in A, one of them now by its
+same-session restatement, and B restores neither. `replay_counts.txt` lists that one as `active`:
+`score.py` finds an item by a prefix of its text, and the restatement that retired it starts the same way. Rule 3 holds. Rule 4: holds on the medians; no hook that exists in 1.1.0 rises. The `SubagentStart` row is a no-op on
+1.1.0, which has no such hook, and the hook is judged under usage-v3's rule. Single runs move by more than 10 % in both directions.
+**The fixes ship.** What still retires a `loss` is mostly the `said:change` path, which this
+experiment did not touch.
+
+## Result of usage-v3, 2026-11-02
+
+Cells as fixed, scored by `results/usage-v3/rescore3.py` on the files the cells left (the same
+regular expressions as `grid3.py`). `off` **1/6**, `on` **5/6**; `off` never passes where `on` fails.
+Cost of the grid USD 1.04. The binary was built before the last usage-v1 changes; the hook's code did
+not change after it. The `off` arm relied on the hook being off by default in that binary; on 1.2.0,
+where it is on, rerunning `grid3.py` needs `MUNINN_SUBAGENT_DELIVERY=0` in the `off` cells. The hook's p95 over the seven runs is 6.7 to 9.7 ms (median 8.36), against SessionStart's 7.6 to
+9.8 ms on the same runs. **Ships on by default.** Six tasks on one model is a small sample.
