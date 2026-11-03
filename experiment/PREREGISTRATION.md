@@ -7130,3 +7130,37 @@ The long-statement guard changed none of the 95 labelled items on the replay, so
 with no measured effect does not ship. The restatement bar moves from 15 % to 10 %, because this
 engine's own word list read one of the two valid pairs below 15 %. Fitted to the design set, as before.
 The dependency updates of the four open bumps (`rusqlite` 0.41 among them) are in the final binary.
+
+## Result of usage-v1, 2026-11-02
+
+Final candidate binary sha256 prefix `97fc25b5d59c763d` (the second amendment's build). Counts in
+`results/usage-v1/`; no text, project name or path.
+
+- **A, replay.** Records labelled `loss` that end retired: base **20**, candidate **9** (active 3 → 14).
+  Retired by an unrelated record: 21 → 8. Corrections retired by a same-subject correction from the
+  turn-index collision: 19 → 0. Retirements handed to an older record: 64 → 9.
+- **B, repair on copies.** 56 records restored across the ten stores. Of the 95 labelled: 21, of them
+  13 `loss` and 7 `old_not_a_fact`; neither `valid` item. Of the 14 losses checked by hand, 7.
+- **C, held-out, dated fixture.** Identical to base in every arm and order. `loop8` both: adjacent
+  `retired_a` 30/30, `kept_b` 30/30; blocks 29/30, 30/30. `loop7` both: adjacent 27/30, 30/30; blocks
+  27/30, 28/30. `noise`: `retired_a` 0/30 everywhere. The first, undated reading stays as it came out.
+- **D, latency.** Seven interleaved runs of `muninn-bench perf` (300 runs each), same bench binary, in
+  `results/usage-v1/perf_interleaved.txt`. Median p95, base against candidate: SessionStart 8.92 / 8.43 ms,
+  UserPromptSubmit gated 5.48 / 5.14, full 10.57 / 9.66. The full prompt hook is over its 10 ms limit on
+  this machine in both builds, depending on the run.
+- **E, `queued_command`.** Of the 31 queued messages the review found missing: base 0, candidate 28.
+  Records built from a task notification or peer message: 2 in both arms, so the candidate adds none.
+
+Rule 1 holds (9 < 20). Rule 2 holds: both valid retirements happen in A, one of them now by its
+same-session restatement, and B restores neither. `replay_counts.txt` lists that one as `active`:
+`score.py` finds an item by a prefix of its text, and the restatement that retired it starts the same way. Rule 3 holds. Rule 4: holds on the medians; no hook rises. Single runs move by more than 10 % in both directions.
+**The fixes ship.** What still retires a `loss` is mostly the `said:change` path, which this
+experiment did not touch.
+
+## Result of usage-v3, 2026-11-02
+
+Cells as fixed, scored by `results/usage-v3/rescore3.py` on the files the cells left (the same
+regular expressions as `grid3.py`). `off` **1/6**, `on` **5/6**; `off` never passes where `on` fails.
+Cost of the grid USD 1.04. The binary was built before the last usage-v1 changes; the hook's code did
+not change after it. The hook's p95 over the seven runs is 6.7 to 9.7 ms (median 8.36), against SessionStart's 7.6 to
+9.8 ms on the same runs. **Ships on by default.** Six tasks on one model is a small sample.

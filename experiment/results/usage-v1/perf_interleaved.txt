@@ -1,0 +1,85 @@
+pa = muninn 1.1.0 (base), pb = usage-v1 final candidate; same muninn-bench binary, runs interleaved, 300 runs each
+== pa run 1
+process start (`--version`, no work)   4.260ms   4.866ms   5.864ms
+ok   hook SessionStart p95                9.544 ms (limit 10)
+ok   hook SubagentStart p95               5.348 ms (limit 10)
+ok   hook UserPromptSubmit gated p95      5.430 ms (limit 1)
+FAIL hook UserPromptSubmit full p95       10.790 ms (limit 10)
+== pb run 1
+process start (`--version`, no work)   4.469ms   5.479ms   6.135ms
+ok   hook SessionStart p95                9.361 ms (limit 10)
+ok   hook SubagentStart p95               8.651 ms (limit 10)
+ok   hook UserPromptSubmit gated p95      5.745 ms (limit 1)
+FAIL hook UserPromptSubmit full p95       10.966 ms (limit 10)
+== pa run 2
+process start (`--version`, no work)   4.419ms   4.936ms   6.152ms
+ok   hook SessionStart p95                9.629 ms (limit 10)
+ok   hook SubagentStart p95               6.018 ms (limit 10)
+FAIL hook UserPromptSubmit gated p95      6.771 ms (limit 1)
+FAIL hook UserPromptSubmit full p95       11.493 ms (limit 10)
+== pb run 2
+process start (`--version`, no work)   3.694ms   4.011ms   4.315ms
+ok   hook SessionStart p95                7.644 ms (limit 10)
+ok   hook SubagentStart p95               6.719 ms (limit 10)
+ok   hook UserPromptSubmit gated p95      4.517 ms (limit 1)
+ok   hook UserPromptSubmit full p95       8.932 ms (limit 10)
+== pa run 3
+process start (`--version`, no work)   3.725ms   4.218ms   4.779ms
+ok   hook SessionStart p95                8.611 ms (limit 10)
+ok   hook SubagentStart p95               4.511 ms (limit 10)
+ok   hook UserPromptSubmit gated p95      4.757 ms (limit 1)
+ok   hook UserPromptSubmit full p95       9.287 ms (limit 10)
+== pb run 3
+process start (`--version`, no work)   3.767ms   4.190ms   4.980ms
+ok   hook SessionStart p95                8.027 ms (limit 10)
+ok   hook SubagentStart p95               6.868 ms (limit 10)
+FAIL hook UserPromptSubmit gated p95      5.851 ms (limit 1)
+ok   hook UserPromptSubmit full p95       9.550 ms (limit 10)
+== pa run 4
+process start (`--version`, no work)   3.811ms   4.135ms   4
+ok   hook SessionStart p95                8.884 ms (limit 10
+ok   hook SubagentStart p95               4.985 ms (limit 10
+FAIL hook UserPromptSubmit gated p95      5.561 ms (limit 1)
+FAIL hook UserPromptSubmit full p95       10.376 ms (limit 1
+== pb run 4
+process start (`--version`, no work)   3.872ms   4.272ms   5
+ok   hook SessionStart p95                8.338 ms (limit 10
+ok   hook SubagentStart p95               7.074 ms (limit 10
+ok   hook UserPromptSubmit gated p95      5.142 ms (limit 1)
+ok   hook UserPromptSubmit full p95       9.407 ms (limit 10
+== pa run 5
+process start (`--version`, no work)   4.452ms   6.177ms   6
+ok   hook SessionStart p95                8.764 ms (limit 10
+ok   hook SubagentStart p95               4.821 ms (limit 10
+ok   hook UserPromptSubmit gated p95      4.744 ms (limit 1)
+FAIL hook UserPromptSubmit full p95       10.861 ms (limit 1
+== pb run 5
+process start (`--version`, no work)   3.834ms   5.053ms   6
+ok   hook SessionStart p95                8.429 ms (limit 10
+ok   hook SubagentStart p95               8.357 ms (limit 10
+ok   hook UserPromptSubmit gated p95      4.835 ms (limit 1)
+ok   hook UserPromptSubmit full p95       9.664 ms (limit 10
+== pa run 6
+process start (`--version`, no work)   3.929ms   4.712ms   5
+ok   hook SessionStart p95                8.918 ms (limit 10
+ok   hook SubagentStart p95               4.787 ms (limit 10
+ok   hook UserPromptSubmit gated p95      5.476 ms (limit 1)
+ok   hook UserPromptSubmit full p95       9.880 ms (limit 10
+== pb run 6
+process start (`--version`, no work)   3.965ms   4.281ms   5
+ok   hook SessionStart p95                9.832 ms (limit 10
+ok   hook SubagentStart p95               9.659 ms (limit 10
+FAIL hook UserPromptSubmit gated p95      5.725 ms (limit 1)
+FAIL hook UserPromptSubmit full p95       10.858 ms (limit 1
+== pa run 7
+process start (`--version`, no work)   4.090ms   4.534ms   5
+ok   hook SessionStart p95                9.341 ms (limit 10
+ok   hook SubagentStart p95               6.599 ms (limit 10
+FAIL hook UserPromptSubmit gated p95      6.351 ms (limit 1)
+FAIL hook UserPromptSubmit full p95       10.573 ms (limit 1
+== pb run 7
+process start (`--version`, no work)   4.091ms   4.517ms   5
+ok   hook SessionStart p95                9.132 ms (limit 10
+ok   hook SubagentStart p95               8.504 ms (limit 10
+ok   hook UserPromptSubmit gated p95      5.124 ms (limit 1)
+ok   hook UserPromptSubmit full p95       9.979 ms (limit 10
