@@ -7113,3 +7113,13 @@ obvious default that one rule forbids (CSV delimiter, HTTP timeout, money, retry
 timestamp format). The main session is told to delegate and to pass only the task. Its own SessionStart
 hook still runs, as in real use. `claude-sonnet-5-5`, `--setting-sources project`. A task passes if the
 written Python matches a regular expression fixed in `results/usage-v3/grid3.py` before the first cell.
+
+## Amendment to usage-v1, 2026-11-02 — changes made after reading the design set, before the final replay
+
+Reading A on the first candidate, against the 95 labels, showed two things. Both valid retirements had
+happened by accident: each was a correction retired by the turn-index collision, so fixing the
+collision undid them. A correction now replaces an earlier one of the same session only when they
+share at least 15 % of their content words. And messages of several lines were still retired because
+one ordinary word left a line of code, so past 12 content words only a word spelled like a name counts.
+Both are fitted to the labels; only rule 3's held-out sets, which they did not see, can speak for them.
+The final binary is `6f99b53cc90bd897` plus a change of test text only.
