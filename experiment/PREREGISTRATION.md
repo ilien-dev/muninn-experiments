@@ -7168,3 +7168,110 @@ Cost of the grid USD 1.04. The binary was built before the last usage-v1 changes
 not change after it. The `off` arm relied on the hook being off by default in that binary; on 1.2.0,
 where it is on, rerunning `grid3.py` needs `MUNINN_SUBAGENT_DELIVERY=0` in the `off` cells. The hook's p95 over the seven runs is 6.7 to 9.7 ms (median 8.36), against SessionStart's 7.6 to
 9.8 ms on the same runs. **Ships on by default.** Six tasks on one model is a small sample.
+
+---
+
+# Pre-registration — usage-v4: what 1.2.0 stores, retires and delivers in real use
+
+Registered 2026-11-11, before any candidate build existed and before any cell ran.
+
+**Why.** A second review, of the sessions since 1.2.0 on one person's eleven stores (ten on Windows,
+one on WSL), read 109 typed records, 273 human messages, 527 delivered blocks and the code. Its
+figures are a single labeller's: 20 of 109 typed records durable, 8 of 47 durable statements
+stored, 19 of 527 per-prompt blocks useful. It also reproduced defects on the stock binary. The
+changes below were proposed from that reading, so everything it read is a design set.
+
+**Builds.** Base: `00d691630` (1.2.0), binary sha256 prefix `b93d2f5c222c0424`. Candidate: the head
+of `feature/usage-review-2-measured-fixes`; each cell records the commit it ran on.
+
+**Privacy.** As in usage-v1: only counts, record ids and label codes are committed under
+`results/usage-v4/`. No text, project name, path or hash of a text. The fixtures stay on the
+owner's machine and the scripts read them from `MUNINN_USAGE_FIXTURES`.
+
+**Labels and splits, fixed before any change.** A second labeller that has not seen the first
+labels relabels all three sets. Items the two disagree on are adjudicated by a third reading and
+the final labels are hashed here in an amendment before the first candidate cell. Each set is then
+split in two by `sha256("usage-v4:" + item id)`: even first byte is `design`, odd is `held-out`.
+Implementers may read design items. Held-out items are read only by the scoring scripts.
+
+## A. Extraction
+
+- **Items.** The human messages of the recall set, each labelled for the durable statements it
+  holds, and the source turns of the 109 typed records. `extract_dump` runs on them with each
+  build. No model runs.
+- **Outcome.** Emitted typed records labelled durable, transient, not the user's, fragment; durable
+  statements emitted or missed.
+- **Rule A1, filters.** A filter ships if on held-out it removes at least 30 % of the noise the
+  base emits and loses at most 5 % of the durable records the base emits. This is extract-v1's
+  rule. Each filter is read alone and then all together.
+- **Rule A2, recall rules.** A rule that adds records ships if on held-out it adds at least one
+  durable statement for every noise record it adds.
+- **Rule A3, a new extractor.** A replacement for the cue-word rules ships if on held-out its
+  precision is at least twice the base's and its recall is not below the base's. If it fails, it
+  does not ship and the result is reported.
+
+## B. Retirement
+
+- **Cells.** usage-v1's replay (`results/usage-v1/replay.py`) with its 95 labelled retirements,
+  plus the retirements since 1.2.0 labelled in this review, base against candidate. Three synthetic
+  repositories, written before any fix: a one-line rewording of a file that names recorded values,
+  a decision stated A, then B, then A again in the same words, and a commit followed by its
+  `git revert`.
+- **Rule B1.** In the replay, retired records labelled `loss`: candidate ≤ base, and both
+  retirements labelled valid still happen.
+- **Rule B2.** On the synthetic repositories the candidate retires nothing in the first, serves A
+  and not B in the second, and retires the reverted commit's record in the third.
+- **Rule B3, held-out.** `loop8/eval_all.py`, arms `both` and `noise`, orders `adjacent` and
+  `blocks`: `retired_a` and `kept_b` do not fall below base and `retired_a` on `noise` stays 0.
+
+## C. Delivery
+
+- **Items.** The 150 labelled (prompt, delivered block) units, replayed through the real
+  `UserPromptSubmit` hook on store copies rewound to each prompt's time. Base figures on today's
+  copies: 18 of 25 useful pairs returned, 226 of 451 unrelated, 564 tokens a prompt. The replay
+  reproduces 71.8 % of the logged ids, so both arms are replayed and compared with each other,
+  never with the log.
+- **Rule C1, a relevance floor and ranking changes.** Ship if on held-out the unrelated blocks
+  delivered fall by at least 30 % and the useful pairs returned fall by at most one.
+- **Rule C2, shorter headers.** Ship if the mean tokens of a delivery with the same ids fall and
+  `init --check-budget` passes. What the agent needs from a header is the kind, the id, the trust
+  and the date; the `evidence:` line moves to `muninn show`.
+- **Rule C3, defects.** A record cut for budget or only listed in the catalogue is offered again in
+  the same session (12 of 12 where base gives 0 of 12); a record delivered before a compaction is
+  offered again after the next `Stop` (base 0 of 1); a retired statement is not served through an
+  episode of the same turn (base: 5.6 % of deliveries in the largest store).
+- **Rule C4, session start.** On the labelled session starts, the share of slots labelled worth
+  their place does not fall, and every active correction and invariant is either shown or listed.
+- **Rule C5, `why`.** usage-v2's 30 questions: recall in Spanish does not fall. The 69 gender-form
+  pairs: more than the base's 0 match. Records of every kind are returned by the route that names
+  them (base 0 of 15), and `--all` uses every word typed (base 0 of 30).
+
+## D. Removals
+
+A part is removed only on these readings. The symbol graph and the dir, symbol and file cues: no
+row of any real store's `fire_ledger` was delivered by one, and B3 and the delivery replay give the
+same ids with the part removed. The embedding sidecar: no store holds a vector, and usage-v2's
+recall is the same without it. `commit_linked` decisions built from commit subjects: no hook
+delivery in any store's ledger names one, and B1 to B3 hold without them. `PostToolUse` and the
+turn-context log follow the cues. If a reading fails, the part stays and the failure is reported.
+
+## E. Latency and cost
+
+`perf --strict`, seven interleaved runs a build on one machine. No read hook's p95 rises by more
+than 10 % over base. `Stop` with an ingest on a copy of the largest store, 20 runs: the candidate's
+median is lower. A new contract for `Stop`, `SessionEnd` and `PostToolUse` is set from the
+candidate's own measured figures, as the others were.
+
+## F. Codex and the rule compiler
+
+Codex: a recorded rollout ingested by the candidate yields typed records where the base yields
+none, and the hooks file installs and delivers a block in one real `codex exec` session. Rule
+compiler: on `corpora/claude-md`, split in two by file name hash, new patterns ship if on the
+held-out half they raise the enforceable share and every rule they newly mark enforceable is one a
+reader agrees the emitted control enforces.
+
+## G. Decision rule
+
+Each change is read under the rule of its section. A change that fails is reverted and listed as
+tried and not shipped. A change no cell here can measure is reported as unmeasured, with the test
+that covers it. B3 and E are read again on the final build with everything that shipped.
