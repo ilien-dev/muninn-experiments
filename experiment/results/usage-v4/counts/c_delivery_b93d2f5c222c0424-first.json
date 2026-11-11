@@ -1,0 +1,77 @@
+{
+ "binary_sha256": "b93d2f5c222c0424",
+ "binary_version": "muninn 1.2.0",
+ "binding": {
+  "c1": "held-out unrelated_returned and useful_returned",
+  "c2": "c12.c2_same_ids (needs --against); mean_tokens is secondary",
+  "c3": "t1 same_session == tried; t2 offered_again_after_stop == 1; t3 prompts_with_stale_twin == 0",
+  "c4": "all_slots share_lenient_of_labelled and share_strict_of_labelled, neither may fall; coverage_today neither == 0",
+  "c5": "usage_v2.spanish_reached, gender_flip_W02.found_top8, routed_away.returned, all_flag.what_about_found"
+ },
+ "build": "b93d2f5c222c0424-first",
+ "commit": "00d691630",
+ "labels": "first",
+ "section": "c_delivery",
+ "splits": {
+  "all": {
+   "c12": {
+    "block_chars": 253672,
+    "evidence_chars": 70627,
+    "harmful_returned": 0,
+    "header_chars": 44251,
+    "mean_tokens": 563.7,
+    "prompts": 150,
+    "prompts_with_delivery": 146,
+    "provenance_share": 0.4529,
+    "related_labelled": 212,
+    "related_returned": 156,
+    "returned": 549,
+    "unlabelled_returned": 149,
+    "unrelated_labelled": 451,
+    "unrelated_returned": 226,
+    "useful_labelled": 25,
+    "useful_returned": 18
+   }
+  },
+  "design": {
+   "c12": {
+    "block_chars": 136797,
+    "evidence_chars": 39077,
+    "harmful_returned": 0,
+    "header_chars": 23963,
+    "mean_tokens": 556.1,
+    "prompts": 82,
+    "prompts_with_delivery": 80,
+    "provenance_share": 0.4608,
+    "related_labelled": 127,
+    "related_returned": 93,
+    "returned": 297,
+    "unlabelled_returned": 73,
+    "unrelated_labelled": 249,
+    "unrelated_returned": 123,
+    "useful_labelled": 10,
+    "useful_returned": 8
+   }
+  },
+  "heldout": {
+   "c12": {
+    "block_chars": 116875,
+    "evidence_chars": 31550,
+    "harmful_returned": 0,
+    "header_chars": 20288,
+    "mean_tokens": 572.9,
+    "prompts": 68,
+    "prompts_with_delivery": 66,
+    "provenance_share": 0.4435,
+    "related_labelled": 85,
+    "related_returned": 63,
+    "returned": 252,
+    "unlabelled_returned": 76,
+    "unrelated_labelled": 202,
+    "unrelated_returned": 103,
+    "useful_labelled": 15,
+    "useful_returned": 10
+   }
+  }
+ }
+}

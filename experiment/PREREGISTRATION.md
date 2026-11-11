@@ -7275,3 +7275,110 @@ reader agrees the emitted control enforces.
 Each change is read under the rule of its section. A change that fails is reverted and listed as
 tried and not shipped. A change no cell here can measure is reported as unmeasured, with the test
 that covers it. B3 and E are read again on the final build with everything that shipped.
+
+## Amendment to usage-v4, 2026-11-11 — labels frozen and sets split, before the first candidate cell
+
+**Second labels.** The three sets were relabelled in one blind pass by a second labeller (an
+agent session), from reading views built from the item files alone. The first labels were not
+opened until the pass was written and hashed: pass files sha256 prefix precision
+`190e978f5b79e78a`, recall `7a3799ebefce9512`, delivery `47ef6ceec063f6f2`. Same codes as the first
+pass (precision: durable, transient, not the user's, fragment; recall: holds a durable statement,
+does not, not typed by a person, bare option pick; delivery: useful, related, unrelated,
+harmful). Independence is partial: the second labeller had read the four analysis reports, which
+give the totals and name about ten items with their labels, and one probe script that names the
+agent-written prompt ids of one store.
+
+**Agreement** (first against second pass):
+
+| set | items | agree | Cohen's kappa | binary reading |
+|---|---|---|---|---|
+| precision | 109 | 103 | 0.913 | durable or not: 106, kappa 0.902 |
+| recall | 300 | 279 | 0.847 | durable or not, on the 257 both passes scored: 242, kappa 0.800 |
+| delivery | 688 (prompt, block) units | 616 | 0.771 | unrelated or not: 641, kappa 0.846; useful or not: 664, kappa 0.136 |
+
+The second pass called 3 units useful where the first called 25 (23 of those 25 it called
+related). `useful` is the weakest label of the review, as the analysis's own re-read had found.
+
+**Adjudication.** All 99 disagreements (6, 21, 72) were read a third time with both labels and
+the first labeller's reason in view, and settled one by one. Final counts: precision durable 20,
+transient 56, not the user's 27, fragment 6; recall durable 48, not 210, not typed by a person 27,
+option pick 15; delivery useful 23, related 209, unrelated 455, harmful 1. Every durable recall
+message carries one or more anchor phrases, the words that state the durable thing; they are
+text and stay in a private file, unhashed.
+
+**Frozen label files** (ids and codes only, one sorted JSON object per line): precision
+`c18de4f31180d8f0`, recall `2ecd4124f82bc3a1`, delivery `e4abd83b8d0000dd`. The 13 retirements
+since 1.2.0 that section B adds were labelled once, in usage-v1's codes, by the second labeller:
+12 `old_not_a_fact` (agent-written or scripted prompts, bug descriptions) and 1 `unrelated` that is
+a `loss` (W02 #2167). They are single-labelled.
+
+**Ids and splits.** Precision `STORE:record id`; recall `STORE:session8:byte offset`; delivery the
+prompt item `Pnnn`, so all blocks of a prompt fall on one side; session starts for C4 their item
+`Snn`. Parity is `sha256("usage-v4:" + id)[0] % 2`, even = design. Sizes, design / held-out:
+precision 63 / 46, recall 152 / 148, delivery 82 / 68 prompts (386 / 302 units), session starts
+21 / 18. The id lists are committed in `results/usage-v4/splits/`. 39 precision records have their
+source turn among the recall messages; 20 of those pairs fall on opposite sides, and the 20
+design items concerned are kept out of the views implementers read.
+
+**How each rule is read, fixed now.**
+- A. A precision record is emitted when `extract_dump` of its session holds a candidate of its
+  kind whose body is its body (case and spacing folded) or contains its object. A durable recall
+  message is emitted when a candidate of its turn contains one of its anchors; a candidate of a
+  durable message that carries none is noise. A1 and A2 read the held-out halves of both sets;
+  A3 reads the recall set: precision = candidates carrying an anchor over candidates from
+  messages typed by a person or not (option picks excluded), recall = durable messages emitted.
+  The two `deadend` records are not measurable with `extract_dump`, which prints `user_said`
+  candidates only.
+- B1 adds the 13 to the 95. B2: reword passes with 0 typed records retired; A-B-A passes when the
+  hook's answer to a question about the subject holds a block stating A and none stating B
+  (counted for any kind and for typed records alone; the rule reads typed records); revert passes
+  when the reverted commit's record is retired after one `maintain` that sees both commits. B3 is
+  read on `results/usage-v1/eval_dated.py`, the evaluator usage-v1's amendment adopted;
+  `loop8/eval_all.py` as registered is reported beside it. On the base the `noise` arm already
+  retires 3/30 in both orders and with both evaluators (usage-v1 read 0/30 on 1.1.x). The rule is
+  not changed here: as written, it holds only if the candidate brings that to 0.
+- C1 and C2 count labelled pairs; a returned pair without a label is counted and not scored.
+  C4 scores slots that carry a label and reports the unlabelled ones.
+
+## Second amendment to usage-v4, 2026-11-11 — two scoring details, before the first candidate cell
+
+- B1 is scored twice: as usage-v1's `score.py` does (an item is active if any record of its kind
+  carrying its key is active) and by the earliest such record, the statement itself. On the base
+  the first reading has the valid W02 #236 active only because the same-session restatement that
+  retired it opens with the same words; the earliest-row reading has both valid retirements
+  happen. Rule B1's "both retirements labelled valid still happen" is read on the earliest row.
+- B2's revert case is also reported with a `maintain` between the commit and its revert, with
+  both git watermarks set back between them as usage-v1's replay does; the rule reads the single
+  `maintain` that sees both commits, as fixed above.
+- The per-item states of section A carry label classes of held-out items and are kept out of
+  this directory, in the private work directory.
+
+## Third amendment to usage-v4, 2026-11-11 — binding readings, ruled after the base figures and before any candidate cell
+
+These readings were set by the experiment's controller after the base figures had been produced
+and before any candidate cell ran. Where they differ from the first two amendments, they replace
+them. `verdict.py` in `results/usage-v4/` applies them.
+
+- B3. The binding evaluator is `loop8/eval_all.py` as registered; `results/usage-v1/eval_dated.py`
+  is reported as secondary. Because 1.2.0 already retires 3/30 on the `noise` arm, that clause
+  reads: candidate `noise` retirements are not above the base's in the same harness (3/30).
+- B2, reword. "Retires nothing" is literal: 0 retirements of any kind, typed or not. The
+  typed-only count is secondary.
+- B1. The `loss` clause is binding by usage-v1's `score.py` rule (base 9); the earliest-row
+  reading is secondary. The `valid` clause is read by the earliest matching record, since the
+  registered scorer misreads a retirement that did happen.
+- C4. Where the text names no share, both the lenient and the strict share must not fall.
+- C2 is read on the prompts whose returned id set is the same in both builds, with the number of
+  such prompts reported; the mean over all prompts is secondary.
+- C3, stale twin. The twin's retirement is taken on the store copy as rewound to each prompt, not
+  on today's copy, so that a read-path fix can reach 0. Base on this reading: W02 13 of 210
+  delivered prompts, L01 4 of 49.
+- Every entry point now refuses to write counts when any step failed (non-zero exit, timeout,
+  output that is not what the step prints, an error on stderr), and clears its earlier outputs.
+- C3, the catalogue arm. The rule names records "only listed in the catalogue" beside those cut
+  for budget. Its test: a session start, then prompts made of the records its catalogue lists
+  without a block, in the same session and in fresh ones. Base: 0 of 5 offered again in the same
+  session, 5 of 5 in a fresh one (W02 lists 6 such records; one is too short to ask by).
+- `verdict.py` never reads an absent or empty input as a pass: such a rule reads `missing`, as
+  does every E rule whose two builds' figures do not come from one interleaved run; C2's
+  `init --check-budget` half is a `manual` row.

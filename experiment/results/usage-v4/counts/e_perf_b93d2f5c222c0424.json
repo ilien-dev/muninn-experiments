@@ -1,0 +1,110 @@
+{
+ "binary_sha256": "b93d2f5c222c0424",
+ "binary_version": "muninn 1.2.0",
+ "build": "b93d2f5c222c0424",
+ "commit": "00d691630",
+ "labels": "final",
+ "section": "e_perf",
+ "splits": {
+  "all": {
+   "perf": {
+    "bench_sha256": "bdf280081d248d51",
+    "contracts_failed_per_run": [
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95",
+      "cue eval (ancestor lookup) p99"
+     ],
+     [],
+     [
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95",
+      "cue eval (ancestor lookup) p99"
+     ],
+     [],
+     [
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95",
+      "cue eval (ancestor lookup) p99"
+     ]
+    ],
+    "hooks": {
+     "SessionStart": {
+      "p50_median": 13.363,
+      "p95_median": 16.93,
+      "p95_runs": [
+       13.464,
+       21.799,
+       15.398,
+       18.945,
+       16.93,
+       18.888,
+       16.186
+      ]
+     },
+     "SubagentStart": {
+      "p50_median": 13.336,
+      "p95_median": 17.04,
+      "p95_runs": [
+       12.755,
+       13.404,
+       17.04,
+       17.141,
+       21.692,
+       14.358,
+       17.152
+      ]
+     },
+     "UserPromptSubmit_full": {
+      "p50_median": 15.57,
+      "p95_median": 20.547,
+      "p95_runs": [
+       16.474,
+       20.547,
+       27.763,
+       16.598,
+       33.246,
+       18.48,
+       22.962
+      ]
+     },
+     "UserPromptSubmit_gated": {
+      "p50_median": 10.518,
+      "p95_median": 14.14,
+      "p95_runs": [
+       9.846,
+       19.045,
+       15.219,
+       12.585,
+       17.968,
+       12.288,
+       14.14
+      ]
+     }
+    },
+    "ingest_200_ms_median": 11.2,
+    "interleaved_with": [],
+    "process_start_p50_median": 9.989,
+    "runs": 7
+   },
+   "stop_ingest_W02": {
+    "max_ms": 472.7,
+    "median_ms": 373.1,
+    "min_ms": 337.5,
+    "p90_ms": 439.7,
+    "records_from_synthetic_session": 21,
+    "runs": 20
+   }
+  }
+ }
+}
