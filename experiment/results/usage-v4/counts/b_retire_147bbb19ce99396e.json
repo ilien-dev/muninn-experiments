@@ -17,6 +17,50 @@
  "splits": {
   "all": {
    "b1": {
+    "inputs": {
+     "L01-now": {
+      "changed": 0,
+      "listed": 102,
+      "staged": 78,
+      "status": "ok",
+      "unrecoverable": 24
+     },
+     "W01": {
+      "changed": 0,
+      "listed": 3,
+      "staged": 0,
+      "status": "ok",
+      "unrecoverable": 3
+     },
+     "W02": {
+      "changed": 0,
+      "listed": 408,
+      "staged": 348,
+      "status": "ok",
+      "unrecoverable": 60
+     },
+     "W02-now": {
+      "changed": 0,
+      "listed": 574,
+      "staged": 514,
+      "status": "ok",
+      "unrecoverable": 60
+     },
+     "W05": {
+      "changed": 0,
+      "listed": 75,
+      "staged": 41,
+      "status": "ok",
+      "unrecoverable": 34
+     },
+     "W07": {
+      "changed": 0,
+      "listed": 93,
+      "staged": 7,
+      "status": "ok",
+      "unrecoverable": 86
+     }
+    },
     "item_states": {
      "now:L01:1116": "absent",
      "now:L01:1120": "absent",
@@ -243,9 +287,9 @@
     "loss_retired_v1": 5,
     "replay": {
      "L01-now": {
-      "batches": 543,
+      "batches": 538,
       "git": false,
-      "s": 49,
+      "s": 45,
       "sessions": 78
      },
      "W01": {
@@ -255,22 +299,22 @@
       "sessions": 0
      },
      "W02": {
-      "batches": 2752,
+      "batches": 2788,
       "git": true,
-      "s": 770,
-      "sessions": 343
+      "s": 748,
+      "sessions": 348
      },
      "W02-now": {
-      "batches": 3974,
+      "batches": 4101,
       "git": true,
-      "s": 1009,
-      "sessions": 508
+      "s": 1020,
+      "sessions": 513
      },
      "W05": {
-      "batches": 370,
+      "batches": 387,
       "git": false,
-      "s": 31,
-      "sessions": 38
+      "s": 30,
+      "sessions": 41
      },
      "W07": {
       "batches": 107,
@@ -287,6 +331,7 @@
      "old_not_a_fact:retired": 6,
      "unrelated:active": 1
     },
+    "status": "ok",
     "store_totals": {
      "L01-now": {
       "correction0": 12,
@@ -294,7 +339,7 @@
       "deadend0": 3,
       "decision0": 46,
       "decision1": 6,
-      "episode0": 809,
+      "episode0": 805,
       "episode1": 20,
       "invariant0": 12,
       "older_heir": 0,
@@ -312,7 +357,7 @@
       "deadend0": 3,
       "decision0": 1487,
       "decision1": 76,
-      "episode0": 2174,
+      "episode0": 2175,
       "episode1": 118,
       "invariant0": 63,
       "older_heir": 5,
@@ -323,9 +368,9 @@
       "correction0": 52,
       "correction1": 7,
       "deadend0": 4,
-      "decision0": 1770,
+      "decision0": 1883,
       "decision1": 111,
-      "episode0": 3063,
+      "episode0": 3056,
       "episode1": 218,
       "invariant0": 78,
       "older_heir": 5,
@@ -335,9 +380,9 @@
      "W05": {
       "correction0": 12,
       "correction1": 1,
-      "decision0": 66,
+      "decision0": 67,
       "decision1": 5,
-      "episode0": 399,
+      "episode0": 417,
       "episode1": 11,
       "invariant0": 10,
       "older_heir": 0,
@@ -381,7 +426,7 @@
      "v1:W02:236": "retired",
      "v1:W05:380": "retired"
     },
-    "wall_s": 1023
+    "wall_s": 1033
    },
    "b2": {
     "aba": {

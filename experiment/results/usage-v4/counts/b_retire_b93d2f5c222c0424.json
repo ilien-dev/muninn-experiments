@@ -17,6 +17,50 @@
  "splits": {
   "all": {
    "b1": {
+    "inputs": {
+     "L01-now": {
+      "changed": 0,
+      "listed": 102,
+      "staged": 78,
+      "status": "ok",
+      "unrecoverable": 24
+     },
+     "W01": {
+      "changed": 0,
+      "listed": 3,
+      "staged": 0,
+      "status": "ok",
+      "unrecoverable": 3
+     },
+     "W02": {
+      "changed": 0,
+      "listed": 408,
+      "staged": 348,
+      "status": "ok",
+      "unrecoverable": 60
+     },
+     "W02-now": {
+      "changed": 0,
+      "listed": 574,
+      "staged": 514,
+      "status": "ok",
+      "unrecoverable": 60
+     },
+     "W05": {
+      "changed": 0,
+      "listed": 75,
+      "staged": 41,
+      "status": "ok",
+      "unrecoverable": 34
+     },
+     "W07": {
+      "changed": 0,
+      "listed": 93,
+      "staged": 7,
+      "status": "ok",
+      "unrecoverable": 86
+     }
+    },
     "item_states": {
      "now:L01:1116": "retired",
      "now:L01:1120": "retired",
@@ -245,7 +289,7 @@
      "L01-now": {
       "batches": 538,
       "git": false,
-      "s": 69,
+      "s": 70,
       "sessions": 78
      },
      "W01": {
@@ -255,27 +299,27 @@
       "sessions": 0
      },
      "W02": {
-      "batches": 2753,
+      "batches": 2788,
       "git": true,
-      "s": 1041,
-      "sessions": 344
+      "s": 807,
+      "sessions": 348
      },
      "W02-now": {
-      "batches": 3832,
+      "batches": 4101,
       "git": true,
-      "s": 1331,
-      "sessions": 509
+      "s": 1081,
+      "sessions": 513
      },
      "W05": {
       "batches": 387,
       "git": false,
-      "s": 45,
+      "s": 51,
       "sessions": 41
      },
      "W07": {
       "batches": 107,
       "git": true,
-      "s": 22,
+      "s": 19,
       "sessions": 7
      }
     },
@@ -285,6 +329,7 @@
      "old_not_a_fact:retired": 12,
      "unrelated:retired": 1
     },
+    "status": "ok",
     "store_totals": {
      "L01-now": {
       "correction0": 11,
@@ -319,10 +364,10 @@
       "typed_superseded_noheir": 12
      },
      "W02-now": {
-      "correction0": 52,
-      "correction1": 19,
+      "correction0": 53,
+      "correction1": 18,
       "deadend0": 4,
-      "decision0": 1721,
+      "decision0": 1843,
       "decision1": 104,
       "episode0": 3324,
       "episode1": 267,
@@ -381,7 +426,7 @@
      "v1:W02:236": "retired",
      "v1:W05:380": "retired"
     },
-    "wall_s": 1362
+    "wall_s": 1093
    },
    "b2": {
     "aba": {

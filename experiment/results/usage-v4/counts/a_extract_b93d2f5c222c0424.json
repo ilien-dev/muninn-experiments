@@ -4,6 +4,13 @@
  "build": "b93d2f5c222c0424",
  "candidates_total": 141,
  "commit": "00d691630",
+ "inputs": {
+  "changed": 0,
+  "listed": 150,
+  "staged": 150,
+  "status": "ok",
+  "unrecoverable": 0
+ },
  "labels": "final",
  "section": "a_extract",
  "splits": {
