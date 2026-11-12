@@ -8,91 +8,86 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "7644ba7cd4705c2e",
+    "bench_sha256": "941974d71aa4faea",
     "contracts_failed_per_run": [
-     [],
      [
-      "hook SessionStart p95",
-      "hook SubagentStart p95",
-      "hook UserPromptSubmit gated p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit gated p95",
-      "hook UserPromptSubmit full p95"
+      "cue eval (ancestor lookup) p99"
      ],
      [],
      [
       "hook SessionStart p95",
-      "cue eval (ancestor lookup) p99"
+      "hook SubagentStart p95"
+     ],
+     [],
+     [
+      "hook UserPromptSubmit gated p95"
      ],
      [
-      "cue eval (ancestor lookup) p99"
+      "hook SessionStart p95"
      ],
      [
-      "cue eval (ancestor lookup) p99"
+      "hook SessionStart p95"
      ]
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 30.195,
-      "p95_median": 42.551,
+      "p50_median": 31.175,
+      "p95_median": 34.714,
       "p95_runs": [
-       40.286,
-       37.935,
-       42.627,
-       42.551,
-       47.386,
-       42.945,
-       38.157
+       34.714,
+       33.301,
+       45.517,
+       31.67,
+       33.341,
+       38.168,
+       66.453
       ]
      },
      "SubagentStart": {
-      "p50_median": 28.662,
-      "p95_median": 36.526,
+      "p50_median": 28.957,
+      "p95_median": 32.018,
       "p95_runs": [
-       32.914,
-       39.765,
-       34.476,
-       41.696,
-       38.25,
-       35.386,
-       36.526
+       30.449,
+       32.251,
+       47.018,
+       29.976,
+       32.018,
+       31.171,
+       34.397
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 31.427,
-      "p95_median": 40.144,
+      "p50_median": 32.262,
+      "p95_median": 35.398,
       "p95_runs": [
-       36.339,
-       40.699,
-       41.72,
-       42.495,
-       40.144,
-       38.139,
-       37.302
+       35.798,
+       32.982,
+       34.547,
+       35.398,
+       35.021,
+       37.23,
+       35.474
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 25.558,
-      "p95_median": 32.316,
+      "p50_median": 26.86,
+      "p95_median": 28.73,
       "p95_runs": [
-       30.643,
-       30.705,
-       35.768,
-       33.029,
-       32.316,
-       33.319,
-       29.983
+       28.912,
+       27.599,
+       28.978,
+       27.721,
+       29.838,
+       28.228,
+       28.73
       ]
      }
     },
-    "ingest_200_ms_median": 10.3,
+    "ingest_200_ms_median": 9.9,
     "interleaved_with": [
-     "4a6f91eb59b9f3be"
+     "a6e77fcb0f698494"
     ],
-    "process_start_p50_median": 25.411,
+    "process_start_p50_median": 26.741,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -110,14 +105,14 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 3349.2,
+    "first_write_open_ms": 2798.3,
     "interleaved_with": [
-     "4a6f91eb59b9f3be"
+     "a6e77fcb0f698494"
     ],
-    "max_ms": 450.2,
-    "median_ms": 308.7,
-    "min_ms": 294.8,
-    "p90_ms": 391.2,
+    "max_ms": 367.8,
+    "median_ms": 310.4,
+    "min_ms": 287.5,
+    "p90_ms": 346.2,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -139,15 +134,14 @@
    },
    "cand": {
     "bench_crate_sha256": "adf4dc453728100d",
-    "commit": "abea8eab9883843448c7b7747e2f88811f84e6d6",
+    "commit": "27ee4b7096534bee24b20711cb3b029210df467b",
     "dirty": false
    }
   },
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
-   "4a6f91eb59b9f3be": [
-    8356,
-    8386
+   "a6e77fcb0f698494": [
+    8356
    ],
    "b93d2f5c222c0424": [
     8345
@@ -155,14 +149,14 @@
   },
   "must_deliver": {
    "blocks": {
-    "4a6f91eb59b9f3be": 2,
+    "a6e77fcb0f698494": 2,
     "b93d2f5c222c0424": 6
    },
    "item": "P026",
    "verdict": "both"
   },
   "seed_rows_and_fingerprint": {
-   "4a6f91eb59b9f3be": [
+   "a6e77fcb0f698494": [
     [
      8336,
      "3a9091da7f1c5202"
