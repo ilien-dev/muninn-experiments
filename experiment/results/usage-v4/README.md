@@ -74,3 +74,14 @@ the control kappa on unrelated-or-not is below 0.6. `--labels final+pool` uses f
 extension and refuses an unusable or changed extension; without it nothing changes. `verdict.py`
 reads C1 from the `-pool` counts of both builds when they exist, says which label set it used, and
 prints how many returned pairs are still unscored.
+
+Session-start slots (seventh amendment) go into the same pool as their own item type: `export`
+replays the labelled session starts through each arm with an exe, exports the (store, block or
+catalogue line, record id) slots no frozen session-start label covers, plus at least 40 (default
+48) labelled slots the base shows as controls, and `ingest` gates them apart (kappa on
+worth-its-slot-or-not below 0.6: `out/usage-v4/labels/event_pool.jsonl` is marked unusable and C4
+reads frozen labels only, with the unlabelled count). `c_delivery.py` also records, per store, whether
+the catalogue's closing line claims the list is whole and whether that is true
+(`c4.whole_list_today`; a word-for-word twin of a listed record counts as covered). `verdict.py`
+reads C4 as amended: corrections and invariants neither shown nor listed do not rise against base,
+the closing line is truthful, and the literal count is printed.

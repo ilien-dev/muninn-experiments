@@ -154,16 +154,34 @@ if C0 and C1:
         out('C3 no retired statement served through its episode twin', 'W02 %d, L01 %d' % (z0['W02:prompts_with_stale_twin'], z0['L01:prompts_with_stale_twin']),
             'W02 %d, L01 %d' % (z1['W02:prompts_with_stale_twin'], z1['L01:prompts_with_stale_twin']),
             z1['W02:prompts_with_stale_twin'] == 0 and z1['L01:prompts_with_stale_twin'] == 0)
-    g0, g1 = C0['splits']['all'].get('c4'), C1['splits']['all'].get('c4')
+    # C4 shares are read on --split, with the pool's session-start labels when both builds' -pool
+    # counts carry them; coverage is read on today's copies (split all), seventh amendment
+    pool4 = bool(P0 and P1 and P0['splits'].get(sp, {}).get('c4', {}).get('all_slots') and P1['splits'].get(sp, {}).get('c4', {}).get('all_slots'))
+    S0, S1 = (P0, P1) if pool4 else (C0, C1)
+    g0, g1 = S0['splits'].get(sp, {}).get('c4'), S1['splits'].get(sp, {}).get('c4')
     if g0 and g1 and 'all_slots' in g0 and 'all_slots' in g1:
         l0, l1 = g0['all_slots'], g1['all_slots']
-        out('C4 share worth the slot does not fall (lenient and strict)', '%s / %s' % (l0['share_lenient_of_labelled'], l0['share_strict_of_labelled']),
-            '%s / %s' % (l1['share_lenient_of_labelled'], l1['share_strict_of_labelled']),
+        un0 = g0['blocks']['unlabelled'] + g0['catalogue']['unlabelled']
+        un1 = g1['blocks']['unlabelled'] + g1['catalogue']['unlabelled']
+        out('C4 share worth the slot does not fall (lenient and strict)', '%s / %s (unscored %d)' % (l0['share_lenient_of_labelled'], l0['share_strict_of_labelled'], un0),
+            '%s / %s (unscored %d)' % (l1['share_lenient_of_labelled'], l1['share_strict_of_labelled'], un1),
             l1['share_lenient_of_labelled'] >= l0['share_lenient_of_labelled'] and l1['share_strict_of_labelled'] >= l0['share_strict_of_labelled'],
-            'all slots; unlabelled slots are not scored: blocks %d, catalogue %d' % (g1['blocks']['unlabelled'], g1['catalogue']['unlabelled']))
-        cov0 = sum(v[k]['neither'] for v in g0['coverage_today'].values() for k in v)
-        cov1 = sum(v[k]['neither'] for v in g1['coverage_today'].values() for k in v)
-        out('C4 every active correction and invariant shown or listed', 'neither %d' % cov0, 'neither %d' % cov1, cov1 == 0)
+            'split %s; labels %s; unlabelled slots not scored: base %d, candidate %d' % (sp, 'frozen + pool slots' if pool4 else 'frozen only', un0, un1))
+    else:
+        out('C4 share worth the slot does not fall (lenient and strict)', None, None, None, 'no C4 counts for split %s' % sp)
+    # coverage does not depend on labels: the newest of the two counts files that carry it
+    pick = lambda Cx, Px: (Px if Px and Px['splits'].get('all', {}).get('c4', {}).get('whole_list_today') else Cx)['splits']['all'].get('c4', {})
+    v0, v1 = pick(C0, P0), pick(C1, P1)
+    if v0.get('coverage_today') and v1.get('coverage_today'):
+        cov0 = sum(v[k]['neither'] for v in v0['coverage_today'].values() for k in v)
+        cov1 = sum(v[k]['neither'] for v in v1['coverage_today'].values() for k in v)
+        wl1 = v1.get('whole_list_today') or {}
+        truthful = all(x.get('truthful') is True for x in wl1.values()) if wl1 else None
+        out('C4 (amended) corrections and invariants neither shown nor listed do not rise', 'neither %d' % cov0, 'neither %d' % cov1, cov1 <= cov0,
+            'literal clause (every one shown or listed): %s' % ('met' if cov1 == 0 else 'not met, %d neither' % cov1))
+        out('C4 (amended) the catalogue says truthfully whether its list is whole', '%d stores' % len(v0.get('whole_list_today') or {}),
+            '%s of %d stores truthful' % (sum(1 for x in wl1.values() if x.get('truthful') is True), len(wl1)) if wl1 else None,
+            truthful, 'stores with no closing line read missing' if wl1 and any(x.get('truthful') is None for x in wl1.values()) else '')
     w0, w1 = C0['splits']['all'].get('c5'), C1['splits']['all'].get('c5')
     if w0 and w1:
         out('C5 Spanish recall does not fall', w0['usage_v2']['spanish_reached'], w1['usage_v2']['spanish_reached'], w1['usage_v2']['spanish_reached'] >= w0['usage_v2']['spanish_reached'],
@@ -225,7 +243,7 @@ else:
     out('E', None, None, None)
 
 EXPECTED = ['A1', 'A2', 'A3', 'B1 loss', 'B1 both valid', 'B2 reword', 'B2 A-B-A', 'B2 revert', 'B3', 'C1', 'C2 mean', 'C2 init', 'C3 cut', 'C3 catalogue',
-            'C3 offered again after', 'C3 no retired', 'C4 share', 'C4 every', 'C5 Spanish', 'C5 gender', 'C5 every kind', 'C5 --all', 'D graph', 'D sidecar',
+            'C3 offered again after', 'C3 no retired', 'C4 share', 'C4 (amended) corrections', 'C4 (amended) the catalogue', 'C5 Spanish', 'C5 gender', 'C5 every kind', 'C5 --all', 'D graph', 'D sidecar',
             'D commit', 'D removal', 'E SessionStart', 'E SubagentStart', 'E UserPromptSubmit_full', 'E UserPromptSubmit_gated', 'E Stop']
 for e in EXPECTED:
     if not any(r['rule'].startswith(e) for r in rows):

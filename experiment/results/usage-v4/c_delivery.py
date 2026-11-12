@@ -223,6 +223,21 @@ if 'c4' in parts:
     for u, v in zip(units, labs):
         assert u['unit'] == v['unit']
         ul.setdefault((u['store'], u['form'], u['id']), v['label'])
+    pool_units = 0
+    if args.labels == 'final+pool':
+        # session-start slots labelled blind in the pool (seventh amendment), only if they passed
+        # their control gate; without the option nothing here changes
+        pm = F + '/out/usage-v4/labels/event_pool.ingest.json'
+        pe = F + '/out/usage-v4/labels/event_pool.jsonl'
+        if os.path.isfile(pm) and os.path.isfile(pe):
+            m = json.load(open(pm))
+            if m.get('usable') and sha16(pe) == m.get('extension_sha256') and sha16(D + '/labels/event_units_pass1.jsonl') == m.get('frozen_sha256'):
+                for x in (json.loads(l) for l in open(pe, encoding='utf-8')):
+                    if (x['store'], x['form'], x['id']) not in ul:
+                        ul[(x['store'], x['form'], x['id'])] = x['label']
+                        pool_units += 1
+            elif not m.get('usable'):
+                pool_units = -1  # recorded: the pool's session-start labels failed their gate
     for sp in splits_for(args.split):
         c = collections.Counter()
         for it, r in res_start.items():
@@ -246,8 +261,11 @@ if 'c4' in parts:
         n = c['B:slots'] + c['C:slots'] - c['B:unlabelled'] - c['C:unlabelled']
         out['all_slots'] = {'share_lenient_of_labelled': ratio(c['B:lenient'] + c['C:lenient'], n), 'share_strict_of_labelled': ratio(c['B:strict'] + c['C:strict'], n)}
         out['mean_tokens'] = round(c['tokens'] / c['starts'], 1) if c['starts'] else None
+        if args.labels == 'final+pool':
+            out['pool_units_used'] = pool_units
         per[sp]['c4'] = out
     cov = {}
+    whole = {}
     for st in ('L01', 'W02', 'W05', 'W06', 'W07', 'W08', 'W10'):
         d = copy_store(st, 'today')
         no_spawn(d)
@@ -256,9 +274,25 @@ if 'c4' in parts:
         listed = set(int(m.group(1)) for m in (CAT.match(l) for l in text.split('\n')) if m)
         con = sqlite3.connect('file:%s/.muninn/muninn.db?mode=ro' % d, uri=True)
         act = {k: set(r[0] for r in con.execute("select id from record where invalid=0 and kind=?", (k,))) for k in ('invariant', 'correction')}
+        eobj = {r[0]: (norm(r[1]), norm(r[2])) for r in con.execute("select id, object, body from record where invalid=0 and kind in ('decision','invariant','correction') and subject not like 'commit:%'")}
+        elig = set(eobj)
+        # a word-for-word twin (same object or same body) of a shown or listed record counts as
+        # covered: the catalogue drops twins
+        seen_text = {t for i in elig & (shown | listed) for t in eobj[i]}
+        twins = {i for i in elig - shown - listed if eobj[i][0] in seen_text or eobj[i][1] in seen_text}
         con.close()
+        # the line after the last catalogue entry says whether the list is whole
+        ls = [l for l in text.split('\n') if l.strip()]
+        idx = [i for i, l in enumerate(ls) if CAT.match(l)]
+        tail = ls[idx[-1] + 1] if idx and idx[-1] + 1 < len(ls) else ''
+        claim = True if tail.startswith('That is every') else (False if 'not listed' in tail else None)
+        miss = len(elig - shown - listed - twins)
+        # a store with nothing eligible and no catalogue has nothing to claim and is not misleading
+        whole[st] = {'claims_whole': claim, 'eligible': len(elig), 'twins_of_listed': len(twins), 'eligible_neither': miss,
+                     'truthful': (True if (claim is None and not elig) else None) if claim is None else claim == (miss == 0)}
         cov[st] = {k: {'active': len(v), 'shown': len(v & shown), 'listed_only': len((v & listed) - shown), 'neither': len(v - shown - listed)} for k, v in act.items()}
     per['all'].setdefault('c4', {})['coverage_today'] = cov
+    per['all']['c4']['whole_list_today'] = whole
     items_out['c4'] = {k: {'blocks': v['blocks'], 'cat': v['cat']} for k, v in sorted(res_start.items())}
 
 # -------------------------------------------------------------------------------------- C3
