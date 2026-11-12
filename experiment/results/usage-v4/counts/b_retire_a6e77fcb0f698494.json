@@ -108,14 +108,14 @@
      "v1:W02:96": "absent",
      "v1:W02:980": "retired",
      "v1:W05:148": "absent",
-     "v1:W05:319": "active",
-     "v1:W05:328": "active",
-     "v1:W05:331": "active",
-     "v1:W05:355": "active",
-     "v1:W05:380": "retired",
-     "v1:W05:394": "retired",
-     "v1:W05:431": "active",
-     "v1:W05:485": "retired",
+     "v1:W05:319": "absent",
+     "v1:W05:328": "absent",
+     "v1:W05:331": "absent",
+     "v1:W05:355": "absent",
+     "v1:W05:380": "absent",
+     "v1:W05:394": "absent",
+     "v1:W05:431": "absent",
+     "v1:W05:485": "absent",
      "v1:W05:644": "retired",
      "v1:W05:667": "active",
      "v1:W07:170": "absent",
@@ -218,14 +218,14 @@
      "v1:W02:96": "absent",
      "v1:W02:980": "retired",
      "v1:W05:148": "absent",
-     "v1:W05:319": "active",
-     "v1:W05:328": "active",
-     "v1:W05:331": "active",
-     "v1:W05:355": "active",
-     "v1:W05:380": "retired",
-     "v1:W05:394": "retired",
-     "v1:W05:431": "active",
-     "v1:W05:485": "retired",
+     "v1:W05:319": "absent",
+     "v1:W05:328": "absent",
+     "v1:W05:331": "absent",
+     "v1:W05:355": "absent",
+     "v1:W05:380": "absent",
+     "v1:W05:394": "absent",
+     "v1:W05:431": "absent",
+     "v1:W05:485": "absent",
      "v1:W05:644": "retired",
      "v1:W05:667": "active",
      "v1:W07:170": "absent",
@@ -243,9 +243,9 @@
     "loss_retired_v1": 5,
     "replay": {
      "L01-now": {
-      "batches": 543,
+      "batches": 544,
       "git": false,
-      "s": 70,
+      "s": 46,
       "sessions": 78
      },
      "W01": {
@@ -257,25 +257,25 @@
      "W02": {
       "batches": 2742,
       "git": true,
-      "s": 999,
+      "s": 737,
       "sessions": 339
      },
      "W02-now": {
       "batches": 3970,
       "git": true,
-      "s": 1275,
+      "s": 995,
       "sessions": 504
      },
      "W05": {
-      "batches": 370,
+      "batches": 219,
       "git": false,
-      "s": 41,
-      "sessions": 38
+      "s": 18,
+      "sessions": 35
      },
      "W07": {
       "batches": 107,
       "git": true,
-      "s": 20,
+      "s": 13,
       "sessions": 7
      }
     },
@@ -293,12 +293,12 @@
       "correction1": 1,
       "deadend0": 3,
       "decision0": 46,
-      "decision1": 6,
-      "episode0": 811,
-      "episode1": 20,
+      "decision1": 7,
+      "episode0": 809,
+      "episode1": 22,
       "invariant0": 12,
       "older_heir": 0,
-      "typed_superseded_heir": 7,
+      "typed_superseded_heir": 8,
       "typed_superseded_noheir": 0
      },
      "W01": {
@@ -333,15 +333,14 @@
       "typed_superseded_noheir": 0
      },
      "W05": {
-      "correction0": 12,
-      "correction1": 1,
-      "decision0": 66,
-      "decision1": 5,
-      "episode0": 399,
-      "episode1": 11,
-      "invariant0": 10,
+      "correction0": 5,
+      "decision0": 37,
+      "decision1": 3,
+      "episode0": 239,
+      "episode1": 7,
+      "invariant0": 4,
       "older_heir": 0,
-      "typed_superseded_heir": 6,
+      "typed_superseded_heir": 3,
       "typed_superseded_noheir": 0
      },
      "W07": {
@@ -355,33 +354,33 @@
      }
     },
     "usage_v1_95": {
-     "loss:absent": 5,
-     "loss:active": 15,
+     "loss:absent": 8,
+     "loss:active": 12,
      "loss:retired": 5,
-     "noloss:absent": 43,
-     "noloss:active": 14,
-     "noloss:retired": 13,
-     "old_not_a_fact:absent": 40,
-     "old_not_a_fact:active": 8,
-     "old_not_a_fact:retired": 5,
-     "same_subject_no_change:absent": 3,
+     "noloss:absent": 48,
+     "noloss:active": 12,
+     "noloss:retired": 10,
+     "old_not_a_fact:absent": 42,
+     "old_not_a_fact:active": 7,
+     "old_not_a_fact:retired": 4,
+     "same_subject_no_change:absent": 4,
      "same_subject_no_change:active": 3,
-     "same_subject_no_change:retired": 8,
-     "unrelated:absent": 5,
-     "unrelated:active": 17,
+     "same_subject_no_change:retired": 7,
+     "unrelated:absent": 9,
+     "unrelated:active": 13,
      "unrelated:retired": 4,
-     "valid:active": 1,
-     "valid:retired": 1
+     "valid:absent": 1,
+     "valid:active": 1
     },
     "valid_states": {
      "v1:W02:236": "active",
-     "v1:W05:380": "retired"
+     "v1:W05:380": "absent"
     },
     "valid_states_earliest_row": {
      "v1:W02:236": "retired",
-     "v1:W05:380": "retired"
+     "v1:W05:380": "absent"
     },
-    "wall_s": 1298
+    "wall_s": 1011
    },
    "b2": {
     "aba": {
