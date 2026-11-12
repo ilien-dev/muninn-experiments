@@ -7426,3 +7426,13 @@ revision 2. Rule E itself is unchanged.
   copies' schema against the one each build creates and every timed Stop in the heartbeat.
   Revision-2 E counts (`e1c7980348b0047f`, `a01c2a1d3fb2c9c8` and the base figures paired with
   them) read `missing` under `verdict.py`. Rule E is unchanged.
+
+## Sixth amendment to usage-v4, 2026-11-11 — the controls of the C1 blind labels
+
+Fixed before any pool labelling. The pool the fourth amendment asks for also carries controls: a
+seeded sample (seed 20261111) of at least 60, by default 80, pairs the base build returned that
+already carry a frozen label, stratified by label, shuffled among the unlabelled pairs so the
+labeller cannot tell them apart. If the labeller's agreement with the frozen labels on those
+controls has a Cohen's kappa below 0.6 on unrelated-or-not, the pool labels are not used and C1 is
+not read until the pool is relabelled. The pool labels extend the frozen delivery labels in a
+separate file; the frozen file and its hash do not change.

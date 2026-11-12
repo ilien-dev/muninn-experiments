@@ -117,11 +117,17 @@ else:
 # ---------------------------------------------------------------------------------------------- C
 C0, C1 = load('c_delivery', a.base), load('c_delivery', a.cand)
 if C0 and C1:
-    c0, c1 = C0['splits'][sp].get('c12'), C1['splits'][sp].get('c12')
+    # C1 reads the counts scored with frozen + pool labels when both builds have them (fourth amendment)
+    P0, P1 = load('c_delivery', a.base + '-pool'), load('c_delivery', a.cand + '-pool')
+    use_pool = bool(P0 and P1 and P0['splits'].get(sp, {}).get('c12') and P1['splits'].get(sp, {}).get('c12'))
+    Q0, Q1 = (P0, P1) if use_pool else (C0, C1)
+    c0, c1 = Q0['splits'][sp].get('c12'), Q1['splits'][sp].get('c12')
     if c0 and c1:
-        out('C1 unrelated returned falls >= 30 %, useful falls <= 1', 'unrelated %d, useful %d' % (c0['unrelated_returned'], c0['useful_returned']),
-            'unrelated %d, useful %d' % (c1['unrelated_returned'], c1['useful_returned']),
-            c1['unrelated_returned'] <= 0.7 * c0['unrelated_returned'] and c1['useful_returned'] >= c0['useful_returned'] - 1, 'split %s' % sp)
+        out('C1 unrelated returned falls >= 30 %, useful falls <= 1', 'unrelated %d, useful %d (unscored %d)' % (c0['unrelated_returned'], c0['useful_returned'], c0['unlabelled_returned']),
+            'unrelated %d, useful %d (unscored %d)' % (c1['unrelated_returned'], c1['useful_returned'], c1['unlabelled_returned']),
+            c1['unrelated_returned'] <= 0.7 * c0['unrelated_returned'] and c1['useful_returned'] >= c0['useful_returned'] - 1,
+            'split %s; labels %s; returned pairs still unscored: base %d of %d, candidate %d of %d' % (
+                sp, 'frozen + pool extension' if use_pool else 'frozen only', c0['unlabelled_returned'], c0['returned'], c1['unlabelled_returned'], c1['returned']))
     # C2 is not a held-out rule: it reads every prompt (split all)
     ca0, ca1 = C0['splits']['all'].get('c12'), C1['splits']['all'].get('c12')
     same = (ca1 or {}).get('c2_same_ids')

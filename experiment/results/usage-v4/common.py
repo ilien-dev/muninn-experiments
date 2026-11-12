@@ -54,6 +54,22 @@ def splits_for(arg):
 def labels(name, which='final'):
     """Final labels (frozen, ids + codes) or the first labeller's, mapped to the same codes."""
     F = fixtures()
+    if which == 'final+pool':
+        base = labels(name, 'final')
+        if name != 'delivery':
+            return base
+        meta = F + '/out/usage-v4/labels/delivery_pool.ingest.json'
+        ext = F + '/out/usage-v4/labels/delivery_pool.jsonl'
+        if not os.path.isfile(meta) or not os.path.isfile(ext):
+            raise SystemExit('final+pool: no pool extension (run c_pool.py ingest first)')
+        m = json.load(open(meta))
+        if not m.get('usable'):
+            raise SystemExit('final+pool: the pool labels failed their control agreement and are not used')
+        if sha16(F + '/out/usage-v4/labels/delivery.jsonl') != m['frozen_sha256'] or sha16(ext) != m['extension_sha256']:
+            raise SystemExit('final+pool: the frozen file or the extension changed since ingest')
+        have = {(x['item'], x['id']) for x in base}
+        extra = [json.loads(l) for l in open(ext, encoding='utf-8')]
+        return base + [x for x in extra if (x['item'], x['id']) not in have]
     if which == 'final':
         return [json.loads(l) for l in open(F + '/out/usage-v4/labels/%s.jsonl' % name, encoding='utf-8')]
     if name == 'precision':
@@ -94,8 +110,9 @@ def parser(desc):
     ap.add_argument('--bin', required=True, help='muninn binary to measure')
     ap.add_argument('--split', choices=['design', 'heldout', 'all'], default='all')
     ap.add_argument('--build', help='label for counts/<section>_<build>.json (default: sha256 prefix of --bin)')
-    ap.add_argument('--labels', choices=['final', 'first'], default='final',
-                    help='final = frozen usage-v4 labels; first = the first labeller (reproduces the analysis figures)')
+    ap.add_argument('--labels', choices=['final', 'first', 'final+pool'], default='final',
+                    help='final = frozen usage-v4 labels; first = the first labeller (reproduces the analysis figures); '
+                         'final+pool = frozen delivery labels plus the pool extension (c_pool.py ingest), counts in <build>-pool')
     ap.add_argument('--commit', help='commit the measured build was made from (recorded in the counts)')
     return ap
 
@@ -155,6 +172,8 @@ def write_counts(section, build, args, per_split, extra=None):
 def build_name(args):
     if args.labels == 'first' and not args.build:
         return sha16(args.bin) + '-first'
+    if args.labels == 'final+pool' and not args.build:
+        return sha16(args.bin) + '-pool'
     return args.build or sha16(args.bin)
 
 

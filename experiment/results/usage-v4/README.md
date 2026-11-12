@@ -53,3 +53,24 @@ without timing, and `check_e_gates.py <base> <candidate>` checks the gates on do
 which is how the wrappers were checked. `splits/` holds the design and held-out ids, and
 `DESIGN_ITEMS.md` says which private files an implementer may read. `BASELINE.md` has the base
 figures and marks which reading of each rule is binding.
+
+## Blind-label pool (`c_pool.py`, fourth amendment)
+
+```sh
+python -I c_pool.py export --arms <base sha16> <arm sha16> ... [--bins <exe> ...] [--short-prompts <ids>]
+python -I c_pool.py ingest --labels $MUNINN_USAGE_FIXTURES/out/usage-v4/pool/labels.jsonl
+python -I c_delivery.py --bin <exe> --labels final+pool --parts c12      # counts in <build>-pool
+```
+
+`export` collects the (prompt, record) pairs any arm returned that no frozen label covers, adds a
+seeded sample of at least 60 frozen-labelled pairs the base returned as controls (stratified by
+label), shuffles them and writes, under `$MUNINN_USAGE_FIXTURES/out/usage-v4/pool/` (private),
+`labelling.jsonl` (opaque ids, prompt and record text, no arm, build, split or label),
+`key.json` (kept from the labeller), `LABELLING.md` and `export.json` (counts). `ingest`
+refuses a file with a missing or invalid label, measures agreement on the controls, writes the
+labels as `out/usage-v4/labels/delivery_pool.jsonl` beside the frozen file (which is never
+written) with both sha256 in `delivery_pool.ingest.json`, and marks the extension unusable when
+the control kappa on unrelated-or-not is below 0.6. `--labels final+pool` uses frozen plus
+extension and refuses an unusable or changed extension; without it nothing changes. `verdict.py`
+reads C1 from the `-pool` counts of both builds when they exist, says which label set it used, and
+prints how many returned pairs are still unscored.
