@@ -3,13 +3,15 @@
  "binary_version": "muninn 1.2.0",
  "build": "b93d2f5c222c0424",
  "commit": "6ba7c7586",
+ "harness_rev": 2,
  "labels": "final",
  "section": "e_perf",
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "210a92927deef560",
+    "bench_sha256": "78417dd353a9a4b9",
     "contracts_failed_per_run": [
+     [],
      [],
      [
       "hook UserPromptSubmit gated p95"
@@ -17,78 +19,110 @@
      [],
      [],
      [],
-     [],
      []
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 14.188,
-      "p95_median": 15.544,
+      "p50_median": 17.952,
+      "p95_median": 19.55,
       "p95_runs": [
-       17.632,
-       14.089,
-       14.894,
-       15.308,
-       15.544,
-       16.203,
-       16.36
+       17.576,
+       18.004,
+       18.754,
+       19.55,
+       19.699,
+       19.778,
+       20.208
       ]
      },
      "SubagentStart": {
-      "p50_median": 13.849,
-      "p95_median": 15.049,
+      "p50_median": 16.078,
+      "p95_median": 16.688,
       "p95_runs": [
-       14.477,
-       14.492,
-       15.049,
-       14.639,
-       15.071,
-       15.196,
-       15.757
+       15.44,
+       15.909,
+       16.447,
+       16.688,
+       17.623,
+       17.531,
+       18.366
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 13.889,
-      "p95_median": 14.707,
+      "p50_median": 19.541,
+      "p95_median": 20.457,
       "p95_runs": [
-       14.418,
-       13.785,
-       15.569,
-       14.704,
-       14.707,
-       15.411,
-       18.519
+       19.113,
+       19.537,
+       19.857,
+       20.457,
+       21.305,
+       20.941,
+       21.458
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 12.498,
-      "p95_median": 14.036,
+      "p50_median": 13.677,
+      "p95_median": 14.976,
       "p95_runs": [
-       14.135,
-       13.268,
-       13.271,
-       13.352,
-       14.255,
-       14.036,
-       15.188
+       13.232,
+       13.751,
+       16.511,
+       14.663,
+       14.976,
+       15.127,
+       15.543
       ]
      }
     },
-    "ingest_200_ms_median": 10.0,
+    "ingest_200_ms_median": 9.6,
     "interleaved_with": [
      "e1c7980348b0047f"
     ],
-    "process_start_p50_median": 11.631,
-    "runs": 7
+    "process_start_p50_median": 12.885,
+    "runs": 7,
+    "store_checks": {
+     "all_hooks_ok": true,
+     "check_prompts_delivered": [
+      {
+       "SessionStart": false,
+       "UserPromptSubmit": false
+      }
+     ],
+     "hook_errors": 0,
+     "hook_finishes": 8414,
+     "schema_versions": [
+      "2"
+     ]
+    }
    },
    "stop_ingest_W02": {
-    "max_ms": 307.3,
-    "median_ms": 299.4,
-    "min_ms": 289.3,
-    "p90_ms": 305.7,
+    "first_write_open_ms": 2471.3,
+    "interleaved_with": [
+     "e1c7980348b0047f"
+    ],
+    "max_ms": 300.6,
+    "median_ms": 292.8,
+    "min_ms": 280.2,
+    "p90_ms": 296.8,
     "records_from_synthetic_session": 21,
-    "runs": 20
+    "runs": 20,
+    "schema_after": "2",
+    "schema_before": "2"
    }
+  }
+ },
+ "workload": {
+  "base_bench": "copy of the base tree with the candidate bench's 8,336-row fire_ledger seed added after the cue load",
+  "base_bench_main_rs_sha256": "37e663fcc9ca8229",
+  "equal": true,
+  "fire_ledger_rows_per_bench_store": {
+   "b93d2f5c222c0424": [
+    8345
+   ],
+   "e1c7980348b0047f": [
+    8345
+   ]
   }
  }
 }

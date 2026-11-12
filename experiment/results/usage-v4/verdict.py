@@ -190,14 +190,23 @@ if D0:
 E0, E1 = load('e_perf', a.base), load('e_perf', a.cand)
 if E0 and E1 and 'perf' in E0['splits']['all'] and 'perf' in E1['splits']['all']:
     h0, h1 = E0['splits']['all']['perf']['hooks'], E1['splits']['all']['perf']['hooks']
-    inter = E1['splits']['all']['perf'].get('interleaved_with') == [E0['binary_sha256']] or E0['splits']['all']['perf'].get('interleaved_with') == [E1['binary_sha256']]
+    p0, p1 = E0['splits']['all']['perf'], E1['splits']['all']['perf']
+    inter = p1.get('interleaved_with') == [E0['binary_sha256']] or p0.get('interleaved_with') == [E1['binary_sha256']]
+    # harness rev 2: each build timed by a bench of its own source, every run checked; rev-1 counts
+    # timed the base on a store it refused and are never a reading
+    rev = E0.get('harness_rev', 1) >= 2 and E1.get('harness_rev', 1) >= 2
+    checked = all(p.get('store_checks', {}).get('all_hooks_ok') for p in (p0, p1))
+    valid = inter and rev and checked
+    why = [] if valid else [w for w, c in (('not from one interleaved run', inter), ('counts from before harness rev 2', rev), ('bench stores not checked', checked)) if not c]
+    wl = E1.get('workload') or {}
+    note = ('missing: ' + ', '.join(why)) if why else ('workloads equal' if wl.get('equal') else 'CAVEAT: ' + wl.get('caveat', 'workload not recorded'))
     for h in h0:
-        out('E %s p95 <= 1.10 x base' % h, h0[h]['p95_median'], h1[h]['p95_median'], h1[h]['p95_median'] <= 1.10 * h0[h]['p95_median'] if inter else None,
-            '' if inter else 'not from one interleaved run: missing')
+        out('E %s p95 <= 1.10 x base' % h, h0[h]['p95_median'], h1[h]['p95_median'], h1[h]['p95_median'] <= 1.10 * h0[h]['p95_median'] if valid else None, note)
     s0, s1 = E0['splits']['all'].get('stop_ingest_W02'), E1['splits']['all'].get('stop_ingest_W02')
     if s0 and s1:
-        out('E Stop with ingest, W02: candidate median lower', s0['median_ms'], s1['median_ms'], s1['median_ms'] < s0['median_ms'] if inter else None,
-            '' if inter else 'not from one interleaved run: missing')
+        sv = rev and (s1.get('interleaved_with') == [E0['binary_sha256']] or s0.get('interleaved_with') == [E1['binary_sha256']])
+        out('E Stop with ingest, W02: candidate median lower', s0['median_ms'], s1['median_ms'], s1['median_ms'] < s0['median_ms'] if sv else None,
+            ('migration (first write open) %s ms, not counted' % s1.get('first_write_open_ms')) if sv else 'missing: counts from before harness rev 2 or not interleaved')
 else:
     out('E', None, None, None)
 

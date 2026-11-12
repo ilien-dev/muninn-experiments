@@ -135,18 +135,18 @@ C5, `muninn why`. usage-v2's questions (sha256 `83ff8cae70f0c743`): Spanish 27 o
 
 ## E. Latency (`e_perf.py`)
 
-`muninn-bench perf --strict`, 7 runs, bench `bdf280081d248d51`. Median over runs:
+`muninn-bench perf --strict`, 7 runs, bench `78417dd353a9a4b9`. Median over runs:
 
 | hook | p50 ms | p95 ms | p95 per run |
 |---|---|---|---|
-| SessionStart | 13.363 | 16.93 | 13.464, 21.799, 15.398, 18.945, 16.93, 18.888, 16.186 |
-| SubagentStart | 13.336 | 17.04 | 12.755, 13.404, 17.04, 17.141, 21.692, 14.358, 17.152 |
-| UserPromptSubmit_full | 15.57 | 20.547 | 16.474, 20.547, 27.763, 16.598, 33.246, 18.48, 22.962 |
-| UserPromptSubmit_gated | 10.518 | 14.14 | 9.846, 19.045, 15.219, 12.585, 17.968, 12.288, 14.14 |
+| SessionStart | 17.952 | 19.55 | 17.576, 18.004, 18.754, 19.55, 19.699, 19.778, 20.208 |
+| SubagentStart | 16.078 | 16.688 | 15.44, 15.909, 16.447, 16.688, 17.623, 17.531, 18.366 |
+| UserPromptSubmit_full | 19.541 | 20.457 | 19.113, 19.537, 19.857, 20.457, 21.305, 20.941, 21.458 |
+| UserPromptSubmit_gated | 13.677 | 14.976 | 13.232, 13.751, 16.511, 14.663, 14.976, 15.127, 15.543 |
 
-Process start p50 9.989 ms; ingest of 200 records 11.2 ms. Contracts failed per run: hook SessionStart p95, hook SubagentStart p95, hook UserPromptSubmit full p95; hook SessionStart p95, hook UserPromptSubmit gated p95, cue eval (ancestor lookup) p99; hook UserPromptSubmit gated p95, hook UserPromptSubmit full p95, cue eval (ancestor lookup) p99; none; hook UserPromptSubmit gated p95, hook UserPromptSubmit full p95, cue eval (ancestor lookup) p99; none; hook UserPromptSubmit gated p95, hook UserPromptSubmit full p95, cue eval (ancestor lookup) p99.
+Process start p50 12.885 ms; ingest of 200 records 9.6 ms. Contracts failed per run: none; none; hook UserPromptSubmit gated p95; none; none; none; none.
 
-Stop with a one-turn ingest on a copy of W02, 20 runs: median 373.1 ms, p90 439.7, min 337.5, max 472.7.
+Stop with a one-turn ingest on a copy of W02, 20 runs: median 292.8 ms, p90 296.8, min 280.2, max 300.6.
 
 ## Reading notes
 

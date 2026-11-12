@@ -2,19 +2,23 @@
  "binary_sha256": "e1c7980348b0047f",
  "binary_version": "muninn 1.2.0",
  "build": "e1c7980348b0047f",
+ "commit": "6ba7c7586",
+ "harness_rev": 2,
  "labels": "final",
  "section": "e_perf",
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "210a92927deef560",
+    "bench_sha256": "7b83497fe1894131",
     "contracts_failed_per_run": [
      [
       "hook SessionStart p95",
+      "hook SubagentStart p95",
       "hook UserPromptSubmit full p95"
      ],
      [
       "hook SessionStart p95",
+      "hook SubagentStart p95",
       "hook UserPromptSubmit full p95"
      ],
      [
@@ -25,13 +29,6 @@
      [
       "hook SessionStart p95",
       "hook SubagentStart p95",
-      "hook UserPromptSubmit gated p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook SubagentStart p95",
-      "hook UserPromptSubmit gated p95",
       "hook UserPromptSubmit full p95"
      ],
      [
@@ -43,79 +40,112 @@
      [
       "hook SessionStart p95",
       "hook SubagentStart p95",
-      "hook UserPromptSubmit gated p95",
       "hook UserPromptSubmit full p95"
-     ]
+     ],
+     []
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 11.214,
-      "p95_median": 12.439,
+      "p50_median": 13.18,
+      "p95_median": 14.855,
       "p95_runs": [
-       11.68,
-       11.286,
-       12.439,
-       12.274,
-       12.723,
-       14.402,
-       14.101
+       15.198,
+       13.37,
+       13.775,
+       14.855,
+       14.791,
+       14.878,
+       15.377
       ]
      },
      "SubagentStart": {
-      "p50_median": 9.049,
-      "p95_median": 10.353,
+      "p50_median": 11.184,
+      "p95_median": 12.444,
       "p95_runs": [
-       9.349,
-       8.758,
-       10.353,
-       10.148,
-       11.063,
-       10.912,
-       13.062
+       10.703,
+       11.161,
+       11.661,
+       12.444,
+       12.965,
+       12.825,
+       13.184
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 13.803,
-      "p95_median": 15.094,
+      "p50_median": 14.818,
+      "p95_median": 15.687,
       "p95_runs": [
-       13.111,
-       12.621,
-       13.204,
-       17.328,
-       15.094,
-       15.996,
-       16.096
+       14.227,
+       14.523,
+       15.084,
+       15.758,
+       15.687,
+       16.024,
+       16.723
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 6.798,
-      "p95_median": 8.076,
+      "p50_median": 8.269,
+      "p95_median": 9.387,
       "p95_runs": [
-       6.799,
-       6.221,
-       6.97,
-       8.076,
-       8.899,
-       9.652,
-       10.094
+       8.131,
+       8.539,
+       9.194,
+       9.387,
+       9.69,
+       10.183,
+       10.666
       ]
      }
     },
-    "ingest_200_ms_median": 9.7,
+    "ingest_200_ms_median": 9.8,
     "interleaved_with": [
      "b93d2f5c222c0424"
     ],
-    "process_start_p50_median": 5.413,
-    "runs": 7
+    "process_start_p50_median": 7.241,
+    "runs": 7,
+    "store_checks": {
+     "all_hooks_ok": true,
+     "check_prompts_delivered": [
+      {
+       "SessionStart": false,
+       "UserPromptSubmit": false
+      }
+     ],
+     "hook_errors": 0,
+     "hook_finishes": 8414,
+     "schema_versions": [
+      "3"
+     ]
+    }
    },
    "stop_ingest_W02": {
-    "max_ms": 347.2,
-    "median_ms": 280.2,
-    "min_ms": 275.6,
-    "p90_ms": 342.7,
+    "first_write_open_ms": 2711.4,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "max_ms": 333.1,
+    "median_ms": 272.6,
+    "min_ms": 268.1,
+    "p90_ms": 276.9,
     "records_from_synthetic_session": 21,
-    "runs": 20
+    "runs": 20,
+    "schema_after": "3",
+    "schema_before": "2"
    }
+  }
+ },
+ "workload": {
+  "base_bench": "copy of the base tree with the candidate bench's 8,336-row fire_ledger seed added after the cue load",
+  "base_bench_main_rs_sha256": "37e663fcc9ca8229",
+  "equal": true,
+  "fire_ledger_rows_per_bench_store": {
+   "b93d2f5c222c0424": [
+    8345
+   ],
+   "e1c7980348b0047f": [
+    8345
+   ]
   }
  }
 }

@@ -7399,3 +7399,22 @@ Set by the experiment's controller after Task 3's candidate (`c202760b4fdcc86a`,
 - The reading includes an attribution arm without R-07 (the combined build with commit
   `0024d4828` reverted). R-07 is reverted if its arm makes C1 worse than the arm without it, or if
   the combined C1 fails.
+
+## Fifth amendment to usage-v4, 2026-11-11 — a defect in the E harness, found by Task 3
+
+`results/usage-v4/e_perf.py` (harness revision 1) timed both builds with one `muninn-bench` built
+from the candidate's tree. Once the candidate's schema moved to version 3, the base binary (1.2.0,
+schema 2) refused every store that bench created ("schema version 3 is newer than this binary
+supports"), exited 0 with nothing delivered, and every base hook figure timed that error path.
+`verdict.py` still printed `pass` on the E rows. The committed E figures of the candidate builds
+`1751bca9f2f1a9cc`, `01b82fa557523015`, `c202760b4fdcc86a` and `e1c7980348b0047f`, and the base
+figures interleaved with them, are therefore not a reading of rule E. The intermediate build
+`0ff051d9890df83b` is in the same case.
+
+Harness revision 2 times each build with a bench built from its own source, so each runs on a
+store its own code created; the base's bench is built from a copy of the 1.2.0 tree with the
+candidate bench's 8,336-row `fire_ledger` seed added, so both seed the same workload. Every run is
+checked through the store's own heartbeat (every hook invocation finished `ok` with no error) and
+any miss blocks the counts. Stop-with-ingest gives each build its own copy of W02 and times the
+migrating first write open apart from the 20 timed Stops. `verdict.py` reads E only from counts of
+revision 2. Rule E itself is unchanged.
