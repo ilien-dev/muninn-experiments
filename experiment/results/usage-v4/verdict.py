@@ -19,11 +19,12 @@ ap.add_argument('base')
 ap.add_argument('cand')
 ap.add_argument('--split', default='heldout', choices=['design', 'heldout', 'all'])
 ap.add_argument('--json', action='store_true')
+ap.add_argument('--counts-dir', help='read counts from this directory instead of counts/ (for checks on doctored copies)')
 a = ap.parse_args()
 
 
 def load(sec, b):
-    p = os.path.join(HERE, 'counts', '%s_%s.json' % (sec, b))
+    p = os.path.join(a.counts_dir or os.path.join(HERE, 'counts'), '%s_%s.json' % (sec, b))
     return json.load(open(p)) if os.path.isfile(p) else None
 
 
@@ -194,19 +195,26 @@ if E0 and E1 and 'perf' in E0['splits']['all'] and 'perf' in E1['splits']['all']
     inter = p1.get('interleaved_with') == [E0['binary_sha256']] or p0.get('interleaved_with') == [E1['binary_sha256']]
     # harness rev 2: each build timed by a bench of its own source, every run checked; rev-1 counts
     # timed the base on a store it refused and are never a reading
-    rev = E0.get('harness_rev', 1) >= 2 and E1.get('harness_rev', 1) >= 2
+    # revision 3: equal workloads by seed count and fingerprint, a must-deliver case on both builds.
+    # Revision-2 counts called a row count equal and did not gate delivery: they read missing.
+    rev = E0.get('harness_rev', 1) >= 3 and E1.get('harness_rev', 1) >= 3
     checked = all(p.get('store_checks', {}).get('all_hooks_ok') for p in (p0, p1))
     valid = inter and rev and checked
-    why = [] if valid else [w for w, c in (('not from one interleaved run', inter), ('counts from before harness rev 2', rev), ('bench stores not checked', checked)) if not c]
+    why = [] if valid else [w for w, c in (('not from one interleaved run', inter), ('counts from before harness rev 3', rev), ('bench stores not checked', checked)) if not c]
     wl = E1.get('workload') or {}
-    note = ('missing: ' + ', '.join(why)) if why else ('workloads equal' if wl.get('equal') else 'CAVEAT: ' + wl.get('caveat', 'workload not recorded'))
+    if valid and wl.get('equal') is not True:
+        valid, why = False, ['workloads not equal: ' + wl.get('caveat', 'not recorded')]
+    if valid and (wl.get('must_deliver') or {}).get('verdict') != 'both':
+        valid, why = False, ['must-deliver case: %s' % (wl.get('must_deliver') or {}).get('verdict', 'not recorded')]
+    note = ('missing: ' + ', '.join(why)) if why else 'workloads equal, must-deliver on both'
     for h in h0:
         out('E %s p95 <= 1.10 x base' % h, h0[h]['p95_median'], h1[h]['p95_median'], h1[h]['p95_median'] <= 1.10 * h0[h]['p95_median'] if valid else None, note)
     s0, s1 = E0['splits']['all'].get('stop_ingest_W02'), E1['splits']['all'].get('stop_ingest_W02')
     if s0 and s1:
-        sv = rev and (s1.get('interleaved_with') == [E0['binary_sha256']] or s0.get('interleaved_with') == [E1['binary_sha256']])
+        md_ok = (wl.get('must_deliver') or {}).get('verdict') == 'both'
+        sv = rev and md_ok and s0.get('stop_hooks_ok') is True and s1.get('stop_hooks_ok') is True and s1.get('schema_after') == s1.get('schema_expected') and s0.get('schema_after') == s0.get('schema_before') and (s1.get('interleaved_with') == [E0['binary_sha256']] or s0.get('interleaved_with') == [E1['binary_sha256']])
         out('E Stop with ingest, W02: candidate median lower', s0['median_ms'], s1['median_ms'], s1['median_ms'] < s0['median_ms'] if sv else None,
-            ('migration (first write open) %s ms, not counted' % s1.get('first_write_open_ms')) if sv else 'missing: counts from before harness rev 2 or not interleaved')
+            ('migration (first write open) %s ms, not counted' % s1.get('first_write_open_ms')) if sv else 'missing: counts from before harness rev 3, must-deliver not on both, a Stop error, schema not as expected, or not interleaved')
 else:
     out('E', None, None, None)
 

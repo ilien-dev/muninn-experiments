@@ -135,18 +135,20 @@ C5, `muninn why`. usage-v2's questions (sha256 `83ff8cae70f0c743`): Spanish 27 o
 
 ## E. Latency (`e_perf.py`)
 
-`muninn-bench perf --strict`, 7 runs, bench `78417dd353a9a4b9`. Median over runs:
+Harness revision 2. `verdict.py` reads E only from revision 3 or later; figures from an earlier revision are shown for the record and are not a reading.
+
+`muninn-bench perf --strict`, 7 runs, bench `9813fa003b246e77`. Median over runs:
 
 | hook | p50 ms | p95 ms | p95 per run |
 |---|---|---|---|
-| SessionStart | 17.952 | 19.55 | 17.576, 18.004, 18.754, 19.55, 19.699, 19.778, 20.208 |
-| SubagentStart | 16.078 | 16.688 | 15.44, 15.909, 16.447, 16.688, 17.623, 17.531, 18.366 |
-| UserPromptSubmit_full | 19.541 | 20.457 | 19.113, 19.537, 19.857, 20.457, 21.305, 20.941, 21.458 |
-| UserPromptSubmit_gated | 13.677 | 14.976 | 13.232, 13.751, 16.511, 14.663, 14.976, 15.127, 15.543 |
+| SessionStart | 19.555 | 21.44 | 20.73, 26.11, 20.784, 20.046, 21.47, 21.44, 21.969 |
+| SubagentStart | 17.538 | 19.39 | 17.192, 18.831, 18.334, 19.39, 19.648, 19.724, 20.987 |
+| UserPromptSubmit_full | 21.048 | 22.507 | 22.074, 22.791, 21.98, 22.578, 22.331, 22.872, 22.507 |
+| UserPromptSubmit_gated | 15.677 | 16.936 | 14.744, 14.992, 16.095, 17.545, 17.576, 16.936, 18.246 |
 
-Process start p50 12.885 ms; ingest of 200 records 9.6 ms. Contracts failed per run: none; none; hook UserPromptSubmit gated p95; none; none; none; none.
+Process start p50 15.017 ms; ingest of 200 records 10.0 ms. Contracts failed per run: none; hook SessionStart p95; none; hook UserPromptSubmit gated p95; none; none; none.
 
-Stop with a one-turn ingest on a copy of W02, 20 runs: median 292.8 ms, p90 296.8, min 280.2, max 300.6.
+Stop with a one-turn ingest on a copy of W02, 20 runs: median 299.5 ms, p90 315.6, min 290.6, max 368.3.
 
 ## Reading notes
 

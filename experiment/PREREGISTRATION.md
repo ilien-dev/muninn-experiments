@@ -7418,3 +7418,11 @@ checked through the store's own heartbeat (every hook invocation finished `ok` w
 any miss blocks the counts. Stop-with-ingest gives each build its own copy of W02 and times the
 migrating first write open apart from the 20 timed Stops. `verdict.py` reads E only from counts of
 revision 2. Rule E itself is unchanged.
+- Addendum, same day, before any revision-3 cell: E harness revision 3. Revision 2 called the two
+  benches' workloads equal when each store held at least 8,336 ledger rows, without comparing the
+  builds, and recorded but did not gate whether a check prompt delivered. Revision 3 compares the
+  seed rows of the two builds' bench stores by count and sha256, hashes each bench's sources, runs
+  a fixed prompt that must deliver on both builds' own migrated copies of W02, checks the Stop
+  copies' schema against the one each build creates and every timed Stop in the heartbeat.
+  Revision-2 E counts (`e1c7980348b0047f`, `a01c2a1d3fb2c9c8` and the base figures paired with
+  them) read `missing` under `verdict.py`. Rule E is unchanged.

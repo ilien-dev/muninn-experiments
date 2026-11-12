@@ -135,6 +135,8 @@ def write_counts(section, build, args, per_split, extra=None):
     cur['labels'] = args.labels
     if getattr(args, 'commit', None):
         cur['commit'] = args.commit
+    elif getattr(args, 'drop_commit', False):
+        cur.pop('commit', None)
     cur.setdefault('splits', {})
     for sp, v in per_split.items():
         if isinstance(cur['splits'].get(sp), dict) and isinstance(v, dict):

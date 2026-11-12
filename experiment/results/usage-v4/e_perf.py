@@ -6,9 +6,12 @@
                       [--runs 7] [--stop-runs 20] [--parts perf,stop] [--commit <candidate commit>]
   (or --bench-base-src / --bench-src <tree> to build each bench into the work directory)
 
-Harness revision 2 (`harness_rev` in the counts). Revision 1 timed both builds with one bench
+Harness revision 3 (`harness_rev` in the counts). Revision 1 timed both builds with one bench
 built from the candidate's tree; once the schema moved past the base's, the base binary refused
-that store and every base figure timed an error path. `verdict.py` reads E only from rev-2 counts.
+that store and every base figure timed an error path. Revision 2 timed each build with its own
+bench but called the workloads equal on a row count alone and did not gate delivery. Revision 3
+compares the two builds' seed rows by count and fingerprint, hashes each bench's sources, and runs
+a must-deliver case on both builds. `verdict.py` reads E only from revision-3 counts.
 
 perf. Each build is timed by a `muninn-bench` built from its own source, so each runs on a store
 its own code created. `--bench-base-src` builds the base's bench from a *copy* of the base tree
@@ -31,8 +34,9 @@ Stop is the catch-up and is dropped. Wall-clock ms; the rule reads the median.
 import glob, json, os, re, shutil, sqlite3, statistics as stt, subprocess, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import *
+from e_gates import seed_fingerprint, gate_workload, gate_deliver
 
-HARNESS_REV = 2
+HARNESS_REV = 3
 ap = parser(__doc__)
 ap.add_argument('--against')
 ap.add_argument('--bench', help='muninn-bench built from the candidate (--against) tree')
@@ -43,6 +47,8 @@ ap.add_argument('--no-ledger-seed', action='store_true', help='build the base be
 ap.add_argument('--runs', type=int, default=7)
 ap.add_argument('--stop-runs', type=int, default=20)
 ap.add_argument('--parts', default='perf,stop')
+ap.add_argument('--base-commit', help='commit or tag the base build was made from (recorded in the base counts)')
+ap.add_argument('--must-deliver-item', default='P026', help='delivery-set item (design split) whose prompt must deliver on both builds')
 args = ap.parse_args()
 F = fixtures()
 parts = set(args.parts.split(','))
@@ -81,13 +87,61 @@ SEED = '''    // usage-v4 harness: the fire_ledger seed of the candidate's bench
 '''
 
 
+TOP_IGNORE = {'target', '.git', '.muninn', 'node_modules', 'research', 'site'}
+
+
+def anchored_ignore(root):
+    """Ignore patterns anchored to the tree root: only these names at the top level, and the
+    rule corpus only at crates/muninn-bench/corpora (not needed to build the bench)."""
+    root = os.path.abspath(root)
+
+    def ign(d, names):
+        rel = os.path.relpath(os.path.abspath(d), root)
+        if rel == '.':
+            return set(names) & TOP_IGNORE
+        if rel == os.path.join('crates', 'muninn-bench'):
+            return set(names) & {'corpora'}
+        return set()
+    return ign
+
+
+def tree_hash(root, sub=None):
+    """sha256 over the sorted relative paths and bytes of a tree (or of one subdirectory),
+    with the anchored ignore patterns applied."""
+    import hashlib
+    root = os.path.abspath(root)
+    base = os.path.join(root, sub) if sub else root
+    ign = anchored_ignore(root)
+    h = hashlib.sha256()
+    for d, dirs, files in os.walk(base):
+        skip = ign(d, dirs + files)
+        dirs[:] = sorted(x for x in dirs if x not in skip)
+        for f in sorted(x for x in files if x not in skip):
+            fp = os.path.join(d, f)
+            h.update(os.path.relpath(fp, root).replace('\\', '/').encode() + b'\0')
+            h.update(open(fp, 'rb').read())
+    return h.hexdigest()[:16]
+
+
+def src_commit(tree):
+    r = subprocess.run(['git', '-C', tree, 'rev-parse', 'HEAD'], capture_output=True, text=True)
+    if r.returncode:
+        return {'commit': None, 'tree_sha256': tree_hash(tree)}
+    dirty = subprocess.run(['git', '-C', tree, 'status', '--porcelain', '--untracked-files=no'], capture_output=True, text=True).stdout.strip()
+    return {'commit': r.stdout.strip(), 'dirty': bool(dirty)}
+
+
+sources = {}
+
+
 def build_bench(src, name, seed=False):
     tree = os.path.abspath(src)
+    sources[name] = dict(src_commit(tree), bench_crate_sha256=tree_hash(tree, os.path.join('crates', 'muninn-bench')))
     if seed:
         # a copy of the tree in the work directory; the source tree itself is never written
         copy = work('e_perf', 'bench-src-' + name)
         shutil.rmtree(copy, ignore_errors=True)
-        shutil.copytree(tree, copy, ignore=shutil.ignore_patterns('target', '.git', '.muninn', 'node_modules', 'corpora', 'research', 'site'))
+        shutil.copytree(tree, copy, ignore=anchored_ignore(tree))
         mp = os.path.join(copy, 'crates', 'muninn-bench', 'src', 'main.rs')
         s = open(mp, encoding='utf-8').read()
         if 'INSERT INTO fire_ledger(session_id, compaction_epoch' in s:
@@ -106,6 +160,7 @@ def build_bench(src, name, seed=False):
             workload['base_bench'] = 'copy of the base tree with the candidate bench\'s 8,336-row fire_ledger seed added after the cue load'
             workload['base_bench_main_rs_sha256'] = sha16(mp)
         tree = copy
+        sources[name]['built_bench_crate_sha256'] = tree_hash(copy, os.path.join('crates', 'muninn-bench'))
     tgt = work('target', 'bench-' + name)
     r = run(['cargo', 'build', '--release', '--locked', '-p', 'muninn-bench', '--target-dir', tgt], 'bench:build:' + name, timeout=3600, cwd=tree, text=True)
     if r is None or r.returncode:
@@ -114,6 +169,35 @@ def build_bench(src, name, seed=False):
 
 
 ENV_ERR = re.compile(r'error|panic|schema|newer|unable', re.I)
+def expected_schema(b):
+    """The schema a build creates: `init` on an empty project in the work directory."""
+    d = work('e_perf', 'schema-probe', sha16(b))
+    shutil.rmtree(d, ignore_errors=True)
+    os.makedirs(d)
+    run(['git', 'init', '-q'], 'schema:git', cwd=d)
+    run([b, '--cwd', d, 'init', '--keep-native', '--no-boot-block'], 'schema:init', env=ENV)
+    p = os.path.join(d, '.muninn', 'muninn.db')
+    if not os.path.isfile(p):
+        fail('schema:no_store')
+        return None
+    con = sqlite3.connect('file:%s?mode=ro' % p, uri=True)
+    v = con.execute("select value from meta where key='schema_version'").fetchone()
+    con.close()
+    return v[0] if v else None
+
+
+def must_deliver(b, k):
+    """One fixed prompt from the delivery set on the build's own migrated copy of W02."""
+    root = work('e_perf', 'deliver', str(k))
+    shutil.rmtree(root, ignore_errors=True)
+    shutil.copytree(F + '/stores/W02', root + '/.muninn', ignore=shutil.ignore_patterns('muninn.db-shm', 'muninn.db-wal'))
+    run([b, '--cwd', root, 'maintain'], 'deliver:maintain', env=ENV)
+    smp = {json.loads(l)['item']: json.loads(l) for l in open(F + '/out/delivery/sample_prompt.jsonl', encoding='utf-8')}
+    it = smp[args.must_deliver_item]
+    pr = next(json.loads(l)['prompt'] for l in open(F + '/out/delivery/pairs.jsonl', encoding='utf-8')
+              if json.loads(l)['reason'] == 'literal' and (json.loads(l)['store'], json.loads(l)['session'], json.loads(l)['at']) == (it['store'], it['session'], it['at']))
+    text = hook(b, 'UserPromptSubmit', root, {'session_id': 'must-deliver', 'prompt': pr}, env=ENV)
+    return len(block_ids(text))
 
 
 def check_store(b, tmp):
@@ -126,6 +210,7 @@ def check_store(b, tmp):
     con = sqlite3.connect('file:%s/.muninn/muninn.db?mode=ro' % root, uri=True)
     ver = con.execute("select value from meta where key='schema_version'").fetchone()
     ledger = con.execute('select count(*) from fire_ledger').fetchone()[0]
+    seed_n, seed_fp = seed_fingerprint(con)
     con.close()
     ok = True
     delivered = {}
@@ -159,8 +244,16 @@ def check_store(b, tmp):
         fail('perf:check:heartbeat')
         ok = False
     shutil.rmtree(dirs[0], ignore_errors=True)
-    return {'schema_version': ver[0] if ver else None, 'fire_ledger_rows': ledger, 'hooks_ok': ok, 'hook_finishes': fin, 'hook_errors': bad, 'delivered': delivered}
+    return {'schema_version': ver[0] if ver else None, 'fire_ledger_rows': ledger, 'seed_rows': seed_n, 'seed_fingerprint': seed_fp,
+            'hooks_ok': ok, 'hook_finishes': fin, 'hook_errors': bad, 'delivered': delivered}
 
+
+if parts == {'gates'}:
+    # no timing: the must-deliver case and the schema each build creates, printed, no counts written
+    md = {b: must_deliver(b, k) for k, b in enumerate(bins)}
+    print(json.dumps({'must_deliver': {sha16(b): md[b] for b in bins}, 'verdict': gate_deliver(md),
+                      'schema_expected': {sha16(b): expected_schema(b) for b in bins}, 'failed_steps': dict(FAILS)}))
+    sys.exit(1 if FAILS else 0)
 
 if 'perf' in parts:
     if not cand_bin:
@@ -172,6 +265,10 @@ if 'perf' in parts:
     if args.bench_base and 'base_bench' not in workload:
         workload['base_bench'] = 'given by --bench-base (%s)' % sha16(bench_base)
     benches = {base_bin: bench_base, cand_bin: bench_cand}
+    md = {b: must_deliver(b, k) for k, b in enumerate(bins)}
+    workload['must_deliver'] = {'item': args.must_deliver_item, 'blocks': {sha16(b): md[b] for b in bins}, 'verdict': gate_deliver(md)}
+    if workload['must_deliver']['verdict'] != 'both':
+        fail('perf:must_deliver:' + workload['must_deliver']['verdict'])
     rows = {b: [] for b in bins}
     checks = {b: [] for b in bins}
     for i in range(args.runs):
@@ -194,7 +291,10 @@ if 'perf' in parts:
             checks[b].append(check_store(b, tmp))
     led = {b: sorted({c['fire_ledger_rows'] for c in checks[b] if c}) for b in bins}
     workload['fire_ledger_rows_per_bench_store'] = {sha16(b): led[b] for b in bins}
-    workload['equal'] = all(v and min(v) >= 8336 for v in led.values())  # both stores hold the 8,336-row seed
+    eq, per_seed = gate_workload({b: [(c['seed_rows'], c['seed_fingerprint']) for c in checks[b] if c] for b in bins})
+    workload['seed_rows_and_fingerprint'] = {sha16(b): [list(x) for x in per_seed[b]] for b in bins}
+    workload['equal'] = eq
+    workload['bench_sources'] = sources
     if not workload['equal']:
         workload['caveat'] = 'the two benches seeded different workloads: the comparison is each build\'s own contract run'
     for b in bins:
@@ -247,6 +347,14 @@ if 'stop' in parts:
             f.write(json.dumps(u) + '\n' + json.dumps(a) + '\n')
 
     prep = {b: prepare(b, k) for k, b in enumerate(bins)}
+    for b in bins:
+        want = expected_schema(b)
+        info = prep[b][1]
+        info['schema_expected'] = want
+        if want is None or info['schema_after'] != want:
+            fail('stop:schema_after')
+        if b == base_bin and info['schema_after'] != info['schema_before']:
+            fail('stop:base_schema_moved')
     ms = {b: [] for b in bins}
     for i in range(args.stop_runs + 1):
         for b in bins:
@@ -266,6 +374,20 @@ if 'stop' in parts:
         con.close()
         if ingested < args.stop_runs:
             fail('stop:not_ingested')
+        # every timed Stop as the binary logged it in the copy's heartbeat
+        sfin = sbad = 0
+        hb = os.path.join(root, '.muninn', 'log', 'heartbeat.jsonl')
+        for l in (open(hb, encoding='utf-8', errors='replace') if os.path.isfile(hb) else []):
+            try:
+                v = json.loads(l)
+            except ValueError:
+                continue
+            if v.get('ev') == 'finish' and v.get('hook') == 'Stop' and v.get('session') == sid:
+                sfin += 1
+                sbad += not v.get('ok') or v.get('err') is not None
+        info['stop_hooks_ok'] = sbad == 0 and sfin >= args.stop_runs + 1
+        if not info['stop_hooks_ok']:
+            fail('stop:heartbeat')
         res[b]['stop_ingest_W02'] = dict(info, runs=len(xs), median_ms=round(stt.median(xs), 1), p90_ms=round(sorted(xs)[int(0.9 * (len(xs) - 1))], 1),
                                          min_ms=round(min(xs), 1), max_ms=round(max(xs), 1), records_from_synthetic_session=ingested,
                                          interleaved_with=[sha16(x) for x in bins if x != b])
@@ -274,5 +396,6 @@ for b in bins:
     a = type('A', (), {})()
     a.bin, a.labels, a.split = b, args.labels, 'all'
     a.build = args.build if b == bins[0] else None
-    a.commit = args.commit if b == cand_bin else None
+    a.commit = args.commit if b == cand_bin else args.base_commit
+    a.drop_commit = a.commit is None  # never leave another run's commit on this file
     write_counts('e_perf', a.build or sha16(b), a, {'all': res[b]}, {'harness_rev': HARNESS_REV, 'workload': workload})

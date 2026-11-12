@@ -183,6 +183,8 @@ if e:
     x = e['splits']['all']
     w('## E. Latency (`e_perf.py`)')
     w('')
+    w('Harness revision %s. `verdict.py` reads E only from revision 3 or later; figures from an earlier revision are shown for the record and are not a reading.' % e.get('harness_rev', 1))
+    w('')
     if 'perf' in x:
         p = x['perf']
         w('`muninn-bench perf --strict`, %d runs, bench `%s`. Median over runs:' % (p['runs'], p['bench_sha256']))

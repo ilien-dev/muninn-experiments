@@ -2,7 +2,6 @@
  "binary_sha256": "b93d2f5c222c0424",
  "binary_version": "muninn 1.2.0",
  "build": "b93d2f5c222c0424",
- "commit": "6ba7c7586",
  "harness_rev": 2,
  "labels": "final",
  "section": "e_perf",

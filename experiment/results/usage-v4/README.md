@@ -32,14 +32,21 @@ B1 replays six corpora with usage-v1's `replay.py`: 1,357 s on the base with 6 j
 `<name>.done.json` marker when its replay finishes; scoring refuses corpora without one, so
 `--score-only` rescans an earlier, finished run without replaying.
 
-E (harness revision 2, `harness_rev` in the counts) times each build with a `muninn-bench` of its
+E (harness revision 3, `harness_rev` in the counts) times each build with a `muninn-bench` of its
 own source, so each runs on a store its own code created. The base's bench is built from a copy of
 the base tree in the work directory with the candidate bench's 8,336-row `fire_ledger` seed added,
 so the two seed the same workload; the `workload` key records what was done, and if the two ever
 differ the comparison is each build's own contract run, which `verdict.py` prints next to the E
 rows. Every run is checked through the store's heartbeat (every hook finished ok, no error) and a
 miss blocks the counts. Stop gives each build its own W02 copy and reports the migrating first
-write open apart (`first_write_open_ms`). `verdict.py` reads E only from revision-2 counts.
+write open apart (`first_write_open_ms`) and checks each copy's schema against the one the build
+itself creates (`init` in the work directory) and every timed Stop in the copy's heartbeat.
+Revision 3 adds: workloads compared build against build by the seed rows' count and sha256
+(`seed_rows_and_fingerprint`), each bench's sources hashed (`bench_sources`), and a must-deliver
+case (`--must-deliver-item`, default P026, a design item) run on both builds' own migrated W02
+copies, which must deliver on both. `verdict.py` reads E only from revision-3 counts; revision-2
+counts read `missing`. `e_perf.py --parts gates` runs the must-deliver case and the schema probe
+without timing, and `check_e_gates.py <base> <candidate>` checks the gates on doctored counts.
 
 `--labels first` scores against the first labeller instead of the frozen labels and writes
 `counts/<section>_<build>-first.json`; on the base binary it reproduces the analysis figures,
