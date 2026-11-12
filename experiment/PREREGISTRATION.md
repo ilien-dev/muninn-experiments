@@ -7462,3 +7462,18 @@ Set by the experiment's controller after Task 4's design-split C4 reading of the
   against the rest) is below 0.6, the pool's slot labels are not used and C4 is read on frozen
   labels only, with the unlabelled count reported. Where the registered text names no share, both
   the lenient and the strict share must not fall (third amendment).
+
+## Eighth amendment to usage-v4, 2026-11-12 — the denominator of C3's catalogue-only arm, written after Task 5's reading of that arm was seen
+
+Written after the arm read 9/10 on Task 5's build `fe41ba8f6a353f44` against 10/10 on
+`9479e147b01629e7`, and before any later C3 cell. The miss is W02 #3589. Checked on the three
+binaries, per record: base, `9479e147b01629e7` and `fe41ba8f6a353f44` all fail to return #3589 for
+its own words in a fresh session. At the arm's session start it is listed (not shown) only on
+`fe41ba8f6a353f44`; on base and `9479e147b01629e7` it is neither shown nor listed at that start.
+
+The arm tests whether a listed record is withheld from recall because it is listed. A record the
+same build does not return for its own words in a fresh session is not withheld by listing. The
+arm's denominator is therefore the listed records that the build's own fresh-session control
+returns; the records excluded that way are counted and printed with the verdict. On this reading:
+base 0 of 5 (none excluded), `9479e147b01629e7` 10 of 10 (none excluded), `fe41ba8f6a353f44` 9 of 9
+(1 excluded, #3589). The C3 rule is otherwise unchanged.
