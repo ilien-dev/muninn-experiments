@@ -7508,3 +7508,33 @@ applied to each filter alone ships nothing by construction.
   pointing back (Task 6 #7), which alone removed 0 of 55 held-out noise records. A line in the
   user's role whose harness `origin.kind` is not `human` (Task 6, `8e2784c93`) is an origin fix
   of the same class as the two named above, and is not submitted to the drop test.
+
+## Tenth amendment to usage-v4, 2026-11-12 — an input loss found during Task 6, and inputs staged under the fixture root
+
+Found during Task 6: B1's line "both retirements labelled valid still happen" read `fail` for
+every build because item `v1:W05:380` read `absent`. Nothing in the product caused it. usage-v1's
+replay reads the transcripts each B1 corpus's store names, and until now it read them where the
+machine keeps them; transcripts left that folder while the experiment ran. Replay copies made by
+the harness give the window: B1 corpus W05 held 41 readable transcripts on 2026-11-11, 38 from
+2026-11-12 04:51 and 35 from 14:09; W02 (usage-v1) 344, then 343, then 339; W02 (today's store) 508,
+507, 503. So every B1 reading made after 2026-11-12 04:51 ran on fewer sessions than the base's,
+and the base and those builds were not compared on the same input. The loss is consistent with the
+client's own removal of old transcripts; the filesystem keeps no record of when or why.
+
+Nothing labelled is lost. Every transcript the base's B1 replay read survives as the copy that
+replay made, and those copies are now the staged inputs: per corpus, readable and staged / listed
+in the store: W05 41 / 75, W02 (usage-v1) 348 / 408, W07 7 / 93, W01 0 / 3, W02 (today) 514 / 574,
+L01 78 / 102. (W02's 348 includes 4 transcripts its store names under paths that had moved before
+the base ran; their copies were found under the same names.) The extraction set's 150 transcripts
+and the W02 session log's 540 of 636 transcripts that `Stop` reads in E are staged the same way,
+and the three project repositories B1 replays (W02, W07, W01; W05 is not a repository) are staged
+as clones. All of these are frozen: a staged file is never rewritten.
+
+From now on A, B1 and E read only the staged copies (`results/usage-v4/inputs.py`). A run whose
+staged copy is gone or changed reports `missing input`, and `verdict.py` prints the rules that
+depend on it as `missing`, never as `fail` and never as a zero. Item `v1:W05:380` reads `retired`
+again on the base (score.py's rule and the earliest row), so B1's valid clause keeps both items.
+B1 figures produced before this amendment for builds measured after 2026-11-12 04:51 are
+superseded by re-reads on the staged inputs where they exist, and are not a reading otherwise.
+Re-read on the staged inputs: base 9 `loss` items retired and both valid retirements happen;
+`147bbb19ce99396e` and `b73378d27587abad` 5, both valid retirements happen.
