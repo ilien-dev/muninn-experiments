@@ -8,75 +8,85 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "c3f8903d0c636a33",
+    "bench_sha256": "a359bfe34b3531f8",
     "contracts_failed_per_run": [
      [],
      [],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
+      "cue eval (ancestor lookup) p99"
+     ],
      [],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95"
+     ],
      [],
-     [],
-     [],
-     []
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95"
+     ]
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 29.811,
-      "p95_median": 31.317,
+      "p50_median": 33.316,
+      "p95_median": 48.597,
       "p95_runs": [
-       31.981,
-       30.093,
-       30.611,
-       30.953,
-       33.259,
-       31.317,
-       32.185
+       75.46,
+       35.214,
+       49.503,
+       48.597,
+       38.887,
+       35.298,
+       50.853
       ]
      },
      "SubagentStart": {
-      "p50_median": 28.046,
-      "p95_median": 28.835,
+      "p50_median": 31.17,
+      "p95_median": 32.803,
       "p95_runs": [
-       27.904,
-       27.93,
-       28.579,
-       28.835,
-       39.573,
-       29.796,
-       29.93
+       31.005,
+       32.803,
+       42.903,
+       45.211,
+       31.566,
+       32.691,
+       56.801
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 31.177,
-      "p95_median": 32.334,
+      "p50_median": 34.191,
+      "p95_median": 37.024,
       "p95_runs": [
-       31.078,
-       31.53,
-       31.936,
-       32.334,
-       32.34,
-       32.794,
-       32.866
+       34.784,
+       37.024,
+       45.465,
+       38.38,
+       35.2,
+       36.81,
+       39.736
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 25.752,
-      "p95_median": 27.006,
+      "p50_median": 29.8,
+      "p95_median": 31.723,
       "p95_runs": [
-       25.716,
-       25.933,
-       26.144,
-       27.006,
-       29.74,
-       27.224,
-       27.817
+       30.684,
+       30.342,
+       40.461,
+       38.929,
+       29.752,
+       31.723,
+       31.976
       ]
      }
     },
-    "ingest_200_ms_median": 9.7,
+    "ingest_200_ms_median": 10.5,
     "interleaved_with": [
-     "b73378d27587abad"
+     "c56f45520c6189f3"
     ],
-    "process_start_p50_median": 25.338,
+    "process_start_p50_median": 29.0,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -94,19 +104,28 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 2616.0,
+    "first_write_open_ms": 5115.0,
+    "inputs": {
+     "changed": 0,
+     "listed": 636,
+     "staged": 540,
+     "status": "ok",
+     "unrecoverable": 96
+    },
     "interleaved_with": [
-     "b73378d27587abad"
+     "c56f45520c6189f3"
     ],
-    "max_ms": 320.5,
-    "median_ms": 300.7,
-    "min_ms": 298.2,
-    "p90_ms": 303.0,
+    "max_ms": 291.7,
+    "median_ms": 246.6,
+    "min_ms": 240.6,
+    "p90_ms": 252.0,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
     "schema_before": "2",
     "schema_expected": "2",
+    "session_log_lines_staged": 8133,
+    "session_log_lines_without_copy": 490,
     "stop_hooks_ok": true
    }
   }
@@ -123,36 +142,35 @@
    },
    "cand": {
     "bench_crate_sha256": "adf4dc453728100d",
-    "commit": "5d9e070d35c1809e7419bce1604d4f99d56b9863",
+    "commit": "12807737f3d87adc159b9c7723ca6452514d3827",
     "dirty": false
    }
   },
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
-   "b73378d27587abad": [
-    8346,
-    8356
-   ],
    "b93d2f5c222c0424": [
     8345
+   ],
+   "c56f45520c6189f3": [
+    8356
    ]
   },
   "must_deliver": {
    "blocks": {
-    "b73378d27587abad": 2,
-    "b93d2f5c222c0424": 6
+    "b93d2f5c222c0424": 6,
+    "c56f45520c6189f3": 2
    },
    "item": "P026",
    "verdict": "both"
   },
   "seed_rows_and_fingerprint": {
-   "b73378d27587abad": [
+   "b93d2f5c222c0424": [
     [
      8336,
      "3a9091da7f1c5202"
     ]
    ],
-   "b93d2f5c222c0424": [
+   "c56f45520c6189f3": [
     [
      8336,
      "3a9091da7f1c5202"
