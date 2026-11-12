@@ -37,7 +37,12 @@ from common import *
 ap = parser(__doc__)
 ap.add_argument('--parts', default='c12,c3,c4,c5')
 ap.add_argument('--against', help='base build (sha16): C2 compares mean tokens on prompts whose returned ids are the same in both builds')
+ap.add_argument('--counts-out', help='write counts and per-item files to this directory instead of counts/ (for checks)')
 args = ap.parse_args()
+if args.counts_out:
+    import common
+    os.makedirs(args.counts_out, exist_ok=True)
+    common.COUNTS = COUNTS = os.path.abspath(args.counts_out)
 F = fixtures()
 build = build_name(args)
 BIN = os.path.abspath(args.bin).replace('\\', '/')
@@ -329,6 +334,8 @@ if 'c3' in parts:
     listed = [int(m.group(1)) for m in (CAT.match(l) for l in st_text.split('\n')) if m]
     listed = [i for i in listed if i not in shown]
     ok = ctl = tried = 0
+    fresh_ok = same_of_fresh = 0
+    excluded = []
     for target in listed:
         row = con.execute('select body from record where id=?', (target,)).fetchone()
         if not row:
@@ -337,11 +344,21 @@ if 'c3' in parts:
         if len(prompt.split()) < 6:
             continue
         tried += 1
-        ok += target in block_ids(hook(BIN, 'UserPromptSubmit', d, {'session_id': 't1c-session', 'prompt': prompt}, env=ENV))
-        ctl += target in block_ids(hook(BIN, 'UserPromptSubmit', d, {'session_id': 't1c-control-%d' % target, 'prompt': prompt}, env=ENV))
+        same = target in block_ids(hook(BIN, 'UserPromptSubmit', d, {'session_id': 't1c-session', 'prompt': prompt}, env=ENV))
+        fresh = target in block_ids(hook(BIN, 'UserPromptSubmit', d, {'session_id': 't1c-control-%d' % target, 'prompt': prompt}, env=ENV))
+        ok += same
+        ctl += fresh
+        # eighth amendment: the arm's denominator is what the build's own fresh-session control returns
+        if fresh:
+            fresh_ok += 1
+            same_of_fresh += same
+        else:
+            excluded.append(target)
         if tried >= 12:
             break
-    out['t1_listed_in_catalogue'] = {'listed_not_shown': len(listed), 'tried': tried, 'same_session': ok, 'fresh_session': ctl}
+    out['t1_listed_in_catalogue'] = {'listed_not_shown': len(listed), 'tried': tried, 'same_session': ok, 'fresh_session': ctl,
+                                     'returned_by_fresh_control': fresh_ok, 'same_session_of_those': same_of_fresh,
+                                     'excluded_not_returned_fresh': len(excluded), 'excluded_ids': excluded}
     prompt = re.sub(r'^user:\s*', '', con.execute("select body from record where invalid=0 and kind='episode' and length(body)>200 order by id desc limit 1 offset 40").fetchone()[0])[:300]
     con.close()
     t2 = {}

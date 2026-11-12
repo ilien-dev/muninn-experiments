@@ -85,3 +85,9 @@ the catalogue's closing line claims the list is whole and whether that is true
 (`c4.whole_list_today`; a word-for-word twin of a listed record counts as covered). `verdict.py`
 reads C4 as amended: corrections and invariants neither shown nor listed do not rise against base,
 the closing line is truthful, and the literal count is printed.
+
+C3's catalogue-only arm (eighth amendment) is scored on the listed records that the build's own
+fresh-session control returns (`returned_by_fresh_control`, `same_session_of_those`); the others
+are counted in `excluded_not_returned_fresh` with their ids and printed by `verdict.py`. Counts
+from before that change read `missing` for this arm until `c_delivery.py --parts c3` is rerun.
+`c_delivery.py --counts-out <dir>` writes counts to another directory (used for checks).

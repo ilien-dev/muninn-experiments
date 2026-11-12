@@ -52,7 +52,7 @@ def frac(x):
 sp = a.split
 # ---------------------------------------------------------------------------------------------- A
 A0, A1 = load('a_extract', a.base), load('a_extract', a.cand)
-if A0 and A1:
+if A0 and A1 and sp in A0['splits'] and sp in A1['splits']:
     p0, p1 = A0['splits'][sp]['precision_set'], A1['splits'][sp]['precision_set']
     r0, r1 = A0['splits'][sp]['recall_set'], A1['splits'][sp]['recall_set']
     n0 = p0['noise_emitted'] + r0['noise_candidates']
@@ -121,7 +121,7 @@ if C0 and C1:
     P0, P1 = load('c_delivery', a.base + '-pool'), load('c_delivery', a.cand + '-pool')
     use_pool = bool(P0 and P1 and P0['splits'].get(sp, {}).get('c12') and P1['splits'].get(sp, {}).get('c12'))
     Q0, Q1 = (P0, P1) if use_pool else (C0, C1)
-    c0, c1 = Q0['splits'][sp].get('c12'), Q1['splits'][sp].get('c12')
+    c0, c1 = Q0['splits'].get(sp, {}).get('c12'), Q1['splits'].get(sp, {}).get('c12')  # a split a build has no prompt counts for reads missing
     if c0 and c1:
         out('C1 unrelated returned falls >= 30 %, useful falls <= 1', 'unrelated %d, useful %d (unscored %d)' % (c0['unrelated_returned'], c0['useful_returned'], c0['unlabelled_returned']),
             'unrelated %d, useful %d (unscored %d)' % (c1['unrelated_returned'], c1['useful_returned'], c1['unlabelled_returned']),
@@ -143,11 +143,18 @@ if C0 and C1:
         out('C3 cut record offered again in the same session (all of them)', '%d/%d' % (x0['same_session'], x0['tried']), '%d/%d' % (x1['same_session'], x1['tried']),
             x1['tried'] > 0 and x1['same_session'] == x1['tried'])
         y0, y1 = t0.get('t1_listed_in_catalogue'), t1.get('t1_listed_in_catalogue')
-        if y0 and y1:
-            out('C3 catalogue-only record offered again in the same session (all of them)', '%d/%d' % (y0['same_session'], y0['tried']), '%d/%d' % (y1['same_session'], y1['tried']),
-                y1['tried'] > 0 and y1['same_session'] == y1['tried'], 'fresh-session control %d/%d' % (y1['fresh_session'], y1['tried']))
+        # eighth amendment: the denominator is the listed records the build's own fresh-session
+        # control returns; the others are counted and printed, not scored
+        if y0 and y1 and 'returned_by_fresh_control' in y0 and 'returned_by_fresh_control' in y1:
+            out('C3 catalogue-only record offered again in the same session (of those its fresh control returns)',
+                '%d/%d' % (y0['same_session_of_those'], y0['returned_by_fresh_control']),
+                '%d/%d' % (y1['same_session_of_those'], y1['returned_by_fresh_control']),
+                y1['same_session_of_those'] == y1['returned_by_fresh_control'] if y1['returned_by_fresh_control'] else None,
+                'excluded, not returned by the fresh control: base %d, candidate %d (ids %s); tried base %d, candidate %d' % (
+                    y0['excluded_not_returned_fresh'], y1['excluded_not_returned_fresh'], y1['excluded_ids'], y0['tried'], y1['tried']))
         else:
-            out('C3 catalogue-only record offered again in the same session (all of them)', y0, y1, None)
+            out('C3 catalogue-only record offered again in the same session (of those its fresh control returns)', None, None, None,
+                'counts predate the eighth amendment: rerun c_delivery --parts c3')
         out('C3 offered again after compaction and Stop', t0['t2_after_compaction']['offered_again_after_stop'], t1['t2_after_compaction']['offered_again_after_stop'],
             t1['t2_after_compaction']['offered_again_after_stop'] == 1)
         z0, z1 = t0['t3_stale_twin'], t1['t3_stale_twin']
@@ -156,7 +163,8 @@ if C0 and C1:
             z1['W02:prompts_with_stale_twin'] == 0 and z1['L01:prompts_with_stale_twin'] == 0)
     # C4 shares are read on --split, with the pool's session-start labels when both builds' -pool
     # counts carry them; coverage is read on today's copies (split all), seventh amendment
-    pool4 = bool(P0 and P1 and P0['splits'].get(sp, {}).get('c4', {}).get('all_slots') and P1['splits'].get(sp, {}).get('c4', {}).get('all_slots'))
+    # the pool's slot labels count only when they passed their gate and were merged (pool_units_used > 0)
+    pool4 = bool(P0 and P1 and all((X['splits'].get(sp, {}).get('c4') or {}).get('all_slots') and (X['splits'].get(sp, {}).get('c4') or {}).get('pool_units_used', 0) > 0 for X in (P0, P1)))
     S0, S1 = (P0, P1) if pool4 else (C0, C1)
     g0, g1 = S0['splits'].get(sp, {}).get('c4'), S1['splits'].get(sp, {}).get('c4')
     if g0 and g1 and 'all_slots' in g0 and 'all_slots' in g1:
