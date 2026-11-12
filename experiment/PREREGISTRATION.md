@@ -7503,3 +7503,6 @@ applied to each filter alone ships nothing by construction.
   it sees what the product sees at ingest; it calls the same function the product calls. The
   filters-only arm is built by a switch that exists only for measurement (read by `extract_dump`),
   not by a user-facing option of the binary.
+- *Note, 2026-11-12, after Task 6's held-out reading:* the drop test above is applied on held-out,
+  the split A1 names (controller's ruling); it dropped one filter, the sentence that opens by
+  pointing back (Task 6 #7), which alone removed 0 of 55 held-out noise records.
