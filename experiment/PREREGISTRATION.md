@@ -7477,3 +7477,29 @@ arm's denominator is therefore the listed records that the build's own fresh-ses
 returns; the records excluded that way are counted and printed with the verdict. On this reading:
 base 0 of 5 (none excluded), `9479e147b01629e7` 10 of 10 (none excluded), `fe41ba8f6a353f44` 9 of 9
 (1 excluded, #3589). The C3 rule is otherwise unchanged.
+
+## Ninth amendment to usage-v4, 2026-11-12 — how A1 and A2 are read, before the first Task 6 cell
+
+Set by the experiment's controller before any Task 6 cell ran. Base figures, from the committed
+counts `results/usage-v4/counts/a_extract_b93d2f5c222c0424.json`: design noise 79 (51 precision
+records + 28 recall candidates) against 17 durable (11 + 6); held-out noise 55 (37 + 18) against
+13 durable (8 + 5). The largest single noise class, prompts written by an agent, is 12 of the 79
+design noise records. No single class reaches 30 % of base noise, so a gate at that threshold
+applied to each filter alone ships nothing by construction.
+
+- **A1.** The 30 % / 5 % gate binds on the filters read all together, on a filters-only arm: a
+  build of the candidate with every recall rule (A2 cell) switched off. Each filter is also read
+  alone and reported against all base noise and against the noise class it targets. A filter that
+  alone removes no noise or loses a durable record is dropped from the set before the combined
+  reading. Durable loss allowed: zero on both splits (5 % of 17 or of 13 is under one item).
+- **A2.** Read per recall rule on what that rule alone adds: durable statements added against
+  noise records added, on held-out. The full build (filters plus surviving recall rules) is
+  reported beside the filters-only arm.
+- **Origin fixes are not filters.** A prompt written by an agent and recorded as the user's, and
+  question text recorded as the user's answer, are defects under the invariant that trust derives
+  from origin. They ship when their tests pass and they lose no durable record on design and
+  held-out; their noise figures are reported and count toward the combined A1 reading.
+- **Measurement change.** `extract_dump` gains a pre-pass across the transcripts of a store, so
+  it sees what the product sees at ingest; it calls the same function the product calls. The
+  filters-only arm is built by a switch that exists only for measurement (read by `extract_dump`),
+  not by a user-facing option of the binary.
