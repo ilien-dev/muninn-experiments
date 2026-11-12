@@ -1,0 +1,117 @@
+{
+ "binary_sha256": "0ff051d9890df83b",
+ "binary_version": "muninn 1.2.0",
+ "build": "0ff051d9890df83b",
+ "labels": "final",
+ "section": "e_perf",
+ "splits": {
+  "all": {
+   "perf": {
+    "bench_sha256": "293bed31ea7984da",
+    "contracts_failed_per_run": [
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ]
+    ],
+    "hooks": {
+     "SessionStart": {
+      "p50_median": 11.967,
+      "p95_median": 13.129,
+      "p95_runs": [
+       10.634,
+       10.974,
+       12.592,
+       13.633,
+       13.836,
+       13.129,
+       14.075
+      ]
+     },
+     "SubagentStart": {
+      "p50_median": 9.185,
+      "p95_median": 10.138,
+      "p95_runs": [
+       7.977,
+       8.702,
+       9.315,
+       11.452,
+       10.138,
+       11.704,
+       11.895
+      ]
+     },
+     "UserPromptSubmit_full": {
+      "p50_median": 12.684,
+      "p95_median": 13.562,
+      "p95_runs": [
+       12.042,
+       12.566,
+       13.55,
+       13.562,
+       14.381,
+       15.161,
+       15.721
+      ]
+     },
+     "UserPromptSubmit_gated": {
+      "p50_median": 6.161,
+      "p95_median": 7.232,
+      "p95_runs": [
+       6.01,
+       6.269,
+       6.887,
+       7.232,
+       7.549,
+       8.212,
+       9.356
+      ]
+     }
+    },
+    "ingest_200_ms_median": 9.6,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "process_start_p50_median": 5.88,
+    "runs": 7
+   },
+   "stop_ingest_W02": {
+    "max_ms": 333.4,
+    "median_ms": 270.0,
+    "min_ms": 266.3,
+    "p90_ms": 276.2,
+    "records_from_synthetic_session": 21,
+    "runs": 20
+   }
+  }
+ }
+}
