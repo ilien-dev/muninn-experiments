@@ -1,0 +1,132 @@
+{
+ "binary_sha256": "a01c2a1d3fb2c9c8",
+ "binary_version": "muninn 1.2.0",
+ "binding": {
+  "c1": "held-out unrelated_returned and useful_returned",
+  "c2": "c12.c2_same_ids (needs --against); mean_tokens is secondary",
+  "c3": "t1 same_session == tried; t2 offered_again_after_stop == 1; t3 prompts_with_stale_twin == 0",
+  "c4": "all_slots share_lenient_of_labelled and share_strict_of_labelled, neither may fall; coverage_today neither == 0",
+  "c5": "usage_v2.spanish_reached, gender_flip_W02.found_top8, routed_away.returned, all_flag.what_about_found"
+ },
+ "build": "a01c2a1d3fb2c9c8",
+ "commit": "a12b840e4",
+ "labels": "final",
+ "section": "c_delivery",
+ "splits": {
+  "all": {
+   "c12": {
+    "block_chars": 254095,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 577.2,
+     "mean_tokens_this": 577.2,
+     "prompts": 127
+    },
+    "evidence_chars": 70963,
+    "harmful_returned": 1,
+    "header_chars": 44490,
+    "mean_tokens": 564.7,
+    "prompts": 150,
+    "prompts_with_delivery": 146,
+    "provenance_share": 0.4544,
+    "related_labelled": 209,
+    "related_returned": 125,
+    "returned": 552,
+    "unlabelled_returned": 181,
+    "unrelated_labelled": 455,
+    "unrelated_returned": 228,
+    "useful_labelled": 23,
+    "useful_returned": 17
+   },
+   "c3": {
+    "t1_cut_for_budget": {
+     "cut_at_start": 32,
+     "fresh_session": 12,
+     "same_session": 12,
+     "tried": 12
+    },
+    "t1_listed_in_catalogue": {
+     "fresh_session": 8,
+     "listed_not_shown": 9,
+     "same_session": 8,
+     "tried": 8
+    },
+    "t2_after_compaction": {
+     "after_next_stop": {
+      "first_blocks": 1,
+      "served_again": 1
+     },
+     "epoch_line_pending": {
+      "first_blocks": 1,
+      "served_again": 1
+     },
+     "offered_again_after_stop": 1
+    },
+    "t3_stale_twin": {
+     "L01:delivered": 49,
+     "L01:prompts": 49,
+     "L01:prompts_with_stale_twin": 0,
+     "L01:share": 0.0,
+     "L01:stale_twin_blocks": 0,
+     "W02:delivered": 210,
+     "W02:prompts": 222,
+     "W02:prompts_with_stale_twin": 0,
+     "W02:share": 0.0,
+     "W02:stale_twin_blocks": 0
+    }
+   }
+  },
+  "design": {
+   "c12": {
+    "block_chars": 137713,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 567.2,
+     "mean_tokens_this": 567.2,
+     "prompts": 65
+    },
+    "evidence_chars": 39538,
+    "harmful_returned": 1,
+    "header_chars": 24281,
+    "mean_tokens": 559.8,
+    "prompts": 82,
+    "prompts_with_delivery": 80,
+    "provenance_share": 0.4634,
+    "related_labelled": 124,
+    "related_returned": 73,
+    "returned": 301,
+    "unlabelled_returned": 94,
+    "unrelated_labelled": 251,
+    "unrelated_returned": 124,
+    "useful_labelled": 10,
+    "useful_returned": 9
+   }
+  },
+  "heldout": {
+   "c12": {
+    "block_chars": 116382,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 587.6,
+     "mean_tokens_this": 587.6,
+     "prompts": 62
+    },
+    "evidence_chars": 31425,
+    "harmful_returned": 0,
+    "header_chars": 20209,
+    "mean_tokens": 570.5,
+    "prompts": 68,
+    "prompts_with_delivery": 66,
+    "provenance_share": 0.4437,
+    "related_labelled": 85,
+    "related_returned": 52,
+    "returned": 251,
+    "unlabelled_returned": 87,
+    "unrelated_labelled": 204,
+    "unrelated_returned": 104,
+    "useful_labelled": 13,
+    "useful_returned": 8
+   }
+  }
+ }
+}
