@@ -2,13 +2,13 @@
  "binary_sha256": "b93d2f5c222c0424",
  "binary_version": "muninn 1.2.0",
  "build": "b93d2f5c222c0424",
- "commit": "00d691630",
+ "commit": "ea3f1d369",
  "labels": "final",
  "section": "e_perf",
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "bdf280081d248d51",
+    "bench_sha256": "48dbae6e90444ee7",
     "contracts_failed_per_run": [
      [
       "hook SessionStart p95",
@@ -16,92 +16,85 @@
       "hook UserPromptSubmit full p95"
      ],
      [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit gated p95",
-      "cue eval (ancestor lookup) p99"
-     ],
-     [
-      "hook UserPromptSubmit gated p95",
-      "hook UserPromptSubmit full p95",
       "cue eval (ancestor lookup) p99"
      ],
      [],
-     [
-      "hook UserPromptSubmit gated p95",
-      "hook UserPromptSubmit full p95",
-      "cue eval (ancestor lookup) p99"
-     ],
+     [],
      [],
      [
-      "hook UserPromptSubmit gated p95",
-      "hook UserPromptSubmit full p95",
       "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
      ]
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 13.363,
-      "p95_median": 16.93,
+      "p50_median": 11.886,
+      "p95_median": 14.589,
       "p95_runs": [
-       13.464,
-       21.799,
-       15.398,
-       18.945,
-       16.93,
-       18.888,
-       16.186
+       11.811,
+       12.412,
+       15.141,
+       13.543,
+       14.589,
+       14.743,
+       19.12
       ]
      },
      "SubagentStart": {
-      "p50_median": 13.336,
-      "p95_median": 17.04,
+      "p50_median": 11.426,
+      "p95_median": 13.627,
       "p95_runs": [
-       12.755,
-       13.404,
-       17.04,
-       17.141,
-       21.692,
-       14.358,
-       17.152
+       10.856,
+       11.518,
+       13.627,
+       13.004,
+       14.347,
+       14.434,
+       16.155
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 15.57,
-      "p95_median": 20.547,
+      "p50_median": 11.68,
+      "p95_median": 17.407,
       "p95_runs": [
-       16.474,
-       20.547,
-       27.763,
-       16.598,
-       33.246,
-       18.48,
-       22.962
+       17.407,
+       12.105,
+       11.88,
+       13.112,
+       21.97,
+       18.055,
+       23.598
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 10.518,
-      "p95_median": 14.14,
+      "p50_median": 10.076,
+      "p95_median": 11.466,
       "p95_runs": [
-       9.846,
-       19.045,
-       15.219,
-       12.585,
-       17.968,
-       12.288,
-       14.14
+       9.864,
+       10.394,
+       10.431,
+       11.466,
+       14.247,
+       12.34,
+       16.84
       ]
      }
     },
-    "ingest_200_ms_median": 11.2,
-    "interleaved_with": [],
-    "process_start_p50_median": 9.989,
+    "ingest_200_ms_median": 10.9,
+    "interleaved_with": [
+     "c202760b4fdcc86a"
+    ],
+    "process_start_p50_median": 9.066,
     "runs": 7
    },
    "stop_ingest_W02": {
-    "max_ms": 472.7,
-    "median_ms": 373.1,
-    "min_ms": 337.5,
-    "p90_ms": 439.7,
+    "max_ms": 324.8,
+    "median_ms": 299.9,
+    "min_ms": 285.5,
+    "p90_ms": 313.2,
     "records_from_synthetic_session": 21,
     "runs": 20
    }

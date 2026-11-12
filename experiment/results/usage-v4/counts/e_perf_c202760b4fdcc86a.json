@@ -1,0 +1,108 @@
+{
+ "binary_sha256": "c202760b4fdcc86a",
+ "binary_version": "muninn 1.2.0",
+ "build": "c202760b4fdcc86a",
+ "labels": "final",
+ "section": "e_perf",
+ "splits": {
+  "all": {
+   "perf": {
+    "bench_sha256": "48dbae6e90444ee7",
+    "contracts_failed_per_run": [
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [],
+     []
+    ],
+    "hooks": {
+     "SessionStart": {
+      "p50_median": 10.865,
+      "p95_median": 13.542,
+      "p95_runs": [
+       10.566,
+       14.304,
+       12.491,
+       12.09,
+       13.542,
+       18.771,
+       17.447
+      ]
+     },
+     "SubagentStart": {
+      "p50_median": 9.5,
+      "p95_median": 12.598,
+      "p95_runs": [
+       9.595,
+       13.508,
+       10.409,
+       11.363,
+       12.598,
+       14.641,
+       16.392
+      ]
+     },
+     "UserPromptSubmit_full": {
+      "p50_median": 13.329,
+      "p95_median": 17.131,
+      "p95_runs": [
+       17.74,
+       13.854,
+       13.246,
+       17.461,
+       14.77,
+       17.131,
+       19.429
+      ]
+     },
+     "UserPromptSubmit_gated": {
+      "p50_median": 6.888,
+      "p95_median": 9.911,
+      "p95_runs": [
+       10.976,
+       9.237,
+       7.215,
+       9.0,
+       9.911,
+       12.12,
+       13.576
+      ]
+     }
+    },
+    "ingest_200_ms_median": 9.8,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "process_start_p50_median": 6.763,
+    "runs": 7
+   },
+   "stop_ingest_W02": {
+    "max_ms": 337.0,
+    "median_ms": 278.5,
+    "min_ms": 271.0,
+    "p90_ms": 286.0,
+    "records_from_synthetic_session": 21,
+    "runs": 20
+   }
+  }
+ }
+}
