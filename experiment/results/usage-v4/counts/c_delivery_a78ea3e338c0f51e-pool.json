@@ -1,0 +1,95 @@
+{
+ "binary_sha256": "a78ea3e338c0f51e",
+ "binary_version": "muninn 1.2.0",
+ "binding": {
+  "c1": "held-out unrelated_returned and useful_returned",
+  "c2": "c12.c2_same_ids (needs --against); mean_tokens is secondary",
+  "c3": "t1 same_session == tried; t2 offered_again_after_stop == 1; t3 prompts_with_stale_twin == 0",
+  "c4": "all_slots share_lenient_of_labelled and share_strict_of_labelled, neither may fall; coverage_today neither == 0",
+  "c5": "usage_v2.spanish_reached, gender_flip_W02.found_top8, routed_away.returned, all_flag.what_about_found"
+ },
+ "build": "a78ea3e338c0f51e-pool",
+ "commit": "26a1fd153",
+ "labels": "final+pool",
+ "section": "c_delivery",
+ "splits": {
+  "all": {
+   "c12": {
+    "block_chars": 115275,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 441.8,
+     "mean_tokens_this": 304.9,
+     "prompts": 18
+    },
+    "evidence_chars": 0,
+    "harmful_returned": 2,
+    "header_chars": 15276,
+    "mean_tokens": 256.2,
+    "prompts": 150,
+    "prompts_with_delivery": 138,
+    "provenance_share": 0.1325,
+    "related_labelled": 307,
+    "related_returned": 139,
+    "returned": 320,
+    "unlabelled_returned": 24,
+    "unrelated_labelled": 554,
+    "unrelated_returned": 134,
+    "useful_labelled": 33,
+    "useful_returned": 21
+   }
+  },
+  "design": {
+   "c12": {
+    "block_chars": 61856,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 417.0,
+     "mean_tokens_this": 298.1,
+     "prompts": 8
+    },
+    "evidence_chars": 0,
+    "harmful_returned": 1,
+    "header_chars": 8096,
+    "mean_tokens": 251.4,
+    "prompts": 82,
+    "prompts_with_delivery": 77,
+    "provenance_share": 0.1309,
+    "related_labelled": 171,
+    "related_returned": 71,
+    "returned": 169,
+    "unlabelled_returned": 12,
+    "unrelated_labelled": 305,
+    "unrelated_returned": 71,
+    "useful_labelled": 17,
+    "useful_returned": 14
+   }
+  },
+  "heldout": {
+   "c12": {
+    "block_chars": 53419,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 461.6,
+     "mean_tokens_this": 310.3,
+     "prompts": 10
+    },
+    "evidence_chars": 0,
+    "harmful_returned": 1,
+    "header_chars": 7180,
+    "mean_tokens": 261.9,
+    "prompts": 68,
+    "prompts_with_delivery": 61,
+    "provenance_share": 0.1344,
+    "related_labelled": 136,
+    "related_returned": 68,
+    "returned": 151,
+    "unlabelled_returned": 12,
+    "unrelated_labelled": 249,
+    "unrelated_returned": 63,
+    "useful_labelled": 16,
+    "useful_returned": 7
+   }
+  }
+ }
+}

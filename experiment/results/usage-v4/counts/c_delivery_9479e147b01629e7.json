@@ -74,6 +74,39 @@
      "W02:share": 0.0,
      "W02:stale_twin_blocks": 0
     }
+   },
+   "c5": {
+    "all_flag": {
+     "asked": 30,
+     "one_word_found": 18,
+     "what_about_found": 0
+    },
+    "gender_flip_W02": {
+     "asked": 69,
+     "found_top8": 0
+    },
+    "routed_away": {
+     "by_store": {
+      "L01": [
+       5,
+       0
+      ],
+      "W02": [
+       10,
+       0
+      ]
+     },
+     "control_records": 80,
+     "control_returned": 74,
+     "records": 15,
+     "returned": 0
+    },
+    "usage_v2": {
+     "english_reached": 5,
+     "items": 30,
+     "spanish_reached": 27
+    },
+    "usage_v2_questions_sha256": "83ff8cae70f0c743"
    }
   },
   "design": {

@@ -1,0 +1,89 @@
+{
+ "binary_sha256": "a78ea3e338c0f51e",
+ "binary_version": "muninn 1.2.0",
+ "binding": {
+  "c1": "held-out unrelated_returned and useful_returned",
+  "c2": "c12.c2_same_ids (needs --against); mean_tokens is secondary",
+  "c3": "t1 same_session == tried; t2 offered_again_after_stop == 1; t3 prompts_with_stale_twin == 0",
+  "c4": "all_slots share_lenient_of_labelled and share_strict_of_labelled, neither may fall; coverage_today neither == 0",
+  "c5": "usage_v2.spanish_reached, gender_flip_W02.found_top8, routed_away.returned, all_flag.what_about_found"
+ },
+ "build": "a78ea3e338c0f51e",
+ "commit": "26a1fd153",
+ "labels": "final",
+ "section": "c_delivery",
+ "splits": {
+  "all": {
+   "c3": {
+    "t1_cut_for_budget": {
+     "cut_at_start": 32,
+     "fresh_session": 11,
+     "same_session": 11,
+     "tried": 11
+    },
+    "t1_listed_in_catalogue": {
+     "fresh_session": 9,
+     "listed_not_shown": 11,
+     "same_session": 9,
+     "tried": 10
+    },
+    "t2_after_compaction": {
+     "after_next_stop": {
+      "first_blocks": 1,
+      "served_again": 1
+     },
+     "epoch_line_pending": {
+      "first_blocks": 1,
+      "served_again": 1
+     },
+     "offered_again_after_stop": 1
+    },
+    "t3_stale_twin": {
+     "L01:delivered": 45,
+     "L01:prompts": 49,
+     "L01:prompts_with_stale_twin": 0,
+     "L01:share": 0.0,
+     "L01:stale_twin_blocks": 0,
+     "W02:delivered": 194,
+     "W02:prompts": 222,
+     "W02:prompts_with_stale_twin": 0,
+     "W02:share": 0.0,
+     "W02:stale_twin_blocks": 0
+    }
+   },
+   "c5": {
+    "all_flag": {
+     "asked": 30,
+     "one_word_found": 21,
+     "what_about_found": 20
+    },
+    "gender_flip_W02": {
+     "asked": 69,
+     "found_top8": 59
+    },
+    "routed_away": {
+     "by_store": {
+      "L01": [
+       5,
+       5
+      ],
+      "W02": [
+       10,
+       10
+      ]
+     },
+     "control_records": 80,
+     "control_returned": 74,
+     "records": 15,
+     "returned": 15
+    },
+    "usage_v2": {
+     "english_reached": 7,
+     "items": 30,
+     "spanish_reached": 28
+    },
+    "usage_v2_questions_sha256": "83ff8cae70f0c743"
+   }
+  }
+ }
+}
