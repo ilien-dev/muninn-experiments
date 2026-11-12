@@ -1,0 +1,100 @@
+{
+ "binary_sha256": "01b82fa557523015",
+ "binary_version": "muninn 1.2.0",
+ "binding": {
+  "b1_loss": "loss_retired_total (score.py rule); loss_retired_total_earliest_row is secondary",
+  "b1_valid": "valid_states_earliest_row; valid_states (score.py rule) is secondary",
+  "b2_aba": "served_A_typed and not served_B_typed",
+  "b2_revert": "revert_one_maintain.reverted_commit_retired",
+  "b2_reword": "reword.retired (any kind) == 0; retired_typed is secondary",
+  "b3": "registered/* (loop8/eval_all.py); noise retired_a <= base; dated/* is secondary"
+ },
+ "build": "01b82fa557523015",
+ "commit": "99a20e9c8",
+ "labels": "final",
+ "note": "B is not split; see the docstring",
+ "section": "b_retire",
+ "splits": {
+  "all": {
+   "b2": {
+    "aba": {
+     "active_decisions_A": 1,
+     "active_decisions_B": 0,
+     "blocks": 1,
+     "served_A_any_block": true,
+     "served_A_typed": true,
+     "served_B_any_block": false,
+     "served_B_typed": false
+    },
+    "revert_maintain_between": {
+     "jest_decision_active": 0,
+     "revert_deadends": 1,
+     "reverted_commit_records": 2,
+     "reverted_commit_retired": 2
+    },
+    "revert_one_maintain": {
+     "jest_decision_active": 0,
+     "revert_deadends": 1,
+     "reverted_commit_records": 1,
+     "reverted_commit_retired": 1
+    },
+    "reword": {
+     "records_before": 7,
+     "retired": 0,
+     "retired_typed": 0,
+     "said_records_created": 0
+    }
+   },
+   "b3": {
+    "dated/both/adjacent": {
+     "kept_b": "23/30",
+     "old_served": "0/30",
+     "retired_a": "30/30",
+     "served_ok": "19/30"
+    },
+    "dated/both/blocks": {
+     "kept_b": "23/30",
+     "old_served": "0/30",
+     "retired_a": "29/30",
+     "served_ok": "16/30"
+    },
+    "dated/noise/adjacent": {
+     "kept_b": "0/30",
+     "old_served": "18/30",
+     "retired_a": "3/30",
+     "served_ok": "0/30"
+    },
+    "dated/noise/blocks": {
+     "kept_b": "0/30",
+     "old_served": "18/30",
+     "retired_a": "3/30",
+     "served_ok": "0/30"
+    },
+    "registered/both/adjacent": {
+     "kept_b": "23/30",
+     "old_served": "8/30",
+     "retired_a": "18/30",
+     "served_ok": "11/30"
+    },
+    "registered/both/blocks": {
+     "kept_b": "23/30",
+     "old_served": "13/30",
+     "retired_a": "10/30",
+     "served_ok": "2/30"
+    },
+    "registered/noise/adjacent": {
+     "kept_b": "0/30",
+     "old_served": "18/30",
+     "retired_a": "3/30",
+     "served_ok": "0/30"
+    },
+    "registered/noise/blocks": {
+     "kept_b": "0/30",
+     "old_served": "18/30",
+     "retired_a": "3/30",
+     "served_ok": "0/30"
+    }
+   }
+  }
+ }
+}
