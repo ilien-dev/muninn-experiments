@@ -7436,3 +7436,29 @@ labeller cannot tell them apart. If the labeller's agreement with the frozen lab
 controls has a Cohen's kappa below 0.6 on unrelated-or-not, the pool labels are not used and C1 is
 not read until the pool is relabelled. The pool labels extend the frozen delivery labels in a
 separate file; the frozen file and its hash do not change.
+
+## Seventh amendment to usage-v4, 2026-11-12 — how C4 is read, written after the design-split C4 figure was seen and before any held-out C4 cell
+
+Set by the experiment's controller after Task 4's design-split C4 reading of the combined build
+`8ec1c6bb4c71ecf8` and before any held-out C4 cell ran.
+
+- The clause "every active correction and invariant is either shown or listed" cannot be met
+  inside the registered budgets by any build. Active corrections and invariants that a session
+  start neither shows nor lists, summed over the seven stores with deliveries (today's copies):
+  base `b93d2f5c222c0424` 213, combined `8ec1c6bb4c71ecf8` 150, the same without R-07
+  `8b11417f92b48606` 150; one store alone holds 118 such rules. (No committed counts file holds
+  this reading for a Task 3 build.) As written the clause fails base and candidate alike and
+  decides nothing.
+- It is read instead as: that count does not rise against the base, and the line that closes the
+  catalogue says truthfully whether the list is whole ("That is every …" only when every active
+  decision, invariant and correction other than a commit subject is shown or listed; "… and
+  more, not listed" otherwise). The literal count is reported for every build.
+- Session-start slots that the candidate fills and that carry no frozen label (on the design
+  split 122 of 260 block slots and 112 of 209 catalogue slots, because corrections are now shown)
+  are labelled blind in the same pool as the C1 pairs, by the same labeller who is not an
+  implementer, with the frozen session-start label codes (rule, decision, one_off, fragment,
+  no_ref, truncated, duplicate, noise). At least 40 already-labelled slots the base shows are
+  mixed in as controls. If the controls' Cohen's kappa on worth-its-slot-or-not (rule or decision
+  against the rest) is below 0.6, the pool's slot labels are not used and C4 is read on frozen
+  labels only, with the unlabelled count reported. Where the registered text names no share, both
+  the lenient and the strict share must not fall (third amendment).
