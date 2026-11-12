@@ -8,88 +8,75 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "7157b69254379e11",
+    "bench_sha256": "fb4228e56b5e2568",
     "contracts_failed_per_run": [
-     [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
      [],
-     [
-      "hook UserPromptSubmit gated p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook SubagentStart p95",
-      "hook UserPromptSubmit gated p95"
-     ],
      [],
-     [
-      "hook UserPromptSubmit gated p95",
-      "cue eval (ancestor lookup) p99"
-     ],
+     [],
+     [],
+     [],
+     [],
      []
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 25.005,
-      "p95_median": 32.824,
+      "p50_median": 21.961,
+      "p95_median": 23.668,
       "p95_runs": [
-       48.763,
-       32.824,
-       27.025,
-       33.802,
-       41.701,
-       28.98,
-       29.831
+       22.529,
+       23.229,
+       22.923,
+       23.858,
+       23.668,
+       24.209,
+       24.361
       ]
      },
      "SubagentStart": {
-      "p50_median": 22.575,
-      "p95_median": 27.186,
+      "p50_median": 20.276,
+      "p95_median": 21.284,
       "p95_runs": [
-       28.178,
-       27.083,
-       23.801,
-       35.535,
-       36.41,
-       27.186,
-       24.9
+       20.308,
+       20.997,
+       20.582,
+       21.433,
+       21.84,
+       21.284,
+       22.49
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 26.589,
-      "p95_median": 32.964,
+      "p50_median": 23.578,
+      "p95_median": 24.955,
       "p95_runs": [
-       38.761,
-       31.503,
-       37.869,
-       32.964,
-       36.839,
-       29.29,
-       30.225
+       23.445,
+       24.955,
+       24.342,
+       24.66,
+       26.343,
+       25.355,
+       26.113
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 20.603,
-      "p95_median": 23.659,
+      "p50_median": 18.017,
+      "p95_median": 19.062,
       "p95_runs": [
-       23.641,
-       23.455,
-       23.213,
-       25.995,
-       30.02,
-       25.221,
-       23.659
+       18.192,
+       18.646,
+       18.415,
+       19.062,
+       19.518,
+       19.416,
+       21.231
       ]
      }
     },
-    "ingest_200_ms_median": 10.1,
+    "ingest_200_ms_median": 9.6,
     "interleaved_with": [
-     "fe41ba8f6a353f44"
+     "5460672525ecf742"
     ],
-    "process_start_p50_median": 19.341,
+    "process_start_p50_median": 17.217,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -107,14 +94,14 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 3050.7,
+    "first_write_open_ms": 2786.3,
     "interleaved_with": [
-     "fe41ba8f6a353f44"
+     "5460672525ecf742"
     ],
-    "max_ms": 422.0,
-    "median_ms": 310.3,
-    "min_ms": 293.7,
-    "p90_ms": 333.7,
+    "max_ms": 430.0,
+    "median_ms": 301.5,
+    "min_ms": 287.1,
+    "p90_ms": 338.1,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -136,37 +123,36 @@
    },
    "cand": {
     "bench_crate_sha256": "adf4dc453728100d",
-    "commit": "d2b2b0691dbb3335e96152689589d312ab01dc3f",
+    "commit": "032b42ce6b99075901058c5e7170b16aceaa1a2d",
     "dirty": false
    }
   },
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
-   "b93d2f5c222c0424": [
-    8345,
-    8354
+   "5460672525ecf742": [
+    8346,
+    8356
    ],
-   "fe41ba8f6a353f44": [
-    8356,
-    8376
+   "b93d2f5c222c0424": [
+    8345
    ]
   },
   "must_deliver": {
    "blocks": {
-    "b93d2f5c222c0424": 6,
-    "fe41ba8f6a353f44": 2
+    "5460672525ecf742": 2,
+    "b93d2f5c222c0424": 6
    },
    "item": "P026",
    "verdict": "both"
   },
   "seed_rows_and_fingerprint": {
-   "b93d2f5c222c0424": [
+   "5460672525ecf742": [
     [
      8336,
      "3a9091da7f1c5202"
     ]
    ],
-   "fe41ba8f6a353f44": [
+   "b93d2f5c222c0424": [
     [
      8336,
      "3a9091da7f1c5202"

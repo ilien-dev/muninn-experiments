@@ -1,0 +1,94 @@
+{
+ "binary_sha256": "10b0ef408c95332e",
+ "binary_version": "muninn 1.2.0",
+ "build": "t6-alone-wish",
+ "candidates_total": 168,
+ "commit": "d53c517da",
+ "labels": "final",
+ "section": "a_extract",
+ "splits": {
+  "design": {
+   "precision_set": {
+    "durable_emitted": 11,
+    "emitted": 62,
+    "emitted_by_kind_label": {
+     "correction:b": 11,
+     "decision:a": 8,
+     "decision:b": 18,
+     "decision:c": 12,
+     "decision:d": 1,
+     "invariant:a": 3,
+     "invariant:b": 4,
+     "invariant:c": 4,
+     "invariant:d": 1
+    },
+    "emitted_by_label": {
+     "a": 11,
+     "b": 33,
+     "c": 16,
+     "d": 2
+    },
+    "items": 63,
+    "labels": {
+     "a": 11,
+     "b": 34,
+     "c": 16,
+     "d": 2
+    },
+    "measurable": 62,
+    "noise_emitted": 51,
+    "not_emitted_by_label": {},
+    "not_measurable_deadend": 1,
+    "record_precision": 0.1774,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 20
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 9,
+     "b": 20,
+     "c": 2,
+     "durable": 11
+    },
+    "durable_by_kind": {
+     "correction": 4,
+     "decision": 15,
+     "rule": 4
+    },
+    "durable_emitted": 9,
+    "durable_emitted_by_kind": {
+     "correction": 1,
+     "decision": 5,
+     "rule": 3
+    },
+    "durable_messages": 23,
+    "durable_missed": 14,
+    "labels": {
+     "a": 23,
+     "b": 109,
+     "nh": 14,
+     "opt": 6
+    },
+    "message_precision": 0.2619,
+    "messages": 152,
+    "messages_with_candidates_by_label": {
+     "a": 14,
+     "b": 18,
+     "nh": 2
+    },
+    "noise_candidates": 31,
+    "recall": 0.3913,
+    "transcript_missing": 0
+   }
+  }
+ },
+ "src": {
+  "commit": "d53c517da54d54b8e41749ca211d7705f5c3c84c",
+  "dirty": false
+ },
+ "src_note": "extract_dump of the --src tree",
+ "turn_alignment": {
+  "candidates_at_recall_turns": 73,
+  "text_found_in_message": 70
+ }
+}
