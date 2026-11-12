@@ -46,9 +46,13 @@
      "tried": 12
     },
     "t1_listed_in_catalogue": {
+     "excluded_ids": [],
+     "excluded_not_returned_fresh": 0,
      "fresh_session": 5,
      "listed_not_shown": 6,
+     "returned_by_fresh_control": 5,
      "same_session": 0,
+     "same_session_of_those": 0,
      "tried": 5
     },
     "t2_after_compaction": {
