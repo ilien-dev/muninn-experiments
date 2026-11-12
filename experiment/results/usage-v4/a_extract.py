@@ -24,6 +24,7 @@ durable / (durable + a_other + b + c).
 import collections, hashlib, json, os, shutil, subprocess, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import *
+from inputs import staged
 
 ap = parser(__doc__)
 ap.add_argument('--src', required=True, help='source tree whose extract_dump is measured')
@@ -50,25 +51,25 @@ by_sid = {os.path.basename(t['path']).rsplit('.', 1)[0]: t['path'] for t in T}
 for r in R:
     by_sid.setdefault(r['session'], r['path'])
 
-# stage the transcripts the items live in (copied once; re-copied when the size changes)
+# the transcripts the items live in, from the staged inputs only (tenth amendment: inputs.py)
 need = collections.defaultdict(set)
 for p in P:
     need[p['store']].add(p['session'])
 for r in R:
     need[r['store']].add(r['session'])
-tx = work('a_extract', 'tx')
+staged_a, input_counts = staged('a')
+tx = work('a_extract', 'tx_staged')
+shutil.rmtree(tx, ignore_errors=True)
 missing = set()
 for st, sids in need.items():
     d = os.path.join(tx, st)
     os.makedirs(d, exist_ok=True)
     for sid in sids:
-        src = by_sid.get(sid)
-        dst = os.path.join(d, sid + '.jsonl')
-        if not src or not os.path.isfile(src):
+        src = staged_a.get(by_sid.get(sid))
+        if not src:
             missing.add(sid)
             continue
-        if not os.path.isfile(dst) or os.path.getsize(dst) != os.path.getsize(src):
-            shutil.copyfile(src, dst)
+        shutil.copyfile(src, os.path.join(d, sid + '.jsonl'))
 
 
 def dump(exe):
@@ -213,7 +214,7 @@ def src_commit(src):
     return {'commit': r.stdout.strip(), 'dirty': bool(d)}
 
 
-extra = {'src': src_commit(args.src), 'src_note': 'extract_dump of the --src tree', 'candidates_total': len(cands),
+extra = {'inputs': input_counts, 'src': src_commit(args.src), 'src_note': 'extract_dump of the --src tree', 'candidates_total': len(cands),
          'turn_alignment': {'candidates_at_recall_turns': align['candidates'], 'text_found_in_message': align['text_in_message']}}
 write_counts('a_extract', build, args, per, extra)
 # per-item emitted ids for base/candidate comparison (ids and codes only)

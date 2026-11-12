@@ -52,7 +52,11 @@ def frac(x):
 sp = a.split
 # ---------------------------------------------------------------------------------------------- A
 A0, A1 = load('a_extract', a.base), load('a_extract', a.cand)
-if A0 and A1 and sp in A0['splits'] and sp in A1['splits']:
+a_inputs_ok = all((X or {}).get('inputs', {}).get('status', 'ok') == 'ok' for X in (A0, A1))
+if A0 and A1 and not a_inputs_ok:
+    for r in ('A1', 'A2', 'A3'):
+        out(r, None, None, None, 'missing input: a staged extraction transcript is gone or changed (tenth amendment)')
+elif A0 and A1 and sp in A0['splits'] and sp in A1['splits']:
     p0, p1 = A0['splits'][sp]['precision_set'], A1['splits'][sp]['precision_set']
     r0, r1 = A0['splits'][sp]['recall_set'], A1['splits'][sp]['recall_set']
     n0 = p0['noise_emitted'] + r0['noise_candidates']
@@ -76,7 +80,10 @@ else:
 B0, B1 = load('b_retire', a.base), load('b_retire', a.cand)
 if B0 and B1:
     s0, s1 = B0['splits']['all'], B1['splits']['all']
-    if 'b1' in s0 and 'b1' in s1:
+    if 'b1' in s0 and 'b1' in s1 and (s0['b1'].get('status', 'ok') != 'ok' or s1['b1'].get('status', 'ok') != 'ok'):
+        for r in ('B1 loss retired: candidate <= base (score.py rule)', 'B1 both valid retirements happen (earliest row)'):
+            out(r, None, None, None, 'missing input: a staged B1 transcript is gone or changed (tenth amendment)')
+    elif 'b1' in s0 and 'b1' in s1:
         v = s1['b1']['valid_states_earliest_row']
         out('B1 loss retired: candidate <= base (score.py rule)', s0['b1']['loss_retired_total'], s1['b1']['loss_retired_total'],
             s1['b1']['loss_retired_total'] <= s0['b1']['loss_retired_total'], 'earliest-row reading: %d -> %d (secondary)' % (s0['b1']['loss_retired_total_earliest_row'], s1['b1']['loss_retired_total_earliest_row']))

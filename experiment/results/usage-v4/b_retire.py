@@ -33,6 +33,7 @@ the counts are written under `all` whatever --split says.
 import collections, concurrent.futures as cf, json, os, shutil, sqlite3, subprocess, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import *
+from inputs import staged, staged_git
 
 ap = parser(__doc__)
 ap.add_argument('--parts', default='b1,b2,b3')
@@ -52,35 +53,32 @@ out = {}
 def b1():
     lab = L['project_labels']
     rundir = work('b_retire', 'runner')
+    input_counts = {}
     shutil.copyfile(os.path.join(EXP, 'results', 'usage-v1', 'replay.py'), os.path.join(rundir, 'replay.py'))
-    projects = work('b_retire', 'projects')
+    projects = work('b_retire', 'projects_staged')
     corpora = []
-    for proj in sorted(os.listdir(F + '/fixtures/usage-v1/stores')):
-        d = os.path.join(rundir, 'stores', proj)
-        os.makedirs(d, exist_ok=True)
-        shutil.copyfile(F + '/fixtures/usage-v1/stores/%s/muninn.db' % proj, os.path.join(d, 'muninn.db'))
-        corpora.append((proj, proj))
-    # today's W02 and L01: a store that holds only the transcript paths replay.py reads
-    for st in ('W02', 'L01'):
-        name = st + 'now'
+    # tenth amendment: replay.py reads only staged copies of the transcripts (inputs.py stage); each
+    # corpus gets a store that holds only the staged paths, the one thing replay.py reads from it
+    names = [(proj, proj) for proj in sorted(os.listdir(F + '/fixtures/usage-v1/stores'))] + [(st + 'now', L['label_projects'].get(st)) for st in ('W02', 'L01')]
+    for name, proj in names:
+        paths, c = staged('b1:' + name)
+        input_counts[(lab.get(name) or name).replace('now', '-now')] = c
         d = os.path.join(rundir, 'stores', name)
         os.makedirs(d, exist_ok=True)
         p = os.path.join(d, 'muninn.db')
         if os.path.exists(p):
             os.remove(p)
-        src = sqlite3.connect('file:%s/stores/%s/muninn.db?mode=ro' % (F, st), uri=True)
-        refs = [r[0] for r in src.execute("select distinct transcript_ref from record where transcript_ref like '%.jsonl:%'")]
-        src.close()
         dst = sqlite3.connect(p)
         dst.execute('create table record (transcript_ref text)')
-        wsl = L.get('wsl_root', '')
-        dst.executemany('insert into record values (?)', [((wsl + r) if r.startswith('/home/') else r,) for r in refs])
+        dst.executemany('insert into record values (?)', [(sp + ':0',) for sp in sorted(paths.values())])
         dst.commit()
         dst.close()
-        corpora.append((name, L['label_projects'].get(st)))
+        corpora.append((name, proj))
+    if any(c['status'] != 'ok' for c in input_counts.values()):
+        return {'status': 'missing input', 'inputs': input_counts}
     for name, proj in corpora:
         link = os.path.join(projects, name)
-        target = os.path.join(L['projects_dir'], proj) if proj else None
+        target = staged_git(proj) if proj else None  # the staged clone, never the live checkout
         if target and os.path.isdir(os.path.join(target, '.git')) and not os.path.exists(link):
             subprocess.run(['cmd', '/c', 'mklink', '/J', link.replace('/', '\\'), target.replace('/', '\\')], capture_output=True)
     rp = work('b_retire', 'rp')
@@ -174,6 +172,7 @@ def b1():
         totals[(lab.get(name) or name).replace('now', '-now')] = dict(t)
     loss_ret = sum(1 for v in items.values() if v['loss'] and v['state'] == 'retired')
     return {
+        'status': 'ok', 'inputs': input_counts,
         'usage_v1_95': dict(v1), 'since_1_2_0_13': dict(v2),
         'loss_retired_total': loss_ret,
         'loss_retired_v1': sum(1 for k, v in items.items() if k.startswith('v1:') and v['loss'] and v['state'] == 'retired'),

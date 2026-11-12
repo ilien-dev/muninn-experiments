@@ -91,3 +91,18 @@ fresh-session control returns (`returned_by_fresh_control`, `same_session_of_tho
 are counted in `excluded_not_returned_fresh` with their ids and printed by `verdict.py`. Counts
 from before that change read `missing` for this arm until `c_delivery.py --parts c3` is rerun.
 `c_delivery.py --counts-out <dir>` writes counts to another directory (used for checks).
+
+## Staged inputs (`inputs.py`, tenth amendment)
+
+The harness used to read some inputs straight from the machine: the transcripts usage-v1's replay
+reads for B1 (from the stores' `transcript_ref`, i.e. the live transcripts folder and the WSL
+share), the project repositories B1 clones, the transcripts of the extraction items (A, which
+re-copied a transcript whenever its size changed), and the transcripts the W02 copy's session log
+names (read by `Stop` in E). Transcripts that left the disk silently shrank B1's corpora. Now
+`python -I inputs.py stage` copies each of them once into `$MUNINN_USAGE_FIXTURES/fixtures/inputs/`
+(directory per original-path hash, file name kept; a manifest with size and sha256, private) and
+freezes them; project repositories are staged as no-checkout clones. A, B1 and E read only the
+staged copies. `inputs.py check` prints counts per group. A run whose staged copy is gone or
+altered records `status: "missing input"` (B1, A) or refuses to write (E), and `verdict.py` prints
+those rules as `missing`, never `fail`. Inputs that were already gone when staging ran are counted
+as `unrecoverable`; C, D and B2/B3 read only files under the fixture root and this directory.

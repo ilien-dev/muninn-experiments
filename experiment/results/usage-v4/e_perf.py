@@ -34,6 +34,7 @@ Stop is the catch-up and is dropped. Wall-clock ms; the rule reads the median.
 import glob, json, os, re, shutil, sqlite3, statistics as stt, subprocess, sys, time
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from common import *
+from inputs import staged
 from e_gates import seed_fingerprint, gate_workload, gate_deliver
 
 HARNESS_REV = 3
@@ -316,6 +317,9 @@ if 'perf' in parts:
                           'interleaved_with': [sha16(x) for x in bins if x != b]}
 
 if 'stop' in parts:
+    staged_e, e_inputs = staged('e')
+    if e_inputs['status'] != 'ok':
+        fail('stop:missing_input')
     def schema(root):
         con = sqlite3.connect('file:%s/.muninn/muninn.db?mode=ro' % root, uri=True)
         v = con.execute("select value from meta where key='schema_version'").fetchone()
@@ -326,6 +330,23 @@ if 'stop' in parts:
         root = work('e_perf', 'stop', str(k))
         shutil.rmtree(root, ignore_errors=True)
         shutil.copytree(F + '/stores/W02', root + '/.muninn', ignore=shutil.ignore_patterns('muninn.db-shm', 'muninn.db-wal'))
+        # tenth amendment: the session log points Stop at staged copies of its transcripts only
+        sl = root + '/.muninn/log/sessions.jsonl'
+        kept = dropped = 0
+        lines = []
+        for l in open(sl, encoding='utf-8', errors='replace'):
+            try:
+                v = json.loads(l)
+            except Exception:
+                continue
+            sp = staged_e.get(v.get('transcript'))
+            if sp:
+                v['transcript'] = os.path.normpath(sp)
+                lines.append(json.dumps(v) + '\n')
+                kept += 1
+            else:
+                dropped += 1
+        open(sl, 'w', encoding='utf-8', newline='').writelines(lines)
         before = schema(root)
         t0 = time.perf_counter()
         r = run([b, '--cwd', root, 'maintain'], 'stop:maintain', env=ENV)  # the write open that migrates the copy
@@ -334,7 +355,8 @@ if 'stop' in parts:
             fail('stop:maintain:stderr')
         run([b, '--cwd', root, 'maintain'], 'stop:maintain', env=ENV)
         open(root + '/synthetic-session.jsonl', 'w').close()
-        return root, {'schema_before': before, 'schema_after': schema(root), 'first_write_open_ms': round(first, 1)}
+        return root, {'schema_before': before, 'schema_after': schema(root), 'first_write_open_ms': round(first, 1),
+                      'session_log_lines_staged': kept, 'session_log_lines_without_copy': dropped}
 
     sid = '00000000-aaaa-bbbb-cccc-000000000001'
 
@@ -388,7 +410,7 @@ if 'stop' in parts:
         info['stop_hooks_ok'] = sbad == 0 and sfin >= args.stop_runs + 1
         if not info['stop_hooks_ok']:
             fail('stop:heartbeat')
-        res[b]['stop_ingest_W02'] = dict(info, runs=len(xs), median_ms=round(stt.median(xs), 1), p90_ms=round(sorted(xs)[int(0.9 * (len(xs) - 1))], 1),
+        res[b]['stop_ingest_W02'] = dict(info, inputs=e_inputs, runs=len(xs), median_ms=round(stt.median(xs), 1), p90_ms=round(sorted(xs)[int(0.9 * (len(xs) - 1))], 1),
                                          min_ms=round(min(xs), 1), max_ms=round(max(xs), 1), records_from_synthetic_session=ingested,
                                          interleaved_with=[sha16(x) for x in bins if x != b])
 
