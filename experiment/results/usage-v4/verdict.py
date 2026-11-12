@@ -165,7 +165,15 @@ if C0 and C1:
     # counts carry them; coverage is read on today's copies (split all), seventh amendment
     # the pool's slot labels count only when they passed their gate and were merged (pool_units_used > 0)
     pool4 = bool(P0 and P1 and all((X['splits'].get(sp, {}).get('c4') or {}).get('all_slots') and (X['splits'].get(sp, {}).get('c4') or {}).get('pool_units_used', 0) > 0 for X in (P0, P1)))
-    S0, S1 = (P0, P1) if pool4 else (C0, C1)
+    # without usable pool slot labels, a final+pool run's C4 is scored on the frozen labels only:
+    # read it when both builds have it for this split, else the frozen run's counts
+    has4 = lambda X: bool(X and (X['splits'].get(sp, {}).get('c4') or {}).get('all_slots'))
+    if pool4:
+        S0, S1 = P0, P1
+    elif has4(P0) and has4(P1):
+        S0, S1 = P0, P1
+    else:
+        S0, S1 = C0, C1
     g0, g1 = S0['splits'].get(sp, {}).get('c4'), S1['splits'].get(sp, {}).get('c4')
     if g0 and g1 and 'all_slots' in g0 and 'all_slots' in g1:
         l0, l1 = g0['all_slots'], g1['all_slots']
