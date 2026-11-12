@@ -7382,3 +7382,20 @@ them. `verdict.py` in `results/usage-v4/` applies them.
 - `verdict.py` never reads an absent or empty input as a pass: such a rule reads `missing`, as
   does every E rule whose two builds' figures do not come from one interleaved run; C2's
   `init --check-budget` half is a `manual` row.
+
+## Fourth amendment to usage-v4, 2026-11-11 — how C1 reads a ranking change, fixed after Task 3's candidate figures and before any Task 4 cell
+
+Set by the experiment's controller after Task 3's candidate (`c202760b4fdcc86a`, worktree
+`ea3f1d369`) had been measured and before any cell of Task 4 ran.
+
+- C1 is read once, on Task 4's combined build (relevance floor plus the ranking changes that
+  reached it, the R-07 tie-break among them), as registered: held-out unrelated blocks fall by at
+  least 30 % and useful pairs fall by at most one. No change is read under C1 on its own before
+  that build.
+- Before the reading, every (prompt, block) pair returned by any arm of that reading that has no
+  label is pooled with the base build's unlabelled pairs, shuffled, and labelled blind to the arm
+  by a labeller who is not an implementer, in the codes of the frozen delivery labels. The reading
+  then scores those pairs too.
+- The reading includes an attribution arm without R-07 (the combined build with commit
+  `0024d4828` reverted). R-07 is reverted if its arm makes C1 worse than the arm without it, or if
+  the combined C1 fails.
