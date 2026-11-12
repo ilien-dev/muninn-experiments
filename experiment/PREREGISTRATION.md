@@ -7505,4 +7505,6 @@ applied to each filter alone ships nothing by construction.
   not by a user-facing option of the binary.
 - *Note, 2026-11-12, after Task 6's held-out reading:* the drop test above is applied on held-out,
   the split A1 names (controller's ruling); it dropped one filter, the sentence that opens by
-  pointing back (Task 6 #7), which alone removed 0 of 55 held-out noise records.
+  pointing back (Task 6 #7), which alone removed 0 of 55 held-out noise records. A line in the
+  user's role whose harness `origin.kind` is not `human` (Task 6, `8e2784c93`) is an origin fix
+  of the same class as the two named above, and is not submitted to the drop test.
