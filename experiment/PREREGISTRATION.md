@@ -7566,3 +7566,37 @@ So the command is not read under A2. It ships on:
 
 Its use in the field is not measured by this experiment. `muninn status` gains a count of
 `remember` calls so that it can be read later.
+
+## Twelfth amendment to usage-v4, 2026-11-13 — a second reading of B1 that does not key an item by kind, written after B1's valid clause read fail for Task 7's build
+
+Written after B1's valid clause read `fail` for build `1a196e3ffaa9becb` (Task 7's final build,
+one typed record per turn) and before any script was changed for it or any run made with a new
+reading. Both valid items, `v1:W02:236` and `v1:W05:380`, read `absent`. The scorer finds an item
+by its kind and a key of its text (`body like '%<key>%' and kind = <item kind>`). Both items were
+corrections in 1.2.0; the build stores the same turn as one decision whose body holds the same
+text, so no row of the item's kind exists and the item reads `absent` though the statement is on
+record. Items read `absent` rose from 53 (`5460672525ecf742`) to 73 on the same inputs.
+
+- **Second reading, kind-free.** An item is found among the typed rows of the replayed store,
+  every kind except `episode` (an episode holds the turn's literal text and is not the statement
+  record): `body like '%<key>%' and kind <> 'episode'`, ordered by `created_at, id` as now. Its
+  state is read as now: `active` if any matching row is active (score.py's rule), and the
+  earliest matching row for the earliest-row reading. The key: for the usage-v1 items, the first
+  line of the old record's body with a leading speaker label `user: ` removed, then its first 70
+  characters; for the items since 1.2.0, their key as it is (none carries a label). The label is
+  removed because the new body is the person's whole message, `user: ` followed by the message,
+  so the old opening `user: <sentence>` is found only when the sentence opens the message; the
+  sentence itself is found anywhere in it. The key is computed by the script from the labelled
+  items alone; nobody reads held-out text to write it.
+- **Which reading binds.** Where an item's kind-bound reading is `absent`, its kind-free reading
+  binds; otherwise the kind-bound reading binds. This applies to the valid clause (both valid
+  items must read `retired`, earliest row) and to the loss clause (loss items retired, score.py's
+  rule: at most the base's 9, and at most the previous build's 5 as Task 7's rulings require).
+- **Runs.** The kind-free reading is scored on base `b93d2f5c222c0424`, on `638698d49596e7c5`
+  (Task 6 as Task 7 started from it) and on `1a196e3ffaa9becb`, on the frozen inputs. On base it
+  must reproduce the base's kind-bound states; every item whose state differs is listed by id and
+  label in the report, and none is dropped.
+- **Decision.** If either valid item is not `retired` on the binding reading, or loss rises above
+  5, Task 7's extractor does not ship and is reverted with revert commits; `muninn remember`
+  stays. Otherwise B1 reads pass for the build. The kind-bound reading keeps being printed beside
+  it.
