@@ -11,7 +11,14 @@ built from the candidate's tree; once the schema moved past the base's, the base
 that store and every base figure timed an error path. Revision 2 timed each build with its own
 bench but called the workloads equal on a row count alone and did not gate delivery. Revision 3
 compares the two builds' seed rows by count and fingerprint, hashes each bench's sources, and runs
-a must-deliver case on both builds. `verdict.py` reads E only from revision-3 counts.
+a must-deliver case on both builds. `verdict.py` reads E only from counts of revision 3 or later.
+Revision 4 (Task 8, fix round 1): the candidate's bench now marks its decisions and invariants as
+the person's (`user_said`, trust 3), because the candidate's catalogue leaves out `commit_linked`
+records and listed none of the fixture's. The base's bench copy gets the same origin and trust
+(`FIXTURE_NEW`), so both arms time a store with the same records; each bench store's records are
+counted by kind, origin and trust after its run, and the workloads are equal only if those
+counts are equal too. Whether each build's SessionStart lists typed records in its catalogue is
+recorded (`catalogue_lists_typed`).
 
 perf. Each build is timed by a `muninn-bench` built from its own source, so each runs on a store
 its own code created. `--bench-base-src` builds the base's bench from a *copy* of the base tree
@@ -37,7 +44,7 @@ from common import *
 from inputs import staged
 from e_gates import seed_fingerprint, gate_workload, gate_deliver
 
-HARNESS_REV = 3
+HARNESS_REV = 4
 ap = parser(__doc__)
 ap.add_argument('--against')
 ap.add_argument('--bench', help='muninn-bench built from the candidate (--against) tree')
@@ -87,6 +94,12 @@ SEED = '''    // usage-v4 harness: the fire_ledger seed of the candidate's bench
     }
 '''
 
+
+FIXTURE_OLD = "VALUES(?1,?2,?3,?4,?5,'commit_linked',2,?6,'bench',?7,?8)"
+FIXTURE_NEW = ("VALUES(?1,?2,?3,?4,?5,"
+               "CASE WHEN ?1 IN ('decision','invariant') THEN 'user_said' ELSE 'commit_linked' END,"
+               "CASE WHEN ?1 IN ('decision','invariant') THEN 3 ELSE 2 END,"
+               "?6,'bench',?7,?8)")
 
 TOP_IGNORE = {'target', '.git', '.muninn', 'node_modules', 'research', 'site'}
 
@@ -157,8 +170,12 @@ def build_bench(src, name, seed=False):
                 s = s[:at] + SEED + s[at:]
             else:
                 s = s.replace(anchor, '    tx.commit()?;\n' + SEED + '    // The index a store actually has', 1)
+            if s.count(FIXTURE_OLD) != 1:
+                sys.exit('cannot give the base bench the candidate fixture\'s origins')
+            s = s.replace(FIXTURE_OLD, FIXTURE_NEW)
             open(mp, 'w', encoding='utf-8', newline='\n').write(s)
-            workload['base_bench'] = 'copy of the base tree with the candidate bench\'s 8,336-row fire_ledger seed added after the cue load'
+            workload['base_bench'] = ('copy of the base tree with the candidate bench\'s 8,336-row fire_ledger seed added after the cue load, '
+                                      'and its decisions and invariants marked user_said, trust 3, as the candidate bench marks them')
             workload['base_bench_main_rs_sha256'] = sha16(mp)
         tree = copy
         sources[name]['built_bench_crate_sha256'] = tree_hash(copy, os.path.join('crates', 'muninn-bench'))
@@ -212,8 +229,10 @@ def check_store(b, tmp):
     ver = con.execute("select value from meta where key='schema_version'").fetchone()
     ledger = con.execute('select count(*) from fire_ledger').fetchone()[0]
     seed_n, seed_fp = seed_fingerprint(con)
+    fixture = [list(r) for r in con.execute("select kind, origin, trust, count(*) from record where session_id='bench' group by 1, 2, 3 order by 1, 2, 3")]
     con.close()
     ok = True
+    lists_typed = None
     delivered = {}
     for event, payload in (('SessionStart', {'session_id': 'check'}),
                            ('UserPromptSubmit', {'session_id': 'check', 'prompt': 'implement retry backoff for the webhook handler with idempotent tokens'})):
@@ -230,6 +249,10 @@ def check_store(b, tmp):
         except Exception:
             text = ''
         delivered[event] = bool(block_ids(text))
+        if event == 'SessionStart':
+            lines = text.split('\n')
+            lists_typed = (any(l.startswith('[muninn:catalog]') and 'what was said' not in l for l in lines)
+                           and any(re.match(r'#\d+ (decision|invariant|correction) ', l) for l in lines))
     # every hook invocation of the run, the bench's and these two, as the binary logged it
     fin = bad = 0
     hb = os.path.join(root, '.muninn', 'log', 'heartbeat.jsonl')
@@ -246,7 +269,8 @@ def check_store(b, tmp):
         ok = False
     shutil.rmtree(dirs[0], ignore_errors=True)
     return {'schema_version': ver[0] if ver else None, 'fire_ledger_rows': ledger, 'seed_rows': seed_n, 'seed_fingerprint': seed_fp,
-            'hooks_ok': ok, 'hook_finishes': fin, 'hook_errors': bad, 'delivered': delivered}
+            'hooks_ok': ok, 'hook_finishes': fin, 'hook_errors': bad, 'delivered': delivered,
+            'fixture': fixture, 'catalogue_lists_typed': lists_typed}
 
 
 if parts == {'gates'}:
@@ -294,6 +318,12 @@ if 'perf' in parts:
     workload['fire_ledger_rows_per_bench_store'] = {sha16(b): led[b] for b in bins}
     eq, per_seed = gate_workload({b: [(c['seed_rows'], c['seed_fingerprint']) for c in checks[b] if c] for b in bins})
     workload['seed_rows_and_fingerprint'] = {sha16(b): [list(x) for x in per_seed[b]] for b in bins}
+    fixtures = {b: [json.dumps(c['fixture']) for c in checks[b] if c] for b in bins}
+    same_fixture = len({f for v in fixtures.values() for f in v}) == 1 and all(fixtures.values())
+    workload['fixture_records_by_kind_origin_trust'] = {sha16(b): json.loads(sorted(set(fixtures[b]))[0]) if fixtures[b] else None for b in bins}
+    workload['fixture_equal'] = same_fixture
+    workload['catalogue_lists_typed'] = {sha16(b): sorted({str(c['catalogue_lists_typed']) for c in checks[b] if c}) for b in bins}
+    eq = eq and same_fixture
     workload['equal'] = eq
     workload['bench_sources'] = sources
     if not workload['equal']:
