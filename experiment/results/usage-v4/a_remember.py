@@ -111,7 +111,23 @@ def anchor_at(text, anchor):
     return f[k][1], f[k + len(a) - 1][1]
 
 
+def soften_breaks(w):
+    """A port of `remember::soften_breaks` (Task 7 fix round 2): a line break ends a sentence only
+    after a stop (. ! ? ; : and the ellipsis character) or at a blank line; any other is a space. Same length."""
+    out = []
+    for i, c in enumerate(w):
+        if c != '\n':
+            out.append(c)
+            continue
+        before = ''.join(out).rstrip(' \t\r')[-1:] or None
+        after = next((x for x in w[i + 1:] if x not in ' \t\r'), None)
+        ends = before is None or before in '.!?;:\u2026\n' or after in (None, '\n')
+        out.append('\n' if ends else ' ')
+    return ''.join(out)
+
+
 def sentences_holding(words, anchor):
+    words = soften_breaks(words)
     at = anchor_at(words, anchor)
     if not at:
         return None
