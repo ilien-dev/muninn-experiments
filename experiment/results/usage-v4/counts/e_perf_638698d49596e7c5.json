@@ -1,0 +1,190 @@
+{
+ "binary_sha256": "638698d49596e7c5",
+ "binary_version": "muninn 1.2.0",
+ "build": "638698d49596e7c5",
+ "commit": "a091815b3",
+ "harness_rev": 3,
+ "labels": "final",
+ "section": "e_perf",
+ "splits": {
+  "all": {
+   "perf": {
+    "bench_sha256": "cdf1d700743e2280",
+    "contracts_failed_per_run": [
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [],
+     []
+    ],
+    "hooks": {
+     "SessionStart": {
+      "p50_median": 11.828,
+      "p95_median": 13.537,
+      "p95_runs": [
+       11.309,
+       16.615,
+       13.537,
+       13.567,
+       12.918,
+       13.503,
+       15.301
+      ]
+     },
+     "SubagentStart": {
+      "p50_median": 10.842,
+      "p95_median": 12.484,
+      "p95_runs": [
+       10.333,
+       12.484,
+       12.299,
+       18.225,
+       11.576,
+       12.942,
+       13.994
+      ]
+     },
+     "UserPromptSubmit_full": {
+      "p50_median": 13.401,
+      "p95_median": 15.208,
+      "p95_runs": [
+       13.031,
+       15.208,
+       15.144,
+       15.855,
+       15.35,
+       15.003,
+       17.383
+      ]
+     },
+     "UserPromptSubmit_gated": {
+      "p50_median": 8.041,
+      "p95_median": 10.032,
+      "p95_runs": [
+       7.271,
+       10.638,
+       10.084,
+       9.822,
+       9.541,
+       10.032,
+       11.739
+      ]
+     }
+    },
+    "ingest_200_ms_median": 10.2,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "process_start_p50_median": 7.595,
+    "runs": 7,
+    "store_checks": {
+     "all_hooks_ok": true,
+     "check_prompts_delivered": [
+      {
+       "SessionStart": false,
+       "UserPromptSubmit": false
+      }
+     ],
+     "hook_errors": 0,
+     "hook_finishes": 8414,
+     "schema_versions": [
+      "4"
+     ]
+    }
+   },
+   "stop_ingest_W02": {
+    "first_write_open_ms": 4722.9,
+    "inputs": {
+     "changed": 0,
+     "listed": 636,
+     "staged": 540,
+     "status": "ok",
+     "unrecoverable": 96
+    },
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "max_ms": 240.2,
+    "median_ms": 224.6,
+    "min_ms": 220.9,
+    "p90_ms": 228.0,
+    "records_from_synthetic_session": 21,
+    "runs": 20,
+    "schema_after": "4",
+    "schema_before": "2",
+    "schema_expected": "4",
+    "session_log_lines_staged": 8133,
+    "session_log_lines_without_copy": 490,
+    "stop_hooks_ok": true
+   }
+  }
+ },
+ "workload": {
+  "base_bench": "copy of the base tree with the candidate bench's 8,336-row fire_ledger seed added after the cue load",
+  "base_bench_main_rs_sha256": "37e663fcc9ca8229",
+  "bench_sources": {
+   "base": {
+    "bench_crate_sha256": "2c88ed015f674f0c",
+    "built_bench_crate_sha256": "453598d8cecb6582",
+    "commit": null,
+    "tree_sha256": "a29b6bbb3698c461"
+   },
+   "cand": {
+    "bench_crate_sha256": "adf4dc453728100d",
+    "commit": "a091815b360515ed769d0b381ec95983fa7eac35",
+    "dirty": false
+   }
+  },
+  "equal": true,
+  "fire_ledger_rows_per_bench_store": {
+   "638698d49596e7c5": [
+    8356
+   ],
+   "b93d2f5c222c0424": [
+    8345
+   ]
+  },
+  "must_deliver": {
+   "blocks": {
+    "638698d49596e7c5": 2,
+    "b93d2f5c222c0424": 6
+   },
+   "item": "P026",
+   "verdict": "both"
+  },
+  "seed_rows_and_fingerprint": {
+   "638698d49596e7c5": [
+    [
+     8336,
+     "3a9091da7f1c5202"
+    ]
+   ],
+   "b93d2f5c222c0424": [
+    [
+     8336,
+     "3a9091da7f1c5202"
+    ]
+   ]
+  }
+ }
+}
