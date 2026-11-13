@@ -6,7 +6,8 @@ section A: it tests the command's mechanics and decides nothing about the extrac
 
 For every durable message of the recall set that a person wrote (final label `a`), on a fresh
 copy of that message's store, the command is called once with the session identified (its id,
-and the staged transcript passed by hand: the copy's own session log names the machine's paths)
+and the staged transcript, which the copy's session log is made to note for that session, as a
+hook would: the command takes a transcript from the session log only)
 and the statement taken word for word from the message at its first anchor that can be found
 in it. The message is read from the staged transcript at the item's byte offset (the line that
 opens the turn), or from the item's text when that line holds no text.
@@ -125,6 +126,12 @@ for r in R:
             os.makedirs(tx)
             t = os.path.join(tx, r['session'] + '.jsonl')
             shutil.copyfile(src, t)
+            # the session log of the copy notes the transcript for the session, as a hook that
+            # sees it does (`sessions::note`): the command takes a transcript only from there
+            log = os.path.join(proj, '.muninn', 'log')
+            os.makedirs(log, exist_ok=True)
+            with open(os.path.join(log, 'sessions.jsonl'), 'a', encoding='utf-8', newline='\n') as fh:
+                fh.write(json.dumps({'session': r['session'], 'transcript': t}) + '\n')
             p = subprocess.run([args.bin, '--cwd', proj, '--json', 'remember', '--kind', KIND.get(L.get('kind'), 'decision'),
                                 '--session', r['session'], '--transcript', t, '--', stmt],
                                capture_output=True, timeout=300)
@@ -139,6 +146,11 @@ for r in R:
                     state = 'errors'
                 elif v.get('origin') != 'user_said':
                     state = 'lower_origin'
+                    # which check the statement missed: the word-for-word one, or the session
+                    reason = 'lower_not_found' if 'word for word' in (v.get('lower') or '') else 'lower_other'
+                    for s_ in (sp, 'all'):
+                        if s_ in per:
+                            per[s_][reason] += 1
                 elif v.get('turn') != r['turn']:
                     state = 'user_said_other_turn'
                 elif v.get('outcome') == 'deduped':
