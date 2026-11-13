@@ -7600,3 +7600,43 @@ record. Items read `absent` rose from 53 (`5460672525ecf742`) to 73 on the same 
   5, Task 7's extractor does not ship and is reverted with revert commits; `muninn remember`
   stays. Otherwise B1 reads pass for the build. The kind-bound reading keeps being printed beside
   it.
+## Thirteenth amendment to usage-v4, 2026-11-13 — a second reading of the `remember` replay cell, written after its 2 / 46 reading
+
+Written after the replay cell of the eleventh amendment read 2 of 48 durable statements recorded
+as `user_said` at the right turn and 46 at the lower origin, for build `ca1feb4e212ae65c` (Task 7
+fix round 1), and before any script change or run for this reading. Why the first reading reads
+that way: the cell passes the labelled anchor phrase, the words that state the durable thing,
+and an anchor is rarely a whole sentence. The command now refuses a fragment by design, because a
+fragment can drop a negation: a statement is the user's only as one or more whole consecutive
+sentences of their message, or the whole of it, cut by the extractor's sentence splitter
+(`extract::split_sentences`).
+
+- **Second reading.** For each of the 48 durable statements, the statement passed is the whole
+  sentence, or the consecutive sentences, of the user's turn that contain the anchor, taken
+  verbatim from the message and passed to `muninn remember` as the first reading passes its
+  statement: same store copy, same session log entry, same flags.
+- **How the sentences are obtained, mechanically, with no text read by a person.** The product
+  exposes no way to call its splitter from outside the binary, so the script reproduces it:
+  - The person's words of the turn come from the line that opens the turn (the item's byte
+    offset in the staged transcript), as `extract::persons_words` reads them. For a dialog
+    answer, the options picked, one a line. Otherwise the text with `<pasted_content>` blocks,
+    inline quotations of 40 characters or more, fenced blocks and `>` lines taken out. A message
+    that labels two or more of its lines as a conversation's speakers gives no words.
+  - These are cut by a line-for-line port of `split_sentences`. It works on the UTF-8 bytes: a
+    newline ends a sentence, and so does `.`, `!` or `;` followed by ASCII whitespace or the end,
+    outside parentheses and not an abbreviation (a stop after a word of one to three ASCII
+    letters with no ASCII capital as the next visible byte). Each piece is trimmed, and empty
+    pieces are dropped.
+  - The anchor is located in those words as the first reading locates it (case, accents and
+    punctuation folded). The statement runs from the start of the first sentence that the
+    anchor's span touches to the end of the last one.
+- **Check, and `not derivable`.** An item is `not derivable` when no anchor of its label can be
+  located in the person's words as reconstructed. Its derived statement is also `not derivable`
+  when the command does not accept it as whole sentences: the command's reason for a lower
+  origin is the word-for-word, whole-sentence one. Then the port and the product disagree, or
+  the reconstruction of the person's words does, and the item is counted apart, never as a
+  lower origin. A lower origin for any other reason (the session) is counted as `lower origin`.
+- **Counted per split**: user_said at the right turn, deduped against an extracted twin,
+  user_said at another turn, lower origin, not derivable (with how many were not located and how
+  many the command refused), errors. Both readings are reported. Neither has a threshold, and
+  neither decides anything. The first reading stays the eleventh amendment's.
