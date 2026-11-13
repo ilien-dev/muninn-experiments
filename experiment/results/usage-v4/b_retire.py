@@ -135,6 +135,25 @@ def b1():
         first = 'active' if rows[0][0] == 0 else 'retired'
         return anyrow, first
 
+    def state_free(db, key):
+        """Twelfth amendment: the same reading among every typed kind but `episode`."""
+        if not os.path.exists(db):
+            return 'noproj', 'noproj'
+        c = sqlite3.connect('file:%s?mode=ro' % db, uri=True)
+        k = key.replace('\\', '\\\\').replace('%', '\\%').replace('_', '\\_')
+        rows = c.execute("select invalid from record where body like ? escape '\\' and kind <> 'episode' order by created_at, id", ('%' + k + '%',)).fetchall()
+        c.close()
+        if not rows:
+            return 'absent', 'absent'
+        return ('active' if any(r[0] == 0 for r in rows) else 'retired'), ('active' if rows[0][0] == 0 else 'retired')
+
+    def free_key(text):
+        """The first line of the old body without a leading `user: ` label, its first 70 characters."""
+        line = text.split('\n')[0]
+        if line.startswith('user: '):
+            line = line[len('user: '):]
+        return line[:70]
+
     S1 = json.load(open(F + '/fixtures/usage-v1/label/sup.json', encoding='utf8'))
     O1 = {(x['p'], int(x['id'])): x for x in json.load(open(F + '/fixtures/usage-v1/label/sup.out.json', encoding='utf8'))}
     v1 = collections.Counter()
@@ -142,9 +161,10 @@ def b1():
     for s in S1:
         db = os.path.join(rp, build, s['p'], '.muninn', 'muninn.db')
         st, st1 = state(db, s['old'].split('\n')[0][:70], s['kind'])
+        fr, fr1 = state_free(db, free_key(s['old']))
         o = O1[(s['p'], int(s['id']))]
         iid = 'v1:%s:%s' % (lab.get(s['p'], '?'), s['id'])
-        items[iid] = {'label': o['label'], 'loss': bool(o['loss']), 'state': st, 'earliest': st1}
+        items[iid] = {'label': o['label'], 'loss': bool(o['loss']), 'state': st, 'earliest': st1, 'free': fr, 'free_earliest': fr1}
         v1['%s:%s' % (o['label'], st)] += 1
         v1['%s:%s' % ('loss' if o['loss'] else 'noloss', st)] += 1
     S2 = [json.loads(l) for l in open(F + '/out/usage-v4/labels/b_since120.jsonl', encoding='utf-8')]
@@ -152,8 +172,9 @@ def b1():
     for s in S2:
         db = os.path.join(rp, build, s['store'] + 'now', '.muninn', 'muninn.db')
         st, st1 = state(db, s['key'], s['kind'])
+        fr, fr1 = state_free(db, free_key(s['key']))
         iid = 'now:%s:%d' % (s['store'], s['id'])
-        items[iid] = {'label': s['label'], 'loss': bool(s['loss']), 'state': st, 'earliest': st1}
+        items[iid] = {'label': s['label'], 'loss': bool(s['loss']), 'state': st, 'earliest': st1, 'free': fr, 'free_earliest': fr1}
         v2['%s:%s' % (s['label'], st)] += 1
         v2['%s:%s' % ('loss' if s['loss'] else 'noloss', st)] += 1
     totals = {}
@@ -171,6 +192,10 @@ def b1():
         c.close()
         totals[(lab.get(name) or name).replace('now', '-now')] = dict(t)
     loss_ret = sum(1 for v in items.values() if v['loss'] and v['state'] == 'retired')
+    # twelfth amendment: where the kind-bound reading is absent, the kind-free one binds
+    for v in items.values():
+        v['bind'] = v['free'] if v['state'] == 'absent' else v['state']
+        v['bind_earliest'] = v['free_earliest'] if v['earliest'] == 'absent' else v['earliest']
     return {
         'status': 'ok', 'inputs': input_counts,
         'usage_v1_95': dict(v1), 'since_1_2_0_13': dict(v2),
@@ -182,6 +207,19 @@ def b1():
         'loss_retired_total_earliest_row': sum(1 for v in items.values() if v['loss'] and v['earliest'] == 'retired'),
         'item_states_earliest_row': {k: v['earliest'] for k, v in sorted(items.items())},
         'item_states': {k: v['state'] for k, v in sorted(items.items())},
+        'kind_free': {
+            'item_states': {k: v['free'] for k, v in sorted(items.items())},
+            'item_states_earliest_row': {k: v['free_earliest'] for k, v in sorted(items.items())},
+            'split': dict(collections.Counter(v['free'] for v in items.values())),
+            'split_earliest_row': dict(collections.Counter(v['free_earliest'] for v in items.values())),
+            'binding_item_states': {k: v['bind'] for k, v in sorted(items.items())},
+            'binding_split': dict(collections.Counter(v['bind'] for v in items.values())),
+            'binding_split_earliest_row': dict(collections.Counter(v['bind_earliest'] for v in items.values())),
+            'loss_retired_total': sum(1 for v in items.values() if v['loss'] and v['bind'] == 'retired'),
+            'loss_retired_total_earliest_row': sum(1 for v in items.values() if v['loss'] and v['bind_earliest'] == 'retired'),
+            'valid_states_earliest_row': {k: v['bind_earliest'] for k, v in items.items() if v['label'] == 'valid'},
+            'valid_states': {k: v['bind'] for k, v in items.items() if v['label'] == 'valid'},
+        },
         'store_totals': totals, 'replay': stats, 'wall_s': round(time.time() - t0),
     }
 

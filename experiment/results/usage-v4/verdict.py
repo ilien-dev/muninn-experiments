@@ -88,6 +88,17 @@ if B0 and B1:
         out('B1 loss retired: candidate <= base (score.py rule)', s0['b1']['loss_retired_total'], s1['b1']['loss_retired_total'],
             s1['b1']['loss_retired_total'] <= s0['b1']['loss_retired_total'], 'earliest-row reading: %d -> %d (secondary)' % (s0['b1']['loss_retired_total_earliest_row'], s1['b1']['loss_retired_total_earliest_row']))
         out('B1 both valid retirements happen (earliest row)', s0['b1'].get('valid_states_earliest_row'), v, bool(v) and all(x == 'retired' for x in v.values()))
+        k0, k1 = s0['b1'].get('kind_free'), s1['b1'].get('kind_free')
+        if k0 and k1:
+            # twelfth amendment: where the kind-bound reading is absent, the kind-free one binds
+            out('B1 (12th) loss retired, binding reading: <= base and <= 5', k0['loss_retired_total'], k1['loss_retired_total'],
+                k1['loss_retired_total'] <= k0['loss_retired_total'] and k1['loss_retired_total'] <= 5,
+                'kind-free split %s -> %s; binding split %s -> %s' % (k0['split'], k1['split'], k0['binding_split'], k1['binding_split']))
+            fv = k1['valid_states_earliest_row']
+            out('B1 (12th) both valid retirements happen (binding, earliest row)', k0['valid_states_earliest_row'], fv,
+                bool(fv) and all(x == 'retired' for x in fv.values()))
+        else:
+            out('B1 (12th) kind-free reading', None, None, None, 'missing: rerun b_retire.py --parts b1 --score-only')
     if 'b2' in s0 and 'b2' in s1:
         w0, w1 = s0['b2'], s1['b2']
         out('B2 reword retires nothing (any kind)', w0['reword']['retired'], w1['reword']['retired'], w1['reword']['retired'] == 0,
