@@ -8,20 +8,26 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "48a32ba826592306",
+    "bench_sha256": "3af426ae6dd113a8",
     "contracts_failed_per_run": [
      [
       "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95",
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
       "hook UserPromptSubmit full p95"
      ],
-     [],
      [
       "hook SessionStart p95",
       "hook SubagentStart p95",
       "hook UserPromptSubmit gated p95",
       "hook UserPromptSubmit full p95"
      ],
-     [],
      [
       "hook SessionStart p95",
       "hook SubagentStart p95",
@@ -32,69 +38,79 @@
       "hook SessionStart p95",
       "hook SubagentStart p95",
       "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95",
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
       "hook UserPromptSubmit full p95"
      ],
-     []
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ]
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 12.806,
-      "p95_median": 15.351,
+      "p50_median": 12.335,
+      "p95_median": 14.609,
       "p95_runs": [
-       10.768,
-       16.516,
-       13.957,
-       16.962,
-       14.493,
-       15.351,
-       15.684
+       19.068,
+       14.609,
+       13.12,
+       13.694,
+       15.085,
+       13.829,
+       15.156
       ]
      },
      "SubagentStart": {
-      "p50_median": 10.467,
-      "p95_median": 12.596,
+      "p50_median": 10.182,
+      "p95_median": 12.432,
       "p95_runs": [
-       8.966,
-       10.941,
-       12.596,
-       12.007,
-       13.828,
-       12.65,
-       13.775
+       15.816,
+       11.866,
+       11.007,
+       11.599,
+       12.634,
+       12.432,
+       13.444
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 14.543,
-      "p95_median": 15.753,
+      "p50_median": 14.292,
+      "p95_median": 17.487,
       "p95_runs": [
-       13.812,
-       13.954,
-       17.772,
-       15.546,
-       20.477,
-       16.415,
-       15.753
+       17.487,
+       19.393,
+       15.483,
+       20.016,
+       21.957,
+       14.621,
+       16.912
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 7.633,
-      "p95_median": 9.782,
+      "p50_median": 7.239,
+      "p95_median": 10.037,
       "p95_runs": [
-       6.339,
-       7.922,
-       9.782,
-       9.204,
-       12.914,
-       10.677,
-       10.47
+       10.141,
+       10.037,
+       9.919,
+       10.928,
+       15.298,
+       8.459,
+       9.68
       ]
      }
     },
-    "ingest_200_ms_median": 10.0,
+    "ingest_200_ms_median": 11.5,
     "interleaved_with": [
-     "1a196e3ffaa9becb"
+     "147eb5646386f8dd"
     ],
-    "process_start_p50_median": 7.22,
+    "process_start_p50_median": 6.542,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -112,7 +128,7 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 4567.7,
+    "first_write_open_ms": 3898.1,
     "inputs": {
      "changed": 0,
      "listed": 636,
@@ -121,12 +137,12 @@
      "unrecoverable": 96
     },
     "interleaved_with": [
-     "1a196e3ffaa9becb"
+     "147eb5646386f8dd"
     ],
-    "max_ms": 234.1,
-    "median_ms": 224.8,
-    "min_ms": 220.8,
-    "p90_ms": 228.5,
+    "max_ms": 218.6,
+    "median_ms": 215.1,
+    "min_ms": 211.4,
+    "p90_ms": 217.1,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -150,29 +166,31 @@
    },
    "cand": {
     "bench_crate_sha256": "adf4dc453728100d",
-    "commit": "d77ec46f6dadfde42d458fbe66dc214b8c0f94cd",
+    "commit": "0667d3241fd7ea7d8fc9bee0afe1d453f30df6d1",
     "dirty": false
    }
   },
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
-   "1a196e3ffaa9becb": [
+   "147eb5646386f8dd": [
+    8346,
     8356
    ],
    "b93d2f5c222c0424": [
+    8345,
     8354
    ]
   },
   "must_deliver": {
    "blocks": {
-    "1a196e3ffaa9becb": 2,
+    "147eb5646386f8dd": 2,
     "b93d2f5c222c0424": 6
    },
    "item": "P026",
    "verdict": "both"
   },
   "seed_rows_and_fingerprint": {
-   "1a196e3ffaa9becb": [
+   "147eb5646386f8dd": [
     [
      8336,
      "3a9091da7f1c5202"
