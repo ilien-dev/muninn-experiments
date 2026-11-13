@@ -8,85 +8,81 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "a359bfe34b3531f8",
+    "bench_sha256": "043ac711da902ed5",
     "contracts_failed_per_run": [
      [],
-     [],
      [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit gated p95",
-      "cue eval (ancestor lookup) p99"
-     ],
-     [],
-     [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit gated p95"
-     ],
-     [],
-     [
-      "hook SessionStart p95",
       "hook SubagentStart p95"
-     ]
+     ],
+     [],
+     [],
+     [],
+     [
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     []
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 33.316,
-      "p95_median": 48.597,
+      "p50_median": 33.317,
+      "p95_median": 34.998,
       "p95_runs": [
-       75.46,
-       35.214,
-       49.503,
-       48.597,
-       38.887,
-       35.298,
-       50.853
+       57.087,
+       34.838,
+       34.995,
+       37.652,
+       34.394,
+       37.527,
+       34.998
       ]
      },
      "SubagentStart": {
-      "p50_median": 31.17,
-      "p95_median": 32.803,
+      "p50_median": 31.323,
+      "p95_median": 34.639,
       "p95_runs": [
-       31.005,
-       32.803,
-       42.903,
-       45.211,
-       31.566,
-       32.691,
-       56.801
+       36.452,
+       76.665,
+       34.639,
+       31.947,
+       32.612,
+       44.858,
+       33.935
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 34.191,
-      "p95_median": 37.024,
+      "p50_median": 34.819,
+      "p95_median": 36.419,
       "p95_runs": [
-       34.784,
-       37.024,
-       45.465,
-       38.38,
-       35.2,
-       36.81,
-       39.736
+       35.035,
+       36.057,
+       44.825,
+       36.797,
+       36.419,
+       43.439,
+       36.182
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 29.8,
-      "p95_median": 31.723,
+      "p50_median": 29.396,
+      "p95_median": 31.091,
       "p95_runs": [
-       30.684,
-       30.342,
-       40.461,
-       38.929,
-       29.752,
-       31.723,
-       31.976
+       31.214,
+       30.647,
+       32.408,
+       31.091,
+       30.527,
+       40.85,
+       30.975
       ]
      }
     },
-    "ingest_200_ms_median": 10.5,
+    "ingest_200_ms_median": 9.6,
     "interleaved_with": [
-     "c56f45520c6189f3"
+     "08c55d2522819226"
     ],
-    "process_start_p50_median": 29.0,
+    "process_start_p50_median": 28.714,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -104,7 +100,7 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 5115.0,
+    "first_write_open_ms": 4292.3,
     "inputs": {
      "changed": 0,
      "listed": 636,
@@ -113,12 +109,12 @@
      "unrecoverable": 96
     },
     "interleaved_with": [
-     "c56f45520c6189f3"
+     "08c55d2522819226"
     ],
-    "max_ms": 291.7,
-    "median_ms": 246.6,
-    "min_ms": 240.6,
-    "p90_ms": 252.0,
+    "max_ms": 431.9,
+    "median_ms": 239.8,
+    "min_ms": 237.0,
+    "p90_ms": 264.8,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -142,35 +138,36 @@
    },
    "cand": {
     "bench_crate_sha256": "adf4dc453728100d",
-    "commit": "12807737f3d87adc159b9c7723ca6452514d3827",
+    "commit": "97072f488a9befa1c54d155cb0ddcfaaa835bfdc",
     "dirty": false
    }
   },
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
+   "08c55d2522819226": [
+    8356,
+    8496
+   ],
    "b93d2f5c222c0424": [
     8345
-   ],
-   "c56f45520c6189f3": [
-    8356
    ]
   },
   "must_deliver": {
    "blocks": {
-    "b93d2f5c222c0424": 6,
-    "c56f45520c6189f3": 2
+    "08c55d2522819226": 2,
+    "b93d2f5c222c0424": 6
    },
    "item": "P026",
    "verdict": "both"
   },
   "seed_rows_and_fingerprint": {
-   "b93d2f5c222c0424": [
+   "08c55d2522819226": [
     [
      8336,
      "3a9091da7f1c5202"
     ]
    ],
-   "c56f45520c6189f3": [
+   "b93d2f5c222c0424": [
     [
      8336,
      "3a9091da7f1c5202"
