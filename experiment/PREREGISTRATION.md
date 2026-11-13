@@ -7538,3 +7538,31 @@ B1 figures produced before this amendment for builds measured after 2026-11-12 0
 superseded by re-reads on the staged inputs where they exist, and are not a reading otherwise.
 Re-read on the staged inputs: base 9 `loss` items retired and both valid retirements happen;
 `147bbb19ce99396e` and `b73378d27587abad` 5, both valid retirements happen.
+
+## Eleventh amendment to usage-v4, 2026-11-12 — how `muninn remember` is read, before it is built
+
+Written before any code of the command exists. Task 7 adds an explicit write path,
+`muninn remember "<statement>" --kind decision|invariant|correction|deadend`, which an agent calls
+when the user states a rule. Section A said it would be read under A2 "on its own test". A2 cannot
+be read offline for it: A2 counts what a rule adds when `extract_dump` runs over the recorded
+transcripts, and no recorded transcript holds a call to a command that did not exist. Whether
+agents call it, and what they pass, can only be seen in use.
+
+So the command is not read under A2. It ships on:
+
+- **Its tests.** Origin and trust by structure (a statement found word for word, after whitespace
+  normalisation, in a turn of the session's transcript that a person wrote is `user_said` and
+  points at that turn; anything else gets an origin whose trust is below `user_said`, never trust
+  3; no session identified means the lower origin, and the command says so); dedupe against the
+  record the extractor types from the same turn; restatement; supersession; and every reader of
+  an older store still working.
+- **A replay cell.** For every durable message of the recall set that a person wrote (label `a`,
+  design and held-out; the scoring script reads the held-out ones, the implementer does not), the
+  command is called on a copy of that message's store with the session identified and the
+  statement taken word for word from the message at its anchor. Counted, per split: recorded as
+  `user_said` with the right turn; deduped against a twin the extractor typed; recorded with the
+  lower origin (a miss of the word-for-word check); errors. The cell tests the command's
+  mechanics. It is not a reading of any rule of section A and decides nothing about the extractor.
+
+Its use in the field is not measured by this experiment. `muninn status` gains a count of
+`remember` calls so that it can be read later.
