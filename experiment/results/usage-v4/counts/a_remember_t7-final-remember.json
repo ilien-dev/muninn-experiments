@@ -1,0 +1,35 @@
+{
+ "binary_sha256": "1a196e3ffaa9becb",
+ "binary_version": "muninn 1.2.0",
+ "build": "t7-final-remember",
+ "commit": "d77ec46f6",
+ "inputs": {
+  "changed": 0,
+  "listed": 150,
+  "staged": 150,
+  "status": "ok",
+  "unrecoverable": 0
+ },
+ "labels": "final",
+ "note": "replay cell of muninn remember (eleventh amendment); decides nothing under section A",
+ "section": "a_remember",
+ "splits": {
+  "all": {
+   "deduped_twin": 3,
+   "durable_messages": 48,
+   "user_said_other_turn": 1,
+   "user_said_right_turn": 44
+  },
+  "design": {
+   "deduped_twin": 2,
+   "durable_messages": 23,
+   "user_said_other_turn": 1,
+   "user_said_right_turn": 20
+  },
+  "heldout": {
+   "deduped_twin": 1,
+   "durable_messages": 25,
+   "user_said_right_turn": 24
+  }
+ }
+}
