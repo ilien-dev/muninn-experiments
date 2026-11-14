@@ -42,7 +42,7 @@ def main():
     ap.add_argument('--prev', required=True)
     ap.add_argument('--cand', required=True)
     ap.add_argument('--corpus', required=True)
-    ap.add_argument('--half', required=True, choices=['design', 'design_readable', 'heldout'])
+    ap.add_argument('--half', required=True, choices=['design', 'design_readable', 'design_unread', 'heldout'])
     ap.add_argument('--list')
     ap.add_argument('--counts')
     a = ap.parse_args()
