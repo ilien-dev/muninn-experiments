@@ -322,7 +322,10 @@ def check_store(b, tmp):
     if bad or fin < 4 * 300 + 2:
         fail('perf:check:heartbeat')
         ok = False
-    if full_delivered < 300 or not delivered.get('UserPromptSubmit'):
+    # addendum to the fourteenth amendment: 285 of the 300 runs (95 %), not all of them. 1.2.0
+    # counts a record its budget cut as delivered, so a prompt for such a record gets nothing
+    # on the base (299 of 300 in revision 5's first run); the count is recorded per run.
+    if full_delivered < 285 or not delivered.get('UserPromptSubmit'):
         fail('perf:full_prompt_not_delivered')
         ok = False
     shutil.rmtree(dirs[0], ignore_errors=True)

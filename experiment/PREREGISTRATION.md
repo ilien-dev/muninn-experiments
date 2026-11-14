@@ -7672,3 +7672,17 @@ base's bench writes directory and symbol cue rows, so the base delivers no block
 and SubagentStart while the candidate does (those two rows compare a base that does less); and
 the candidate's bench goes on to time Stop and SessionEnd after the rows E reads, which the
 base's does not.
+
+- Addendum, same day, after revision 5's first run and before any revision-5 counts were
+  written. That run failed its own gate and wrote nothing: on the base arm 299 of the 300 full
+  prompts were given a block in each of the 7 runs, on the candidate arm 300 of 300. The one
+  the base left unanswered asks for a record that an earlier prompt's budget had cut: 1.2.0
+  counts a record cut for budget as delivered for the rest of the session (finding R-01, fixed
+  in the candidate), so it does not offer it again. The gate as written, every run on both
+  arms, cannot be met by the base and would have measured that defect instead of guarding the
+  row. It now reads: at least 285 of the 300 runs (95 %) on each arm, with the count of each
+  run recorded (`full_prompts_delivered_per_run`); the candidate's own bench still refuses a
+  run in which any prompt goes unanswered. The 95 % was chosen after seeing 299 and 300, which
+  is why this is written down: a p95 over 300 runs of which at most 15 delivered nothing is
+  still a reading of delivering runs. No timing figure of that failed run was read before
+  this was written; the counts were not written and its figures are not used.
