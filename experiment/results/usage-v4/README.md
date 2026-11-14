@@ -107,6 +107,15 @@ altered records `status: "missing input"` (B1, A) or refuses to write (E), and `
 those rules as `missing`, never `fail`. Inputs that were already gone when staging ran are counted
 as `unrecoverable`; C, D and B2/B3 read only files under the fixture root and this directory.
 
+## Anchors outside a B1 replay (`b1_replay.py`, eighteenth amendment)
+
+A record anchored to an absolute path outside the replay directory used to be hashed and
+validated where the path points, a live file on the machine. `b_retire.py` now runs usage-v1's
+`replay.py`, unchanged, under `b1_replay.py`, which clears the stored hash of each such record
+before every `maintain` and when the replay ends, so the validator skips it. The count per corpus
+is in the counts (`replay.<corpus>.anchors_outside_skipped`), and each store total carries
+`retired_anchor_changed`. B1 is compared only between replays made under this runner.
+
 ## E, harness revision 5 (fourteenth amendment)
 
 The full-prompt row of revisions 1 to 4 timed a prompt that delivered nothing. `e_perf.py` now

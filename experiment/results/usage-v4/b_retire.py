@@ -91,16 +91,22 @@ def b1():
     def one(name):
         if os.path.exists(marker(name)):
             os.remove(marker(name))
-        r = run([sys.executable, '-I', os.path.join(rundir, 'replay.py'), BIN, build, name, rp], 'b1:replay', timeout=7200, env=env, text=True)
+        # eighteenth amendment: replay.py runs unchanged under b1_replay.py, which clears the stored
+        # hash of every record anchored outside the replay directory before each maintain
+        r = run([sys.executable, '-I', os.path.join(HERE, 'b1_replay.py'), os.path.join(rundir, 'replay.py'), BIN, build, name, rp], 'b1:replay', timeout=7200, env=env, text=True)
         try:
             v = json.loads(r.stdout.strip().splitlines()[-1])
         except Exception:
             fail('b1:replay:no_output')
             v = {'error': 'no output'}
+        try:
+            v.update(json.load(open(os.path.join(rp, build, name + '.anchors.json'))))
+        except Exception:
+            fail('b1:replay:no_anchor_count')
         if 'error' in v:
             fail('b1:replay:error')
         elif r is not None and r.returncode == 0:  # a marker only for a replay that exited 0
-            json.dump({k: v[k] for k in ('sessions', 'batches', 'git', 's') if k in v}, open(marker(name), 'w'))
+            json.dump({k: v[k] for k in ('sessions', 'batches', 'git', 's', 'anchors_outside_skipped') if k in v}, open(marker(name), 'w'))
         v.pop('p', None)
         return name, v
 
@@ -112,7 +118,7 @@ def b1():
     with cf.ThreadPoolExecutor(args.jobs) as ex:
         for name, v in ex.map(one, [] if args.score_only else [c[0] for c in sorted(corpora, key=lambda c: c[0] != 'W02now')]):
             key = (lab.get(name) or name).replace('now', '-now')
-            stats[key] = {k: v[k] for k in ('sessions', 'batches', 'git', 's', 'error') if k in v}
+            stats[key] = {k: v[k] for k in ('sessions', 'batches', 'git', 's', 'error', 'anchors_outside_skipped') if k in v}
     # score only replays that finished in this run, or, with --score-only, in an earlier one
     for name, _ in corpora:
         if not os.path.exists(marker(name)):
@@ -189,6 +195,7 @@ def b1():
         t['typed_superseded_heir'] = c.execute("select count(*) from record where invalid=1 and invalid_reason='superseded' and invalidated_by is not null and kind!='episode'").fetchone()[0]
         t['typed_superseded_noheir'] = c.execute("select count(*) from record where invalid=1 and invalid_reason='superseded' and invalidated_by is null and kind!='episode'").fetchone()[0]
         t['older_heir'] = c.execute("select count(*) from record r join record h on h.id=r.invalidated_by where r.invalid=1 and h.created_at<r.created_at").fetchone()[0]
+        t['retired_anchor_changed'] = c.execute("select count(*) from record where invalid=1 and invalid_reason='anchor_changed'").fetchone()[0]
         c.close()
         totals[(lab.get(name) or name).replace('now', '-now')] = dict(t)
     loss_ret = sum(1 for v in items.values() if v['loss'] and v['state'] == 'retired')
