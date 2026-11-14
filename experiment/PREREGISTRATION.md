@@ -7806,3 +7806,38 @@ to 238: it does not raise the enforceable share, rule F is not met, and the form
 shipped. The review also found it denies outright a rule that holds only under a condition.
 The rule compiler part of rule F therefore closes with three families tried and none shipped;
 every figure committed so far stands as committed.
+
+## Eighteenth amendment to usage-v4, 2026-11-14 — a B1 replay read files outside its own directory, written before the final B reading
+
+Written before the final build's B reading and before `b_retire.py` is changed for it. It
+changes no rule and no threshold. It does not follow a figure it bears on: the one record it
+was found through is not a labelled item, and no rule row moved.
+
+Found by Task 9: a correction typed from a turn that touched one file outside the project keeps
+that file's absolute path as its anchor. The engine hashes the file where the path points when
+it ingests the record, and the validator hashes it again at every `maintain`; a file that
+reads differently retires the record as `anchor_changed`. That is what the engine is meant to
+do in a real store. In a B1 replay it makes the result depend on the machine: the file belongs
+to a project on the owner's disk, outside the replay directory and outside the staged inputs
+of the tenth amendment, and its owner can edit it while the replay runs. Seen once: correction
+#4317 of today's W02 corpus, active in the replay of `e089b6763045d4e3` and retired
+`anchor_changed` in the replay of `deb218345d4c700c`, whose file was written during that run.
+In that replay 15 corrections of three corpora carry such an anchor, 12 of them with a hash.
+
+- **How the final B reading neutralises it: skipped, not staged.** In a B1 replay a record whose
+  anchor resolves outside the replay directory is not validated against the live file. Before
+  every `maintain` of a replay, and once more when the replay ends, the stored hash of each
+  such record is cleared (`anchor_hash` set to NULL), which is the state the same record has on
+  a machine where the file does not exist: the validator reads only records that hold a hash.
+  Nothing else of the record is touched, and anchors inside the replay directory are validated
+  as before. Staging was not chosen because the engine opens the path the transcript names; to
+  point it at a frozen copy the transcripts would have to be rewritten.
+- **Both arms.** The base is replayed again under the same harness in the same sitting as the
+  final build, and B1 is read from those two replays. The number of records skipped in each
+  corpus is written to the counts.
+- **`replay.py` stays as usage-v1 committed it.** `b1_replay.py` runs it unchanged and steps in
+  only before a `maintain` call. The change to `b_retire.py` is its own commit, after this one
+  and before any run.
+- **Earlier readings.** B1 figures committed before this amendment stand as committed. The
+  results say which of the records concerned are labelled B1 items, by id and label, and
+  whether any replay still on disk holds one retired by the validator.
