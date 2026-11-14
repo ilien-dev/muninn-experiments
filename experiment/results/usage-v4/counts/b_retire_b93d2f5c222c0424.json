@@ -649,39 +649,45 @@
     "loss_retired_v1": 8,
     "replay": {
      "L01-now": {
+      "anchors_outside_skipped": 0,
       "batches": 538,
       "git": false,
-      "s": 70,
+      "s": 46,
       "sessions": 78
      },
      "W01": {
+      "anchors_outside_skipped": 0,
       "batches": 0,
       "git": true,
       "s": 0,
       "sessions": 0
      },
      "W02": {
+      "anchors_outside_skipped": 4,
       "batches": 2788,
       "git": true,
-      "s": 807,
+      "s": 735,
       "sessions": 348
      },
      "W02-now": {
+      "anchors_outside_skipped": 8,
       "batches": 4101,
       "git": true,
-      "s": 1081,
+      "s": 986,
       "sessions": 513
      },
      "W05": {
+      "anchors_outside_skipped": 0,
       "batches": 387,
       "git": false,
-      "s": 51,
+      "s": 28,
       "sessions": 41
      },
      "W07": {
+      "anchors_outside_skipped": 0,
       "batches": 107,
       "git": true,
-      "s": 19,
+      "s": 12,
       "sessions": 7
      }
     },
@@ -703,11 +709,13 @@
       "episode1": 13,
       "invariant0": 14,
       "older_heir": 0,
+      "retired_anchor_changed": 0,
       "typed_superseded_heir": 12,
       "typed_superseded_noheir": 0
      },
      "W01": {
       "older_heir": 0,
+      "retired_anchor_changed": 0,
       "typed_superseded_heir": 0,
       "typed_superseded_noheir": 0
      },
@@ -722,6 +730,7 @@
       "invariant0": 60,
       "invariant1": 5,
       "older_heir": 4,
+      "retired_anchor_changed": 0,
       "typed_superseded_heir": 50,
       "typed_superseded_noheir": 12
      },
@@ -736,6 +745,7 @@
       "invariant0": 60,
       "invariant1": 23,
       "older_heir": 4,
+      "retired_anchor_changed": 0,
       "typed_superseded_heir": 106,
       "typed_superseded_noheir": 19
      },
@@ -748,6 +758,7 @@
       "episode1": 7,
       "invariant0": 11,
       "older_heir": 0,
+      "retired_anchor_changed": 0,
       "typed_superseded_heir": 7,
       "typed_superseded_noheir": 0
      },
@@ -757,6 +768,7 @@
       "episode0": 98,
       "invariant0": 3,
       "older_heir": 0,
+      "retired_anchor_changed": 0,
       "typed_superseded_heir": 0,
       "typed_superseded_noheir": 0
      }
@@ -788,7 +800,7 @@
      "v1:W02:236": "retired",
      "v1:W05:380": "retired"
     },
-    "wall_s": 1096
+    "wall_s": 1004
    },
    "b2": {
     "aba": {
