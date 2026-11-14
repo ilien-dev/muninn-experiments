@@ -7789,3 +7789,20 @@ family had not been developed against; the report says how many such rules were 
 **`muninn-bench replay`.** A tool, decided by no rule. It is reported with the comparison of
 its counts against `a_extract.py` and `c_delivery.py` on the same private fixture for the
 same build, and with the counts it does not cover named.
+
+## Seventeenth amendment to usage-v4, 2026-11-14 — the rule compiler's held-out reading leaves out a sentence the design half also holds, written after the 238 to 239 figure
+
+This is the eighth text of usage-v4 written after seeing a figure it bears on, and it moves
+the reading in the stricter direction. The figure: with the one form kept after the sixteenth
+amendment's readings (`3aed48ad`), the held-out half read 238 enforceable rules of 3,585
+before and 239 after. The task's review then found that the one rule newly marked there is,
+word for word, a sentence that is also in a file of the readable design list, the one the
+form was developed on.
+
+From this amendment on a rule of the held-out half counts as newly enforceable only when its
+text does not appear verbatim in any file of the design half. A sentence both halves hold was
+seen while the pattern was written and is not held-out. Read so, the kept form's gain is 238
+to 238: it does not raise the enforceable share, rule F is not met, and the form is not
+shipped. The review also found it denies outright a rule that holds only under a condition.
+The rule compiler part of rule F therefore closes with three families tried and none shipped;
+every figure committed so far stands as committed.
