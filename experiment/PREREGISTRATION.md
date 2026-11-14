@@ -7841,3 +7841,41 @@ In that replay 15 corrections of three corpora carry such an anchor, 12 of them 
 - **Earlier readings.** B1 figures committed before this amendment stand as committed. The
   results say which of the records concerned are labelled B1 items, by id and label, and
   whether any replay still on disk holds one retired by the validator.
+
+## Result of usage-v4, 2026-11-14
+
+Read on the build that ships, commit `5afb51960`, binary `8ea5e788aecf33e2`, against 1.2.0
+(`b93d2f5c222c0424`), on the frozen inputs. `results/usage-v4/RESULTS.md` has every figure, the
+table of every change, the texts written after a figure and the weaknesses of the
+measurement. Held-out where the rule is held-out.
+
+| rule | base | final build | verdict |
+|---|---|---|---|
+| A1, filters-only arm | noise 55, durable 13 | noise 38 (30.9 % removed), durable 13 | pass, by one item |
+| A2, per recall rule, added durable / added noise | | +1 / +0, +4 / +4, +1 / +0 | pass |
+| A3 | precision 0.2174, recall 0.16 | no extractor shipped | not claimed |
+| B1 | 9 `loss` items retired; both valid retired | 5; both valid retired | pass |
+| B2 | 7 retired; serves B; 0 of 2 | 0 retired; serves A and not B; 1 of 1 | pass |
+| B3 | 18/30, 10/30; `kept_b` 23/30; noise 3/30 | the same | pass |
+| C1 | unrelated 143, useful 10 | unrelated 72, useful 9 | pass |
+| C2 | 436.9 tokens | 305.1 on 17 prompts with the same ids | pass |
+| C3 | 0 of 12; 0 of 5; 0 of 1; twin served in 13 and 4 prompts | 11 of 11; 9 of 9; 1 of 1; 0 and 0 | pass |
+| C4, as amended | 0.2027 / 0.0997; 213 neither shown nor listed | 0.2488 / 0.1220 on frozen labels; 151; closing line truthful in 7 of 7 stores | pass; as registered, not met by either build |
+| C5 | 27; 0 of 69; 0 of 15; 0 and 18 of 30 | 27; 55 of 69; 15 of 15; 20 and 21 of 30 | pass |
+| D | 0 ledger rows from a cue of the parts; 0 vectors | graph, cues, `PostToolUse`, turn-context log and sidecar removed; commit-subject decisions kept (B2's revert reads 0 of 1 without them) | read as registered |
+| E, median of three ratios | | SessionStart 1.148, SubagentStart 1.274, full prompt 0.965, gated prompt 1.087; `Stop` 235.1 → 70.7 ms | **fail** on SessionStart and SubagentStart; pass on the other three |
+| F, Codex | 0 typed records on the route a build installs | 5 and 79; one real session delivered (counts of `209bcab355dcde4c`) | pass |
+| F, rule compiler | 238 of 3,585 enforceable | 238 of 3,585; three families tried, none shipped | nothing shipped |
+
+Rule E fails as registered on the two rows where the base's bench store delivers no block and
+the final build's does (fourteenth and fifteenth amendments). Read against the previous build
+as hook time minus process start, SubagentStart is no slower (−0.12 and −0.37 ms) and
+SessionStart reads +0.17 and −0.39 ms, inside what the procedure can resolve. Nothing was
+tuned or reverted for it. The three E runs were taken on a desktop in use, with process start
+at 6.4 to 8.4 ms p50 where earlier runs read 4.4 to 4.7.
+
+Eight texts of this registration say of themselves that they follow a figure they bear on
+(seventh, eighth, twelfth and thirteenth amendments, the addendum to the fourteenth, the
+fifteenth, sixteenth and seventeenth); the second, third, fourth and ninth were written after
+base figures or another task's figure and before the cells they govern. `RESULTS.md` says what
+each changed and in which direction.
