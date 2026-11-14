@@ -7723,3 +7723,69 @@ From this amendment on, for every E reading, Task 11's binding one included:
 - Nothing else of rule E or of harness revision 5 changes. `verdict.py` still reads one counts
   file a build; until it reads three, the median of the three ratios is computed from the three
   commits and written beside its output.
+
+## Sixteenth amendment to usage-v4, 2026-11-14 — how rule F is read, written before any pattern of the rule compiler is written or run and before any F cell, and after one Codex figure was seen
+
+This is the seventh text of usage-v4 written after seeing a figure it bears on, for its first
+part only. Nothing of the rule compiler had been read, written or run when it was committed.
+
+**Codex, first clause.** The figure seen: handed an invented rollout by hand with
+`muninn ingest`, the base (`b93d2f5c222c0424`) types six records from it, two decisions, two
+corrections and two invariants. One of the six comes from a message the rollout marks as
+queued by a command (`turn_trigger: queue`) and is stored as the user's at trust 3. So "where
+the base yields none" is false of a rollout someone hands to the binary. It is true of what a
+build does by itself: 1.2.0 writes Codex hooks only when asked with `--codex`, and the review
+found no project with them. The clause is read on that route:
+
+- `f_codex.py --bin <exe> --rollout <file>` makes a project in a temporary directory with a
+  temporary Codex home beside it (both environment-overridden, the real home is never read or
+  written), runs `<bin> init` with no Codex flag, and then runs the commands that the project's
+  `.codex/hooks.json` registers for SessionStart, UserPromptSubmit, Stop and SessionEnd, in
+  that order, each with the input Codex documents for it and the rollout as `transcript_path`.
+  A build that leaves no hooks file runs no command.
+- Outcome: typed records in the store by kind and origin. The clause passes when the
+  candidate's count is above zero and the base's is zero.
+- Beside it, reported and deciding nothing: the same counts when each build is handed the
+  rollout with `muninn ingest`; and, on both routes, how many records each build stores as
+  `user_said` from a turn the rollout does not mark as the person's (a queued message, an
+  `exec` prompt, a session whose source is not the terminal or the editor). A candidate that
+  stores one is an origin defect under the ruling of the ninth amendment's class and is fixed
+  or the part is reverted.
+- Both readings are taken on the invented rollout committed as a fixture in the repository,
+  and on private copies of the real rollouts of the reviewed machine under the fixture root
+  (`codex/`), counts only. If the machine holds none, the report says so.
+
+**Codex, second clause.** One real `codex exec` session, or a few, with a short prompt that
+holds nothing private, in a new empty directory under the scratch root, with a store created
+there by the candidate and the hooks file the candidate's `init` wrote. The user's Codex
+configuration is not modified: if a run needs a Codex home, it is a copy under the scratch
+root holding only what authentication needs, deleted afterwards. The clause passes when the
+store's fire ledger holds a delivery for the session's id and the session's rollout holds the
+block as context Codex gave the model. If Codex cannot be made to run the hooks under those
+limits, the clause is reported unmeasured with the reason, never as passed.
+
+**Rule compiler, the split.** `corpora/claude-md/files` is split by file name: a file is
+`design` when the first byte of `sha256("usage-v4:" + file name)` is even and `held-out` when
+it is odd, the rule the other usage-v4 sets were split by. `f_rules_split.py` writes the
+lists, committed with this amendment in `results/usage-v4/splits/`: 330 files, 167 design and
+163 held-out. The corpus has earlier hold-out lists of its own (`holdout.txt`, `holdout2.txt`,
+`holdout-enforce*.txt`, 134 files, 65 of them in the new held-out half), which Gate 1 and
+Gate 5a read. To leave those gates as they were, patterns are developed only on the 103 design
+files that no earlier list names (`f_rules_design_readable.txt`); nobody developing a pattern
+opens another corpus file.
+
+**Rule compiler, the reading.** The previous build is `deb218345d4c700c` (worktree
+`dcaa6b185`). `muninn-bench rules --holdout f_rules_heldout.txt` gives the enforceable share
+of the held-out half for the previous build and for the candidate; it is run on the held-out
+half once per pattern set, after the set is frozen on the design half. A rule is newly
+enforceable when the candidate classes it enforceable and the previous build does not. Every
+newly enforceable held-out rule is listed with its emitted control in the task report, which
+is public text, and the task's reviewer is the reader rule F names. A family ships when the
+held-out share rises and the reader agrees with every one of its rules. A family with one
+disagreement is narrowed or dropped, and what is left is read again only on rules the narrowed
+family had not been developed against; the report says how many such rules were left. Gate 1
+(`rules --labels … --strict`) and Gate 5a (`enforce`) must still pass at their thresholds.
+
+**`muninn-bench replay`.** A tool, decided by no rule. It is reported with the comparison of
+its counts against `a_extract.py` and `c_delivery.py` on the same private fixture for the
+same build, and with the counts it does not cover named.
