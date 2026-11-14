@@ -1,0 +1,28 @@
+Which state of f_codex.py produced each f_codex_*.json
+
+f_codex.py fires the commands a project's .codex/hooks.json registers. Two things about it
+changed after its first commit (ba271c1e), both in 86d746c4: its import of `common` was fixed
+(as first committed it could not start), and on Windows it fires through PowerShell, where it
+first fired through cmd.exe. The state between the two, with the import fixed and cmd.exe
+still the shell, was never committed. It differs from 86d746c4 by one call:
+    C.run('cmd.exe /S /C "%s"' % line, ...)
+where the committed script has
+    C.run(['powershell.exe', '-NoProfile', '-Command', line], ...)
+
+file                                           written by             shell that fired the hooks
+f_codex_b93d2f5c222c0424.json (base)           the uncommitted state  cmd.exe; no hooks file, nothing fired
+f_codex_deb218345d4c700c.json (previous build) the uncommitted state  cmd.exe; no hooks file, nothing fired
+f_codex_914d8161a7832432.json (first candidate) the uncommitted state cmd.exe. Through PowerShell every
+                                                                      command of this build exits non-zero
+                                                                      and the script refuses to write counts
+f_codex_729af340a64ba4a1.json                  86d746c4               PowerShell
+f_codex_bda593036f176419.json (Task 10 final)  86d746c4               PowerShell
+builds measured after this note                the script as committed PowerShell
+
+The `direct` route of every file hands the rollout over with `muninn ingest` and fires
+nothing, so the shell does not bear on it. f_codex_exec_729af340a64ba4a1.json is the second
+clause: the real `codex exec` sessions, counts only.
+
+On the real set the one record the candidate no longer stores as the user's (80 to 79 handed
+over) comes from a `codex exec` session, rollout R14. The two messages the real set marks as
+queued yield no typed record in any build.
