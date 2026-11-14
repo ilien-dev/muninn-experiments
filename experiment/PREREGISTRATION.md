@@ -7686,3 +7686,40 @@ base's does not.
   is why this is written down: a p95 over 300 runs of which at most 15 delivered nothing is
   still a reading of delivering runs. No timing figure of that failed run was read before
   this was written; the counts were not written and its figures are not used.
+
+## Fifteenth amendment to usage-v4, 2026-11-14 — how E is staged and read from now on, written after its figures were seen
+
+This is the sixth text of usage-v4 written after seeing a figure it bears on. It was adopted
+after the E run committed as `743b5f15` (build `8ef269a377fcbf4c`), in which three read rows
+read over 1.10 times base, and after the gated row had read 1.220 in that run, 1.043 in the
+next (`d3825c2b`) and 1.111 on the final build (`cdcec478`). All three runs stand as committed.
+None is withdrawn and none is to be read as a pass of rule E: Task 9 does not claim one.
+
+What was changed between the first and the second of those runs, and was not written here at
+the time: both binaries were run from copies made at the same moment in one directory, instead
+of each from its own file. The reason was a measurement: byte-identical copies of one binary
+read 3 to 4 ms apart at process start depending on the file (4.70, 5.39 and 5.56 ms p50 for a
+fresh copy against 8.32, 5.71 and 9.43 ms for the file it was copied from, gated prompt, 150
+runs a round), and every E row includes process start. The harness was not edited for this and
+the counts are keyed by the same hashes. Earlier E readings of this plan did not control for
+it, in either direction.
+
+From this amendment on, for every E reading, Task 11's binding one included:
+
+- Staging. Both binaries are copied at the same moment into one directory and run from those
+  copies. The counts say so in the commit that carries them.
+- Runs. Three interleaved base and candidate runs of `e_perf.py`, on a machine with nothing
+  else running. All three are committed, whatever they read.
+- Reading. A row's ratio is the median of the three runs' ratios of candidate p95 to base p95.
+  Rule E's thresholds are unchanged: a read row passes at a median ratio of 1.10 or less, and
+  Stop with ingest when the candidate's median is lower in the median run.
+- SessionStart and SubagentStart. They are reported beside this sentence: the base's bench
+  writes directory and symbol cue rows, so the base delivers no block at SessionStart and
+  SubagentStart while the candidate does. Because the base cannot say whether a build
+  regressed those two hooks, they are additionally read against the previous build of the
+  plan as hook time minus process start: the median over the runs of (hook p50 minus process
+  start p50), candidate against previous build, from same-moment copies on one bench store.
+  That second reading is reported with its spread and has no threshold of its own.
+- Nothing else of rule E or of harness revision 5 changes. `verdict.py` still reads one counts
+  file a build; until it reads three, the median of the three ratios is computed from the three
+  commits and written beside its output.
