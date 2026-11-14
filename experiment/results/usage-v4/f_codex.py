@@ -22,8 +22,9 @@ from the rollout, by this script's own rule: the session's `source` is `cli` or 
 Only counts are written. `--set real` writes totals and, per rollout, a label `Rnn` in directory
 order: no path, name, id or text.
 """
-import json, os, shutil, subprocess, sys, tempfile, time
+import json, os, shutil, sys, tempfile, time
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import common as C
 
 EVENTS = ['SessionStart', 'UserPromptSubmit', 'Stop', 'SessionEnd']
@@ -74,11 +75,15 @@ def machine(codex):
 
 
 def fire(handler, event, payload, project, env):
-    """Run one registered command the way Codex does: the platform's shell, the session's cwd."""
+    """Run one registered command the way Codex does: the session's shell, the session's cwd.
+    On Windows that shell is Windows PowerShell: a real `codex exec` session of codex-cli 0.166.0
+    ran a probe hook there, and ran nothing for a command only cmd.exe takes. The first version
+    of this script used cmd.exe, which is what Codex falls back to when a session has no shell."""
     inp = json.dumps(dict(payload, hook_event_name=event, cwd=project, model='gpt-fixture')).encode('utf-8')
     if os.name == 'nt':
         line = handler.get('commandWindows') or handler['command']
-        r = C.run('cmd.exe /S /C "%s"' % line, 'fire:' + event, timeout=600, input=inp, env=env, cwd=project)
+        r = C.run(['powershell.exe', '-NoProfile', '-Command', line], 'fire:' + event, timeout=600, input=inp,
+                  env=env, cwd=project)
     else:
         r = C.run(['sh', '-c', handler['command']], 'fire:' + event, timeout=600, input=inp, env=env, cwd=project)
     if r is not None and C._bad_stderr(r.stderr.decode('utf-8', 'replace')):
