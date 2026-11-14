@@ -2,96 +2,121 @@
  "binary_sha256": "b93d2f5c222c0424",
  "binary_version": "muninn 1.2.0",
  "build": "b93d2f5c222c0424",
- "harness_rev": 4,
+ "harness_rev": 5,
  "labels": "final",
  "section": "e_perf",
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "0a5664e2cb006e54",
+    "bench_sha256": "7d9c212bf96ce944",
     "contracts_failed_per_run": [
      [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
       "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95",
       "cue eval (ancestor lookup) p99"
      ],
-     [
-      "hook UserPromptSubmit gated p95"
-     ],
-     [],
-     [],
      [],
      [
-      "hook UserPromptSubmit gated p95"
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
      ],
-     []
+     [],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ]
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 15.565,
-      "p95_median": 16.957,
+      "p50_median": 12.611,
+      "p95_median": 14.816,
       "p95_runs": [
-       16.589,
-       16.264,
-       16.89,
-       16.957,
-       17.788,
-       17.861,
-       18.923
+       13.785,
+       12.97,
+       13.832,
+       16.352,
+       14.816,
+       17.766,
+       15.89
       ]
      },
      "SubagentStart": {
-      "p50_median": 13.214,
-      "p95_median": 15.019,
+      "p50_median": 9.242,
+      "p95_median": 11.818,
       "p95_runs": [
-       14.115,
-       13.409,
-       14.961,
-       15.019,
-       15.532,
-       15.931,
-       16.785
+       11.767,
+       11.818,
+       10.174,
+       12.727,
+       10.992,
+       13.474,
+       13.939
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 16.955,
-      "p95_median": 18.53,
+      "p50_median": 12.261,
+      "p95_median": 14.901,
       "p95_runs": [
-       17.597,
-       17.692,
-       18.195,
-       18.53,
-       18.889,
-       19.439,
-       20.252
+       13.147,
+       14.633,
+       14.901,
+       15.71,
+       12.015,
+       14.952,
+       16.305
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 10.242,
-      "p95_median": 12.485,
+      "p50_median": 6.413,
+      "p95_median": 8.504,
       "p95_runs": [
-       11.519,
-       12.575,
-       12.065,
-       12.473,
-       12.485,
-       13.502,
-       13.88
+       8.504,
+       9.586,
+       6.628,
+       8.917,
+       8.404,
+       8.326,
+       11.36
       ]
      }
     },
-    "ingest_200_ms_median": 9.4,
+    "ingest_200_ms_median": 10.8,
     "interleaved_with": [
-     "038cec3c4a3f53ef"
+     "8ef269a377fcbf4c"
     ],
-    "process_start_p50_median": 9.32,
+    "process_start_p50_median": 6.399,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
      "check_prompts_delivered": [
       {
        "SessionStart": false,
-       "UserPromptSubmit": false
+       "UserPromptSubmit": true
       }
+     ],
+     "full_prompts_delivered_per_run": [
+      299,
+      299,
+      299,
+      299,
+      299,
+      299,
+      299
      ],
      "hook_errors": 0,
      "hook_finishes": 8414,
@@ -101,7 +126,7 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 4146.6,
+    "first_write_open_ms": 4426.8,
     "inputs": {
      "changed": 0,
      "listed": 636,
@@ -110,12 +135,12 @@
      "unrecoverable": 96
     },
     "interleaved_with": [
-     "038cec3c4a3f53ef"
+     "8ef269a377fcbf4c"
     ],
-    "max_ms": 237.9,
-    "median_ms": 222.9,
-    "min_ms": 219.1,
-    "p90_ms": 225.0,
+    "max_ms": 218.6,
+    "median_ms": 216.9,
+    "min_ms": 214.3,
+    "p90_ms": 218.1,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -129,22 +154,23 @@
  },
  "workload": {
   "base_bench": "copy of the base tree with the candidate bench's 8,336-row fire_ledger seed added after the cue load, and its decisions and invariants marked user_said, trust 3, as the candidate bench marks them",
-  "base_bench_main_rs_sha256": "bfb4bc2b7e874bf8",
+  "base_bench_full_prompts": "full_prompts and run_prompts copied from the candidate bench; the base's one call replaced",
+  "base_bench_main_rs_sha256": "3a7d088da75c79a2",
   "bench_sources": {
    "base": {
     "bench_crate_sha256": "2c88ed015f674f0c",
-    "built_bench_crate_sha256": "fa06d8b7c0479657",
+    "built_bench_crate_sha256": "f7aca678902b45cb",
     "commit": null,
     "tree_sha256": "a29b6bbb3698c461"
    },
    "cand": {
-    "bench_crate_sha256": "eeb3c16c650cc04a",
-    "commit": "6fbf2cbd977c3f933fa0036a27c21a686c11f068",
+    "bench_crate_sha256": "83b770e846207efd",
+    "commit": "d41820eaac80b4f93f7067526fc6872672c13653",
     "dirty": false
    }
   },
   "catalogue_lists_typed": {
-   "038cec3c4a3f53ef": [
+   "8ef269a377fcbf4c": [
     "True"
    ],
    "b93d2f5c222c0424": [
@@ -153,17 +179,22 @@
   },
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
-   "038cec3c4a3f53ef": [
-    8358
+   "8ef269a377fcbf4c": [
+    25324,
+    25334,
+    25335,
+    25336,
+    25364,
+    25366,
+    25367
    ],
    "b93d2f5c222c0424": [
-    8346,
     8356
    ]
   },
   "fixture_equal": true,
   "fixture_records_by_kind_origin_trust": {
-   "038cec3c4a3f53ef": [
+   "8ef269a377fcbf4c": [
     [
      "claim",
      "commit_linked",
@@ -230,14 +261,14 @@
   },
   "must_deliver": {
    "blocks": {
-    "038cec3c4a3f53ef": 2,
+    "8ef269a377fcbf4c": 2,
     "b93d2f5c222c0424": 6
    },
    "item": "P026",
    "verdict": "both"
   },
   "seed_rows_and_fingerprint": {
-   "038cec3c4a3f53ef": [
+   "8ef269a377fcbf4c": [
     [
      8336,
      "3a9091da7f1c5202"
