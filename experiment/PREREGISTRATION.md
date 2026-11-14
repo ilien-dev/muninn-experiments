@@ -7640,3 +7640,35 @@ sentences of their message, or the whole of it, cut by the extractor's sentence 
   user_said at another turn, lower origin, not derivable (with how many were not located and how
   many the command refused), errors. Both readings are reported. Neither has a threshold, and
   neither decides anything. The first reading stays the eleventh amendment's.
+## Fourteenth amendment to usage-v4, 2026-11-14 — a defect in the E harness, found by Task 9: the full-prompt row never timed a delivery
+
+Written before any revision-5 cell ran.
+
+`muninn-bench perf` ran one prompt 300 times for its "UserPromptSubmit (full)" row. Its six
+words are among the thirty the fixture puts in about half of all 20,000 records, so no term was
+selective, recall returned nothing, and the hook ended `silence:no_match` in every run. That is
+in the bench of every build, the 1.2.0 base included. The harness's own check prompt was the
+same one, each counts file recorded `UserPromptSubmit: false` under `check_prompts_delivered`,
+and nothing gated on it. So in every E reading so far (harness revisions 1 to 4, every build and
+the base figures paired with it) the row named "UserPromptSubmit (full)" is the time of opening
+the store, the ledger lookup and an empty recall. It is not a reading of a prompt that is given
+a block. The rule's verdict on that row stood on equal work in both arms, and stays as recorded;
+what it measured was less than its name says.
+
+Harness revision 5. The candidate's bench asks, in each run, for three identifiers of one record
+of the fixture, a different record each run, and refuses the run unless every prompt is answered
+with a block. The base's bench copy is given the same two functions, copied from the candidate's
+source, in place of its one call, so both arms run the same 300 prompts: they are built from the
+fixture's records and the ledger seed alone, which revision 4 already checks are equal. After
+each run the harness reads the bench store and counts the prompts of that session that were
+given a block; fewer than the runs, on either arm, fails the run and no counts are written. The
+store check's prompt is built the same way and must deliver on both arms.
+
+The gated row, the two session-start rows and Stop are not touched by this. Rule E and its
+thresholds are unchanged. `verdict.py` is unchanged; it reads revision 3 or later.
+
+Two things the harness still cannot make equal are recorded with each run and not gated: the
+base's bench writes directory and symbol cue rows, so the base delivers no blocks at SessionStart
+and SubagentStart while the candidate does (those two rows compare a base that does less); and
+the candidate's bench goes on to time Stop and SessionEnd after the rows E reads, which the
+base's does not.

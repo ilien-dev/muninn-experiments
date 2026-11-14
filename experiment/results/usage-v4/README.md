@@ -106,3 +106,11 @@ staged copies. `inputs.py check` prints counts per group. A run whose staged cop
 altered records `status: "missing input"` (B1, A) or refuses to write (E), and `verdict.py` prints
 those rules as `missing`, never `fail`. Inputs that were already gone when staging ran are counted
 as `unrecoverable`; C, D and B2/B3 read only files under the fixture root and this directory.
+
+## E, harness revision 5 (fourteenth amendment)
+
+The full-prompt row of revisions 1 to 4 timed a prompt that delivered nothing. `e_perf.py` now
+gives the base bench copy the candidate bench's `full_prompts` and `run_prompts` (taken from
+`--bench-src`, which is therefore required), counts in every bench store the prompts of session
+`b` that were given a block (`full_prompts_delivered_per_run`), and fails the run when either arm
+has fewer than its 300 runs or when the store check's own prompt delivers nothing.

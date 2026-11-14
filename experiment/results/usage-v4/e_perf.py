@@ -19,6 +19,19 @@ records and listed none of the fixture's. The base's bench copy gets the same or
 counted by kind, origin and trust after its run, and the workloads are equal only if those
 counts are equal too. Whether each build's SessionStart lists typed records in its catalogue is
 recorded (`catalogue_lists_typed`).
+Revision 5 (Task 9): the "UserPromptSubmit (full)" row never timed a delivery. The bench ran one
+prompt 300 times, made of six of the thirty words its fixture puts in about half of all records,
+so no term was selective, recall returned nothing and the hook ended `silence:no_match` in every
+run, on both builds; `check_prompts_delivered` said `UserPromptSubmit: false` in every counts
+file and nothing gated on it. The candidate's bench now asks, in each run, for three identifiers
+of one record (`full_prompts`, `run_prompts` in its `main.rs`). The base's bench copy gets those
+two functions, copied from the candidate's source, and its one call replaced, so both arms run
+the same 300 prompts (the fixture's records and the ledger seed are the same in both, and the
+prompts are built from those alone). Every bench store is then read: the full row counts only
+if the store's delivery log and ledger hold a delivered block for at least as many prompts of
+session `b` as there were runs (`full_prompts_delivered`); otherwise the run fails and no counts
+are written. The store check's own prompt is one of those. Earlier revisions' full rows, every
+build's, are a reading of an empty recall, not of a delivery.
 
 perf. Each build is timed by a `muninn-bench` built from its own source, so each runs on a store
 its own code created. `--bench-base-src` builds the base's bench from a *copy* of the base tree
@@ -44,7 +57,7 @@ from common import *
 from inputs import staged
 from e_gates import seed_fingerprint, gate_workload, gate_deliver
 
-HARNESS_REV = 4
+HARNESS_REV = 5
 ap = parser(__doc__)
 ap.add_argument('--against')
 ap.add_argument('--bench', help='muninn-bench built from the candidate (--against) tree')
@@ -101,6 +114,18 @@ FIXTURE_NEW = ("VALUES(?1,?2,?3,?4,?5,"
                "CASE WHEN ?1 IN ('decision','invariant') THEN 3 ELSE 2 END,"
                "?6,'bench',?7,?8)")
 
+FULL_OLD = re.compile(r'let ups = run_hook\(\s*&bin,\s*root,\s*"UserPromptSubmit",\s*&serde_json::json!\(\{"session_id":"b","cwd":cwd,"prompt":"implement retry backoff for the webhook handler with idempotent tokens"\}\),\s*runs,\s*\)\?;')
+FULL_NEW = 'let (ups, _delivered) = run_prompts(&bin, root, "b", &full_prompts(root, runs)?)?;'
+
+
+def rust_fn(src, name):
+    """The text of one top-level function of a Rust source, doc comment included."""
+    m = re.search(r'(?:^///[^\n]*\n)*^fn %s\(.*?^}\n' % re.escape(name), src, re.M | re.S)
+    if not m:
+        sys.exit('the candidate bench has no function %s' % name)
+    return m.group(0)
+
+
 TOP_IGNORE = {'target', '.git', '.muninn', 'node_modules', 'research', 'site'}
 
 
@@ -148,7 +173,7 @@ def src_commit(tree):
 sources = {}
 
 
-def build_bench(src, name, seed=False):
+def build_bench(src, name, seed=False, prompts_from=None):
     tree = os.path.abspath(src)
     sources[name] = dict(src_commit(tree), bench_crate_sha256=tree_hash(tree, os.path.join('crates', 'muninn-bench')))
     if seed:
@@ -173,6 +198,17 @@ def build_bench(src, name, seed=False):
             if s.count(FIXTURE_OLD) != 1:
                 sys.exit('cannot give the base bench the candidate fixture\'s origins')
             s = s.replace(FIXTURE_OLD, FIXTURE_NEW)
+            # revision 5: the candidate's full prompts, one a run, in place of the one prompt
+            if not prompts_from:
+                sys.exit('revision 5 needs --bench-src: the base bench takes the full prompts of the candidate from it')
+            cand = open(os.path.join(os.path.abspath(prompts_from), 'crates', 'muninn-bench', 'src', 'main.rs'), encoding='utf-8').read()
+            if 'fn full_prompts(' not in s:
+                if len(FULL_OLD.findall(s)) != 1:
+                    sys.exit('cannot place the candidate\'s full prompts in the base bench')
+                s = FULL_OLD.sub(FULL_NEW, s)
+                at = s.index('\nfn ingest_200(')
+                s = s[:at] + '\n' + rust_fn(cand, 'full_prompts') + '\n' + rust_fn(cand, 'run_prompts') + s[at:]
+                workload['base_bench_full_prompts'] = 'full_prompts and run_prompts copied from the candidate bench; the base\'s one call replaced'
             open(mp, 'w', encoding='utf-8', newline='\n').write(s)
             workload['base_bench'] = ('copy of the base tree with the candidate bench\'s 8,336-row fire_ledger seed added after the cue load, '
                                       'and its decisions and invariants marked user_said, trust 3, as the candidate bench marks them')
@@ -229,13 +265,32 @@ def check_store(b, tmp):
     ver = con.execute("select value from meta where key='schema_version'").fetchone()
     ledger = con.execute('select count(*) from fire_ledger').fetchone()[0]
     seed_n, seed_fp = seed_fingerprint(con)
+    # revision 5: the prompts of session `b` that were given a block, folded or still in the log
+    full_delivered = con.execute("select count(distinct fired_at) from fire_ledger where session_id='b' and reason like '%literal' "
+                                 "and reason not like '%gated%' and record_id is not null and fired_at > 1700000008335").fetchone()[0]
+    marks = con.execute("select value from meta where key='fold:delivery.jsonl'").fetchone()
+    folded = int(marks[0].split(',')[0]) if marks else 0
+    dl = os.path.join(root, '.muninn', 'log', 'delivery.jsonl')
+    if os.path.isfile(dl):
+        with open(dl, 'rb') as fh:
+            fh.seek(folded)
+            for l in fh.read().decode('utf-8', 'replace').splitlines():
+                try:
+                    v = json.loads(l)
+                except ValueError:
+                    continue
+                full_delivered += v.get('session') == 'b' and v.get('reason') == 'literal' and bool(v.get('ids'))
+    # a record of the fixture to ask for: three identifiers of its body, as the bench's prompts are made
+    body = con.execute("select body from record where session_id='bench' and kind='episode' order by id desc limit 1").fetchone()[0]
+    rare = [w for w in body.split(' ') if w[-1:].isdigit()][:3]
+    check_prompt = 'implement %s for the handler with %s' % (rare[0], ' and '.join(rare[1:]))
     fixture = [list(r) for r in con.execute("select kind, origin, trust, count(*) from record where session_id='bench' group by 1, 2, 3 order by 1, 2, 3")]
     con.close()
     ok = True
     lists_typed = None
     delivered = {}
     for event, payload in (('SessionStart', {'session_id': 'check'}),
-                           ('UserPromptSubmit', {'session_id': 'check', 'prompt': 'implement retry backoff for the webhook handler with idempotent tokens'})):
+                           ('UserPromptSubmit', {'session_id': 'check', 'prompt': check_prompt})):
         inp = json.dumps(dict(payload, hook_event_name=event, cwd=root))
         r = run([b, 'hook', event], 'perf:check:' + event, timeout=120, cwd=root, input=inp.encode(), env=ENV)
         if r is None:
@@ -267,9 +322,12 @@ def check_store(b, tmp):
     if bad or fin < 4 * 300 + 2:
         fail('perf:check:heartbeat')
         ok = False
+    if full_delivered < 300 or not delivered.get('UserPromptSubmit'):
+        fail('perf:full_prompt_not_delivered')
+        ok = False
     shutil.rmtree(dirs[0], ignore_errors=True)
     return {'schema_version': ver[0] if ver else None, 'fire_ledger_rows': ledger, 'seed_rows': seed_n, 'seed_fingerprint': seed_fp,
-            'hooks_ok': ok, 'hook_finishes': fin, 'hook_errors': bad, 'delivered': delivered,
+            'hooks_ok': ok, 'hook_finishes': fin, 'hook_errors': bad, 'delivered': delivered, 'full_prompts_delivered': full_delivered,
             'fixture': fixture, 'catalogue_lists_typed': lists_typed}
 
 
@@ -283,7 +341,7 @@ if parts == {'gates'}:
 if 'perf' in parts:
     if not cand_bin:
         sys.exit('E compares two builds: give --against <candidate muninn.exe>')
-    bench_base = args.bench_base or (build_bench(args.bench_base_src, 'base', seed=not args.no_ledger_seed) if args.bench_base_src else None)
+    bench_base = args.bench_base or (build_bench(args.bench_base_src, 'base', seed=not args.no_ledger_seed, prompts_from=args.bench_src) if args.bench_base_src else None)
     bench_cand = args.bench or (build_bench(args.bench_src, 'cand') if args.bench_src else None)
     if not bench_base or not bench_cand:
         sys.exit('--bench-base/--bench-base-src and --bench/--bench-src are both required for perf')
@@ -340,7 +398,8 @@ if 'perf' in parts:
                                            'all_hooks_ok': all(c and c['hooks_ok'] for c in checks[b]),
                                            'hook_finishes': sum(c['hook_finishes'] for c in checks[b] if c),
                                            'hook_errors': sum(c['hook_errors'] for c in checks[b] if c),
-                                           'check_prompts_delivered': [c['delivered'] for c in checks[b] if c][:1]},
+                                           'check_prompts_delivered': [c['delivered'] for c in checks[b] if c][:1],
+                                           'full_prompts_delivered_per_run': [c['full_prompts_delivered'] for c in checks[b] if c]},
                           'process_start_p50_median': round(stt.median([r['process_start'][0] for r in rs]), 3) if rs else None,
                           'ingest_200_ms_median': round(stt.median([r['ingest_200_ms'] for r in rs]), 1) if rs else None,
                           'contracts_failed_per_run': [[c['name'] for c in r['contracts'] if not c['ok']] for r in rs],
