@@ -8,17 +8,17 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "35b31db5f704e8ea",
+    "bench_sha256": "4fdd9f4027b92b28",
     "contracts_failed_per_run": [
      [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
       "hook UserPromptSubmit full p95"
      ],
      [
-      "hook SessionStart p95",
       "hook UserPromptSubmit full p95"
      ],
      [
-      "hook SessionStart p95",
       "hook UserPromptSubmit full p95"
      ],
      [
@@ -28,77 +28,83 @@
      ],
      [
       "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
       "hook UserPromptSubmit full p95"
      ],
      [
       "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
       "hook UserPromptSubmit full p95",
       "cue eval (ancestor lookup) p99"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit full p95"
      ]
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 9.539,
-      "p95_median": 11.109,
+      "p50_median": 10.78,
+      "p95_median": 12.63,
       "p95_runs": [
-       8.833,
-       11.764,
-       10.256,
-       12.556,
-       11.109,
-       11.102,
-       11.907
+       11.498,
+       9.789,
+       9.882,
+       13.583,
+       13.864,
+       14.117,
+       12.63
       ]
      },
      "SubagentStart": {
-      "p50_median": 7.536,
-      "p95_median": 9.452,
+      "p50_median": 7.881,
+      "p95_median": 10.334,
       "p95_runs": [
-       7.433,
-       8.34,
-       7.797,
+       9.86,
+       7.708,
+       7.768,
        10.334,
-       9.872,
-       9.528,
-       9.452
+       11.374,
+       12.416,
+       12.259
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 10.266,
-      "p95_median": 11.829,
+      "p50_median": 10.837,
+      "p95_median": 15.419,
       "p95_runs": [
-       10.262,
-       11.829,
-       10.784,
-       13.872,
-       11.274,
-       13.237,
-       12.512
+       12.628,
+       10.301,
+       10.649,
+       19.488,
+       15.473,
+       23.967,
+       15.419
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 5.049,
-      "p95_median": 5.526,
+      "p50_median": 5.194,
+      "p95_median": 7.365,
       "p95_runs": [
-       4.976,
-       4.796,
-       5.233,
-       7.848,
-       5.526,
-       5.75,
-       6.242
+       7.365,
+       4.97,
+       5.284,
+       7.224,
+       9.2,
+       16.412,
+       10.643
       ]
      }
     },
-    "ingest_200_ms_median": 9.6,
+    "ingest_200_ms_median": 9.5,
     "interleaved_with": [
-     "8ef269a377fcbf4c"
+     "e089b6763045d4e3"
     ],
-    "process_start_p50_median": 4.402,
+    "process_start_p50_median": 4.704,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -125,7 +131,7 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 4174.3,
+    "first_write_open_ms": 5217.3,
     "inputs": {
      "changed": 0,
      "listed": 636,
@@ -134,12 +140,12 @@
      "unrecoverable": 96
     },
     "interleaved_with": [
-     "8ef269a377fcbf4c"
+     "e089b6763045d4e3"
     ],
-    "max_ms": 222.8,
-    "median_ms": 216.1,
-    "min_ms": 213.1,
-    "p90_ms": 219.6,
+    "max_ms": 232.9,
+    "median_ms": 225.2,
+    "min_ms": 219.6,
+    "p90_ms": 229.4,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -164,35 +170,36 @@
    },
    "cand": {
     "bench_crate_sha256": "83b770e846207efd",
-    "commit": "d41820eaac80b4f93f7067526fc6872672c13653",
+    "commit": "3cb6a695bd3619739e14ab06f0e84f8e61906297",
     "dirty": false
    }
   },
   "catalogue_lists_typed": {
-   "8ef269a377fcbf4c": [
+   "b93d2f5c222c0424": [
     "True"
    ],
-   "b93d2f5c222c0424": [
+   "e089b6763045d4e3": [
     "True"
    ]
   },
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
-   "8ef269a377fcbf4c": [
-    25335,
-    25364,
-    25365,
-    25374,
-    25375,
-    25376
-   ],
    "b93d2f5c222c0424": [
     8356
+   ],
+   "e089b6763045d4e3": [
+    25336,
+    25354,
+    25364,
+    25373,
+    25375,
+    25376,
+    25377
    ]
   },
   "fixture_equal": true,
   "fixture_records_by_kind_origin_trust": {
-   "8ef269a377fcbf4c": [
+   "b93d2f5c222c0424": [
     [
      "claim",
      "commit_linked",
@@ -224,7 +231,7 @@
      400
     ]
    ],
-   "b93d2f5c222c0424": [
+   "e089b6763045d4e3": [
     [
      "claim",
      "commit_linked",
@@ -259,20 +266,20 @@
   },
   "must_deliver": {
    "blocks": {
-    "8ef269a377fcbf4c": 2,
-    "b93d2f5c222c0424": 6
+    "b93d2f5c222c0424": 6,
+    "e089b6763045d4e3": 2
    },
    "item": "P026",
    "verdict": "both"
   },
   "seed_rows_and_fingerprint": {
-   "8ef269a377fcbf4c": [
+   "b93d2f5c222c0424": [
     [
      8336,
      "3a9091da7f1c5202"
     ]
    ],
-   "b93d2f5c222c0424": [
+   "e089b6763045d4e3": [
     [
      8336,
      "3a9091da7f1c5202"
