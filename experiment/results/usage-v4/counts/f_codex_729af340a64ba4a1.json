@@ -1,0 +1,793 @@
+{
+ "binary_sha256": "729af340a64ba4a1",
+ "binary_version": "muninn 1.2.0",
+ "build": "729af340a64ba4a1",
+ "labels": "final",
+ "section": "f_codex",
+ "splits": {
+  "invented": {
+   "bytes": 21359,
+   "direct": {
+    "by_kind": {
+     "correction": 2,
+     "decision": 2,
+     "invariant": 1
+    },
+    "by_origin": {
+     "user_said": 5
+    },
+    "messages": 5,
+    "messages_not_a_persons": 1,
+    "rollouts": 1,
+    "rollouts_with_a_typed_record": 1,
+    "typed": 5,
+    "user_said_from_a_turn_not_a_persons": 0
+   },
+   "hooks": {
+    "by_kind": {
+     "correction": 2,
+     "decision": 2,
+     "invariant": 1
+    },
+    "by_origin": {
+     "user_said": 5
+    },
+    "commands_run": 4,
+    "hooks_file": true,
+    "messages": 5,
+    "messages_not_a_persons": 1,
+    "rollouts": 1,
+    "rollouts_with_a_typed_record": 1,
+    "typed": 5,
+    "user_said_from_a_turn_not_a_persons": 0
+   }
+  },
+  "real": {
+   "bytes": 348104302,
+   "direct": {
+    "by_kind": {
+     "correction": 1,
+     "deadend": 7,
+     "decision": 59,
+     "invariant": 12
+    },
+    "by_origin": {
+     "commit_linked": 1,
+     "tool_observed": 7,
+     "user_said": 71
+    },
+    "messages": 187,
+    "messages_not_a_persons": 4,
+    "per_rollout": {
+     "R01": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R02": {
+      "messages": 4,
+      "not_a_persons": 0,
+      "typed": 6
+     },
+     "R03": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R04": {
+      "messages": 8,
+      "not_a_persons": 0,
+      "typed": 5
+     },
+     "R05": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 11
+     },
+     "R06": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 20
+     },
+     "R07": {
+      "messages": 7,
+      "not_a_persons": 0,
+      "typed": 4
+     },
+     "R08": {
+      "messages": 0,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R09": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R10": {
+      "messages": 6,
+      "not_a_persons": 0,
+      "typed": 3
+     },
+     "R11": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 4
+     },
+     "R12": {
+      "messages": 23,
+      "not_a_persons": 0,
+      "typed": 6
+     },
+     "R13": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R14": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R15": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R16": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R17": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R18": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 2
+     },
+     "R19": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R20": {
+      "messages": 7,
+      "not_a_persons": 0,
+      "typed": 3
+     },
+     "R21": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R22": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R23": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R24": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R25": {
+      "messages": 0,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R26": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R27": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R28": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R29": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R30": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R31": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R32": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R33": {
+      "messages": 5,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R34": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R35": {
+      "messages": 4,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R36": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R37": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R38": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R39": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R40": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R41": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R42": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R43": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R44": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R45": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R46": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R47": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R48": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R49": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R50": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R51": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R52": {
+      "messages": 21,
+      "not_a_persons": 0,
+      "typed": 8
+     },
+     "R53": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R54": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R55": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R56": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R57": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R58": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R59": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R60": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R61": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R62": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R63": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R64": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R65": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R66": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R67": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R68": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R69": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R70": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     }
+    },
+    "rollouts": 70,
+    "rollouts_with_a_typed_record": 18,
+    "typed": 79,
+    "user_said_from_a_turn_not_a_persons": 0
+   },
+   "hooks": {
+    "by_kind": {
+     "correction": 1,
+     "deadend": 7,
+     "decision": 59,
+     "invariant": 12
+    },
+    "by_origin": {
+     "commit_linked": 1,
+     "tool_observed": 7,
+     "user_said": 71
+    },
+    "commands_run": 280,
+    "hooks_file": true,
+    "messages": 187,
+    "messages_not_a_persons": 4,
+    "per_rollout": {
+     "R01": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R02": {
+      "messages": 4,
+      "not_a_persons": 0,
+      "typed": 6
+     },
+     "R03": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R04": {
+      "messages": 8,
+      "not_a_persons": 0,
+      "typed": 5
+     },
+     "R05": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 11
+     },
+     "R06": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 20
+     },
+     "R07": {
+      "messages": 7,
+      "not_a_persons": 0,
+      "typed": 4
+     },
+     "R08": {
+      "messages": 0,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R09": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R10": {
+      "messages": 6,
+      "not_a_persons": 0,
+      "typed": 3
+     },
+     "R11": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 4
+     },
+     "R12": {
+      "messages": 23,
+      "not_a_persons": 0,
+      "typed": 6
+     },
+     "R13": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R14": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R15": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R16": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R17": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R18": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 2
+     },
+     "R19": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R20": {
+      "messages": 7,
+      "not_a_persons": 0,
+      "typed": 3
+     },
+     "R21": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R22": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R23": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R24": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R25": {
+      "messages": 0,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R26": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R27": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R28": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R29": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R30": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R31": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R32": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R33": {
+      "messages": 5,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R34": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R35": {
+      "messages": 4,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R36": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R37": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R38": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R39": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R40": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R41": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R42": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R43": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R44": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R45": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R46": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R47": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R48": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R49": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R50": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R51": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R52": {
+      "messages": 21,
+      "not_a_persons": 0,
+      "typed": 8
+     },
+     "R53": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R54": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R55": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R56": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 1
+     },
+     "R57": {
+      "messages": 1,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R58": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R59": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R60": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R61": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R62": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R63": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R64": {
+      "messages": 2,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R65": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R66": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R67": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R68": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R69": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     },
+     "R70": {
+      "messages": 3,
+      "not_a_persons": 0,
+      "typed": 0
+     }
+    },
+    "rollouts": 70,
+    "rollouts_with_a_typed_record": 18,
+    "typed": 79,
+    "user_said_from_a_turn_not_a_persons": 0
+   }
+  }
+ }
+}
