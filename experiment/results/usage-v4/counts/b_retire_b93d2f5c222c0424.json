@@ -652,7 +652,7 @@
       "anchors_outside_skipped": 0,
       "batches": 538,
       "git": false,
-      "s": 48,
+      "s": 45,
       "sessions": 78
      },
      "W01": {
@@ -666,28 +666,28 @@
       "anchors_outside_skipped": 4,
       "batches": 2788,
       "git": true,
-      "s": 715,
+      "s": 750,
       "sessions": 348
      },
      "W02-now": {
       "anchors_outside_skipped": 8,
       "batches": 4101,
       "git": true,
-      "s": 978,
+      "s": 1018,
       "sessions": 513
      },
      "W05": {
       "anchors_outside_skipped": 0,
       "batches": 387,
       "git": false,
-      "s": 29,
+      "s": 28,
       "sessions": 41
      },
      "W07": {
       "anchors_outside_skipped": 0,
       "batches": 107,
       "git": true,
-      "s": 12,
+      "s": 11,
       "sessions": 7
      }
     },
@@ -800,7 +800,7 @@
      "v1:W02:236": "retired",
      "v1:W05:380": "retired"
     },
-    "wall_s": 995
+    "wall_s": 1036
    },
    "b2": {
     "aba": {
