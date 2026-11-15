@@ -116,6 +116,16 @@ before every `maintain` and when the replay ends, so the validator skips it. The
 is in the counts (`replay.<corpus>.anchors_outside_skipped`), and each store total carries
 `retired_anchor_changed`. B1 is compared only between replays made under this runner.
 
+## What loop 8's `served_ok` reads (`b3_path.py`, a diagnostic after the result)
+
+`loop8/eval_all.py` takes `served_ok` and `old_served` from `muninn recall "<topic>"`, and nine
+of the ten topics are three words long. `muninn recall` now applies the prompt hook's gates, so
+it prints nothing for them, and those cells read 2/30 and 0/30 on every build from Task 6 on
+where 1.2.0 reads 11/30 and 8/30. Rule B3 names `retired_a` and `kept_b` only. `b3_path.py`,
+written after the result and deciding no rule, runs the evaluator unchanged and reads each
+scenario's store through the prompt hook (a question of nine words made from the topic) and
+through the session start, on both builds. Its docstring says what it counts.
+
 ## E, harness revision 5 (fourteenth amendment)
 
 The full-prompt row of revisions 1 to 4 timed a prompt that delivered nothing. `e_perf.py` now
