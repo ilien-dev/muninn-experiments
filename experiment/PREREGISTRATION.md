@@ -7999,6 +7999,15 @@ typed` reads 0 bad, with one more order of 384 ending in a marked silence than b
 (52 for 51); the new `stated` line that read 5 bad reads 0; "A, B, A again" ends the same in
 its six read orders.
 
+*Added the same day, before any cell finished.* The probes and the review's scripts were run
+first on the build of `53d068f84` (`841c9f61f0ded8d1`). The review's two-coordinator
+enumeration read 4 of 384 there, not 0: the change was no longer revoked, but it was left
+retired with a mark, which the implementer's own probe counts as allowed and the review's does
+not. One more commit (`b53d75ed6`, binary `c11855d8ae39af2e`) closes it, and that enumeration
+reads 0 of 384 on it. The run on `841c9f61f0ded8d1` was stopped while the first A cells were
+writing; its counts were deleted and are not committed. Every reading of this round is taken
+on `c11855d8ae39af2e`.
+
 ## Result of usage-v4 on the fixed build, 2026-11-14
 
 Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
