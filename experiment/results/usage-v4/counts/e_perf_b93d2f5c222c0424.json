@@ -8,18 +8,8 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "e3d265f1a0600f8a",
+    "bench_sha256": "022fa856723ab6ed",
     "contracts_failed_per_run": [
-     [
-      "hook SessionStart p95",
-      "hook SubagentStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook SubagentStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
      [
       "hook SessionStart p95",
       "hook SubagentStart p95",
@@ -34,6 +24,7 @@
      [
       "hook SessionStart p95",
       "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
       "hook UserPromptSubmit full p95"
      ],
      [
@@ -41,67 +32,71 @@
       "hook SubagentStart p95",
       "hook UserPromptSubmit full p95"
      ],
+     [
+      "hook UserPromptSubmit gated p95"
+     ],
+     [],
      []
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 11.965,
-      "p95_median": 14.172,
+      "p50_median": 12.941,
+      "p95_median": 14.623,
       "p95_runs": [
-       13.253,
-       14.345,
-       13.673,
-       14.086,
-       14.654,
-       14.172,
-       16.121
+       13.372,
+       14.332,
+       15.127,
+       14.623,
+       14.212,
+       15.724,
+       15.451
       ]
      },
      "SubagentStart": {
-      "p50_median": 9.728,
-      "p95_median": 12.163,
+      "p50_median": 10.724,
+      "p95_median": 12.227,
       "p95_runs": [
-       11.284,
-       12.163,
-       11.607,
-       12.95,
-       12.289,
-       11.985,
-       12.841
+       11.458,
+       12.076,
+       12.782,
+       12.095,
+       12.227,
+       13.24,
+       13.249
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 13.107,
-      "p95_median": 15.203,
+      "p50_median": 13.694,
+      "p95_median": 15.7,
       "p95_runs": [
-       14.119,
-       12.72,
-       14.315,
-       15.701,
-       15.573,
-       15.203,
-       15.763
+       14.047,
+       14.814,
+       15.7,
+       14.844,
+       16.64,
+       16.538,
+       15.73
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 6.983,
-      "p95_median": 9.302,
+      "p50_median": 7.748,
+      "p95_median": 10.215,
       "p95_runs": [
-       8.42,
+       8.923,
+       9.838,
+       12.173,
        9.302,
-       8.495,
-       10.974,
-       9.768,
-       9.046,
-       10.576
+       11.601,
+       10.215,
+       10.666
       ]
      }
     },
-    "ingest_200_ms_median": 10.1,
+    "ingest_200_ms_median": 10.2,
     "interleaved_with": [
      "366bb7913a35be7a"
     ],
-    "process_start_p50_median": 6.358,
+    "process_start_p50_median": 7.111,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -128,7 +123,7 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 4118.6,
+    "first_write_open_ms": 4191.4,
     "inputs": {
      "changed": 0,
      "listed": 636,
@@ -139,10 +134,10 @@
     "interleaved_with": [
      "366bb7913a35be7a"
     ],
-    "max_ms": 227.5,
-    "median_ms": 220.6,
-    "min_ms": 216.9,
-    "p90_ms": 223.3,
+    "max_ms": 225.7,
+    "median_ms": 221.1,
+    "min_ms": 218.0,
+    "p90_ms": 223.8,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -182,12 +177,10 @@
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
    "366bb7913a35be7a": [
-    25375,
+    25365,
     25378,
-    25381,
-    25388,
-    25406,
-    25407
+    25384,
+    25406
    ],
    "b93d2f5c222c0424": [
     8346,
