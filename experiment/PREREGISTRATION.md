@@ -8130,3 +8130,18 @@ failing E ratios are higher than on the fixed build, and read against it directl
 start is 0.15 and 0.07 ms slower in two readings, inside the 0.4 ms the comparison resolves.
 Two files the read hooks execute changed in this round. The runs were again taken on a desktop
 in use.
+
+## Result of usage-v4 on the closing build, 2026-11-15
+
+Read on the worktree's `1b1179620`, binary `c7aa624fd41924ba`, as the third dated note under
+the nineteenth amendment says. A, the `remember` cell, B, C, D, F and `b3_path` are equal on
+every leaf to `692e382f2056ebd5`, but for the seconds a replay took, and `verdict.py` prints
+the same rows. The Result above stands for every rule; its E figures are those of
+`692e382f2056ebd5`, and no file a read hook executes has changed since.
+
+The defect the third review found reads 0 of 6 orders where `692e382f2056ebd5` read 1. The
+order probes and the two-coordinator enumeration read as on that build. What the review left
+unfixed is counted in `results/usage-v4/RESULTS.md`, section "After the third review": a
+statement said again after its replacement is not always current under the correction, key
+and quantity rules, a decision and its replacement each said twice can end both active, some
+of those unmarked, and a conflict mark is never removed.

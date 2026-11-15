@@ -215,7 +215,8 @@ core crate, where the conflict mark is read. E was therefore read again in full 
     change that takes the statement just before it, which depends on what the store held
     then: **not reversed, no mark.** Where only one of those links two statements, both are
     served as current with no conflict mark.
-  - A statement said again after its replacement is current in all six read orders.
+  - A statement said again after a replacement by its words is current in all six read
+    orders. Under the other rules it is not: see "After the third review".
 - R3: a row typed by a turn known to be an agent's and retired otherwise than as an agent's
   takes the person's turn when the person said it first; a journal whose first state is later
   than the person's saying returns to the person's turn; and in the undo, a record of the
@@ -253,8 +254,9 @@ commit closed it, and `c11855d8ae39af2e` and `692e382f2056ebd5` both read 0.
 
 More orders end in a marked silence than on the fixed build: one more of 384 on `typed`, three
 more of 1,920 on the `revoke` line of `events`, one more on two others. They are orders with
-a word of the user's mid-way, and they point at R1 and R2: a word now counts as said in
-between by its date, whichever session was read first.
+a word of the user's mid-way. They were not traced order by order. What counts as a word in
+between is decided by read order, not by date: a typed record read after the worker's prompt
+and before its coordinator's turn.
 
 One build of the round read **36 and 24 bad on the default line** (5,472 and 3,528 runs):
 `329880d405f39cba`, the first with the conflict mark. It took a record that a restatement had
@@ -374,9 +376,67 @@ Windows only.
 - A sentence the person typed in a session that hands no task over, dated before a worker's
   copy of it that another worker's copy has since retired, is dropped while the worker's turn
   is not yet known to be an agent's.
-- A word of the user's dated between a worker's turn and its coordinator's now leaves what the
-  worker's prompt retired retired and marked whichever session was read first; before, only
-  when it was read in between.
+- More orders with a word of the user's mid-way end retired and marked than on the fixed
+  build (the probe table above). A word counts as in between by read order, not by date.
+- The shapes counted under "Not fixed" in the section on the third review, the conflict
+  mark that is never removed, and `muninn why` opening with `sufficient` above it.
+
+## After the third review: the closing fix
+
+A third review read the follow-up build `692e382f2056ebd5` with invented sessions (`fu.py`).
+It found one defect the round had introduced, which is fixed here, and three things that are
+not fixed and are stated below.
+
+**The defect.** A worker's session is read while nothing says it is an agent's, then an older
+session of the person's, then the coordinator. The worker's row, dated later, retired the
+person's statement from the older side (the reversal of the quantity rule, the key and the
+correction rule). When the row was revoked as an agent's copy the undo did not give the
+statement back: the statement, typed after the row was read, counted as a word said since.
+Nothing was current and `muninn doctor` read yellow. The fixed build `366bb7913a35be7a` and
+1.2.0 end with the statement current.
+
+**The closing build.** Commit `1b1179620`, binary `c7aa624fd41924ba`. One clause of
+`agent/undo.rs`: the record a statement of an agent's holds retired, and the records of its
+turn, are not words said after that statement. No file a read hook executes changes, and E
+was not read again. A test reads the six orders for the three rules; before the change it
+failed on the order worker, person, coordinator for each (the correction case needs two
+session ids that share their first eight characters, since a correction replaces one of its
+own session).
+
+| `fu.py workerheir`, quantity rule, six read orders | 1.2.0 | `366bb7913a35be7a` | `692e382f2056ebd5` | `c7aa624fd41924ba` |
+|---|---|---|---|---|
+| orders ending with the person's statement not current | 0 | 0 | 1 | 0 |
+
+**Not fixed, as counted by the review's probes on `c7aa624fd41924ba`** (every read order of the
+sessions against the date order; invented sentences):
+
+| sessions, in date order | rule | orders not ending as date order does | what they end with |
+|---|---|---|---|
+| a correction, a second replacing it, the first again | correction said again | 1 of 6 (4 on `366bb7913a35be7a`) | the second current, the first retired: the order that reads the second last |
+| the same shape by key | key | not probed | the same path in the code |
+| a quantity, a bare change of it, the quantity again | bare quantity | 4 of 6 (5 on `366bb7913a35be7a`) | the change active beside the quantity, no mark |
+| A, B replacing it by words, A again, B again | a decision's words | 18 of 24 by the rows' states; in 11 of them A is active beside the current B | marked as in conflict in 7 of the 11, unmarked in 4 |
+| A, B, then C replacing B, by words | a decision's words | 4 of 6 | A, B or both active beside the current C, each marked with the record that replaces it |
+
+- **A conflict mark is never removed.** It is a row in `meta` for each record. It says nothing
+  while either record is retired and shows again if that record comes back.
+- **`muninn why` opens with `sufficient`** and names one record as answering directly, above
+  the two conflict lines.
+- **"By its date" was wrong** in the section above and in the CHANGELOG, and both are
+  corrected: a word of the user's counts as in between a worker's prompt and its coordinator
+  by read order, whatever its date. The one exception is the record this fix adds.
+
+**Repeated on `c7aa624fd41924ba`.** The order probes print the same lines as on
+`692e382f2056ebd5`: 0 bad on every registered line, 64 of 384 on "said before and replaced".
+The two-coordinator enumeration reads 0 and 64 of 384. The earlier reviews' scripts read as
+before. Tests: 404 pass on Windows with fmt and clippy clean, 407 under Linux.
+
+A, the `remember` cell, B in full with the base replayed again, C, D, F and `b3_path` are equal
+on every leaf to `692e382f2056ebd5`, but for the seconds each replay took: B1 reads 5 losses
+(6 by the earliest row), the binding reading passes, and decisions retired read 74 and 110.
+Delivery returns the same ids on 150 of 150 prompts against `366bb7913a35be7a` and against
+`187d91a1431ab6ac`. `verdict.py` prints the same rows. The E figures above are those of
+`692e382f2056ebd5` and were not taken again.
 
 `verdict.py b93d2f5c222c0424 8ea5e788aecf33e2 --split heldout` prints the rows below, except
 A1, which binds on the filters-only arm (`8ea5e788aecf33e2-filters`, ninth amendment), and E,
