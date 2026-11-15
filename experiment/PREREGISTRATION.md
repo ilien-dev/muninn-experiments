@@ -8041,6 +8041,15 @@ it, all of them: the probes, A, the `remember` cell, B with the base replayed ag
 check, F and the verdicts. These readings are the round's; those of `c11855d8ae39af2e` stay
 committed beside them.
 
+*Added the same day, before any cell finished on `329880d405f39cba`.* The order probes, run
+first, read 36 and 24 bad orders of 5,472 and 3,528 on the default line of that build, where
+every earlier build read 0. The commit that added the mark had also made an active record
+said again look for a word dated between its two sayings, and it took a record that a
+restatement had moved there for one first said there. That is corrected in `fc7c1a6fc`,
+binary `692e382f2056ebd5`, on which the default line reads 0 again. The run on
+`329880d405f39cba` was stopped during A and its counts deleted. Every reading of the round is
+taken on `692e382f2056ebd5`.
+
 ## Result of usage-v4 on the fixed build, 2026-11-14
 
 Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
