@@ -7968,3 +7968,32 @@ reading below is taken on `366bb7913a35be7a`; no other cell was run on `4617c4d5
 Two probe modes were added for the review's shapes before either build was read on them
 (`orderprobe stated` and `dates`); their figures on the sources of the final build are
 reported beside those of the fixed build.
+
+## Result of usage-v4 on the fixed build, 2026-11-14
+
+Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
+the nineteenth amendment says. The Result above is the reading of the final build and stands
+as written; this one replaces it where the two differ. `results/usage-v4/RESULTS.md`, section
+"After the final review", has the tables.
+
+| rule | final build | fixed build |
+|---|---|---|
+| A1, A2, A3; the `remember` cell | as above | equal on every leaf |
+| B1 | 5 `loss` items retired; both valid retired | the same; every labelled item's state equal |
+| B2, B3 | as above | equal |
+| C1 to C5 | as above | equal on every leaf |
+| D | same ids on 150 of 150 prompts against `187d91a1431ab6ac` | the same, and 150 of 150 against the final build |
+| E, median of three ratios | SessionStart 1.148, SubagentStart 1.274, full prompt 0.965, gated prompt 1.087; `Stop` 235.1 → 70.7 ms | 1.176, 1.413, 0.998, 1.091; `Stop` 220.6 → 61.7 ms: **fail** on the same two rows, pass on the other three |
+| F, Codex | 5 and 79 | equal |
+
+No verdict changed. Outside the rules, B1's store totals moved in the two corpora of one
+project: records retired with an older record as heir went from 5 to 0 in each. The order
+probes read 0 bad on every registered line. Of the two modes added for the review's shapes,
+one reads 0 bad of 8 where the final build's sources read 4, and the other reads 5, 0 and 64
+bad of 384 on its three lines where the final build's sources read 75, 0 and 64: two cases
+around the first defect are still open and `RESULTS.md` describes them.
+
+Every E ratio is higher than on the final build. No fix touches the two failing hooks, and
+read directly against the final build as hook time minus process start the fixed build is
+between 0.23 ms faster and 0.17 ms slower. The three runs were again taken on a desktop in
+use.

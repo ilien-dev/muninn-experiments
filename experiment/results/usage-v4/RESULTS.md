@@ -75,6 +75,40 @@ different ids. The third fix shows in the store totals of the two corpora of one
 the final build 5 records of each end retired in favour of an older record, on the fixed
 build none, and 3 and 2 decisions fewer are retired. None of those records is a labelled item.
 
+**E on the fixed build**, as the fifteenth amendment says: same-moment copies, three
+interleaved runs, each committed before it was read. p95 in ms, base → fixed (ratio):
+
+| row | run 1 | run 2 | run 3 | median ratio | final build's median | verdict |
+|---|---|---|---|---|---|---|
+| SessionStart | 12.672 → 15.589 (1.230) | 14.172 → 16.079 (1.135) | 14.623 → 17.201 (1.176) | 1.176 | 1.148 | **fail** |
+| SubagentStart | 10.308 → 15.411 (1.495) | 12.163 → 15.810 (1.300) | 12.227 → 17.276 (1.413) | 1.413 | 1.274 | **fail** |
+| UserPromptSubmit, full | 13.492 → 14.424 (1.069) | 15.203 → 14.547 (0.957) | 15.700 → 15.673 (0.998) | 0.998 | 0.965 | pass |
+| UserPromptSubmit, gated | 7.739 → 9.253 (1.196) | 9.302 → 9.445 (1.015) | 10.215 → 11.145 (1.091) | 1.091 | 1.087 | pass |
+| `Stop` with ingest, W02, median | 249.3 → 73.2 | 220.6 → 61.7 | 221.1 → 63.5 | | 235.1 → 70.7 | pass |
+
+Rule E reads as on the final build: it fails on the two rows where the base's bench delivers
+no block and passes on the other three. Every read row's median ratio is higher than the final
+build's. That is not a finding against a fix, for two reasons. No fix touches the session
+start or the subagent start, and the one that touches the prompt path changes one condition
+of one query. And read against the final build directly, as hook p50 minus process-start p50
+(12 rounds of 40, two same-moment copies of each binary on one bench store of 20,000 records,
+taken twice), the fixed build is no slower than the spread between copies:
+
+| | final build, two copies | fixed build, two copies | difference of means |
+|---|---|---|---|
+| SessionStart, first reading | 8.364, 8.215 | 8.556, 8.298 | +0.14 |
+| SessionStart, second reading | 9.068, 8.933 | 8.869, 8.672 | −0.23 |
+| SubagentStart, first reading | 7.241, 7.127 | 7.120, 7.046 | −0.10 |
+| SubagentStart, second reading | 7.793, 7.586 | 7.669, 7.447 | −0.13 |
+| gated prompt, first reading | 0.686, 0.658 | 0.737, 0.726 | +0.06 |
+| gated prompt, second reading | 0.613, 0.775 | 1.026, 0.702 | +0.17 |
+
+The gated prompt passes narrowly again (1.196, 1.015 and 1.091). Machine state: the owner's
+working desktop, in use, as for the final build's reading and against the fifteenth
+amendment's condition. A browser, an editor application and the session running the harness
+were open; no compiler, harness script or other `muninn` ran beside the runs (checked before
+each). Process start p50, base and fixed: 4.951 and 4.990, 6.358 and 6.350, 7.111 and 8.351 ms.
+
 **Order probes** (built against each source tree; `bad` is an order that serves what the same
 order with every coordinator first does not, leaves a retired record unmarked, or differs with
 no word of the user's between a worker and its coordinator):
