@@ -109,6 +109,17 @@ amendment's condition. A browser, an editor application and the session running 
 were open; no compiler, harness script or other `muninn` ran beside the runs (checked before
 each). Process start p50, base and fixed: 4.951 and 4.990, 6.358 and 6.350, 7.111 and 8.351 ms.
 
+**`perf --strict` on the fixed build.** Under Linux (WSL, Rust 1.98.1, the tracked files of the
+branch head), limits as written, two runs: exit 0 both. p95 in ms: SessionStart 6.037, 6.004;
+SubagentStart 5.502, 5.888; gated prompt 1.500, 1.412 with process start at 1.490 and 1.812;
+full prompt 4.952, 4.691; PostCompact on a Codex rollout 3.423, 3.366; `Stop` 26.8, 26.2;
+`SessionEnd` 57.5, 95.6. With CI's `MUNINN_PERF_LIMIT_SCALE=1.5`: exit 0 (5.552, 5.279, 1.372,
+4.997). Several of these are above the ranges the final build's seven runs gave (full prompt
+4.3 to 4.8, gated 1.3 to 1.4, SubagentStart 5.1 to 5.7), in another sitting of the same
+machine. On Windows: exit 1 on three contracts, as for the final build and the base
+(SessionStart 12.998, SubagentStart 12.919, full prompt 10.729 ms against 10, with process
+start at 5.279 p95).
+
 **Order probes** (built against each source tree; `bad` is an order that serves what the same
 order with every coordinator first does not, leaves a retired record unmarked, or differs with
 no word of the user's between a worker and its coordinator):
