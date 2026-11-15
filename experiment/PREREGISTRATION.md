@@ -7951,3 +7951,20 @@ session is read after a newer one, or when a statement meets a record revoked as
 a replay that reads its sessions in date order with no handed-over task should not move. The
 second fix lets `recall` return episodes it skipped, so C and D's id check can move on a
 prompt that reaches a turn holding a retired dead end.
+
+*Added 2026-11-14, after the first probe reading on `4617c4d527b399f0` and before any other
+cell.* The order probes were run first, on that build's sources, and one line was not 0 bad:
+`orderprobe typed`, the coordinator's own prompt on the same subject, read 13 bad of 384
+(coordinator-first serves less), where the final build reads 0. The third fix caused it. It
+compared the date of the record a new statement would retire, and a worker's copy of a
+statement moves the statement to the worker's turn; a coordinator's own prompt dated before
+that turn then left the statement alone, and it stayed active beside its replacement once the
+copy was undone. The probes are the check that fix was given, so the fix was narrowed and not
+left out: a record a standing restatement moved while it was active is compared by the date it
+had before the move (commit `7bd930eb7`, binary `366bb7913a35be7a`). That is a change made
+after a figure was seen, and it gives something up: a statement the person said again while it
+was current is not protected from an older change read later, as on the final build. Every
+reading below is taken on `366bb7913a35be7a`; no other cell was run on `4617c4d527b399f0`.
+Two probe modes were added for the review's shapes before either build was read on them
+(`orderprobe stated` and `dates`); their figures on the sources of the final build are
+reported beside those of the fixed build.
