@@ -8008,6 +8008,19 @@ reads 0 of 384 on it. The run on `841c9f61f0ded8d1` was stopped while the first 
 writing; its counts were deleted and are not committed. Every reading of this round is taken
 on `c11855d8ae39af2e`.
 
+*Added 2026-11-15, before B is read on `c11855d8ae39af2e`.* On 2026-11-14 the probes, A, the
+`remember` cell, C, F and the `b3_path` diagnostic ran on that build and their counts are on
+disk, not yet committed. B did not: its first attempt ended in 97 seconds for the base and in
+124 for the candidate, with two of the six replays exiting non-zero without output on each
+arm, and `b_retire.py` refused to write. The six replays of the base, run one at a time
+afterwards from the same staged inputs, all exited 0. A second attempt was cut off when the
+session that ran it was restarted. The cause of the first failure is not known, because the
+harness dropped a failed replay's stderr. `b_retire.py` is changed in the commit that carries
+this note to keep that stderr in the private work directory; nothing else of the harness
+changes, and no rule. B is then run in full, the base first, and D's id check, the verdicts
+and one `Stop` reading after it. Whatever the B attempt reads is committed; if it fails
+again, the kept stderr is reported.
+
 ## Result of usage-v4 on the fixed build, 2026-11-14
 
 Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as

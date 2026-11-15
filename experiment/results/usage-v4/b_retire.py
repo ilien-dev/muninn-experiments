@@ -94,6 +94,11 @@ def b1():
         # eighteenth amendment: replay.py runs unchanged under b1_replay.py, which clears the stored
         # hash of every record anchored outside the replay directory before each maintain
         r = run([sys.executable, '-I', os.path.join(HERE, 'b1_replay.py'), os.path.join(rundir, 'replay.py'), BIN, build, name, rp], 'b1:replay', timeout=7200, env=env, text=True)
+        # A replay that fails used to leave nothing to read: its stderr was dropped. It is kept
+        # now, in the private work directory (it names paths), never in the counts.
+        if r is None or r.returncode != 0:
+            with open(os.path.join(work('b_retire', 'logs'), '%s-%s.err' % (build, name)), 'w', encoding='utf-8', errors='replace') as f:
+                f.write('timeout or could not start\n' if r is None else 'exit %d\n%s' % (r.returncode, (r.stderr or '')[-4000:]))
         try:
             v = json.loads(r.stdout.strip().splitlines()[-1])
         except Exception:
