@@ -1,9 +1,15 @@
 # usage-v4: results
 
-The registration is the section "usage-v4" of `../../PREREGISTRATION.md` with its eighteen
+The registration is the section "usage-v4" of `../../PREREGISTRATION.md` with its nineteen
 amendments. This file reads every rule on the build that ships, lists every change with what
 happened to it, and says where the measurement is weak. Stores are named by label (W01 to W10,
 L01) and records by id. No text of a record or a transcript is here.
+
+**The build changed after the reading below.** A review of the whole branch found three
+defects no cell reads, the build was fixed, and the cells were read again on the fixed build
+`366bb7913a35be7a` (nineteenth amendment). The section "After the final review" has what was
+found, the fixed build's figures beside the final build's, and what is still open. Everything
+else in this file is the reading of the final build `8ea5e788aecf33e2`, left as it was written.
 
 - **Base:** Muninn 1.2.0, commit `00d691630`, binary `b93d2f5c222c0424`.
 - **Final build:** commit `5afb51960` of `feature/usage-review-2-measured-fixes`, binary
@@ -15,6 +21,109 @@ L01) and records by id. No text of a record or a transcript is here.
 - **Counts:** `counts/*_8ea5e788aecf33e2*.json`, and `counts/b_retire_b93d2f5c222c0424.json`
   for the base's B replay, which was run again beside the final build (eighteenth amendment).
   The three E runs are the commits named in section E.
+
+## After the final review: the fixed build
+
+**How the defects were found.** Not by a cell. A reviewer of the whole branch wrote invented
+transcripts, put them through the `Stop` hook of the released binary and of 1.2.0, and read the
+store. Three things came out, and the registered cells could not have shown any of them:
+
+1. **A statement typed in the turn that hands a copy of it to a worker was lost when the
+   worker's session was read first**, which is the order a live session produces. The worker's
+   turn typed the sentence, the coordinator's turn revoked that row as an agent's, and the
+   person's own sentence then met the revoked row by its hash and was dropped. 1.2.0 keeps the
+   statement in both orders. The order probes had "the coordinator's own prompt is a word of
+   the user's" and never the case where that word is the sentence the task copies.
+2. **The episode of a turn whose command failed was no longer served once the command passed**
+   (or failed again with another count). `recall` skipped the episode of any turn holding a row
+   retired as superseded, and a dead end is retired that way. 1.2.0 serves it. C3's twin arm
+   reads only turns whose typed statement was replaced.
+3. **An older statement read after a newer one retired the newer one.** 1.2.0 does the same
+   for two sessions read out of order; this plan added a route, the release of a last message
+   nobody answered. B1 replays each corpus in one order, and B2 and B3 write their sessions in
+   date order.
+
+**The fixed build.** Commits `b2df1cc70` to `7bd930eb7` of the branch, binary
+`366bb7913a35be7a`, same toolchain. Each fix has tests that fail on the build before it.
+The third fix was narrowed after its first form failed a probe (below). The build also makes
+`muninn remember` say when the record it found is retired, and `init` say that the Codex hooks
+file names this machine's binary; no cell reads either.
+
+**The cells again, final build → fixed build** (`counts/*_366bb7913a35be7a*.json`; inputs
+frozen, one run at a time; the base's B replay run again in the same sitting):
+
+| reading | final `8ea5e788aecf33e2` | fixed `366bb7913a35be7a` | counts |
+|---|---|---|---|
+| A1, A2, A3 and the four arms | as in the table below | equal on every leaf (177 or 178 a file) | `a_extract_*` |
+| `remember` replay, both readings | 2 / 46 of 48; 41 / 6 / 1 | equal (24 leaves a file) | `a_remember_*` |
+| B1 `loss` retired; both valid items | 5; both retired | 5; both retired (both readings) | `b_retire_*` |
+| B1, every labelled item's state | | equal | `b_retire_*` |
+| B1 store totals, records retired with an older record as heir | 5 in W02, 5 in W02-now (base 4 and 4) | 0 and 0 | `b_retire_*` |
+| B1 store totals, decisions retired | 76 and 111 | 73 and 109 | `b_retire_*` |
+| B2, B3 (all four cells) | 0; A not B; 1 of 1; equal to base | equal | `b_retire_*` |
+| `b3_path.py` diagnostic | table below | equal (46 leaves) | `b3_path_*` |
+| C1 to C5, frozen labels and with the pool | as in the table below | equal on every leaf (291 + 378, 294 + 378) | `c_delivery_*` |
+| C3, retired statement served through its episode | 0 of 198 and 0 of 47 | 0 and 0 | `c_delivery_*` |
+| D, same ids against `187d91a1431ab6ac` | 150 of 150, B3 equal | 150 of 150, B3 equal | `d_removals_*` |
+| D, same ids against the final build | | 150 of 150 | `d_removals_*-vs-8ea5e788aecf33e2` |
+| F, Codex first clause | 5 and 79; 0 from a turn not a person's | equal (478 leaves) | `f_codex_*` |
+| `verdict.py --split heldout`, `design`, `all` | | every row as on the final build | |
+
+Nothing a rule reads moved. The second fix changes what `recall` returns only for a prompt that
+reaches a turn holding a retired dead end, and none of the 150 replayed prompts returns
+different ids. The third fix shows in the store totals of the two corpora of one project: on
+the final build 5 records of each end retired in favour of an older record, on the fixed
+build none, and 3 and 2 decisions fewer are retired. None of those records is a labelled item.
+
+**Order probes** (built against each source tree; `bad` is an order that serves what the same
+order with every coordinator first does not, leaves a retired record unmarked, or differs with
+no word of the user's between a worker and its coordinator):
+
+| probe | final build's sources | fixed build |
+|---|---|---|
+| `orderprobe`, default | 5,472 and 3,528 runs, 0 bad | 0 bad |
+| `orderprobe typed`, another subject, the same subject | 384 and 384, 0 bad | 0 and 0 bad |
+| `orderprobe events`, four lines of 1,920 | 0 bad; fewer active than coordinator-first in 9, 432, 432 and 561 | 0 bad; 9, 435, 435 and 564 |
+| `rprobe`, `vprobe`, `qprobe`, `kprobe` | 0 bad, no leak | 0 bad, no leak |
+| `orderprobe dates` (new): sessions of the person's read in every order | 4 bad of 8 | 0 bad of 8 |
+| `orderprobe stated` (new), the coordinator's prompt never said before | 75 bad of 384 | **5 bad of 384** |
+| `orderprobe stated`, said before and current | 0 of 384 | 0 of 384 |
+| `orderprobe stated`, said before and since replaced | 64 of 384 | **64 of 384** |
+
+The two new modes were written for the review's shapes after the fixes, and were read first on
+the fixed sources, then on the final build's. `stated` puts the sentence a task carries in the
+coordinator's own prompt, over two workers and two coordinators in every order, and judges
+every statement typed outside a worker's session.
+
+- `events`: three more orders of 1,920 on three lines end with a record retired and marked
+  where coordinator-first keeps it active. All are orders with a word of the user's mid-way,
+  where that is the ruled outcome. The count is higher than on the final build by 3 orders a
+  line, and which of the fixes moved it was not located.
+- **The first form of the third fix failed a probe and was changed.** With the plain rule (a
+  record is never retired by a statement dated before it), `orderprobe typed` on the same
+  subject read 13 bad of 384. A worker's copy moves a statement to the worker's turn; a
+  coordinator's own prompt dated before that turn left the statement alone; undone, the copy
+  left it active at its earlier date beside its replacement. The shipped rule compares a
+  record that a standing restatement moved while active by the date it had before the move.
+  This is a change after a figure, recorded under the nineteenth amendment before any other
+  cell ran.
+
+**Still open on the fixed build.**
+
+- `stated`, never said before, 5 of 384: with two coordinators and two workers, the row the
+  worker typed can be retired by another worker's copy of another statement before the
+  person's coordinator is read. The person's sentence then meets a row retired otherwise than
+  as an agent's, and is dropped; when the copies are undone the row is revoked. The person's
+  statement ends retired and unmarked. All five are orders with a word mid-way.
+- `stated`, said before and since replaced, 64 of 384, unchanged by the fixes: the person says
+  again, in a coordinator's own prompt, a statement another had replaced, while another
+  worker's turn is on record and its coordinator is not. The restatement is dropped and the
+  replaced value ends current, where coordinator-first ends with the restated one. These are
+  all 64 orders with a word mid-way. 1.2.0 has no restatement at all.
+- An older statement read after a newer one is not retired by the newer one. Both stay active;
+  the session start lists the newer first and the prompt hook serves it first.
+- A statement the person said again while it was current is not kept from an older change read
+  later (what the narrowing of the third fix gave up). 1.2.0 and the final build do the same.
 
 `verdict.py b93d2f5c222c0424 8ea5e788aecf33e2 --split heldout` prints the rows below, except
 A1, which binds on the filters-only arm (`8ea5e788aecf33e2-filters`, ninth amendment), and E,
@@ -235,10 +344,15 @@ covers it.
 | Rule compiler: a path named in one clause and a pronoun in the next; a flag forbidden for a named command, and a tool forbidden outright; an invocation written out with its flags | F | 2 of 4 held-out rules wrong; 0 of 3,585; 238 → 238 once the sentence both halves hold is left out | tried and not shipped, all three |
 | `muninn-bench replay` | none | reproduces the harness, above | shipped (a tool) |
 | `perf` row for PostCompact against a Codex rollout | E (contract) | section E | shipped |
+| After the reading: what the person types in the turn that hands a copy of it to a worker is kept in either read order, and a statement put back from an agent's revocation replaces what a new one replaces | none (final review) | `orderprobe stated`, never said before: 75 → 5 bad of 384 | shipped in the fixed build, unmeasured by a rule: tests and probes |
+| After the reading: `recall` skips an episode only for a retired statement of its turn, not for a retired dead end | none (final review) | C equal on every leaf | shipped in the fixed build, unmeasured: tests |
+| After the reading: a statement retires nothing said after it; a record a standing restatement moved is compared by the date before the move | none (final review) | `orderprobe dates` 4 → 0 bad of 8; records retired with an older heir 5 → 0 in two corpora | shipped in the fixed build, unmeasured by a rule: tests and probes |
+| The same rule on the record's date alone | probes | `orderprobe typed` 13 bad of 384 | tried and not shipped |
+| After the reading: `remember` says when the record it found is retired; `config cues` refused; `init` says the Codex hooks file is for this machine; a session id cut at a whole character | none (final review) | | shipped in the fixed build, unmeasured: tests |
 
 ## Texts written after a figure
 
-The registration and the first amendment were written before the base was measured. Eight
+The registration and the first amendment were written before the base was measured. Nine
 later texts say of themselves that they follow a figure they bear on:
 
 1. **Seventh amendment** (C4), after the design-split C4 figure and before any held-out C4
@@ -271,6 +385,12 @@ later texts say of themselves that they follow a figure they bear on:
 8. **Seventeenth amendment** (F, rule compiler), after the 238 → 239 figure. A held-out
    sentence the design half also holds does not count. Stricter: the last pattern was not
    shipped.
+
+9. **Nineteenth amendment**, after the Result and every figure in it. It changes no rule: it
+   says the build was changed after the final reading and which cells are repeated on the
+   fixed build. Its **dated note** follows a probe figure on the first fixed build
+   (`4617c4d527b399f0`, 13 bad of 384) and records that one fix was narrowed for it. Looser
+   for that fix: the narrowed rule protects fewer records than the one first written.
 
 Others were written after the base figures, or after another task's figure, and before the
 cells they govern. They are listed because a base figure is a figure:
@@ -351,6 +471,10 @@ cells they govern. They are listed because a base figure is a figure:
 
 ## Open, as measured
 
+- The four items under "Still open on the fixed build", in the section on the final review.
+- **Three defects reached the final reading unseen.** Every cell passed on a build that lost
+  a typed statement in the usual read order. The cells read what the registration named; the
+  probes that found the defects were written by a reviewer afterwards.
 - Rule E fails on SessionStart and SubagentStart against a base that delivers nothing there.
   Against the previous build the final one reads no slower beyond the spread. Whether that
   is accepted is a decision for the project's owner; nothing was tuned or reverted for it.
