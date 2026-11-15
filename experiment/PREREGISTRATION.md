@@ -8050,6 +8050,23 @@ binary `692e382f2056ebd5`, on which the default line reads 0 again. The run on
 `329880d405f39cba` was stopped during A and its counts deleted. Every reading of the round is
 taken on `692e382f2056ebd5`.
 
+*Third dated note, 2026-11-15, after the readings of `692e382f2056ebd5` and the Result written
+for it, before any cell on the build that follows.* A third review read `692e382f2056ebd5`
+with invented sessions (`fu.py`) and found a defect this round introduced. A worker's session
+read before anything says it is an agent's, then an older session of the person's, then the
+coordinator: the worker's row retires the person's statement from the older side (the
+reversal of the quantity rule, and by reading the key and the correction rule), and when the
+row is revoked as an agent's copy the statement is not given back. Nothing is current. The
+fixed build `366bb7913a35be7a` and 1.2.0 end with the statement current. The build is changed
+for it in one clause of `agent/undo.rs` (commit `1b1179620`, binary `c7aa624fd41924ba`); no
+file a read hook executes changes, so E is not read again. Repeated on that binary: the three
+reviews' probes, the order probes, B in full with the base replayed, D's delivery ids, and the
+verdict, with A, the `remember` cell, C and F, which the verdict reads. The review also left three
+things that are not changed in code and are written into the documents as open, with the
+counts these probes give on `c7aa624fd41924ba`: "A, B, A again" under the correction, key and
+quantity rules; "A, B, A, B" under the rule by a decision's words; and that a conflict mark is
+never removed while `muninn why` opens with `sufficient` above it.
+
 ## Result of usage-v4 on the fixed build, 2026-11-14
 
 Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
