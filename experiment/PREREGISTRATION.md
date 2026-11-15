@@ -8021,6 +8021,26 @@ changes, and no rule. B is then run in full, the base first, and D's id check, t
 and one `Stop` reading after it. Whatever the B attempt reads is committed; if it fails
 again, the kept stderr is reported.
 
+*Added 2026-11-15, after B was read on `c11855d8ae39af2e` and before any cell on the build that
+follows.* B ran on both arms and is committed as read. It is worse than the fixed build's on one
+labelled item: `v1:W02:1508`, a `loss` item, is retired where it was active, B1 reads 6 losses
+for 5, and the twelfth amendment's binding reading (no more than the base's 9 and no more
+than 5) fails. The row was retired with, as its heir, a decision dated twelve minutes after it
+and read before it: the reversal of the rule by a decision's words, the second of the three
+changes of this round. This was foreseen in the note above and its outcome was fixed there:
+that rule is no longer reversed. An older decision read after the one that would replace it
+by its words stays active and the two are marked as in conflict (commit `b2e10dc55`, binary
+`329880d405f39cba`). The key, a correction said again and a bare quantity stay reversed; none
+of them moved a labelled item. This is a change made after a figure and it follows the rule
+written before the figure.
+
+The mark is read where a block is rendered, so a file the read hooks execute changed
+(`muninn-core/src/filter.rs`, `recall.rs`). E is therefore read again in full on
+`329880d405f39cba`, as the fifteenth amendment says, with `perf --strict`. Also repeated on
+it, all of them: the probes, A, the `remember` cell, B with the base replayed again, C, D's id
+check, F and the verdicts. These readings are the round's; those of `c11855d8ae39af2e` stay
+committed beside them.
+
 ## Result of usage-v4 on the fixed build, 2026-11-14
 
 Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
