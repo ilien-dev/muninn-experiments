@@ -8078,3 +8078,38 @@ Every E ratio is higher than on the final build. No fix touches the two failing 
 read directly against the final build as hook time minus process start the fixed build is
 between 0.23 ms faster and 0.17 ms slower. The three runs were again taken on a desktop in
 use.
+
+## Result of usage-v4 on the follow-up build, 2026-11-15
+
+Read on commit `fc7c1a6fc`, binary `692e382f2056ebd5`, against 1.2.0, on the frozen inputs, as
+the notes of 2026-11-15 under the nineteenth amendment say. The two Results above stand as
+written; this one replaces them where they differ. `results/usage-v4/RESULTS.md`, section
+"After the second review", has the tables.
+
+| rule | fixed build | follow-up build |
+|---|---|---|
+| A1, A2, A3; the `remember` cell | as above | equal on every leaf |
+| B1 | 5 `loss` items retired; both valid retired | the same; every labelled item's state equal |
+| B2, B3 | as above | equal |
+| C1 to C5 | as above | equal on every leaf |
+| D | same ids on 150 of 150 prompts | the same, against the fixed build and against `187d91a1431ab6ac` |
+| E, median of three ratios | SessionStart 1.176, SubagentStart 1.413, full prompt 0.998, gated prompt 1.091; `Stop` 220.6 → 61.7 ms | 1.191, 1.526, 0.984, 1.075; `Stop` 216.7 → 59.7 ms: **fail** on the same two rows, pass on the other three |
+| F, Codex | 5 and 79 | equal |
+
+No verdict changed. One build of the round, `c11855d8ae39af2e`, did change one: B1 read 6
+losses and failed the twelfth amendment's binding reading. The change that caused it, applying
+the rule by a decision's words to an older record read last, was replaced by a conflict mark
+between the two records, and the reading above is of the build without it. Outside the rules,
+B1's store totals differ from the fixed build's by one commit-linked decision in each of two
+corpora, retired by key.
+
+The order probes read 0 bad on every registered line and on the review's enumeration of two
+coordinators (5 of 384 on the fixed build). The line "said before and since replaced" still
+reads 64 of 384. `RESULTS.md` lists what is open.
+
+The `Stop` pair is the run with the middle difference of three. For this build it is also the
+middle of each column; for the fixed build the columns' middles were 221.1 and 63.5. The two
+failing E ratios are higher than on the fixed build, and read against it directly the session
+start is 0.15 and 0.07 ms slower in two readings, inside the 0.4 ms the comparison resolves.
+Two files the read hooks execute changed in this round. The runs were again taken on a desktop
+in use.

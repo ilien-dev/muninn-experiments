@@ -86,6 +86,10 @@ interleaved runs, each committed before it was read. p95 in ms, base → fixed (
 | UserPromptSubmit, gated | 7.739 → 9.253 (1.196) | 9.302 → 9.445 (1.015) | 10.215 → 11.145 (1.091) | 1.091 | 1.087 | pass |
 | `Stop` with ingest, W02, median | 249.3 → 73.2 | 220.6 → 61.7 | 221.1 → 63.5 | | 235.1 → 70.7 | pass |
 
+The `Stop` pair quoted for this build elsewhere, 220.6 → 61.7, is run 2, the run whose
+difference is the middle one of the three. It is not the middle of each column, which is 221.1
+and 63.5 (run 3).
+
 Rule E reads as on the final build: it fails on the two rows where the base's bench delivers
 no block and passes on the other three. Every read row's median ratio is higher than the final
 build's. That is not a finding against a fix, for two reasons. No fix touches the session
@@ -169,6 +173,210 @@ every statement typed outside a worker's session.
   the session start lists the newer first and the prompt hook serves it first.
 - A statement the person said again while it was current is not kept from an older change read
   later (what the narrowing of the third fix gave up). 1.2.0 and the final build do the same.
+
+## After the second review: the follow-up build
+
+A second review read the fixed build `366bb7913a35be7a`, again with invented sessions through
+the hooks, and left three things. The section above is the reading of that build and stands as
+written; of its four open items the first is closed here, the third and fourth are dealt
+with as described below, and the second is not.
+
+- **R1. A revoked record came back.** After `muninn revoke`, a session dated before the
+  revocation and read after it, holding the same words, put the record back. The fixed build
+  and the final build both did it; 1.2.0 keeps it revoked.
+- **R2. Two statements that contradict each other were both current.** The older one read
+  last stayed active beside its replacement: both in the catalogue, both served by the prompt
+  hook at trust 3, `muninn why` answering `sufficient` with both, no conflict mark. And "A,
+  then B replacing it, then A again" ended with A current in one read order of four.
+- **R3. A change typed in one of two coordinating sessions could end with nothing current**:
+  5 of 384 read orders, where 1.2.0 keeps the change in all 384.
+
+**The follow-up build.** Commits `39d514317`, `8ff2daa7d`, `53d068f84`, `b53d75ed6`,
+`b2e10dc55` and `fc7c1a6fc` of the branch, binary `692e382f2056ebd5`, same toolchain. They
+change `ingest.rs`, `agent.rs` (tests) and two clauses of `agent/undo.rs` in the capture
+crate, a test file, and two files the read hooks execute: `filter.rs` and `recall.rs` of the
+core crate, where the conflict mark is read. E was therefore read again in full (below).
+
+- R1: a record the person revoked is put back only by a statement dated after the revocation.
+- R2: an older record read last retires nothing said after it, as on the fixed build. What
+  the later record does to it depends on the rule that links them:
+  - by key, a correction said again, and a bare quantity (when no record between the two
+    holds the unit): **reversed**. The older record is retired with the later one as its heir,
+    as date order leaves it.
+  - by a decision's words: **not reversed; both stay active and are marked as in conflict.**
+    The build before this one (`c11855d8ae39af2e`) reversed it, and B1 read worse for it: see
+    "B on the two builds of the round". The mark is a row in `meta` for each of the two
+    records, read by key where a block is rendered: the prompt hook's header reads `conflict
+    with #n`, the catalogue line says another active record disagrees, and `muninn why` prints
+    its conflict line. It says nothing once either record is retired.
+  - an untyped message a later change shares its words with: not reversed, no mark (the mark
+    is for typed records).
+  - the reply that names both values, whose text is not kept as such, and the subject-less
+    change that takes the statement just before it, which depends on what the store held
+    then: **not reversed, no mark.** Where only one of those links two statements, both are
+    served as current with no conflict mark.
+  - A statement said again after its replacement is current in all six read orders.
+- R3: a row typed by a turn known to be an agent's and retired otherwise than as an agent's
+  takes the person's turn when the person said it first; a journal whose first state is later
+  than the person's saying returns to the person's turn; and in the undo, a record of the
+  turn that the returning record stands at is not a word said since.
+
+**Two-coordinator enumeration** (the second review's script, through the `Stop` hook of each
+binary: two workers, two coordinators, the first coordinator's own prompt the statement, every
+order and every pair of tasks, 384 runs; "bad" is a run whose current word is not the one date
+order leaves):
+
+| shape | 1.2.0 | fixed `366bb7913a35be7a` | follow-up `692e382f2056ebd5` |
+|---|---|---|---|
+| a change never said before (R3) | 0 of 384 | 5 of 384, nothing current, marked | **0 of 384** |
+| a statement said again after another replaced it | 384 of 384 | 64 of 384 | 64 of 384 |
+| an active trust-3 decision attributed to a worker's session, first shape and second | 88 and 168 | 0 and 0 | 0 and 0 |
+
+The first build of this round (`841c9f61f0ded8d1`) read 4 of 384 on the first shape: the
+change was no longer revoked but was left retired with a mark. The implementer's probe counts
+that as allowed in an order with a word mid-way and read 0; the review's does not. One more
+commit closed it, and `c11855d8ae39af2e` and `692e382f2056ebd5` both read 0.
+
+**Order probes on the follow-up build's sources** (`bad` as defined in the section above):
+
+| probe | fixed build | follow-up build |
+|---|---|---|
+| `orderprobe`, default | 0 bad | 0 bad |
+| `orderprobe typed`, another subject, the same subject | 0 and 0 bad; fewer active in 51 and 34 | 0 and 0 bad; fewer active in 52 and 34 |
+| `orderprobe events`, four lines of 1,920 | 0 bad; fewer active in 9, 435, 435, 564 | 0 bad; 12, 436, 436, 564 |
+| `rprobe`, `vprobe`, `qprobe`, `kprobe` | 0 bad, no leak | 0 bad, no leak |
+| `orderprobe stated`, never said before | 5 bad of 384 | 0 bad of 384 |
+| `orderprobe stated`, said before and current | 0 of 384 | 0 of 384 |
+| `orderprobe stated`, said before and since replaced | 64 of 384 | 64 of 384 |
+| `orderprobe dates`: the newest statement stands | 0 of 8 | 0 of 8 |
+| `orderprobe dates` (new lines): every read order against date order, for A, B; A, B, C; A, B, A again; a quantity and a bare change of it | not read | 0 bad of 2, 6, 6 and 2. Not as date order but both active and marked as in conflict: 1 of 2 and 4 of 6 for the first two; 0 for the others |
+
+More orders end in a marked silence than on the fixed build: one more of 384 on `typed`, three
+more of 1,920 on the `revoke` line of `events`, one more on two others. They are orders with
+a word of the user's mid-way, and they point at R1 and R2: a word now counts as said in
+between by its date, whichever session was read first.
+
+One build of the round read **36 and 24 bad on the default line** (5,472 and 3,528 runs):
+`329880d405f39cba`, the first with the conflict mark. It took a record that a restatement had
+moved between a record's two sayings for a word first said there. Corrected in `fc7c1a6fc`
+before any cell finished; `692e382f2056ebd5` reads 0, and a shape for it is in the tests.
+
+The first review's probes and the second review's (`rr.py`) on the follow-up build: the
+revoked rule stays revoked; "A, B, A again" ends with A current in the four orders it reads;
+the older decision read last stays active beside the newer, the catalogue marks both lines,
+the prompt hook's two blocks read `conflict with #n`, and `muninn why` prints the conflict
+line (it still opens with `sufficient` and names the newer one); the statement typed in the
+turn that hands its copy over is the person's in both orders.
+
+**B on the two builds of the round** (`counts/b_retire_c11855d8ae39af2e.json`,
+`b_retire_692e382f2056ebd5.json`; the base replayed again each time):
+
+| reading | fixed `366bb7913a35be7a` | `c11855d8ae39af2e`, words rule reversed | `692e382f2056ebd5`, words rule marked |
+|---|---|---|---|
+| B1 `loss` items retired (`loss_retired_total`; by the earliest row) | 5; 6 | **6; 7** | 5; 6 |
+| B1, twelfth amendment's binding reading (no more than 5) | pass | **fail** | pass |
+| the item that moved, `v1:W02:1508` (labelled `loss`) | active | retired | active |
+| both valid items, by the earliest row | retired | retired | retired |
+| B2, B3 | as before | equal | equal |
+| store totals, decisions retired, W02 and W02-now | 73 and 109 | 75 and 111 | 74 and 110 |
+| store totals, records retired with an older record as heir | 0 and 0 | 0 and 0 | 0 and 0 |
+
+The reversal of the words rule retired the labelled item with, as its heir, a decision dated
+twelve minutes after it and read before it. The replay reads whole sessions in the order of
+their first message, so two sessions that overlap are not read turn by turn in date order;
+read that way, as the hooks read a live project, the forward rule retires the same item. The
+replay had not shown it. As the note written before the reading provided, the rule is not
+reversed and keeps the conflict-mark form. On `692e382f2056ebd5` the one remaining
+difference from the fixed build is a commit-linked decision in each of the two corpora,
+retired by key with a later record as its heir; it is not a labelled item.
+
+The first attempt at B in this round failed on both arms: two of six replays exited non-zero
+without output, in 97 and 124 seconds. The six replays then passed one at a time and two full
+attempts passed after that. The cause was not found; `b_retire.py` now keeps a failed
+replay's stderr in the private work directory.
+
+A, the `remember` cell, C, D, F and `b3_path` on `692e382f2056ebd5`: equal on every leaf to the
+fixed build, and delivery returns the same ids on 150 of 150 prompts against it and against
+`187d91a1431ab6ac`. `verdict.py` prints the fixed build's rows.
+
+**E on the follow-up build**, read again in full because `filter.rs` and `recall.rs` changed.
+Same-moment copies, three interleaved runs, each committed before it was read. p95 in ms, base
+→ follow-up (ratio):
+
+| row | run 1 | run 2 | run 3 | median ratio | fixed build's | final build's | verdict |
+|---|---|---|---|---|---|---|---|
+| SessionStart | 10.204 → 12.157 (1.191) | 11.596 → 13.844 (1.194) | 12.835 → 15.127 (1.179) | 1.191 | 1.176 | 1.148 | **fail** |
+| SubagentStart | 7.712 → 12.143 (1.575) | 9.449 → 13.471 (1.426) | 9.801 → 14.959 (1.526) | 1.526 | 1.413 | 1.274 | **fail** |
+| UserPromptSubmit, full | 10.938 → 10.486 (0.959) | 12.451 → 12.255 (0.984) | 13.178 → 13.133 (0.997) | 0.984 | 0.998 | 0.965 | pass |
+| UserPromptSubmit, gated | 5.675 → 5.522 (0.973) | 6.251 → 6.717 (1.075) | 7.216 → 8.694 (1.205) | 1.075 | 1.091 | 1.087 | pass |
+| `Stop` with ingest, W02, median | 215.6 → 57.2 | 216.7 → 59.7 | 218.5 → 62.0 | | | | pass |
+
+The verdict is the one of every reading so far: fail on the two rows where the base's bench
+delivers no block, pass on the other three. The two failing ratios are higher again. Read
+against the fixed build directly, as hook p50 minus process-start p50 (12 rounds of 40, two
+same-moment copies of each binary, taken twice):
+
+| | fixed build, two copies | follow-up build, two copies | difference of means |
+|---|---|---|---|
+| SessionStart, first reading | 7.737, 7.774 | 8.039, 7.777 | +0.15 |
+| SessionStart, second reading | 8.265, 8.261 | 8.374, 8.292 | +0.07 |
+| SubagentStart, first reading | 6.432, 6.484 | 6.487, 6.398 | −0.02 |
+| SubagentStart, second reading | 7.074, 7.104 | 7.111, 7.158 | +0.05 |
+| gated prompt, first reading | 0.572, 0.624 | 0.648, 0.646 | +0.05 |
+| gated prompt, second reading | 0.676, 0.695 | 0.757, 0.744 | +0.07 |
+
+SessionStart reads slower by 0.15 and 0.07 ms, the same sign twice and inside the 0.4 ms this
+procedure resolves. It points at the conflict mark: the catalogue now asks, for each line it
+prints, whether the record carries one (one probe of `meta` by key). No figure isolates that
+probe; the attribution is by reading the change. Machine state as before: the owner's desktop in use, no compiler, harness
+script or other `muninn` beside the runs. Process start p50, base and follow-up: 4.226 and
+4.322, 5.032 and 5.230, 5.534 and 6.186 ms.
+
+**Which pair is quoted for `Stop`.** For each build the three runs give three medians of
+twenty. The pair quoted is the run whose difference is the middle one of the three: 216.7 →
+59.7 ms here, which is also the middle of each column. For the fixed build that run was 220.6
+→ 61.7, while the middle of each column was 221.1 and 63.5. For the final build both ways
+give 235.1 → 70.7.
+
+**`perf --strict` and the test suites on `fc7c1a6fc`.** Windows: 403 tests pass, the fault
+suite passes at 200 repetitions (13 tests), the boot block is within budget (646 tokens), and
+`perf --strict` exits 1 as on every build and on 1.2.0 (SessionStart p95 13.081 ms,
+SubagentStart 12.880, full prompt 11.877, against a limit of 10; process start 5.466 ms p95).
+Linux (WSL): 406 tests pass, the fault suite passes (16 tests), and `perf --strict` exits 0
+three times: SessionStart p95 4.684, 4.592 and 5.018 ms, SubagentStart 4.317, 4.428 and 4.722,
+full prompt 3.919, 3.906 and 4.192, gated 1.164, 1.193 and 1.300, with process start at 1.212
+and 1.138. The fixed build read 5.552 to 6.037, 5.279 to 5.888, 4.691 to 4.997 and 1.372 to
+1.500 a day earlier. The Linux toolchain on that machine has no clippy; clippy and fmt ran on
+Windows only.
+
+**Still open after this round.**
+
+- An older decision read after the one that would replace it by its words stays current
+  beside it. The two are marked as in conflict wherever they are shown, and the agent is
+  told to ask; nothing retires the older one until the person says something.
+- The reply that names both values and the subject-less change are not applied when the older
+  session is read last. Where only one of them links two statements, both are served as
+  current with no conflict mark; and a statement said again while current can still be
+  retired by an older statement whose reply names it, read later. An untyped message read
+  after a later change that shares its words stays in the list of what was said, unmarked.
+- The rule by a decision's words retires a labelled statement the person still holds when two
+  overlapping sessions are read turn by turn (`v1:W02:1508`). The B1 replay does not read
+  that way and counts 5 losses; a live project is read that way.
+- A statement said again in a coordinating session's prompt, after another had replaced it,
+  ends with the other one current in 64 of 384 read orders (all those with another worker
+  read before it and that worker's coordinator after). 1.2.0 is wrong in all 384. Not in this
+  round.
+- A worker's prompt reads as the person's until its coordinator's session is read. Read alone
+  it types a new statement at trust 3, and since the first round of fixes it also puts back a
+  row another coordinator had shown to be an agent's, even when its turn is dated earlier.
+  When its coordinator is read, the row is revoked again; if that session is never read, it
+  stays.
+- A sentence the person typed in a session that hands no task over, dated before a worker's
+  copy of it that another worker's copy has since retired, is dropped while the worker's turn
+  is not yet known to be an agent's.
+- A word of the user's dated between a worker's turn and its coordinator's now leaves what the
+  worker's prompt retired retired and marked whichever session was read first; before, only
+  when it was read in between.
 
 `verdict.py b93d2f5c222c0424 8ea5e788aecf33e2 --split heldout` prints the rows below, except
 A1, which binds on the filters-only arm (`8ea5e788aecf33e2-filters`, ninth amendment), and E,
@@ -516,7 +724,14 @@ cells they govern. They are listed because a base figure is a figure:
 
 ## Open, as measured
 
-- The four items under "Still open on the fixed build", in the section on the final review.
+- The items under "Still open after this round", in the section on the second review. They
+  replace the four under "Still open on the fixed build".
+- **A change of the round read worse on a labelled figure and was taken back.** Reversing the
+  rule by a decision's words retired a sixth labelled loss in B1. The same item is retired by
+  the forward rule when overlapping sessions are read turn by turn, which no cell reads.
+- **The two failing E ratios rose at each of three readings** (1.148, 1.176, 1.191 and 1.274,
+  1.413, 1.526). Build against build the differences are inside what the direct comparison
+  resolves, and the last one has the same sign twice at the session start.
 - **Three defects reached the final reading unseen.** Every cell passed on a build that lost
   a typed statement in the usual read order. The cells read what the registration named; the
   probes that found the defects were written by a reviewer afterwards.
