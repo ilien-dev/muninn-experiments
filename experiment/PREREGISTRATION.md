@@ -7874,6 +7874,17 @@ SessionStart reads +0.17 and −0.39 ms, inside what the procedure can resolve. 
 tuned or reverted for it. The three E runs were taken on a desktop in use, with process start
 at 6.4 to 8.4 ms p50 where earlier runs read 4.4 to 4.7.
 
+*Added 2026-11-14, after review of this result.* Rule B3's cells are equal, but the same
+evaluator's `served_ok` and `old_served` are not: 11/30 and 8/30 on 1.2.0 against 2/30 and 0/30
+on the final build (adjacent order), on every build from Task 6 on. The evaluator reads `muninn
+recall` with a three-word topic, which the command has gated since Task 3. A diagnostic written
+after the figure (`b3_path.py`, deciding no rule) reads the same stores through the prompt
+hook and the session start: the new value is in the context, with the old one absent, in 18
+and 15 of 30 cells on 1.2.0 and in 20 and 17 on the final build. In the prompt hook alone, in
+blocks order, it is in 4 and then 2. The three E runs departed from the fifteenth amendment's
+condition of a machine with nothing else running; `RESULTS.md` says so under its weaknesses.
+The fifth amendment and the body of the fourteenth also followed E figures.
+
 Eight texts of this registration say of themselves that they follow a figure they bear on
 (seventh, eighth, twelfth and thirteenth amendments, the addendum to the fourteenth, the
 fifteenth, sixteenth and seventeenth); the second, third, fourth and ninth were written after

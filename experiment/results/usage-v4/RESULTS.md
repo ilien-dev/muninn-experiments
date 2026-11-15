@@ -8,8 +8,9 @@ L01) and records by id. No text of a record or a transcript is here.
 - **Base:** Muninn 1.2.0, commit `00d691630`, binary `b93d2f5c222c0424`.
 - **Final build:** commit `5afb51960` of `feature/usage-review-2-measured-fixes`, binary
   `8ea5e788aecf33e2`, built with Rust 1.99.0 on Windows. It still calls itself 1.2.0: the
-  version was set after the reading, and the released binary differs from the measured one by
-  that string.
+  version was set after the reading. The released binary differs from the measured one by
+  that string and by one line of the boot block that `init --boot-file` writes (`MUNINN 9/9
+  GREEN` for `11/11`); on the 150 replayed prompts it returns the same ids and tokens.
 - **Inputs:** the frozen copies under the fixture root (tenth amendment). One run at a time.
 - **Counts:** `counts/*_8ea5e788aecf33e2*.json`, and `counts/b_retire_b93d2f5c222c0424.json`
   for the base's B replay, which was run again beside the final build (eighteenth amendment).
@@ -28,7 +29,7 @@ which is read from three runs (fifteenth amendment).
 | A3 | a new extractor: precision ≥ 2 × base and recall ≥ base, held-out | precision 0.2174, recall 0.16 | no extractor shipped; the shipped rules read 0.4074 and 0.40 | not claimed (see "Tried and not shipped") |
 | B1 | retired `loss` items: candidate ≤ base; both valid retirements still happen | 9; both retired | 5; both retired (kind-bound and kind-free readings agree) | pass |
 | B2 | reword retires nothing; A-B-A serves A and not B; the reverted commit's record is retired | 7 retired; serves B and not A; 0 of 2 | 0 retired; serves A and not B; 1 of 1 | pass |
-| B3 | `loop8/eval_all.py`: `retired_a`, `kept_b` not below base; noise retirements not above base (third amendment) | 18/30, 10/30; 23/30; noise 3/30, 3/30 | the same on all four cells | pass |
+| B3 | `loop8/eval_all.py`: `retired_a`, `kept_b` not below base; noise retirements not above base (third amendment) | 18/30, 10/30; 23/30; noise 3/30, 3/30 | the same on all four cells | pass. The evaluator's other cells, `served_ok` and `old_served`, are not equal: see below |
 | C1 | held-out unrelated blocks fall ≥ 30 %, useful pairs fall ≤ 1 | unrelated 143, useful 10, of 252 returned | unrelated 72 (−49.7 %), useful 9, of 157 returned, 4 of them unscored | pass |
 | C2 | mean tokens of a delivery with the same ids fall; `init --check-budget` passes | 436.9 | 305.1 on the 17 prompts with the same ids (all prompts 563.7 → 252.5); budget check in the CI section | pass |
 | C3 | a cut record is offered again in the session | 0 of 12 | 11 of 11 | pass |
@@ -62,6 +63,50 @@ Order probes on the final tree, every line `bad=0`: 5,472 and 3,528 orders by de
 twice typed, 1,920 four times with events, and the reviewer's shapes (rprobe, vprobe, qprobe,
 kprobe). `muninn-bench replay` on the private fixtures gives the harness's counts: extraction
 52, 50 and 50 leaves equal with none differing, delivery 16, 16 and 16.
+
+## B3's other cells: what `served_ok` reads now
+
+Rule B3 names `retired_a` and `kept_b`. The same evaluator also prints whether the current
+answer was served, and those cells moved:
+
+| cell (registered evaluator) | 1.2.0 | final build |
+|---|---|---|
+| both / adjacent, `served_ok` | 11/30 | 2/30 |
+| both / adjacent, `old_served` | 8/30 | 0/30 |
+| both / blocks, `served_ok` | 2/30 | 0/30 |
+| both / blocks, `old_served` | 13/30 | 2/30 |
+| noise, both orders, `old_served` | 18/30 | 2/30 |
+
+With the dated evaluator `served_ok` reads 19/30 and 16/30 on 1.2.0 and 2/30 and 2/30 on the
+final build. Every build of this plan from Task 6 on reads these values, and no report of the
+plan said so before this one.
+
+The cause is the instrument. The evaluator asks `muninn recall "<topic>"`, and nine of the ten
+topics are three words long. Since Task 3 `muninn recall` applies the gates of the prompt hook,
+which has always been silent on a prompt under four words. The command prints something for 21
+or 20 of the 30 topics on 1.2.0 and for 2 on the final build.
+
+A diagnostic was added after the result to read the same stores through the path a session
+takes (`b3_path.py`, committed before it ran; it decides no rule). It runs the evaluator
+unchanged and, for each scenario, reads the prompt hook's context for the question "Which
+<topic> do we use in this project now?" and the session start's context. Counts
+`b3_path_*.json`, of 30 cells, 1.2.0 → final build:
+
+| | both / adjacent | both / blocks | noise (both orders) |
+|---|---|---|---|
+| new value in either context and old value in neither | 18 → 20 | 15 → 17 | 1 → 1 |
+| old value in either context | 10 → 8 | 15 → 13 | 23 → 21 |
+| new value in the prompt hook's context | 12 → 12 | 4 → 2 | 0 → 0 |
+| old value in the prompt hook's context | 8 → 6 | 13 → 11 | 18 → 15 |
+| new value in the session start's context | 27 → 27 | 29 → 29 | 2 → 2 |
+| old value in the session start's context | 2 → 2 | 2 → 2 | 14 → 14 |
+
+Through a session's two paths together the final build puts the current answer in front of
+the assistant, with the old one absent, at least as often as 1.2.0 in every cell, and the old
+value no more often. One sub-cell goes the other way: in the prompt hook alone, in blocks
+order, the new value is in 2 of 30 contexts where 1.2.0 had it in 4. The diagnostic's prompt
+is one template, written for this reading. On the noise arm the old value is the current one
+(nothing replaced it), so its presence there is correct.
 
 ## E. Latency and cost
 
@@ -203,6 +248,12 @@ later texts say of themselves that they follow a figure they bear on:
 2. **Eighth amendment** (C3, catalogue arm), after the arm read 9 of 10. The denominator became
    the listed records the build's own fresh-session control returns. Looser by one record at
    the time; on the final build nothing is excluded.
+   Not self-declared, and listed here because both followed E figures: the **fifth
+   amendment** was written after the E figures of four builds had been read and found void
+   (the base had timed an error path); it gives each build its own bench and a common ledger
+   seed. The **body of the fourteenth** was written after every earlier E run had been read
+   and the full-prompt row found to time no delivery; it gives both arms 300 prompts that
+   deliver. Neither moves a threshold. Both change what the E rows measure, on both arms.
 3. **Twelfth amendment** (B1), after the valid clause read `fail` for Task 7's build. It adds a
    kind-free reading that binds where an item reads `absent`. It could go either way and went
    against the change: the extractor was reverted.
@@ -227,15 +278,21 @@ cells they govern. They are listed because a base figure is a figure:
 - **Second amendment**: B1's valid clause is read on the earliest matching row, after seeing
   that the registered scorer reads one valid item as active on the base. Looser for both
   builds alike.
-- **Third amendment**: B3's noise clause reads "not above the base's 3/30" where the text says
-  "stays 0", after the base read 3/30. Looser. B2's reword became "0 retirements of any kind",
-  stricter. C2 is read on prompts with the same ids.
+- **Third amendment**, all of it after the base figures: B3's noise clause reads "not above
+  the base's 3/30" where the text says "stays 0" (looser), and the registered evaluator binds.
+  B2's reword became "0 retirements of any kind" (stricter). B1's loss clause binds by
+  `score.py`'s rule and its valid clause by the earliest row. C4 must hold on both the lenient
+  and the strict share (stricter). C2 is read on prompts with the same ids. C3's stale-twin
+  arm takes the retirement on the store as rewound to each prompt, "so that a read-path fix
+  can reach 0" (it favours the candidate). C3's catalogue arm was defined then, with the
+  base's 0 of 5 already read. A missing input reads `missing`, never `pass` (stricter).
 - **Fourth amendment**: C1 is read once, on Task 4's combined build, after Task 3's ranking
   change alone read 104 → 104 unrelated on held-out. It moved the reading to a later build and
   added the blind pool; the ranking change shipped on an arm that read equal with and without
   it.
 - **Ninth amendment**: A1's gate binds on the filters read together, after the base counts
-  showed no single noise class reaches 30 %. Looser than a gate on each filter alone. Its dated
+  showed no single noise class reaches 30 %. Looser than a gate on each filter alone. It also sets the durable loss
+  allowed to zero on both splits, stricter than the registered 5 %. Its dated
   note, after Task 6's held-out reading, applies the drop test on held-out (stricter: one
   filter dropped) and names a third origin fix that is not submitted to it.
 - **Tenth and eighteenth amendments**: inputs staged, and anchors outside a replay skipped.
@@ -260,6 +317,15 @@ cells they govern. They are listed because a base figure is a figure:
   held-out half three times, and one of its sentences was in the design half too.
 - **A1 passes by one item** (38 against a limit of 38.5) and fails on design (26.6 %) and on
   both splits together (28.4 %).
+- **The binding E reading departs from the fifteenth amendment's own condition.** The
+  amendment asks for three runs "on a machine with nothing else running". They were taken on
+  the owner's working desktop, in use: process start read 6.4 to 8.4 ms p50 where earlier
+  runs read 4.4 to 4.7, and another project's test runner was seen minutes after the third
+  run. The runs were not repeated. This bears on the rows that pass as well as on those that
+  fail: the gated prompt passes at a median of 1.087 with runs of 1.002, 1.087 and 1.122.
+- **`served_ok` was not watched.** Loop 8's delivery cells fell from Task 3 on because the
+  instrument stopped printing, and nobody read them until the review of this result. Any
+  statement of the plan that leaned on `served_ok` after Task 3 leaned on a gated command.
 - **E's base arm does less at SessionStart and SubagentStart.** The base's bench writes
   directory and symbol cue rows, so the base delivers no block there. Those two rows compare
   a build that delivers with one that does not.

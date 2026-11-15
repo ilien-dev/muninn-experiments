@@ -123,7 +123,7 @@ of the ten topics are three words long. `muninn recall` now applies the prompt h
 it prints nothing for them, and those cells read 2/30 and 0/30 on every build from Task 6 on
 where 1.2.0 reads 11/30 and 8/30. Rule B3 names `retired_a` and `kept_b` only. `b3_path.py`,
 written after the result and deciding no rule, runs the evaluator unchanged and reads each
-scenario's store through the prompt hook (a question of nine words made from the topic) and
+scenario's store through the prompt hook (a question made from the topic by one template) and
 through the session start, on both builds. Its docstring says what it counts.
 
 ## E, harness revision 5 (fourteenth amendment)
