@@ -7969,6 +7969,36 @@ Two probe modes were added for the review's shapes before either build was read 
 (`orderprobe stated` and `dates`); their figures on the sources of the final build are
 reported beside those of the fixed build.
 
+*Added 2026-11-14, after a second review of the fixed build `366bb7913a35be7a` and after its
+figures were seen; before any cell runs on the build that follows.* The second review, again
+by probes outside the cells, left three things, and the build was changed for them (commits
+`39d514317`, `8ff2daa7d` and `53d068f84` of the branch):
+
+- R1. A record the person revoked was put back by a session dated before the revocation and
+  read after it. The review's probe: active again on the fixed build and on the final one,
+  still revoked on 1.2.0.
+- R2. An older statement read after the one that replaces it stayed current beside it, with no
+  mark; and a statement said again while current was retired by an older change read later
+  (of four read orders of "A, B, A again" one was right). The end state is now to be what
+  reading in date order leaves, for the rules that can be read from both records.
+- R3. With two coordinating sessions, a change typed in one coordinator's prompt could end
+  retired with nothing current on the subject: 5 of 384 orders on the fixed build, 0 on 1.2.0.
+
+Repeated on the new build, frozen inputs, one run at a time: the order probes in every mode,
+with the review's shapes and its two-coordinator enumeration read on the base, on
+`366bb7913a35be7a` and on the new build; B in full, with the base replayed again; A; the
+`remember` cell; C; D's id check; F; `verdict.py --split`. E's read rows are not repeated
+unless a file a read hook executes changed, which the diff of the two builds decides; if only
+the write path changed, one reading of `Stop` with an ingest, base against the new build, is
+taken and the read rows remain those of `366bb7913a35be7a`. A labelled reading made worse by
+one of the three is reported with it and not tuned. If the second change costs a labelled B1
+item, the rule that cost it keeps both records active and the report says so.
+
+Known before the runs, from the probes used as tests while the changes were written: `orderprobe
+typed` reads 0 bad, with one more order of 384 ending in a marked silence than before
+(52 for 51); the new `stated` line that read 5 bad reads 0; "A, B, A again" ends the same in
+its six read orders.
+
 ## Result of usage-v4 on the fixed build, 2026-11-14
 
 Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
