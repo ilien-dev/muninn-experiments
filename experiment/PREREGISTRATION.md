@@ -7890,3 +7890,64 @@ Eight texts of this registration say of themselves that they follow a figure the
 fifteenth, sixteenth and seventeenth); the second, third, fourth and ninth were written after
 base figures or another task's figure and before the cells they govern. `RESULTS.md` says what
 each changed and in which direction.
+
+## Nineteenth amendment to usage-v4, 2026-11-14 — the build was changed after the final reading, and the readings are repeated on the fixed build; written after figures were seen
+
+This text is written after the Result above and after every figure in it was seen. It changes
+no rule and no threshold. It is committed before any cell below runs on the fixed build.
+
+**What was found, and how.** A review of the whole branch, after the Result, found three defects
+by probes outside the registered cells: invented transcripts put through the `Stop` hook of the
+released binary (`02931d4b41072f92`, the sources of `8ea5e788aecf33e2`) and of 1.2.0, and the
+store read afterwards. No registered cell reads any of them.
+
+- A statement the person types in the turn whose agent hands a copy of it to a worker was lost
+  when the worker's session was read first: revoked as an agent's, with no health check
+  showing it. 1.2.0 keeps it in both orders. The order probes of this plan had the shape
+  "the coordinator's own prompt is a word of the user's" but never one where that word is the
+  sentence the task copies.
+- The episode of a turn whose command failed stopped being served by `muninn recall` and the
+  prompt hook once the same command passed later, or failed again with another count. 1.2.0
+  serves it. C3's twin arm reads only turns whose typed statement was replaced.
+- An older statement read after a newer one retired the newer one. 1.2.0 does the same for two
+  sessions read out of order; this plan added a route to it, the release of a last message
+  nobody answered. B1 replays each corpus in one order, and B2 and B3 write their sessions in
+  the order of their dates.
+
+**The build was changed after the final reading.** Commits `b2df1cc70`, `90a8461d9`,
+`fd21ec766`, `5f32df6b5` and `fc8e6d8c9` on `8c0ca179c`, binary `4617c4d527b399f0`, built with
+the toolchain of the final build. Besides the three fixes it carries two changes no cell reads:
+`muninn remember` says when the record it found is retired, and `init` says that the Codex
+hooks file names this machine's binary. Each fix has tests that fail on the build before it.
+
+**What is repeated on the fixed build**, on the frozen inputs, one run at a time:
+
+- the order probes (`orderprobe` default, typed and events, `rprobe`, `vprobe`, `qprobe`,
+  `kprobe`), every line 0 bad, with the review's shapes added where a probe can hold them;
+- B under the eighteenth amendment's runner, the base replayed again in the same sitting: both
+  B1 readings, B2, B3, and the `b3_path.py` diagnostic;
+- A, and the `remember` replay cell in both readings;
+- C, all of it; C3's twin arm is the one the second fix bears on;
+- D's check that delivery returns the same record ids, against `187d91a1431ab6ac` as before
+  and against the final build `8ea5e788aecf33e2`; a prompt whose ids differ is listed by its
+  item id beside the fix that explains it, or reported as unexplained;
+- F through `f_codex.py`, with no new `codex exec` session: the second clause stands on the
+  committed counts;
+- `verdict.py --split`;
+- E as the fifteenth amendment says: same-moment copies, three interleaved runs, the median of
+  the three ratios. The machine is the owner's working desktop; what else was running is
+  written beside the counts;
+- `perf --strict` on Windows and under Linux, with the rest of the CI list.
+
+**How they are read.** These readings replace the final ones where they differ, and
+`RESULTS.md` keeps the earlier figure beside the new one. A reading that is worse than the
+final build's because of a fix is reported with the fix it points at. Nothing is tuned for it
+and no cell is run twice to choose a figure. If a fix cannot be kept without a labelled
+reading getting worse, that fix is left out of the build, the trade-off is reported as found,
+and the other fixes ship.
+
+**Known before any run, by reading the fixes.** The first and third fixes act only when a
+session is read after a newer one, or when a statement meets a record revoked as an agent's;
+a replay that reads its sessions in date order with no handed-over task should not move. The
+second fix lets `recall` return episodes it skipped, so C and D's id check can move on a
+prompt that reaches a turn holding a retired dead end.
