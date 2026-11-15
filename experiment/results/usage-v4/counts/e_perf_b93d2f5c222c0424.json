@@ -8,98 +8,102 @@
  "splits": {
   "all": {
    "perf": {
-    "bench_sha256": "30a2b8c3e78b1176",
+    "bench_sha256": "677a9447fb49fe92",
     "contracts_failed_per_run": [
      [
       "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
       "hook SubagentStart p95",
       "hook UserPromptSubmit full p95"
      ],
      [
       "hook SessionStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
       "hook SubagentStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
-      "hook UserPromptSubmit full p95"
-     ],
-     [
-      "hook SessionStart p95",
       "hook UserPromptSubmit full p95"
      ]
     ],
     "hooks": {
      "SessionStart": {
-      "p50_median": 10.476,
-      "p95_median": 11.596,
+      "p50_median": 11.244,
+      "p95_median": 12.835,
       "p95_runs": [
-       10.231,
-       10.93,
-       11.927,
-       10.883,
-       13.98,
-       13.108,
-       11.596
+       14.38,
+       12.835,
+       11.614,
+       12.203,
+       13.358,
+       12.26,
+       12.928
       ]
      },
      "SubagentStart": {
-      "p50_median": 8.215,
-      "p95_median": 9.449,
+      "p50_median": 8.934,
+      "p95_median": 9.801,
       "p95_runs": [
-       10.692,
-       8.522,
-       9.449,
-       8.524,
-       11.874,
-       9.763,
-       8.834
+       9.647,
+       9.801,
+       9.063,
+       9.514,
+       10.504,
+       10.621,
+       10.63
       ]
      },
      "UserPromptSubmit_full": {
-      "p50_median": 11.279,
-      "p95_median": 12.451,
+      "p50_median": 12.141,
+      "p95_median": 13.178,
       "p95_runs": [
-       11.208,
-       11.937,
-       12.451,
-       11.657,
-       14.864,
-       13.006,
-       13.489
+       12.474,
+       14.324,
+       12.184,
+       12.757,
+       13.822,
+       13.178,
+       13.827
       ]
      },
      "UserPromptSubmit_gated": {
-      "p50_median": 5.483,
-      "p95_median": 6.251,
+      "p50_median": 6.395,
+      "p95_median": 7.216,
       "p95_runs": [
-       5.674,
-       5.839,
-       6.251,
-       6.035,
-       6.367,
-       6.873,
-       6.29
+       6.729,
+       10.641,
+       6.698,
+       6.834,
+       7.99,
+       7.216,
+       7.928
       ]
      }
     },
-    "ingest_200_ms_median": 9.2,
+    "ingest_200_ms_median": 9.1,
     "interleaved_with": [
      "692e382f2056ebd5"
     ],
-    "process_start_p50_median": 5.032,
+    "process_start_p50_median": 5.534,
     "runs": 7,
     "store_checks": {
      "all_hooks_ok": true,
@@ -126,7 +130,7 @@
     }
    },
    "stop_ingest_W02": {
-    "first_write_open_ms": 4046.4,
+    "first_write_open_ms": 4065.1,
     "inputs": {
      "changed": 0,
      "listed": 636,
@@ -137,10 +141,10 @@
     "interleaved_with": [
      "692e382f2056ebd5"
     ],
-    "max_ms": 240.9,
-    "median_ms": 216.7,
-    "min_ms": 213.2,
-    "p90_ms": 219.9,
+    "max_ms": 222.7,
+    "median_ms": 218.5,
+    "min_ms": 215.0,
+    "p90_ms": 220.0,
     "records_from_synthetic_session": 21,
     "runs": 20,
     "schema_after": "2",
@@ -180,13 +184,15 @@
   "equal": true,
   "fire_ledger_rows_per_bench_store": {
    "692e382f2056ebd5": [
-    25366,
-    25371,
-    25376,
+    25365,
+    25372,
+    25378,
+    25405,
     25406,
-    25407
+    25414
    ],
    "b93d2f5c222c0424": [
+    8346,
     8356
    ]
   },
