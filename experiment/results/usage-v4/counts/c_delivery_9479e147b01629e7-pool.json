@@ -1,0 +1,375 @@
+{
+ "binary_sha256": "9479e147b01629e7",
+ "binary_version": "muninn 1.2.0",
+ "binding": {
+  "c1": "held-out unrelated_returned and useful_returned",
+  "c2": "c12.c2_same_ids (needs --against); mean_tokens is secondary",
+  "c3": "t1 same_session == tried; t2 offered_again_after_stop == 1; t3 prompts_with_stale_twin == 0",
+  "c4": "all_slots share_lenient_of_labelled and share_strict_of_labelled, neither may fall; coverage_today neither == 0",
+  "c5": "usage_v2.spanish_reached, gender_flip_W02.found_top8, routed_away.returned, all_flag.what_about_found"
+ },
+ "build": "9479e147b01629e7-pool",
+ "commit": "3e1c803ff",
+ "labels": "final+pool",
+ "section": "c_delivery",
+ "splits": {
+  "all": {
+   "c12": {
+    "block_chars": 115120,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 436.9,
+     "mean_tokens_this": 305.1,
+     "prompts": 17
+    },
+    "evidence_chars": 0,
+    "harmful_returned": 2,
+    "header_chars": 15472,
+    "mean_tokens": 255.8,
+    "prompts": 150,
+    "prompts_with_delivery": 140,
+    "provenance_share": 0.1344,
+    "related_labelled": 307,
+    "related_returned": 145,
+    "returned": 324,
+    "unlabelled_returned": 0,
+    "unrelated_labelled": 554,
+    "unrelated_returned": 153,
+    "useful_labelled": 33,
+    "useful_returned": 24
+   },
+   "c4": {
+    "all_slots": {
+     "share_lenient_of_labelled": 0.3088,
+     "share_strict_of_labelled": 0.1221
+    },
+    "blocks": {
+     "labels": {
+      "decision": 54,
+      "duplicate": 22,
+      "fragment": 36,
+      "no_ref": 19,
+      "one_off": 88,
+      "rule": 53,
+      "unlabelled": 207
+     },
+     "share_lenient_of_labelled": 0.3934,
+     "share_strict_of_labelled": 0.1949,
+     "slots": 479,
+     "unlabelled": 207,
+     "worth_lenient": 107,
+     "worth_strict": 53
+    },
+    "catalogue": {
+     "labels": {
+      "decision": 27,
+      "fragment": 10,
+      "no_ref": 14,
+      "noise": 13,
+      "one_off": 64,
+      "truncated": 34,
+      "unlabelled": 212
+     },
+     "share_lenient_of_labelled": 0.1667,
+     "share_strict_of_labelled": 0.0,
+     "slots": 374,
+     "unlabelled": 212,
+     "worth_lenient": 27,
+     "worth_strict": 0
+    },
+    "coverage_today": {
+     "L01": {
+      "correction": {
+       "active": 13,
+       "listed_only": 3,
+       "neither": 4,
+       "shown": 6
+      },
+      "invariant": {
+       "active": 23,
+       "listed_only": 7,
+       "neither": 8,
+       "shown": 8
+      }
+     },
+     "W02": {
+      "correction": {
+       "active": 58,
+       "listed_only": 3,
+       "neither": 50,
+       "shown": 5
+      },
+      "invariant": {
+       "active": 60,
+       "listed_only": 5,
+       "neither": 47,
+       "shown": 8
+      }
+     },
+     "W05": {
+      "correction": {
+       "active": 15,
+       "listed_only": 4,
+       "neither": 6,
+       "shown": 5
+      },
+      "invariant": {
+       "active": 38,
+       "listed_only": 4,
+       "neither": 26,
+       "shown": 8
+      }
+     },
+     "W06": {
+      "correction": {
+       "active": 2,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 2
+      },
+      "invariant": {
+       "active": 1,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 1
+      }
+     },
+     "W07": {
+      "correction": {
+       "active": 12,
+       "listed_only": 2,
+       "neither": 3,
+       "shown": 7
+      },
+      "invariant": {
+       "active": 20,
+       "listed_only": 7,
+       "neither": 5,
+       "shown": 8
+      }
+     },
+     "W08": {
+      "correction": {
+       "active": 0,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 0
+      },
+      "invariant": {
+       "active": 0,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 0
+      }
+     },
+     "W10": {
+      "correction": {
+       "active": 1,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 1
+      },
+      "invariant": {
+       "active": 10,
+       "listed_only": 1,
+       "neither": 0,
+       "shown": 9
+      }
+     }
+    },
+    "mean_tokens": 1762.1,
+    "pool_units_used": -1,
+    "starts": 39,
+    "whole_list_today": {
+     "L01": {
+      "claims_whole": false,
+      "eligible": 71,
+      "eligible_neither": 41,
+      "truthful": true,
+      "twins_of_listed": 6
+     },
+     "W02": {
+      "claims_whole": false,
+      "eligible": 391,
+      "eligible_neither": 367,
+      "truthful": true,
+      "twins_of_listed": 1
+     },
+     "W05": {
+      "claims_whole": false,
+      "eligible": 123,
+      "eligible_neither": 100,
+      "truthful": true,
+      "twins_of_listed": 2
+     },
+     "W06": {
+      "claims_whole": true,
+      "eligible": 10,
+      "eligible_neither": 0,
+      "truthful": true,
+      "twins_of_listed": 3
+     },
+     "W07": {
+      "claims_whole": false,
+      "eligible": 69,
+      "eligible_neither": 43,
+      "truthful": true,
+      "twins_of_listed": 1
+     },
+     "W08": {
+      "claims_whole": null,
+      "eligible": 0,
+      "eligible_neither": 0,
+      "truthful": true,
+      "twins_of_listed": 0
+     },
+     "W10": {
+      "claims_whole": true,
+      "eligible": 15,
+      "eligible_neither": 0,
+      "truthful": true,
+      "twins_of_listed": 0
+     }
+    }
+   }
+  },
+  "design": {
+   "c12": {
+    "block_chars": 59756,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 417.0,
+     "mean_tokens_this": 298.1,
+     "prompts": 8
+    },
+    "evidence_chars": 0,
+    "harmful_returned": 1,
+    "header_chars": 7959,
+    "mean_tokens": 242.9,
+    "prompts": 82,
+    "prompts_with_delivery": 78,
+    "provenance_share": 0.1332,
+    "related_labelled": 171,
+    "related_returned": 71,
+    "returned": 166,
+    "unlabelled_returned": 0,
+    "unrelated_labelled": 305,
+    "unrelated_returned": 79,
+    "useful_labelled": 17,
+    "useful_returned": 15
+   },
+   "c4": {
+    "all_slots": {
+     "share_lenient_of_labelled": 0.3602,
+     "share_strict_of_labelled": 0.1186
+    },
+    "blocks": {
+     "labels": {
+      "decision": 37,
+      "duplicate": 11,
+      "fragment": 9,
+      "no_ref": 7,
+      "one_off": 46,
+      "rule": 28,
+      "unlabelled": 122
+     },
+     "share_lenient_of_labelled": 0.471,
+     "share_strict_of_labelled": 0.2029,
+     "slots": 260,
+     "unlabelled": 122,
+     "worth_lenient": 65,
+     "worth_strict": 28
+    },
+    "catalogue": {
+     "labels": {
+      "decision": 20,
+      "fragment": 6,
+      "no_ref": 9,
+      "noise": 8,
+      "one_off": 37,
+      "truncated": 18,
+      "unlabelled": 111
+     },
+     "share_lenient_of_labelled": 0.2041,
+     "share_strict_of_labelled": 0.0,
+     "slots": 209,
+     "unlabelled": 111,
+     "worth_lenient": 20,
+     "worth_strict": 0
+    },
+    "mean_tokens": 1778.5,
+    "pool_units_used": -1,
+    "starts": 21
+   }
+  },
+  "heldout": {
+   "c12": {
+    "block_chars": 55364,
+    "c2_same_ids": {
+     "against": "b93d2f5c222c0424",
+     "mean_tokens_against": 454.7,
+     "mean_tokens_this": 311.3,
+     "prompts": 9
+    },
+    "evidence_chars": 0,
+    "harmful_returned": 1,
+    "header_chars": 7513,
+    "mean_tokens": 271.4,
+    "prompts": 68,
+    "prompts_with_delivery": 62,
+    "provenance_share": 0.1357,
+    "related_labelled": 136,
+    "related_returned": 74,
+    "returned": 158,
+    "unlabelled_returned": 0,
+    "unrelated_labelled": 249,
+    "unrelated_returned": 74,
+    "useful_labelled": 16,
+    "useful_returned": 9
+   },
+   "c4": {
+    "all_slots": {
+     "share_lenient_of_labelled": 0.2475,
+     "share_strict_of_labelled": 0.1263
+    },
+    "blocks": {
+     "labels": {
+      "decision": 17,
+      "duplicate": 11,
+      "fragment": 27,
+      "no_ref": 12,
+      "one_off": 42,
+      "rule": 25,
+      "unlabelled": 85
+     },
+     "share_lenient_of_labelled": 0.3134,
+     "share_strict_of_labelled": 0.1866,
+     "slots": 219,
+     "unlabelled": 85,
+     "worth_lenient": 42,
+     "worth_strict": 25
+    },
+    "catalogue": {
+     "labels": {
+      "decision": 7,
+      "fragment": 4,
+      "no_ref": 5,
+      "noise": 5,
+      "one_off": 27,
+      "truncated": 16,
+      "unlabelled": 101
+     },
+     "share_lenient_of_labelled": 0.1094,
+     "share_strict_of_labelled": 0.0,
+     "slots": 165,
+     "unlabelled": 101,
+     "worth_lenient": 7,
+     "worth_strict": 0
+    },
+    "mean_tokens": 1742.9,
+    "pool_units_used": -1,
+    "starts": 18
+   }
+  }
+ }
+}

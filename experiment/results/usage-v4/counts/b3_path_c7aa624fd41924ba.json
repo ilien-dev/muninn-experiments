@@ -1,0 +1,58 @@
+{
+ "binary_sha256": "c7aa624fd41924ba",
+ "binary_version": "muninn 2.0.0",
+ "cells": {
+  "both/adjacent": {
+   "context_ok": "20/30",
+   "context_old": "8/30",
+   "old_served": "0/30",
+   "prompt_new": "12/30",
+   "prompt_old": "6/30",
+   "recall_printed": "2/30",
+   "retired_a": "18/30",
+   "served_ok": "2/30",
+   "start_new": "27/30",
+   "start_old": "2/30"
+  },
+  "both/blocks": {
+   "context_ok": "17/30",
+   "context_old": "13/30",
+   "old_served": "2/30",
+   "prompt_new": "2/30",
+   "prompt_old": "11/30",
+   "recall_printed": "2/30",
+   "retired_a": "10/30",
+   "served_ok": "0/30",
+   "start_new": "29/30",
+   "start_old": "2/30"
+  },
+  "noise/adjacent": {
+   "context_ok": "1/30",
+   "context_old": "21/30",
+   "old_served": "2/30",
+   "prompt_new": "0/30",
+   "prompt_old": "15/30",
+   "recall_printed": "2/30",
+   "retired_a": "3/30",
+   "served_ok": "0/30",
+   "start_new": "2/30",
+   "start_old": "14/30"
+  },
+  "noise/blocks": {
+   "context_ok": "1/30",
+   "context_old": "21/30",
+   "old_served": "2/30",
+   "prompt_new": "0/30",
+   "prompt_old": "15/30",
+   "recall_printed": "2/30",
+   "retired_a": "3/30",
+   "served_ok": "0/30",
+   "start_new": "2/30",
+   "start_old": "14/30"
+  }
+ },
+ "commit": "1b1179620",
+ "diagnostic": "added after the Result of usage-v4; decides no rule",
+ "prompt_template": "Which %s do we use in this project now?",
+ "section": "b3_path"
+}

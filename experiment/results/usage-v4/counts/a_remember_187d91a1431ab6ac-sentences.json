@@ -1,0 +1,36 @@
+{
+ "binary_sha256": "187d91a1431ab6ac",
+ "binary_version": "muninn 1.2.0",
+ "build": "187d91a1431ab6ac-sentences",
+ "commit": "4e6c35d25",
+ "inputs": {
+  "changed": 0,
+  "listed": 150,
+  "staged": 150,
+  "status": "ok",
+  "unrecoverable": 0
+ },
+ "labels": "final",
+ "note": "second reading, whole sentences holding the anchor (thirteenth amendment); decides nothing under section A",
+ "reading": "sentences",
+ "section": "a_remember",
+ "splits": {
+  "all": {
+   "deduped_twin": 6,
+   "durable_messages": 48,
+   "user_said_other_turn": 1,
+   "user_said_right_turn": 41
+  },
+  "design": {
+   "deduped_twin": 3,
+   "durable_messages": 23,
+   "user_said_other_turn": 1,
+   "user_said_right_turn": 19
+  },
+  "heldout": {
+   "deduped_twin": 3,
+   "durable_messages": 25,
+   "user_said_right_turn": 22
+  }
+ }
+}

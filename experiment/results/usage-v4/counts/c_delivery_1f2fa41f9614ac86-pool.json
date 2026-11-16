@@ -1,0 +1,217 @@
+{
+ "binary_sha256": "1f2fa41f9614ac86",
+ "binary_version": "muninn 1.2.0",
+ "binding": {
+  "c1": "held-out unrelated_returned and useful_returned",
+  "c2": "c12.c2_same_ids (needs --against); mean_tokens is secondary",
+  "c3": "t1 same_session == tried; t2 offered_again_after_stop == 1; t3 prompts_with_stale_twin == 0",
+  "c4": "all_slots share_lenient_of_labelled and share_strict_of_labelled, neither may fall; coverage_today neither == 0",
+  "c5": "usage_v2.spanish_reached, gender_flip_W02.found_top8, routed_away.returned, all_flag.what_about_found"
+ },
+ "build": "1f2fa41f9614ac86-pool",
+ "commit": "44f60ebc6",
+ "labels": "final+pool",
+ "section": "c_delivery",
+ "splits": {
+  "all": {
+   "c4": {
+    "coverage_today": {
+     "L01": {
+      "correction": {
+       "active": 13,
+       "listed_only": 3,
+       "neither": 4,
+       "shown": 6
+      },
+      "invariant": {
+       "active": 23,
+       "listed_only": 8,
+       "neither": 8,
+       "shown": 7
+      }
+     },
+     "W02": {
+      "correction": {
+       "active": 58,
+       "listed_only": 3,
+       "neither": 50,
+       "shown": 5
+      },
+      "invariant": {
+       "active": 60,
+       "listed_only": 6,
+       "neither": 48,
+       "shown": 6
+      }
+     },
+     "W05": {
+      "correction": {
+       "active": 15,
+       "listed_only": 4,
+       "neither": 6,
+       "shown": 5
+      },
+      "invariant": {
+       "active": 38,
+       "listed_only": 5,
+       "neither": 26,
+       "shown": 7
+      }
+     },
+     "W06": {
+      "correction": {
+       "active": 2,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 2
+      },
+      "invariant": {
+       "active": 1,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 1
+      }
+     },
+     "W07": {
+      "correction": {
+       "active": 12,
+       "listed_only": 2,
+       "neither": 4,
+       "shown": 6
+      },
+      "invariant": {
+       "active": 20,
+       "listed_only": 7,
+       "neither": 5,
+       "shown": 8
+      }
+     },
+     "W08": {
+      "correction": {
+       "active": 0,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 0
+      },
+      "invariant": {
+       "active": 0,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 0
+      }
+     },
+     "W10": {
+      "correction": {
+       "active": 1,
+       "listed_only": 0,
+       "neither": 0,
+       "shown": 1
+      },
+      "invariant": {
+       "active": 10,
+       "listed_only": 2,
+       "neither": 0,
+       "shown": 8
+      }
+     }
+    },
+    "whole_list_today": {
+     "L01": {
+      "claims_whole": false,
+      "eligible": 71,
+      "eligible_neither": 41,
+      "truthful": true,
+      "twins_of_listed": 6
+     },
+     "W02": {
+      "claims_whole": false,
+      "eligible": 391,
+      "eligible_neither": 314,
+      "truthful": true,
+      "twins_of_listed": 55
+     },
+     "W05": {
+      "claims_whole": false,
+      "eligible": 123,
+      "eligible_neither": 100,
+      "truthful": true,
+      "twins_of_listed": 2
+     },
+     "W06": {
+      "claims_whole": true,
+      "eligible": 10,
+      "eligible_neither": 0,
+      "truthful": true,
+      "twins_of_listed": 3
+     },
+     "W07": {
+      "claims_whole": false,
+      "eligible": 69,
+      "eligible_neither": 44,
+      "truthful": true,
+      "twins_of_listed": 1
+     },
+     "W08": {
+      "claims_whole": null,
+      "eligible": 0,
+      "eligible_neither": 0,
+      "truthful": true,
+      "twins_of_listed": 0
+     },
+     "W10": {
+      "claims_whole": true,
+      "eligible": 15,
+      "eligible_neither": 0,
+      "truthful": true,
+      "twins_of_listed": 0
+     }
+    }
+   }
+  },
+  "design": {
+   "c4": {
+    "all_slots": {
+     "share_lenient_of_labelled": 0.3502,
+     "share_strict_of_labelled": 0.1139
+    },
+    "blocks": {
+     "labels": {
+      "decision": 38,
+      "duplicate": 11,
+      "fragment": 6,
+      "no_ref": 7,
+      "one_off": 37,
+      "rule": 27,
+      "unlabelled": 108
+     },
+     "share_lenient_of_labelled": 0.5159,
+     "share_strict_of_labelled": 0.2143,
+     "slots": 234,
+     "unlabelled": 108,
+     "worth_lenient": 65,
+     "worth_strict": 27
+    },
+    "catalogue": {
+     "labels": {
+      "decision": 18,
+      "fragment": 12,
+      "no_ref": 9,
+      "noise": 5,
+      "one_off": 50,
+      "truncated": 17,
+      "unlabelled": 101
+     },
+     "share_lenient_of_labelled": 0.1622,
+     "share_strict_of_labelled": 0.0,
+     "slots": 212,
+     "unlabelled": 101,
+     "worth_lenient": 18,
+     "worth_strict": 0
+    },
+    "mean_tokens": 1718.1,
+    "pool_units_used": -1,
+    "starts": 21
+   }
+  }
+ }
+}

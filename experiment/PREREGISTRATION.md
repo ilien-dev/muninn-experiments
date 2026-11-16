@@ -7168,3 +7168,1018 @@ Cost of the grid USD 1.04. The binary was built before the last usage-v1 changes
 not change after it. The `off` arm relied on the hook being off by default in that binary; on 1.2.0,
 where it is on, rerunning `grid3.py` needs `MUNINN_SUBAGENT_DELIVERY=0` in the `off` cells. The hook's p95 over the seven runs is 6.7 to 9.7 ms (median 8.36), against SessionStart's 7.6 to
 9.8 ms on the same runs. **Ships on by default.** Six tasks on one model is a small sample.
+
+---
+
+# Pre-registration — usage-v4: what 1.2.0 stores, retires and delivers in real use
+
+Registered 2026-11-11, before any candidate build existed and before any cell ran.
+
+**Why.** A second review, of the sessions since 1.2.0 on one person's eleven stores (ten on Windows,
+one on WSL), read 109 typed records, 273 human messages, 527 delivered blocks and the code. Its
+figures are a single labeller's: 20 of 109 typed records durable, 8 of 47 durable statements
+stored, 19 of 527 per-prompt blocks useful. It also reproduced defects on the stock binary. The
+changes below were proposed from that reading, so everything it read is a design set.
+
+**Builds.** Base: `00d691630` (1.2.0), binary sha256 prefix `b93d2f5c222c0424`. Candidate: the head
+of `feature/usage-review-2-measured-fixes`; each cell records the commit it ran on.
+
+**Privacy.** As in usage-v1: only counts, record ids and label codes are committed under
+`results/usage-v4/`. No text, project name, path or hash of a text. The fixtures stay on the
+owner's machine and the scripts read them from `MUNINN_USAGE_FIXTURES`.
+
+**Labels and splits, fixed before any change.** A second labeller that has not seen the first
+labels relabels all three sets. Items the two disagree on are adjudicated by a third reading and
+the final labels are hashed here in an amendment before the first candidate cell. Each set is then
+split in two by `sha256("usage-v4:" + item id)`: even first byte is `design`, odd is `held-out`.
+Implementers may read design items. Held-out items are read only by the scoring scripts.
+
+## A. Extraction
+
+- **Items.** The human messages of the recall set, each labelled for the durable statements it
+  holds, and the source turns of the 109 typed records. `extract_dump` runs on them with each
+  build. No model runs.
+- **Outcome.** Emitted typed records labelled durable, transient, not the user's, fragment; durable
+  statements emitted or missed.
+- **Rule A1, filters.** A filter ships if on held-out it removes at least 30 % of the noise the
+  base emits and loses at most 5 % of the durable records the base emits. This is extract-v1's
+  rule. Each filter is read alone and then all together.
+- **Rule A2, recall rules.** A rule that adds records ships if on held-out it adds at least one
+  durable statement for every noise record it adds.
+- **Rule A3, a new extractor.** A replacement for the cue-word rules ships if on held-out its
+  precision is at least twice the base's and its recall is not below the base's. If it fails, it
+  does not ship and the result is reported.
+
+## B. Retirement
+
+- **Cells.** usage-v1's replay (`results/usage-v1/replay.py`) with its 95 labelled retirements,
+  plus the retirements since 1.2.0 labelled in this review, base against candidate. Three synthetic
+  repositories, written before any fix: a one-line rewording of a file that names recorded values,
+  a decision stated A, then B, then A again in the same words, and a commit followed by its
+  `git revert`.
+- **Rule B1.** In the replay, retired records labelled `loss`: candidate ≤ base, and both
+  retirements labelled valid still happen.
+- **Rule B2.** On the synthetic repositories the candidate retires nothing in the first, serves A
+  and not B in the second, and retires the reverted commit's record in the third.
+- **Rule B3, held-out.** `loop8/eval_all.py`, arms `both` and `noise`, orders `adjacent` and
+  `blocks`: `retired_a` and `kept_b` do not fall below base and `retired_a` on `noise` stays 0.
+
+## C. Delivery
+
+- **Items.** The 150 labelled (prompt, delivered block) units, replayed through the real
+  `UserPromptSubmit` hook on store copies rewound to each prompt's time. Base figures on today's
+  copies: 18 of 25 useful pairs returned, 226 of 451 unrelated, 564 tokens a prompt. The replay
+  reproduces 71.8 % of the logged ids, so both arms are replayed and compared with each other,
+  never with the log.
+- **Rule C1, a relevance floor and ranking changes.** Ship if on held-out the unrelated blocks
+  delivered fall by at least 30 % and the useful pairs returned fall by at most one.
+- **Rule C2, shorter headers.** Ship if the mean tokens of a delivery with the same ids fall and
+  `init --check-budget` passes. What the agent needs from a header is the kind, the id, the trust
+  and the date; the `evidence:` line moves to `muninn show`.
+- **Rule C3, defects.** A record cut for budget or only listed in the catalogue is offered again in
+  the same session (12 of 12 where base gives 0 of 12); a record delivered before a compaction is
+  offered again after the next `Stop` (base 0 of 1); a retired statement is not served through an
+  episode of the same turn (base: 5.6 % of deliveries in the largest store).
+- **Rule C4, session start.** On the labelled session starts, the share of slots labelled worth
+  their place does not fall, and every active correction and invariant is either shown or listed.
+- **Rule C5, `why`.** usage-v2's 30 questions: recall in Spanish does not fall. The 69 gender-form
+  pairs: more than the base's 0 match. Records of every kind are returned by the route that names
+  them (base 0 of 15), and `--all` uses every word typed (base 0 of 30).
+
+## D. Removals
+
+A part is removed only on these readings. The symbol graph and the dir, symbol and file cues: no
+row of any real store's `fire_ledger` was delivered by one, and B3 and the delivery replay give the
+same ids with the part removed. The embedding sidecar: no store holds a vector, and usage-v2's
+recall is the same without it. `commit_linked` decisions built from commit subjects: no hook
+delivery in any store's ledger names one, and B1 to B3 hold without them. `PostToolUse` and the
+turn-context log follow the cues. If a reading fails, the part stays and the failure is reported.
+
+## E. Latency and cost
+
+`perf --strict`, seven interleaved runs a build on one machine. No read hook's p95 rises by more
+than 10 % over base. `Stop` with an ingest on a copy of the largest store, 20 runs: the candidate's
+median is lower. A new contract for `Stop`, `SessionEnd` and `PostToolUse` is set from the
+candidate's own measured figures, as the others were.
+
+## F. Codex and the rule compiler
+
+Codex: a recorded rollout ingested by the candidate yields typed records where the base yields
+none, and the hooks file installs and delivers a block in one real `codex exec` session. Rule
+compiler: on `corpora/claude-md`, split in two by file name hash, new patterns ship if on the
+held-out half they raise the enforceable share and every rule they newly mark enforceable is one a
+reader agrees the emitted control enforces.
+
+## G. Decision rule
+
+Each change is read under the rule of its section. A change that fails is reverted and listed as
+tried and not shipped. A change no cell here can measure is reported as unmeasured, with the test
+that covers it. B3 and E are read again on the final build with everything that shipped.
+
+## Amendment to usage-v4, 2026-11-11 — labels frozen and sets split, before the first candidate cell
+
+**Second labels.** The three sets were relabelled in one blind pass by a second labeller (an
+agent session), from reading views built from the item files alone. The first labels were not
+opened until the pass was written and hashed: pass files sha256 prefix precision
+`190e978f5b79e78a`, recall `7a3799ebefce9512`, delivery `47ef6ceec063f6f2`. Same codes as the first
+pass (precision: durable, transient, not the user's, fragment; recall: holds a durable statement,
+does not, not typed by a person, bare option pick; delivery: useful, related, unrelated,
+harmful). Independence is partial: the second labeller had read the four analysis reports, which
+give the totals and name about ten items with their labels, and one probe script that names the
+agent-written prompt ids of one store.
+
+**Agreement** (first against second pass):
+
+| set | items | agree | Cohen's kappa | binary reading |
+|---|---|---|---|---|
+| precision | 109 | 103 | 0.913 | durable or not: 106, kappa 0.902 |
+| recall | 300 | 279 | 0.847 | durable or not, on the 257 both passes scored: 242, kappa 0.800 |
+| delivery | 688 (prompt, block) units | 616 | 0.771 | unrelated or not: 641, kappa 0.846; useful or not: 664, kappa 0.136 |
+
+The second pass called 3 units useful where the first called 25 (23 of those 25 it called
+related). `useful` is the weakest label of the review, as the analysis's own re-read had found.
+
+**Adjudication.** All 99 disagreements (6, 21, 72) were read a third time with both labels and
+the first labeller's reason in view, and settled one by one. Final counts: precision durable 20,
+transient 56, not the user's 27, fragment 6; recall durable 48, not 210, not typed by a person 27,
+option pick 15; delivery useful 23, related 209, unrelated 455, harmful 1. Every durable recall
+message carries one or more anchor phrases, the words that state the durable thing; they are
+text and stay in a private file, unhashed.
+
+**Frozen label files** (ids and codes only, one sorted JSON object per line): precision
+`c18de4f31180d8f0`, recall `2ecd4124f82bc3a1`, delivery `e4abd83b8d0000dd`. The 13 retirements
+since 1.2.0 that section B adds were labelled once, in usage-v1's codes, by the second labeller:
+12 `old_not_a_fact` (agent-written or scripted prompts, bug descriptions) and 1 `unrelated` that is
+a `loss` (W02 #2167). They are single-labelled.
+
+**Ids and splits.** Precision `STORE:record id`; recall `STORE:session8:byte offset`; delivery the
+prompt item `Pnnn`, so all blocks of a prompt fall on one side; session starts for C4 their item
+`Snn`. Parity is `sha256("usage-v4:" + id)[0] % 2`, even = design. Sizes, design / held-out:
+precision 63 / 46, recall 152 / 148, delivery 82 / 68 prompts (386 / 302 units), session starts
+21 / 18. The id lists are committed in `results/usage-v4/splits/`. 39 precision records have their
+source turn among the recall messages; 20 of those pairs fall on opposite sides, and the 20
+design items concerned are kept out of the views implementers read.
+
+**How each rule is read, fixed now.**
+- A. A precision record is emitted when `extract_dump` of its session holds a candidate of its
+  kind whose body is its body (case and spacing folded) or contains its object. A durable recall
+  message is emitted when a candidate of its turn contains one of its anchors; a candidate of a
+  durable message that carries none is noise. A1 and A2 read the held-out halves of both sets;
+  A3 reads the recall set: precision = candidates carrying an anchor over candidates from
+  messages typed by a person or not (option picks excluded), recall = durable messages emitted.
+  The two `deadend` records are not measurable with `extract_dump`, which prints `user_said`
+  candidates only.
+- B1 adds the 13 to the 95. B2: reword passes with 0 typed records retired; A-B-A passes when the
+  hook's answer to a question about the subject holds a block stating A and none stating B
+  (counted for any kind and for typed records alone; the rule reads typed records); revert passes
+  when the reverted commit's record is retired after one `maintain` that sees both commits. B3 is
+  read on `results/usage-v1/eval_dated.py`, the evaluator usage-v1's amendment adopted;
+  `loop8/eval_all.py` as registered is reported beside it. On the base the `noise` arm already
+  retires 3/30 in both orders and with both evaluators (usage-v1 read 0/30 on 1.1.x). The rule is
+  not changed here: as written, it holds only if the candidate brings that to 0.
+- C1 and C2 count labelled pairs; a returned pair without a label is counted and not scored.
+  C4 scores slots that carry a label and reports the unlabelled ones.
+
+## Second amendment to usage-v4, 2026-11-11 — two scoring details, before the first candidate cell
+
+- B1 is scored twice: as usage-v1's `score.py` does (an item is active if any record of its kind
+  carrying its key is active) and by the earliest such record, the statement itself. On the base
+  the first reading has the valid W02 #236 active only because the same-session restatement that
+  retired it opens with the same words; the earliest-row reading has both valid retirements
+  happen. Rule B1's "both retirements labelled valid still happen" is read on the earliest row.
+- B2's revert case is also reported with a `maintain` between the commit and its revert, with
+  both git watermarks set back between them as usage-v1's replay does; the rule reads the single
+  `maintain` that sees both commits, as fixed above.
+- The per-item states of section A carry label classes of held-out items and are kept out of
+  this directory, in the private work directory.
+
+## Third amendment to usage-v4, 2026-11-11 — binding readings, ruled after the base figures and before any candidate cell
+
+These readings were set by the experiment's controller after the base figures had been produced
+and before any candidate cell ran. Where they differ from the first two amendments, they replace
+them. `verdict.py` in `results/usage-v4/` applies them.
+
+- B3. The binding evaluator is `loop8/eval_all.py` as registered; `results/usage-v1/eval_dated.py`
+  is reported as secondary. Because 1.2.0 already retires 3/30 on the `noise` arm, that clause
+  reads: candidate `noise` retirements are not above the base's in the same harness (3/30).
+- B2, reword. "Retires nothing" is literal: 0 retirements of any kind, typed or not. The
+  typed-only count is secondary.
+- B1. The `loss` clause is binding by usage-v1's `score.py` rule (base 9); the earliest-row
+  reading is secondary. The `valid` clause is read by the earliest matching record, since the
+  registered scorer misreads a retirement that did happen.
+- C4. Where the text names no share, both the lenient and the strict share must not fall.
+- C2 is read on the prompts whose returned id set is the same in both builds, with the number of
+  such prompts reported; the mean over all prompts is secondary.
+- C3, stale twin. The twin's retirement is taken on the store copy as rewound to each prompt, not
+  on today's copy, so that a read-path fix can reach 0. Base on this reading: W02 13 of 210
+  delivered prompts, L01 4 of 49.
+- Every entry point now refuses to write counts when any step failed (non-zero exit, timeout,
+  output that is not what the step prints, an error on stderr), and clears its earlier outputs.
+- C3, the catalogue arm. The rule names records "only listed in the catalogue" beside those cut
+  for budget. Its test: a session start, then prompts made of the records its catalogue lists
+  without a block, in the same session and in fresh ones. Base: 0 of 5 offered again in the same
+  session, 5 of 5 in a fresh one (W02 lists 6 such records; one is too short to ask by).
+- `verdict.py` never reads an absent or empty input as a pass: such a rule reads `missing`, as
+  does every E rule whose two builds' figures do not come from one interleaved run; C2's
+  `init --check-budget` half is a `manual` row.
+
+## Fourth amendment to usage-v4, 2026-11-11 — how C1 reads a ranking change, fixed after Task 3's candidate figures and before any Task 4 cell
+
+Set by the experiment's controller after Task 3's candidate (`c202760b4fdcc86a`, worktree
+`ea3f1d369`) had been measured and before any cell of Task 4 ran.
+
+- C1 is read once, on Task 4's combined build (relevance floor plus the ranking changes that
+  reached it, the R-07 tie-break among them), as registered: held-out unrelated blocks fall by at
+  least 30 % and useful pairs fall by at most one. No change is read under C1 on its own before
+  that build.
+- Before the reading, every (prompt, block) pair returned by any arm of that reading that has no
+  label is pooled with the base build's unlabelled pairs, shuffled, and labelled blind to the arm
+  by a labeller who is not an implementer, in the codes of the frozen delivery labels. The reading
+  then scores those pairs too.
+- The reading includes an attribution arm without R-07 (the combined build with commit
+  `0024d4828` reverted). R-07 is reverted if its arm makes C1 worse than the arm without it, or if
+  the combined C1 fails.
+
+## Fifth amendment to usage-v4, 2026-11-11 — a defect in the E harness, found by Task 3
+
+`results/usage-v4/e_perf.py` (harness revision 1) timed both builds with one `muninn-bench` built
+from the candidate's tree. Once the candidate's schema moved to version 3, the base binary (1.2.0,
+schema 2) refused every store that bench created ("schema version 3 is newer than this binary
+supports"), exited 0 with nothing delivered, and every base hook figure timed that error path.
+`verdict.py` still printed `pass` on the E rows. The committed E figures of the candidate builds
+`1751bca9f2f1a9cc`, `01b82fa557523015`, `c202760b4fdcc86a` and `e1c7980348b0047f`, and the base
+figures interleaved with them, are therefore not a reading of rule E. The intermediate build
+`0ff051d9890df83b` is in the same case.
+
+Harness revision 2 times each build with a bench built from its own source, so each runs on a
+store its own code created; the base's bench is built from a copy of the 1.2.0 tree with the
+candidate bench's 8,336-row `fire_ledger` seed added, so both seed the same workload. Every run is
+checked through the store's own heartbeat (every hook invocation finished `ok` with no error) and
+any miss blocks the counts. Stop-with-ingest gives each build its own copy of W02 and times the
+migrating first write open apart from the 20 timed Stops. `verdict.py` reads E only from counts of
+revision 2. Rule E itself is unchanged.
+- Addendum, same day, before any revision-3 cell: E harness revision 3. Revision 2 called the two
+  benches' workloads equal when each store held at least 8,336 ledger rows, without comparing the
+  builds, and recorded but did not gate whether a check prompt delivered. Revision 3 compares the
+  seed rows of the two builds' bench stores by count and sha256, hashes each bench's sources, runs
+  a fixed prompt that must deliver on both builds' own migrated copies of W02, checks the Stop
+  copies' schema against the one each build creates and every timed Stop in the heartbeat.
+  Revision-2 E counts (`e1c7980348b0047f`, `a01c2a1d3fb2c9c8` and the base figures paired with
+  them) read `missing` under `verdict.py`. Rule E is unchanged.
+
+## Sixth amendment to usage-v4, 2026-11-11 — the controls of the C1 blind labels
+
+Fixed before any pool labelling. The pool the fourth amendment asks for also carries controls: a
+seeded sample (seed 20261111) of at least 60, by default 80, pairs the base build returned that
+already carry a frozen label, stratified by label, shuffled among the unlabelled pairs so the
+labeller cannot tell them apart. If the labeller's agreement with the frozen labels on those
+controls has a Cohen's kappa below 0.6 on unrelated-or-not, the pool labels are not used and C1 is
+not read until the pool is relabelled. The pool labels extend the frozen delivery labels in a
+separate file; the frozen file and its hash do not change.
+
+## Seventh amendment to usage-v4, 2026-11-12 — how C4 is read, written after the design-split C4 figure was seen and before any held-out C4 cell
+
+Set by the experiment's controller after Task 4's design-split C4 reading of the combined build
+`8ec1c6bb4c71ecf8` and before any held-out C4 cell ran.
+
+- The clause "every active correction and invariant is either shown or listed" cannot be met
+  inside the registered budgets by any build. Active corrections and invariants that a session
+  start neither shows nor lists, summed over the seven stores with deliveries (today's copies):
+  base `b93d2f5c222c0424` 213, combined `8ec1c6bb4c71ecf8` 150, the same without R-07
+  `8b11417f92b48606` 150; one store alone holds 118 such rules. (No committed counts file holds
+  this reading for a Task 3 build.) As written the clause fails base and candidate alike and
+  decides nothing.
+- It is read instead as: that count does not rise against the base, and the line that closes the
+  catalogue says truthfully whether the list is whole ("That is every …" only when every active
+  decision, invariant and correction other than a commit subject is shown or listed; "… and
+  more, not listed" otherwise). The literal count is reported for every build.
+- Session-start slots that the candidate fills and that carry no frozen label (on the design
+  split 122 of 260 block slots and 112 of 209 catalogue slots, because corrections are now shown)
+  are labelled blind in the same pool as the C1 pairs, by the same labeller who is not an
+  implementer, with the frozen session-start label codes (rule, decision, one_off, fragment,
+  no_ref, truncated, duplicate, noise). At least 40 already-labelled slots the base shows are
+  mixed in as controls. If the controls' Cohen's kappa on worth-its-slot-or-not (rule or decision
+  against the rest) is below 0.6, the pool's slot labels are not used and C4 is read on frozen
+  labels only, with the unlabelled count reported. Where the registered text names no share, both
+  the lenient and the strict share must not fall (third amendment).
+
+## Eighth amendment to usage-v4, 2026-11-12 — the denominator of C3's catalogue-only arm, written after Task 5's reading of that arm was seen
+
+Written after the arm read 9/10 on Task 5's build `fe41ba8f6a353f44` against 10/10 on
+`9479e147b01629e7`, and before any later C3 cell. The miss is W02 #3589. Checked on the three
+binaries, per record: base, `9479e147b01629e7` and `fe41ba8f6a353f44` all fail to return #3589 for
+its own words in a fresh session. At the arm's session start it is listed (not shown) only on
+`fe41ba8f6a353f44`; on base and `9479e147b01629e7` it is neither shown nor listed at that start.
+
+The arm tests whether a listed record is withheld from recall because it is listed. A record the
+same build does not return for its own words in a fresh session is not withheld by listing. The
+arm's denominator is therefore the listed records that the build's own fresh-session control
+returns; the records excluded that way are counted and printed with the verdict. On this reading:
+base 0 of 5 (none excluded), `9479e147b01629e7` 10 of 10 (none excluded), `fe41ba8f6a353f44` 9 of 9
+(1 excluded, #3589). The C3 rule is otherwise unchanged.
+
+## Ninth amendment to usage-v4, 2026-11-12 — how A1 and A2 are read, before the first Task 6 cell
+
+Set by the experiment's controller before any Task 6 cell ran. Base figures, from the committed
+counts `results/usage-v4/counts/a_extract_b93d2f5c222c0424.json`: design noise 79 (51 precision
+records + 28 recall candidates) against 17 durable (11 + 6); held-out noise 55 (37 + 18) against
+13 durable (8 + 5). The largest single noise class, prompts written by an agent, is 12 of the 79
+design noise records. No single class reaches 30 % of base noise, so a gate at that threshold
+applied to each filter alone ships nothing by construction.
+
+- **A1.** The 30 % / 5 % gate binds on the filters read all together, on a filters-only arm: a
+  build of the candidate with every recall rule (A2 cell) switched off. Each filter is also read
+  alone and reported against all base noise and against the noise class it targets. A filter that
+  alone removes no noise or loses a durable record is dropped from the set before the combined
+  reading. Durable loss allowed: zero on both splits (5 % of 17 or of 13 is under one item).
+- **A2.** Read per recall rule on what that rule alone adds: durable statements added against
+  noise records added, on held-out. The full build (filters plus surviving recall rules) is
+  reported beside the filters-only arm.
+- **Origin fixes are not filters.** A prompt written by an agent and recorded as the user's, and
+  question text recorded as the user's answer, are defects under the invariant that trust derives
+  from origin. They ship when their tests pass and they lose no durable record on design and
+  held-out; their noise figures are reported and count toward the combined A1 reading.
+- **Measurement change.** `extract_dump` gains a pre-pass across the transcripts of a store, so
+  it sees what the product sees at ingest; it calls the same function the product calls. The
+  filters-only arm is built by a switch that exists only for measurement (read by `extract_dump`),
+  not by a user-facing option of the binary.
+- *Note, 2026-11-12, after Task 6's held-out reading:* the drop test above is applied on held-out,
+  the split A1 names (controller's ruling); it dropped one filter, the sentence that opens by
+  pointing back (Task 6 #7), which alone removed 0 of 55 held-out noise records. A line in the
+  user's role whose harness `origin.kind` is not `human` (Task 6, `8e2784c93`) is an origin fix
+  of the same class as the two named above, and is not submitted to the drop test.
+
+## Tenth amendment to usage-v4, 2026-11-12 — an input loss found during Task 6, and inputs staged under the fixture root
+
+Found during Task 6: B1's line "both retirements labelled valid still happen" read `fail` for
+every build because item `v1:W05:380` read `absent`. Nothing in the product caused it. usage-v1's
+replay reads the transcripts each B1 corpus's store names, and until now it read them where the
+machine keeps them; transcripts left that folder while the experiment ran. Replay copies made by
+the harness give the window: B1 corpus W05 held 41 readable transcripts on 2026-11-11, 38 from
+2026-11-12 04:51 and 35 from 14:09; W02 (usage-v1) 344, then 343, then 339; W02 (today's store) 508,
+507, 503. So every B1 reading made after 2026-11-12 04:51 ran on fewer sessions than the base's,
+and the base and those builds were not compared on the same input. The loss is consistent with the
+client's own removal of old transcripts; the filesystem keeps no record of when or why.
+
+Nothing labelled is lost. Every transcript the base's B1 replay read survives as the copy that
+replay made, and those copies are now the staged inputs: per corpus, readable and staged / listed
+in the store: W05 41 / 75, W02 (usage-v1) 348 / 408, W07 7 / 93, W01 0 / 3, W02 (today) 514 / 574,
+L01 78 / 102. (W02's 348 includes 4 transcripts its store names under paths that had moved before
+the base ran; their copies were found under the same names.) The extraction set's 150 transcripts
+and the W02 session log's 540 of 636 transcripts that `Stop` reads in E are staged the same way,
+and the three project repositories B1 replays (W02, W07, W01; W05 is not a repository) are staged
+as clones. All of these are frozen: a staged file is never rewritten.
+
+From now on A, B1 and E read only the staged copies (`results/usage-v4/inputs.py`). A run whose
+staged copy is gone or changed reports `missing input`, and `verdict.py` prints the rules that
+depend on it as `missing`, never as `fail` and never as a zero. Item `v1:W05:380` reads `retired`
+again on the base (score.py's rule and the earliest row), so B1's valid clause keeps both items.
+B1 figures produced before this amendment for builds measured after 2026-11-12 04:51 are
+superseded by re-reads on the staged inputs where they exist, and are not a reading otherwise.
+Re-read on the staged inputs: base 9 `loss` items retired and both valid retirements happen;
+`147bbb19ce99396e` and `b73378d27587abad` 5, both valid retirements happen.
+
+## Eleventh amendment to usage-v4, 2026-11-12 — how `muninn remember` is read, before it is built
+
+Written before any code of the command exists. Task 7 adds an explicit write path,
+`muninn remember "<statement>" --kind decision|invariant|correction|deadend`, which an agent calls
+when the user states a rule. Section A said it would be read under A2 "on its own test". A2 cannot
+be read offline for it: A2 counts what a rule adds when `extract_dump` runs over the recorded
+transcripts, and no recorded transcript holds a call to a command that did not exist. Whether
+agents call it, and what they pass, can only be seen in use.
+
+So the command is not read under A2. It ships on:
+
+- **Its tests.** Origin and trust by structure (a statement found word for word, after whitespace
+  normalisation, in a turn of the session's transcript that a person wrote is `user_said` and
+  points at that turn; anything else gets an origin whose trust is below `user_said`, never trust
+  3; no session identified means the lower origin, and the command says so); dedupe against the
+  record the extractor types from the same turn; restatement; supersession; and every reader of
+  an older store still working.
+- **A replay cell.** For every durable message of the recall set that a person wrote (label `a`,
+  design and held-out; the scoring script reads the held-out ones, the implementer does not), the
+  command is called on a copy of that message's store with the session identified and the
+  statement taken word for word from the message at its anchor. Counted, per split: recorded as
+  `user_said` with the right turn; deduped against a twin the extractor typed; recorded with the
+  lower origin (a miss of the word-for-word check); errors. The cell tests the command's
+  mechanics. It is not a reading of any rule of section A and decides nothing about the extractor.
+
+Its use in the field is not measured by this experiment. `muninn status` gains a count of
+`remember` calls so that it can be read later.
+
+## Twelfth amendment to usage-v4, 2026-11-13 — a second reading of B1 that does not key an item by kind, written after B1's valid clause read fail for Task 7's build
+
+Written after B1's valid clause read `fail` for build `1a196e3ffaa9becb` (Task 7's final build,
+one typed record per turn) and before any script was changed for it or any run made with a new
+reading. Both valid items, `v1:W02:236` and `v1:W05:380`, read `absent`. The scorer finds an item
+by its kind and a key of its text (`body like '%<key>%' and kind = <item kind>`). Both items were
+corrections in 1.2.0; the build stores the same turn as one decision whose body holds the same
+text, so no row of the item's kind exists and the item reads `absent` though the statement is on
+record. Items read `absent` rose from 53 (`5460672525ecf742`) to 73 on the same inputs.
+
+- **Second reading, kind-free.** An item is found among the typed rows of the replayed store,
+  every kind except `episode` (an episode holds the turn's literal text and is not the statement
+  record): `body like '%<key>%' and kind <> 'episode'`, ordered by `created_at, id` as now. Its
+  state is read as now: `active` if any matching row is active (score.py's rule), and the
+  earliest matching row for the earliest-row reading. The key: for the usage-v1 items, the first
+  line of the old record's body with a leading speaker label `user: ` removed, then its first 70
+  characters; for the items since 1.2.0, their key as it is (none carries a label). The label is
+  removed because the new body is the person's whole message, `user: ` followed by the message,
+  so the old opening `user: <sentence>` is found only when the sentence opens the message; the
+  sentence itself is found anywhere in it. The key is computed by the script from the labelled
+  items alone; nobody reads held-out text to write it.
+- **Which reading binds.** Where an item's kind-bound reading is `absent`, its kind-free reading
+  binds; otherwise the kind-bound reading binds. This applies to the valid clause (both valid
+  items must read `retired`, earliest row) and to the loss clause (loss items retired, score.py's
+  rule: at most the base's 9, and at most the previous build's 5 as Task 7's rulings require).
+- **Runs.** The kind-free reading is scored on base `b93d2f5c222c0424`, on `638698d49596e7c5`
+  (Task 6 as Task 7 started from it) and on `1a196e3ffaa9becb`, on the frozen inputs. On base it
+  must reproduce the base's kind-bound states; every item whose state differs is listed by id and
+  label in the report, and none is dropped.
+- **Decision.** If either valid item is not `retired` on the binding reading, or loss rises above
+  5, Task 7's extractor does not ship and is reverted with revert commits; `muninn remember`
+  stays. Otherwise B1 reads pass for the build. The kind-bound reading keeps being printed beside
+  it.
+## Thirteenth amendment to usage-v4, 2026-11-13 — a second reading of the `remember` replay cell, written after its 2 / 46 reading
+
+Written after the replay cell of the eleventh amendment read 2 of 48 durable statements recorded
+as `user_said` at the right turn and 46 at the lower origin, for build `ca1feb4e212ae65c` (Task 7
+fix round 1), and before any script change or run for this reading. Why the first reading reads
+that way: the cell passes the labelled anchor phrase, the words that state the durable thing,
+and an anchor is rarely a whole sentence. The command now refuses a fragment by design, because a
+fragment can drop a negation: a statement is the user's only as one or more whole consecutive
+sentences of their message, or the whole of it, cut by the extractor's sentence splitter
+(`extract::split_sentences`).
+
+- **Second reading.** For each of the 48 durable statements, the statement passed is the whole
+  sentence, or the consecutive sentences, of the user's turn that contain the anchor, taken
+  verbatim from the message and passed to `muninn remember` as the first reading passes its
+  statement: same store copy, same session log entry, same flags.
+- **How the sentences are obtained, mechanically, with no text read by a person.** The product
+  exposes no way to call its splitter from outside the binary, so the script reproduces it:
+  - The person's words of the turn come from the line that opens the turn (the item's byte
+    offset in the staged transcript), as `extract::persons_words` reads them. For a dialog
+    answer, the options picked, one a line. Otherwise the text with `<pasted_content>` blocks,
+    inline quotations of 40 characters or more, fenced blocks and `>` lines taken out. A message
+    that labels two or more of its lines as a conversation's speakers gives no words.
+  - These are cut by a line-for-line port of `split_sentences`. It works on the UTF-8 bytes: a
+    newline ends a sentence, and so does `.`, `!` or `;` followed by ASCII whitespace or the end,
+    outside parentheses and not an abbreviation (a stop after a word of one to three ASCII
+    letters with no ASCII capital as the next visible byte). Each piece is trimmed, and empty
+    pieces are dropped.
+  - The anchor is located in those words as the first reading locates it (case, accents and
+    punctuation folded). The statement runs from the start of the first sentence that the
+    anchor's span touches to the end of the last one.
+- **Check, and `not derivable`.** An item is `not derivable` when no anchor of its label can be
+  located in the person's words as reconstructed. Its derived statement is also `not derivable`
+  when the command does not accept it as whole sentences: the command's reason for a lower
+  origin is the word-for-word, whole-sentence one. Then the port and the product disagree, or
+  the reconstruction of the person's words does, and the item is counted apart, never as a
+  lower origin. A lower origin for any other reason (the session) is counted as `lower origin`.
+- **Counted per split**: user_said at the right turn, deduped against an extracted twin,
+  user_said at another turn, lower origin, not derivable (with how many were not located and how
+  many the command refused), errors. Both readings are reported. Neither has a threshold, and
+  neither decides anything. The first reading stays the eleventh amendment's.
+## Fourteenth amendment to usage-v4, 2026-11-14 — a defect in the E harness, found by Task 9: the full-prompt row never timed a delivery
+
+Written before any revision-5 cell ran.
+
+`muninn-bench perf` ran one prompt 300 times for its "UserPromptSubmit (full)" row. Its six
+words are among the thirty the fixture puts in about half of all 20,000 records, so no term was
+selective, recall returned nothing, and the hook ended `silence:no_match` in every run. That is
+in the bench of every build, the 1.2.0 base included. The harness's own check prompt was the
+same one, each counts file recorded `UserPromptSubmit: false` under `check_prompts_delivered`,
+and nothing gated on it. So in every E reading so far (harness revisions 1 to 4, every build and
+the base figures paired with it) the row named "UserPromptSubmit (full)" is the time of opening
+the store, the ledger lookup and an empty recall. It is not a reading of a prompt that is given
+a block. The rule's verdict on that row stood on equal work in both arms, and stays as recorded;
+what it measured was less than its name says.
+
+Harness revision 5. The candidate's bench asks, in each run, for three identifiers of one record
+of the fixture, a different record each run, and refuses the run unless every prompt is answered
+with a block. The base's bench copy is given the same two functions, copied from the candidate's
+source, in place of its one call, so both arms run the same 300 prompts: they are built from the
+fixture's records and the ledger seed alone, which revision 4 already checks are equal. After
+each run the harness reads the bench store and counts the prompts of that session that were
+given a block; fewer than the runs, on either arm, fails the run and no counts are written. The
+store check's prompt is built the same way and must deliver on both arms.
+
+The gated row, the two session-start rows and Stop are not touched by this. Rule E and its
+thresholds are unchanged. `verdict.py` is unchanged; it reads revision 3 or later.
+
+Two things the harness still cannot make equal are recorded with each run and not gated: the
+base's bench writes directory and symbol cue rows, so the base delivers no blocks at SessionStart
+and SubagentStart while the candidate does (those two rows compare a base that does less); and
+the candidate's bench goes on to time Stop and SessionEnd after the rows E reads, which the
+base's does not.
+
+- Addendum, same day, after revision 5's first run and before any revision-5 counts were
+  written. That run failed its own gate and wrote nothing: on the base arm 299 of the 300 full
+  prompts were given a block in each of the 7 runs, on the candidate arm 300 of 300. The one
+  the base left unanswered asks for a record that an earlier prompt's budget had cut: 1.2.0
+  counts a record cut for budget as delivered for the rest of the session (finding R-01, fixed
+  in the candidate), so it does not offer it again. The gate as written, every run on both
+  arms, cannot be met by the base and would have measured that defect instead of guarding the
+  row. It now reads: at least 285 of the 300 runs (95 %) on each arm, with the count of each
+  run recorded (`full_prompts_delivered_per_run`); the candidate's own bench still refuses a
+  run in which any prompt goes unanswered. The 95 % was chosen after seeing 299 and 300, which
+  is why this is written down: a p95 over 300 runs of which at most 15 delivered nothing is
+  still a reading of delivering runs. No timing figure of that failed run was read before
+  this was written; the counts were not written and its figures are not used.
+
+## Fifteenth amendment to usage-v4, 2026-11-14 — how E is staged and read from now on, written after its figures were seen
+
+This is the sixth text of usage-v4 written after seeing a figure it bears on. It was adopted
+after the E run committed as `743b5f15` (build `8ef269a377fcbf4c`), in which three read rows
+read over 1.10 times base, and after the gated row had read 1.220 in that run, 1.043 in the
+next (`d3825c2b`) and 1.111 on the final build (`cdcec478`). All three runs stand as committed.
+None is withdrawn and none is to be read as a pass of rule E: Task 9 does not claim one.
+
+What was changed between the first and the second of those runs, and was not written here at
+the time: both binaries were run from copies made at the same moment in one directory, instead
+of each from its own file. The reason was a measurement: byte-identical copies of one binary
+read 3 to 4 ms apart at process start depending on the file (4.70, 5.39 and 5.56 ms p50 for a
+fresh copy against 8.32, 5.71 and 9.43 ms for the file it was copied from, gated prompt, 150
+runs a round), and every E row includes process start. The harness was not edited for this and
+the counts are keyed by the same hashes. Earlier E readings of this plan did not control for
+it, in either direction.
+
+From this amendment on, for every E reading, Task 11's binding one included:
+
+- Staging. Both binaries are copied at the same moment into one directory and run from those
+  copies. The counts say so in the commit that carries them.
+- Runs. Three interleaved base and candidate runs of `e_perf.py`, on a machine with nothing
+  else running. All three are committed, whatever they read.
+- Reading. A row's ratio is the median of the three runs' ratios of candidate p95 to base p95.
+  Rule E's thresholds are unchanged: a read row passes at a median ratio of 1.10 or less, and
+  Stop with ingest when the candidate's median is lower in the median run.
+- SessionStart and SubagentStart. They are reported beside this sentence: the base's bench
+  writes directory and symbol cue rows, so the base delivers no block at SessionStart and
+  SubagentStart while the candidate does. Because the base cannot say whether a build
+  regressed those two hooks, they are additionally read against the previous build of the
+  plan as hook time minus process start: the median over the runs of (hook p50 minus process
+  start p50), candidate against previous build, from same-moment copies on one bench store.
+  That second reading is reported with its spread and has no threshold of its own.
+- Nothing else of rule E or of harness revision 5 changes. `verdict.py` still reads one counts
+  file a build; until it reads three, the median of the three ratios is computed from the three
+  commits and written beside its output.
+
+## Sixteenth amendment to usage-v4, 2026-11-14 — how rule F is read, written before any pattern of the rule compiler is written or run and before any F cell, and after one Codex figure was seen
+
+This is the seventh text of usage-v4 written after seeing a figure it bears on, for its first
+part only. Nothing of the rule compiler had been read, written or run when it was committed.
+
+**Codex, first clause.** The figure seen: handed an invented rollout by hand with
+`muninn ingest`, the base (`b93d2f5c222c0424`) types six records from it, two decisions, two
+corrections and two invariants. One of the six comes from a message the rollout marks as
+queued by a command (`turn_trigger: queue`) and is stored as the user's at trust 3. So "where
+the base yields none" is false of a rollout someone hands to the binary. It is true of what a
+build does by itself: 1.2.0 writes Codex hooks only when asked with `--codex`, and the review
+found no project with them. The clause is read on that route:
+
+- `f_codex.py --bin <exe> --rollout <file>` makes a project in a temporary directory with a
+  temporary Codex home beside it (both environment-overridden, the real home is never read or
+  written), runs `<bin> init` with no Codex flag, and then runs the commands that the project's
+  `.codex/hooks.json` registers for SessionStart, UserPromptSubmit, Stop and SessionEnd, in
+  that order, each with the input Codex documents for it and the rollout as `transcript_path`.
+  A build that leaves no hooks file runs no command.
+- Outcome: typed records in the store by kind and origin. The clause passes when the
+  candidate's count is above zero and the base's is zero.
+- Beside it, reported and deciding nothing: the same counts when each build is handed the
+  rollout with `muninn ingest`; and, on both routes, how many records each build stores as
+  `user_said` from a turn the rollout does not mark as the person's (a queued message, an
+  `exec` prompt, a session whose source is not the terminal or the editor). A candidate that
+  stores one is an origin defect under the ruling of the ninth amendment's class and is fixed
+  or the part is reverted.
+- Both readings are taken on the invented rollout committed as a fixture in the repository,
+  and on private copies of the real rollouts of the reviewed machine under the fixture root
+  (`codex/`), counts only. If the machine holds none, the report says so.
+
+**Codex, second clause.** One real `codex exec` session, or a few, with a short prompt that
+holds nothing private, in a new empty directory under the scratch root, with a store created
+there by the candidate and the hooks file the candidate's `init` wrote. The user's Codex
+configuration is not modified: if a run needs a Codex home, it is a copy under the scratch
+root holding only what authentication needs, deleted afterwards. The clause passes when the
+store's fire ledger holds a delivery for the session's id and the session's rollout holds the
+block as context Codex gave the model. If Codex cannot be made to run the hooks under those
+limits, the clause is reported unmeasured with the reason, never as passed.
+
+**Rule compiler, the split.** `corpora/claude-md/files` is split by file name: a file is
+`design` when the first byte of `sha256("usage-v4:" + file name)` is even and `held-out` when
+it is odd, the rule the other usage-v4 sets were split by. `f_rules_split.py` writes the
+lists, committed with this amendment in `results/usage-v4/splits/`: 330 files, 167 design and
+163 held-out. The corpus has earlier hold-out lists of its own (`holdout.txt`, `holdout2.txt`,
+`holdout-enforce*.txt`, 134 files, 65 of them in the new held-out half), which Gate 1 and
+Gate 5a read. To leave those gates as they were, patterns are developed only on the 103 design
+files that no earlier list names (`f_rules_design_readable.txt`); nobody developing a pattern
+opens another corpus file.
+
+**Rule compiler, the reading.** The previous build is `deb218345d4c700c` (worktree
+`dcaa6b185`). `muninn-bench rules --holdout f_rules_heldout.txt` gives the enforceable share
+of the held-out half for the previous build and for the candidate; it is run on the held-out
+half once per pattern set, after the set is frozen on the design half. A rule is newly
+enforceable when the candidate classes it enforceable and the previous build does not. Every
+newly enforceable held-out rule is listed with its emitted control in the task report, which
+is public text, and the task's reviewer is the reader rule F names. A family ships when the
+held-out share rises and the reader agrees with every one of its rules. A family with one
+disagreement is narrowed or dropped, and what is left is read again only on rules the narrowed
+family had not been developed against; the report says how many such rules were left. Gate 1
+(`rules --labels … --strict`) and Gate 5a (`enforce`) must still pass at their thresholds.
+
+**`muninn-bench replay`.** A tool, decided by no rule. It is reported with the comparison of
+its counts against `a_extract.py` and `c_delivery.py` on the same private fixture for the
+same build, and with the counts it does not cover named.
+
+## Seventeenth amendment to usage-v4, 2026-11-14 — the rule compiler's held-out reading leaves out a sentence the design half also holds, written after the 238 to 239 figure
+
+This is the eighth text of usage-v4 written after seeing a figure it bears on, and it moves
+the reading in the stricter direction. The figure: with the one form kept after the sixteenth
+amendment's readings (`3aed48ad`), the held-out half read 238 enforceable rules of 3,585
+before and 239 after. The task's review then found that the one rule newly marked there is,
+word for word, a sentence that is also in a file of the readable design list, the one the
+form was developed on.
+
+From this amendment on a rule of the held-out half counts as newly enforceable only when its
+text does not appear verbatim in any file of the design half. A sentence both halves hold was
+seen while the pattern was written and is not held-out. Read so, the kept form's gain is 238
+to 238: it does not raise the enforceable share, rule F is not met, and the form is not
+shipped. The review also found it denies outright a rule that holds only under a condition.
+The rule compiler part of rule F therefore closes with three families tried and none shipped;
+every figure committed so far stands as committed.
+
+## Eighteenth amendment to usage-v4, 2026-11-14 — a B1 replay read files outside its own directory, written before the final B reading
+
+Written before the final build's B reading and before `b_retire.py` is changed for it. It
+changes no rule and no threshold. It does not follow a figure it bears on: the one record it
+was found through is not a labelled item, and no rule row moved.
+
+Found by Task 9: a correction typed from a turn that touched one file outside the project keeps
+that file's absolute path as its anchor. The engine hashes the file where the path points when
+it ingests the record, and the validator hashes it again at every `maintain`; a file that
+reads differently retires the record as `anchor_changed`. That is what the engine is meant to
+do in a real store. In a B1 replay it makes the result depend on the machine: the file belongs
+to a project on the owner's disk, outside the replay directory and outside the staged inputs
+of the tenth amendment, and its owner can edit it while the replay runs. Seen once: correction
+#4317 of today's W02 corpus, active in the replay of `e089b6763045d4e3` and retired
+`anchor_changed` in the replay of `deb218345d4c700c`, whose file was written during that run.
+In that replay 15 corrections of three corpora carry such an anchor, 12 of them with a hash.
+
+- **How the final B reading neutralises it: skipped, not staged.** In a B1 replay a record whose
+  anchor resolves outside the replay directory is not validated against the live file. Before
+  every `maintain` of a replay, and once more when the replay ends, the stored hash of each
+  such record is cleared (`anchor_hash` set to NULL), which is the state the same record has on
+  a machine where the file does not exist: the validator reads only records that hold a hash.
+  Nothing else of the record is touched, and anchors inside the replay directory are validated
+  as before. Staging was not chosen because the engine opens the path the transcript names; to
+  point it at a frozen copy the transcripts would have to be rewritten.
+- **Both arms.** The base is replayed again under the same harness in the same sitting as the
+  final build, and B1 is read from those two replays. The number of records skipped in each
+  corpus is written to the counts.
+- **`replay.py` stays as usage-v1 committed it.** `b1_replay.py` runs it unchanged and steps in
+  only before a `maintain` call. The change to `b_retire.py` is its own commit, after this one
+  and before any run.
+- **Earlier readings.** B1 figures committed before this amendment stand as committed. The
+  results say which of the records concerned are labelled B1 items, by id and label, and
+  whether any replay still on disk holds one retired by the validator.
+
+## Result of usage-v4, 2026-11-14
+
+Read on the build that ships, commit `5afb51960`, binary `8ea5e788aecf33e2`, against 1.2.0
+(`b93d2f5c222c0424`), on the frozen inputs. `results/usage-v4/RESULTS.md` has every figure, the
+table of every change, the texts written after a figure and the weaknesses of the
+measurement. Held-out where the rule is held-out.
+
+| rule | base | final build | verdict |
+|---|---|---|---|
+| A1, filters-only arm | noise 55, durable 13 | noise 38 (30.9 % removed), durable 13 | pass, by one item |
+| A2, per recall rule, added durable / added noise | | +1 / +0, +4 / +4, +1 / +0 | pass |
+| A3 | precision 0.2174, recall 0.16 | no extractor shipped | not claimed |
+| B1 | 9 `loss` items retired; both valid retired | 5; both valid retired | pass |
+| B2 | 7 retired; serves B; 0 of 2 | 0 retired; serves A and not B; 1 of 1 | pass |
+| B3 | 18/30, 10/30; `kept_b` 23/30; noise 3/30 | the same | pass |
+| C1 | unrelated 143, useful 10 | unrelated 72, useful 9 | pass |
+| C2 | 436.9 tokens | 305.1 on 17 prompts with the same ids | pass |
+| C3 | 0 of 12; 0 of 5; 0 of 1; twin served in 13 and 4 prompts | 11 of 11; 9 of 9; 1 of 1; 0 and 0 | pass |
+| C4, as amended | 0.2027 / 0.0997; 213 neither shown nor listed | 0.2488 / 0.1220 on frozen labels; 151; closing line truthful in 7 of 7 stores | pass; as registered, not met by either build |
+| C5 | 27; 0 of 69; 0 of 15; 0 and 18 of 30 | 27; 55 of 69; 15 of 15; 20 and 21 of 30 | pass |
+| D | 0 ledger rows from a cue of the parts; 0 vectors | graph, cues, `PostToolUse`, turn-context log and sidecar removed; commit-subject decisions kept (B2's revert reads 0 of 1 without them) | read as registered |
+| E, median of three ratios | | SessionStart 1.148, SubagentStart 1.274, full prompt 0.965, gated prompt 1.087; `Stop` 235.1 → 70.7 ms | **fail** on SessionStart and SubagentStart; pass on the other three |
+| F, Codex | 0 typed records on the route a build installs | 5 and 79; one real session delivered (counts of `209bcab355dcde4c`) | pass |
+| F, rule compiler | 238 of 3,585 enforceable | 238 of 3,585; three families tried, none shipped | nothing shipped |
+
+Rule E fails as registered on the two rows where the base's bench store delivers no block and
+the final build's does (fourteenth and fifteenth amendments). Read against the previous build
+as hook time minus process start, SubagentStart is no slower (−0.12 and −0.37 ms) and
+SessionStart reads +0.17 and −0.39 ms, inside what the procedure can resolve. Nothing was
+tuned or reverted for it. The three E runs were taken on a desktop in use, with process start
+at 6.4 to 8.4 ms p50 where earlier runs read 4.4 to 4.7.
+
+*Added 2026-11-14, after review of this result.* Rule B3's cells are equal, but the same
+evaluator's `served_ok` and `old_served` are not: 11/30 and 8/30 on 1.2.0 against 2/30 and 0/30
+on the final build (adjacent order), on every build from Task 6 on. The evaluator reads `muninn
+recall` with a three-word topic, which the command has gated since Task 3. A diagnostic written
+after the figure (`b3_path.py`, deciding no rule) reads the same stores through the prompt
+hook and the session start: the new value is in the context, with the old one absent, in 18
+and 15 of 30 cells on 1.2.0 and in 20 and 17 on the final build. In the prompt hook alone, in
+blocks order, it is in 4 and then 2. The three E runs departed from the fifteenth amendment's
+condition of a machine with nothing else running; `RESULTS.md` says so under its weaknesses.
+The fifth amendment and the body of the fourteenth also followed E figures.
+
+Eight texts of this registration say of themselves that they follow a figure they bear on
+(seventh, eighth, twelfth and thirteenth amendments, the addendum to the fourteenth, the
+fifteenth, sixteenth and seventeenth); the second, third, fourth and ninth were written after
+base figures or another task's figure and before the cells they govern. `RESULTS.md` says what
+each changed and in which direction.
+
+## Nineteenth amendment to usage-v4, 2026-11-14 — the build was changed after the final reading, and the readings are repeated on the fixed build; written after figures were seen
+
+This text is written after the Result above and after every figure in it was seen. It changes
+no rule and no threshold. It is committed before any cell below runs on the fixed build.
+
+**What was found, and how.** A review of the whole branch, after the Result, found three defects
+by probes outside the registered cells: invented transcripts put through the `Stop` hook of the
+released binary (`02931d4b41072f92`, the sources of `8ea5e788aecf33e2`) and of 1.2.0, and the
+store read afterwards. No registered cell reads any of them.
+
+- A statement the person types in the turn whose agent hands a copy of it to a worker was lost
+  when the worker's session was read first: revoked as an agent's, with no health check
+  showing it. 1.2.0 keeps it in both orders. The order probes of this plan had the shape
+  "the coordinator's own prompt is a word of the user's" but never one where that word is the
+  sentence the task copies.
+- The episode of a turn whose command failed stopped being served by `muninn recall` and the
+  prompt hook once the same command passed later, or failed again with another count. 1.2.0
+  serves it. C3's twin arm reads only turns whose typed statement was replaced.
+- An older statement read after a newer one retired the newer one. 1.2.0 does the same for two
+  sessions read out of order; this plan added a route to it, the release of a last message
+  nobody answered. B1 replays each corpus in one order, and B2 and B3 write their sessions in
+  the order of their dates.
+
+**The build was changed after the final reading.** Commits `b2df1cc70`, `90a8461d9`,
+`fd21ec766`, `5f32df6b5` and `fc8e6d8c9` on `8c0ca179c`, binary `4617c4d527b399f0`, built with
+the toolchain of the final build. Besides the three fixes it carries two changes no cell reads:
+`muninn remember` says when the record it found is retired, and `init` says that the Codex
+hooks file names this machine's binary. Each fix has tests that fail on the build before it.
+
+**What is repeated on the fixed build**, on the frozen inputs, one run at a time:
+
+- the order probes (`orderprobe` default, typed and events, `rprobe`, `vprobe`, `qprobe`,
+  `kprobe`), every line 0 bad, with the review's shapes added where a probe can hold them;
+- B under the eighteenth amendment's runner, the base replayed again in the same sitting: both
+  B1 readings, B2, B3, and the `b3_path.py` diagnostic;
+- A, and the `remember` replay cell in both readings;
+- C, all of it; C3's twin arm is the one the second fix bears on;
+- D's check that delivery returns the same record ids, against `187d91a1431ab6ac` as before
+  and against the final build `8ea5e788aecf33e2`; a prompt whose ids differ is listed by its
+  item id beside the fix that explains it, or reported as unexplained;
+- F through `f_codex.py`, with no new `codex exec` session: the second clause stands on the
+  committed counts;
+- `verdict.py --split`;
+- E as the fifteenth amendment says: same-moment copies, three interleaved runs, the median of
+  the three ratios. The machine is the owner's working desktop; what else was running is
+  written beside the counts;
+- `perf --strict` on Windows and under Linux, with the rest of the CI list.
+
+**How they are read.** These readings replace the final ones where they differ, and
+`RESULTS.md` keeps the earlier figure beside the new one. A reading that is worse than the
+final build's because of a fix is reported with the fix it points at. Nothing is tuned for it
+and no cell is run twice to choose a figure. If a fix cannot be kept without a labelled
+reading getting worse, that fix is left out of the build, the trade-off is reported as found,
+and the other fixes ship.
+
+**Known before any run, by reading the fixes.** The first and third fixes act only when a
+session is read after a newer one, or when a statement meets a record revoked as an agent's;
+a replay that reads its sessions in date order with no handed-over task should not move. The
+second fix lets `recall` return episodes it skipped, so C and D's id check can move on a
+prompt that reaches a turn holding a retired dead end.
+
+*Added 2026-11-14, after the first probe reading on `4617c4d527b399f0` and before any other
+cell.* The order probes were run first, on that build's sources, and one line was not 0 bad:
+`orderprobe typed`, the coordinator's own prompt on the same subject, read 13 bad of 384
+(coordinator-first serves less), where the final build reads 0. The third fix caused it. It
+compared the date of the record a new statement would retire, and a worker's copy of a
+statement moves the statement to the worker's turn; a coordinator's own prompt dated before
+that turn then left the statement alone, and it stayed active beside its replacement once the
+copy was undone. The probes are the check that fix was given, so the fix was narrowed and not
+left out: a record a standing restatement moved while it was active is compared by the date it
+had before the move (commit `7bd930eb7`, binary `366bb7913a35be7a`). That is a change made
+after a figure was seen, and it gives something up: a statement the person said again while it
+was current is not protected from an older change read later, as on the final build. Every
+reading below is taken on `366bb7913a35be7a`; no other cell was run on `4617c4d527b399f0`.
+Two probe modes were added for the review's shapes before either build was read on them
+(`orderprobe stated` and `dates`); their figures on the sources of the final build are
+reported beside those of the fixed build.
+
+*Added 2026-11-14, after a second review of the fixed build `366bb7913a35be7a` and after its
+figures were seen; before any cell runs on the build that follows.* The second review, again
+by probes outside the cells, left three things, and the build was changed for them (commits
+`39d514317`, `8ff2daa7d` and `53d068f84` of the branch):
+
+- R1. A record the person revoked was put back by a session dated before the revocation and
+  read after it. The review's probe: active again on the fixed build and on the final one,
+  still revoked on 1.2.0.
+- R2. An older statement read after the one that replaces it stayed current beside it, with no
+  mark; and a statement said again while current was retired by an older change read later
+  (of four read orders of "A, B, A again" one was right). The end state is now to be what
+  reading in date order leaves, for the rules that can be read from both records.
+- R3. With two coordinating sessions, a change typed in one coordinator's prompt could end
+  retired with nothing current on the subject: 5 of 384 orders on the fixed build, 0 on 1.2.0.
+
+Repeated on the new build, frozen inputs, one run at a time: the order probes in every mode,
+with the review's shapes and its two-coordinator enumeration read on the base, on
+`366bb7913a35be7a` and on the new build; B in full, with the base replayed again; A; the
+`remember` cell; C; D's id check; F; `verdict.py --split`. E's read rows are not repeated
+unless a file a read hook executes changed, which the diff of the two builds decides; if only
+the write path changed, one reading of `Stop` with an ingest, base against the new build, is
+taken and the read rows remain those of `366bb7913a35be7a`. A labelled reading made worse by
+one of the three is reported with it and not tuned. If the second change costs a labelled B1
+item, the rule that cost it keeps both records active and the report says so.
+
+Known before the runs, from the probes used as tests while the changes were written: `orderprobe
+typed` reads 0 bad, with one more order of 384 ending in a marked silence than before
+(52 for 51); the new `stated` line that read 5 bad reads 0; "A, B, A again" ends the same in
+its six read orders.
+
+*Added the same day, before any cell finished.* The probes and the review's scripts were run
+first on the build of `53d068f84` (`841c9f61f0ded8d1`). The review's two-coordinator
+enumeration read 4 of 384 there, not 0: the change was no longer revoked, but it was left
+retired with a mark, which the implementer's own probe counts as allowed and the review's does
+not. One more commit (`b53d75ed6`, binary `c11855d8ae39af2e`) closes it, and that enumeration
+reads 0 of 384 on it. The run on `841c9f61f0ded8d1` was stopped while the first A cells were
+writing; its counts were deleted and are not committed. Every reading of this round is taken
+on `c11855d8ae39af2e`.
+
+*Added 2026-11-15, before B is read on `c11855d8ae39af2e`.* On 2026-11-14 the probes, A, the
+`remember` cell, C, F and the `b3_path` diagnostic ran on that build and their counts are on
+disk, not yet committed. B did not: its first attempt ended in 97 seconds for the base and in
+124 for the candidate, with two of the six replays exiting non-zero without output on each
+arm, and `b_retire.py` refused to write. The six replays of the base, run one at a time
+afterwards from the same staged inputs, all exited 0. A second attempt was cut off when the
+session that ran it was restarted. The cause of the first failure is not known, because the
+harness dropped a failed replay's stderr. `b_retire.py` is changed in the commit that carries
+this note to keep that stderr in the private work directory; nothing else of the harness
+changes, and no rule. B is then run in full, the base first, and D's id check, the verdicts
+and one `Stop` reading after it. Whatever the B attempt reads is committed; if it fails
+again, the kept stderr is reported.
+
+*Added 2026-11-15, after B was read on `c11855d8ae39af2e` and before any cell on the build that
+follows.* B ran on both arms and is committed as read. It is worse than the fixed build's on one
+labelled item: `v1:W02:1508`, a `loss` item, is retired where it was active, B1 reads 6 losses
+for 5, and the twelfth amendment's binding reading (no more than the base's 9 and no more
+than 5) fails. The row was retired with, as its heir, a decision dated twelve minutes after it
+and read before it: the reversal of the rule by a decision's words, the second of the three
+changes of this round. This was foreseen in the note above and its outcome was fixed there:
+that rule is no longer reversed. An older decision read after the one that would replace it
+by its words stays active and the two are marked as in conflict (commit `b2e10dc55`, binary
+`329880d405f39cba`). The key, a correction said again and a bare quantity stay reversed; none
+of them moved a labelled item. This is a change made after a figure and it follows the rule
+written before the figure.
+
+The mark is read where a block is rendered, so a file the read hooks execute changed
+(`muninn-core/src/filter.rs`, `recall.rs`). E is therefore read again in full on
+`329880d405f39cba`, as the fifteenth amendment says, with `perf --strict`. Also repeated on
+it, all of them: the probes, A, the `remember` cell, B with the base replayed again, C, D's id
+check, F and the verdicts. These readings are the round's; those of `c11855d8ae39af2e` stay
+committed beside them.
+
+*Added the same day, before any cell finished on `329880d405f39cba`.* The order probes, run
+first, read 36 and 24 bad orders of 5,472 and 3,528 on the default line of that build, where
+every earlier build read 0. The commit that added the mark had also made an active record
+said again look for a word dated between its two sayings, and it took a record that a
+restatement had moved there for one first said there. That is corrected in `fc7c1a6fc`,
+binary `692e382f2056ebd5`, on which the default line reads 0 again. The run on
+`329880d405f39cba` was stopped during A and its counts deleted. Every reading of the round is
+taken on `692e382f2056ebd5`.
+
+*Third dated note, 2026-11-15, after the readings of `692e382f2056ebd5` and the Result written
+for it, before any cell on the build that follows.* A third review read `692e382f2056ebd5`
+with invented sessions (`fu.py`) and found a defect this round introduced. A worker's session
+read before anything says it is an agent's, then an older session of the person's, then the
+coordinator: the worker's row retires the person's statement from the older side (the
+reversal of the quantity rule, and by reading the key and the correction rule), and when the
+row is revoked as an agent's copy the statement is not given back. Nothing is current. The
+fixed build `366bb7913a35be7a` and 1.2.0 end with the statement current. The build is changed
+for it in one clause of `agent/undo.rs` (commit `1b1179620`, binary `c7aa624fd41924ba`); no
+file a read hook executes changes, so E is not read again. Repeated on that binary: the three
+reviews' probes, the order probes, B in full with the base replayed, D's delivery ids, and the
+verdict, with A, the `remember` cell, C and F, which the verdict reads. The review also left three
+things that are not changed in code and are written into the documents as open, with the
+counts these probes give on `c7aa624fd41924ba`: "A, B, A again" under the correction, key and
+quantity rules; "A, B, A, B" under the rule by a decision's words; and that a conflict mark is
+never removed while `muninn why` opens with `sufficient` above it.
+
+*Fourth dated note, 2026-11-15, after the readings of `c7aa624fd41924ba` and the Result written
+for it, before any cell on the build that follows.* A check of the closing fix found another
+shape of the same defect (`fu.py giveback`): two older statements of the person's, the second
+replacing the first, under one worker's row, the coordinator read last. On
+`c7aa624fd41924ba` the order worker, first, second, coordinator ends with both statements
+current and unmarked, and the order worker, second, first, coordinator with nothing current.
+`366bb7913a35be7a`, which never retired an older record under a later one, ends both with the
+second current. Two patches of the undo each left a shape, so the reversal itself is taken
+out: by the key, a correction said again and a bare quantity, as already by a decision's
+words, an older record read after the one that would replace it stays on record and the two
+are marked as in conflict. The undo clause of `1b1179620` is removed, and the clause of
+`53d068f84` that spared what a restatement retired; one clause of the round stays in
+`agent/undo.rs`, the one the two-coordinator case needs. Commit `f27eaf126`, binary
+`7132eaf247650b8d`. No file a read hook executes changes against `1b1179620`, and E is not read
+again. Repeated on that binary: the reviews' probes with `giveback`, the order probes, B in
+full with the base replayed, D's ids, and the verdict with A, the `remember` cell, C and F.
+The order probe's line for a quantity read in both orders was written for the reversal and
+is expected to read the older-last order as "both active and marked"; it is reported as it
+reads. The Result of `c7aa624fd41924ba` above is superseded by the one written after these
+cells.
+
+## Result of usage-v4 on the fixed build, 2026-11-14
+
+Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
+the nineteenth amendment says. The Result above is the reading of the final build and stands
+as written; this one replaces it where the two differ. `results/usage-v4/RESULTS.md`, section
+"After the final review", has the tables.
+
+| rule | final build | fixed build |
+|---|---|---|
+| A1, A2, A3; the `remember` cell | as above | equal on every leaf |
+| B1 | 5 `loss` items retired; both valid retired | the same; every labelled item's state equal |
+| B2, B3 | as above | equal |
+| C1 to C5 | as above | equal on every leaf |
+| D | same ids on 150 of 150 prompts against `187d91a1431ab6ac` | the same, and 150 of 150 against the final build |
+| E, median of three ratios | SessionStart 1.148, SubagentStart 1.274, full prompt 0.965, gated prompt 1.087; `Stop` 235.1 → 70.7 ms | 1.176, 1.413, 0.998, 1.091; `Stop` 220.6 → 61.7 ms: **fail** on the same two rows, pass on the other three |
+| F, Codex | 5 and 79 | equal |
+
+No verdict changed. Outside the rules, B1's store totals moved in the two corpora of one
+project: records retired with an older record as heir went from 5 to 0 in each. The order
+probes read 0 bad on every registered line. Of the two modes added for the review's shapes,
+one reads 0 bad of 8 where the final build's sources read 4, and the other reads 5, 0 and 64
+bad of 384 on its three lines where the final build's sources read 75, 0 and 64: two cases
+around the first defect are still open and `RESULTS.md` describes them.
+
+Every E ratio is higher than on the final build. No fix touches the two failing hooks, and
+read directly against the final build as hook time minus process start the fixed build is
+between 0.23 ms faster and 0.17 ms slower. The three runs were again taken on a desktop in
+use.
+
+## Result of usage-v4 on the follow-up build, 2026-11-15
+
+Read on commit `fc7c1a6fc`, binary `692e382f2056ebd5`, against 1.2.0, on the frozen inputs, as
+the notes of 2026-11-15 under the nineteenth amendment say. The two Results above stand as
+written; this one replaces them where they differ. `results/usage-v4/RESULTS.md`, section
+"After the second review", has the tables.
+
+| rule | fixed build | follow-up build |
+|---|---|---|
+| A1, A2, A3; the `remember` cell | as above | equal on every leaf |
+| B1 | 5 `loss` items retired; both valid retired | the same; every labelled item's state equal |
+| B2, B3 | as above | equal |
+| C1 to C5 | as above | equal on every leaf |
+| D | same ids on 150 of 150 prompts | the same, against the fixed build and against `187d91a1431ab6ac` |
+| E, median of three ratios | SessionStart 1.176, SubagentStart 1.413, full prompt 0.998, gated prompt 1.091; `Stop` 220.6 → 61.7 ms | 1.191, 1.526, 0.984, 1.075; `Stop` 216.7 → 59.7 ms: **fail** on the same two rows, pass on the other three |
+| F, Codex | 5 and 79 | equal |
+
+No verdict changed. One build of the round, `c11855d8ae39af2e`, did change one: B1 read 6
+losses and failed the twelfth amendment's binding reading. The change that caused it, applying
+the rule by a decision's words to an older record read last, was replaced by a conflict mark
+between the two records, and the reading above is of the build without it. Outside the rules,
+B1's store totals differ from the fixed build's by one commit-linked decision in each of two
+corpora, retired by key.
+
+The order probes read 0 bad on every registered line and on the review's enumeration of two
+coordinators (5 of 384 on the fixed build). The line "said before and since replaced" still
+reads 64 of 384. `RESULTS.md` lists what is open.
+
+The `Stop` pair is the run with the middle difference of three. For this build it is also the
+middle of each column; for the fixed build the columns' middles were 221.1 and 63.5. The two
+failing E ratios are higher than on the fixed build, and read against it directly the session
+start is 0.15 and 0.07 ms slower in two readings, inside the 0.4 ms the comparison resolves.
+Two files the read hooks execute changed in this round. The runs were again taken on a desktop
+in use.
+
+## Result of usage-v4 on the closing build, 2026-11-15
+
+Read on the worktree's `1b1179620`, binary `c7aa624fd41924ba`, as the third dated note under
+the nineteenth amendment says. A, the `remember` cell, B, C, D, F and `b3_path` are equal on
+every leaf to `692e382f2056ebd5`, but for the seconds a replay took, and `verdict.py` prints
+the same rows. The Result above stands for every rule; its E figures are those of
+`692e382f2056ebd5`, and no file a read hook executes has changed since.
+
+The defect the third review found reads 0 of 6 orders where `692e382f2056ebd5` read 1. The
+order probes and the two-coordinator enumeration read as on that build. What the review left
+unfixed is counted in `results/usage-v4/RESULTS.md`, section "After the third review": a
+statement said again after its replacement is not always current under the correction, key
+and quantity rules, a decision and its replacement each said twice can end both active, some
+of those unmarked, and a conflict mark is never removed.
+
+## Result of usage-v4 on the build without the reversal, 2026-11-15
+
+Read on the worktree's `f27eaf126`, binary `7132eaf247650b8d`, as the fourth dated note under
+the nineteenth amendment says. It replaces the Result of the closing build above. A, the
+`remember` cell, C, D, F and `b3_path` are equal on every leaf to `c7aa624fd41924ba`; B is equal
+on every leaf to the fixed build `366bb7913a35be7a` but for the seconds a replay took; and
+`verdict.py` prints the same rows. No verdict changed. The E figures are those of
+`692e382f2056ebd5`: `filter.rs` and `recall.rs` are as on that build, and the mark they read is
+now written by three more rules.
+
+One and two older statements under a worker's row end, in 6 and 24 read orders, as the fixed
+build ends them. The order probes read 0 bad on every registered line; "said before and
+replaced" still reads 64 of 384. What the reversal had bought is given back: two sessions
+read in either order no longer end the same under the key, the correction and the quantity
+rule, they end with both statements on record and a conflict mark.
+`results/usage-v4/RESULTS.md`, section "The reversal taken out", counts it.

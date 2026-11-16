@@ -1,0 +1,93 @@
+{
+ "candidate": {
+  "bench_sha256": "71e89b5b70ef6086",
+  "by_class": {
+   "enforceable_hook": 124,
+   "enforceable_permission": 142,
+   "interpretive_only": 3265
+  },
+  "by_pattern": {
+   "file.doc_create": 5,
+   "file.generated": 2,
+   "file.protected_path": 29,
+   "file.root_create": 4,
+   "file.secrets_read": 2,
+   "git.add_all": 5,
+   "git.amend": 5,
+   "git.commit": 18,
+   "git.commit_path": 14,
+   "git.destructive": 7,
+   "git.force_push": 8,
+   "git.no_verify": 4,
+   "git.protected_branch": 9,
+   "git.push": 14,
+   "none": 3250,
+   "process.ask_before": 1,
+   "process.ask_before_unmapped": 9,
+   "process.ask_if_unsure": 6,
+   "process.before_commit": 72,
+   "process.before_pr": 2,
+   "process.dependencies": 1,
+   "process.deploy": 1,
+   "process.full_suite": 3,
+   "shell.kill": 3,
+   "shell.named_command": 48,
+   "shell.rm_rf": 5,
+   "shell.sudo": 3,
+   "shell.written_invocation": 1
+  },
+  "candidates": 3531,
+  "enforceable": 266,
+  "enforceable_share": 0.07533,
+  "files": 167
+ },
+ "control_changed": 0,
+ "control_changed_by_pattern": {},
+ "half": "design",
+ "newly_enforceable": 1,
+ "newly_enforceable_by_pattern": {
+  "shell.written_invocation": 1
+ },
+ "no_longer_enforceable": 0,
+ "previous": {
+  "bench_sha256": "39b01e658f357e8d",
+  "by_class": {
+   "enforceable_hook": 123,
+   "enforceable_permission": 142,
+   "interpretive_only": 3266
+  },
+  "by_pattern": {
+   "file.doc_create": 5,
+   "file.generated": 2,
+   "file.protected_path": 29,
+   "file.root_create": 4,
+   "file.secrets_read": 2,
+   "git.add_all": 5,
+   "git.amend": 5,
+   "git.commit": 18,
+   "git.commit_path": 14,
+   "git.destructive": 7,
+   "git.force_push": 8,
+   "git.no_verify": 4,
+   "git.protected_branch": 9,
+   "git.push": 14,
+   "none": 3251,
+   "process.ask_before": 1,
+   "process.ask_before_unmapped": 9,
+   "process.ask_if_unsure": 6,
+   "process.before_commit": 72,
+   "process.before_pr": 2,
+   "process.dependencies": 1,
+   "process.deploy": 1,
+   "process.full_suite": 3,
+   "shell.kill": 3,
+   "shell.named_command": 48,
+   "shell.rm_rf": 5,
+   "shell.sudo": 3
+  },
+  "candidates": 3531,
+  "enforceable": 265,
+  "enforceable_share": 0.07505,
+  "files": 167
+ }
+}

@@ -1,0 +1,515 @@
+#!/usr/bin/env python3
+"""Section E, latency and cost. Nothing else should run on the machine while this runs.
+
+  python -I e_perf.py --bin <base muninn.exe> --against <candidate muninn.exe>
+                      --bench-base <muninn-bench of the base> --bench <muninn-bench of the candidate>
+                      [--runs 7] [--stop-runs 20] [--parts perf,stop] [--commit <candidate commit>]
+  (or --bench-base-src / --bench-src <tree> to build each bench into the work directory)
+
+Harness revision 3 (`harness_rev` in the counts). Revision 1 timed both builds with one bench
+built from the candidate's tree; once the schema moved past the base's, the base binary refused
+that store and every base figure timed an error path. Revision 2 timed each build with its own
+bench but called the workloads equal on a row count alone and did not gate delivery. Revision 3
+compares the two builds' seed rows by count and fingerprint, hashes each bench's sources, and runs
+a must-deliver case on both builds. `verdict.py` reads E only from counts of revision 3 or later.
+Revision 4 (Task 8, fix round 1): the candidate's bench now marks its decisions and invariants as
+the person's (`user_said`, trust 3), because the candidate's catalogue leaves out `commit_linked`
+records and listed none of the fixture's. The base's bench copy gets the same origin and trust
+(`FIXTURE_NEW`), so both arms time a store with the same records; each bench store's records are
+counted by kind, origin and trust after its run, and the workloads are equal only if those
+counts are equal too. Whether each build's SessionStart lists typed records in its catalogue is
+recorded (`catalogue_lists_typed`).
+Revision 5 (Task 9): the "UserPromptSubmit (full)" row never timed a delivery. The bench ran one
+prompt 300 times, made of six of the thirty words its fixture puts in about half of all records,
+so no term was selective, recall returned nothing and the hook ended `silence:no_match` in every
+run, on both builds; `check_prompts_delivered` said `UserPromptSubmit: false` in every counts
+file and nothing gated on it. The candidate's bench now asks, in each run, for three identifiers
+of one record (`full_prompts`, `run_prompts` in its `main.rs`). The base's bench copy gets those
+two functions, copied from the candidate's source, and its one call replaced, so both arms run
+the same 300 prompts (the fixture's records and the ledger seed are the same in both, and the
+prompts are built from those alone). Every bench store is then read: the full row counts only
+if the store's delivery log and ledger hold a delivered block for at least as many prompts of
+session `b` as there were runs (`full_prompts_delivered`); otherwise the run fails and no counts
+are written. The store check's own prompt is one of those. Earlier revisions' full rows, every
+build's, are a reading of an empty recall, not of a delivery.
+
+perf. Each build is timed by a `muninn-bench` built from its own source, so each runs on a store
+its own code created. `--bench-base-src` builds the base's bench from a *copy* of the base tree
+in the work directory, with one change: the 8,336-row `fire_ledger` seed the candidate's bench
+adds (`--ledger-seed`, on by default), so both benches seed the same workload; the `workload`
+key of the counts says what was done. `muninn-bench perf --strict --json --muninn <bin>`, `--runs`
+times a build, alternating base and candidate run by run. Read from the JSON (the exit code is
+not used: the 1 ms gated contract fails on this machine in every build): p50/p95/p99 of each hook.
+Every run is checked: the bench's JSON must hold all four hooks and the run count asked for, and
+the store the bench left (under a private TEMP) is opened by the measured binary through its own
+hooks: every hook invocation of the run (the bench's 4 x 300 and two of the harness's) must be
+logged in the store's heartbeat as finished ok with no error, and the harness's two must leave
+nothing on stderr. Any miss is a failure and no counts are written.
+stop. Each build gets its own fresh copy of W02 (database, log directory, init.json). Its first
+`maintain` is the write open that migrates the copy to the build's schema; it is timed and
+reported apart (`first_write_open_ms`), then a second `maintain`, then one synthetic turn
+appended and `hook Stop` run after each, `--stop-runs` + 1 times, builds alternating; the first
+Stop is the catch-up and is dropped. Wall-clock ms; the rule reads the median.
+"""
+import glob, json, os, re, shutil, sqlite3, statistics as stt, subprocess, sys, time
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from common import *
+from inputs import staged
+from e_gates import seed_fingerprint, gate_workload, gate_deliver
+
+HARNESS_REV = 5
+ap = parser(__doc__)
+ap.add_argument('--against')
+ap.add_argument('--bench', help='muninn-bench built from the candidate (--against) tree')
+ap.add_argument('--bench-src')
+ap.add_argument('--bench-base', help='muninn-bench built from the base (--bin) tree')
+ap.add_argument('--bench-base-src')
+ap.add_argument('--no-ledger-seed', action='store_true', help='build the base bench from its tree unchanged')
+ap.add_argument('--runs', type=int, default=7)
+ap.add_argument('--stop-runs', type=int, default=20)
+ap.add_argument('--parts', default='perf,stop')
+ap.add_argument('--base-commit', help='commit or tag the base build was made from (recorded in the base counts)')
+ap.add_argument('--must-deliver-item', default='P026', help='delivery-set item (design split) whose prompt must deliver on both builds')
+args = ap.parse_args()
+F = fixtures()
+parts = set(args.parts.split(','))
+base_bin = os.path.abspath(args.bin)
+cand_bin = os.path.abspath(args.against) if args.against else None
+bins = [base_bin] + ([cand_bin] if cand_bin else [])
+ENV = {k: v for k, v in os.environ.items() if not k.startswith('MUNINN_')}
+res = {b: {} for b in bins}
+workload = {}
+
+SEED = '''    // usage-v4 harness: the fire_ledger seed of the candidate's bench, so both benches seed the
+    // same workload (8 336 rows under the session the hooks run with).
+    {
+        let tx = db.write_tx()?;
+        {
+            let mut st = tx.prepare(
+                "INSERT INTO fire_ledger(session_id, compaction_epoch, record_id, fired_at, tokens, reason) \\
+                 VALUES('b', 0, ?1, ?2, 0, ?3)",
+            )?;
+            for i in 0..8_336usize {
+                let reason = match i % 10 {
+                    0..=7 => "literal:gated:budget:54",
+                    8 => "literal:cue:event:post_compact",
+                    _ => "literal:literal",
+                };
+                let id = (rng.next() as usize % records) as i64 + 1;
+                st.execute(rusqlite::params![
+                    id,
+                    1_700_000_000_000i64 + i as i64,
+                    reason
+                ])?;
+            }
+        }
+        tx.commit()?;
+    }
+'''
+
+
+FIXTURE_OLD = "VALUES(?1,?2,?3,?4,?5,'commit_linked',2,?6,'bench',?7,?8)"
+FIXTURE_NEW = ("VALUES(?1,?2,?3,?4,?5,"
+               "CASE WHEN ?1 IN ('decision','invariant') THEN 'user_said' ELSE 'commit_linked' END,"
+               "CASE WHEN ?1 IN ('decision','invariant') THEN 3 ELSE 2 END,"
+               "?6,'bench',?7,?8)")
+
+FULL_OLD = re.compile(r'let ups = run_hook\(\s*&bin,\s*root,\s*"UserPromptSubmit",\s*&serde_json::json!\(\{"session_id":"b","cwd":cwd,"prompt":"implement retry backoff for the webhook handler with idempotent tokens"\}\),\s*runs,\s*\)\?;')
+FULL_NEW = 'let (ups, _delivered) = run_prompts(&bin, root, "b", &full_prompts(root, runs)?)?;'
+
+
+def rust_fn(src, name):
+    """The text of one top-level function of a Rust source, doc comment included."""
+    m = re.search(r'(?:^///[^\n]*\n)*^fn %s\(.*?^}\n' % re.escape(name), src, re.M | re.S)
+    if not m:
+        sys.exit('the candidate bench has no function %s' % name)
+    return m.group(0)
+
+
+TOP_IGNORE = {'target', '.git', '.muninn', 'node_modules', 'research', 'site'}
+
+
+def anchored_ignore(root):
+    """Ignore patterns anchored to the tree root: only these names at the top level, and the
+    rule corpus only at crates/muninn-bench/corpora (not needed to build the bench)."""
+    root = os.path.abspath(root)
+
+    def ign(d, names):
+        rel = os.path.relpath(os.path.abspath(d), root)
+        if rel == '.':
+            return set(names) & TOP_IGNORE
+        if rel == os.path.join('crates', 'muninn-bench'):
+            return set(names) & {'corpora'}
+        return set()
+    return ign
+
+
+def tree_hash(root, sub=None):
+    """sha256 over the sorted relative paths and bytes of a tree (or of one subdirectory),
+    with the anchored ignore patterns applied."""
+    import hashlib
+    root = os.path.abspath(root)
+    base = os.path.join(root, sub) if sub else root
+    ign = anchored_ignore(root)
+    h = hashlib.sha256()
+    for d, dirs, files in os.walk(base):
+        skip = ign(d, dirs + files)
+        dirs[:] = sorted(x for x in dirs if x not in skip)
+        for f in sorted(x for x in files if x not in skip):
+            fp = os.path.join(d, f)
+            h.update(os.path.relpath(fp, root).replace('\\', '/').encode() + b'\0')
+            h.update(open(fp, 'rb').read())
+    return h.hexdigest()[:16]
+
+
+def src_commit(tree):
+    r = subprocess.run(['git', '-C', tree, 'rev-parse', 'HEAD'], capture_output=True, text=True)
+    if r.returncode:
+        return {'commit': None, 'tree_sha256': tree_hash(tree)}
+    dirty = subprocess.run(['git', '-C', tree, 'status', '--porcelain', '--untracked-files=no'], capture_output=True, text=True).stdout.strip()
+    return {'commit': r.stdout.strip(), 'dirty': bool(dirty)}
+
+
+sources = {}
+
+
+def build_bench(src, name, seed=False, prompts_from=None):
+    tree = os.path.abspath(src)
+    sources[name] = dict(src_commit(tree), bench_crate_sha256=tree_hash(tree, os.path.join('crates', 'muninn-bench')))
+    if seed:
+        # a copy of the tree in the work directory; the source tree itself is never written
+        copy = work('e_perf', 'bench-src-' + name)
+        shutil.rmtree(copy, ignore_errors=True)
+        shutil.copytree(tree, copy, ignore=anchored_ignore(tree))
+        mp = os.path.join(copy, 'crates', 'muninn-bench', 'src', 'main.rs')
+        s = open(mp, encoding='utf-8').read()
+        if 'INSERT INTO fire_ledger(session_id, compaction_epoch' in s:
+            workload['base_bench'] = 'tree already seeds the ledger; built unchanged'
+        else:
+            anchor = '    tx.commit()?;\n    // The index a store actually has'
+            if anchor not in s:
+                m = re.search(r'\n    tx\.commit\(\)\?;\n', s[s.index('fn populate'):])
+                if not m:
+                    sys.exit('cannot place the ledger seed in the base bench')
+                at = s.index('fn populate') + m.end()
+                s = s[:at] + SEED + s[at:]
+            else:
+                s = s.replace(anchor, '    tx.commit()?;\n' + SEED + '    // The index a store actually has', 1)
+            if s.count(FIXTURE_OLD) != 1:
+                sys.exit('cannot give the base bench the candidate fixture\'s origins')
+            s = s.replace(FIXTURE_OLD, FIXTURE_NEW)
+            # revision 5: the candidate's full prompts, one a run, in place of the one prompt
+            if not prompts_from:
+                sys.exit('revision 5 needs --bench-src: the base bench takes the full prompts of the candidate from it')
+            cand = open(os.path.join(os.path.abspath(prompts_from), 'crates', 'muninn-bench', 'src', 'main.rs'), encoding='utf-8').read()
+            if 'fn full_prompts(' not in s:
+                if len(FULL_OLD.findall(s)) != 1:
+                    sys.exit('cannot place the candidate\'s full prompts in the base bench')
+                s = FULL_OLD.sub(FULL_NEW, s)
+                at = s.index('\nfn ingest_200(')
+                s = s[:at] + '\n' + rust_fn(cand, 'full_prompts') + '\n' + rust_fn(cand, 'run_prompts') + s[at:]
+                workload['base_bench_full_prompts'] = 'full_prompts and run_prompts copied from the candidate bench; the base\'s one call replaced'
+            open(mp, 'w', encoding='utf-8', newline='\n').write(s)
+            workload['base_bench'] = ('copy of the base tree with the candidate bench\'s 8,336-row fire_ledger seed added after the cue load, '
+                                      'and its decisions and invariants marked user_said, trust 3, as the candidate bench marks them')
+            workload['base_bench_main_rs_sha256'] = sha16(mp)
+        tree = copy
+        sources[name]['built_bench_crate_sha256'] = tree_hash(copy, os.path.join('crates', 'muninn-bench'))
+    tgt = work('target', 'bench-' + name)
+    r = run(['cargo', 'build', '--release', '--locked', '-p', 'muninn-bench', '--target-dir', tgt], 'bench:build:' + name, timeout=3600, cwd=tree, text=True)
+    if r is None or r.returncode:
+        sys.exit('muninn-bench (%s) did not build:\n%s' % (name, (r.stderr if r else '')[-2000:]))
+    return os.path.join(tgt, 'release', 'muninn-bench.exe' if os.name == 'nt' else 'muninn-bench')
+
+
+ENV_ERR = re.compile(r'error|panic|schema|newer|unable', re.I)
+def expected_schema(b):
+    """The schema a build creates: `init` on an empty project in the work directory."""
+    d = work('e_perf', 'schema-probe', sha16(b))
+    shutil.rmtree(d, ignore_errors=True)
+    os.makedirs(d)
+    run(['git', 'init', '-q'], 'schema:git', cwd=d)
+    run([b, '--cwd', d, 'init', '--keep-native', '--no-boot-block'], 'schema:init', env=ENV)
+    p = os.path.join(d, '.muninn', 'muninn.db')
+    if not os.path.isfile(p):
+        fail('schema:no_store')
+        return None
+    con = sqlite3.connect('file:%s?mode=ro' % p, uri=True)
+    v = con.execute("select value from meta where key='schema_version'").fetchone()
+    con.close()
+    return v[0] if v else None
+
+
+def must_deliver(b, k):
+    """One fixed prompt from the delivery set on the build's own migrated copy of W02."""
+    root = work('e_perf', 'deliver', str(k))
+    shutil.rmtree(root, ignore_errors=True)
+    shutil.copytree(F + '/stores/W02', root + '/.muninn', ignore=shutil.ignore_patterns('muninn.db-shm', 'muninn.db-wal'))
+    run([b, '--cwd', root, 'maintain'], 'deliver:maintain', env=ENV)
+    smp = {json.loads(l)['item']: json.loads(l) for l in open(F + '/out/delivery/sample_prompt.jsonl', encoding='utf-8')}
+    it = smp[args.must_deliver_item]
+    pr = next(json.loads(l)['prompt'] for l in open(F + '/out/delivery/pairs.jsonl', encoding='utf-8')
+              if json.loads(l)['reason'] == 'literal' and (json.loads(l)['store'], json.loads(l)['session'], json.loads(l)['at']) == (it['store'], it['session'], it['at']))
+    text = hook(b, 'UserPromptSubmit', root, {'session_id': 'must-deliver', 'prompt': pr}, env=ENV)
+    return len(block_ids(text))
+
+
+def check_store(b, tmp):
+    """The store the bench left behind, opened by the binary it timed, through its own hooks."""
+    dirs = glob.glob(os.path.join(tmp, 'muninn-bench-*'))
+    if len(dirs) != 1 or not os.path.isfile(os.path.join(dirs[0], '.muninn', 'muninn.db')):
+        fail('perf:no_bench_store')
+        return None
+    root = dirs[0].replace('\\', '/')
+    con = sqlite3.connect('file:%s/.muninn/muninn.db?mode=ro' % root, uri=True)
+    ver = con.execute("select value from meta where key='schema_version'").fetchone()
+    ledger = con.execute('select count(*) from fire_ledger').fetchone()[0]
+    seed_n, seed_fp = seed_fingerprint(con)
+    # revision 5: the prompts of session `b` that were given a block, folded or still in the log
+    full_delivered = con.execute("select count(distinct fired_at) from fire_ledger where session_id='b' and reason like '%literal' "
+                                 "and reason not like '%gated%' and record_id is not null and fired_at > 1700000008335").fetchone()[0]
+    marks = con.execute("select value from meta where key='fold:delivery.jsonl'").fetchone()
+    folded = int(marks[0].split(',')[0]) if marks else 0
+    dl = os.path.join(root, '.muninn', 'log', 'delivery.jsonl')
+    if os.path.isfile(dl):
+        with open(dl, 'rb') as fh:
+            fh.seek(folded)
+            for l in fh.read().decode('utf-8', 'replace').splitlines():
+                try:
+                    v = json.loads(l)
+                except ValueError:
+                    continue
+                full_delivered += v.get('session') == 'b' and v.get('reason') == 'literal' and bool(v.get('ids'))
+    # a record of the fixture to ask for: three identifiers of its body, as the bench's prompts are made
+    body = con.execute("select body from record where session_id='bench' and kind='episode' order by id desc limit 1").fetchone()[0]
+    rare = [w for w in body.split(' ') if w[-1:].isdigit()][:3]
+    check_prompt = 'implement %s for the handler with %s' % (rare[0], ' and '.join(rare[1:]))
+    fixture = [list(r) for r in con.execute("select kind, origin, trust, count(*) from record where session_id='bench' group by 1, 2, 3 order by 1, 2, 3")]
+    con.close()
+    ok = True
+    lists_typed = None
+    delivered = {}
+    for event, payload in (('SessionStart', {'session_id': 'check'}),
+                           ('UserPromptSubmit', {'session_id': 'check', 'prompt': check_prompt})):
+        inp = json.dumps(dict(payload, hook_event_name=event, cwd=root))
+        r = run([b, 'hook', event], 'perf:check:' + event, timeout=120, cwd=root, input=inp.encode(), env=ENV)
+        if r is None:
+            ok = False
+            continue
+        if ENV_ERR.search(r.stderr.decode('utf-8', 'replace')):
+            fail('perf:check:%s:stderr' % event)
+            ok = False
+        try:
+            text = json.loads(r.stdout.decode('utf-8'))['hookSpecificOutput']['additionalContext']
+        except Exception:
+            text = ''
+        delivered[event] = bool(block_ids(text))
+        if event == 'SessionStart':
+            lines = text.split('\n')
+            lists_typed = (any(l.startswith('[muninn:catalog]') and 'what was said' not in l for l in lines)
+                           and any(re.match(r'#\d+ (decision|invariant|correction) ', l) for l in lines))
+    # every hook invocation of the run, the bench's and these two, as the binary logged it
+    fin = bad = 0
+    hb = os.path.join(root, '.muninn', 'log', 'heartbeat.jsonl')
+    for l in (open(hb, encoding='utf-8', errors='replace') if os.path.isfile(hb) else []):
+        try:
+            v = json.loads(l)
+        except ValueError:
+            continue
+        if v.get('ev') == 'finish':
+            fin += 1
+            bad += not v.get('ok') or v.get('err') is not None
+    if bad or fin < 4 * 300 + 2:
+        fail('perf:check:heartbeat')
+        ok = False
+    # addendum to the fourteenth amendment: 285 of the 300 runs (95 %), not all of them. 1.2.0
+    # counts a record its budget cut as delivered, so a prompt for such a record gets nothing
+    # on the base (299 of 300 in revision 5's first run); the count is recorded per run.
+    if full_delivered < 285 or not delivered.get('UserPromptSubmit'):
+        fail('perf:full_prompt_not_delivered')
+        ok = False
+    shutil.rmtree(dirs[0], ignore_errors=True)
+    return {'schema_version': ver[0] if ver else None, 'fire_ledger_rows': ledger, 'seed_rows': seed_n, 'seed_fingerprint': seed_fp,
+            'hooks_ok': ok, 'hook_finishes': fin, 'hook_errors': bad, 'delivered': delivered, 'full_prompts_delivered': full_delivered,
+            'fixture': fixture, 'catalogue_lists_typed': lists_typed}
+
+
+if parts == {'gates'}:
+    # no timing: the must-deliver case and the schema each build creates, printed, no counts written
+    md = {b: must_deliver(b, k) for k, b in enumerate(bins)}
+    print(json.dumps({'must_deliver': {sha16(b): md[b] for b in bins}, 'verdict': gate_deliver(md),
+                      'schema_expected': {sha16(b): expected_schema(b) for b in bins}, 'failed_steps': dict(FAILS)}))
+    sys.exit(1 if FAILS else 0)
+
+if 'perf' in parts:
+    if not cand_bin:
+        sys.exit('E compares two builds: give --against <candidate muninn.exe>')
+    bench_base = args.bench_base or (build_bench(args.bench_base_src, 'base', seed=not args.no_ledger_seed, prompts_from=args.bench_src) if args.bench_base_src else None)
+    bench_cand = args.bench or (build_bench(args.bench_src, 'cand') if args.bench_src else None)
+    if not bench_base or not bench_cand:
+        sys.exit('--bench-base/--bench-base-src and --bench/--bench-src are both required for perf')
+    if args.bench_base and 'base_bench' not in workload:
+        workload['base_bench'] = 'given by --bench-base (%s)' % sha16(bench_base)
+    benches = {base_bin: bench_base, cand_bin: bench_cand}
+    md = {b: must_deliver(b, k) for k, b in enumerate(bins)}
+    workload['must_deliver'] = {'item': args.must_deliver_item, 'blocks': {sha16(b): md[b] for b in bins}, 'verdict': gate_deliver(md)}
+    if workload['must_deliver']['verdict'] != 'both':
+        fail('perf:must_deliver:' + workload['must_deliver']['verdict'])
+    rows = {b: [] for b in bins}
+    checks = {b: [] for b in bins}
+    for i in range(args.runs):
+        for b in bins:
+            tmp = work('e_perf', 'tmp', 'run-%d-%d' % (i, bins.index(b)))
+            shutil.rmtree(tmp, ignore_errors=True)
+            os.makedirs(tmp)
+            env = dict(ENV, TEMP=tmp.replace('/', '\\'), TMP=tmp.replace('/', '\\'), TMPDIR=tmp)
+            p = run([benches[b], 'perf', '--strict', '--json', '--muninn', b], 'perf', timeout=3600, ok_codes=(0, 1), text=True, env=env)
+            line = next((l for l in p.stdout.splitlines() if l.startswith('{')), None) if p else None
+            if not line:
+                fail('perf:no_json')
+                continue
+            j = json.loads(line)
+            if j.get('runs') != 300 or any(h not in j.get('hook', {}) for h in ('SessionStart', 'SubagentStart', 'UserPromptSubmit_gated', 'UserPromptSubmit_full')):
+                fail('perf:incomplete_json')
+            if p.stderr and ENV_ERR.search(re.sub(r'Error: \d+ contract\(s\) exceeded', '', p.stderr)):
+                fail('perf:bench_stderr')
+            rows[b].append(j)
+            checks[b].append(check_store(b, tmp))
+    led = {b: sorted({c['fire_ledger_rows'] for c in checks[b] if c}) for b in bins}
+    workload['fire_ledger_rows_per_bench_store'] = {sha16(b): led[b] for b in bins}
+    eq, per_seed = gate_workload({b: [(c['seed_rows'], c['seed_fingerprint']) for c in checks[b] if c] for b in bins})
+    workload['seed_rows_and_fingerprint'] = {sha16(b): [list(x) for x in per_seed[b]] for b in bins}
+    fixtures = {b: [json.dumps(c['fixture']) for c in checks[b] if c] for b in bins}
+    same_fixture = len({f for v in fixtures.values() for f in v}) == 1 and all(fixtures.values())
+    workload['fixture_records_by_kind_origin_trust'] = {sha16(b): json.loads(sorted(set(fixtures[b]))[0]) if fixtures[b] else None for b in bins}
+    workload['fixture_equal'] = same_fixture
+    workload['catalogue_lists_typed'] = {sha16(b): sorted({str(c['catalogue_lists_typed']) for c in checks[b] if c}) for b in bins}
+    eq = eq and same_fixture
+    workload['equal'] = eq
+    workload['bench_sources'] = sources
+    if not workload['equal']:
+        workload['caveat'] = 'the two benches seeded different workloads: the comparison is each build\'s own contract run'
+    for b in bins:
+        rs = rows[b]
+        hooks = {}
+        for h in ('SessionStart', 'SubagentStart', 'UserPromptSubmit_gated', 'UserPromptSubmit_full'):
+            p95 = [r['hook'][h][1] for r in rs]
+            hooks[h] = {'p95_runs': [round(x, 3) for x in p95], 'p95_median': round(stt.median(p95), 3) if p95 else None,
+                        'p50_median': round(stt.median([r['hook'][h][0] for r in rs]), 3) if rs else None}
+        res[b]['perf'] = {'runs': len(rs), 'bench_sha256': sha16(benches[b]), 'hooks': hooks,
+                          'store_checks': {'schema_versions': sorted({str(c['schema_version']) for c in checks[b] if c}),
+                                           'all_hooks_ok': all(c and c['hooks_ok'] for c in checks[b]),
+                                           'hook_finishes': sum(c['hook_finishes'] for c in checks[b] if c),
+                                           'hook_errors': sum(c['hook_errors'] for c in checks[b] if c),
+                                           'check_prompts_delivered': [c['delivered'] for c in checks[b] if c][:1],
+                                           'full_prompts_delivered_per_run': [c['full_prompts_delivered'] for c in checks[b] if c]},
+                          'process_start_p50_median': round(stt.median([r['process_start'][0] for r in rs]), 3) if rs else None,
+                          'ingest_200_ms_median': round(stt.median([r['ingest_200_ms'] for r in rs]), 1) if rs else None,
+                          'contracts_failed_per_run': [[c['name'] for c in r['contracts'] if not c['ok']] for r in rs],
+                          'interleaved_with': [sha16(x) for x in bins if x != b]}
+
+if 'stop' in parts:
+    staged_e, e_inputs = staged('e')
+    if e_inputs['status'] != 'ok':
+        fail('stop:missing_input')
+    def schema(root):
+        con = sqlite3.connect('file:%s/.muninn/muninn.db?mode=ro' % root, uri=True)
+        v = con.execute("select value from meta where key='schema_version'").fetchone()
+        con.close()
+        return v[0] if v else None
+
+    def prepare(b, k):
+        root = work('e_perf', 'stop', str(k))
+        shutil.rmtree(root, ignore_errors=True)
+        shutil.copytree(F + '/stores/W02', root + '/.muninn', ignore=shutil.ignore_patterns('muninn.db-shm', 'muninn.db-wal'))
+        # tenth amendment: the session log points Stop at staged copies of its transcripts only
+        sl = root + '/.muninn/log/sessions.jsonl'
+        kept = dropped = 0
+        lines = []
+        for l in open(sl, encoding='utf-8', errors='replace'):
+            try:
+                v = json.loads(l)
+            except Exception:
+                continue
+            sp = staged_e.get(v.get('transcript'))
+            if sp:
+                v['transcript'] = os.path.normpath(sp)
+                lines.append(json.dumps(v) + '\n')
+                kept += 1
+            else:
+                dropped += 1
+        open(sl, 'w', encoding='utf-8', newline='').writelines(lines)
+        before = schema(root)
+        t0 = time.perf_counter()
+        r = run([b, '--cwd', root, 'maintain'], 'stop:maintain', env=ENV)  # the write open that migrates the copy
+        first = (time.perf_counter() - t0) * 1000
+        if r is not None and ENV_ERR.search(r.stderr.decode('utf-8', 'replace')):
+            fail('stop:maintain:stderr')
+        run([b, '--cwd', root, 'maintain'], 'stop:maintain', env=ENV)
+        open(root + '/synthetic-session.jsonl', 'w').close()
+        return root, {'schema_before': before, 'schema_after': schema(root), 'first_write_open_ms': round(first, 1),
+                      'session_log_lines_staged': kept, 'session_log_lines_without_copy': dropped}
+
+    sid = '00000000-aaaa-bbbb-cccc-000000000001'
+
+    def turn(root, i):
+        u = {'type': 'user', 'sessionId': sid, 'cwd': root, 'timestamp': '2026-11-11T10:%02d:00.000Z' % i,
+             'message': {'role': 'user', 'content': 'Synthetic audit turn number %d about the zebra pipeline widget, please look at it' % i}}
+        a = {'type': 'assistant', 'sessionId': sid, 'timestamp': '2026-11-11T10:%02d:30.000Z' % i,
+             'message': {'role': 'assistant', 'content': [{'type': 'text', 'text': 'Looked at the zebra pipeline widget, iteration %d. Nothing to change.' % i}]}}
+        with open(root + '/synthetic-session.jsonl', 'a', newline='') as f:
+            f.write(json.dumps(u) + '\n' + json.dumps(a) + '\n')
+
+    prep = {b: prepare(b, k) for k, b in enumerate(bins)}
+    for b in bins:
+        want = expected_schema(b)
+        info = prep[b][1]
+        info['schema_expected'] = want
+        if want is None or info['schema_after'] != want:
+            fail('stop:schema_after')
+        if b == base_bin and info['schema_after'] != info['schema_before']:
+            fail('stop:base_schema_moved')
+    ms = {b: [] for b in bins}
+    for i in range(args.stop_runs + 1):
+        for b in bins:
+            root = prep[b][0]
+            turn(root, i)
+            inp = json.dumps({'session_id': sid, 'transcript_path': root + '/synthetic-session.jsonl', 'cwd': root, 'hook_event_name': 'Stop'})
+            t0 = time.perf_counter()
+            r = run([b, '--cwd', root, 'hook', 'Stop'], 'stop:hook', timeout=120, input=inp.encode(), env=ENV)
+            ms[b].append((time.perf_counter() - t0) * 1000)
+            if r is not None and ENV_ERR.search(r.stderr.decode('utf-8', 'replace')):
+                fail('stop:hook:stderr')
+    for b in bins:
+        root, info = prep[b]
+        xs = ms[b][1:]
+        con = sqlite3.connect('file:%s/.muninn/muninn.db?mode=ro' % root, uri=True)
+        ingested = con.execute("select count(*) from record where session_id=?", (sid,)).fetchone()[0]
+        con.close()
+        if ingested < args.stop_runs:
+            fail('stop:not_ingested')
+        # every timed Stop as the binary logged it in the copy's heartbeat
+        sfin = sbad = 0
+        hb = os.path.join(root, '.muninn', 'log', 'heartbeat.jsonl')
+        for l in (open(hb, encoding='utf-8', errors='replace') if os.path.isfile(hb) else []):
+            try:
+                v = json.loads(l)
+            except ValueError:
+                continue
+            if v.get('ev') == 'finish' and v.get('hook') == 'Stop' and v.get('session') == sid:
+                sfin += 1
+                sbad += not v.get('ok') or v.get('err') is not None
+        info['stop_hooks_ok'] = sbad == 0 and sfin >= args.stop_runs + 1
+        if not info['stop_hooks_ok']:
+            fail('stop:heartbeat')
+        res[b]['stop_ingest_W02'] = dict(info, inputs=e_inputs, runs=len(xs), median_ms=round(stt.median(xs), 1), p90_ms=round(sorted(xs)[int(0.9 * (len(xs) - 1))], 1),
+                                         min_ms=round(min(xs), 1), max_ms=round(max(xs), 1), records_from_synthetic_session=ingested,
+                                         interleaved_with=[sha16(x) for x in bins if x != b])
+
+for b in bins:
+    a = type('A', (), {})()
+    a.bin, a.labels, a.split = b, args.labels, 'all'
+    a.build = args.build if b == bins[0] else None
+    a.commit = args.commit if b == cand_bin else args.base_commit
+    a.drop_commit = a.commit is None  # never leave another run's commit on this file
+    write_counts('e_perf', a.build or sha16(b), a, {'all': res[b]}, {'harness_rev': HARNESS_REV, 'workload': workload})

@@ -1,0 +1,85 @@
+{
+ "candidate": {
+  "bench_sha256": "f37b835b4e4ca78f",
+  "by_class": {
+   "enforceable_hook": 51,
+   "enforceable_permission": 51,
+   "interpretive_only": 1916
+  },
+  "by_pattern": {
+   "file.anaphoric_path": 1,
+   "file.doc_create": 3,
+   "file.protected_path": 9,
+   "file.root_create": 2,
+   "file.secrets_read": 2,
+   "git.add_all": 1,
+   "git.commit": 4,
+   "git.commit_path": 5,
+   "git.destructive": 2,
+   "git.force_push": 3,
+   "git.no_verify": 2,
+   "git.protected_branch": 2,
+   "git.push": 4,
+   "none": 1911,
+   "process.ask_before_unmapped": 4,
+   "process.ask_if_unsure": 1,
+   "process.before_commit": 30,
+   "process.before_pr": 1,
+   "process.deploy": 1,
+   "shell.forbidden_flag": 1,
+   "shell.kill": 1,
+   "shell.named_command": 23,
+   "shell.rm_rf": 3,
+   "shell.sudo": 2
+  },
+  "candidates": 2018,
+  "enforceable": 102,
+  "enforceable_share": 0.05055,
+  "files": 103
+ },
+ "control_changed": 0,
+ "control_changed_by_pattern": {},
+ "half": "design_readable",
+ "newly_enforceable": 2,
+ "newly_enforceable_by_pattern": {
+  "file.anaphoric_path": 1,
+  "shell.forbidden_flag": 1
+ },
+ "no_longer_enforceable": 0,
+ "previous": {
+  "bench_sha256": "39b01e658f357e8d",
+  "by_class": {
+   "enforceable_hook": 50,
+   "enforceable_permission": 50,
+   "interpretive_only": 1918
+  },
+  "by_pattern": {
+   "file.doc_create": 3,
+   "file.protected_path": 9,
+   "file.root_create": 2,
+   "file.secrets_read": 2,
+   "git.add_all": 1,
+   "git.commit": 4,
+   "git.commit_path": 5,
+   "git.destructive": 2,
+   "git.force_push": 3,
+   "git.no_verify": 2,
+   "git.protected_branch": 2,
+   "git.push": 4,
+   "none": 1913,
+   "process.ask_before_unmapped": 4,
+   "process.ask_if_unsure": 1,
+   "process.before_commit": 30,
+   "process.before_pr": 1,
+   "process.deploy": 1,
+   "shell.kill": 1,
+   "shell.named_command": 23,
+   "shell.rm_rf": 3,
+   "shell.sudo": 2
+  },
+  "candidates": 2018,
+  "enforceable": 100,
+  "enforceable_share": 0.04955,
+  "files": 103
+ }
+}

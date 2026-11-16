@@ -1,0 +1,179 @@
+{
+ "binary_sha256": "b93d2f5c222c0424",
+ "binary_version": "muninn 1.2.0",
+ "build": "AA-base-arm2",
+ "harness_rev": 3,
+ "labels": "final",
+ "note": "A/A run: the second arm, a byte copy of base (same sha256) timed as the candidate, interleaved with AA-base-arm1. Not a build. Saved under this label by hand from the file the harness wrote under the base sha16; the base file was then put back as it was before the A/A run.",
+ "section": "e_perf",
+ "splits": {
+  "all": {
+   "perf": {
+    "bench_sha256": "57df69654109b3a1",
+    "contracts_failed_per_run": [
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95",
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "hook UserPromptSubmit full p95",
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "cue eval (ancestor lookup) p99"
+     ],
+     [
+      "hook UserPromptSubmit gated p95",
+      "cue eval (ancestor lookup) p99"
+     ]
+    ],
+    "hooks": {
+     "SessionStart": {
+      "p50_median": 14.851,
+      "p95_median": 18.915,
+      "p95_runs": [
+       16.214,
+       15.518,
+       30.953,
+       21.411,
+       18.915,
+       20.318,
+       18.787
+      ]
+     },
+     "SubagentStart": {
+      "p50_median": 11.266,
+      "p95_median": 18.193,
+      "p95_runs": [
+       13.938,
+       11.567,
+       24.479,
+       29.452,
+       16.713,
+       19.302,
+       18.193
+      ]
+     },
+     "UserPromptSubmit_full": {
+      "p50_median": 15.65,
+      "p95_median": 21.129,
+      "p95_runs": [
+       21.129,
+       15.963,
+       42.816,
+       34.307,
+       18.249,
+       20.256,
+       21.462
+      ]
+     },
+     "UserPromptSubmit_gated": {
+      "p50_median": 10.094,
+      "p95_median": 12.409,
+      "p95_runs": [
+       10.682,
+       9.305,
+       21.593,
+       19.761,
+       10.384,
+       12.409,
+       15.575
+      ]
+     }
+    },
+    "ingest_200_ms_median": 14.9,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "process_start_p50_median": 9.771,
+    "runs": 7,
+    "store_checks": {
+     "all_hooks_ok": true,
+     "check_prompts_delivered": [
+      {
+       "SessionStart": false,
+       "UserPromptSubmit": false
+      }
+     ],
+     "hook_errors": 0,
+     "hook_finishes": 8414,
+     "schema_versions": [
+      "2"
+     ]
+    }
+   },
+   "stop_ingest_W02": {
+    "first_write_open_ms": 7737.6,
+    "inputs": {
+     "changed": 0,
+     "listed": 636,
+     "staged": 540,
+     "status": "ok",
+     "unrecoverable": 96
+    },
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "max_ms": 266.9,
+    "median_ms": 234.0,
+    "min_ms": 223.8,
+    "p90_ms": 262.8,
+    "records_from_synthetic_session": 21,
+    "runs": 20,
+    "schema_after": "2",
+    "schema_before": "2",
+    "schema_expected": "2",
+    "session_log_lines_staged": 8133,
+    "session_log_lines_without_copy": 490,
+    "stop_hooks_ok": true
+   }
+  }
+ },
+ "workload": {
+  "base_bench": "copy of the base tree with the candidate bench's 8,336-row fire_ledger seed added after the cue load",
+  "base_bench_main_rs_sha256": "37e663fcc9ca8229",
+  "bench_sources": {
+   "base": {
+    "bench_crate_sha256": "2c88ed015f674f0c",
+    "built_bench_crate_sha256": "453598d8cecb6582",
+    "commit": null,
+    "tree_sha256": "a29b6bbb3698c461"
+   }
+  },
+  "equal": true,
+  "fire_ledger_rows_per_bench_store": {
+   "b93d2f5c222c0424": [
+    8354
+   ]
+  },
+  "must_deliver": {
+   "blocks": {
+    "b93d2f5c222c0424": 6
+   },
+   "item": "P026",
+   "verdict": "both"
+  },
+  "seed_rows_and_fingerprint": {
+   "b93d2f5c222c0424": [
+    [
+     8336,
+     "3a9091da7f1c5202"
+    ]
+   ]
+  }
+ }
+}

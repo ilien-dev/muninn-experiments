@@ -1,0 +1,23 @@
+{
+ "section": "f_codex_exec",
+ "what": "rule F, Codex second clause: real `codex exec` sessions of codex-cli 0.166.0 in an empty scratch directory, private Codex home holding a copy of the login (deleted afterwards), store seeded by ingesting the invented rollout. Counts only.",
+ "codex_cli": "0.166.0",
+ "sessions_run": 7,
+ "sessions": [
+  {"n": 1, "build": "914d8161a7832432", "hooks_at": "project", "command_form": "double-quoted path", "hooks_that_left_a_heartbeat": 0, "deliveries_logged": 0, "answered_from_memory": false},
+  {"n": 2, "build": "914d8161a7832432", "hooks_at": "project", "command_form": "double-quoted path", "hooks_that_left_a_heartbeat": 0, "deliveries_logged": 0, "answered_from_memory": false},
+  {"n": 3, "build": "914d8161a7832432", "hooks_at": "private Codex home", "command_form": "double-quoted path", "hooks_that_left_a_heartbeat": 0, "deliveries_logged": 0, "answered_from_memory": false},
+  {"n": 4, "build": null, "hooks_at": "private Codex home", "command_form": "probe file written wrongly", "probe_events_fired": 0},
+  {"n": 5, "build": null, "hooks_at": "private Codex home", "command_form": "probe: echo the event", "probe_events_fired": 4, "events": ["SessionStart", "UserPromptSubmit", "Stop", "SessionEnd"], "probe_output_encoding": "UTF-16"},
+  {"n": 6, "build": "914d8161a7832432", "hooks_at": "private Codex home", "command_form": "probe: four spellings at SessionStart", "shell": "Windows PowerShell 5.1", "ran": {"double-quoted path": false, "call operator and quoted path": true, "bare path": true}},
+  {"n": 7, "build": "729af340a64ba4a1", "hooks_at": "project", "command_form": "bare path", "the_reading": true,
+   "hooks_that_left_a_heartbeat": {"SessionStart": 1, "UserPromptSubmit": 1, "Stop": 0, "SessionEnd": 1},
+   "hook_ms": {"SessionStart": 4.3, "UserPromptSubmit": 2.1, "SessionEnd": 10.1},
+   "deliveries_logged": 3,
+   "deliveries": [{"reason": "cue:event:session_start", "records": 3, "tokens": 102}, {"reason": "catalog", "records": 3, "tokens": 195}, {"reason": "literal", "records": 2, "tokens": 85}],
+   "rollout_messages_holding_the_context": 2, "their_role": "developer",
+   "answered_from_memory": true,
+   "captured_by": "SessionEnd", "records_from_the_session": {"episode": 1, "typed": 0}}
+ ],
+ "clause_passes": true
+}

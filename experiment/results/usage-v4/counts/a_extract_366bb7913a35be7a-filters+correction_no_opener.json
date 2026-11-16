@@ -1,0 +1,260 @@
+{
+ "binary_sha256": "366bb7913a35be7a",
+ "binary_version": "muninn 2.0.0",
+ "build": "366bb7913a35be7a-filters+correction_no_opener",
+ "candidates_total": 112,
+ "commit": "7bd930eb7",
+ "inputs": {
+  "changed": 0,
+  "listed": 150,
+  "staged": 150,
+  "status": "ok",
+  "unrecoverable": 0
+ },
+ "labels": "final",
+ "section": "a_extract",
+ "splits": {
+  "all": {
+   "precision_set": {
+    "durable_emitted": 19,
+    "emitted": 79,
+    "emitted_by_kind_label": {
+     "correction:a": 1,
+     "correction:b": 8,
+     "decision:a": 12,
+     "decision:b": 29,
+     "decision:c": 5,
+     "decision:d": 4,
+     "invariant:a": 6,
+     "invariant:b": 9,
+     "invariant:c": 3,
+     "invariant:d": 2
+    },
+    "emitted_by_label": {
+     "a": 19,
+     "b": 46,
+     "c": 8,
+     "d": 6
+    },
+    "items": 109,
+    "labels": {
+     "a": 20,
+     "b": 56,
+     "c": 27,
+     "d": 6
+    },
+    "measurable": 107,
+    "noise_emitted": 60,
+    "not_emitted_by_label": {
+     "b": 9,
+     "c": 19
+    },
+    "not_measurable_deadend": 2,
+    "record_precision": 0.2405,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 4
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 12,
+     "b": 23,
+     "c": 2,
+     "durable": 16
+    },
+    "durable_by_kind": {
+     "correction": 6,
+     "deadend": 1,
+     "decision": 33,
+     "rule": 8
+    },
+    "durable_emitted": 13,
+    "durable_emitted_by_kind": {
+     "correction": 4,
+     "decision": 4,
+     "rule": 5
+    },
+    "durable_messages": 48,
+    "durable_missed": 35,
+    "labels": {
+     "a": 48,
+     "b": 210,
+     "nh": 27,
+     "opt": 15
+    },
+    "message_precision": 0.3019,
+    "messages": 300,
+    "messages_with_candidates_by_label": {
+     "a": 19,
+     "b": 19,
+     "nh": 2
+    },
+    "noise_candidates": 37,
+    "recall": 0.2708,
+    "transcript_missing": 0
+   }
+  },
+  "design": {
+   "precision_set": {
+    "durable_emitted": 11,
+    "emitted": 45,
+    "emitted_by_kind_label": {
+     "correction:b": 6,
+     "decision:a": 8,
+     "decision:b": 18,
+     "decision:c": 3,
+     "decision:d": 1,
+     "invariant:a": 3,
+     "invariant:b": 4,
+     "invariant:c": 1,
+     "invariant:d": 1
+    },
+    "emitted_by_label": {
+     "a": 11,
+     "b": 28,
+     "c": 4,
+     "d": 2
+    },
+    "items": 63,
+    "labels": {
+     "a": 11,
+     "b": 34,
+     "c": 16,
+     "d": 2
+    },
+    "measurable": 62,
+    "noise_emitted": 34,
+    "not_emitted_by_label": {
+     "b": 5,
+     "c": 12
+    },
+    "not_measurable_deadend": 1,
+    "record_precision": 0.2444,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 3
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 6,
+     "b": 17,
+     "c": 2,
+     "durable": 10
+    },
+    "durable_by_kind": {
+     "correction": 4,
+     "decision": 15,
+     "rule": 4
+    },
+    "durable_emitted": 8,
+    "durable_emitted_by_kind": {
+     "correction": 3,
+     "decision": 2,
+     "rule": 3
+    },
+    "durable_messages": 23,
+    "durable_missed": 15,
+    "labels": {
+     "a": 23,
+     "b": 109,
+     "nh": 14,
+     "opt": 6
+    },
+    "message_precision": 0.2857,
+    "messages": 152,
+    "messages_with_candidates_by_label": {
+     "a": 11,
+     "b": 15,
+     "nh": 2
+    },
+    "noise_candidates": 25,
+    "recall": 0.3478,
+    "transcript_missing": 0
+   }
+  },
+  "heldout": {
+   "precision_set": {
+    "durable_emitted": 8,
+    "emitted": 34,
+    "emitted_by_kind_label": {
+     "correction:a": 1,
+     "correction:b": 2,
+     "decision:a": 4,
+     "decision:b": 11,
+     "decision:c": 2,
+     "decision:d": 3,
+     "invariant:a": 3,
+     "invariant:b": 5,
+     "invariant:c": 2,
+     "invariant:d": 1
+    },
+    "emitted_by_label": {
+     "a": 8,
+     "b": 18,
+     "c": 4,
+     "d": 4
+    },
+    "items": 46,
+    "labels": {
+     "a": 9,
+     "b": 22,
+     "c": 11,
+     "d": 4
+    },
+    "measurable": 45,
+    "noise_emitted": 26,
+    "not_emitted_by_label": {
+     "b": 4,
+     "c": 7
+    },
+    "not_measurable_deadend": 1,
+    "record_precision": 0.2353,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 1
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 6,
+     "b": 6,
+     "durable": 6
+    },
+    "durable_by_kind": {
+     "correction": 2,
+     "deadend": 1,
+     "decision": 18,
+     "rule": 4
+    },
+    "durable_emitted": 5,
+    "durable_emitted_by_kind": {
+     "correction": 1,
+     "decision": 2,
+     "rule": 2
+    },
+    "durable_messages": 25,
+    "durable_missed": 20,
+    "labels": {
+     "a": 25,
+     "b": 101,
+     "nh": 13,
+     "opt": 9
+    },
+    "message_precision": 0.3333,
+    "messages": 148,
+    "messages_with_candidates_by_label": {
+     "a": 8,
+     "b": 4
+    },
+    "noise_candidates": 12,
+    "recall": 0.2,
+    "transcript_missing": 0
+   }
+  }
+ },
+ "src": {
+  "commit": "7bd930eb73cf66dd1d36bf8edbee25157ffca1a7",
+  "dirty": true
+ },
+ "src_note": "extract_dump of the --src tree",
+ "turn_alignment": {
+  "candidates_at_recall_turns": 53,
+  "text_found_in_message": 51
+ }
+}

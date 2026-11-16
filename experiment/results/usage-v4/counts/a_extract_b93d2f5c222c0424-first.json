@@ -1,0 +1,232 @@
+{
+ "binary_sha256": "b93d2f5c222c0424",
+ "binary_version": "muninn 1.2.0",
+ "build": "b93d2f5c222c0424-first",
+ "candidates_total": 141,
+ "commit": "00d691630",
+ "labels": "first",
+ "section": "a_extract",
+ "splits": {
+  "all": {
+   "precision_set": {
+    "durable_emitted": 19,
+    "emitted": 107,
+    "emitted_by_kind_label": {
+     "correction:a": 1,
+     "correction:b": 17,
+     "decision:a": 12,
+     "decision:b": 29,
+     "decision:c": 17,
+     "decision:d": 4,
+     "invariant:a": 6,
+     "invariant:b": 9,
+     "invariant:c": 10,
+     "invariant:d": 2
+    },
+    "emitted_by_label": {
+     "a": 19,
+     "b": 55,
+     "c": 27,
+     "d": 6
+    },
+    "items": 109,
+    "labels": {
+     "a": 20,
+     "b": 56,
+     "c": 27,
+     "d": 6
+    },
+    "measurable": 107,
+    "noise_emitted": 88,
+    "not_emitted_by_label": {},
+    "not_measurable_deadend": 2,
+    "record_precision": 0.1776,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 18
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 26,
+     "b": 29,
+     "c": 2
+    },
+    "durable_by_kind": {
+     "correction": 6,
+     "deadend": 1,
+     "decision": 33,
+     "rule": 7
+    },
+    "durable_emitted": 0,
+    "durable_emitted_by_kind": {},
+    "durable_messages": 47,
+    "durable_missed": 47,
+    "labels": {
+     "a": 47,
+     "b": 215,
+     "nh": 27,
+     "opt": 11
+    },
+    "message_precision": 0.0,
+    "messages": 300,
+    "messages_with_candidates_by_label": {
+     "a": 18,
+     "b": 25,
+     "nh": 2
+    },
+    "noise_candidates": 57,
+    "recall": 0.0,
+    "store_held_a_carrying_record": 8,
+    "transcript_missing": 0
+   }
+  },
+  "design": {
+   "precision_set": {
+    "durable_emitted": 11,
+    "emitted": 62,
+    "emitted_by_kind_label": {
+     "correction:b": 11,
+     "decision:a": 8,
+     "decision:b": 18,
+     "decision:c": 12,
+     "decision:d": 1,
+     "invariant:a": 3,
+     "invariant:b": 4,
+     "invariant:c": 4,
+     "invariant:d": 1
+    },
+    "emitted_by_label": {
+     "a": 11,
+     "b": 33,
+     "c": 16,
+     "d": 2
+    },
+    "items": 63,
+    "labels": {
+     "a": 11,
+     "b": 34,
+     "c": 16,
+     "d": 2
+    },
+    "measurable": 62,
+    "noise_emitted": 51,
+    "not_emitted_by_label": {},
+    "not_measurable_deadend": 1,
+    "record_precision": 0.1774,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 15
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 13,
+     "b": 19,
+     "c": 2
+    },
+    "durable_by_kind": {
+     "correction": 4,
+     "decision": 16,
+     "rule": 4
+    },
+    "durable_emitted": 0,
+    "durable_emitted_by_kind": {},
+    "durable_messages": 24,
+    "durable_missed": 24,
+    "labels": {
+     "a": 24,
+     "b": 110,
+     "nh": 14,
+     "opt": 4
+    },
+    "message_precision": 0.0,
+    "messages": 152,
+    "messages_with_candidates_by_label": {
+     "a": 10,
+     "b": 17,
+     "nh": 2
+    },
+    "noise_candidates": 34,
+    "recall": 0.0,
+    "store_held_a_carrying_record": 5,
+    "transcript_missing": 0
+   }
+  },
+  "heldout": {
+   "precision_set": {
+    "durable_emitted": 8,
+    "emitted": 45,
+    "emitted_by_kind_label": {
+     "correction:a": 1,
+     "correction:b": 6,
+     "decision:a": 4,
+     "decision:b": 11,
+     "decision:c": 5,
+     "decision:d": 3,
+     "invariant:a": 3,
+     "invariant:b": 5,
+     "invariant:c": 6,
+     "invariant:d": 1
+    },
+    "emitted_by_label": {
+     "a": 8,
+     "b": 22,
+     "c": 11,
+     "d": 4
+    },
+    "items": 46,
+    "labels": {
+     "a": 9,
+     "b": 22,
+     "c": 11,
+     "d": 4
+    },
+    "measurable": 45,
+    "noise_emitted": 37,
+    "not_emitted_by_label": {},
+    "not_measurable_deadend": 1,
+    "record_precision": 0.1778,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 3
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 13,
+     "b": 10
+    },
+    "durable_by_kind": {
+     "correction": 2,
+     "deadend": 1,
+     "decision": 17,
+     "rule": 3
+    },
+    "durable_emitted": 0,
+    "durable_emitted_by_kind": {},
+    "durable_messages": 23,
+    "durable_missed": 23,
+    "labels": {
+     "a": 23,
+     "b": 105,
+     "nh": 13,
+     "opt": 7
+    },
+    "message_precision": 0.0,
+    "messages": 148,
+    "messages_with_candidates_by_label": {
+     "a": 8,
+     "b": 8
+    },
+    "noise_candidates": 23,
+    "recall": 0.0,
+    "store_held_a_carrying_record": 3,
+    "transcript_missing": 0
+   }
+  }
+ },
+ "src": {
+  "commit": "not a git checkout",
+  "dirty": null
+ },
+ "src_note": "extract_dump of the --src tree",
+ "turn_alignment": {
+  "candidates_at_recall_turns": 57,
+  "text_found_in_message": 54
+ }
+}

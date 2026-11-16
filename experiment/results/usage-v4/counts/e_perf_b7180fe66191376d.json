@@ -1,0 +1,188 @@
+{
+ "binary_sha256": "b7180fe66191376d",
+ "binary_version": "muninn 1.2.0",
+ "build": "b7180fe66191376d",
+ "commit": "dbbbdad76",
+ "harness_rev": 3,
+ "labels": "final",
+ "section": "e_perf",
+ "splits": {
+  "all": {
+   "perf": {
+    "bench_sha256": "ad0f2425a67982d8",
+    "contracts_failed_per_run": [
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [],
+     []
+    ],
+    "hooks": {
+     "SessionStart": {
+      "p50_median": 11.766,
+      "p95_median": 14.275,
+      "p95_runs": [
+       18.431,
+       14.275,
+       14.062,
+       14.162,
+       13.057,
+       18.988,
+       16.174
+      ]
+     },
+     "SubagentStart": {
+      "p50_median": 10.286,
+      "p95_median": 11.874,
+      "p95_runs": [
+       10.061,
+       11.056,
+       11.874,
+       12.315,
+       11.686,
+       16.921,
+       14.711
+      ]
+     },
+     "UserPromptSubmit_full": {
+      "p50_median": 12.982,
+      "p95_median": 15.242,
+      "p95_runs": [
+       13.595,
+       12.712,
+       15.564,
+       14.568,
+       15.242,
+       19.133,
+       15.451
+      ]
+     },
+     "UserPromptSubmit_gated": {
+      "p50_median": 7.358,
+      "p95_median": 9.066,
+      "p95_runs": [
+       7.891,
+       7.53,
+       8.526,
+       9.066,
+       10.412,
+       13.64,
+       10.13
+      ]
+     }
+    },
+    "ingest_200_ms_median": 10.4,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "process_start_p50_median": 6.372,
+    "runs": 7,
+    "store_checks": {
+     "all_hooks_ok": true,
+     "check_prompts_delivered": [
+      {
+       "SessionStart": false,
+       "UserPromptSubmit": false
+      }
+     ],
+     "hook_errors": 0,
+     "hook_finishes": 8414,
+     "schema_versions": [
+      "4"
+     ]
+    }
+   },
+   "stop_ingest_W02": {
+    "first_write_open_ms": 2787.9,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "max_ms": 405.8,
+    "median_ms": 287.3,
+    "min_ms": 277.5,
+    "p90_ms": 291.3,
+    "records_from_synthetic_session": 21,
+    "runs": 20,
+    "schema_after": "4",
+    "schema_before": "2",
+    "schema_expected": "4",
+    "stop_hooks_ok": true
+   }
+  }
+ },
+ "workload": {
+  "base_bench": "copy of the base tree with the candidate bench's 8,336-row fire_ledger seed added after the cue load",
+  "base_bench_main_rs_sha256": "37e663fcc9ca8229",
+  "bench_sources": {
+   "base": {
+    "bench_crate_sha256": "2c88ed015f674f0c",
+    "built_bench_crate_sha256": "453598d8cecb6582",
+    "commit": null,
+    "tree_sha256": "a29b6bbb3698c461"
+   },
+   "cand": {
+    "bench_crate_sha256": "adf4dc453728100d",
+    "commit": "dbbbdad764a4d3ee7b83382973236f33adfe5e95",
+    "dirty": false
+   }
+  },
+  "equal": true,
+  "fire_ledger_rows_per_bench_store": {
+   "b7180fe66191376d": [
+    8346,
+    8356,
+    8456
+   ],
+   "b93d2f5c222c0424": [
+    8345,
+    8354
+   ]
+  },
+  "must_deliver": {
+   "blocks": {
+    "b7180fe66191376d": 2,
+    "b93d2f5c222c0424": 6
+   },
+   "item": "P026",
+   "verdict": "both"
+  },
+  "seed_rows_and_fingerprint": {
+   "b7180fe66191376d": [
+    [
+     8336,
+     "3a9091da7f1c5202"
+    ]
+   ],
+   "b93d2f5c222c0424": [
+    [
+     8336,
+     "3a9091da7f1c5202"
+    ]
+   ]
+  }
+ }
+}

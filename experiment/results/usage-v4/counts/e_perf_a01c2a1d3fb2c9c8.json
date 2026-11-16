@@ -1,0 +1,157 @@
+{
+ "binary_sha256": "a01c2a1d3fb2c9c8",
+ "binary_version": "muninn 1.2.0",
+ "build": "a01c2a1d3fb2c9c8",
+ "commit": "a12b840e4",
+ "harness_rev": 2,
+ "labels": "final",
+ "section": "e_perf",
+ "splits": {
+  "all": {
+   "perf": {
+    "bench_sha256": "86f69cd42c9b3f5d",
+    "contracts_failed_per_run": [
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit full p95"
+     ],
+     [
+      "hook SessionStart p95",
+      "hook SubagentStart p95",
+      "hook UserPromptSubmit gated p95",
+      "hook UserPromptSubmit full p95"
+     ]
+    ],
+    "hooks": {
+     "SessionStart": {
+      "p50_median": 10.767,
+      "p95_median": 11.994,
+      "p95_runs": [
+       10.053,
+       10.399,
+       11.466,
+       11.994,
+       12.04,
+       12.437,
+       13.741
+      ]
+     },
+     "SubagentStart": {
+      "p50_median": 9.264,
+      "p95_median": 10.341,
+      "p95_runs": [
+       9.087,
+       8.765,
+       9.947,
+       10.545,
+       10.509,
+       10.341,
+       13.548
+      ]
+     },
+     "UserPromptSubmit_full": {
+      "p50_median": 12.436,
+      "p95_median": 13.457,
+      "p95_runs": [
+       12.146,
+       12.924,
+       12.812,
+       13.703,
+       13.457,
+       14.925,
+       15.981
+      ]
+     },
+     "UserPromptSubmit_gated": {
+      "p50_median": 6.524,
+      "p95_median": 7.825,
+      "p95_runs": [
+       7.79,
+       6.982,
+       7.629,
+       8.416,
+       8.505,
+       7.825,
+       10.43
+      ]
+     }
+    },
+    "ingest_200_ms_median": 10.0,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "process_start_p50_median": 5.771,
+    "runs": 7,
+    "store_checks": {
+     "all_hooks_ok": true,
+     "check_prompts_delivered": [
+      {
+       "SessionStart": false,
+       "UserPromptSubmit": false
+      }
+     ],
+     "hook_errors": 0,
+     "hook_finishes": 8414,
+     "schema_versions": [
+      "3"
+     ]
+    }
+   },
+   "stop_ingest_W02": {
+    "first_write_open_ms": 2791.9,
+    "interleaved_with": [
+     "b93d2f5c222c0424"
+    ],
+    "max_ms": 340.3,
+    "median_ms": 272.0,
+    "min_ms": 266.6,
+    "p90_ms": 330.7,
+    "records_from_synthetic_session": 21,
+    "runs": 20,
+    "schema_after": "3",
+    "schema_before": "2"
+   }
+  }
+ },
+ "workload": {
+  "base_bench": "copy of the base tree with the candidate bench's 8,336-row fire_ledger seed added after the cue load",
+  "base_bench_main_rs_sha256": "37e663fcc9ca8229",
+  "equal": true,
+  "fire_ledger_rows_per_bench_store": {
+   "a01c2a1d3fb2c9c8": [
+    8354,
+    8417
+   ],
+   "b93d2f5c222c0424": [
+    8345
+   ]
+  }
+ }
+}

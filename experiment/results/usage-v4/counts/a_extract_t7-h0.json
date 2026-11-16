@@ -1,0 +1,105 @@
+{
+ "binary_sha256": "5ff174c5dd1e2c65",
+ "binary_version": "muninn 1.2.0",
+ "build": "t7-h0",
+ "candidates_total": 107,
+ "commit": "236781f98",
+ "inputs": {
+  "changed": 0,
+  "listed": 150,
+  "staged": 150,
+  "status": "ok",
+  "unrecoverable": 0
+ },
+ "labels": "final",
+ "section": "a_extract",
+ "splits": {
+  "design": {
+   "precision_set": {
+    "durable_emitted": 10,
+    "emitted": 32,
+    "emitted_by_kind_label": {
+     "correction:b": 1,
+     "decision:a": 8,
+     "decision:b": 16,
+     "decision:c": 1,
+     "decision:d": 1,
+     "invariant:a": 2,
+     "invariant:b": 2,
+     "invariant:c": 1
+    },
+    "emitted_by_label": {
+     "a": 10,
+     "b": 19,
+     "c": 2,
+     "d": 1
+    },
+    "items": 63,
+    "labels": {
+     "a": 11,
+     "b": 34,
+     "c": 16,
+     "d": 2
+    },
+    "measurable": 62,
+    "noise_emitted": 22,
+    "not_emitted_by_label": {
+     "a": 1,
+     "b": 14,
+     "c": 14,
+     "d": 1
+    },
+    "not_measurable_deadend": 1,
+    "record_precision": 0.3125,
+    "transcript_missing": 0,
+    "unlabelled_candidates_in_source_turns": 0
+   },
+   "recall_set": {
+    "candidates_by_class": {
+     "a_other": 1,
+     "b": 13,
+     "c": 2,
+     "durable": 18
+    },
+    "durable_by_kind": {
+     "correction": 4,
+     "decision": 15,
+     "rule": 4
+    },
+    "durable_emitted": 18,
+    "durable_emitted_by_kind": {
+     "correction": 3,
+     "decision": 12,
+     "rule": 3
+    },
+    "durable_messages": 23,
+    "durable_missed": 5,
+    "labels": {
+     "a": 23,
+     "b": 109,
+     "nh": 14,
+     "opt": 6
+    },
+    "message_precision": 0.5294,
+    "messages": 152,
+    "messages_with_candidates_by_label": {
+     "a": 19,
+     "b": 13,
+     "nh": 2
+    },
+    "noise_candidates": 16,
+    "recall": 0.7826,
+    "transcript_missing": 0
+   }
+  }
+ },
+ "src": {
+  "commit": "236781f98459e97025641e0a65a7bc1cc38ebabd",
+  "dirty": false
+ },
+ "src_note": "extract_dump of the --src tree",
+ "turn_alignment": {
+  "candidates_at_recall_turns": 52,
+  "text_found_in_message": 52
+ }
+}
