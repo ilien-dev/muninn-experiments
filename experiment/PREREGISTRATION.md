@@ -8166,3 +8166,20 @@ unfixed is counted in `results/usage-v4/RESULTS.md`, section "After the third re
 statement said again after its replacement is not always current under the correction, key
 and quantity rules, a decision and its replacement each said twice can end both active, some
 of those unmarked, and a conflict mark is never removed.
+
+## Result of usage-v4 on the build without the reversal, 2026-11-15
+
+Read on the worktree's `f27eaf126`, binary `7132eaf247650b8d`, as the fourth dated note under
+the nineteenth amendment says. It replaces the Result of the closing build above. A, the
+`remember` cell, C, D, F and `b3_path` are equal on every leaf to `c7aa624fd41924ba`; B is equal
+on every leaf to the fixed build `366bb7913a35be7a` but for the seconds a replay took; and
+`verdict.py` prints the same rows. No verdict changed. The E figures are those of
+`692e382f2056ebd5`: `filter.rs` and `recall.rs` are as on that build, and the mark they read is
+now written by three more rules.
+
+One and two older statements under a worker's row end, in 6 and 24 read orders, as the fixed
+build ends them. The order probes read 0 bad on every registered line; "said before and
+replaced" still reads 64 of 384. What the reversal had bought is given back: two sessions
+read in either order no longer end the same under the key, the correction and the quantity
+rule, they end with both statements on record and a conflict mark.
+`results/usage-v4/RESULTS.md`, section "The reversal taken out", counts it.

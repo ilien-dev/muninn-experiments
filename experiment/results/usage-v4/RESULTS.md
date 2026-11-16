@@ -201,8 +201,9 @@ core crate, where the conflict mark is read. E was therefore read again in full 
 - R2: an older record read last retires nothing said after it, as on the fixed build. What
   the later record does to it depends on the rule that links them:
   - by key, a correction said again, and a bare quantity (when no record between the two
-    holds the unit): **reversed**. The older record is retired with the later one as its heir,
-    as date order leaves it.
+    holds the unit): **reversed** on this build. The older record is retired with the later
+    one as its heir, as date order leaves it. **Taken back on the last build**, which marks
+    the two as in conflict: see "The reversal taken out".
   - by a decision's words: **not reversed; both stay active and are marked as in conflict.**
     The build before this one (`c11855d8ae39af2e`) reversed it, and B1 read worse for it: see
     "B on the two builds of the round". The mark is a row in `meta` for each of the two
@@ -378,10 +379,16 @@ Windows only.
   is not yet known to be an agent's.
 - More orders with a word of the user's mid-way end retired and marked than on the fixed
   build (the probe table above). A word counts as in between by read order, not by date.
-- The shapes counted under "Not fixed" in the section on the third review, the conflict
-  mark that is never removed, and `muninn why` opening with `sufficient` above it.
+- The shapes counted under "Not fixed" in the section "The reversal taken out", the conflict
+  mark that is never moved or removed, and `muninn why` opening with `sufficient` above it.
+  That section replaces the first item of this list: by every rule read from both records,
+  the older one read last now stays current beside the later one, marked.
 
 ## After the third review: the closing fix
+
+*The fix of this section was replaced. The next section, "The reversal taken out", is the
+reading of the build that ships; the counts under "Not fixed" below are those of
+`c7aa624fd41924ba` and are read again there.*
 
 A third review read the follow-up build `692e382f2056ebd5` with invented sessions (`fu.py`).
 It found one defect the round had introduced, which is fixed here, and three things that are
@@ -437,6 +444,77 @@ on every leaf to `692e382f2056ebd5`, but for the seconds each replay took: B1 re
 Delivery returns the same ids on 150 of 150 prompts against `366bb7913a35be7a` and against
 `187d91a1431ab6ac`. `verdict.py` prints the same rows. The E figures above are those of
 `692e382f2056ebd5` and were not taken again.
+
+## The reversal taken out
+
+A check of the closing fix found a second shape of the same defect (`fu.py giveback`). Two
+statements of the person's, the second replacing the first, both dated before one worker's
+row that would replace either; the coordinator is read last.
+
+| read order | `366bb7913a35be7a` | `c7aa624fd41924ba` |
+|---|---|---|
+| worker, first, second, coordinator | the second current | **both current, unmarked** |
+| worker, second, first, coordinator | both current, unmarked | **nothing current** |
+
+Two patches of the undo had each left a shape, and the build that never retired an older
+record under a later one was right in both. So the reversal is taken out.
+
+**The last build.** Commit `f27eaf126`, binary `7132eaf247650b8d`. By the key, a correction
+said again and a bare quantity, as by a decision's words since `b2e10dc55`, an older record
+read after the one that would replace it retires nothing, is not retired, and the two are
+marked as in conflict through the same function. When the later record has itself been
+replaced, the mark goes to the record that stands at the end of its heirs. In date order the
+later record retires the older one as it always did. Of the round, `agent/undo.rs` keeps one
+clause against its state at `1c55f1012`: for a restatement's give-back, a record of the turn
+that what would be given back stands at is not a word said since, which the two-coordinator
+case needs. The clause of `1b1179620` and the one that spared what a restatement retired are
+gone. No file a read hook executes changes against `1b1179620`, and E was not read again.
+
+| every read order, ended as `366bb7913a35be7a` ends | `692e382f2056ebd5` | `c7aa624fd41924ba` | `7132eaf247650b8d` |
+|---|---|---|---|
+| one older statement, a worker's row, the coordinator: 6 orders | 5 | 6 | 6 |
+| two older statements, a worker's row, the coordinator: 24 orders (`gb_check.py`) | not read | not read | 24 |
+
+In the 24 orders the last build's rows are in the state `366bb7913a35be7a` leaves them in;
+it writes conflict marks in 15 of them. One order ends with the person's later statement
+retired and marked for `muninn doctor`, on both builds: second, worker, first, coordinator,
+where the worker's row retired the second in date order and the first was read before the
+coordinator. That is the rule for a word read in between, as since Task 7.
+
+**Not fixed, as counted on `7132eaf247650b8d`** (every read order against the date order):
+
+| sessions, in date order | rule | orders not ending as date order does | what they end with |
+|---|---|---|---|
+| a quantity, then a bare change of it | bare quantity | 1 of 2 | both active, marked |
+| a rule or a correction holding a quantity, then a bare change of it | bare quantity | 1 of 2 each | both active, marked |
+| a correction, a second replacing it, the first again | correction said again | 4 of 6 (1 on `c7aa624fd41924ba`, 4 on `366bb7913a35be7a`) | the second current alone in 1, the order that reads it last; both active and marked in 3 |
+| the same shape by key | key | not probed | the same path in the code |
+| a quantity, a bare change of it, the quantity again | bare quantity | 5 of 6 (4, and 5) | the change active beside the quantity; marked in 1, unmarked in 4 |
+| three quantities, each a bare change of the one before | bare quantity | 5 of 6 (0 on `c7aa624fd41924ba`) | an older one active beside the newest; marked in 4, no mark shown in 1 |
+| A, B replacing it by words, A again, B again | a decision's words | 18 of 24 by the rows' states; in 11 A is active beside the current B | marked in 7 of the 11, unmarked in 4 (as on `c7aa624fd41924ba`) |
+| A, B, then C replacing B, by words | a decision's words | 4 of 6 | A, B or both active beside the current C, each marked |
+
+Taking the reversal out costs what it had bought on these probes: for two sessions read in
+either order the three rules no longer end as date order does, they end with both statements
+on record and a mark. A mark is written when the older record is read and is never moved or
+removed: it says nothing while either record is retired, shows again if that record comes
+back, and does not follow a record that is replaced later. `muninn why` opens with
+`sufficient` above its conflict lines.
+
+**Repeated on `7132eaf247650b8d`.** The order probes read 0 bad on every registered line, and
+the line for a quantity read in both orders now counts 1 of 2 as both active and marked (0 on
+the build before). `stated` reads 0, 0 and 64 of 384; the two-coordinator enumeration 0 and 64
+of 384. Tests: 405 pass on Windows with fmt and clippy clean, the fault suite passes at 200
+repetitions (13 tests), and 408 pass under Linux.
+
+A, the `remember` cell, C, D, F and `b3_path` are equal on every leaf to `c7aa624fd41924ba`,
+and so to the fixed build. B, with the base replayed again, is equal on every leaf to the
+fixed build `366bb7913a35be7a` but for the seconds each replay took: 5 losses (6 by the
+earliest row), the binding reading passes, and decisions retired read 73 and 109, where the
+two builds with the reversal read 74 and 110. The commit-linked decision the reversal retired
+by key in each of two corpora is active again. Delivery returns the same ids on 150 of 150
+prompts against `366bb7913a35be7a` and against `187d91a1431ab6ac`. `verdict.py` prints the
+same rows. The E figures are those of `692e382f2056ebd5`.
 
 `verdict.py b93d2f5c222c0424 8ea5e788aecf33e2 --split heldout` prints the rows below, except
 A1, which binds on the filters-only arm (`8ea5e788aecf33e2-filters`, ninth amendment), and E,
