@@ -8067,6 +8067,27 @@ counts these probes give on `c7aa624fd41924ba`: "A, B, A again" under the correc
 quantity rules; "A, B, A, B" under the rule by a decision's words; and that a conflict mark is
 never removed while `muninn why` opens with `sufficient` above it.
 
+*Fourth dated note, 2026-11-15, after the readings of `c7aa624fd41924ba` and the Result written
+for it, before any cell on the build that follows.* A check of the closing fix found another
+shape of the same defect (`fu.py giveback`): two older statements of the person's, the second
+replacing the first, under one worker's row, the coordinator read last. On
+`c7aa624fd41924ba` the order worker, first, second, coordinator ends with both statements
+current and unmarked, and the order worker, second, first, coordinator with nothing current.
+`366bb7913a35be7a`, which never retired an older record under a later one, ends both with the
+second current. Two patches of the undo each left a shape, so the reversal itself is taken
+out: by the key, a correction said again and a bare quantity, as already by a decision's
+words, an older record read after the one that would replace it stays on record and the two
+are marked as in conflict. The undo clause of `1b1179620` is removed, and the clause of
+`53d068f84` that spared what a restatement retired; one clause of the round stays in
+`agent/undo.rs`, the one the two-coordinator case needs. Commit `f27eaf126`, binary
+`7132eaf247650b8d`. No file a read hook executes changes against `1b1179620`, and E is not read
+again. Repeated on that binary: the reviews' probes with `giveback`, the order probes, B in
+full with the base replayed, D's ids, and the verdict with A, the `remember` cell, C and F.
+The order probe's line for a quantity read in both orders was written for the reversal and
+is expected to read the older-last order as "both active and marked"; it is reported as it
+reads. The Result of `c7aa624fd41924ba` above is superseded by the one written after these
+cells.
+
 ## Result of usage-v4 on the fixed build, 2026-11-14
 
 Read on commit `7bd930eb7`, binary `366bb7913a35be7a`, against 1.2.0, on the frozen inputs, as
